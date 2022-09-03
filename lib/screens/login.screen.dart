@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const Text(
-                "test",
+                "dongnerang",
                 style: TextStyle(fontSize: 20, color: AppColors.primary),
               ),
               const SizedBox(height: 20),

@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:747660530943:android:f349ddbd8cd5f3d1d0a8ca",
+        "mobilesdk_app_id": "1:747660530943:android:c360c173d03449a5d0a8ca",
         "android_client_info": {
-          "package_name": "com.incom.com.incom"
+          "package_name": "com.dongnerang.com.dongnerang"
         }
       },
       "oauth_client": [
         {
-          "client_id": "747660530943-msg7jefnrgbb57k49bmnal84f2tp1s3p.apps.googleusercontent.com",
+          "client_id": "747660530943-b9dj5grspcs6b6hiba0fj3p6os76gucp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.incom.com.incom",
+            "package_name": "com.dongnerang.com.dongnerang",
             "certificate_hash": "934aaffcf2fa33a0926d33ad1c83e7eeb64813b1"
           }
         },

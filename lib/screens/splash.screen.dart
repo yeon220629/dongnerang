@@ -57,14 +57,14 @@ class _SplashScreenState extends State<SplashScreen> {
               children: const [
                 SizedBox(height: 20),
                 Text(
-                  "테스트",
+                  "dongnerang",
                   style: TextStyle(fontSize: 28, color: AppColors.primary),
                 )
               ],
             ),
           ),
           const Text(
-            "테스트",
+            "dongnerang",
             style: TextStyle(fontSize: 20, color: AppColors.primary),
           ),
           const SizedBox(height: 20),
