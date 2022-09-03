@@ -1,0 +1,45 @@
+name: incom
+description: incom flutter project
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  latlong2: ^0.8.1
+  logger: ^1.1.0
+
+  #  firebase
+  firebase_auth: ^3.3.20
+  firebase_core: ^1.18.0
+  firebase_storage: ^10.2.18
+  cloud_firestore: ^3.1.18
+
+  # URL
+  url_launcher: ^6.1.4
+  get: ^4.6.5
+  http: ^0.13.4
+
+  flutter_easyloading: ^3.0.5
+  flutter_signin_button: ^2.0.0
+  flutter_html: ^2.2.1
+  flutter_colorpicker: ^1.0.3
+  google_sign_in: ^5.3.3
+  permission_handler: ^10.0.0
+  kakao_flutter_sdk: ^1.2.1 # 전체 추가
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "747660530943",
+    "firebase_url": "https://dbcurd-67641-default-rtdb.firebaseio.com",
+    "project_id": "dbcurd-67641",
+    "storage_bucket": "dbcurd-67641.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747660530943:android:f349ddbd8cd5f3d1d0a8ca",
+        "android_client_info": {
+          "package_name": "com.incom.com.incom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747660530943-msg7jefnrgbb57k49bmnal84f2tp1s3p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.incom.com.incom",
+            "certificate_hash": "934aaffcf2fa33a0926d33ad1c83e7eeb64813b1"
+          }
+        },
+        {
+          "client_id": "747660530943-8brvso0b8mho869gdjl2hfqigdjm02gt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF8GEteXW94SBy0vwiSKDbqzpcxqLNUd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747660530943-8brvso0b8mho869gdjl2hfqigdjm02gt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
