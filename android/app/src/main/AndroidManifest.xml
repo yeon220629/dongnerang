@@ -75,7 +75,7 @@
 
 
     <application
-        android:label="incom"
+        android:label="dongnerang"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
