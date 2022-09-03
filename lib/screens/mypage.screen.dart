@@ -35,7 +35,7 @@ class _mypageScreenState extends State<mypageScreen> {
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-                print('search button is clicked');
+                print('start button is clicked');
               },
             )
           ],
