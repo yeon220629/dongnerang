@@ -48,9 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     //   "assets/images/logo.png",
                     //   width: Get.size.width / 3,
                     // ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 50),
                     const Text(
-                      "로그인 스크린",
+                      "동네랑 로고",
                       style: TextStyle(fontSize: 28, color: AppColors.primary),
                     ),
                     const SizedBox(height: 20),
