@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:incom/screens/mainScreen.dart';
 import 'package:incom/screens/splash.screen.dart';
 import 'package:incom/services/user.service.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      home: const mainScreen(),
       initialBinding: BindingsBuilder((){
         Get.put(UserService());
       }),

@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // FirebaseAuth.instance.signOut();
     // GoogleSignIn().signOut();
-    checkPermissions();
+    // checkPermissions();
     super.initState();
   }
 
@@ -46,30 +46,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
+      body: SafeArea(
       child: SizedBox(
-        height: Get.size.height,
-        width: Get.size.width,
-        child: Column(children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                SizedBox(height: 20),
-                Text(
-                  "dongnerang",
-                  style: TextStyle(fontSize: 28, color: AppColors.primary),
-                )
-              ],
+          height: Get.size.height,
+          width: Get.size.width,
+          child: Column(children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  SizedBox(height: 20),
+                  Text(
+                    "dongnerang",
+                    style: TextStyle(fontSize: 28, color: AppColors.primary),
+                  )
+                ],
+              ),
             ),
-          ),
-          const Text(
-            "dongnerang",
-            style: TextStyle(fontSize: 20, color: AppColors.primary),
-          ),
-          const SizedBox(height: 20),
-        ]),
+            const Text(
+              "dongnerang",
+              style: TextStyle(fontSize: 20, color: AppColors.primary),
+            ),
+            const SizedBox(height: 20),
+          ]),
+        ),
       ),
-    ));
+    );
   }
 }

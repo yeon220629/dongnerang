@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -68,4 +66,3 @@ var POPUP_MENU_ITEMS_OTHERS = [
         onPressed: null,
       )),
 ];
-

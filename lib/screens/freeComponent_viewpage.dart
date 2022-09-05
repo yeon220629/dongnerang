@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-
 import '../constants/colors.constants.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../constants/common.constants.dart';
 
 class freeComponent_viewpage extends StatefulWidget {
   const freeComponent_viewpage({Key? key}) : super(key: key);
@@ -20,7 +20,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   ScrollController controller = ScrollController();
   bool closeTapContainer = false;
   double topContainer = 0;
-
+  List<String> LIST_MENU = <String>[
+    '동작', '강북', '관악', '광진', '강남',
+    '서초', '성북', '양천', '영등포', '종로',
+    '중구'
+  ];
   List<Widget> itemsData = [];
 
   Future<void> getPostsData(value) async {
@@ -52,7 +56,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           },
           child: Container(
               width: 500,
-              height: 165,
+              height: 110,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               decoration: BoxDecoration(color: Colors.white, boxShadow: [
                 BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
@@ -72,38 +76,19 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        '기관명 | ${post['center_name ']}',
-                        style: const TextStyle(fontSize: 17, color: Colors.grey),
-                        textDirection: TextDirection.ltr,
-                      ),
-                      Text(
-                        '시작일 | ${post['registrationdate']}',
-                        style: const TextStyle(fontSize: 17, color: Colors.grey),
-                        textDirection: TextDirection.ltr,
-                      ),
-                      Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                width: 165,
-                                child: ElevatedButton.icon(
-                                    onPressed: (){},
-                                    icon: Icon(Icons.save_alt),
-                                    label: Text("저장"),
-                                ),
-                              ),
-                              Container(
-                                width: 165,
-                                child: ElevatedButton.icon(
-                                    onPressed: (){},
-                                    icon: Icon(Icons.share),
-                                    label: Text("공유"),
-                                )
-                              )
-                            ],
-                          )
+                      Row(
+                        children: [
+                          Text(
+                            '${post['center_name ']}',
+                            style: const TextStyle(fontSize: 17, color: Colors.grey),
+                            textDirection: TextDirection.ltr,
+                          ),
+                          Text(
+                            '시작일 | ${post['registrationdate']}',
+                            style: const TextStyle(fontSize: 17, color: Colors.grey),
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ],
                       )
                     ],
                   ),
@@ -137,10 +122,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height*0.30;
+    String dropdownValue = LIST_MENU.first;
 
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.white,
+            leading: const Icon(Icons.ac_unit, color: AppColors.black),
             title: CupertinoSearchTextField(
               controller: editingController,
               prefixIcon: const Icon(Icons.search),
@@ -151,126 +139,158 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 print(value);
               },
             ),
-          ),
-          backgroundColor: Colors.white,
-          drawer: Drawer( // 함수로 뺴야하는 부분
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('강남'),
-                    onTap: () {
-                      EasyLoading.show(status: " 데이터 로딩 중...");
-                      getPostsData('GANGNAM');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('강북'),
-                    onTap: () {
-                      getPostsData('GANGBUK');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('관악'),
-                    onTap: () {
-                      getPostsData('GWANAK');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('광진'),
-                    onTap: () {
-                      getPostsData('GWANGZIN');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('동작'),
-                    onTap: () {
-                      getPostsData('DONGJAK');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('서초'),
-                    onTap: () {
-                      getPostsData('SEOCHO');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('성북'),
-                    onTap: () {
-                      getPostsData('SEONGBUK');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('양천'),
-                    onTap: () {
-                      getPostsData('YANGCHEON');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('영등포'),
-                    onTap: () {
-                      getPostsData('YEONGDEUNGPO');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('종로'),
-                    onTap: () {
-                      getPostsData('JONGRO');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('중구'),
-                    onTap: () {
-                      getPostsData("JUNGGU");
-                    },
-                  ),
-                ],
+            actions: [
+              // DropdownButtonExample()
+              DropdownButton(
+                items: LIST_MENU.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                value: dropdownValue,
+                onChanged: (String? value){
+                  print(value);
+                  if(value == '강남'){
+                    print("GANGNAM");
+                  }
+                },
               )
+            ],
           ),
+          // drawer: DropdownButton(
+          //     items: LIST_MENU.map<DropdownMenuItem<String>>((String value) {
+          //       return DropdownMenuItem<String>(
+          //         value: value,
+          //         child: Text(value),
+          //       );
+          //     }).toList(),
+          //     value: dropdownValue,
+          //     onChanged: (String? value){
+          //       print(value);
+          //       if(value == '강남'){
+          //         print("GANGNAM");
+          //       }
+          //     },
+          //   ),
+          // drawer: Drawer( // 함수로 뺴야하는 부분
+          //     child: ListView(
+          //       padding: EdgeInsets.zero,
+          //       children: <Widget>[
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('강남'),
+          //           onTap: () {
+          //             EasyLoading.show(status: " 데이터 로딩 중...");
+          //             getPostsData('GANGNAM');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('강북'),
+          //           onTap: () {
+          //             getPostsData('GANGBUK');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('관악'),
+          //           onTap: () {
+          //             getPostsData('GWANAK');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('광진'),
+          //           onTap: () {
+          //             getPostsData('GWANGZIN');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('동작'),
+          //           onTap: () {
+          //             getPostsData('DONGJAK');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('서초'),
+          //           onTap: () {
+          //             getPostsData('SEOCHO');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('성북'),
+          //           onTap: () {
+          //             getPostsData('SEONGBUK');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('양천'),
+          //           onTap: () {
+          //             getPostsData('YANGCHEON');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('영등포'),
+          //           onTap: () {
+          //             getPostsData('YEONGDEUNGPO');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('종로'),
+          //           onTap: () {
+          //             getPostsData('JONGRO');
+          //           },
+          //         ),
+          //         ListTile(
+          //           leading: Icon(
+          //             Icons.home,
+          //             color: Colors.grey[850],
+          //           ),
+          //           title: Text('중구'),
+          //           onTap: () {
+          //             getPostsData("JUNGGU");
+          //           },
+          //         ),
+          //       ],
+          //     )
+          // ),
           body: SizedBox(
             height: size.height,
             child: Column(
@@ -367,3 +387,5 @@ class CategoriesScroller extends StatelessWidget {
     );
   }
 }
+
+
