@@ -69,7 +69,7 @@ var POPUP_MENU_ITEMS_OTHERS = [
         onPressed: null,
       )),
 ];
-
+// Controller
 final TextEditingController editingController = TextEditingController();
 final CategoriesScroller categoriesScroller = CategoriesScroller();
 late final ScrollController controller = ScrollController();
@@ -86,7 +86,6 @@ InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
     allowsInlineMediaPlayback: true,
   )
 );
-
 late PullToRefreshController pullToRefreshController = PullToRefreshController();
 final urlController = TextEditingController();
 

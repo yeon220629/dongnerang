@@ -22,12 +22,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     '동작', '강북', '관악', '광진', '강남', '서초', '성북', '양천', '영등포', '종로',
     '중구'
   ];
+
   String dropdownValue = '동작';
   final _random = Random();
   bool closeTapContainer = false;
   double topContainer = 0;
   List<Widget> itemsData = [];
-
+  List<Widget> listItems = [];
+  List<dynamic> responseData = [];
   String url = "";
   double progress = 0;
 
@@ -49,9 +51,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     });
 
     List<dynamic> responseList= valueData;
-    List<Widget> listItems = [];
-
+    responseData.addAll(responseList);
     for ( var post in responseList){
+      // Search_value.add(post);
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${post["link"]}');
@@ -160,30 +162,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               placeholderStyle:
               const TextStyle(fontSize: 14,color: Colors.grey),
               onChanged: (value) async {
-                print(value);
-
-                DocumentReference<Map<String, dynamic>> docref =
-                FirebaseFirestore.instance.collection("crawlingData").doc(value);
-                final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-                    await docref.get();
-                var valueDoc = documentSnapshot.data();
-
-                List<dynamic> valueData = [];
-                valueDoc?.forEach((key, value) {
-                  valueData.add(value);
-                });
-
-                List<dynamic> responseList= valueData;
-                List<Widget> listItems = [];
-
-                for ( var post in responseList){
-                  String title = post["title"];
-                  if(title.contains(value)){
+                // 배열 초기화
+                itemsData = [];
+                listItems = [];
+                for(var post in responseData){
+                  if(post["title"].contains(value)){
+                    print(post["title"]);
                     listItems.add( GestureDetector(
                         onTap: () async{
                           final Uri url = Uri.parse('${post["link"]}');
-                          print("url : $url");
-
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(url)));
                         },
                         child: Container(
@@ -233,11 +220,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             )
                         ))
                     );
-                  }
-                }
-                setState(() {
-                  itemsData = listItems;
-                });
+                    setState(() {
+                      itemsData = listItems;
+                    });
+                  };
+                };
+                // setState(() {
+                //   itemsData = listItems;
+                // });
               },
             ),
             actions: <Widget>[
@@ -255,7 +245,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     print("GANGNAM");
                     getPostsData("GANGNAM");
                   }else if(value == '강북'){
-                    getPostsData("GANGNAM");
+                    getPostsData("GANGBUK");
                   }else if(value == '관악'){
                     getPostsData("GWANAK");
                   }else if(value == '광진'){
