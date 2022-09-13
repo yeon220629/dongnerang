@@ -70,7 +70,7 @@ var POPUP_MENU_ITEMS_OTHERS = [
       )),
 ];
 // Controller
-final TextEditingController editingController = TextEditingController();
+late final TextEditingController editingController = TextEditingController();
 final CategoriesScroller categoriesScroller = CategoriesScroller();
 late final ScrollController controller = ScrollController();
 InAppWebViewController? webViewController;
