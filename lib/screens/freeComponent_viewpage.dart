@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:incom/constants/colors.constants.dart';
+import 'package:incom/screens/url.load.screen.dart';
+import '../constants/common.constants.dart';
 
-import '../constants/colors.constants.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class freeComponent_viewpage extends StatefulWidget {
   const freeComponent_viewpage({Key? key}) : super(key: key);
@@ -14,14 +17,22 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
-  final TextEditingController editingController = TextEditingController();
-  final CategoriesScroller categoriesScroller = CategoriesScroller();
 
-  ScrollController controller = ScrollController();
+
+  List<String> LIST_MENU = <String>[
+    '동작', '강북', '관악', '광진', '강남', '서초', '성북', '양천', '영등포', '종로',
+    '중구'
+  ];
+
+  String dropdownValue = '동작';
+  final _random = Random();
   bool closeTapContainer = false;
   double topContainer = 0;
-
   List<Widget> itemsData = [];
+  List<Widget> listItems = [];
+  List<dynamic> responseData = [];
+  String url = "";
+  double progress = 0;
 
   Future<void> getPostsData(value) async {
     if(value == null){
@@ -41,18 +52,18 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     });
 
     List<dynamic> responseList= valueData;
-    // List<dynamic> responseList = FOOD_DATAs;
-    List<Widget> listItems = [];
-
+    responseData.addAll(responseList);
     for ( var post in responseList){
+      // Search_value.add(post);
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${post["link"]}');
-            await launchUrl(url);
+
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(url)));
           },
           child: Container(
               width: 500,
-              height: 165,
+              height: 110,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               decoration: BoxDecoration(color: Colors.white, boxShadow: [
                 BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
@@ -72,38 +83,25 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        '기관명 | ${post['center_name ']}',
-                        style: const TextStyle(fontSize: 17, color: Colors.grey),
-                        textDirection: TextDirection.ltr,
-                      ),
-                      Text(
-                        '시작일 | ${post['registrationdate']}',
-                        style: const TextStyle(fontSize: 17, color: Colors.grey),
-                        textDirection: TextDirection.ltr,
-                      ),
-                      Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                width: 165,
-                                child: ElevatedButton.icon(
-                                    onPressed: (){},
-                                    icon: Icon(Icons.save_alt),
-                                    label: Text("저장"),
-                                ),
-                              ),
-                              Container(
-                                width: 165,
-                                child: ElevatedButton.icon(
-                                    onPressed: (){},
-                                    icon: Icon(Icons.share),
-                                    label: Text("공유"),
-                                )
-                              )
-                            ],
-                          )
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(3),
+                            color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                              [_random.nextInt(9) * 100],
+                            child: Text(
+                              '${post['center_name ']}',
+                              style: const TextStyle(fontSize: 13, color: Colors.black),
+                              textDirection: TextDirection.ltr,
+                            )
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            '시작일 | ${post['registrationdate']}',
+                            style: const TextStyle(fontSize: 17, color: Colors.grey),
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ],
                       )
                     ],
                   ),
@@ -120,6 +118,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   void initState() {
     super.initState();
 
+    pullToRefreshController = PullToRefreshController(
+        options: PullToRefreshOptions(
+          color : Colors.blue,
+        ),
+        onRefresh: () async {
+          webViewController?.reload();
+        }
+    );
+
     getPostsData(null);
     controller.addListener(() {
 
@@ -133,6 +140,79 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  void _handleSubmitted(String text) {
+    print(text);
+    itemsData = [];
+    listItems = [];
+    for(var post in responseData){
+      if(post["title"].contains(text)){
+        print(post["title"]);
+        listItems.add( GestureDetector(
+            onTap: () async{
+              final Uri url = Uri.parse('${post["link"]}');
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(url)));
+            },
+            child: Container(
+                width: 500,
+                height: 110,
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+                ]),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '${post["title"]}',
+                        style: const TextStyle(fontSize: 14),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                        maxLines: 3,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                              padding: EdgeInsets.all(3),
+                              color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                              [_random.nextInt(9) * 100],
+                              child: Text(
+                                '${post['center_name ']}',
+                                style: const TextStyle(fontSize: 13, color: Colors.black),
+                                textDirection: TextDirection.ltr,
+                              )
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            '시작일 | ${post['registrationdate']}',
+                            style: const TextStyle(fontSize: 17, color: Colors.grey),
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+            ))
+        );
+        setState(() {
+          itemsData = listItems;
+        });
+      };
+    };
+    editingController.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     final Size size = MediaQuery.of(context).size;
@@ -141,140 +221,111 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: CupertinoSearchTextField(
-              controller: editingController,
-              prefixIcon: const Icon(Icons.search),
-              placeholder: "관련 검색",
-              placeholderStyle:
-              const TextStyle(fontSize: 14,color: AppColors.hintText),
-              onChanged: (value) {
+            backgroundColor: Colors.white,
+            leadingWidth: size.width * 0.1,
+            elevation: 0.0,
+            leading: const Icon(
+              Icons.ac_unit,
+              color: Colors.black,
+            ),
+            title: DropdownButton(
+              value: dropdownValue,
+              items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
+                return DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(item),
+                );
+              }).toList(),
+              onChanged: (dynamic value){
                 print(value);
+                if(value == '강남'){
+                  print("GANGNAM");
+                  getPostsData("GANGNAM");
+                }else if(value == '강북'){
+                  getPostsData("GANGBUK");
+                }else if(value == '관악'){
+                  getPostsData("GWANAK");
+                }else if(value == '광진'){
+                  getPostsData("GWANGZIN");
+                }else if(value == '동작'){
+                  getPostsData("DONGJAK");
+                }else if(value == '서초'){
+                  getPostsData("SEOCHO");
+                }else if(value == '성북'){
+                  getPostsData("SEONGBUK");
+                }else if(value == '양천'){
+                  getPostsData("YANGCHEON");
+                }else if(value == '영등포'){
+                  getPostsData("YEONGDEUNGPO");
+                }else if(value == '종로'){
+                  getPostsData("JONGRO");
+                }else if(value == '중구'){
+                  getPostsData("JUNGGU");
+                }
+                setState(() {
+                  if(mounted){
+                    dropdownValue = value;
+                  }
+                });
               },
             ),
-          ),
-          backgroundColor: Colors.white,
-          drawer: Drawer( // 함수로 뺴야하는 부분
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
+            actions: <Widget>[
+              // title: CupertinoSearchTextField(
+              //   controller: editingController,
+              //   prefixIcon: const Icon(Icons.search),
+              //   placeholder: "관련 검색",
+              //   placeholderStyle: const TextStyle(fontSize: 14,color: Colors.grey),
+              //   onSubmitted: _handleSubmitted,
+              // ),
+              SizedBox(
+                width: 198.0,
+                child: Stack(
+                  alignment: Alignment.centerRight,
+                  children: <Widget>[
+                    CupertinoSearchTextField(
+                      controller: editingController,
+                      itemSize: 0,
+                      // prefixIcon: const Icon(Icons.),
+                      placeholder: "관련 검색",
+                      placeholderStyle: const TextStyle(fontSize: 14,color: Colors.grey),
+                      onSubmitted: _handleSubmitted,
                     ),
-                    title: Text('강남'),
-                    onTap: () {
-                      EasyLoading.show(status: " 데이터 로딩 중...");
-                      getPostsData('GANGNAM');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
+                    IconButton(
+                      onPressed: () => _handleSubmitted(editingController.text),
+                      icon: const Icon(Icons.search, color: Colors.blue,),
                     ),
-                    title: Text('강북'),
-                    onTap: () {
-                      getPostsData('GANGBUK');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('관악'),
-                    onTap: () {
-                      getPostsData('GWANAK');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('광진'),
-                    onTap: () {
-                      getPostsData('GWANGZIN');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('동작'),
-                    onTap: () {
-                      getPostsData('DONGJAK');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('서초'),
-                    onTap: () {
-                      getPostsData('SEOCHO');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('성북'),
-                    onTap: () {
-                      getPostsData('SEONGBUK');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('양천'),
-                    onTap: () {
-                      getPostsData('YANGCHEON');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('영등포'),
-                    onTap: () {
-                      getPostsData('YEONGDEUNGPO');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('종로'),
-                    onTap: () {
-                      getPostsData('JONGRO');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.grey[850],
-                    ),
-                    title: Text('중구'),
-                    onTap: () {
-                      getPostsData("JUNGGU");
-                    },
-                  ),
-                ],
-              )
+                  ],
+                )
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: IconButton(
+                  onPressed: (){},
+                  icon: Icon(Icons.add_alert_rounded, color: Colors.blue,),
+                ),
+              ),
+            ],
           ),
           body: SizedBox(
             height: size.height,
             child: Column(
               children: <Widget>[
+                BottomNavigationBar(
+                  elevation: 1.0,
+                  selectedLabelStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  items: const [
+                    BottomNavigationBarItem(
+                      label: "동네소식",
+                      icon: Icon(Icons.linear_scale, size: 0,)
+                    ),
+                    BottomNavigationBarItem(
+                      label: "NPO",
+                      icon: Icon(Icons.linear_scale, size: 0,)
+                    ),
+                  ]
+                ),
                 AnimatedOpacity(
                   opacity: closeTapContainer?0:1,
                   duration: const Duration(milliseconds: 200),
@@ -282,34 +333,145 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     duration: const Duration(milliseconds: 200),
                     width: size.width,
                     alignment: Alignment.topCenter,
-                    height: closeTapContainer?0:categoryHeight,
+                    height: closeTapContainer?0:categoryHeight - 70,
                     child: categoriesScroller,),
                 ),
                 Expanded(
-                    child: ListView.builder(
-                        itemCount: itemsData.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (c, i){
-                          double scale = 1.0;
-                          if (topContainer > 0.5){
-                            scale = i + 0.5 - topContainer;
-                            if (scale < 0 ) { scale = 0;}
-                            else if (scale > 1) { scale = 1; }
-                          }
-                          return Opacity(
-                            opacity: scale,
-                            child: Transform(
-                              transform: Matrix4.identity()..scale(scale, scale),
-                              alignment: Alignment.bottomCenter,
-                              child: Align(
-                                heightFactor: 0.95,
-                                alignment: Alignment.topCenter,
-                                child: itemsData[i],
+                  // 잠깐 변경 확인 후 수정 및 반영 2022 09 13 03 : 20
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 18),
+                        child : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("새로운 소식", style: TextStyle(fontWeight: FontWeight.bold)),
+                            ElevatedButton.icon(
+                              onPressed: (){},
+                              label: Text("더보기"),
+                              icon: Icon(Icons.arrow_forward_ios_rounded)
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1),
+                        ),
+                        height: categoryHeight - 70,
+                        child: Column(
+                          children: [
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: itemsData.length,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (c, i){
+                                double scale = 1.0;
+                                if (topContainer > 0.5){
+                                  scale = i + 0.5 - topContainer;
+                                  if (scale < 0 ) { scale = 0;}
+                                  else if (scale > 1) { scale = 1; }
+                                }
+                                return Opacity(
+                                  opacity: scale,
+                                  child: Transform(
+                                    transform: Matrix4.identity()..scale(scale, scale),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Align(
+                                      heightFactor: 0.95,
+                                      alignment: Alignment.topCenter,
+                                      child: itemsData[i],
+                                    ),
+                                  ),
+                                );
+                              }
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 18),
+                              child : Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("전체 소식", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  ElevatedButton.icon(
+                                      onPressed: (){},
+                                      label: Text("더보기"),
+                                      icon: Icon(Icons.arrow_forward_ios_rounded)
+                                  )
+                                ],
                               ),
                             ),
-                          );
-                        }
-                    )
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 20.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 1),
+                              ),
+                              height: categoryHeight - 70,
+                              child: Column(
+                                children: [
+                                  ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: itemsData.length,
+                                      physics: const BouncingScrollPhysics(),
+                                      itemBuilder: (c, i){
+                                        double scale = 1.0;
+                                        if (topContainer > 0.5){
+                                          scale = i + 0.5 - topContainer;
+                                          if (scale < 0 ) { scale = 0;}
+                                          else if (scale > 1) { scale = 1; }
+                                        }
+                                        return Opacity(
+                                          opacity: scale,
+                                          child: Transform(
+                                            transform: Matrix4.identity()..scale(scale, scale),
+                                            alignment: Alignment.bottomCenter,
+                                            child: Align(
+                                              heightFactor: 0.95,
+                                              alignment: Alignment.topCenter,
+                                              child: itemsData[i],
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  // child: ListView.builder(
+                  //   itemCount: itemsData.length,
+                  //   physics: const BouncingScrollPhysics(),
+                  //   itemBuilder: (c, i){
+                  //     double scale = 1.0;
+                  //     if (topContainer > 0.5){
+                  //       scale = i + 0.5 - topContainer;
+                  //       if (scale < 0 ) { scale = 0;}
+                  //       else if (scale > 1) { scale = 1; }
+                  //     }
+                  //     return Opacity(
+                  //       opacity: scale,
+                  //       child: Transform(
+                  //         transform: Matrix4.identity()..scale(scale, scale),
+                  //         alignment: Alignment.bottomCenter,
+                  //         child: Align(
+                  //           heightFactor: 0.95,
+                  //           alignment: Alignment.topCenter,
+                  //           child: itemsData[i],
+                  //         ),
+                  //       ),
+                  //     );
+                  //   }
+                  // )
                 )
               ],
             ),
@@ -324,12 +486,12 @@ class CategoriesScroller extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 50;
+    final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 80;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
         child: FittedBox(
           fit: BoxFit.fill,
           alignment: Alignment.topCenter,
@@ -338,8 +500,11 @@ class CategoriesScroller extends StatelessWidget {
               Container(
                 width: 375,
                 margin: const EdgeInsets.only(right: 20),
-                height: categoryHeight,
-                decoration: BoxDecoration(color: Colors.blueAccent.shade100),
+                height: categoryHeight - 5,
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent.shade100,
+                  borderRadius: BorderRadius.circular(5),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
@@ -367,3 +532,5 @@ class CategoriesScroller extends StatelessWidget {
     );
   }
 }
+
+

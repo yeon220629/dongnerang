@@ -33,6 +33,11 @@ dependencies:
   kakao_flutter_sdk: ^1.2.1 # 전체 추가
   cupertino_icons: ^1.0.2
 
+  flutter_inappwebview:
+    git:
+      url: https://github.com/pichillilorenzo/flutter_inappwebview.git
+      ref: master
+
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:

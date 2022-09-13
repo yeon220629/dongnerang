@@ -5,7 +5,6 @@ import 'package:incom/screens/mypage.screen.dart';
 import '../constants/colors.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
-import 'crawling.screen.dart';
 import 'freeComponent_viewpage.dart';
 
 class mainScreen extends StatefulWidget {
@@ -63,6 +62,7 @@ class mainScreenState extends State<mainScreen> {
           () => IndexedStack(
             index: navigationController.currentBottomMenuIndex.value,
             children: const[
+              // testScreen(),
               freeComponent_viewpage(),
               // crawlingScreen(),
               mypageScreen(),
