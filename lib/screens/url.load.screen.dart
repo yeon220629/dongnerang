@@ -160,29 +160,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 )
               ],
             )
-            // ButtonBar(
-            //   alignment: MainAxisAlignment.center,
-            //   children: <Widget>[
-            //     ElevatedButton(
-            //       child: Icon(Icons.arrow_back),
-            //       onPressed: () {
-            //         webViewController?.goBack();
-            //       },
-            //     ),
-            //     ElevatedButton(
-            //       child: Icon(Icons.arrow_forward),
-            //       onPressed: () {
-            //         webViewController?.goForward();
-            //       },
-            //     ),
-            //     ElevatedButton(
-            //       child: Icon(Icons.refresh),
-            //       onPressed: () {
-            //         webViewController?.reload();
-            //       },
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),
