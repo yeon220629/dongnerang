@@ -30,7 +30,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final viewModel = MainViewModel(KakaoLogin());
+  // final viewModel = MainViewModel(KakaoLogin());
 
   @override
   Widget build(BuildContext context) {
@@ -126,16 +126,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     //   icon: Image.asset(
                     //     "assets/images/kakao_login_large_wide.png"),
                     // )
-                    SignInButton(
-                      Buttons.Google,
-                      text: "Kakao 로그인",
-                      onPressed: () async {
-                        await viewModel.login();
-                        setState(() {});
-                        EasyLoading.show(status: "카카오 로그인 성공...");
-                        Get.offAll(() => const mainScreen());
-                      },
-                    )
+                    // SignInButton(
+                    //   Buttons.Google,
+                    //   text: "Kakao 로그인",
+                    //   onPressed: () async {
+                    //     await viewModel.login();
+                    //     setState(() {});
+                    //     EasyLoading.show(status: "카카오 로그인 성공...");
+                    //     Get.offAll(() => const mainScreen());
+                    //   },
+                    // )
                   ],
                 ),
               ),

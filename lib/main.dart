@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import 'package:incom/screens/mainScreen.dart';
 import 'package:incom/screens/splash.screen.dart';
 import 'package:incom/services/user.service.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 import 'constants/common.constants.dart';
 
 void main() async {
-  KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY2);
+  // KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY2);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());

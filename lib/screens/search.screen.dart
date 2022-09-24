@@ -1,9 +1,6 @@
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:incom/screens/url.load.screen.dart';
-import '../constants/common.constants.dart';
 import 'package:filter_list/filter_list.dart';
 
 class searchScreen extends StatefulWidget {
@@ -26,27 +23,23 @@ class _searchScreenState extends State<searchScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              FilterListWidget<User>(
-                hideSelectedTextCount: true,
-                listData: userList,
-                selectedListData: selectedUserList,
-                onApplyButtonClick: (list) {
-                  Navigator.pop(context, list);
-                },
-                choiceChipLabel: (item) {
-                  return item!.name;
-                },
-                validateSelectedItem: (list, val) {
-                  return list!.contains(val);
-                },
-                onItemSearch: (user, query) {
-                  return user.name!.toLowerCase().contains(query.toLowerCase());
-                },
-              ),
-            ],
+          child:
+          FilterListWidget<User>(
+            hideSelectedTextCount: true,
+            listData: userList,
+            selectedListData: selectedUserList,
+            onApplyButtonClick: (list) {
+              Navigator.pop(context, list);
+            },
+            choiceChipLabel: (item) {
+              return item!.name;
+            },
+            validateSelectedItem: (list, val) {
+              return list!.contains(val);
+            },
+            onItemSearch: (user, query) {
+              return user.name!.toLowerCase().contains(query.toLowerCase());
+            },
           ),
         )
       ),
@@ -61,7 +54,7 @@ class User {
 }
 
 List<User> userList = [
-  User(name: "Abigail", avatar: "user.png"),
+  User(name: "동작", avatar: "user.png"),
   User(name: "Audrey", avatar: "user.png"),
   User(name: "Ava", avatar: "user.png"),
   User(name: "Bella", avatar: "user.png"),
