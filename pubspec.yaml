@@ -32,6 +32,7 @@ dependencies:
   permission_handler: ^10.0.0
   kakao_flutter_sdk: ^1.2.1 # 전체 추가
   cupertino_icons: ^1.0.2
+  filter_list: ^1.0.2
 
   flutter_inappwebview:
     git:
