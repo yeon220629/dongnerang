@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dongnerang/screens/url.load.screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:incom/screens/search.screen.dart';
-import 'package:incom/screens/url.load.screen.dart';
 import '../constants/common.constants.dart';
+import 'package:dongnerang/screens/search.screen.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -17,8 +17,6 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
-
-
   List<String> LIST_MENU = <String>[
     '동작', '강북', '관악', '광진', '강남', '서초', '성북', '양천', '영등포', '종로',
     '중구'
@@ -30,31 +28,41 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
-  List<dynamic> responseData = [];
   String url = "";
   double progress = 0;
+  var label = "전체소식";
 
   Future<void> getPostsData(value) async {
+
+    List<dynamic> valueData = [];
+    List<dynamic> responseList = [];
     if(value == null){
       print("들어온 변수가 null 값입니다.");
       value = 'DONGJAK';
     }
+    // else if(value == 'all'){
+    //   FirebaseFirestore.instance.collection("crawlingData").get().then(
+    //     (res) async {
+    //       print("Successfully completed : ${res.docs.length}");
+    //       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await res.docs.;
+    //     },
+    //     onError: (e) => print("Error completing: $e"),
+    //   );
+    // }
 
     DocumentReference<Map<String, dynamic>> docref =
-    FirebaseFirestore.instance.collection("crawlingData").doc(value);
-    final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-    await docref.get();
+      FirebaseFirestore.instance.collection("crawlingData").doc(value);
+
+    final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await docref.get();
     var valueDoc = documentSnapshot.data();
 
-    List<dynamic> valueData = [];
     valueDoc?.forEach((key, value) {
       valueData.add(value);
     });
 
-    List<dynamic> responseList= valueData;
-    responseData.addAll(responseList);
+    responseList = valueData;
+
     for ( var post in responseList){
-      // Search_value.add(post);
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${post["link"]}');
@@ -201,7 +209,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               IconButton(onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const searchScreen())
+                  MaterialPageRoute(builder: (context) => searchScreen(title: '',))
                 );
               },
               icon: const Icon(Icons.search), color: Colors.blueAccent),
@@ -227,14 +235,30 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     selectedLabelStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
-                    items: const [
+                    onTap: (value){
+                      print(value);
+                      setState(() {
+                        // 이쪽 한번 이야기 필요.
+                        if(value == 0 ){
+                          label = "동네소식";
+                          getPostsData('all');
+                        }else if(value == 1){
+                          label = "서울시소식";
+                          setState(() {
+                          });
+                        }else {
+                          label = "전체 소식";
+                        }
+                      });
+                    },
+                    items: [
                       BottomNavigationBarItem(
-                          label: "동네소식",
-                          icon: Icon(Icons.linear_scale, size: 0,)
+                        label: "동네소식",
+                        icon: Icon(Icons.linear_scale, size: 0,)
                       ),
                       BottomNavigationBarItem(
-                          label: "서울시 소식",
-                          icon: Icon(Icons.linear_scale, size: 0,)
+                        label: "서울시 소식",
+                        icon: Icon(Icons.linear_scale, size: 0,)
                       ),
                     ]
                 ),
@@ -242,7 +266,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: EdgeInsets.all(15),
-                    child: Text("전체 소식", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    child: Text("$label", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   )
                 ),
                 Expanded(
@@ -271,6 +295,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         }
                     )
                 )
+
               ],
             ),
           ),
@@ -281,7 +306,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
 class CategoriesScroller extends StatelessWidget {
   const CategoriesScroller();
-
   @override
   Widget build(BuildContext context) {
     final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 50;
@@ -298,7 +322,7 @@ class CategoriesScroller extends StatelessWidget {
               Container(
                 width: 375,
                 margin: const EdgeInsets.only(right: 20),
-                height: categoryHeight - 65,
+                height: categoryHeight - 50,
                 decoration: BoxDecoration(color: Colors.blueAccent.shade100),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

@@ -1,11 +1,12 @@
+import 'package:dongnerang/screens/search.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:incom/screens/mypage.screen.dart';
 
 import '../constants/colors.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
 import 'freeComponent_viewpage.dart';
+import 'mypage.screen.dart';
 
 class mainScreen extends StatefulWidget {
   const mainScreen({Key? key}) : super(key: key);
@@ -61,11 +62,11 @@ class mainScreenState extends State<mainScreen> {
       body: Obx(
           () => IndexedStack(
             index: navigationController.currentBottomMenuIndex.value,
-            children: const[
+            children: [
               // testScreen(),
               freeComponent_viewpage(),
               // crawlingScreen(),
-              mypageScreen(),
+              mypageScreen()
             ],
           )
       ),
