@@ -74,24 +74,24 @@ class PermissionScreen extends StatelessWidget {
                     title: "저장공간",
                     subTitle: "데이터 및 리소스 저장",
                   ),
-                  const SizedBox(height: 36),
-                  buildPermissionItem(
-                    imagePath: "assets/images/camera.png",
-                    title: "카메라",
-                    subTitle: "장소 사진 업로드",
-                  ),
-                  const SizedBox(height: 36),
-                  buildPermissionItem(
-                    imagePath: "assets/images/photo.png",
-                    title: "사진/갤러리",
-                    subTitle: "장소 사진 업로드",
-                  ),
-                  const SizedBox(height: 36),
-                  buildPermissionItem(
-                    imagePath: "assets/images/alarm.png",
-                    title: "알림",
-                    subTitle: "푸시알림 등록 및 수신",
-                  ),
+                  // const SizedBox(height: 36),
+                  // buildPermissionItem(
+                  //   imagePath: "assets/images/camera.png",
+                  //   title: "카메라",
+                  //   subTitle: "장소 사진 업로드",
+                  // ),
+                  // const SizedBox(height: 36),
+                  // buildPermissionItem(
+                  //   imagePath: "assets/images/photo.png",
+                  //   title: "사진/갤러리",
+                  //   subTitle: "장소 사진 업로드",
+                  // ),
+                  // const SizedBox(height: 36),
+                  // buildPermissionItem(
+                  //   imagePath: "assets/images/alarm.png",
+                  //   title: "알림",
+                  //   subTitle: "푸시알림 등록 및 수신",
+                  // ),
                 ]),
           )),
     );

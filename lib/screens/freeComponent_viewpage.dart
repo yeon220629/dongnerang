@@ -33,22 +33,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   var label = "전체소식";
 
   Future<void> getPostsData(value) async {
-
+    listItems = [];
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
     if(value == null){
       print("들어온 변수가 null 값입니다.");
       value = 'DONGJAK';
     }
-    // else if(value == 'all'){
-    //   FirebaseFirestore.instance.collection("crawlingData").get().then(
-    //     (res) async {
-    //       print("Successfully completed : ${res.docs.length}");
-    //       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await res.docs.;
-    //     },
-    //     onError: (e) => print("Error completing: $e"),
-    //   );
-    // }
 
     DocumentReference<Map<String, dynamic>> docref =
       FirebaseFirestore.instance.collection("crawlingData").doc(value);
@@ -173,7 +164,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   );
                 }).toList(),
                 onChanged: (dynamic value){
-                  print(value);
                   if(value == '강남'){
                     print("GANGNAM");
                     getPostsData("GANGNAM");

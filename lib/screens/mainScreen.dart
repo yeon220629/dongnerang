@@ -6,6 +6,8 @@ import '../constants/colors.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
 import 'freeComponent_viewpage.dart';
+import 'intro.screen.dart';
+import 'login.screen.dart';
 import 'mypage.screen.dart';
 
 class mainScreen extends StatefulWidget {
@@ -48,6 +50,10 @@ class mainScreenState extends State<mainScreen> {
                         BottomNavigationBarItem(
                           icon: Icon(Icons.ac_unit),
                           label: "마이페이지"
+                        ),
+                        BottomNavigationBarItem(
+                            icon: Icon(Icons.ac_unit),
+                            label: "인트로 스크린"
                         )
                       ],
                       onTap: (index) {
@@ -63,10 +69,9 @@ class mainScreenState extends State<mainScreen> {
           () => IndexedStack(
             index: navigationController.currentBottomMenuIndex.value,
             children: [
-              // testScreen(),
               freeComponent_viewpage(),
-              // crawlingScreen(),
-              mypageScreen()
+              mypageScreen(),
+              IntroScreen(),
             ],
           )
       ),

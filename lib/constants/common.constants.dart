@@ -5,8 +5,8 @@ import 'package:latlong2/latlong.dart';
 import '../screens/freeComponent_viewpage.dart';
 
 const CIRCLE_RADIUS = 50.0;
-const KAKAO_NATIVE_APP_KEY = "fc7ff62469909fc60350045b7bc1178e"; //real
-const KAKAO_NATIVE_APP_KEY2 = "7d87ad463053b80008264d1eb03665b1"; //real
+const KAKAO_NATIVE_APP_KEY = "d7eaa723a1b0bbd17635330c5c561a5e"; //real
+// const KAKAO_NATIVE_APP_KEY2 = "7d87ad463053b80008264d1eb03665b1"; //real
 
 const NO_CATEGORY_TEXT = "없음";
 final MAP_INITIAL_CENTER_LOCATION = LatLng(37.5547125, 126.9707878);

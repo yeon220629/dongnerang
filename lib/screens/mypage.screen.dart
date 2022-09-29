@@ -1,81 +1,44 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class mypageScreen extends StatefulWidget {
-    const mypageScreen({Key? key}) : super(key: key);
+  const mypageScreen({Key? key}) : super(key: key);
 
-    @override
-    State<mypageScreen> createState() => _mypageScreenState();
-
-    }
-
-    class _mypageScreenState extends State<mypageScreen> {
-
-    @override
-    Widget build(BuildContext context) {
-    return Scaffold(
-    backgroundColor: Colors.greenAccent,
-    appBar: AppBar(
-    backgroundColor: Colors.green,
-    centerTitle: true,
-    elevation: 0.0,
-    leading: IconButton(
-    icon: Icon(Icons.menu),
-    onPressed: () {
-    print('menu button is clicked');
-    },
-    ),
-    actions: [
-    IconButton(
-    icon: Icon(Icons.shopping_cart),
-    onPressed: () {
-    print('shopping cart button is clicked');
-    },
-    ),
-    IconButton(
-    icon: Icon(Icons.search),
-    onPressed: () {
-    print('start button is clicked');
-    },
-    )
-    ],
-    title: Text('Profile'),
-    ),
-    body: Padding(
-    padding: EdgeInsets.fromLTRB(30.0, 40.0, 0, 0),
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-    const Center(
-    child: CircleAvatar(
-    backgroundImage: AssetImage("assets/camera.png"),
-    radius: 60.0,
-    ),
-    ),
-    Divider(
-    height: 60.0,
-    color: Colors.grey[850],
-    thickness: 0.8,
-    endIndent: 30.0,
-    ),
-    const Text('Name',
-    style: TextStyle(
-    color: Colors.white,
-    letterSpacing: 3.0,
-    ),
-    ),
-    const SizedBox(height: 10.0,),
-    const Text('이창섭',
-    style: TextStyle(
-    color: Colors.white,
-    letterSpacing:2.0,
-    fontSize: 20.0,
-    fontWeight: FontWeight.bold,
-    ),
-    )
-            ],
-          ),
-        ),
-      );
-    }
+  @override
+  State<mypageScreen> createState() => _mypageScreenState();
 }
+
+late PickedFile _imageFile; // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
+final ImagePicker _picker = ImagePicker();
+
+class _mypageScreenState extends State<mypageScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+            body: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                child: ListView(
+                    children: [
+                        imageProfile(),
+                    ],
+                ),
+            ),
+        )
+    );
+  }
+}
+
+Widget imageProfile() {
+    return Center(
+        child: Row(
+            children: <Widget>[
+                CircleAvatar(
+                  radius: 80,
+                )
+            ],
+        ),
+    );
+}
+

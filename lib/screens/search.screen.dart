@@ -57,7 +57,6 @@ class _searchScreenState extends State<searchScreen>
 
     for ( var post in responseList){
       if(post['title'].contains(value)){
-        print("data okay : ${post['title']}, ${post['number']}");
         listItems.add( GestureDetector(
             onTap: () async{
               final Uri url = Uri.parse('${post["link"]}');

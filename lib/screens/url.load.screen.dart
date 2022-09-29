@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/colors.constants.dart';
 
@@ -69,19 +68,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
     body: SafeArea(
         child: Column(
           children: <Widget>[
-            // TextField(
-            //   decoration: InputDecoration(
-            //     prefixIcon: Icon(Icons.search)
-            //   ),
-            //   controller: urlController,
-            //   keyboardType: TextInputType.text,
-            //   onSubmitted: (value){
-            //     var url = Uri.parse(value);
-            //     if(url.scheme.isEmpty){
-            //       url = widget.urldata;
-            //     }
-            //   },
-            // ),
             Expanded(
               child: Stack(
                 children: [
