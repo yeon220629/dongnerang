@@ -16,16 +16,45 @@ class _mypageScreenState extends State<mypageScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            body: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: ListView(
-                    children: [
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: ListView(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            children: [
+              SizedBox(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
                         imageProfile(),
-                    ],
-                ),
-            ),
-        )
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                              child: Column(
+                                children: [
+                                  Text('동작구참돔', style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                                  TextButton(
+                                      onPressed: (){},
+                                      child: Text("내 정보 관리"),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                )
+              )
+            ],
+          ),
+        ),
+      )
     );
   }
 }
@@ -35,10 +64,14 @@ Widget imageProfile() {
         child: Row(
             children: <Widget>[
                 CircleAvatar(
-                  radius: 80,
+                  radius: 50,
                 )
             ],
         ),
     );
 }
 
+Widget myInterestedList() {
+  return Center(
+  );
+}

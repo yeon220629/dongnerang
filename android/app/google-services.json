@@ -38,6 +38,13 @@
             {
               "client_id": "747660530943-8brvso0b8mho869gdjl2hfqigdjm02gt.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "747660530943-jui64n18p9sc8vt7jsulsos9gt20komn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dongnerang.com.dongnerang"
+              }
             }
           ]
         }

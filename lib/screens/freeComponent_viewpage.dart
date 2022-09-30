@@ -226,14 +226,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       fontWeight: FontWeight.bold,
                     ),
                     onTap: (value){
-                      print(value);
                       setState(() {
                         // 이쪽 한번 이야기 필요.
-                        if(value == 0 ){
-                          label = "동네소식";
-                          getPostsData('all');
-                        }else if(value == 1){
+                        if(value == 1){
                           label = "서울시소식";
+                          getPostsData("NPO");
                           setState(() {
                           });
                         }else {
