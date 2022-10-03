@@ -6,7 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'constants/common.constants.dart';
-import 'firebase_options.dart';
+
 
 bool isFirebaseReady = true;
 

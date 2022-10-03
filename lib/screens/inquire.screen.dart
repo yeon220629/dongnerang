@@ -1,16 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'settingsPage.screen.dart';
 
-class mypageScreen extends StatefulWidget {
-  const mypageScreen({Key? key}) : super(key: key);
 
-  @override
-  State<mypageScreen> createState() => _mypageScreenState();
-
-}
-
-class _mypageScreenState extends State<mypageScreen> {
+class Inquire extends StatelessWidget {
+  const Inquire({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +10,6 @@ class _mypageScreenState extends State<mypageScreen> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 1,
-
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (_) => SettingsPage()));
-            },
-          )
-        ],
         title: Text('마이페이지'),
       ),
       body: Padding(
@@ -64,4 +46,3 @@ class _mypageScreenState extends State<mypageScreen> {
     );
   }
 }
-
