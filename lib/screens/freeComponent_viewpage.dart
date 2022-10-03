@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -96,7 +97,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         SizedBox(width: 10),
                         Text(
                           '시작일 | ${post['registrationdate']}',
-                          style: const TextStyle(fontSize: 17, color: Colors.grey),
+                          style: const TextStyle(fontSize: 15, color: Colors.grey),
                           textDirection: TextDirection.ltr,
                         ),
                       ],
@@ -153,7 +154,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
-            leading: const Icon(Icons.ac_unit, color: Colors.black),
+            foregroundColor: Color(0xff5d6acb),
+            title: Container(
+                width: 40,
+                child: Image.asset("assets/images/app_logo.png"),
+            ),
+            // fit:BoxFit.cover,
+            // height:20,
+
             actions: <Widget>[
               DropdownButton(
                 value: dropdownValue,
@@ -205,15 +213,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   });
                 },
               ),
-              const SizedBox(width: 180,),
+              const SizedBox(width: 160,),
               IconButton(onPressed: (){
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => searchScreen(title: '',))
                 );
               },
-              icon: const Icon(Icons.search), color: Colors.blueAccent),
-              IconButton(onPressed: (){}, icon: const Icon(Icons.baby_changing_station), color: Colors.blueAccent),
+              icon: const Icon(Icons.search)),
+              IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_none_outlined)),
             ],
           ),
           body: SizedBox(
@@ -318,7 +326,7 @@ class CategoriesScroller extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: FittedBox(
           fit: BoxFit.fill,
           alignment: Alignment.topCenter,
@@ -328,23 +336,14 @@ class CategoriesScroller extends StatelessWidget {
                 width: 375,
                 margin: const EdgeInsets.only(right: 20),
                 height: categoryHeight - 50,
-                decoration: BoxDecoration(color: Colors.blueAccent.shade100),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const <Widget>[
-                      Text(
-                        "현재 인기가\n가장 많은 지원사업",
-                        style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                // decoration: BoxDecoration(color: Colors.blueAccent.shade100),
+                child:Center(
+                          child: Image.asset("assets/images/banner.png")
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                      // SizedBox(
+                      //   height: 5,
+                      // ),
                 ),
-              ),
             ],
           ),
         ),

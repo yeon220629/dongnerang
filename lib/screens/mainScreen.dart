@@ -40,24 +40,26 @@ class mainScreenState extends State<mainScreen> {
                     BottomNavigationBar(
                       showUnselectedLabels: true,
                       showSelectedLabels: true,
-                      selectedLabelStyle: const TextStyle(color: Colors.red),
+                      // selectedLabelStyle: const TextStyle(color: Colors.red),
                       selectedItemColor: AppColors.primary,
                       unselectedItemColor: AppColors.grey,
+                      // currentIndex: _selectedIndex,
                       items: const [
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.ac_unit),
+                          icon: Icon(Icons.home),
                           label: "홈",
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.ac_unit),
+                          icon: Icon(Icons.account_circle),
                           label: "마이페이지"
                         ),
-                        BottomNavigationBarItem(
-                            icon: Icon(Icons.ac_unit),
-                            label: "인트로 스크린"
-                        ),
+                        // BottomNavigationBarItem(
+                        //     icon: Icon(Icons.ac_unit),
+                        //     label: "인트로 스크린"
+                        // ),
                       ],
                       onTap: (index) {
+                        // print(index);
                         navigationController.currentBottomMenuIndex.value = index;
                         setState(() {});
                       },
@@ -72,7 +74,7 @@ class mainScreenState extends State<mainScreen> {
             children: [
               freeComponent_viewpage(),
               mypageScreen(),
-              IntroScreen(),
+              // IntroScreen(),
               // privateSettingScreen(),
             ],
           )

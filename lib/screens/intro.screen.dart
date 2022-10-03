@@ -35,10 +35,10 @@ class IntroScreen extends StatelessWidget {
                   text: "yeon",
                   onPressed: () {
                     FirebaseAuth.instance.currentUser == null
-                        // ? Get.offAll(() => const LoginScreen())
-                        // : Get.offAll(() => const mainScreen());
-                        ? Get.offAll(() => const mainScreen())
-                        : Get.offAll(() => const LoginScreen());
+                        ? Get.offAll(() => const LoginScreen())
+                        : Get.offAll(() => const mainScreen());
+                        // ? Get.offAll(() => const mainScreen())
+                        // : Get.offAll(() => const LoginScreen());
                   },
                 ),
               )
