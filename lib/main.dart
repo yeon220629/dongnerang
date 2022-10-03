@@ -13,10 +13,7 @@ bool isFirebaseReady = true;
 void main() async {
   KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).catchError((e){
-    isFirebaseReady = false;
-    print("error flutter firebase service : $e");
-  });
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
