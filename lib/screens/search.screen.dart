@@ -141,11 +141,11 @@ class _searchScreenState extends State<searchScreen>
         }
     );
     SearcheditingController.text = '';
-    controller.addListener(() {
-      double value = controller.offset/119;
+    controllers.addListener(() {
+      double value = controllers.offset/119;
       setState(() {
         topContainer = value;
-        closeTapContainer = controller.offset > 50;
+        closeTapContainer = controllers.offset > 50;
       });
     });
   }

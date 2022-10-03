@@ -1,3 +1,4 @@
+import 'package:dongnerang/screens/private.setting.screen.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,7 @@ class mainScreenState extends State<mainScreen> {
                         BottomNavigationBarItem(
                             icon: Icon(Icons.ac_unit),
                             label: "인트로 스크린"
-                        )
+                        ),
                       ],
                       onTap: (index) {
                         navigationController.currentBottomMenuIndex.value = index;
@@ -72,6 +73,7 @@ class mainScreenState extends State<mainScreen> {
               freeComponent_viewpage(),
               mypageScreen(),
               IntroScreen(),
+              // privateSettingScreen(),
             ],
           )
       ),

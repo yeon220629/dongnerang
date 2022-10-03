@@ -70,8 +70,7 @@ var POPUP_MENU_ITEMS_OTHERS = [
       )),
 ];
 // Controller
-final CategoriesScroller categoriesScroller = CategoriesScroller();
-late final ScrollController controller = ScrollController();
+final ScrollController controllers = ScrollController();
 InAppWebViewController? webViewController;
 InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
   crossPlatform: InAppWebViewOptions(

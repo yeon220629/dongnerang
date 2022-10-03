@@ -11,7 +11,7 @@ admin.initializeApp({
 exports.createCustomToken = functions.https.onRequest(async (request, response) => {
     const user = request.body;
     
-    const uid = user.uid;
+    const uid = `kakao:${user.uid}`;
     const updateParams = {
         email : user.email,
         photoURL : user.photoURL,
@@ -26,4 +26,6 @@ exports.createCustomToken = functions.https.onRequest(async (request, response) 
     }
 
     const token = await admin.auth().createCustomToken(uid);
+
+    response.send(token);
 });

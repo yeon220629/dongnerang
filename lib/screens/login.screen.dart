@@ -37,15 +37,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 "동네랑 로고",
                 style: TextStyle(fontSize: 28, color: AppColors.primary),
               ),
-            const SizedBox(height: 325),
+            const SizedBox(height: 100),
            IconButton(
-               onPressed: () async {
-                 // EasyLoading.show(status: " 로그인...");
-                 await viewModel.login();
-
-
-               },
-               icon: Image.asset('assets/images/kakao_login_large_wide.png')
+             onPressed: () async {
+               // EasyLoading.show(status: " 로그인...");
+               await viewModel.login();
+             },
+             icon: Image.asset('assets/images/kakao_login_large_wide.png'),iconSize: 300,
             ),
             const SizedBox(height: 20),
           ]),

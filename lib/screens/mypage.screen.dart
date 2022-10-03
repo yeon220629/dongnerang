@@ -31,23 +31,32 @@ class _mypageScreenState extends State<mypageScreen> {
                         Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('동작구참돔', style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   )),
                                   TextButton(
-                                      onPressed: (){},
-                                      child: Text("내 정보 관리"),
+                                    onPressed: (){},
+                                    child: Text("내 정보 관리 >"),
                                   ),
                                 ],
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 27),
+                          child: IconButton(onPressed: (){}, icon: Icon(Icons.settings)),
+                        ),
                       ],
                     ),
+                    SizedBox(height: 35,),
+                    Container(
+                      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                    )
                   ],
                 )
               )
@@ -64,7 +73,7 @@ Widget imageProfile() {
         child: Row(
             children: <Widget>[
                 CircleAvatar(
-                  radius: 50,
+                  radius: 40,
                 )
             ],
         ),

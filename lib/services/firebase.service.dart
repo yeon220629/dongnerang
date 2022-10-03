@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_picker/image_picker.dart';
 import '../models/app_user.model.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,5 +34,21 @@ class FirebaseService {
       return null;
     }
     return findUserByEmail(user.email!);
+  }
+
+  static Future<String?> uploadImage(XFile? selectedImage) async {
+    if (selectedImage == null) {
+      EasyLoading.showError("이미지 선택 실패");
+      return null;
+    }
+
+    EasyLoading.show(status: "업로드 중입니다");
+
+    var storageRef = FirebaseStorage.instance
+        .ref(DateTime.now().toString() + selectedImage.name);
+    // await storageRef.putFile(File(selectedImage.path));
+    final downloadUrl = await storageRef.getDownloadURL();
+    // logger.d(downloadUrl);
+    return downloadUrl;
   }
 }

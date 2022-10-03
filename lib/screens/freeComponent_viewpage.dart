@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../constants/common.constants.dart';
@@ -17,6 +16,7 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
+  final CategoriesScroller categoriesScroller = CategoriesScroller();
   List<String> LIST_MENU = <String>[
     '동작', '강북', '관악', '광진', '강남', '서초', '성북', '양천', '영등포', '종로',
     '중구'
@@ -29,8 +29,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   String url = "";
-  double progress = 0;
   var label = "전체소식";
+  var currentItem = "";
 
   Future<void> getPostsData(value) async {
     listItems = [];
@@ -126,13 +126,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     );
 
     getPostsData(null);
-    controller.addListener(() {
+    controllers.addListener(() {
 
-      double value = controller.offset/119;
+      double value = controllers.offset/119;
 
       setState(() {
         topContainer = value;
-        closeTapContainer = controller.offset > 50;
+        closeTapContainer = controllers.offset > 50;
       });
     });
   }
@@ -165,28 +165,38 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 }).toList(),
                 onChanged: (dynamic value){
                   if(value == '강남'){
-                    print("GANGNAM");
                     getPostsData("GANGNAM");
+                    currentItem = "GANGNAM";
                   }else if(value == '강북'){
                     getPostsData("GANGBUK");
+                    currentItem = "GANGBUK";
                   }else if(value == '관악'){
                     getPostsData("GWANAK");
+                    currentItem = "GWANAK";
                   }else if(value == '광진'){
                     getPostsData("GWANGZIN");
+                    currentItem = "GWANGZIN";
                   }else if(value == '동작'){
                     getPostsData("DONGJAK");
+                    currentItem = "DONGJAK";
                   }else if(value == '서초'){
                     getPostsData("SEOCHO");
+                    currentItem = "SEOCHO";
                   }else if(value == '성북'){
                     getPostsData("SEONGBUK");
+                    currentItem = "SEONGBUK";
                   }else if(value == '양천'){
                     getPostsData("YANGCHEON");
+                    currentItem = "YANGCHEON";
                   }else if(value == '영등포'){
                     getPostsData("YEONGDEUNGPO");
+                    currentItem = "YEONGDEUNGPO";
                   }else if(value == '종로'){
                     getPostsData("JONGRO");
+                    currentItem = "JONGRO";
                   }else if(value == '중구'){
                     getPostsData("JUNGGU");
+                    currentItem = "JUNGGU";
                   }
                   setState(() {
                     if(mounted){
@@ -228,8 +238,16 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     onTap: (value){
                       setState(() {
                         // 이쪽 한번 이야기 필요.
-                        if(value == 1){
-                          label = "서울시소식";
+                        if(value == 0){
+                          label = "동네소식";
+                          if(currentItem == ""){
+                            currentItem = "DONGJAK";
+                            getPostsData(currentItem);
+                          }
+                          getPostsData(currentItem);
+                        }
+                        else if(value == 1){
+                          label = "서울시 소식";
                           getPostsData("NPO");
                           setState(() {
                           });
@@ -334,5 +352,3 @@ class CategoriesScroller extends StatelessWidget {
     );
   }
 }
-
-
