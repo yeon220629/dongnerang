@@ -49,12 +49,11 @@ class MainViewModel {
         currentUser =
         await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
         if (currentUser == null) {
-          EasyLoading.showError("회원가입 진행");
-          Get.offAll(() => privateSettingScreen());
+          EasyLoading.showError("회원가입 진행 필요");
         }
       }
       UserService.to.currentUser.value = currentUser;
-      Get.offAll(() => mainScreen());
+      Get.offAll(() => privateSettingScreen());
     }
     Future logout() async {
       await _socialLogin.logout();
