@@ -36,10 +36,11 @@ class _SplashScreenState extends State<SplashScreen> {
     //   });
     // } else {
       Future.delayed(const Duration(milliseconds: 1000), () {
-        print("FirebaseAuth.instance.currentUser : ${FirebaseAuth.instance}");
         FirebaseAuth.instance.currentUser != null
-            ? Get.offAll(() => const mainScreen())
-            : Get.offAll(() => const LoginScreen());
+            // ? Get.offAll(() => const mainScreen())
+            // : Get.offAll(() => const LoginScreen());
+            ? Get.offAll(() => const LoginScreen())
+            : Get.offAll(() => const mainScreen());
       });
     // }
   }

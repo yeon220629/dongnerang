@@ -20,6 +20,7 @@ class MainViewModel {
   Future login() async {
     isLogined = await _socialLogin.login();
     print("isLogined : $isLogined");
+
     if(isLogined) {
       user = await kakao.UserApi.instance.me();
       print("user : ${user!.kakaoAccount!.birthday}");
@@ -46,8 +47,7 @@ class MainViewModel {
           "name": user!.kakaoAccount!.profile!.nickname,
           "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
         });
-        currentUser =
-        await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
+        currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
         if (currentUser == null) {
           EasyLoading.showError("회원가입 진행 필요");
         }

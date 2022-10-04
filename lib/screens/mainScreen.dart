@@ -65,26 +65,26 @@ class mainScreenState extends State<mainScreen> {
                           ),
                           label: "마이페이지"
                         ),
-                        // BottomNavigationBarItem(
-                        //     icon: Icon(
-                        //       Icons.ac_unit,
-                        //       color:
-                        //         navigationController.currentBottomMenuIndex.value == 2
-                        //           ? AppColors.primary
-                        //           : AppColors.grey,
-                        //     ),
-                        //     label: "인트로 스크린"
-                        // ),
-                        // BottomNavigationBarItem(
-                        //     icon: Icon(
-                        //       Icons.ac_unit,
-                        //       color:
-                        //         navigationController.currentBottomMenuIndex.value == 3
-                        //           ? AppColors.primary
-                        //           : AppColors.grey,
-                        //     ),
-                        //     label: "세팅 스크린"
-                        // ),
+                        BottomNavigationBarItem(
+                            icon: Icon(
+                              Icons.ac_unit,
+                              color:
+                                navigationController.currentBottomMenuIndex.value == 2
+                                  ? AppColors.primary
+                                  : AppColors.grey,
+                            ),
+                            label: "인트로 스크린"
+                        ),
+                        BottomNavigationBarItem(
+                            icon: Icon(
+                              Icons.ac_unit,
+                              color:
+                                navigationController.currentBottomMenuIndex.value == 3
+                                  ? AppColors.primary
+                                  : AppColors.grey,
+                            ),
+                            label: "세팅 스크린"
+                        ),
                       ],
                       onTap: (index) {
                         // print(index);
@@ -102,8 +102,8 @@ class mainScreenState extends State<mainScreen> {
             children: [
               freeComponent_viewpage(),
               mypageScreen(),
-              // IntroScreen(),
-              // privateSettingScreen(),
+              IntroScreen(),
+              privateSettingScreen(),
             ],
           )
       ),
