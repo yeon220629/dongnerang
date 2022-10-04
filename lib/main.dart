@@ -1,4 +1,5 @@
 import 'package:dongnerang/screens/mainScreen.dart';
+import 'package:dongnerang/screens/splash.screen.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,8 @@ class MyApp extends StatelessWidget {
         // primaryColor: Colors.white,
         // primarySwatch: Colors.indigo,
       ),
-      // home: const SplashScreen(),
-      home: const mainScreen(),
+      home: const SplashScreen(),
+      // home: const mainScreen(),
       initialBinding: BindingsBuilder((){
         Get.put(UserService());
       }),

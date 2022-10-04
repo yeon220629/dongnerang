@@ -13,6 +13,7 @@ import '../controller/private.setting.controller.dart';
 import '../services/firebase.service.dart';
 import '../services/user.service.dart';
 import '../util/logger.service.dart';
+import 'mainScreen.dart';
 
 class privateSettingScreen extends GetView<PrivateSettingController> {
   double ages = 0;
@@ -58,7 +59,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                         }));
                         EasyLoading.showSuccess("개인설정 추가 완료");
                         await FirebaseService.getCurrentUser();
-                        Get.back();
+                        Get.offAll(() => mainScreen());
                       } catch (e) {
                         logger.e(e);
                         EasyLoading.showSuccess("개인설정 추가 실패");

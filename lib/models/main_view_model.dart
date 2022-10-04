@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/screens/mainScreen.dart';
 import 'package:dongnerang/screens/private.setting.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -18,6 +19,7 @@ class MainViewModel {
 
   Future login() async {
     isLogined = await _socialLogin.login();
+    print("isLogined : $isLogined");
     if(isLogined) {
       user = await kakao.UserApi.instance.me();
       print("user : ${user!.kakaoAccount!.birthday}");
@@ -47,11 +49,12 @@ class MainViewModel {
         currentUser =
         await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
         if (currentUser == null) {
-          EasyLoading.showError("가입 실패");
+          EasyLoading.showError("회원가입 진행");
+          Get.offAll(() => privateSettingScreen());
         }
       }
       UserService.to.currentUser.value = currentUser;
-      Get.offAll(() => privateSettingScreen());
+      Get.offAll(() => mainScreen());
     }
     Future logout() async {
       await _socialLogin.logout();
