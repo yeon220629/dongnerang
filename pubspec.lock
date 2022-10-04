@@ -210,7 +210,7 @@ packages:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.11.0"
+    version: "3.11.1"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
@@ -312,10 +312,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: ee1b0d7ff754a49e9f995c68505da3556b9c830d
+      resolved-ref: "0579de9f9cca2264a759968c20bd4b52f5ad8c39"
       url: "https://github.com/pichillilorenzo/flutter_inappwebview.git"
     source: git
-    version: "5.4.3+7"
+    version: "5.4.4+2"
   flutter_keyboard_visibility:
     dependency: "direct main"
     description:
@@ -1121,7 +1121,7 @@ packages:
       name: video_player_avfoundation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.6"
+    version: "2.3.7"
   video_player_platform_interface:
     dependency: transitive
     description:

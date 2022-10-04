@@ -2,11 +2,13 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+
+import '../services/firebase.service.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -53,6 +55,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     });
 
     responseList = valueData;
+    String? userEmail = FirebaseAuth.instance.currentUser?.email;
+    print("va : ${FirebaseService.getUserLocalData(userEmail!)}");
 
     for ( var post in responseList){
       listItems.add( GestureDetector(

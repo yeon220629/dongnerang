@@ -31,10 +31,10 @@ class MainViewModel {
         'email': user!.kakaoAccount!.email!,
         'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
       });
-      await FirebaseAuth.instance.signInWithCustomToken(customToken);
 
       var currentUser = await FirebaseService.findUserByEmail(
           user!.kakaoAccount!.email!);
+
       if (currentUser == null) {
         await FirebaseFirestore.instance
             .collection("users")

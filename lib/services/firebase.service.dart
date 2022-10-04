@@ -36,19 +36,13 @@ class FirebaseService {
     return findUserByEmail(user.email!);
   }
 
-  static Future<String?> uploadImage(XFile? selectedImage) async {
-    if (selectedImage == null) {
-      EasyLoading.showError("이미지 선택 실패");
-      return null;
-    }
-
-    EasyLoading.show(status: "업로드 중입니다");
-
-    var storageRef = FirebaseStorage.instance
-        .ref(DateTime.now().toString() + selectedImage.name);
-    // await storageRef.putFile(File(selectedImage.path));
-    final downloadUrl = await storageRef.getDownloadURL();
-    // logger.d(downloadUrl);
-    return downloadUrl;
+  static Future<AppUser?> getUserLocalData(String email) async {
+    final doc = await FirebaseFirestore.instance.collection("users").doc(email).get();
+    doc.data()?.forEach((key, value) {
+      if(key == 'local'){
+        // print("value : $value");
+        return value;
+      }
+    });
   }
 }

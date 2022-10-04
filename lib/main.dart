@@ -1,4 +1,4 @@
-import 'package:dongnerang/screens/mainScreen.dart';
+import 'package:dongnerang/firebase_options.dart';
 import 'package:dongnerang/screens/splash.screen.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,7 +14,9 @@ bool isFirebaseReady = true;
 void main() async {
   KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
