@@ -44,19 +44,47 @@ class mainScreenState extends State<mainScreen> {
                       selectedItemColor: AppColors.primary,
                       unselectedItemColor: AppColors.grey,
                       // currentIndex: _selectedIndex,
-                      items: const [
+                      items: [
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.home),
+                          icon: Icon(
+                            Icons.home,
+                            color:
+                              navigationController.currentBottomMenuIndex.value == 0
+                                ? AppColors.primary
+                                : AppColors.grey,
+                          ),
                           label: "홈",
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.account_circle),
+                          icon: Icon(
+                            Icons.account_circle,
+                            color:
+                              navigationController.currentBottomMenuIndex.value == 1
+                                ? AppColors.primary
+                                : AppColors.grey,
+                          ),
                           label: "마이페이지"
                         ),
-                        // BottomNavigationBarItem(
-                        //     icon: Icon(Icons.ac_unit),
-                        //     label: "인트로 스크린"
-                        // ),
+                        BottomNavigationBarItem(
+                            icon: Icon(
+                              Icons.ac_unit,
+                              color:
+                                navigationController.currentBottomMenuIndex.value == 2
+                                  ? AppColors.primary
+                                  : AppColors.grey,
+                            ),
+                            label: "인트로 스크린"
+                        ),
+                        BottomNavigationBarItem(
+                            icon: Icon(
+                              Icons.ac_unit,
+                              color:
+                                navigationController.currentBottomMenuIndex.value == 3
+                                  ? AppColors.primary
+                                  : AppColors.grey,
+                            ),
+                            label: "세팅 스크린"
+                        ),
                       ],
                       onTap: (index) {
                         // print(index);
@@ -74,8 +102,8 @@ class mainScreenState extends State<mainScreen> {
             children: [
               freeComponent_viewpage(),
               mypageScreen(),
-              // IntroScreen(),
-              // privateSettingScreen(),
+              IntroScreen(),
+              privateSettingScreen(),
             ],
           )
       ),

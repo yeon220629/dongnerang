@@ -20,6 +20,8 @@ class MainViewModel {
     isLogined = await _socialLogin.login();
     if(isLogined) {
       user = await kakao.UserApi.instance.me();
+      print("user : ${user!.kakaoAccount!.birthday}");
+
       final customToken = await FirebaseService().createCustomToken({
         'uid': user!.id.toString(),
         'displayName': user!.kakaoAccount?.profile?.nickname,
@@ -49,7 +51,7 @@ class MainViewModel {
         }
       }
       UserService.to.currentUser.value = currentUser;
-      Get.offAll(() => const privateSettingScreen());
+      Get.offAll(() => privateSettingScreen());
     }
     Future logout() async {
       await _socialLogin.logout();
