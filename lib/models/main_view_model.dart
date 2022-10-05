@@ -19,11 +19,10 @@ class MainViewModel {
 
   Future login() async {
     isLogined = await _socialLogin.login();
-    print("isLogined : $isLogined");
 
     if(isLogined) {
       user = await kakao.UserApi.instance.me();
-      print("user : ${user!.kakaoAccount!.birthday}");
+      // print("user : ${user!.kakaoAccount!.birthday}");
 
       final customToken = await FirebaseService().createCustomToken({
         'uid': user!.id.toString(),
@@ -31,6 +30,8 @@ class MainViewModel {
         'email': user!.kakaoAccount!.email!,
         'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
       });
+
+      await FirebaseAuth.instance.signInWithCustomToken(customToken);
 
       var currentUser = await FirebaseService.findUserByEmail(
           user!.kakaoAccount!.email!);

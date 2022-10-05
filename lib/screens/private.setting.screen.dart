@@ -59,7 +59,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                         }));
                         EasyLoading.showSuccess("개인설정 추가 완료");
                         await FirebaseService.getCurrentUser();
-                        Get.offAll(() => mainScreen());
+                        Get.off(() => mainScreen());
                       } catch (e) {
                         logger.e(e);
                         EasyLoading.showSuccess("개인설정 추가 실패");

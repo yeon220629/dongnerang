@@ -1,13 +1,12 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/models/app_user.model.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
-
 import '../services/firebase.service.dart';
 
 
@@ -34,13 +33,27 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   String url = "";
   var label = "전체소식";
   var currentItem = "";
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
+
+
+  Future<void> getUserLocalData() async {
+    FirebaseService.getUserLocalData(userEmail!).then((value){
+      print("value : ${value[0]}");
+      int ListData = value.length;
+      print("ListData : $ListData");
+      for(int i = 0; i < ListData; i++){
+        print("value[i] : ${value[i]}");
+        LIST_MENU.add(value[i]);
+      }
+      // LIST_MENU.add(value);
+    });
+  }
 
   Future<void> getPostsData(value) async {
     listItems = [];
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
     if(value == null){
-      print("들어온 변수가 null 값입니다.");
       value = 'DONGJAK';
     }
 
@@ -55,8 +68,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     });
 
     responseList = valueData;
-    String? userEmail = FirebaseAuth.instance.currentUser?.email;
-    print("va : ${FirebaseService.getUserLocalData(userEmail!)}");
+
 
     for ( var post in responseList){
       listItems.add( GestureDetector(
@@ -129,7 +141,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           webViewController?.reload();
         }
     );
-
+    // getUserLocalData();
     getPostsData(null);
     controllers.addListener(() {
 

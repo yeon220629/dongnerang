@@ -36,13 +36,17 @@ class FirebaseService {
     return findUserByEmail(user.email!);
   }
 
-  static Future<AppUser?> getUserLocalData(String email) async {
+  static Future<List> getUserLocalData(String email) async {
+    List getDt = [];
     final doc = await FirebaseFirestore.instance.collection("users").doc(email).get();
     doc.data()?.forEach((key, value) {
       if(key == 'local'){
-        // print("value : $value");
-        return value;
+
+        for(int i = 0; i < value.toString().split(",").length; i++){
+          getDt.add(value[i]);
+        }
       }
     });
+    return getDt;
   }
 }

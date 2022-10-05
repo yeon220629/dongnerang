@@ -19,7 +19,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // FirebaseAuth.instance.signOut();
+    // FirebaseAuth.instance.signOut(); -> 로그아웃
     // GoogleSignIn().signOut();
     checkPermissions();
     super.initState();
@@ -36,7 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
     //   });
     // } else {
       Future.delayed(const Duration(milliseconds: 1000), () {
-        // print(FirebaseAuth.instance.currentUser);
+        print(FirebaseAuth.instance);
+        print(FirebaseAuth.instance.currentUser?.email);
         FirebaseAuth.instance.currentUser != null
             ? Get.offAll(() => const mainScreen())
             : Get.offAll(() => const LoginScreen());
