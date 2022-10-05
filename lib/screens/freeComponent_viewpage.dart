@@ -23,8 +23,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     '동작', '강북', '관악', '광진', '강남', '서초', '성북', '양천', '영등포', '종로',
     '중구'
   ];
+  // List<String> LIST_MENU = [];
 
-  String dropdownValue = '동작';
+  String dropdownValue = '';
   final _random = Random();
   bool closeTapContainer = false;
   double topContainer = 0;
@@ -188,6 +189,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   );
                 }).toList(),
                 onChanged: (dynamic value){
+                  print("value : $value");
                   if(value == '강남'){
                     getPostsData("GANGNAM");
                     currentItem = "GANGNAM";
