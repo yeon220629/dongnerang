@@ -25,7 +25,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   ];
   // List<String> LIST_MENU = [];
 
-  String dropdownValue = '';
+  String dropdownValue = '동작';
   final _random = Random();
   bool closeTapContainer = false;
   double topContainer = 0;
