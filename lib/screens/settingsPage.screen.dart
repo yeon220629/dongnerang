@@ -1,7 +1,9 @@
+import 'package:dongnerang/screens/setting/introduce.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dongnerang/screens/noticepage.screen.dart';
-import 'notification.screen.dart';
-import 'inquire.screen.dart';
+import 'package:dongnerang/screens/notification.screen.dart';
+import 'setting/inquire.screen.dart';
+import 'setting/introduce.screen.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class SettingsPage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyHomePage(),),);
+                  MaterialPageRoute(builder: (context) => NotificationScreen(),),);
               },
             trailing: Icon(Icons.arrow_forward_ios_outlined),
             ),
@@ -55,6 +57,11 @@ class SettingsPage extends StatelessWidget {
             ListTile(
             leading: Icon(Icons.perm_device_info),
             title: Text('동네랑 소개'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Introduce(),),);
+              },
             trailing:Icon(Icons.arrow_forward_ios_outlined),
         ),
       ListTile(
@@ -66,3 +73,4 @@ class SettingsPage extends StatelessWidget {
     );
   }
 }
+
