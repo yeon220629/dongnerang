@@ -1,11 +1,12 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/freeComponent_viewpage.dart';
-import 'package:dongnerang/screens/mainScreen.dart';
 import 'package:dongnerang/screens/mypage.screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../constants/common.constants.dart';
 import 'url.load.screen.dart';
 
@@ -34,6 +35,7 @@ class _searchScreenState extends State<searchScreen>
   double progress = 0;
 
 
+
   Future<void> getPostsData(value) async {
     if(value == null){
       print("들어온 변수가 null 값입니다.");
@@ -56,11 +58,22 @@ class _searchScreenState extends State<searchScreen>
     // responseData.addAll(responseList);
 
     for ( var post in responseList){
+      print("post : ${post['title']}");
+      print("value : ${value}");
+      String comvalue = value;
+
+
       if(post['title'].contains(value)){
+
+        print("데이터가 포함됨. : ${post['title']}");
+        print("데이터가 포함됨. value :  $value");
+
         listItems.add( GestureDetector(
             onTap: () async{
               final Uri url = Uri.parse('${post["link"]}');
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(url)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
+                  url, post["title"], post['center_name '], post['registrationdate']
+              )));
             },
             child: Container(
                 width: 500,
@@ -109,6 +122,10 @@ class _searchScreenState extends State<searchScreen>
                 )
             ))
         );
+        break;
+      }
+      if(post['title'] != value){
+        listItems = [];
       }
     }
     setState(() {
@@ -116,6 +133,19 @@ class _searchScreenState extends State<searchScreen>
     });
   }
 
+  Future<List> getKeword()async {
+    String? userEmail = FirebaseAuth.instance.currentUser?.email;
+    List valueTemp = [];
+    final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(userEmail).get();
+    checkDuplicate.data()?.forEach((key, value) {
+      if(key.contains("keyword")){
+        valueTemp.add(value);
+      }
+    });
+
+    print("keyTemp : ${valueTemp.first.length}");
+    return valueTemp.first;
+  }
   final List<TagModel> _tagsToSelect = [
     TagModel(id: 'DONGJAK', title: '사육신역사관'),
     TagModel(id: 'DONGDAEMUN', title: '문화예술교육'),
@@ -124,6 +154,7 @@ class _searchScreenState extends State<searchScreen>
     TagModel(id: 'JUNGGU', title: '이야기'),
     TagModel(id: 'JUNGGU', title: '선정결과'),
   ];
+
   refreshState(VoidCallback fn) {
     if (mounted) setState(fn);
   }
@@ -148,6 +179,7 @@ class _searchScreenState extends State<searchScreen>
         closeTapContainer = controllers.offset > 50;
       });
     });
+    print(getKeword());
   }
 
   // @override
@@ -161,6 +193,9 @@ class _searchScreenState extends State<searchScreen>
       itemsData = [];
       return _tagsToSelect;
     }
+    // else{
+    //   getPostsData(_searchText);
+    // }
 
     List<TagModel> _tempList = [];
     for (int index = 0; index < _tagsToSelect.length; index++) {
@@ -204,15 +239,19 @@ class _searchScreenState extends State<searchScreen>
           Expanded(
             child: TextField(
               controller: SearcheditingController,
+              onChanged: (value){
+                // print(value);
+                getPostsData(value);
+              },
             ),
           ),
           IconButton(onPressed: (){
-            setState(() {
-              listItems = [];
-            });
-            Future.delayed(Duration.zero, () async {
-              getPostsData(SearcheditingController.text);
-            });
+            // setState(() {
+            //   listItems = [];
+            // });
+            // Future.delayed(Duration.zero, () async {
+            //   getPostsData(SearcheditingController.text);
+            // });
           }, icon: Icon(Icons.search, color: Colors.black,)),
           IconButton(onPressed: (){
             SearcheditingController.clear();
@@ -222,20 +261,19 @@ class _searchScreenState extends State<searchScreen>
       body: _tagIcon(),
       bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(label: '홈',icon: IconButton(
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => mainScreen()),
-              );
-            }, icon: Icon(Icons.home),
-          )),
-          BottomNavigationBarItem(label: '마이페이지', icon: IconButton(onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => mainScreen()),
-            );
-          }, icon: Icon(Icons.info)))
+          BottomNavigationBarItem(
+            label: '홈',
+            icon: IconButton(onPressed: (){
+              // Get.to(() => const mainScreen());
+              Navigator.pop(context);
+            }, icon: Icon(Icons.home),)
+          ),
+          BottomNavigationBarItem(
+              label: '마이페이지',
+              icon: IconButton(onPressed: (){
+                Get.to(() => const mypageScreen());
+              }, icon: Icon(Icons.account_circle),)
+          ),
         ]
       ),
     );

@@ -5,9 +5,13 @@ import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
+import 'noticepage.screen.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -19,13 +23,13 @@ class freeComponent_viewpage extends StatefulWidget {
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
   final CategoriesScroller categoriesScroller = CategoriesScroller();
-  List<String> LIST_MENU = <String>[
-    '동작', '강북', '관악', '광진', '강남', '서초', '성북', '양천', '영등포', '종로',
-    '중구'
-  ];
-  // List<String> LIST_MENU = [];
+  // List<String> LIST_MENU = <String>[
+  //   '동작', '강북', '관악', '광진', '강남', '서초', '성북', '양천', '영등포', '종로',
+  //   '중구'
+  // ];
+  List<String> LIST_MENU = [];
 
-  String dropdownValue = '동작';
+
   final _random = Random();
   bool closeTapContainer = false;
   double topContainer = 0;
@@ -35,29 +39,32 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   var label = "전체소식";
   var currentItem = "";
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
-
+  String dropdownValue = '';
 
   Future<void> getUserLocalData() async {
     FirebaseService.getUserLocalData(userEmail!).then((value){
-      print("value : ${value[0]}");
       int ListData = value.length;
-      print("ListData : $ListData");
       for(int i = 0; i < ListData; i++){
-        print("value[i] : ${value[i]}");
         LIST_MENU.add(value[i]);
       }
-      // LIST_MENU.add(value);
+
+      String? checklocalItem = fnChecklocal(LIST_MENU[0])?.last;
+      getPostsData(checklocalItem);
+
+      setState(() {
+        dropdownValue = LIST_MENU[0]!;
+      });
     });
   }
 
   Future<void> getPostsData(value) async {
+    print("valuesss : $value");
     listItems = [];
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
-    if(value == null){
-      value = 'DONGJAK';
-    }
-
+    // if(value == null){
+    //   value = 'DONGJAK';
+    // }
     DocumentReference<Map<String, dynamic>> docref =
       FirebaseFirestore.instance.collection("crawlingData").doc(value);
 
@@ -69,13 +76,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     });
 
     responseList = valueData;
-
-
     for ( var post in responseList){
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${post["link"]}');
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(url)));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
+                url, post["title"], post['center_name '], post['registrationdate']
+            )));
           },
           child: Container(
               width: 500,
@@ -142,8 +149,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           webViewController?.reload();
         }
     );
-    // getUserLocalData();
-    getPostsData(null);
+    getUserLocalData();
+    // getPostsData(null);
     controllers.addListener(() {
 
       double value = controllers.offset/119;
@@ -163,9 +170,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
   @override
   Widget build(BuildContext context) {
-
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height*0.30;
+    // String dropdownValue = LIST_MENU[0];
+    bool isClicked = false;
 
     return SafeArea(
         child: Scaffold(
@@ -178,7 +186,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             ),
             // fit:BoxFit.cover,
             // height:20,
-
             actions: <Widget>[
               DropdownButton(
                 value: dropdownValue,
@@ -189,57 +196,32 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   );
                 }).toList(),
                 onChanged: (dynamic value){
-                  print("value : $value");
-                  if(value == '강남'){
-                    getPostsData("GANGNAM");
-                    currentItem = "GANGNAM";
-                  }else if(value == '강북'){
-                    getPostsData("GANGBUK");
-                    currentItem = "GANGBUK";
-                  }else if(value == '관악'){
-                    getPostsData("GWANAK");
-                    currentItem = "GWANAK";
-                  }else if(value == '광진'){
-                    getPostsData("GWANGZIN");
-                    currentItem = "GWANGZIN";
-                  }else if(value == '동작'){
-                    getPostsData("DONGJAK");
-                    currentItem = "DONGJAK";
-                  }else if(value == '서초'){
-                    getPostsData("SEOCHO");
-                    currentItem = "SEOCHO";
-                  }else if(value == '성북'){
-                    getPostsData("SEONGBUK");
-                    currentItem = "SEONGBUK";
-                  }else if(value == '양천'){
-                    getPostsData("YANGCHEON");
-                    currentItem = "YANGCHEON";
-                  }else if(value == '영등포'){
-                    getPostsData("YEONGDEUNGPO");
-                    currentItem = "YEONGDEUNGPO";
-                  }else if(value == '종로'){
-                    getPostsData("JONGRO");
-                    currentItem = "JONGRO";
-                  }else if(value == '중구'){
-                    getPostsData("JUNGGU");
-                    currentItem = "JUNGGU";
+                  listItems = [];
+                  // print("value : $value");
+                  // print("return 확인 : ${fnChecklocal(value)}" );
+                  List? item = fnChecklocal(value);
+                  // print("item?.first : ${item?.first}");
+                  // getPostsData("GANGNAM");
+                  if(value == item?.first){
+                    getPostsData(item?.last);
                   }
                   setState(() {
-                    if(mounted){
-                      dropdownValue = value;
-                    }
+                    dropdownValue = value;
                   });
                 },
               ),
               const SizedBox(width: 160,),
               IconButton(onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => searchScreen(title: '',))
-                );
+                Get.to(() => searchScreen(title: '',));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => searchScreen(title: '',))
+                // );
               },
               icon: const Icon(Icons.search)),
-              IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_none_outlined)),
+              IconButton(onPressed: (){
+                Get.to(() => NoticePage());
+              }, icon: const Icon(Icons.notifications_none_outlined)),
             ],
           ),
           body: SizedBox(
@@ -258,14 +240,16 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 ),
                 BottomNavigationBar(
                     elevation: 1.0,
-                    selectedLabelStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    showUnselectedLabels: true,
+                    showSelectedLabels: true,
+                    // selectedLabelStyle: const TextStyle(color: Colors.red),
+                    selectedItemColor: AppColors.primary,
+                    unselectedItemColor: AppColors.grey,
                     onTap: (value){
                       setState(() {
-                        // 이쪽 한번 이야기 필요.
                         if(value == 0){
                           label = "동네소식";
+                          isClicked = false;
                           if(currentItem == ""){
                             currentItem = "DONGJAK";
                             getPostsData(currentItem);
@@ -274,6 +258,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         }
                         else if(value == 1){
                           label = "서울시 소식";
+                          isClicked = false;
                           getPostsData("NPO");
                           setState(() {
                           });
@@ -285,11 +270,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     items: [
                       BottomNavigationBarItem(
                         label: "동네소식",
-                        icon: Icon(Icons.linear_scale, size: 0,)
+                        icon: Icon(
+                          Icons.linear_scale, size: 0,
+                          color: isClicked == true ? AppColors.primary : AppColors.grey,
+                          //
+                        )
                       ),
                       BottomNavigationBarItem(
                         label: "서울시 소식",
-                        icon: Icon(Icons.linear_scale, size: 0,)
+                        icon: Icon(Icons.linear_scale, size: 0,
+                        color: isClicked == true ? AppColors.primary : AppColors.grey,
+                        )
                       ),
                     ]
                 ),

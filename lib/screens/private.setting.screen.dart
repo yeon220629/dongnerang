@@ -150,6 +150,7 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
                     print("sendTags ; $sendTags");
                     if(sendTags.length >= 4){
                       print("3을 초과하였습니다. -> 4개지역 선택댐 ㄷㄷ..");
+                      return;
                     }
                     widget.callback(sendTags);
                   },
@@ -226,7 +227,9 @@ class KeywordStateful extends StatefulWidget {
 }
 
 class _KeywordStatefulState extends State<KeywordStateful> {
-  List<String> _values = [];
+  List<String> _values = [
+    '지금','공지사항들','등록해두었습니다'
+  ];
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _textEditingController = TextEditingController();
 

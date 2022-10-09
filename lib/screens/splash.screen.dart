@@ -39,10 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
         print(FirebaseAuth.instance);
         print(FirebaseAuth.instance.currentUser?.email);
         FirebaseAuth.instance.currentUser != null
-            // ? Get.offAll(() => const mainScreen())
-            // : Get.offAll(() => const LoginScreen());
-            ? Get.offAll(() => const LoginScreen())
-            : Get.offAll(() => const mainScreen());
+            ? Get.offAll(() => const mainScreen())
+            : Get.offAll(() => const LoginScreen());
+            // ? Get.offAll(() => const LoginScreen())
+            // : Get.offAll(() => const mainScreen());
       });
     // }
   }

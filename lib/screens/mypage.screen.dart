@@ -22,7 +22,6 @@ class _mypageScreenState extends State<mypageScreen> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 1,
-
         actions: [
           IconButton(
             icon: Icon(Icons.settings),

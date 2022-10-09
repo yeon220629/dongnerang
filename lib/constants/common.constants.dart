@@ -89,8 +89,61 @@ final urlController = TextEditingController();
 
 final List CustomData = [
   "강남", "강동", "강북","강서","관악",
-  "광진", "로", "금천", "노원","도봉",
+  "광진", "금천", "노원","도봉",
   "동대문","동작", "마포", "서대문","서초",
-  "성동", "성북", "송화", "양천", "영등포",
-  "용산", "은평", "종로", "중", "중랑"
+  "성동", "성북", "송파", "양천", "영등포",
+  "용산", "은평", "종로", "중구", "중랑"
 ];
+
+
+List? fnChecklocal(String local){
+  if(local == '강남'){
+    return ['강남'',''GANGNAM'];
+  }else if(local == '강동'){
+    return ['강동'',''GANGDONG'];
+  }else if(local == '강북'){
+    return ["강북",'GANGBUK'];
+  }else if(local == '강서'){
+    return ['강서', 'GANGSEO'];
+  }else if(local == '관악'){
+    return ['관악', 'GWANAK'];
+  }else if(local == '광진'){
+    return ['광진', 'GWANGZIN'];
+  }else if(local == '금천'){
+    return ['금천', 'GEUAMCHEOUN'];
+  }else if(local == '노원'){
+    return ['노원', 'NOWON_NOTICE'];
+  }else if(local == '도봉'){
+    return ['도봉', 'DOBONG'];
+  }else if(local == '동대문'){
+    return ['동대문', 'DONGDAEMUN'];
+  }else if(local == '동작'){
+    return ['동작', 'DONGJAK'];
+  }else if(local == '마포'){
+    return ['마포', 'MAPO'];
+  }else if(local == '서대문'){
+    return ['마포', 'MAPO'];
+  }else if(local == '서초'){
+    return ['서초', 'SEOCHO'];
+  }else if(local == '성동'){
+    return ['성동', 'SEONGDONG'];
+  }else if(local == '성북'){
+    return ['성북', 'SEONGBUK'];
+  }else if(local == '송파'){
+    return ['송파', 'SONGPA'];
+  }else if(local == '양천'){
+    return ['양천', 'YANGCHEON'];
+  }else if(local == '영등포'){
+    return ['영등포', 'YEONGDEUNGPO'];
+  }else if(local == '용산'){
+    return ['용산', 'YOUNGSAN_NOTICE'];
+  }else if(local == '은평'){
+    return ['은평', 'EUNPYENG'];
+  }else if(local == '종로'){
+    return ['종로', 'JONGRO'];
+  }else if(local == '중구'){
+    return ['중구', 'JUNGGU'];
+  }else if(local == '중랑'){
+    return ['중랑', 'JUNGNANG_NOTICE'];
+  }
+}
