@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../constants/colors.constants.dart';
 import '../widgets/app_button.widget.dart';
 import 'login.screen.dart';
-import 'mainScreen.dart';
+import 'mainScreenBar.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);

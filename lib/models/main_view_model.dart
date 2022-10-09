@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/mainScreen.dart';
+import 'package:dongnerang/screens/mainScreenBar.dart';
 import 'package:dongnerang/screens/private.setting.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';

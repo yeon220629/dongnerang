@@ -13,7 +13,7 @@ import '../controller/private.setting.controller.dart';
 import '../services/firebase.service.dart';
 import '../services/user.service.dart';
 import '../util/logger.service.dart';
-import 'mainScreen.dart';
+import 'mainScreenBar.dart';
 
 class privateSettingScreen extends GetView<PrivateSettingController> {
   double ages = 0;
@@ -43,9 +43,9 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
-                    // print("age : ${ages.round().toString()}");
-                    // print("keyword : ${keyword[0]}");
-                    // print("local : ${local[0]}");
+                    print("age : ${ages.round().toString()}");
+                    print("keyword : ${keyword}");
+                    print("local : ${local[0]}");
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         print("test");
@@ -54,7 +54,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                             .doc(UserService.to.currentUser.value!.email)
                             .update(({
                           "age": ages.round().toString(),
-                          "keyword": keyword[0],
+                          "keyword": keyword,
                           "local": local[0],
                         }));
                         EasyLoading.showSuccess("개인설정 추가 완료");
@@ -228,7 +228,7 @@ class KeywordStateful extends StatefulWidget {
 
 class _KeywordStatefulState extends State<KeywordStateful> {
   List<String> _values = [
-    '지금','공지사항들','등록해두었습니다'
+    '공지사항들','등록해두었습니다'
   ];
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _textEditingController = TextEditingController();

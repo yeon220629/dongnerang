@@ -6,7 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../constants/colors.constants.dart';
 import 'login.screen.dart';
-import 'mainScreen.dart';
+import 'mainScreenBar.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // FirebaseAuth.instance.signOut(); -> 로그아웃
+    FirebaseAuth.instance.signOut();
     // GoogleSignIn().signOut();
     checkPermissions();
     super.initState();
@@ -39,10 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
         print(FirebaseAuth.instance);
         print(FirebaseAuth.instance.currentUser?.email);
         FirebaseAuth.instance.currentUser != null
-            ? Get.offAll(() => const mainScreen())
-            : Get.offAll(() => const LoginScreen());
-            // ? Get.offAll(() => const LoginScreen())
-            // : Get.offAll(() => const mainScreen());
+            // ? Get.offAll(() => const mainScreen())
+            // : Get.offAll(() => const LoginScreen());
+            ? Get.offAll(() => const LoginScreen())
+            : Get.offAll(() => const mainScreen());
       });
     // }
   }
