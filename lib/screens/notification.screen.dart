@@ -10,39 +10,35 @@ import 'package:flutter_switch/flutter_switch.dart';
 //   }
 // }
 
-class MyHomePage extends StatefulWidget {
+class NotificationScreen extends StatefulWidget {
+    const NotificationScreen({Key? key}) : super(key: key);
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<NotificationScreen> createState() => _NotificationScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _NotificationScreenState extends State<NotificationScreen> {
   bool status = false;
-
+  bool _lights = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        elevation: 0.0,
         title: Text("알림 설정"),
       ),
-      body: Center(
-        child: Container(
-          child: FlutterSwitch(
-            width: 100.0,
-            height: 55.0,
-            valueFontSize: 25.0,
-            toggleSize: 45.0,
-            value: status,
-            borderRadius: 30.0,
-            padding: 8.0,
-            showOnOff: true,
-            onToggle: (val) {
-              setState(() {
-                status = val;
-              });
-            },
-          ),
-        ),
+      body: SwitchListTile(
+        title: const Text('알림 허용'),
+        value: _lights,
+        onChanged: (bool value) {
+          setState(() {
+            _lights = value;
+          });
+        },
+        secondary: const Icon(Icons.notifications_active_outlined),
       ),
+
     );
   }
 }

@@ -305,10 +305,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "0579de9f9cca2264a759968c20bd4b52f5ad8c39"
+      resolved-ref: "6b94751df5bbf359545d581d957dc78bbdc78290"
       url: "https://github.com/pichillilorenzo/flutter_inappwebview.git"
     source: git
-    version: "5.4.4+2"
+    version: "5.4.4+3"
   flutter_keyboard_visibility:
     dependency: "direct main"
     description:
