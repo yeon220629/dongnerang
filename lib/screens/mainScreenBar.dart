@@ -1,5 +1,6 @@
 import 'package:dongnerang/screens/private.setting.screen.dart';
 import 'package:dongnerang/screens/search.screen.dart';
+import 'package:dongnerang/screens/splash.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -75,16 +76,16 @@ class mainScreenState extends State<mainScreen> {
                             ),
                             label: "로그인 스크린"
                         ),
-                        // BottomNavigationBarItem(
-                        //     icon: Icon(
-                        //       Icons.ac_unit,
-                        //       color:
-                        //         navigationController.currentBottomMenuIndex.value == 3
-                        //           ? AppColors.primary
-                        //           : AppColors.grey,
-                        //     ),
-                        //     label: "세팅 스크린"
-                        // ),
+                        BottomNavigationBarItem(
+                            icon: Icon(
+                              Icons.ac_unit,
+                              color:
+                                navigationController.currentBottomMenuIndex.value == 3
+                                  ? AppColors.primary
+                                  : AppColors.grey,
+                            ),
+                            label: "세팅 스크린"
+                        ),
                       ],
                       onTap: (index) {
                         // print(index);
@@ -103,7 +104,8 @@ class mainScreenState extends State<mainScreen> {
               freeComponent_viewpage(),
               mypageScreen(),
               // privateSettingScreen(),
-              LoginScreen()
+              LoginScreen(),
+              // SplashScreen()
             ],
           )
       ),

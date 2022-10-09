@@ -64,11 +64,45 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
     appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
-          color: Colors.black,
+          color: AppColors.primary,
         ),
-        title: const Text("Web Page", style: TextStyle(
-          fontSize: 14, color: Colors.black
-        ))
+        actions: [
+          IconButton(onPressed: (){
+            String? userEmail = FirebaseAuth.instance.currentUser?.email;
+            saveData.add(widget.urldata.toString());
+            saveData.add(widget.o);
+            saveData.add(widget.j);
+            saveData.add(widget.s);
+            FirebaseService.saveUserPrivacyData(userEmail!, saveData);
+            // Get.to(() => NoticePage()),
+          }, icon: const Icon(Icons.bookmark_border_rounded)),
+          IconButton(onPressed: ()async {
+            // 사용자 정의 템플릿 ID
+            // String url = "https://developers.kakao.com";
+            String firebasesUrl = widget.urldata.toString();
+            int templateId = 83950;
+
+            print("firebasesUrl : $firebasesUrl");
+
+            // 카카오톡 실행 가능 여부 확인
+            bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
+            if (isKakaoTalkSharingAvailable) {
+              print('카카오톡으로 공유 가능');
+              try{
+                Uri uri = await ShareClient.instance.shareScrap(url: firebasesUrl, templateId: templateId);
+                await ShareClient.instance.launchKakaoTalk(uri);
+                print('카카오톡 공유 완료');
+                EasyLoading.showSuccess("공유 완료");
+              }catch (e){
+                print('카카오톡 공유 실패 $e');
+              }
+            } else {
+              print('카카오톡 미설치: 웹 공유 기능 사용 권장');
+            }
+
+          // Get.to(() => NoticePage()),
+        }, icon: const Icon(Icons.share)),
+        ],
     ),
     body: SafeArea(
         child: Column(
@@ -134,55 +168,56 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 ],
               ),
             ),
-            BottomNavigationBar(
-              showUnselectedLabels: true,
-              showSelectedLabels: true,
-              selectedLabelStyle: const TextStyle(color: Colors.red),
-              selectedItemColor: AppColors.primary,
-              unselectedItemColor: AppColors.grey,
-              items: [
-                BottomNavigationBarItem(
-                  label: '저장',
-                  icon: IconButton(onPressed: (){
-                    String? userEmail = FirebaseAuth.instance.currentUser?.email;
-                    saveData.add(widget.urldata.toString());
-                    saveData.add(widget.o);
-                    saveData.add(widget.j);
-                    saveData.add(widget.s);
-                    FirebaseService.saveUserPrivacyData(userEmail!, saveData);
-
-                  }, icon: Icon(Icons.save)),
-                ),
-                BottomNavigationBarItem(
-                    // icon: Icon(Icons.share),
-                  icon: IconButton(onPressed: () async {
-                    // 사용자 정의 템플릿 ID
-                    // String url = "https://developers.kakao.com";
-                    String firebasesUrl = widget.urldata.toString();
-                    int templateId = 83950;
-
-                    print("firebasesUrl : $firebasesUrl");
-
-                    // 카카오톡 실행 가능 여부 확인
-                    bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
-                    if (isKakaoTalkSharingAvailable) {
-                      print('카카오톡으로 공유 가능');
-                      try{
-                        Uri uri = await ShareClient.instance.shareScrap(url: firebasesUrl, templateId: templateId);
-                        await ShareClient.instance.launchKakaoTalk(uri);
-                        print('카카오톡 공유 완료');
-                        EasyLoading.showSuccess("공유 완료");
-                      }catch (e){
-                        print('카카오톡 공유 실패 $e');
-                      }
-                    } else {
-                      print('카카오톡 미설치: 웹 공유 기능 사용 권장');
-                    }
-                  }, icon: Icon(Icons.share)),
-                  label: "공유"
-                )
-              ],
-            )
+            //버릴거!!
+            // BottomNavigationBar(
+            //   showUnselectedLabels: true,
+            //   showSelectedLabels: true,
+            //   selectedLabelStyle: const TextStyle(color: Colors.red),
+            //   selectedItemColor: AppColors.primary,
+            //   unselectedItemColor: AppColors.grey,
+            //   items: [
+            //     BottomNavigationBarItem(
+            //       label: '저장',
+            //       icon: IconButton(onPressed: (){
+            //         String? userEmail = FirebaseAuth.instance.currentUser?.email;
+            //         saveData.add(widget.urldata.toString());
+            //         saveData.add(widget.o);
+            //         saveData.add(widget.j);
+            //         saveData.add(widget.s);
+            //         FirebaseService.saveUserPrivacyData(userEmail!, saveData);
+            //
+            //       }, icon: Icon(Icons.save)),
+            //     ),
+            //     BottomNavigationBarItem(
+            //         // icon: Icon(Icons.share),
+            //       icon: IconButton(onPressed: () async {
+            //         // 사용자 정의 템플릿 ID
+            //         // String url = "https://developers.kakao.com";
+            //         String firebasesUrl = widget.urldata.toString();
+            //         int templateId = 83950;
+            //
+            //         print("firebasesUrl : $firebasesUrl");
+            //
+            //         // 카카오톡 실행 가능 여부 확인
+            //         bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
+            //         if (isKakaoTalkSharingAvailable) {
+            //           print('카카오톡으로 공유 가능');
+            //           try{
+            //             Uri uri = await ShareClient.instance.shareScrap(url: firebasesUrl, templateId: templateId);
+            //             await ShareClient.instance.launchKakaoTalk(uri);
+            //             print('카카오톡 공유 완료');
+            //             EasyLoading.showSuccess("공유 완료");
+            //           }catch (e){
+            //             print('카카오톡 공유 실패 $e');
+            //           }
+            //         } else {
+            //           print('카카오톡 미설치: 웹 공유 기능 사용 권장');
+            //         }
+            //       }, icon: Icon(Icons.share)),
+            //       label: "공유"
+            //     )
+            //   ],
+            // )
           ],
         ),
       ),

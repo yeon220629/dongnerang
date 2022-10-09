@@ -58,17 +58,14 @@ class _SplashScreenState extends State<SplashScreen> {
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  SizedBox(height: 20),
-                  Text(
-                    "dongnerang",
-                    style: TextStyle(fontSize: 28, color: AppColors.primary),
-                  )
+                children: <Widget>[
+                  // SizedBox(height: 20),
+                  Image.asset("assets/images/app_logo.png", width: 150, height: 150,)
                 ],
               ),
             ),
             const Text(
-              "dongnerang",
+              "동네랑",
               style: TextStyle(fontSize: 20, color: AppColors.primary),
             ),
             const SizedBox(height: 20),

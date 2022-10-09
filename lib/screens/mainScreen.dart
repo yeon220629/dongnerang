@@ -179,7 +179,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
-            foregroundColor: Color(0xff5d6acb),
+            foregroundColor: AppColors.primary,
             title: Container(
                 width: 40,
                 child: Image.asset("assets/images/app_logo.png"),
@@ -224,7 +224,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               }, icon: const Icon(Icons.notifications_none_outlined)),
             ],
           ),
-          body: SizedBox(
+
+
+          body:
+          SizedBox(
             height: size.height,
             child: Column(
               children: <Widget>[
