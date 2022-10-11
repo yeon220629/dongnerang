@@ -40,6 +40,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   var currentItem = "";
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String dropdownValue = '';
+  int cuindex = 0;
+
 
   Future<void> getUserLocalData() async {
     FirebaseService.getUserLocalData(userEmail!).then((value){
@@ -173,7 +175,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height*0.30;
     // String dropdownValue = LIST_MENU[0];
-    bool isClicked = false;
+
 
     return SafeArea(
         child: Scaffold(
@@ -231,28 +233,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             height: size.height,
             child: Column(
               children: <Widget>[
-                AnimatedOpacity(
-                  opacity: closeTapContainer?0:1,
-                  duration: const Duration(milliseconds: 200),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    width: size.width,
-                    alignment: Alignment.topCenter,
-                    height: closeTapContainer?0:categoryHeight - 75,
-                    child: categoriesScroller,),
-                ),
                 BottomNavigationBar(
+                    currentIndex: cuindex,
                     elevation: 1.0,
                     showUnselectedLabels: true,
                     showSelectedLabels: true,
                     // selectedLabelStyle: const TextStyle(color: Colors.red),
                     selectedItemColor: AppColors.primary,
                     unselectedItemColor: AppColors.grey,
+                    selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),
                     onTap: (value){
                       setState(() {
+                        cuindex = value;
                         if(value == 0){
                           label = "동네소식";
-                          isClicked = false;
                           if(currentItem == ""){
                             currentItem = "DONGJAK";
                             getPostsData(currentItem);
@@ -261,7 +255,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         }
                         else if(value == 1){
                           label = "서울시 소식";
-                          isClicked = false;
                           getPostsData("NPO");
                           setState(() {
                           });
@@ -271,21 +264,31 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       });
                     },
                     items: [
-                      BottomNavigationBarItem(
+                      new BottomNavigationBarItem(
                         label: "동네소식",
                         icon: Icon(
                           Icons.linear_scale, size: 0,
-                          color: isClicked == true ? AppColors.primary : AppColors.grey,
+                          color: cuindex == 0 ? AppColors.primary : AppColors.grey,
                           //
                         )
                       ),
-                      BottomNavigationBarItem(
+                      new BottomNavigationBarItem(
                         label: "서울시 소식",
                         icon: Icon(Icons.linear_scale, size: 0,
-                        color: isClicked == true ? AppColors.primary : AppColors.grey,
+                        color: cuindex == 1 ? AppColors.primary : AppColors.grey,
                         )
                       ),
                     ]
+                ),
+                AnimatedOpacity(
+                  opacity: closeTapContainer?0:1,
+                  duration: const Duration(milliseconds: 200),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: size.width,
+                    alignment: Alignment.topCenter,
+                    height: closeTapContainer?0:categoryHeight - 75,
+                    child: categoriesScroller,),
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
