@@ -23,13 +23,8 @@ class freeComponent_viewpage extends StatefulWidget {
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
   final CategoriesScroller categoriesScroller = CategoriesScroller();
-  // List<String> LIST_MENU = <String>[
-  //   '동작', '강북', '관악', '광진', '강남', '서초', '성북', '양천', '영등포', '종로',
-  //   '중구'
-  // ];
+
   List<String> LIST_MENU = [];
-
-
   final _random = Random();
   bool closeTapContainer = false;
   double topContainer = 0;
@@ -44,7 +39,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
 
   Future<void> getUserLocalData() async {
-    FirebaseService.getUserLocalData(userEmail!).then((value){
+    FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
       int ListData = value.length;
       for(int i = 0; i < ListData; i++){
         LIST_MENU.add(value[i]);
@@ -60,13 +55,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
-    print("valuesss : $value");
     listItems = [];
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
-    // if(value == null){
-    //   value = 'DONGJAK';
-    // }
+
     DocumentReference<Map<String, dynamic>> docref =
       FirebaseFirestore.instance.collection("crawlingData").doc(value);
 
@@ -83,7 +75,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           onTap: () async{
             final Uri url = Uri.parse('${post["link"]}');
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                url, post["title"], post['center_name '], post['registrationdate']
+                url, post["title"], post['center_name '], post['registrationdate'], 0
             )));
           },
           child: Container(
@@ -214,11 +206,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               ),
               const SizedBox(width: 160,),
               IconButton(onPressed: (){
-                Get.to(() => searchScreen(title: '',));
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => searchScreen(title: '',))
-                // );
+                // Get.to(() => searchScreen(title: '',));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => searchScreen(title: '',))
+                );
               },
               icon: const Icon(Icons.search)),
               IconButton(onPressed: (){
@@ -228,8 +220,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           ),
 
 
-          body:
-          SizedBox(
+          body: SizedBox(
             height: size.height,
             child: Column(
               children: <Widget>[
@@ -281,7 +272,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     ]
                 ),
                 AnimatedOpacity(
-                  opacity: closeTapContainer?0:1,
+                  opacity: closeTapContainer ? 0:1,
                   duration: const Duration(milliseconds: 200),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
@@ -323,7 +314,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         }
                     )
                 )
-
               ],
             ),
           ),

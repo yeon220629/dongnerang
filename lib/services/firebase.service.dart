@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,17 +39,34 @@ class FirebaseService {
     return findUserByEmail(user.email!);
   }
 
-  static Future<List> getUserLocalData(String email) async {
+  static Future<List> getUserLocalData(String email, String param) async {
     List getDt = [];
     final doc = await FirebaseFirestore.instance.collection("users").doc(email).get();
     doc.data()?.forEach((key, value) {
-      if(key == 'local'){
+      if(key == param){
         for(int i = 0; i < value.toString().split(",").length; i++){
           getDt.add(value[i]);
         }
       }
     });
     return getDt;
+  }
+
+  static Future<bool> getUserSaveToggleData(String email, String title) async {
+    bool toggleValue = false;
+
+    final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
+    checkDuplicate.data()?.forEach((key, value) {
+      if(key.contains("userSaveData")){
+        if(value[3] == title){
+          // print("key number : $key");
+          // print("value Data : ${value[4]}");
+          toggleValue = value[4];
+        }
+      }
+    });
+    print("toggleValue : $toggleValue");
+    return toggleValue;
   }
   
   //중복 데이터 제거 필요
@@ -72,27 +91,82 @@ class FirebaseService {
     }
 
     for(var keyCompare in keyTemp){
-      // print(keyCompare);
       int compareNumber = int.parse(keyCompare.replaceRange(0, 12, ''));
       if('userSaveData${compareNumber}'.contains(compareNumber.toString())){
-        compareNumber += 1;
+        compareNumber ++;
       }
       lastNumber.add(compareNumber);
     }
+    lastNumber.sort();
+    // lastNumber.reversed;
 
     for(var valueCompare in valueTemp){
       if(valueCompare[3] == param[3]){
-        print("데이터가 있음.");
-        EasyLoading.showError("이미 저장되어있는 데이터가 있습니다.");
         break;
-      }else{
-        // print("데이터가 없음");
-        // print(lastNumber);
-        await FirebaseFirestore.instance.collection("users").doc(email).update(({
-          'userSaveData${lastNumber.first}': param,
-        }));
-        EasyLoading.showSuccess("저장 완료");
       }
+
+      if(valueCompare[3] != param[3]){
+        await FirebaseFirestore.instance.collection("users").doc(email).update(({
+          'userSaveData${lastNumber.reversed.first}': param,
+        }));
+        // EasyLoading.showSuccess("저장 완료");
+      }
+
     }
+  }
+  static Future<void> deleteUserPrivacyData(String email, String title) async {
+    final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
+    checkDuplicate.data()?.forEach((key, value) async {
+      if(key.contains("userSaveData")){
+        if(value[3] == title){
+          // print("key number : $key");
+          var data = <String, dynamic>{
+            key: FieldValue.delete(),
+          };
+          checkDuplicate.reference.update(data);
+          // print(data);
+        }
+      }
+    });
+  }
+
+  static Future<List> getUserPrivacyProfile(String email) async {
+    List getUserData = [];
+    List getUserSaveData = [];
+    final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
+    checkDuplicate.data()?.forEach((key, value) async {
+      if(key.contains("name")){
+        // print("name value : $value");
+        getUserData.add(value);
+      }
+      if(key.contains("profileImage")){
+        // print("profileImage value : $value");
+        getUserData.add(value);
+      }
+      if(key.contains("userSaveData")){
+        // print("userSaveData value : $value");
+        getUserSaveData.add(value);
+      }
+    });
+    // print("getUserData : $getUserData");
+    return [getUserData, getUserSaveData];
+  }
+
+  static Future<void> savePrivacyProfile(String email, List value, String key) async{
+    print("email : $email");
+    print("value : $value");
+    final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
+      if(key.contains("keyword")){
+        // print("name value : $value");
+        await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
+          key: value,
+        }));
+      }
+      if(key.contains("local")){
+        // print("profileImage value : $value");
+        await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
+          key: value,
+        }));
+      }
   }
 }

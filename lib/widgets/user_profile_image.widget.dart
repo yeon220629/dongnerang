@@ -20,8 +20,8 @@ class UserProfileCircleImage extends StatelessWidget {
             )
           : CachedNetworkImage(
               imageUrl: imageUrl!,
-              width: size,
-              height: size,
+              // width: size,
+              // height: size,
               fit: BoxFit.cover,
             ),
     );

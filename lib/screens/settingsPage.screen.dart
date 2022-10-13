@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:dongnerang/screens/noticepage.screen.dart';
 import 'package:dongnerang/screens/notification.screen.dart';
 import 'setting/inquire.screen.dart';
-import 'setting/introduce.screen.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -14,12 +13,6 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        // leading: IconButton(
-        //     icon: Icon(Icons.arrow_back_ios_new_outlined),
-        //     onPressed: () {
-        //         Navigator.pop(ctx);
-        //     },
-        // ),
         title: Text('설정'),
       ),
       body: ListView(

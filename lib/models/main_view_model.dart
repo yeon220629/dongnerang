@@ -6,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart' as kakao ;
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../services/firebase.service.dart';
 import '../services/social_login.dart';
 import '../services/user.service.dart';
@@ -19,10 +20,94 @@ class MainViewModel {
 
   Future login() async {
     isLogined = await _socialLogin.login();
+    // if(isLogined) {
+    //   user = await kakao.UserApi.instance.me();
+    //   // print("user : ${user!.kakaoAccount!.birthday}");
+    //   List<String> scopes = [];
+    //
+    //   if (user?.kakaoAccount?.emailNeedsAgreement == true) {
+    //     scopes.add('account_email');
+    //   }
+    //   if (user?.kakaoAccount?.birthdayNeedsAgreement == true) {
+    //     scopes.add("birthday");
+    //   }
+    //   if (user?.kakaoAccount?.birthyearNeedsAgreement == true) {
+    //     scopes.add("birthyear");
+    //   }
+    //   if (user?.kakaoAccount?.ciNeedsAgreement == true) {
+    //     scopes.add("account_ci");
+    //   }
+    //   if (user?.kakaoAccount?.phoneNumberNeedsAgreement == true) {
+    //     scopes.add("phone_number");
+    //   }
+    //   if (user?.kakaoAccount?.profileNeedsAgreement == true) {
+    //     scopes.add("profile");
+    //   }
+    //   if (user?.kakaoAccount?.ageRangeNeedsAgreement == true) {
+    //     scopes.add("age_range");
+    //   }
+    //
+    //   final customToken = await FirebaseService().createCustomToken({
+    //     'uid': user!.id.toString(),
+    //     'displayName': user!.kakaoAccount?.profile?.nickname,
+    //     'email': user!.kakaoAccount!.email!,
+    //     'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
+    //   });
+    //
+    //   await FirebaseAuth.instance.signInWithCustomToken(customToken);
+    //
+    //   var currentUser = await FirebaseService.findUserByEmail(
+    //       user!.kakaoAccount!.email!);
+    //
+    //   if (currentUser == null) {
+    //     await FirebaseFirestore.instance
+    //         .collection("users")
+    //         .doc(user!.kakaoAccount!.email!)
+    //         .set({
+    //       "email": user!.kakaoAccount!.email!,
+    //       "provider": "kakao",
+    //       "createdAt": DateTime.now(),
+    //       "loggedAt": DateTime.now(),
+    //       "name": user!.kakaoAccount!.profile!.nickname,
+    //       "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
+    //     });
+    //     currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
+    //     if (currentUser == null) {
+    //       EasyLoading.showError("회원가입 진행 필요");
+    //     }
+    //   }
+    //   UserService.to.currentUser.value = currentUser;
+    //   Get.offAll(() => privateSettingScreen());
+    // }
+    if(!isLogined){
+      print("check");
+      UserApi.instance.loginWithKakaoAccount();
 
-    if(isLogined) {
       user = await kakao.UserApi.instance.me();
       // print("user : ${user!.kakaoAccount!.birthday}");
+      List<String> scopes = [];
+
+      if (user?.kakaoAccount?.emailNeedsAgreement == true) {
+        scopes.add('account_email');
+      }
+      if (user?.kakaoAccount?.birthdayNeedsAgreement == true) {
+        scopes.add("birthday");
+      }
+      if (user?.kakaoAccount?.birthyearNeedsAgreement == true) {
+        scopes.add("birthyear");
+      }
+      if (user?.kakaoAccount?.ciNeedsAgreement == true) {
+        scopes.add("account_ci");
+      }
+      if (user?.kakaoAccount?.phoneNumberNeedsAgreement == true) {
+        scopes.add("phone_number");
+      }
+      if (user?.kakaoAccount?.profileNeedsAgreement == true) {
+        scopes.add("profile");
+      }
+      if (user?.kakaoAccount?.ageRangeNeedsAgreement == true) {
+        scopes.add("age_range");
+      }
 
       final customToken = await FirebaseService().createCustomToken({
         'uid': user!.id.toString(),

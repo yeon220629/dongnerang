@@ -40,13 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 100),
            IconButton(
              onPressed: () async {
-               // EasyLoading.show(status: " 로그인...");
-               // print("이메일 정보 : ${FirebaseAuth.instance.currentUser}");
-               // if(FirebaseAuth.instance.currentUser != null){
-               //   print("유저가 있음");
-               // }else{
-               //   print("유저 없음");
-               // }
                await viewModel.login();
              },
              icon: Image.asset('assets/images/kakao_login_large_wide.png'),iconSize: 300,

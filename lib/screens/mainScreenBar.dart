@@ -1,6 +1,4 @@
-import 'package:dongnerang/screens/private.setting.screen.dart';
-import 'package:dongnerang/screens/search.screen.dart';
-import 'package:dongnerang/screens/splash.screen.dart';
+import 'package:dongnerang/screens/mypage/mypage.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,9 +6,7 @@ import '../constants/colors.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
 import 'mainScreen.dart';
-import 'intro.screen.dart';
 import 'login.screen.dart';
-import 'mypage.screen.dart';
 
 class mainScreen extends StatefulWidget {
   const mainScreen({Key? key}) : super(key: key);
@@ -41,9 +37,10 @@ class mainScreenState extends State<mainScreen> {
                     BottomNavigationBar(
                       showUnselectedLabels: true,
                       showSelectedLabels: true,
-                      // selectedLabelStyle: const TextStyle(color: Colors.red),
                       selectedItemColor: AppColors.primary,
                       unselectedItemColor: AppColors.grey,
+                      selectedLabelStyle: TextStyle(color : AppColors.primary),
+                      unselectedLabelStyle: TextStyle(color : AppColors.grey),
                       // currentIndex: _selectedIndex,
                       items: [
                         BottomNavigationBarItem(
@@ -64,7 +61,7 @@ class mainScreenState extends State<mainScreen> {
                                 ? AppColors.primary
                                 : AppColors.grey,
                           ),
-                          label: "마이페이지"
+                          label: "마이페이지",
                         ),
                         BottomNavigationBarItem(
                             icon: Icon(

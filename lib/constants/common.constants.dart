@@ -1,16 +1,63 @@
+import 'package:dongnerang/services/firebase.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../screens/mainScreen.dart';
+import '../screens/mainScreenBar.dart';
+import 'colors.constants.dart';
 
 const CIRCLE_RADIUS = 50.0;
 const KAKAO_NATIVE_APP_KEY = "d7eaa723a1b0bbd17635330c5c561a5e"; //real
-// const KAKAO_NATIVE_APP_KEY2 = "7d87ad463053b80008264d1eb03665b1"; //real
 
 const NO_CATEGORY_TEXT = "없음";
 final MAP_INITIAL_CENTER_LOCATION = LatLng(37.5547125, 126.9707878);
 const ZOOM_FOR_SHOW_MARKER_NAME = 13;
+
+class fnCommnAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const fnCommnAppbar({
+    required this.appBar,
+    required this.title,
+    this.center = false,
+    required this.email,
+    required this.ListData,
+    required this.keyName,
+
+  });
+
+  final AppBar appBar;
+  final String title;
+  final bool center;
+  final String email;
+  final List ListData;
+  final String keyName;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      iconTheme: IconThemeData(
+        color: AppColors.black,
+      ),
+      backgroundColor: AppColors.white,
+      centerTitle: true,
+      elevation: 0.0,
+      title: Text('$title', style: TextStyle(color: AppColors.black),),
+      actions: [
+        TextButton(onPressed: (){
+          FirebaseService.savePrivacyProfile(email, ListData, keyName);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => mainScreen()),
+          );
+
+        }, child: Text("완료", style: TextStyle(color: AppColors.black),))
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
+}
 
 var POPUP_MENU_ITEMS = [
   PopupMenuItem(
@@ -95,6 +142,10 @@ final List CustomData = [
   "용산", "은평", "종로", "중구", "중랑"
 ];
 
+final List mostPopularKeyword = [
+  '인기', '키워드의', '종류는', '111', '222', '333', '444', '555'
+  , '888', '777', '666'
+];
 
 List? fnChecklocal(String local){
   if(local == '강남'){
@@ -146,4 +197,17 @@ List? fnChecklocal(String local){
   }else if(local == '중랑'){
     return ['중랑', 'JUNGNANG_NOTICE'];
   }
+}
+
+// 반환에 사용할 클래스
+class ReturnValue{
+  String result;
+  ReturnValue({required this.result});
+}
+class Arguments {
+  late String arg;   // 전달에 사용할 데이터
+  ReturnValue returnValue; //반환때 사용할 클래스
+  Arguments(
+    {this.arg: '', required this.returnValue}
+  );
 }

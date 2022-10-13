@@ -1,13 +1,14 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/mypage.screen.dart';
+import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../constants/common.constants.dart';
+import 'mypage/mypage.screen.dart';
 import 'url.load.screen.dart';
 
 class searchScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _searchScreenState extends State<searchScreen>
     }
 
     DocumentReference<Map<String, dynamic>> docref =
-    FirebaseFirestore.instance.collection("crawlingData").doc('DONGJAK');
+    FirebaseFirestore.instance.collection("crawlingData").doc(value);
     final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
     await docref.get();
     var valueDoc = documentSnapshot.data();
@@ -58,11 +59,6 @@ class _searchScreenState extends State<searchScreen>
     // responseData.addAll(responseList);
 
     for ( var post in responseList){
-      print("post : ${post['title']}");
-      print("value : ${value}");
-      String comvalue = value;
-
-
       if(post['title'].contains(value)){
 
         print("데이터가 포함됨. : ${post['title']}");
@@ -72,7 +68,7 @@ class _searchScreenState extends State<searchScreen>
             onTap: () async{
               final Uri url = Uri.parse('${post["link"]}');
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                  url, post["title"], post['center_name '], post['registrationdate']
+                  url, post["title"], post['center_name '], post['registrationdate'], 2
               )));
             },
             child: Container(
@@ -232,8 +228,10 @@ class _searchScreenState extends State<searchScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: AppColors.black
+        ),
         backgroundColor: Colors.white,
-        leading: const Icon(Icons.ac_unit, color: Colors.black),
         actions: <Widget>[
           const SizedBox(width: 60,),
           Expanded(
@@ -259,23 +257,23 @@ class _searchScreenState extends State<searchScreen>
         ],
       ),
       body: _tagIcon(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            label: '홈',
-            icon: IconButton(onPressed: (){
-              // Get.to(() => const mainScreen());
-              Navigator.pop(context);
-            }, icon: Icon(Icons.home),)
-          ),
-          BottomNavigationBarItem(
-              label: '마이페이지',
-              icon: IconButton(onPressed: (){
-                Get.to(() => const mypageScreen());
-              }, icon: Icon(Icons.account_circle),)
-          ),
-        ]
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       label: '홈',
+      //       icon: IconButton(onPressed: (){
+      //         // Get.to(() => const mainScreen());
+      //         Navigator.pop(context);
+      //       }, icon: Icon(Icons.home),)
+      //     ),
+      //     BottomNavigationBarItem(
+      //         label: '마이페이지',
+      //         icon: IconButton(onPressed: (){
+      //           Get.to(() => const mypageScreen());
+      //         }, icon: Icon(Icons.account_circle),)
+      //     ),
+      //   ]
+      // ),
     );
   }
 
