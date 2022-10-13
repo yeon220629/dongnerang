@@ -149,9 +149,9 @@ final List mostPopularKeyword = [
 
 List? fnChecklocal(String local){
   if(local == '강남'){
-    return ['강남'',''GANGNAM'];
+    return ['강남','GANGNAM'];
   }else if(local == '강동'){
-    return ['강동'',''GANGDONG'];
+    return ['강동','GANGDONG'];
   }else if(local == '강북'){
     return ["강북",'GANGBUK'];
   }else if(local == '강서'){

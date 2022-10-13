@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
+import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -23,47 +24,45 @@ class _searchScreenState extends State<searchScreen>
     with SingleTickerProviderStateMixin {
   static TextEditingController SearcheditingController = TextEditingController();
 
-  List<TagModel> _tags = [];
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String get _searchText => SearcheditingController.text.trim();
   bool closeTapContainer = false;
   final _random = Random();
   double topContainer = 0;
+  String url = "";
+  double progress = 0;
+
+  List<TagModel> _tags = [];
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   List<dynamic> responseData = [];
   List<dynamic> Search_value = [];
-  String url = "";
-  double progress = 0;
-
-
+  List getUserkeyword = [];
+  List? item = [];
 
   Future<void> getPostsData(value) async {
-    if(value == null){
-      print("들어온 변수가 null 값입니다.");
-      value = 'DONGJAK';
+    item = [];
+    List<dynamic> valueData = [];
+    listItems = [];
+    for(int i = 0; i < getUserkeyword.length; i++){
+      item?.add(fnChecklocal(getUserkeyword[i]));
+    }
+    // print("$item : item");
+    // print("${item?.length} : item");
+    for(int i = 0; i < item!.length; i++){
+      DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore.instance.collection("crawlingData").doc(item![i][1]);
+      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await docref.get();
+      var valueDoc = documentSnapshot.data();
+
+      valueDoc?.forEach((key, value) {
+        valueData.add(value);
+      });
     }
 
-    DocumentReference<Map<String, dynamic>> docref =
-    FirebaseFirestore.instance.collection("crawlingData").doc(value);
-    final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-    await docref.get();
-    var valueDoc = documentSnapshot.data();
-
-    List<dynamic> valueData = [];
-
-    valueDoc?.forEach((key, value) {
-      valueData.add(value);
-    });
-
     List<dynamic> responseList= valueData;
-    // responseData.addAll(responseList);
 
     for ( var post in responseList){
       if(post['title'].contains(value)){
-
-        print("데이터가 포함됨. : ${post['title']}");
-        print("데이터가 포함됨. value :  $value");
-
         listItems.add( GestureDetector(
             onTap: () async{
               final Uri url = Uri.parse('${post["link"]}');
@@ -118,19 +117,20 @@ class _searchScreenState extends State<searchScreen>
                 )
             ))
         );
-        break;
       }
-      if(post['title'] != value){
-        listItems = [];
-      }
+      // if(post['title'] != value){
+      //   listItems = [];
+      // }
     }
+    print("listItems : ${listItems.length}");
+
     setState(() {
       itemsData = listItems;
     });
   }
 
   Future<List> getKeword()async {
-    String? userEmail = FirebaseAuth.instance.currentUser?.email;
+
     List valueTemp = [];
     final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(userEmail).get();
     checkDuplicate.data()?.forEach((key, value) {
@@ -138,11 +138,10 @@ class _searchScreenState extends State<searchScreen>
         valueTemp.add(value);
       }
     });
-
-    print("keyTemp : ${valueTemp.first.length}");
     return valueTemp.first;
   }
   final List<TagModel> _tagsToSelect = [
+    //DB에 넣을지 말지 확인 필요
     TagModel(id: 'DONGJAK', title: '사육신역사관'),
     TagModel(id: 'DONGDAEMUN', title: '문화예술교육'),
     TagModel(id: 'NPO', title: '지원사업'),
@@ -150,6 +149,7 @@ class _searchScreenState extends State<searchScreen>
     TagModel(id: 'JUNGGU', title: '이야기'),
     TagModel(id: 'JUNGGU', title: '선정결과'),
   ];
+  final List<TagModel> getKeywordData = [];
 
   refreshState(VoidCallback fn) {
     if (mounted) setState(fn);
@@ -158,6 +158,12 @@ class _searchScreenState extends State<searchScreen>
   @override
   void initState() {
     super.initState();
+    FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
+      int ListData = value.length;
+      for(int i = 0; i < ListData; i++){
+        getUserkeyword.add(value[i]);
+      }
+    });
     SearcheditingController.addListener(() => refreshState(() {}));
     pullToRefreshController = PullToRefreshController(
         options: PullToRefreshOptions(
@@ -175,23 +181,40 @@ class _searchScreenState extends State<searchScreen>
         closeTapContainer = controllers.offset > 50;
       });
     });
-    print(getKeword());
-  }
 
-  // @override
-  // void dispose() {
-  //   SearcheditingController.dispose();
-  //   super.dispose();
-  // }
+    getKeword().then((value){
+      for(int i = 0; i < value.length; i++){
+        print("$i : ${value[i]}");
+        setState(() {
+          getKeywordData.add(TagModel(id: '$i', title: '${value[i]}'));
+        });
+      }
+    });
+  }
+  List<TagModel> _myKeywordResultList() {
+    if (_searchText.isEmpty) {
+      // itemsData = [];
+      return getKeywordData;
+    }
+
+    List<TagModel> _tempList = [];
+    for (int index = 0; index < getKeywordData.length; index++) {
+      TagModel tagModel = getKeywordData[index];
+      if (tagModel.title
+          .toLowerCase()
+          .trim()
+          .contains(_searchText.toLowerCase())) {
+        _tempList.add(tagModel);
+      }
+    }
+    return _tempList;
+  }
 
   List<TagModel> _filterSearchResultList() {
     if (_searchText.isEmpty) {
-      itemsData = [];
+      // itemsData = [];
       return _tagsToSelect;
     }
-    // else{
-    //   getPostsData(_searchText);
-    // }
 
     List<TagModel> _tempList = [];
     for (int index = 0; index < _tagsToSelect.length; index++) {
@@ -203,7 +226,6 @@ class _searchScreenState extends State<searchScreen>
         _tempList.add(tagModel);
       }
     }
-
     return _tempList;
   }
 
@@ -257,23 +279,6 @@ class _searchScreenState extends State<searchScreen>
         ],
       ),
       body: _tagIcon(),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       label: '홈',
-      //       icon: IconButton(onPressed: (){
-      //         // Get.to(() => const mainScreen());
-      //         Navigator.pop(context);
-      //       }, icon: Icon(Icons.home),)
-      //     ),
-      //     BottomNavigationBarItem(
-      //         label: '마이페이지',
-      //         icon: IconButton(onPressed: (){
-      //           Get.to(() => const mypageScreen());
-      //         }, icon: Icon(Icons.account_circle),)
-      //     ),
-      //   ]
-      // ),
     );
   }
 
@@ -303,6 +308,18 @@ class _searchScreenState extends State<searchScreen>
       Wrap(
         alignment: WrapAlignment.start,
         children: _filterSearchResultList()
+            .where((tagModel) => !_tags.contains(tagModel))
+            .map((tagModel) => tagChip(
+          tagModel: tagModel,
+          onTap: () => _addTags(tagModel),
+          action: 'Add',
+        ))
+            .toList(),
+      ),
+      Text('나의 키워드', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      Wrap(
+        alignment: WrapAlignment.start,
+        children: _myKeywordResultList()
             .where((tagModel) => !_tags.contains(tagModel))
             .map((tagModel) => tagChip(
           tagModel: tagModel,
@@ -391,6 +408,7 @@ class _searchScreenState extends State<searchScreen>
   }
 
   Widget _serachResultWidget() {
+    print("itemsData길이 : ${itemsData.length}");
     return Flexible(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

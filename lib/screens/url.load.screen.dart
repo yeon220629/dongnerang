@@ -85,16 +85,17 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
         //페이지 리로드
         onPressed: (){
           if(widget.i == 0){
-            // Navigator.of(context).pop();
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => mainScreen()),
-            );
+            Navigator.of(context).pop();
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => mainScreen()),
+            // );
           }else if(widget.i == 1){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => mainScreen()),
-            );
+            Navigator.of(context).pop();
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => mainScreen()),
+            // );
           }else if(widget.i == 2){
             print(Arguments(returnValue: ReturnValue(result:'Nope.')));
             Navigator.pop(context, Arguments(returnValue: ReturnValue(result:'Nope.')));
