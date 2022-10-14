@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,9 +45,9 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
-                    print("age : ${ages.round().toString()}");
-                    print("keyword : ${keyword}");
-                    print("local : ${local[0]}");
+                    // print("age : ${ages.round().toString()}");
+                    // print("keyword : ${keyword}");
+                    // print("local : ${local[0]}");
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         print("test");
@@ -71,6 +73,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
         ],
         leading:  IconButton(
             onPressed: () {
+              exit(0);
               Navigator.pop(context); //뒤로가기
             },
             color: Colors.black,
@@ -121,37 +124,74 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   final GlobalKey<TagsState> _globalKey = GlobalKey<TagsState>();
   List tags = [];
   List sendTags = [];
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 220),
       child: Column(
         children: [
-          Text("지역 선택", style: TextStyle(fontWeight: FontWeight.bold),),
+          Row(
+            children: [
+              Text("지역 선택", style: TextStyle(fontWeight: FontWeight.bold),),
+              // TextButton(onPressed: (){
+                // setState(() {
+                //   sendTags = [];
+                //   List<Item>? lst = _globalKey.currentState?.getAllItem;
+                //   // CustomData.clear();
+                //   if(lst!=null) {
+                //     lst.where(
+                //         (a) => a.active == false).forEach((element) {
+                //           lst.remove(element);
+                //     });
+                //   }
+                // });
+              // }, child: Text("재선택")),
+            ],
+          ),
           SizedBox(height: 35,),
           Tags(
               key: _globalKey,
               itemCount: CustomData.length,
               itemBuilder: (index){
-
                 for (int i = 0; i < CustomData.length; i++) {
                   tags.add(Item(title:CustomData[i]));
                 };
                 final Item currentItem = tags[index];
                 return ItemTags(
+                  active: false,
                   index: index,
                   title: currentItem.title,
                   customData: currentItem.customData,
                   textStyle: TextStyle(fontSize: 14),
                   combine: ItemTagsCombine.withTextBefore,
                   onPressed: (i){
-                    sendTags.add(i.title);
-                    print("sendTags ; $sendTags");
-                    if(sendTags.length >= 4){
-                      print("3을 초과하였습니다. -> 4개지역 선택댐 ㄷㄷ..");
-                      return;
-                    }
+                    setState(() {
+                      if(i.active){
+                        print("true 타이틀 : ${i.title}");
+                        sendTags.add(i.title);
+                      }
+                      if(!i.active){
+                        print("false 타이틀 : ${i.title}");
+                        sendTags.remove(i.title);
+                      }
+                      print("sendTags ; $sendTags");
+                      print("sendTagsleng ; ${sendTags.length}");
+                      if(sendTags.length >= 4){
+                        sendTags.remove(i.title);
+                        print("개수 초과 됨");
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context){
+                            return AlertDialog(
+                              title: Text("현재 선택된 지역 : ${sendTags}"),
+                              actions: <Widget>[
+                                TextButton(onPressed: (){Navigator.pop(context);}, child: Text("닫기"))
+                              ],
+                            );
+                          }
+                        );
+                      }
+                    });
                     widget.callback(sendTags);
                   },
                 );

@@ -278,7 +278,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     duration: const Duration(milliseconds: 200),
                     width: size.width,
                     alignment: Alignment.topCenter,
-                    height: closeTapContainer?0:categoryHeight - 75,
+                    height: closeTapContainer? 0 : categoryHeight - 75,
                     child: categoriesScroller,),
                 ),
                 Container(

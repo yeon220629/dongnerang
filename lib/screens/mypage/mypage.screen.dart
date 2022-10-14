@@ -111,8 +111,15 @@ class _mypageScreenState extends State<mypageScreen> {
     userSaveData.then((value){
       // print("userSaveData 1 :  ${value[1]}");
       setState(() {
-        profileImage = value[0][0];
-        userName = value[0][1];
+        value[0]?.forEach((element) {
+          if(element.toString().contains('https')){
+            profileImage = element.toString();
+          }else{
+            userName = element.toString();
+          }
+        });
+        // profileImage = value[0][1];
+        // userName = value[0][0];
         getPostsData(value[1]);
       });
     });
@@ -149,67 +156,57 @@ class _mypageScreenState extends State<mypageScreen> {
         title: Text('내 정보 관리', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 11),
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 13),
-          children: [
-            SizedBox(
-                height: size.height,
-                width: size.width,
-                child: Column(
+      body: SizedBox(
+        height: size.height,
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: [
+                UserProfileCircleImage(imageUrl: profileImage,),
+                Column(
                   children: [
-                    Row(
-                      children: [
-                        // imageProfile(profileImage!),
-                        UserProfileCircleImage(imageUrl: profileImage,),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('${userName}', style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                                  TextButton(
-                                    onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(
-                                          builder: (_) => mypageInformSettingScreen()));
-                                    },
-                                    child: Text("내 정보 관리"),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 27),
-                          child: Text('>', style: TextStyle(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${userName}', style: TextStyle(
                             fontWeight: FontWeight.bold,
                           )),
-                        ),
-                      ],
+                          TextButton(
+                            onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (_) => mypageInformSettingScreen()));
+                            },
+                            child: Text("내 정보 관리"),
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(height: 15,),
-                    Container( decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                    ),
-                    Container(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                        )
-                    ),
-                    saveDataProfile(itemsData, topContainer),
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 27),
+                  child: Text('>', style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  )),
+                ),
+              ],
+            ),
+            SizedBox(height: 10,),
+            Container( decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+            ),
+            Container(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                 )
-            )
-          ],
+            ),
+            saveDataProfile(itemsData, topContainer),
+          ]
         ),
-      ),
+      )
     );
   }
 }
