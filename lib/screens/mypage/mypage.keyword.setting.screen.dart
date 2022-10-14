@@ -91,8 +91,14 @@ class _mypageKeywordSettingState extends State<mypageKeywordSetting> {
     selectedColor: Colors.blue.shade800,
     disabledColor: Colors.blue.shade400,
     labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-    label: Text("${name}"), onSelected: (bool value) {
-      select_tags.add(name);
+    label: Text("${name}"), onSelected: (value) {
+      if(value == true){
+        select_tags.add(name);
+      }
+      if(value == false){
+        select_tags.remove(name);
+      }
+
       setState(() {
         selected_tags = select_tags;
       });

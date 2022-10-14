@@ -81,9 +81,15 @@ class _mypageLocalSettingState extends State<mypageLocalSetting> {
       disabledColor: Colors.blue.shade400,
       labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       label: Text("${name}"), onSelected: (value) {
-        select_tags.add(name);
-        if(select_tags.length > 3){
-          return;
+        print(value);
+        if(select_tags.length > 2){
+          value = false;
+        }
+        if(value == true){
+          select_tags.add(name);
+        }
+        if(value == false){
+          select_tags.remove(name);
         }
         setState(() {
           selected_tags = select_tags;
