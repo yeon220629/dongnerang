@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class UserProfileCircleImage extends StatelessWidget {
   const UserProfileCircleImage(
-      {Key? key, required this.imageUrl, this.size = 43})
+      {Key? key, required this.imageUrl, this.size = 75})
       : super(key: key);
 
   final String? imageUrl;
@@ -20,7 +20,7 @@ class UserProfileCircleImage extends StatelessWidget {
             )
           : CachedNetworkImage(
               imageUrl: imageUrl!,
-              // width: size,
+              width: size,
               // height: size,
               fit: BoxFit.cover,
             ),
