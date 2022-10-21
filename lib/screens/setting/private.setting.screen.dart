@@ -93,9 +93,9 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
               Center(
                 child: Stack(
                   children: [
-                    AgeStatefulWidget(callback: (value) {
-                      ageValue = value;
-                    }),
+                    // AgeStatefulWidget(callback: (value) {
+                    //   ageValue = value;
+                    // }),
                     KeywordStateful(callback: (value) {
                       keyword.add(value);
                     }),
@@ -146,7 +146,6 @@ class _KeywordStatefulState extends State<KeywordStateful> {
     return Center(
       child: Column(
           children: [
-            SizedBox(height: 85,),
             Row(
               children: [
                 Text("키워드", style: TextStyle(fontWeight: FontWeight.bold),),
@@ -228,27 +227,27 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
     return Container(
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("연령대", style: TextStyle(fontWeight: FontWeight.bold),),
-              Text("${_currentSliderValue.round().toString()}세"),
-            ],
-          ),
-          Container(
-            width: double.maxFinite,
-            child: CupertinoSlider(
-              min: 0,
-              max: 100,
-              value: _currentSliderValue,
-              onChanged: (value) {
-                setState(() {
-                  _currentSliderValue = value;
-                  widget.callback(_currentSliderValue);
-                });
-              },
-            ),
-          )
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     Text("연령대", style: TextStyle(fontWeight: FontWeight.bold),),
+          //     Text("${_currentSliderValue.round().toString()}세"),
+          //   ],
+          // ),
+          // Container(
+          //   width: double.maxFinite,
+          //   child: CupertinoSlider(
+          //     min: 0,
+          //     max: 100,
+          //     value: _currentSliderValue,
+          //     onChanged: (value) {
+          //       setState(() {
+          //         _currentSliderValue = value;
+          //         widget.callback(_currentSliderValue);
+          //       });
+          //     },
+          //   ),
+          // )
         ],
       ),
     );
@@ -269,10 +268,11 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 220),
-        child: Column(
+    final Size size = MediaQuery.of(context).size;
 
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: size.height / 5.5),
+        child: Column(
           children: [
             Row(
               children: [
