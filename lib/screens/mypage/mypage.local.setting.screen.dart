@@ -16,8 +16,8 @@ class mypageLocalSetting extends StatefulWidget {
 class _mypageLocalSettingState extends State<mypageLocalSetting> {
   var selected_tags = [];
   var select_tags = [];
-  String? userEmail = FirebaseAuth.instance.currentUser?.email;
   List currentLocal = [];
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
 
   @override
   void initState() {
@@ -79,6 +79,7 @@ class _mypageLocalSettingState extends State<mypageLocalSetting> {
       selected: selected_tags.contains(name),
       selectedColor: Colors.blue.shade800,
       disabledColor: Colors.blue.shade400,
+      avatar: Text(""),
       labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       label: Text("${name}"), onSelected: (value) {
         print(value);

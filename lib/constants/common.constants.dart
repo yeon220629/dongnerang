@@ -44,12 +44,9 @@ class fnCommnAppbar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         TextButton(onPressed: (){
           FirebaseService.savePrivacyProfile(email, ListData, keyName);
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => mainScreen()),
-          );
-
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  mainScreen()), (route) => false);
         }, child: Text("완료", style: TextStyle(color: AppColors.black),))
       ],
     );
@@ -134,6 +131,11 @@ InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
 late PullToRefreshController pullToRefreshController = PullToRefreshController();
 final urlController = TextEditingController();
 
+final List CustomKeyword = [
+  "언어","예술","건강관리","마케팅","SNS","서포터즈",
+  "탐사","+추가"
+];
+
 final List CustomData = [
   "강남", "강동", "강북","강서","관악",
   "광진", "금천", "노원","도봉",
@@ -163,7 +165,7 @@ List? fnChecklocal(String local){
   }else if(local == '금천'){
     return ['금천', 'GEUAMCHEOUN'];
   }else if(local == '노원'){
-    return ['노원', 'NOWON_NOTICE'];
+    return ['노원', 'NOWON'];
   }else if(local == '도봉'){
     return ['도봉', 'DOBONG'];
   }else if(local == '동대문'){
@@ -172,9 +174,12 @@ List? fnChecklocal(String local){
     return ['동작', 'DONGJAK'];
   }else if(local == '마포'){
     return ['마포', 'MAPO'];
-  }else if(local == '서대문'){
-    return ['마포', 'MAPO'];
-  }else if(local == '서초'){
+  //  서대문 잠깐 보류
+  }
+  // else if(local == '서대문'){
+  //   return ['마포', 'MAPO'];
+  // }
+  else if(local == '서초'){
     return ['서초', 'SEOCHO'];
   }else if(local == '성동'){
     return ['성동', 'SEONGDONG'];
@@ -187,7 +192,7 @@ List? fnChecklocal(String local){
   }else if(local == '영등포'){
     return ['영등포', 'YEONGDEUNGPO'];
   }else if(local == '용산'){
-    return ['용산', 'YOUNGSAN_NOTICE'];
+    return ['용산', 'YOUNGSAN'];
   }else if(local == '은평'){
     return ['은평', 'EUNPYENG'];
   }else if(local == '종로'){
@@ -195,7 +200,7 @@ List? fnChecklocal(String local){
   }else if(local == '중구'){
     return ['중구', 'JUNGGU'];
   }else if(local == '중랑'){
-    return ['중랑', 'JUNGNANG_NOTICE'];
+    return ['중랑', 'JUNGNANG'];
   }
 }
 

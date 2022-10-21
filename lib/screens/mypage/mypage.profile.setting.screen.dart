@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../constants/colors.constants.dart';
-import '../../constants/common.constants.dart';
 import '../../services/firebase.service.dart';
+import '../mainScreenBar.dart';
 
 class mypageProfileSetting extends StatefulWidget {
   const mypageProfileSetting({Key? key}) : super(key: key);
@@ -14,7 +14,6 @@ class mypageProfileSetting extends StatefulWidget {
 }
 
 class _mypageProfileSettingState extends State<mypageProfileSetting> {
-  // PickedFile? _imageFile; // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
   XFile? _imageFile; // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
   final ImagePicker _picker = ImagePicker(); // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
 
@@ -23,25 +22,51 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
   String? userName = '';
   late Future<List> userSaveData;
 
+  String? userUpdageName;
+
+  List userUpdateData = [];
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
     userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
     userSaveData.then((value){
-      // print("userSaveData 1 :  ${value[1]}");
       setState(() {
-        profileImage = value[0][0];
-        userName = value[0][1];
+        value[0]?.forEach((element) {
+          if(element.toString().contains('https')){
+            profileImage = element.toString();
+          }else{
+            userName = element.toString();
+          }
+        });
       });
     });
+    // _imageFile = profileImage as XFile?;
   }
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: fnCommnAppbar(appBar: AppBar(), title: '프로필 수정', center: false, email: '', ListData: [], keyName: ''),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: AppColors.black,
+        ),
+        backgroundColor: AppColors.white,
+        centerTitle: true,
+        elevation: 0.0,
+        title: Text('프로필 수정', style: TextStyle(color: AppColors.black),),
+        actions: [
+          TextButton(onPressed: (){
+            userUpdateData.add(userUpdageName);
+            FirebaseService.savePrivacyProfileSetting(userEmail!, userUpdateData, ['name', 'profileImage']);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    mainScreen()), (route) => false);
+            }, child: Text("완료", style: TextStyle(color: AppColors.black),))
+          ],
+        ),
         body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: ListView(
@@ -63,6 +88,7 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: _imageFile == null
+                  // ? Image.asset("assets/images/default-profile.png")
                   ? CachedNetworkImage(imageUrl: profileImage!)
                   : CachedNetworkImage(imageUrl: profileImage!)
           ),
@@ -146,9 +172,15 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
             Icons.person,
             color: AppColors.black,
           ),
-          labelText: 'Name',
-          hintText: 'Input your name'
+          labelText: '${userName}',
+          hintText: '${userName}'
       ),
+      // onSaved: ,
+      onChanged: (value){
+        setState(() {
+          userUpdageName = value;
+        });
+      },
     );
   }
 
@@ -194,10 +226,11 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
   }
 
   takePhoto(ImageSource source) async {
+    print("source : ${source}");
     final pickedFile = await _picker.pickImage(source: source);
+    print("pickedFile : $pickedFile");
     setState(() {
       _imageFile = pickedFile;
-      
       print("_imageFile : $_imageFile");
     });
   }

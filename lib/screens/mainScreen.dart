@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/models/app_user.model.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -95,30 +94,32 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       style: const TextStyle(fontSize: 14),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
-                      maxLines: 3,
+                      maxLines: 2,
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                            padding: EdgeInsets.all(3),
-                            color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                            [_random.nextInt(9) * 100],
-                            child: Text(
-                              '${post['center_name ']}',
-                              style: const TextStyle(fontSize: 13, color: Colors.black),
-                              textDirection: TextDirection.ltr,
-                            )
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          '시작일 | ${post['registrationdate']}',
-                          style: const TextStyle(fontSize: 15, color: Colors.grey),
-                          textDirection: TextDirection.ltr,
-                        ),
-                      ],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Container(
+                              padding: EdgeInsets.all(3),
+                              color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                              [_random.nextInt(9) * 100],
+                              child: Text(
+                                '${post['center_name ']}',
+                                style: const TextStyle(fontSize: 13, color: Colors.black),
+                                textDirection: TextDirection.ltr,
+                              )
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            '시작일 | ${post['registrationdate'].trim()}',
+                            style: const TextStyle(fontSize: 15, color: Colors.grey),
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ],
+                      )
                     )
                   ],
                 ),
@@ -166,8 +167,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height*0.30;
-    // String dropdownValue = LIST_MENU[0];
-
 
     return SafeArea(
         child: Scaffold(
@@ -191,11 +190,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 }).toList(),
                 onChanged: (dynamic value){
                   listItems = [];
-                  // print("value : $value");
-                  // print("return 확인 : ${fnChecklocal(value)}" );
                   List? item = fnChecklocal(value);
-                  // print("item?.first : ${item?.first}");
-                  // getPostsData("GANGNAM");
                   if(value == item?.first){
                     getPostsData(item?.last);
                   }
@@ -218,8 +213,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               }, icon: const Icon(Icons.notifications_none_outlined)),
             ],
           ),
-
-
           body: SizedBox(
             height: size.height,
             child: Column(
@@ -229,26 +222,28 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     elevation: 1.0,
                     showUnselectedLabels: true,
                     showSelectedLabels: true,
-                    // selectedLabelStyle: const TextStyle(color: Colors.red),
                     selectedItemColor: AppColors.primary,
                     unselectedItemColor: AppColors.grey,
-                    selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),
+                    selectedLabelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20
+                    ),
+                    unselectedLabelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20
+                    ),
                     onTap: (value){
                       setState(() {
                         cuindex = value;
                         if(value == 0){
                           label = "동네소식";
-                          if(currentItem == ""){
-                            currentItem = "DONGJAK";
-                            getPostsData(currentItem);
-                          }
-                          getPostsData(currentItem);
+                          getPostsData(fnChecklocal(dropdownValue)?.last);
+                          setState(() {});
                         }
                         else if(value == 1){
                           label = "서울시 소식";
-                          getPostsData("NPO");
-                          setState(() {
-                          });
+                          getPostsData("SEOUL");
+                          setState(() {});
                         }else {
                           label = "전체 소식";
                         }
@@ -259,7 +254,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         label: "동네소식",
                         icon: Icon(
                           Icons.linear_scale, size: 0,
-                          color: cuindex == 0 ? AppColors.primary : AppColors.grey,
+                          color: cuindex == 0
+                              ? AppColors.primary
+                              : AppColors.grey,
                           //
                         )
                       ),
@@ -278,41 +275,41 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     duration: const Duration(milliseconds: 200),
                     width: size.width,
                     alignment: Alignment.topCenter,
-                    height: closeTapContainer? 0 : categoryHeight - 75,
+                    height: closeTapContainer? 0 : categoryHeight - 80,
                     child: categoriesScroller,),
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
                     child: Text("$label", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   )
                 ),
                 Expanded(
-                    child: ListView.builder(
-                        itemCount: itemsData.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (c, i){
-                          double scale = 1.0;
-                          if (topContainer > 0.5){
-                            scale = i + 0.5 - topContainer;
-                            if (scale < 0 ) { scale = 0;}
-                            else if (scale > 1) { scale = 1; }
-                          }
-                          return Opacity(
-                            opacity: scale,
-                            child: Transform(
-                              transform: Matrix4.identity()..scale(scale, scale),
-                              alignment: Alignment.bottomCenter,
-                              child: Align(
-                                heightFactor: 0.95,
-                                alignment: Alignment.topCenter,
-                                child: itemsData[i],
-                              ),
-                            ),
-                          );
-                        }
-                    )
+                  child: ListView.builder(
+                    itemCount: itemsData.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (c, i){
+                      double scale = 1.0;
+                      if (topContainer > 0.5){
+                        scale = i + 0.5 - topContainer;
+                        if (scale < 0 ) { scale = 0;}
+                        else if (scale > 1) { scale = 1; }
+                      }
+                      return Opacity(
+                        opacity: scale,
+                        child: Transform(
+                          transform: Matrix4.identity()..scale(scale, scale),
+                          alignment: Alignment.bottomCenter,
+                          child: Align(
+                            heightFactor: 0.95,
+                            alignment: Alignment.topCenter,
+                            child: itemsData[i],
+                          ),
+                        ),
+                      );
+                    }
+                  )
                 )
               ],
             ),
@@ -345,9 +342,6 @@ class CategoriesScroller extends StatelessWidget {
                 child:Center(
                           child: Image.asset("assets/images/banner.png")
                       ),
-                      // SizedBox(
-                      //   height: 5,
-                      // ),
                 ),
             ],
           ),

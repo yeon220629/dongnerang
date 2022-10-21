@@ -18,7 +18,6 @@ class mypageScreen extends StatefulWidget {
 }
 
 class _mypageScreenState extends State<mypageScreen> {
-
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String? profileImage = '';
   String? userName = '';
@@ -67,7 +66,7 @@ class _mypageScreenState extends State<mypageScreen> {
                       style: const TextStyle(fontSize: 14),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
-                      maxLines: 3,
+                      maxLines: 2,
                     ),
                     const SizedBox(
                       height: 15,
@@ -118,8 +117,6 @@ class _mypageScreenState extends State<mypageScreen> {
             userName = element.toString();
           }
         });
-        // profileImage = value[0][1];
-        // userName = value[0][0];
         getPostsData(value[1]);
       });
     });

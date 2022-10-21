@@ -1,9 +1,6 @@
-import 'package:dongnerang/screens/permission.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
-
 import '../constants/colors.constants.dart';
 import 'login.screen.dart';
 import 'mainScreenBar.dart';
@@ -41,8 +38,6 @@ class _SplashScreenState extends State<SplashScreen> {
         FirebaseAuth.instance.currentUser != null
             ? Get.offAll(() => const mainScreen())
             : Get.offAll(() => const LoginScreen());
-            // ? Get.offAll(() => const LoginScreen())
-            // : Get.offAll(() => const mainScreen());
       });
     // }
   }

@@ -9,7 +9,6 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 import '../constants/colors.constants.dart';
-import '../constants/common.constants.dart';
 
 
 class urlLoadScreen extends StatefulWidget {
@@ -83,22 +82,23 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
       leading: IconButton(
         icon: Icon(Icons.arrow_back, color: Colors.black),
         //페이지 리로드
+
         onPressed: (){
+          // 메인 페이지
           if(widget.i == 0){
-            Navigator.of(context).pop();
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => mainScreen()),
-            // );
-          }else if(widget.i == 1){
-            Navigator.of(context).pop();
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => mainScreen()),
-            // );
-          }else if(widget.i == 2){
-            print(Arguments(returnValue: ReturnValue(result:'Nope.')));
-            Navigator.pop(context, Arguments(returnValue: ReturnValue(result:'Nope.')));
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  mainScreen()), (route) => false);
+          }
+          if(widget.i == 1){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    mainScreen()), (route) => false);
+          }
+          if(widget.i == 2){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    searchScreen(title: "")), (route) => false);
           }
         }
       ),

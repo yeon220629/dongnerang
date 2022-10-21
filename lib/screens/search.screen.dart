@@ -1,15 +1,11 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
-import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../constants/common.constants.dart';
-import 'mypage/mypage.screen.dart';
+import '../services/firebase.service.dart';
 import 'url.load.screen.dart';
 
 class searchScreen extends StatefulWidget {
@@ -22,21 +18,19 @@ class searchScreen extends StatefulWidget {
 
 class _searchScreenState extends State<searchScreen>
     with SingleTickerProviderStateMixin {
-  static TextEditingController SearcheditingController = TextEditingController();
-
+  final KeywordScroller keywordscroller = KeywordScroller();
+  late TextEditingController SearcheditingController = new TextEditingController();
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
-  String get _searchText => SearcheditingController.text.trim();
   bool closeTapContainer = false;
   final _random = Random();
   double topContainer = 0;
   String url = "";
-  double progress = 0;
 
-  List<TagModel> _tags = [];
+
+  List ResentSearch = [];
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   List<dynamic> responseData = [];
-  List<dynamic> Search_value = [];
   List getUserkeyword = [];
   List? item = [];
 
@@ -44,41 +38,48 @@ class _searchScreenState extends State<searchScreen>
     item = [];
     List<dynamic> valueData = [];
     listItems = [];
-    for(int i = 0; i < getUserkeyword.length; i++){
+
+    for (int i = 0; i < getUserkeyword.length; i++) {
       item?.add(fnChecklocal(getUserkeyword[i]));
     }
-    // print("$item : item");
-    // print("${item?.length} : item");
-    for(int i = 0; i < item!.length; i++){
-      DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore.instance.collection("crawlingData").doc(item![i][1]);
-      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await docref.get();
+    for (int i = 0; i < item!.length; i++) {
+      DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore
+          .instance.collection("crawlingData").doc(item![i][1]);
+      final DocumentSnapshot<
+          Map<String, dynamic>> documentSnapshot = await docref.get();
       var valueDoc = documentSnapshot.data();
-
+      if(value == ''){
+        listItems = [];
+        break;
+      }
       valueDoc?.forEach((key, value) {
         valueData.add(value);
       });
     }
-
-    List<dynamic> responseList= valueData;
-
-    for ( var post in responseList){
-      if(post['title'].contains(value)){
-        listItems.add( GestureDetector(
-            onTap: () async{
+    List<dynamic> responseList = valueData;
+    for (var post in responseList) {
+      if (post['title'].contains(value)) {
+        listItems.add(GestureDetector(
+            onTap: () async {
               final Uri url = Uri.parse('${post["link"]}');
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                  url, post["title"], post['center_name '], post['registrationdate'], 2
-              )));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                  urlLoadScreen(
+                      url, post["title"], post['center_name '],
+                      post['registrationdate'], 2
+                  )));
             },
             child: Container(
                 width: 500,
                 height: 110,
-                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                margin: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 15),
                 decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                  BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+                  BoxShadow(
+                      color: Colors.black.withAlpha(100), blurRadius: 10.0),
                 ]),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -87,7 +88,7 @@ class _searchScreenState extends State<searchScreen>
                         style: const TextStyle(fontSize: 14),
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.justify,
-                        maxLines: 3,
+                        maxLines: 2,
                       ),
                       const SizedBox(
                         height: 15,
@@ -96,18 +97,21 @@ class _searchScreenState extends State<searchScreen>
                         children: [
                           Container(
                               padding: EdgeInsets.all(3),
-                              color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                              color: Colors.primaries[_random.nextInt(Colors
+                                  .primaries.length)]
                               [_random.nextInt(9) * 100],
                               child: Text(
                                 '${post['center_name ']}',
-                                style: const TextStyle(fontSize: 13, color: Colors.black),
+                                style: const TextStyle(fontSize: 13,
+                                    color: Colors.black),
                                 textDirection: TextDirection.ltr,
                               )
                           ),
                           SizedBox(width: 10),
                           Text(
-                            '시작일 | ${post['registrationdate']}',
-                            style: const TextStyle(fontSize: 17, color: Colors.grey),
+                            '시작일 | ${post['registrationdate'].trim()}',
+                            style: const TextStyle(
+                                fontSize: 17, color: Colors.grey),
                             textDirection: TextDirection.ltr,
                           ),
                         ],
@@ -118,43 +122,24 @@ class _searchScreenState extends State<searchScreen>
             ))
         );
       }
-      // if(post['title'] != value){
-      //   listItems = [];
-      // }
     }
-    print("listItems : ${listItems.length}");
-
     setState(() {
       itemsData = listItems;
     });
   }
 
-  Future<List> getKeword()async {
-
+  Future<List> getKeword() async {
     List valueTemp = [];
-    final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(userEmail).get();
+    final checkDuplicate = await FirebaseFirestore.instance.collection("users")
+        .doc(userEmail)
+        .get();
     checkDuplicate.data()?.forEach((key, value) {
-      if(key.contains("keyword")){
+      if (key.contains("keyword")) {
         valueTemp.add(value);
       }
     });
     return valueTemp.first;
   }
-  final List<TagModel> _tagsToSelect = [
-    //DB에 넣을지 말지 확인 필요
-    TagModel(id: 'DONGJAK', title: '사육신역사관'),
-    TagModel(id: 'DONGDAEMUN', title: '문화예술교육'),
-    TagModel(id: 'NPO', title: '지원사업'),
-    TagModel(id: 'JUNGGU', title: '생활기술자를'),
-    TagModel(id: 'JUNGGU', title: '이야기'),
-    TagModel(id: 'JUNGGU', title: '선정결과'),
-  ];
-  final List<TagModel> getKeywordData = [];
-
-  refreshState(VoidCallback fn) {
-    if (mounted) setState(fn);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -164,94 +149,17 @@ class _searchScreenState extends State<searchScreen>
         getUserkeyword.add(value[i]);
       }
     });
-    SearcheditingController.addListener(() => refreshState(() {}));
-    pullToRefreshController = PullToRefreshController(
-        options: PullToRefreshOptions(
-          color : Colors.blue,
-        ),
-        onRefresh: () async {
-          webViewController?.reload();
-        }
-    );
-    SearcheditingController.text = '';
-    controllers.addListener(() {
-      double value = controllers.offset/119;
-      setState(() {
-        topContainer = value;
-        closeTapContainer = controllers.offset > 50;
-      });
-    });
-
-    getKeword().then((value){
-      for(int i = 0; i < value.length; i++){
-        print("$i : ${value[i]}");
-        setState(() {
-          getKeywordData.add(TagModel(id: '$i', title: '${value[i]}'));
-        });
-      }
-    });
-  }
-  List<TagModel> _myKeywordResultList() {
-    if (_searchText.isEmpty) {
-      // itemsData = [];
-      return getKeywordData;
-    }
-
-    List<TagModel> _tempList = [];
-    for (int index = 0; index < getKeywordData.length; index++) {
-      TagModel tagModel = getKeywordData[index];
-      if (tagModel.title
-          .toLowerCase()
-          .trim()
-          .contains(_searchText.toLowerCase())) {
-        _tempList.add(tagModel);
-      }
-    }
-    return _tempList;
-  }
-
-  List<TagModel> _filterSearchResultList() {
-    if (_searchText.isEmpty) {
-      // itemsData = [];
-      return _tagsToSelect;
-    }
-
-    List<TagModel> _tempList = [];
-    for (int index = 0; index < _tagsToSelect.length; index++) {
-      TagModel tagModel = _tagsToSelect[index];
-      if (tagModel.title
-          .toLowerCase()
-          .trim()
-          .contains(_searchText.toLowerCase())) {
-        _tempList.add(tagModel);
-      }
-    }
-    return _tempList;
-  }
-
-  _addTags(tagModel) async {
-    if (!_tags.contains(tagModel)) {
-      setState(() {
-        // _tags.add(tagModel);
-        SearcheditingController.text = tagModel.title;
-      });
-    }
-  }
-
-  _removeTag(tagModel) async {
-    if (_tags.contains(tagModel)) {
-      setState(() {
-        _tags.remove(tagModel);
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final double categoryHeight = size.height * 0.30;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: AppColors.black
+            color: AppColors.black
         ),
         backgroundColor: Colors.white,
         actions: <Widget>[
@@ -260,205 +168,159 @@ class _searchScreenState extends State<searchScreen>
             child: TextField(
               controller: SearcheditingController,
               onChanged: (value){
-                // print(value);
+                print(value);
+                // if(value.isNotEmpty){
+                //   print("is NOT empty");
+                // }else{
+                //   print("is empty");
+                //   setState(() {
+                //     itemsData = [];
+                //   });
+                // }
                 getPostsData(value);
               },
             ),
           ),
           IconButton(onPressed: (){
-            // setState(() {
-            //   listItems = [];
-            // });
-            // Future.delayed(Duration.zero, () async {
-            //   getPostsData(SearcheditingController.text);
-            // });
-          }, icon: Icon(Icons.search, color: Colors.black,)),
-          IconButton(onPressed: (){
+          }, icon: Icon(Icons.search)),
+          IconButton(onPressed: () {
             SearcheditingController.clear();
           }, icon: Icon(Icons.clear, color: Colors.black,))
         ],
       ),
-      body: _tagIcon(),
-    );
-  }
-
-  Widget _tagIcon() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(width: 25.0,),
-        _tagsWidget(),
-      ],
-    );
-  }
-
-  _displayTagWidget() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: _filterSearchResultList().isNotEmpty
-          ? _buildSuggestionWidget()
-          : Text(''),
-    );
-  }
-
-  Widget _buildSuggestionWidget() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      // if (_filterSearchResultList().length != _tags.length)
-      Text('인기 키워드', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-      Wrap(
-        alignment: WrapAlignment.start,
-        children: _filterSearchResultList()
-            .where((tagModel) => !_tags.contains(tagModel))
-            .map((tagModel) => tagChip(
-          tagModel: tagModel,
-          onTap: () => _addTags(tagModel),
-          action: 'Add',
-        ))
-            .toList(),
-      ),
-      Text('나의 키워드', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-      Wrap(
-        alignment: WrapAlignment.start,
-        children: _myKeywordResultList()
-            .where((tagModel) => !_tags.contains(tagModel))
-            .map((tagModel) => tagChip(
-          tagModel: tagModel,
-          onTap: () => _addTags(tagModel),
-          action: 'Add',
-        ))
-            .toList(),
-      ),
-    ]);
-  }
-
-  Widget tagChip({
-    tagModel,
-    onTap,
-    action,
-  }) {
-    return InkWell(
-        onTap: onTap,
-        child: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 5.0,
-              ),
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.0,
-                  vertical: 10.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.deepOrangeAccent,
-                  borderRadius: BorderRadius.circular(100.0),
-                ),
-                child: Text(
-                  '${tagModel.title}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15.0,
-                  ),
-                ),
-              ),
+      body: SizedBox(
+        height: size.height,
+        child : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("인기 키워드", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    AnimatedOpacity(
+                      opacity: closeTapContainer ? 0:1,
+                      duration: const Duration(milliseconds: 200),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        width: size.width,
+                        alignment: Alignment.topCenter,
+                        height: closeTapContainer? 0 : categoryHeight - 160,
+                        child: keywordscroller,),
+                    ),
+                  ],
+                )
             ),
-            Positioned(
-              right: 0,
-              child: CircleAvatar(
-                backgroundColor: Colors.orange.shade600,
-                radius: 8.0,
-                child: Icon(
-                  Icons.clear,
-                  size: 10.0,
-                  color: Colors.white,
-                ),
-              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Text("검색 결과", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+            ),
+            Expanded(
+                child: ListView.builder(
+                itemCount: itemsData.length,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (c, i){
+                  double scale = 1.0;
+                  if (topContainer > 0.5){
+                    scale = i + 0.5 - topContainer;
+                    if (scale < 0 ) { scale = 0;}
+                    else if (scale > 1) { scale = 1; }
+                  }
+                  return Opacity(
+                    opacity: scale,
+                    child: Transform(
+                      transform: Matrix4.identity()..scale(scale, scale),
+                      alignment: Alignment.bottomCenter,
+                      child: Align(
+                        heightFactor: 0.95,
+                        alignment: Alignment.topCenter,
+                        child: itemsData[i],
+                      ),
+                    ),
+                  );
+                }
+              )
             )
           ],
-        ));
-  }
-
-  Widget _tagsWidget() {
-    return Flexible(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _tags.length > 0
-              ? Column(children: [
-            Wrap(
-              alignment: WrapAlignment.start,
-              children: _tags
-                  .map((tagModel) => tagChip(
-                tagModel: tagModel,
-                onTap: () => _removeTag(tagModel),
-                // action: 'Remove',
-              ))
-                  .toSet()
-                  .toList(),
-            ),
-          ])
-              : Container(),
-          _displayTagWidget(),
-          _serachResultWidget(),
-        ],
-      ),
-    );
-  }
-
-  Widget _serachResultWidget() {
-    print("itemsData길이 : ${itemsData.length}");
-    return Flexible(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.all(5),
-                child: Text("검색 결과", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              )
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: itemsData.length,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (c, i){
-                double scale = 1.0;
-                if (topContainer > 0.5){
-                  scale = i + 0.5 - topContainer;
-                  if (scale < 0 ) { scale = 0;}
-                  else if (scale > 1) { scale = 1; }
-                }
-                return Opacity(
-                  opacity: scale,
-                  child: Transform(
-                    transform: Matrix4.identity()..scale(scale, scale),
-                    alignment: Alignment.bottomCenter,
-                    child: Align(
-                      heightFactor: 0.95,
-                      alignment: Alignment.topCenter,
-                      child: itemsData[i],
-                    ),
-                  ),
-                );
-              }
-            )
-          )
-        ],
-      ),
+        )
+      )
     );
   }
 }
 
-class TagModel {
-  String id;
-  String title;
+class KeywordScroller extends StatefulWidget {
+  const KeywordScroller({Key? key}) : super(key: key);
 
-  TagModel({
-    required this.id,
-    required this.title,
-  });
+
+  @override
+  State<KeywordScroller> createState() => _KeywordScrollerState();
+}
+
+class _KeywordScrollerState extends State<KeywordScroller> {
+  List tags = [];
+  List selected_tags = [];
+  List select_tags = [];
+
+  @override
+  Widget build(BuildContext context) {
+    final double categoryHeight = MediaQuery
+        .of(context)
+        .size
+        .height * 0.30 - 50;
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: FittedBox(
+          fit: BoxFit.fill,
+          alignment: Alignment.topCenter,
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: categoryHeight * 2.9,
+                margin: const EdgeInsets.only(right: 5),
+                height: categoryHeight - 150,
+                child: Center(
+                  child: Wrap(
+                    spacing: 8.0,
+                    runSpacing: 4.0,
+                    children: <Widget>[...generate_tags(CustomKeyword)],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  generate_tags(value) {
+    return value.map((tag) => get_chip(tag)).toList();
+  }
+  get_chip(name) {
+    return FilterChip(
+      selected: selected_tags.contains(name),
+      selectedColor: Colors.blue.shade800,
+      disabledColor: Colors.blue.shade400,
+      labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      label: Text("${name}"),
+      onSelected: (value) {
+        print("${value} : ${name}");
+        if (select_tags.length >= 1) {
+          value = false;
+        }
+        if (value == true) {
+          select_tags.add(name);
+        }
+        if (value == false) {
+          select_tags.remove(name);
+        }
+        setState(() {
+          selected_tags = select_tags;
+        });
+      },
+    );
+  }
 }

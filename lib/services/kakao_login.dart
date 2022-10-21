@@ -4,6 +4,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 class KakaoLogin implements SocialLogin{
   @override
   Future<bool> login() async{
+    print("locin check");
     try{
       bool isInstalled = await isKakaoTalkInstalled();
       if(isInstalled) {

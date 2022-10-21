@@ -153,20 +153,36 @@ class FirebaseService {
   }
 
   static Future<void> savePrivacyProfile(String email, List value, String key) async{
-    print("email : $email");
-    print("value : $value");
-    final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
+    // print("email : $email");
+    // print("value : $value");
+    // final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
       if(key.contains("keyword")){
-        // print("name value : $value");
         await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
           key: value,
         }));
       }
       if(key.contains("local")){
-        // print("profileImage value : $value");
         await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
           key: value,
         }));
       }
+  }
+
+  static Future<void> savePrivacyProfileSetting(String email, List value, List key) async{
+    print("value : ${value}");
+    for(int i = 0; i < key.length; i++){
+      print("key : ${key[i]}");
+      if(key[i] == 'name'){
+          await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
+            key[i]: value[0],
+          }));
+      }
+    }
+    // if(key.contains("name")){
+    //   print(value);
+    //   await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
+    //     key: value,
+    //   }));
+    // }
   }
 }

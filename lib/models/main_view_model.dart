@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/mainScreenBar.dart';
-import 'package:dongnerang/screens/private.setting.screen.dart';
+import 'package:dongnerang/screens/setting/private.setting.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -19,132 +19,150 @@ class MainViewModel {
   MainViewModel(this._socialLogin);
 
   Future login() async {
-    isLogined = await _socialLogin.login();
-    // if(isLogined) {
-    //   user = await kakao.UserApi.instance.me();
-    //   // print("user : ${user!.kakaoAccount!.birthday}");
-    //   List<String> scopes = [];
-    //
-    //   if (user?.kakaoAccount?.emailNeedsAgreement == true) {
-    //     scopes.add('account_email');
-    //   }
-    //   if (user?.kakaoAccount?.birthdayNeedsAgreement == true) {
-    //     scopes.add("birthday");
-    //   }
-    //   if (user?.kakaoAccount?.birthyearNeedsAgreement == true) {
-    //     scopes.add("birthyear");
-    //   }
-    //   if (user?.kakaoAccount?.ciNeedsAgreement == true) {
-    //     scopes.add("account_ci");
-    //   }
-    //   if (user?.kakaoAccount?.phoneNumberNeedsAgreement == true) {
-    //     scopes.add("phone_number");
-    //   }
-    //   if (user?.kakaoAccount?.profileNeedsAgreement == true) {
-    //     scopes.add("profile");
-    //   }
-    //   if (user?.kakaoAccount?.ageRangeNeedsAgreement == true) {
-    //     scopes.add("age_range");
-    //   }
-    //
-    //   final customToken = await FirebaseService().createCustomToken({
-    //     'uid': user!.id.toString(),
-    //     'displayName': user!.kakaoAccount?.profile?.nickname,
-    //     'email': user!.kakaoAccount!.email!,
-    //     'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
-    //   });
-    //
-    //   await FirebaseAuth.instance.signInWithCustomToken(customToken);
-    //
-    //   var currentUser = await FirebaseService.findUserByEmail(
-    //       user!.kakaoAccount!.email!);
-    //
-    //   if (currentUser == null) {
-    //     await FirebaseFirestore.instance
-    //         .collection("users")
-    //         .doc(user!.kakaoAccount!.email!)
-    //         .set({
-    //       "email": user!.kakaoAccount!.email!,
-    //       "provider": "kakao",
-    //       "createdAt": DateTime.now(),
-    //       "loggedAt": DateTime.now(),
-    //       "name": user!.kakaoAccount!.profile!.nickname,
-    //       "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
-    //     });
-    //     currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
-    //     if (currentUser == null) {
-    //       EasyLoading.showError("회원가입 진행 필요");
-    //     }
-    //   }
-    //   UserService.to.currentUser.value = currentUser;
-    //   Get.offAll(() => privateSettingScreen());
-    // }
-    if(!isLogined){
-      print("check");
-      UserApi.instance.loginWithKakaoAccount();
+    // isLogined = await _socialLogin.login();
 
-      user = await kakao.UserApi.instance.me();
-      // print("user : ${user!.kakaoAccount!.birthday}");
-      List<String> scopes = [];
+    if (await AuthApi.instance.hasToken()) {
+      try {
+        AccessTokenInfo tokenInfo =
+          await UserApi.instance.accessTokenInfo();
+        print('토큰 유효성 체크 성공 ${tokenInfo.id} ${tokenInfo.expiresIn}');
+        // Get.offAll(() => mainScreen());
+        Get.offAll(() => privateSettingScreen());
+      } catch (error) {
+        if (error is KakaoException && error.isInvalidTokenError()) {
+          print('토큰 만료 $error');
+        } else {
+          print('토큰 정보 조회 실패 $error');
+        }
+        try {
+          // 카카오 계정으로 로그인
+          OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+          print('로그인 성공 ${token.accessToken}');
+          AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
 
-      if (user?.kakaoAccount?.emailNeedsAgreement == true) {
-        scopes.add('account_email');
-      }
-      if (user?.kakaoAccount?.birthdayNeedsAgreement == true) {
-        scopes.add("birthday");
-      }
-      if (user?.kakaoAccount?.birthyearNeedsAgreement == true) {
-        scopes.add("birthyear");
-      }
-      if (user?.kakaoAccount?.ciNeedsAgreement == true) {
-        scopes.add("account_ci");
-      }
-      if (user?.kakaoAccount?.phoneNumberNeedsAgreement == true) {
-        scopes.add("phone_number");
-      }
-      if (user?.kakaoAccount?.profileNeedsAgreement == true) {
-        scopes.add("profile");
-      }
-      if (user?.kakaoAccount?.ageRangeNeedsAgreement == true) {
-        scopes.add("age_range");
-      }
+          user = await kakao.UserApi.instance.me();
 
-      final customToken = await FirebaseService().createCustomToken({
-        'uid': user!.id.toString(),
-        'displayName': user!.kakaoAccount?.profile?.nickname,
-        'email': user!.kakaoAccount!.email!,
-        'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
-      });
+          final customToken = await FirebaseService().createCustomToken({
+            'uid': user!.id.toString(),
+            'displayName': user!.kakaoAccount?.profile?.nickname,
+            'email': user!.kakaoAccount!.email!,
+            'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
+          });
 
-      await FirebaseAuth.instance.signInWithCustomToken(customToken);
+          await FirebaseAuth.instance.signInWithCustomToken(customToken);
 
-      var currentUser = await FirebaseService.findUserByEmail(
-          user!.kakaoAccount!.email!);
+          var currentUser = await FirebaseService.findUserByEmail(
+              user!.kakaoAccount!.email!);
 
-      if (currentUser == null) {
-        await FirebaseFirestore.instance
-            .collection("users")
-            .doc(user!.kakaoAccount!.email!)
-            .set({
-          "email": user!.kakaoAccount!.email!,
-          "provider": "kakao",
-          "createdAt": DateTime.now(),
-          "loggedAt": DateTime.now(),
-          "name": user!.kakaoAccount!.profile!.nickname,
-          "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
-        });
-        currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
-        if (currentUser == null) {
-          EasyLoading.showError("회원가입 진행 필요");
+          if (currentUser == null) {
+            await FirebaseFirestore.instance
+                .collection("users")
+                .doc(user!.kakaoAccount!.email!)
+                .set({
+              "email": user!.kakaoAccount!.email!,
+              "provider": "kakao",
+              "createdAt": DateTime.now(),
+              "loggedAt": DateTime.now(),
+              "name": user!.kakaoAccount!.profile!.nickname,
+              "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
+            });
+            currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
+            if (currentUser == null) {
+              EasyLoading.showError("회원가입 진행 필요");
+            }
+          }
+          UserService.to.currentUser.value = currentUser;
+          Get.offAll(() => privateSettingScreen());
+        } catch (error) {
+          print('로그인 실패 $error');
         }
       }
-      UserService.to.currentUser.value = currentUser;
-      Get.offAll(() => privateSettingScreen());
+    } else {
+      print('발급된 토큰 없음');
+      try {
+        OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+        print('로그인 성공 ${token.accessToken}');
+        AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
+        // UserApi.instance.loginWithKakaoAccount();
+
+        user = await kakao.UserApi.instance.me();
+
+        final customToken = await FirebaseService().createCustomToken({
+          'uid': user!.id.toString(),
+          'displayName': user!.kakaoAccount?.profile?.nickname,
+          'email': user!.kakaoAccount!.email!,
+          'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
+        });
+
+        await FirebaseAuth.instance.signInWithCustomToken(customToken);
+
+        var currentUser = await FirebaseService.findUserByEmail(
+            user!.kakaoAccount!.email!);
+
+        if (currentUser == null) {
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(user!.kakaoAccount!.email!)
+              .set({
+            "email": user!.kakaoAccount!.email!,
+            "provider": "kakao",
+            "createdAt": DateTime.now(),
+            "loggedAt": DateTime.now(),
+            "name": user!.kakaoAccount!.profile!.nickname,
+            "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
+          });
+          currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
+          if (currentUser == null) {
+            EasyLoading.showError("회원가입 진행 필요");
+          }
+        }
+        UserService.to.currentUser.value = currentUser;
+        Get.offAll(() => privateSettingScreen());
+      } catch (error) {
+        print('로그인 실패 $error');
+      }
     }
-    Future logout() async {
-      await _socialLogin.logout();
-      isLogined = false;
-      user = null;
-    }
+
+    // AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
+    // UserApi.instance.loginWithKakaoAccount();
+
+    // user = await kakao.UserApi.instance.me();
+    //
+    // final customToken = await FirebaseService().createCustomToken({
+    //   'uid': user!.id.toString(),
+    //   'displayName': user!.kakaoAccount?.profile?.nickname,
+    //   'email': user!.kakaoAccount!.email!,
+    //   'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
+    // });
+    //
+    // await FirebaseAuth.instance.signInWithCustomToken(customToken);
+    //
+    // var currentUser = await FirebaseService.findUserByEmail(
+    //     user!.kakaoAccount!.email!);
+    //
+    // if (currentUser == null) {
+    //   await FirebaseFirestore.instance
+    //       .collection("users")
+    //       .doc(user!.kakaoAccount!.email!)
+    //       .set({
+    //     "email": user!.kakaoAccount!.email!,
+    //     "provider": "kakao",
+    //     "createdAt": DateTime.now(),
+    //     "loggedAt": DateTime.now(),
+    //     "name": user!.kakaoAccount!.profile!.nickname,
+    //     "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
+    //   });
+    //   currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
+    //   if (currentUser == null) {
+    //     EasyLoading.showError("회원가입 진행 필요");
+    //   }
+    // }
+    // UserService.to.currentUser.value = currentUser;
+    // Get.offAll(() => privateSettingScreen());
+  }
+  Future logout() async {
+    await _socialLogin.logout();
+    isLogined = false;
+    user = null;
   }
 }
