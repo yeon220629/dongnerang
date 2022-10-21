@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:flutter_tags/flutter_tags.dart';
 import 'package:get/get.dart';
-import 'package:material_tag_editor/tag_editor.dart';
 
 import '../../constants/common.constants.dart';
 import '../../controller/private.setting.controller.dart';
