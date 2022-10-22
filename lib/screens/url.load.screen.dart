@@ -127,21 +127,24 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
           ),
 
           IconButton(onPressed: ()async {
-            // 사용자 정의 템플릿 ID
-            // String url = "https://developers.kakao.com";
             String firebasesUrl = widget.urldata.toString();
             int templateId = 83950;
-
             print("firebasesUrl : $firebasesUrl");
-
+            final TextTemplate defaultText = TextTemplate(
+              text:
+              '제목 : ${widget.s}\n 링크 : ${firebasesUrl}',
+              link: Link(
+                webUrl: Uri.parse(firebasesUrl),
+              ),
+            );
             // 카카오톡 실행 가능 여부 확인
             bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
             if (isKakaoTalkSharingAvailable) {
               print('카카오톡으로 공유 가능');
               try{
-                Uri uri = await ShareClient.instance.shareScrap(url: firebasesUrl, templateId: templateId);
-                await ShareClient.instance.launchKakaoTalk(uri);
-                print('카카오톡 공유 완료');
+                Uri uri =
+                  await ShareClient.instance.shareDefault(template: defaultText);
+                  await ShareClient.instance.launchKakaoTalk(uri);
                 EasyLoading.showSuccess("공유 완료");
               }catch (e){
                 print('카카오톡 공유 실패 $e');

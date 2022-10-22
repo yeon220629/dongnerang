@@ -84,7 +84,7 @@ class _mypageScreenState extends State<mypageScreen> {
                             )
                         ),
                         Text(
-                          '시작일 | ${responseList[0][i][2]}',
+                          '시작일 | ${responseList[0][i][2].toString().trim()}',
                           style: const TextStyle(fontSize: 15, color: Colors.grey),
                           textDirection: TextDirection.ltr,
                         ),

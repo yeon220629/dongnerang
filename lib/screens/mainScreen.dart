@@ -29,6 +29,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
+  List listOrder = [];
   String url = "";
   var label = "전체소식";
   var currentItem = "";
@@ -54,19 +55,27 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
+    listOrder = [];
     listItems = [];
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
 
-    DocumentReference<Map<String, dynamic>> docref =
-      FirebaseFirestore.instance.collection("crawlingData").doc(value);
-
+    DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore.instance.collection("crawlingData").doc(value);
     final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await docref.get();
-    var valueDoc = documentSnapshot.data();
+    late  Map<String, dynamic>? valueDoc = documentSnapshot.data();
 
-    valueDoc?.forEach((key, value) {
-      valueData.add(value);
-    });
+    String? numberName = valueDoc?.keys.first.split("_")[0];
+    for(int i = 1; i < valueDoc!.length; i++){
+      listOrder.add("${numberName}_${i.toString().trim()}");
+    }
+
+    for (String element in listOrder) {
+      valueDoc?.forEach((key, value) {
+        if(element == key){
+          valueData.add(value);
+        }
+      });
+    }
 
     responseList = valueData;
     for ( var post in responseList){
