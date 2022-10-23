@@ -33,9 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
             const SizedBox(height: 200),
-            Image.asset('assets/images/app_logo.png',fit: BoxFit.cover,
-              height: size.height / 6.8,
+            Image.asset('assets/images/logo.png',fit: BoxFit.cover,
+              height: size.height / 9.8,
             ),
+              SizedBox(height: 15,),
+              const Text(
+                "내가 찾는 우리 동네의 공공소식",
+                style: TextStyle(fontSize: 20, color: AppColors.primary),
+              ),
             const SizedBox(height: 50),
               // const Text(
             //     "동네랑 로고",

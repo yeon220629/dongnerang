@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
-import 'noticepage.screen.dart';
+// import 'noticepage.screen.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -89,10 +90,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           child: Container(
               width: 500,
               height: 110,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-              ]),
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                  border: Border.all(color: Colors.black12, width: 1)), //테두리
+              // decoration: BoxDecoration(color: Colors.white, boxShadow: [
+              //   BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+              // ]),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
                 child: Column(
@@ -113,18 +117,19 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         children: [
                           Container(
                               padding: EdgeInsets.all(3),
-                              color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                              [_random.nextInt(9) * 100],
+                              color: Colors.blueAccent,
+                              // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                              // [_random.nextInt(9) * 100],
                               child: Text(
                                 '${post['center_name ']}',
-                                style: const TextStyle(fontSize: 13, color: Colors.black),
+                                style: const TextStyle(fontSize: 13, color: Colors.white),
                                 textDirection: TextDirection.ltr,
                               )
                           ),
-                          SizedBox(width: 10),
+                          SizedBox(width: 8),
                           Text(
                             '시작일 | ${post['registrationdate'].trim()}',
-                            style: const TextStyle(fontSize: 15, color: Colors.grey),
+                            style: const TextStyle(fontSize: 13, color: Colors.grey),
                             textDirection: TextDirection.ltr,
                           ),
                         ],
@@ -183,8 +188,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
             title: Container(
-                width: 40,
-                child: Image.asset("assets/images/app_logo.png"),
+                width: 50,
+                child: Image.asset("assets/images/logo.png"),
             ),
             // fit:BoxFit.cover,
             // height:20,
@@ -291,7 +296,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-                    child: Text("$label", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    child: Text("$label", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   )
                 ),
                 Expanded(
@@ -332,7 +337,7 @@ class CategoriesScroller extends StatelessWidget {
   const CategoriesScroller();
   @override
   Widget build(BuildContext context) {
-    final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 50;
+    final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 90;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
