@@ -37,6 +37,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String dropdownValue = '';
   int cuindex = 0;
+  int colorindex = 0;
 
 
   Future<void> getUserLocalData() async {
@@ -77,9 +78,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         }
       });
     }
-
     responseList = valueData;
+
     for ( var post in responseList){
+      if(post["center_name "].toString().contains("_")){
+        colorindex = 1;
+      }else{
+        colorindex = 0;
+      }
+
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${post["link"]}');
@@ -117,7 +124,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         children: [
                           Container(
                               padding: EdgeInsets.all(3),
-                              color: Colors.blueAccent,
+                              color: colorindex == 1
+                                  ? AppColors.primary
+                                  : AppColors.red,
                               // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
                               // [_random.nextInt(9) * 100],
                               child: Text(

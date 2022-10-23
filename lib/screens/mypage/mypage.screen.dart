@@ -5,6 +5,7 @@ import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
 import '../settingsPage.screen.dart';
@@ -28,6 +29,7 @@ class _mypageScreenState extends State<mypageScreen> {
   bool closeTapContainer = false;
   double topContainer = 0;
   List valueBox = [];
+  int colorindex = 0;
 
 
   Future<void> getPostsData(value) async {
@@ -44,6 +46,12 @@ class _mypageScreenState extends State<mypageScreen> {
     // print(responseList[0].length);
     for(int i = 0; i< responseList[0].length; i++){
       // print("$i 번호 : ${responseList[0][i]}");
+      // 문화재단 pri
+      if(responseList[0][i][1].toString().contains("_")){
+        colorindex = 1;
+      }else{
+        colorindex = 0;
+      }
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${responseList[0][i][0]}');
@@ -75,8 +83,9 @@ class _mypageScreenState extends State<mypageScreen> {
                       children: [
                         Container(
                             padding: EdgeInsets.all(3),
-                            color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                            [_random.nextInt(9) * 100],
+                            color: colorindex == 1
+                                ? AppColors.primary
+                                : AppColors.red,
                             child: Text(
                               '${responseList[0][i][1]}',
                               style: const TextStyle(fontSize: 13, color: Colors.black),
