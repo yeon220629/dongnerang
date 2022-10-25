@@ -345,7 +345,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   listItems = [];
                   List? item = fnChecklocal(value);
                   if(value == item?.first){
-                    getPostsData(item?.last);
+                    getPostsData("${item?.first}_전체");
+                    // getPostsData(item?.last);
                   }
                   setState(() {
                     dropdownValue = value;
