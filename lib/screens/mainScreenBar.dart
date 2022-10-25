@@ -36,12 +36,12 @@ class mainScreenState extends State<mainScreen> {
                   shrinkWrap: true,
                   children: [
                     BottomNavigationBar(
-                      showUnselectedLabels: true,
-                      showSelectedLabels: true,
+                      showSelectedLabels: false,
+                      showUnselectedLabels: false,
                       selectedItemColor: AppColors.primary,
                       unselectedItemColor: AppColors.grey,
-                      selectedLabelStyle: TextStyle(color : AppColors.primary),
-                      unselectedLabelStyle: TextStyle(color : AppColors.grey),
+                      // selectedLabelStyle: TextStyle(color : AppColors.primary),
+                      // unselectedLabelStyle: TextStyle(color : AppColors.grey),
                       // currentIndex: _selectedIndex,
                       items: [
                         BottomNavigationBarItem(
@@ -66,7 +66,7 @@ class mainScreenState extends State<mainScreen> {
                         ),
                         BottomNavigationBarItem(
                             icon: Icon(
-                              Icons.ac_unit,
+                              Icons.login_outlined,
                               color:
                                 navigationController.currentBottomMenuIndex.value == 2
                                   ? AppColors.primary

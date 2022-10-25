@@ -32,16 +32,16 @@ class _LoginScreenState extends State<LoginScreen> {
           width: Get.size.width,
           child: Column(
             children: [
-            const SizedBox(height: 200),
+            const SizedBox(height: 150),
             Image.asset('assets/images/logo.png',fit: BoxFit.cover,
-              height: size.height / 9.8,
+              height: size.height / 11.8,
             ),
               SizedBox(height: 15,),
               const Text(
                 "내가 찾는 우리 동네의 공공소식",
-                style: TextStyle(fontSize: 20, color: AppColors.primary),
+                style: TextStyle(fontSize: 15, color: AppColors.primary),
               ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 150),
               // const Text(
             //     "동네랑 로고",
             //     style: TextStyle(fontSize: 28, color: AppColors.primary),
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
              },
              icon: Image.asset('assets/images/kakao_login_large_wide.png'),iconSize: 300,
             ),
-            const SizedBox(height: 20),
+            // const SizedBox(height: 20),
           ]),
         ),
       )

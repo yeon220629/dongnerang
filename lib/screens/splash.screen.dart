@@ -55,13 +55,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   // SizedBox(height: 20),
-                  Image.asset("assets/images/logo.png", width: 150, height: 150,)
+                  Image.asset("assets/images/logo.png", width: 180, height: 180,)
                 ],
               ),
             ),
             const Text(
-              "동네랑",
-              style: TextStyle(fontSize: 20, color: AppColors.primary),
+              "yeon",
+              style: TextStyle(fontSize: 20, color: AppColors.grey),
             ),
             const SizedBox(height: 20),
           ]),

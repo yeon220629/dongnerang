@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/screens/introduce.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,7 +13,8 @@ import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
 // import 'noticepage.screen.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class freeComponent_viewpage extends StatefulWidget {
   const freeComponent_viewpage({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
-  final CategoriesScroller categoriesScroller = CategoriesScroller();
+  // final CategoriesScroller categoriesScroller = CategoriesScroller();
 
   List<String> LIST_MENU = [];
   final _random = Random();
@@ -111,7 +113,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   children: <Widget>[
                     Text(
                       '${post["title"]}',
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(fontSize: 15),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
                       maxLines: 2,
@@ -123,15 +125,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       child: Row(
                         children: [
                           Container(
-                              padding: EdgeInsets.all(3),
+                              // padding: EdgeInsets.all(3),
                               color: colorindex == 1
-                                  ? AppColors.primary
-                                  : AppColors.red,
+                                  ? AppColors.blue
+                                  : AppColors.green,
                               // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
                               // [_random.nextInt(9) * 100],
                               child: Text(
                                 '${post['center_name ']}',
-                                style: const TextStyle(fontSize: 13, color: Colors.white),
+                                style: const TextStyle(fontSize: 12, color: Colors.white),
                                 textDirection: TextDirection.ltr,
                               )
                           ),
@@ -194,6 +196,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            elevation: 0.0,
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
             title: Container(
@@ -240,6 +243,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             height: size.height,
             child: Column(
               children: <Widget>[
+                //배너
+                GestureDetector(
+
+                    // onTap: _launchUrl,
+                      // child: Text('Show Flutter homepage'),
+
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Introduce(),),);
+                    },
+                    // height: 200,
+                    // width: 200,
+                    child: Image.asset("assets/images/banner.png")),
                 BottomNavigationBar(
                     currentIndex: cuindex,
                     elevation: 1.0,
@@ -291,23 +308,43 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       ),
                     ]
                 ),
-                AnimatedOpacity(
-                  opacity: closeTapContainer ? 0:1,
-                  duration: const Duration(milliseconds: 200),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    width: size.width,
-                    alignment: Alignment.topCenter,
-                    height: closeTapContainer? 0 : categoryHeight - 80,
-                    child: categoriesScroller,),
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-                    child: Text("$label", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  )
-                ),
+                //정상
+                // CarouselSlider(
+                //   items: imgList
+                //       .map((item) => Container(
+                //     child: Center(
+                //       child: Image.network(
+                //         item,
+                //         fit: BoxFit.cover,
+                //         // width: 100,
+                //       ),
+                //     ),
+                //   ))
+                //       .toList(),
+                //   options: CarouselOptions(
+                //     autoPlay: true,
+                //     aspectRatio: 2.0,
+                //     enlargeCenterPage: true,
+                //   ),
+                // ),
+                // AnimatedOpacity(
+                //   opacity: closeTapContainer ? 0:1,
+                //   duration: const Duration(milliseconds: 200),
+                //   child: AnimatedContainer(
+                //     duration: const Duration(milliseconds: 200),
+                //     width: size.width,
+                //     alignment: Alignment.topCenter,
+                //     height: closeTapContainer? 0 : categoryHeight - 80,
+                //     child: categoriesScroller,),
+                // ),
+                // Container(
+                //   alignment: Alignment.centerLeft,
+                //   child: Padding(
+                //     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+                //     child: Text("$label", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                //   )
+                // ),
+                //정상
                 Expanded(
                   child: ListView.builder(
                     itemCount: itemsData.length,
@@ -342,34 +379,72 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 }
 
-class CategoriesScroller extends StatelessWidget {
-  const CategoriesScroller();
-  @override
-  Widget build(BuildContext context) {
-    final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 90;
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          alignment: Alignment.topCenter,
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: 375,
-                margin: const EdgeInsets.only(right: 20),
-                height: categoryHeight - 50,
-                // decoration: BoxDecoration(color: Colors.blueAccent.shade100),
-                child:Center(
-                          child: Image.asset("assets/images/banner.png")
-                      ),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+
+// final Uri _url = Uri.parse('https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d');
+// final List<String> imgList = [
+//   'https://cdn.pixabay.com/photo/2020/08/09/11/31/business-5475283_1280.jpg',
+//   'https://cdn.pixabay.com/photo/2016/04/05/07/08/money-1308823_1280.jpg',
+// ];
+
+// class CategoriesScroller extends StatelessWidget {
+//   const CategoriesScroller();
+//   @override
+//   Widget build(BuildContext context) {
+//     // final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 90;
+//     return
+      // SingleChildScrollView(
+      // physics: const BouncingScrollPhysics(),
+      // scrollDirection: Axis.horizontal,
+      // child: Container(
+      //   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      //   child: FittedBox(
+      //     fit: BoxFit.fill,
+      //     alignment: Alignment.topCenter,
+      //     child: Row(
+      //       children: <Widget>[
+      //         Container(
+      //           color: Color(0xFFEDF0F4),
+      //           width: 375,
+      //           margin: const EdgeInsets.only(right: 20),
+      //           height: categoryHeight - 10,
+      //           // decoration: BoxDecoration(color: Colors.blueAccent.shade100),
+      //           child:
+      //           CarouselSlider(
+      //             options: CarouselOptions(height: 400.0),
+      //             items: [1,2,3,4,5].map((i) {
+      //               return Builder(
+      //                 builder: (BuildContext context) {
+      //                   return Container(
+      //                       width: MediaQuery.of(context).size.width,
+      //                       margin: EdgeInsets.symmetric(horizontal: 5.0),
+      //                       decoration: BoxDecoration(
+      //                           color: Colors.amber
+      //                       ),
+      //                       child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+      //                   );
+      //                 },
+      //               );
+      //             }).toList(),
+      //           GestureDetector(
+                          // child: Image.asset("assets/images/banner.png"),
+      //                       onTap: _launchUrl,
+      //                       final url = Uri.parse(
+      //                       'https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d',
+      //                       );
+      //                       if (await canLaunchUrl(url)) {
+      //                       launchUrl(url);
+      //                       } else {
+      //                       // ignore: avoid_print
+      //                       print("Can't launch $url");
+      //                       }
+      //                       },
+      //                 ),
+      //           ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+

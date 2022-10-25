@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'dart:core';
+import 'dart:async';
+import 'package:url_launcher/url_launcher.dart';
 
 class Inquire extends StatelessWidget {
   const Inquire({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class Inquire extends StatelessWidget {
             ),
             SizedBox(height: 30.0,),
         OutlinedButton.icon(
-          onPressed: (){}, // null값을 주면 비활성화 된다.
+            onPressed: UrlLauncher().email,
           icon: Icon(Icons.question_mark_outlined),
           label: Text('문의하기'),
           style: TextButton.styleFrom(
@@ -40,3 +42,33 @@ class Inquire extends StatelessWidget {
     );
   }
 }
+
+
+class UrlLauncher {
+  final Uri EMAIL = Uri(
+      scheme: 'mailto',
+      path: 'yeon220629@naver.com',
+      queryParameters: {'subject': '문의 드립니다', 'body': '개발자님 안녕하세요?'});
+
+  Future<void> launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> email() async {
+    if (await canLaunch(EMAIL.toString())) {
+      await launch(EMAIL.toString());
+    } else {
+      throw 'error email';
+    }
+  }
+}
+
+// Future<void> _launchUrl() async {
+//   if (!await launchUrl(_url)) {
+//     throw 'Could not launch $_url';
+//   }
+// }

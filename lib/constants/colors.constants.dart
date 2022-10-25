@@ -10,7 +10,9 @@ class AppColors {
   static const hintText = Color(0xffbcbcbc);
   static const hintBorder = Color(0xffebebeb);
   static final skyBlue = const Color(0xffC2E5FF).withOpacity(0.8);
-  static const primaryDark = Color(0xff78B2E5);
+  static const green = Color(0xff3CC181);
+  static const blue = Color(0xff4C69D1);
+
 }
 
 class MarkerColors {
