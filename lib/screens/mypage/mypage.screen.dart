@@ -168,7 +168,10 @@ class _mypageScreenState extends State<mypageScreen> {
           children: <Widget>[
             Row(
               children: [
-                UserProfileCircleImage(imageUrl: profileImage,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                  child: UserProfileCircleImage(imageUrl: profileImage,size: size.height / 9,),
+                ),
                 Column(
                   children: [
                     Padding(

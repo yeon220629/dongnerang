@@ -300,6 +300,19 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         CustomData.remove(value[i]);
       }
     });
+
+    mypageUserSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
+    mypageUserSaveData.then((value){
+      setState(() {
+        value[0]?.forEach((element) {
+          if(element.toString().contains('https')){
+            profileImage = element.toString();
+          }else{
+            userName = element.toString();
+          }
+        });
+      });
+    });
     // getPostsData(null);
     controllers.addListener(() {
 

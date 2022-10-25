@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
@@ -17,6 +19,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
     Get.put(PrivateSettingController());
     List keyword = [];
     List local = [];
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -77,6 +80,15 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                     Center(
                       child: Stack(
                         children: [
+                          Container(
+                            child : mypageProfileSetting(),
+                            height: size.height / 4,
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(
+                            //     width: 1
+                            //   )
+                            // ),
+                          ),
                           mypageKeywordStateful(callback: (value) {
                             // print(value);
                             keyword.add(value);
@@ -283,3 +295,138 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
     );
   }
 }
+
+class mypageProfileSetting extends StatefulWidget {
+  const mypageProfileSetting({Key? key}) : super(key: key);
+
+  @override
+  State<mypageProfileSetting> createState() => _mypageProfileSettingState();
+}
+
+class _mypageProfileSettingState extends State<mypageProfileSetting> {
+  XFile? _imageFile; // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
+  final ImagePicker _picker = ImagePicker(); // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 0),
+        child: ListView(
+          children: <Widget>[
+            imageProfile(),
+            Text("닉네임", style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(height: 5),
+            nameTextField(),
+          ],
+        )
+    );
+  }
+
+  Widget imageProfile() {
+    return Center(
+      child: Stack(
+        children: <Widget>[
+          ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: _imageFile == null
+              // ? Image.asset("assets/images/default-profile.png")
+                  ? CachedNetworkImage(imageUrl: profileImage!)
+                  : CachedNetworkImage(imageUrl: profileImage!)
+          ),
+          Positioned(
+              bottom: 20,
+              right: 20,
+              child: InkWell(
+                onTap: () {
+                  // 클릭시 모달 팝업을 띄워준다.
+                  showModalBottomSheet(context: context, builder: ((builder) => bottomSheet()));
+                },
+                child: Icon(
+                  Icons.camera_alt,
+                  color: AppColors.black,
+                  size: 40,
+                ),
+              )
+          )
+        ],
+      ),
+    );
+  }
+
+  // 카메라 아이콘 클릭시 띄울 모달 팝업
+  Widget bottomSheet() {
+    return Container(
+        height: 100,
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 20
+        ),
+        child: Column(
+          children: <Widget>[
+            Text(
+              'Choose Profile photo',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(height: 20,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                TextButton.icon(
+                  icon: Icon(Icons.photo_library, size: 50,),
+                  onPressed: () {
+                    takePhoto(ImageSource.gallery);
+                  },
+                  label: Text('Gallery', style: TextStyle(fontSize: 20),),
+                )
+              ],
+            )
+          ],
+        )
+    );
+  }
+
+  Widget nameTextField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: AppColors.black,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: AppColors.black,
+              width: 2,
+            ),
+          ),
+          prefixIcon: Icon(
+            Icons.person,
+            color: AppColors.black,
+          ),
+          labelText: '${userName}',
+          hintText: '${userName}'
+      ),
+      // onSaved: ,
+      onChanged: (value){
+        setState(() {
+          userUpdageName = value;
+        });
+      },
+    );
+  }
+
+  takePhoto(ImageSource source) async {
+    print("source : ${source}");
+    final pickedFile = await _picker.pickImage(source: source);
+    print("pickedFile : $pickedFile");
+    setState(() {
+      _imageFile = pickedFile;
+      print("_imageFile : $_imageFile");
+    });
+  }
+}
+

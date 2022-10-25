@@ -66,7 +66,9 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                         CustomKeyword = [];
                         EasyLoading.showSuccess("개인설정 추가 완료");
                         await FirebaseService.getCurrentUser();
-                        Get.off(() => mainScreen());
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                mainScreen()), (route) => false);
                       } catch (e) {
                         logger.e(e);
                         EasyLoading.showSuccess("개인설정 추가 실패");

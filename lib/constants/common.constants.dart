@@ -1,6 +1,7 @@
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../screens/mainScreenBar.dart';
@@ -129,9 +130,16 @@ InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
 late PullToRefreshController pullToRefreshController = PullToRefreshController();
 final urlController = TextEditingController();
 
+// 개인설정 공통값
 List CustomKeyword = [];
 List mypageCustomKeyword = [];
 List mypageCustomlocal = [];
+String? profileImage = '';
+String? userName = '';
+late Future<List> mypageUserSaveData;
+String? userUpdageName;
+List userUpdateData = [];
+
 
 final List CustomData = [
   "강남", "강동", "강북","강서","관악",

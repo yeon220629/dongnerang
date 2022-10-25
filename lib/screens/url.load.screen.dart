@@ -82,7 +82,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
       leading: IconButton(
         icon: Icon(Icons.arrow_back, color: Colors.black),
         //페이지 리로드
-
         onPressed: (){
           // 메인 페이지
           if(widget.i == 0){
