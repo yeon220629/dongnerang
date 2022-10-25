@@ -27,7 +27,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('개인설정', style: TextStyle(
+                Text('프로필 수정', style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.5,
                     color: Colors.black)),
@@ -128,7 +128,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
     final double categoryHeight = size.height * 0.30;
 
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 3.9),
+        padding: EdgeInsets.symmetric(vertical: size.height / 3.7),
         child: Column(
           children: [
             Row(
@@ -307,7 +307,6 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
   XFile? _imageFile; // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
   final ImagePicker _picker = ImagePicker(); // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -356,6 +355,7 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
 
   // 카메라 아이콘 클릭시 띄울 모달 팝업
   Widget bottomSheet() {
+    final Size size = MediaQuery.of(context).size;
     return Container(
         height: 100,
         width: MediaQuery.of(context).size.width,
@@ -365,24 +365,30 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
         ),
         child: Column(
           children: <Widget>[
-            Text(
-              'Choose Profile photo',
-              style: TextStyle(
-                fontSize: 20,
+            Container(
+              child: TextButton.icon(
+                icon: Icon(null),
+                onPressed: () {
+                  takePhoto(ImageSource.gallery);
+                },
+                label: Text('앨범에서 선택', style: TextStyle(fontSize: 20),),
               ),
             ),
-            SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                TextButton.icon(
-                  icon: Icon(Icons.photo_library, size: 50,),
-                  onPressed: () {
-                    takePhoto(ImageSource.gallery);
-                  },
-                  label: Text('Gallery', style: TextStyle(fontSize: 20),),
-                )
-              ],
+            Container(
+              width: size.width,
+              height: 2,
+              color: AppColors.black,
+            ),
+            Container(
+              child: TextButton.icon(
+                icon: Icon(null),
+                onPressed: () {
+                  takePhoto(ImageSource.gallery);
+                },
+                label: Text('프로필 사진 삭재', style: TextStyle(
+                    fontSize: 20, color: AppColors.red
+                ),),
+              ),
             )
           ],
         )
@@ -403,10 +409,7 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
               width: 2,
             ),
           ),
-          prefixIcon: Icon(
-            Icons.person,
-            color: AppColors.black,
-          ),
+
           labelText: '${userName}',
           hintText: '${userName}'
       ),
@@ -422,11 +425,10 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
   takePhoto(ImageSource source) async {
     print("source : ${source}");
     final pickedFile = await _picker.pickImage(source: source);
-    print("pickedFile : $pickedFile");
+    print("pickedFile : ${pickedFile?.path.toString()}");
     setState(() {
       _imageFile = pickedFile;
       print("_imageFile : $_imageFile");
     });
   }
 }
-

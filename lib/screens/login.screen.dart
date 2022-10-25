@@ -30,30 +30,28 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SizedBox(
           height: Get.size.height,
           width: Get.size.width,
-          child: Column(
-            children: [
-            const SizedBox(height: 150),
-            Image.asset('assets/images/logo.png',fit: BoxFit.cover,
-              height: size.height / 11.8,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: Column(
+                children: [
+                  SizedBox(height: size.height / 4,),
+                  Image.asset('assets/images/logo.png',fit: BoxFit.cover,
+                    height: size.height / 11.8,
+                  ),
+                  SizedBox(height: 15,),
+                  const Text(
+                    "내가 찾는 우리 동네의 공공소식",
+                    style: TextStyle(fontSize: 15, color: AppColors.primary),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      await viewModel.login();
+                    },
+                    icon: Image.asset('assets/images/kakao_login_large_wide.png'),iconSize: 300,
+                  ),
+                  // const SizedBox(height: 20),
+                ]),
             ),
-              SizedBox(height: 15,),
-              const Text(
-                "내가 찾는 우리 동네의 공공소식",
-                style: TextStyle(fontSize: 15, color: AppColors.primary),
-              ),
-            const SizedBox(height: 150),
-              // const Text(
-            //     "동네랑 로고",
-            //     style: TextStyle(fontSize: 28, color: AppColors.primary),
-            //   ),
-           IconButton(
-             onPressed: () async {
-               await viewModel.login();
-             },
-             icon: Image.asset('assets/images/kakao_login_large_wide.png'),iconSize: 300,
-            ),
-            // const SizedBox(height: 20),
-          ]),
         ),
       )
     );
