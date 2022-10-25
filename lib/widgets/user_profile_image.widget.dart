@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class UserProfileCircleImage extends StatelessWidget {
   const UserProfileCircleImage(
-      {Key? key, required this.imageUrl, this.size = 75})
+      {Key? key, required this.imageUrl, this.size})
       : super(key: key);
 
   final String? imageUrl;

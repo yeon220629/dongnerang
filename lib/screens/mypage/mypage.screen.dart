@@ -184,7 +184,6 @@ class _mypageScreenState extends State<mypageScreen> {
                               mypageCustomKeyword = [];
                               Navigator.push(context, MaterialPageRoute(
                                   builder: (_) => mypageInformSettingScreen()));
-                              // mypageCustomKeyword
                               FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value){
                                 int ListData = value.length;
                                 for(int i = 0; i < ListData; i++){

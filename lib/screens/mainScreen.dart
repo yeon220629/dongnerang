@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
@@ -230,9 +229,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                     border: Border.all(color: Colors.black12, width: 1)), //테두리
-                // decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                //   BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-                // ]),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
                   child: Column(
@@ -298,6 +294,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         }
     );
     getUserLocalData();
+    FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
+      int ListData = value.length;
+      for(int i = 0; i < ListData; i++){
+        CustomData.remove(value[i]);
+      }
+    });
     // getPostsData(null);
     controllers.addListener(() {
 
@@ -493,73 +495,4 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     );
   }
 }
-
-
-// final Uri _url = Uri.parse('https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d');
-// final List<String> imgList = [
-//   'https://cdn.pixabay.com/photo/2020/08/09/11/31/business-5475283_1280.jpg',
-//   'https://cdn.pixabay.com/photo/2016/04/05/07/08/money-1308823_1280.jpg',
-// ];
-
-// class CategoriesScroller extends StatelessWidget {
-//   const CategoriesScroller();
-//   @override
-//   Widget build(BuildContext context) {
-//     // final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 90;
-//     return
-      // SingleChildScrollView(
-      // physics: const BouncingScrollPhysics(),
-      // scrollDirection: Axis.horizontal,
-      // child: Container(
-      //   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      //   child: FittedBox(
-      //     fit: BoxFit.fill,
-      //     alignment: Alignment.topCenter,
-      //     child: Row(
-      //       children: <Widget>[
-      //         Container(
-      //           color: Color(0xFFEDF0F4),
-      //           width: 375,
-      //           margin: const EdgeInsets.only(right: 20),
-      //           height: categoryHeight - 10,
-      //           // decoration: BoxDecoration(color: Colors.blueAccent.shade100),
-      //           child:
-      //           CarouselSlider(
-      //             options: CarouselOptions(height: 400.0),
-      //             items: [1,2,3,4,5].map((i) {
-      //               return Builder(
-      //                 builder: (BuildContext context) {
-      //                   return Container(
-      //                       width: MediaQuery.of(context).size.width,
-      //                       margin: EdgeInsets.symmetric(horizontal: 5.0),
-      //                       decoration: BoxDecoration(
-      //                           color: Colors.amber
-      //                       ),
-      //                       child: Text('text $i', style: TextStyle(fontSize: 16.0),)
-      //                   );
-      //                 },
-      //               );
-      //             }).toList(),
-      //           GestureDetector(
-                          // child: Image.asset("assets/images/banner.png"),
-      //                       onTap: _launchUrl,
-      //                       final url = Uri.parse(
-      //                       'https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d',
-      //                       );
-      //                       if (await canLaunchUrl(url)) {
-      //                       launchUrl(url);
-      //                       } else {
-      //                       // ignore: avoid_print
-      //                       print("Can't launch $url");
-      //                       }
-      //                       },
-      //                 ),
-      //           ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 

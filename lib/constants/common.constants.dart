@@ -131,13 +131,14 @@ final urlController = TextEditingController();
 
 List CustomKeyword = [];
 List mypageCustomKeyword = [];
+List mypageCustomlocal = [];
 
 final List CustomData = [
   "강남", "강동", "강북","강서","관악",
-  "광진", "금천", "노원","도봉",
-  "동대문","동작", "마포","서초",
-  "성동", "성북", "송파", "양천", "영등포",
-  "용산", "은평", "종로", "중구", "중랑"
+  "광진", "금천", "노원","도봉","중구",
+  "동작", "마포","서초","중랑","종로",
+  "성동", "성북","송파", "양천",
+  "용산", "은평","동대문","영등포",
 ];
 
 final List mostPopularKeyword = [
