@@ -21,7 +21,6 @@ class fnCommnAppbar extends StatelessWidget implements PreferredSizeWidget {
     required this.email,
     required this.ListData,
     required this.keyName,
-
   });
 
   final AppBar appBar;
@@ -51,7 +50,6 @@ class fnCommnAppbar extends StatelessWidget implements PreferredSizeWidget {
       ],
     );
   }
-
   @override
   Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
 }
@@ -131,15 +129,13 @@ InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
 late PullToRefreshController pullToRefreshController = PullToRefreshController();
 final urlController = TextEditingController();
 
-final List CustomKeyword = [
-  "언어","예술","건강관리","마케팅","SNS","서포터즈",
-  "탐사","+추가"
-];
+List CustomKeyword = [];
+List mypageCustomKeyword = [];
 
 final List CustomData = [
   "강남", "강동", "강북","강서","관악",
   "광진", "금천", "노원","도봉",
-  "동대문","동작", "마포", "서대문","서초",
+  "동대문","동작", "마포","서초",
   "성동", "성북", "송파", "양천", "영등포",
   "용산", "은평", "종로", "중구", "중랑"
 ];
@@ -201,6 +197,8 @@ List? fnChecklocal(String local){
     return ['중구', 'JUNGGU'];
   }else if(local == '중랑'){
     return ['중랑', 'JUNGNANG'];
+  }else if(local == '서울'){
+    return ['서울', 'SEOUL'];
   }
 }
 
@@ -216,3 +214,19 @@ class Arguments {
     {this.arg: '', required this.returnValue}
   );
 }
+
+List dropdownYear = [
+  "2022","2021","2020","2019","2018","2017","2016",
+  "2015","2014","2013","2012","2011","2010","2009",
+  "2008","2007","2006","2005","2004","2003","2002",
+  "2001","2000","1999","1998","1997","1996","1995",
+  "1994","1993","1992","1991","1990","1989","1988",
+  "1987","1986","1985","1984","1983","1982","1981",
+  "1980","1979","1978","1977","1976","1975","1979",
+];
+List dropdownMonth = ["1","2","3","4","5","6","7","8","9","10","11","12"];
+List dropdownDay = ['1','2','3','4','5','6','7','8','9','10','11','12','13',
+            '14','15','16','17','18','19','20','21','22','23','24','25','26',
+            '27','28','29','30','31'
+            ];
+List centerCheck = ['전체', '문화재단', '구청'];

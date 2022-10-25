@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/introduce.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,9 +11,7 @@ import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
-// import 'noticepage.screen.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'introduce.dart';
 
 class freeComponent_viewpage extends StatefulWidget {
   const freeComponent_viewpage({Key? key}) : super(key: key);
@@ -27,7 +24,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   // final CategoriesScroller categoriesScroller = CategoriesScroller();
 
   List<String> LIST_MENU = [];
-  final _random = Random();
   bool closeTapContainer = false;
   double topContainer = 0;
   List<Widget> itemsData = [];
@@ -40,7 +36,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   String dropdownValue = '';
   int cuindex = 0;
   int colorindex = 0;
-
+  String? defaultCenter = '전체';
+  String? centerName = '';
 
   Future<void> getUserLocalData() async {
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
@@ -59,6 +56,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
+    print(value);
+    if(value.toString().contains("_")){
+      centerName = value.toString().split("_")[1];
+      value = fnChecklocal(value.toString().split("_")[0])?.last;
+    }
+
     listOrder = [];
     listItems = [];
     List<dynamic> valueData = [];
@@ -83,74 +86,199 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     responseList = valueData;
 
     for ( var post in responseList){
-      if(post["center_name "].toString().contains("_")){
+      if(post["center_name "].toString().contains("구청")){
         colorindex = 1;
       }else{
         colorindex = 0;
       }
-
-      listItems.add( GestureDetector(
-          onTap: () async{
-            final Uri url = Uri.parse('${post["link"]}');
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                url, post["title"], post['center_name '], post['registrationdate'], 0
-            )));
-          },
-          child: Container(
-              width: 500,
-              height: 110,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), //모서리를 둥글게
-                  border: Border.all(color: Colors.black12, width: 1)), //테두리
-              // decoration: BoxDecoration(color: Colors.white, boxShadow: [
-              //   BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-              // ]),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '${post["title"]}',
-                      style: const TextStyle(fontSize: 15),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.justify,
-                      maxLines: 2,
+      if(centerName == '구청'){
+        if(post["center_name "].toString().contains("구청")){
+          listItems.add( GestureDetector(
+              onTap: () async{
+                final Uri url = Uri.parse('${post["link"]}');
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
+                    url, post["title"], post['center_name '], post['registrationdate'], 0
+                )));
+              },
+              child: Container(
+                  width: 500,
+                  height: 110,
+                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                      border: Border.all(color: Colors.black12, width: 1)), //테두리
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '${post["title"]}',
+                          style: const TextStyle(fontSize: 15),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Expanded(
+                            child: Row(
+                              children: [
+                                Container(
+                                    // padding: EdgeInsets.all(3),
+                                    color: colorindex == 1
+                                        ? AppColors.blue
+                                        : AppColors.green,
+                                    // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                                    // [_random.nextInt(9) * 100],
+                                    child: Text(
+                                      '${post['center_name ']}',
+                                      style: const TextStyle(fontSize: 12, color: Colors.white),
+                                      textDirection: TextDirection.ltr,
+                                    )
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  '시작일 | ${post['registrationdate'].trim()}',
+                                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                                  textDirection: TextDirection.ltr,
+                                ),
+                              ],
+                            )
+                        )
+                      ],
                     ),
-                    const SizedBox(
-                      height: 15,
+                  )
+              ))
+          );
+        }
+      }else if(centerName == '문화재단'){
+        if(post["center_name "].toString().contains("문화재단")){
+          listItems.add( GestureDetector(
+              onTap: () async{
+                final Uri url = Uri.parse('${post["link"]}');
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
+                    url, post["title"], post['center_name '], post['registrationdate'], 0
+                )));
+              },
+              child: Container(
+                  width: 500,
+                  height: 110,
+                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                      border: Border.all(color: Colors.black12, width: 1)), //테두리
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '${post["title"]}',
+                          style: const TextStyle(fontSize: 15),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Expanded(
+                            child: Row(
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.all(3),
+                                    color: colorindex == 1
+                                        ? AppColors.blue
+                                        : AppColors.green,
+                                    // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                                    // [_random.nextInt(9) * 100],
+                                    child: Text(
+                                      '${post['center_name ']}',
+                                      style: const TextStyle(fontSize: 13, color: Colors.white),
+                                      textDirection: TextDirection.ltr,
+                                    )
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  '시작일 | ${post['registrationdate'].trim()}',
+                                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                                  textDirection: TextDirection.ltr,
+                                ),
+                              ],
+                            )
+                        )
+                      ],
                     ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Container(
-                              // padding: EdgeInsets.all(3),
-                              color: colorindex == 1
-                                  ? AppColors.blue
-                                  : AppColors.green,
-                              // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                              // [_random.nextInt(9) * 100],
-                              child: Text(
-                                '${post['center_name ']}',
-                                style: const TextStyle(fontSize: 12, color: Colors.white),
+                  )
+              ))
+          );
+        }
+      }else{
+        listItems.add( GestureDetector(
+            onTap: () async{
+              final Uri url = Uri.parse('${post["link"]}');
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
+                  url, post["title"], post['center_name '], post['registrationdate'], 0
+              )));
+            },
+            child: Container(
+                width: 500,
+                height: 110,
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                    border: Border.all(color: Colors.black12, width: 1)), //테두리
+                // decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                //   BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+                // ]),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '${post["title"]}',
+                        style: const TextStyle(fontSize: 15),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                        maxLines: 2,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Expanded(
+                          child: Row(
+                            children: [
+                              Container(
+                                  padding: EdgeInsets.all(3),
+                                  color: colorindex == 1
+                                      ? AppColors.blue
+                                      : AppColors.green,
+                                  // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                                  // [_random.nextInt(9) * 100],
+                                  child: Text(
+                                    '${post['center_name ']}',
+                                    style: const TextStyle(fontSize: 13, color: Colors.white),
+                                    textDirection: TextDirection.ltr,
+                                  )
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                '시작일 | ${post['registrationdate'].trim()}',
+                                style: const TextStyle(fontSize: 13, color: Colors.grey),
                                 textDirection: TextDirection.ltr,
-                              )
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            '시작일 | ${post['registrationdate'].trim()}',
-                            style: const TextStyle(fontSize: 13, color: Colors.grey),
-                            textDirection: TextDirection.ltr,
-                          ),
-                        ],
+                              ),
+                            ],
+                          )
                       )
-                    )
-                  ],
-                ),
-              )
-          ))
-      );
+                    ],
+                  ),
+                )
+            ))
+        );
+      }
     }
     setState(() {
       itemsData = listItems;
@@ -196,7 +324,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            elevation: 0.0,
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
             title: Container(
@@ -222,6 +349,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   }
                   setState(() {
                     dropdownValue = value;
+                    defaultCenter = "전체";
                   });
                 },
               ),
@@ -245,14 +373,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               children: <Widget>[
                 //배너
                 GestureDetector(
-
                     // onTap: _launchUrl,
                       // child: Text('Show Flutter homepage'),
-
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Introduce(),),);
+                        MaterialPageRoute(builder: (context) => introduceWidget(),),);
                     },
                     // height: 200,
                     // width: 200,
@@ -282,10 +408,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         }
                         else if(value == 1){
                           label = "서울시 소식";
-                          getPostsData("SEOUL");
+                          getPostsData('서울_전체');
                           setState(() {});
-                        }else {
-                          label = "전체 소식";
                         }
                       });
                     },
@@ -308,43 +432,32 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       ),
                     ]
                 ),
-                //정상
-                // CarouselSlider(
-                //   items: imgList
-                //       .map((item) => Container(
-                //     child: Center(
-                //       child: Image.network(
-                //         item,
-                //         fit: BoxFit.cover,
-                //         // width: 100,
-                //       ),
-                //     ),
-                //   ))
-                //       .toList(),
-                //   options: CarouselOptions(
-                //     autoPlay: true,
-                //     aspectRatio: 2.0,
-                //     enlargeCenterPage: true,
-                //   ),
-                // ),
-                // AnimatedOpacity(
-                //   opacity: closeTapContainer ? 0:1,
-                //   duration: const Duration(milliseconds: 200),
-                //   child: AnimatedContainer(
-                //     duration: const Duration(milliseconds: 200),
-                //     width: size.width,
-                //     alignment: Alignment.topCenter,
-                //     height: closeTapContainer? 0 : categoryHeight - 80,
-                //     child: categoriesScroller,),
-                // ),
-                // Container(
-                //   alignment: Alignment.centerLeft,
-                //   child: Padding(
-                //     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-                //     child: Text("$label", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                //   )
-                // ),
-                //정상
+                cuindex == 0
+                    ? DropdownButton(
+                    value: defaultCenter,
+                    items: centerCheck.map( (value) {
+                      if(value == "전체"){
+                        return DropdownMenuItem (
+                          value: value, child: Text(value),
+                        );
+                      }else{
+                        return DropdownMenuItem (
+                          value: value, child: Text("${dropdownValue+value}"),
+                          // value: value, child: Text(value),
+                        );
+                      }
+                    },
+                    ).toList(),
+                    onChanged: (value){
+                      setState(() {
+                        listItems = [];
+                        defaultCenter = value as String?;
+                        getPostsData(dropdownValue+"_"+defaultCenter!);
+                      }
+                      );
+                    }
+                )
+                : SizedBox(),
                 Expanded(
                   child: ListView.builder(
                     itemCount: itemsData.length,

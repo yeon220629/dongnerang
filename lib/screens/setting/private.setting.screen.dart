@@ -8,6 +8,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 
+import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../controller/private.setting.controller.dart';
 import '../../services/firebase.service.dart';
@@ -16,9 +17,11 @@ import '../../util/logger.service.dart';
 import '../mainScreenBar.dart';
 
 class privateSettingScreen extends GetView<PrivateSettingController> {
-  double ages = 0;
+  late birthDay ages;
   List keyword = [];
   List local = [];
+  String gender = '';
+
   // 키워드 및 지역 변경 할 사항
   var selected_tags = [];
   var select_tags = [];
@@ -30,7 +33,9 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
 
   @override
   Widget build(BuildContext context) {
+
     Get.put(PrivateSettingController());
+    final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,20 +51,19 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
-                    // print("age : ${ages.round().toString()}");
-                    // print("keyword : ${keyword[0]}");
-                    // print("local : ${local[0]}");
+                    print("keyword : ${keyword}");
                     if (controller.formKey.currentState!.validate()) {
                       try {
-                        print("test");
                         await FirebaseFirestore.instance
                             .collection("users")
                             .doc(UserService.to.currentUser.value!.email)
                             .update(({
-                          "age": ages.round().toString(),
+                          "age": ages.toJson(),
                           "keyword": keyword[0],
                           "local": local[0],
+                          "gender" : gender,
                         }));
+                        CustomKeyword = [];
                         EasyLoading.showSuccess("개인설정 추가 완료");
                         await FirebaseService.getCurrentUser();
                         Get.off(() => mainScreen());
@@ -86,14 +90,34 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
         child: Form(
           key: controller.formKey,
           child: ListView(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
             children: [
               Center(
                 child: Stack(
                   children: [
-                    // AgeStatefulWidget(callback: (value) {
-                    //   ageValue = value;
-                    // }),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: size.height / 220),
+                          child : Container(
+                            alignment: Alignment.centerLeft,
+                            child:Text("생년월일", style: TextStyle(fontWeight: FontWeight.bold),),
+                          )
+                        ),
+                        SizedBox(height: 5,),
+                        AgeStatefulWidget(callback: (value) {
+                          ageValue = value;
+                        }),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("*연령대에 맞는 공공사업을 추천할때 사용됩니다.", style: TextStyle(fontWeight: FontWeight.normal),),
+                        )
+                      ],
+                    ),
+                    genderChoiceWidget(callback: (value){
+                      print(value);
+                      gender = value;
+                    }),
                     KeywordStateful(callback: (value) {
                       keyword.add(value);
                     }),
@@ -113,19 +137,6 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
   }
 }
 
-class KeywordStatefulWidget extends StatefulWidget {
-  const KeywordStatefulWidget({Key? key}) : super(key: key);
-
-  @override
-  State<KeywordStatefulWidget> createState() => _KeywordStatefulWidgetState();
-}
-
-class _KeywordStatefulWidgetState extends State<KeywordStatefulWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 class KeywordStateful extends StatefulWidget {
   late final Function callback;
   KeywordStateful({required this.callback});
@@ -133,39 +144,96 @@ class KeywordStateful extends StatefulWidget {
   @override
   State<KeywordStateful> createState() => _KeywordStatefulState();
 }
-
 class _KeywordStatefulState extends State<KeywordStateful> {
+  final myController = TextEditingController();
   List tags = [];
   List selected_tags = [];
   List select_tags = [];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
+    final Size size = MediaQuery.of(context).size;
+    final double categoryHeight = size.height * 0.30;
+
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: size.height / 3.9),
+        child: Column(
           children: [
             Row(
               children: [
                 Text("키워드", style: TextStyle(fontWeight: FontWeight.bold),),
               ],
             ),
+            SizedBox(height: 5,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Wrap( spacing: 4.0, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomKeyword)], ),
+              child: FittedBox(
+                fit: BoxFit.fill,
+                alignment: Alignment.topCenter,
+                child: Column(
+                  children: [
+                    Container(
+                      width: size.width,
+                      child: TextFormField(
+                        controller: myController,
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.search),
+                            onPressed: () {
+                              print("myController : ${myController.text}");
+                              select_tags.add(myController.text);
+                              setState(() {
+                                CustomKeyword.add(myController.text);
+                                widget.callback(select_tags);
+                              });
+                              myController.clear();
+                            },
+                          ),
+                          labelText: '관심키워드를 등록해주세요! ex)청년, 예술',
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          width: categoryHeight * 1.5,
+                          margin: const EdgeInsets.only(right: 5),
+                          height: categoryHeight - 170,
+                          child: Center(
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              padding: EdgeInsets.all(10),
+                              children: <Widget>[...generate_tags(CustomKeyword)],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ),
             ),
           ],
         )
     );
   }
+  //키워드 삭제 하는 부분으로 일단 보류
   generate_tags(value) {
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
     return FilterChip(
       selected: selected_tags.contains(name),
-      selectedColor: Colors.blue.shade800,
       disabledColor: Colors.blue.shade400,
-      labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      backgroundColor: AppColors.blue,
+      labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       label: Text("${name}"),
       onSelected: (value) {
         print("${value} : ${name}");
@@ -187,31 +255,6 @@ class _KeywordStatefulState extends State<KeywordStateful> {
   }
 }
 
-class _Chip extends StatelessWidget {
-  const _Chip({
-    required this.label,
-    required this.onDeleted,
-    required this.index,
-  });
-  final String label;
-  final ValueChanged<int> onDeleted;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Chip(
-      labelPadding: const EdgeInsets.only(left: 8.0),
-      label: Text(label),
-      deleteIcon: Icon(
-        Icons.close,
-        size: 18,
-      ),
-      onDeleted: () {
-        onDeleted(index);
-      },
-    );
-  }
-}
 class AgeStatefulWidget extends StatefulWidget {
   final Function callback;
   AgeStatefulWidget({required this.callback});
@@ -219,35 +262,72 @@ class AgeStatefulWidget extends StatefulWidget {
   State<AgeStatefulWidget> createState() => _AgeStatefulWidgetWidgetState();
 }
 class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
-  double _currentSliderValue = 0;
+  String? defaultYear = '2022';
+  String? defaultMonth = '1';
+  String? defaultDay = '1';
+  birthDay birth = new birthDay(year: '', month: '', day: '');
+
   @override
   Widget build(BuildContext context) {
+    widget.callback(birth);
+
     return Container(
-      child: Column(
-        children: [
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     Text("연령대", style: TextStyle(fontWeight: FontWeight.bold),),
-          //     Text("${_currentSliderValue.round().toString()}세"),
-          //   ],
-          // ),
-          // Container(
-          //   width: double.maxFinite,
-          //   child: CupertinoSlider(
-          //     min: 0,
-          //     max: 100,
-          //     value: _currentSliderValue,
-          //     onChanged: (value) {
-          //       setState(() {
-          //         _currentSliderValue = value;
-          //         widget.callback(_currentSliderValue);
-          //       });
-          //     },
-          //   ),
-          // )
-        ],
+      decoration: BoxDecoration(
+        border: Border.all(width: 0.5),
+        borderRadius: BorderRadius.circular(10)
       ),
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DropdownButton(
+                    value: defaultYear,
+                    items: dropdownYear.map( (value) {
+                        return DropdownMenuItem (
+                          value: value, child: Text(value),
+                        );
+                      },
+                    ).toList(),
+                    onChanged: (value){ setState(() {
+                      defaultYear = value as String?;
+                      birth.year = value!;
+                    });
+                    }
+                  ),
+                  DropdownButton( value: defaultMonth,
+                    items: dropdownMonth.map( (value) {
+                        return DropdownMenuItem (
+                          value: value, child: Text(value),
+                        );
+                      },
+                    ).toList(), onChanged: (value){ setState(() {
+                        defaultMonth = value as String?;
+                        birth.month = value!;
+                      });
+                    }
+                  ),
+                  DropdownButton( value: defaultDay,
+                    items: dropdownDay.map( (value) {
+                        return DropdownMenuItem (
+                          value: value, child: Text(value),
+                        );
+                      },
+                    ).toList(), onChanged: (value){
+                      setState(() {
+                        defaultDay = value as String?;
+                        birth.day = value!;
+                      });
+                    }
+                  )
+                ],
+              )
+            ],
+          )
+        )
+      )
     );
   }
 }
@@ -263,18 +343,19 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   List tags = [];
   List selected_tags = [];
   List select_tags = [];
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 5.5),
+        padding: EdgeInsets.symmetric(vertical: size.height / 2.4),
         child: Column(
           children: [
             Row(
               children: [
-                Text("지역 선택", style: TextStyle(fontWeight: FontWeight.bold),),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text("지역 선택", style: TextStyle(fontWeight: FontWeight.bold),),
+                )
               ],
             ),
             SizedBox(height: 5,),
@@ -300,7 +381,6 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
       labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       label: Text("${name}"),
       onSelected: (value) {
-        print(value);
         if (select_tags.length > 2) {
           value = false;
         }
@@ -316,5 +396,113 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
         });
       },
     );
+  }
+}
+
+class genderChoiceWidget extends StatefulWidget {
+  final Function callback;
+  genderChoiceWidget({required this.callback});
+  @override
+  State<genderChoiceWidget> createState() => _genderChoiceState();
+}
+
+class _genderChoiceState extends State<genderChoiceWidget> {
+  late List<bool> isClick;
+  bool man = false;
+  bool girl = false;
+  String gender = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    isClick = [man, girl];
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    final Size size = MediaQuery.of(context).size;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height / 6.6),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text("성별", style: TextStyle(fontWeight: FontWeight.bold),),
+            ],
+          ),
+          SizedBox(height: 5,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ToggleButtons(
+                borderRadius: BorderRadius.circular(10),
+                  fillColor: AppColors.blue,
+                  selectedColor: AppColors.white,
+                  focusColor: AppColors.white,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: size.width / 6.5),
+                        child: Text('남성', style: TextStyle(fontSize: 18, color: AppColors.black))
+                      ),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: size.width / 6.5),
+                        child: Text('여성', style: TextStyle(fontSize: 18,color: AppColors.black))),
+                    )
+                  ],
+                onPressed: toggleSelect,
+                isSelected: isClick,
+              )
+            ],
+          )
+        ],
+      )
+    );
+  }
+  void toggleSelect(value) {
+    print(value);
+    if (value == 0) {
+      man = true;
+      girl = false;
+      gender = '남성';
+      widget.callback(gender);
+    } if(value == 1) {
+      girl = true;
+      man = false;
+      gender = '여성';
+      widget.callback(gender);
+    }
+    setState(() {
+      isClick = [man, girl];
+    });
+  }
+}
+
+class birthDay {
+  String year = '';
+  String month = '';
+  String day = '';
+  birthDay(
+      {required this.year,
+        required this.month,
+        required this.day,
+        });
+  birthDay.fromJson(Map<String, dynamic> json) {
+    year = json['year'];
+    month = json['month'];
+    day = json['day'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['year'] = this.year;
+    data['month'] = this.month;
+    data['day'] = this.day;
+    return data;
   }
 }

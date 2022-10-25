@@ -169,14 +169,6 @@ class _searchScreenState extends State<searchScreen>
               controller: SearcheditingController,
               onChanged: (value){
                 print(value);
-                // if(value.isNotEmpty){
-                //   print("is NOT empty");
-                // }else{
-                //   print("is empty");
-                //   setState(() {
-                //     itemsData = [];
-                //   });
-                // }
                 getPostsData(value);
               },
             ),

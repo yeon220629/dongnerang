@@ -1,81 +1,120 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:get/get.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-final Uri _url = Uri.parse('https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d');
+import '../constants/colors.constants.dart';
 
-class Introduce extends StatelessWidget {
-  const Introduce({Key? key}) : super(key: key);
+
+class introduceWidget extends StatefulWidget {
+
+  @override
+  State<introduceWidget> createState() => _introduceWidgetState();
+}
+
+class _introduceWidgetState extends State<introduceWidget> {
+
+  bool toggle = false;
+
+  InAppWebViewController? webViewController;
+
+  late PullToRefreshController pullToRefreshController = PullToRefreshController();
+  String url = "";
+  double progress = 0;
+  final urlController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    pullToRefreshController = PullToRefreshController(
+        onRefresh: () async {
+          webViewController?.reload();
+        }
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+  }
 
   @override
   Widget build(BuildContext context) {
+    List saveData = [];
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        elevation: 0.0,
-        // leading: IconButton(
-        //     icon: Icon(Icons.arrow_back_ios_new_outlined),
-        //     onPressed: () {
-        //         Navigator.pop(ctx);
-        //     },
-        // ),
-        title: Text('동네랑 소개'),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(
+          color: AppColors.primary,
+        ),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            //페이지 리로드
+            onPressed: (){
+              Navigator.pop(context);
+            }
+        ),
+        actions: [
+        ],
       ),
-      // body: _launchUrl, [문제인 곳!!!!!]
-      // async {
-      //   final url = Uri.parse(
-      //     'https://dev-yakuza.posstree.com/en/',
-      //   );
-      //   if (await canLaunchUrl(url)) {
-      //     launchUrl(url);
-      //   } else {
-      //     // ignore: avoid_print
-      //     print("Can't launch $url");
-      //   }
-      // },,
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Stack(
+                children: [
+                  InAppWebView(
+                     initialUrlRequest: URLRequest(url: Uri.parse('https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d')),
+                    pullToRefreshController: pullToRefreshController,
+                    onWebViewCreated: (controller) {
+                      webViewController = controller;
+                    },
+                    onLoadStart: (controller, url) {
+                      setState(() {
+                        this.url = url.toString();
+                        urlController.text = this.url;
+                      });
+                    },
+                    shouldOverrideUrlLoading: (controller, navigationAction) async {
+                      var uri = navigationAction.request.url!;
+
+                      if (![ "http", "https", "file", "chrome",
+                        "data", "javascript", "about"].contains(uri.scheme)) {
+                        return NavigationActionPolicy.CANCEL;
+                      }
+
+                      return NavigationActionPolicy.ALLOW;
+                    },
+                    onProgressChanged: (controller, progress) {
+                      if (progress == 100) {
+                        pullToRefreshController.endRefreshing();
+                      }
+                      setState(() {
+                        this.progress = progress / 100;
+                        urlController.text = this.url;
+                      });
+                    },
+                    onUpdateVisitedHistory: (controller, url, androidIsReload) {
+                      setState(() {
+                        this.url = url.toString();
+                        urlController.text = this.url;
+                      });
+                    },
+                    onConsoleMessage: (controller, consoleMessage) {
+                      print(consoleMessage);
+                    },
+                  ),
+                  progress < 1.0
+                      ? LinearProgressIndicator(value: progress)
+                      : Container(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
-
-Future<void> _launchUrl() async {
-  if (!await launchUrl(_url)) {
-    throw 'Could not launch $_url';
-  }
-}
-
-
-
-// notion() async {
-//   String url = "https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d";
-//   if (await canLaunch(url)) {
-//     await launch(url);
-//   } else {
-//     Get.snackbar('연결 실패', '어디어디로\n문의 부탁드립니다.',
-//         duration: Duration(seconds: 10), backgroundColor: Colors.white);
-//   }
-// }
-// class MyStatefulWidget extends StatefulWidget {
-//   const MyStatefulWidget({super.key});
-//
-//   @override
-//   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-// }
-//
-// class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-//   bool _customTileExpanded = false;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: const <Widget>[
-//         ExpansionTile(
-//           title: Text('"동네랑"이 드디어 출시되었습니다!'),
-//           subtitle: Text('22.10.28'),
-//           children: <Widget>[
-//             ListTile(title: Text('동네랑은 2명의 개발자와 함께 알리알라리알리아리리모콘트리아')),
-//           ],
-//         ),
-//       ],
-//     );
-//   }
-// }

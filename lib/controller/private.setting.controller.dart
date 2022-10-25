@@ -13,7 +13,6 @@ class PrivateSettingController extends GetxController {
   final addressController = TextEditingController();
   final isRegisterAgree = false.obs;
   final isPrivacyAgree = false.obs;
-
   final ImagePicker imagePicker = ImagePicker();
 
   @override
