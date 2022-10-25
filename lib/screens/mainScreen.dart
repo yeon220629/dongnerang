@@ -403,7 +403,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         cuindex = value;
                         if(value == 0){
                           label = "동네소식";
-                          getPostsData(fnChecklocal(dropdownValue)?.last);
+                          defaultCenter = '전체';
+                          getPostsData("${fnChecklocal(dropdownValue)?.first}_전체");
                           setState(() {});
                         }
                         else if(value == 1){
