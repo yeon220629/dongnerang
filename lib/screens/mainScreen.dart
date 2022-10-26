@@ -11,6 +11,7 @@ import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
 import 'introduce.dart';
+import 'notice.main.screen.dart';
 
 class freeComponent_viewpage extends StatefulWidget {
   const freeComponent_viewpage({Key? key}) : super(key: key);
@@ -379,7 +380,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               },
               icon: const Icon(Icons.search)),
               IconButton(onPressed: (){
-                Get.to(() => NoticePage());
+                Get.to(() => noticemainpage());
               }, icon: const Icon(Icons.notifications_none_outlined)),
             ],
           ),

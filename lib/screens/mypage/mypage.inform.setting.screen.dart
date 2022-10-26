@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +14,16 @@ import '../../constants/common.constants.dart';
 import '../../controller/private.setting.controller.dart';
 
 class mypageInformSettingScreen extends GetView<PrivateSettingController> {
-  const mypageInformSettingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Get.put(PrivateSettingController());
-    List keyword = [];
-    List local = [];
+
+    String profilePhotoSetting = '';
+    String profilenickSetting = '';
+    List profileKeyword = [];
+    List profilelocal = [];
+
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
@@ -50,12 +55,14 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                       //       "gender" : gender,
                       //     }));
                       //     mypageCustomKeyword = []
-                      //     EasyLoading.showSuccess("개인설정 추가 완료");
+                      //     EasyLoading.showSuccess("프로필 수정 완료");
                       //     await FirebaseService.getCurrentUser();
-                      //     Get.off(() => mainScreen());
+                      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                      //     builder: (BuildContext context) =>
+                      //         mainScreen(title: "")), (route) => false);
                       //   } catch (e) {
                       //     logger.e(e);
-                      //     EasyLoading.showSuccess("개인설정 추가 실패");
+                      //     EasyLoading.showSuccess("프로필 수정 실패");
                       //   }
                       // }
                     }, child: Text("완료", style: TextStyle(color: Colors.black))),
@@ -81,20 +88,27 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                       child: Stack(
                         children: [
                           Container(
-                            child : mypageProfileSetting(),
+                            child : mypagePhotoProfileSetting(callback: (value){
+                              profilePhotoSetting = value;
+                              print("mypageProfileSetting : $profilePhotoSetting");
+                            },),
                             height: size.height / 4,
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(
-                            //     width: 1
-                            //   )
-                            // ),
+                          ),
+                          Container(
+
+                            child: mypageNickNameProfileSetting(callback: (value){
+                              profilenickSetting = value;
+                              print("mypageNickNameProfileSetting : $profilenickSetting");
+                            },),
+                            margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
                           ),
                           mypageKeywordStateful(callback: (value) {
-                            // print(value);
-                            keyword.add(value);
+                            profileKeyword.add(value);
+                            print("mypageKeywordStateful : $profileKeyword");
                           }),
                           TagKeywordStateful(callback: (value) {
-                            local.add(value);
+                            profilelocal.add(value);
+                            print("TagKeywordStateful $profilelocal");
                           }),
                         ],
                       ),
@@ -237,9 +251,11 @@ class TagKeywordStateful extends StatefulWidget {
 }
 
 class _TagKeywordStatefulState extends State<TagKeywordStateful> {
+
   List tags = [];
   List selected_tags = [];
   List select_tags = [];
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -296,16 +312,19 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   }
 }
 
-class mypageProfileSetting extends StatefulWidget {
-  const mypageProfileSetting({Key? key}) : super(key: key);
+class mypagePhotoProfileSetting extends StatefulWidget {
+  late final Function callback;
+  mypagePhotoProfileSetting({required this.callback});
 
   @override
-  State<mypageProfileSetting> createState() => _mypageProfileSettingState();
+  State<mypagePhotoProfileSetting> createState() => _mypagePhotoProfileSettingState();
 }
 
-class _mypageProfileSettingState extends State<mypageProfileSetting> {
+class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
   XFile? _imageFile; // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
   final ImagePicker _picker = ImagePicker(); // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
+  List BoxData = [];
+  String? photo = '';
 
   @override
   Widget build(BuildContext context) {
@@ -314,24 +333,27 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
         child: ListView(
           children: <Widget>[
             imageProfile(),
-            Text("닉네임", style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 5),
-            nameTextField(),
+            // Text("닉네임", style: TextStyle(fontWeight: FontWeight.bold)),
+            // SizedBox(height: 5),
+            // nameTextField(),
           ],
         )
     );
   }
 
   Widget imageProfile() {
+    final Size size = MediaQuery.of(context).size;
     return Center(
       child: Stack(
         children: <Widget>[
           ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: _imageFile == null
-              // ? Image.asset("assets/images/default-profile.png")
+                  // ? Image.asset("assets/images/default-profile.png", fit: BoxFit.contain,)
                   ? CachedNetworkImage(imageUrl: profileImage!)
-                  : CachedNetworkImage(imageUrl: profileImage!)
+                  // : CachedNetworkImage(imageUrl: profileImage!)
+                  // : Image.network(_imageFile!.path)
+                  :Image.file(File(_imageFile!.path), width: size.width / 5.5)
           ),
           Positioned(
               bottom: 20,
@@ -382,8 +404,11 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
             Container(
               child: TextButton.icon(
                 icon: Icon(null),
-                onPressed: () {
-                  takePhoto(ImageSource.gallery);
+                onPressed: () async {
+                  // takePhoto("assets/images/default-profile.png");
+                  setState(() {
+                    _imageFile = null;
+                  });
                 },
                 label: Text('프로필 사진 삭재', style: TextStyle(
                     fontSize: 20, color: AppColors.red
@@ -395,40 +420,69 @@ class _mypageProfileSettingState extends State<mypageProfileSetting> {
     );
   }
 
-  Widget nameTextField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.black,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.black,
-              width: 2,
-            ),
-          ),
-
-          labelText: '${userName}',
-          hintText: '${userName}'
-      ),
-      // onSaved: ,
-      onChanged: (value){
-        setState(() {
-          userUpdageName = value;
-        });
-      },
-    );
-  }
 
   takePhoto(ImageSource source) async {
+    // Pick an image
+    // final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? file = await ImagePicker().pickImage( source: source);
+    print("file : ${file}");
+    print("filepath : ${file?.path.runtimeType}");
     print("source : ${source}");
-    final pickedFile = await _picker.pickImage(source: source);
-    print("pickedFile : ${pickedFile?.path.toString()}");
     setState(() {
-      _imageFile = pickedFile;
-      print("_imageFile : $_imageFile");
+      _imageFile = file;
     });
+  }
+}
+
+class mypageNickNameProfileSetting extends StatefulWidget {
+  late final Function callback;
+  mypageNickNameProfileSetting({required this.callback});
+
+  @override
+  State<mypageNickNameProfileSetting> createState() => _mypageNickNameProfileSettingState();
+}
+
+class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSetting> {
+  String? nick = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return nameTextField();
+  }
+
+  Widget nameTextField() {
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Text("닉네임", style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        SizedBox(height: 5,),
+        TextFormField(
+          decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.black,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.black,
+                  width: 2,
+                ),
+              ),
+
+              labelText: '${userName}',
+              hintText: '${userName}'
+          ),
+          // onSaved: ,
+          onChanged: (value){
+            setState(() {
+              widget.callback(value);
+            });
+          },
+        )
+      ],
+    );
   }
 }
