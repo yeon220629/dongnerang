@@ -120,7 +120,8 @@ class _mypageScreenState extends State<mypageScreen> {
       // print("userSaveData 1 :  ${value[1]}");
       setState(() {
         value[0]?.forEach((element) {
-          if(element.toString().contains('https')){
+          print(element);
+          if(element.toString().contains('/')){
             profileImage = element.toString();
           }else{
             userName = element.toString();

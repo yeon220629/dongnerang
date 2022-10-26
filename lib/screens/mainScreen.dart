@@ -56,7 +56,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
-    print(value);
+    // print(value);
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
@@ -306,7 +306,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     mypageUserSaveData.then((value){
       setState(() {
         value[0]?.forEach((element) {
-          if(element.toString().contains('https')){
+          if(element.toString().contains('/')){
             profileImage = element.toString();
           }else{
             userName = element.toString();

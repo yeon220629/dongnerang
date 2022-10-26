@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -12,17 +14,19 @@ import 'package:image_picker/image_picker.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../controller/private.setting.controller.dart';
+import '../../services/firebase.service.dart';
+import '../../services/user.service.dart';
+import '../../util/logger.service.dart';
+import '../mainScreenBar.dart';
 
 class mypageInformSettingScreen extends GetView<PrivateSettingController> {
-
+  String profilePhotoSetting = '';
+  String profilenickSetting = '';
+  List profileKeyword = [];
+  List profilelocal = [];
   @override
   Widget build(BuildContext context) {
     Get.put(PrivateSettingController());
-
-    String profilePhotoSetting = '';
-    String profilenickSetting = '';
-    List profileKeyword = [];
-    List profilelocal = [];
 
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -39,32 +43,35 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                 SizedBox(width: 100,),
                 TextButton(
                     onPressed: () async {
-                      // print("age : ${ages.round().toString()}");
-                      // print("keyword : ${keyword}");
-                      // print("local : ${local[0]}");
-                      // if (controller.formKey.currentState!.validate()) {
-                      //   try {
-                      //     print("test");
-                      //     await FirebaseFirestore.instance
-                      //         .collection("users")
-                      //         .doc(UserService.to.currentUser.value!.email)
-                      //         .update(({
-                      //       "age": ages.toJson(),
-                      //       "keyword": keyword[0],
-                      //       "local": local[0],
-                      //       "gender" : gender,
-                      //     }));
-                      //     mypageCustomKeyword = []
-                      //     EasyLoading.showSuccess("프로필 수정 완료");
-                      //     await FirebaseService.getCurrentUser();
-                      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         mainScreen(title: "")), (route) => false);
-                      //   } catch (e) {
-                      //     logger.e(e);
-                      //     EasyLoading.showSuccess("프로필 수정 실패");
-                      //   }
-                      // }
+                      // print("profilePhotoSetting : $profilePhotoSetting");
+                      // print("profilenickSetting : $profilenickSetting");
+                      // print("profileKeyword : $profileKeyword");
+                      // print("profilelocal : $profilelocal");
+                      if (controller.formKey.currentState!.validate()) {
+                        try {
+                          await FirebaseFirestore.instance
+                              .collection("users")
+                              .doc(UserService.to.currentUser.value!.email)
+                              .update(({
+                            "profileImage":profilePhotoSetting,
+                            "name":profilenickSetting,
+                            "keyword": profileKeyword[0],
+                            "local": profilelocal[0],
+                          }));
+                          profilePhotoSetting = '';
+                          profilenickSetting = '';
+                          profileKeyword = [];
+                          profilelocal = [];
+                          EasyLoading.showSuccess("프로필 수정 완료");
+                          await FirebaseService.getCurrentUser();
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              mainScreen()), (route) => false);
+                        } catch (e) {
+                          logger.e(e);
+                          EasyLoading.showSuccess("프로필 수정 실패");
+                        }
+                      }
                     }, child: Text("완료", style: TextStyle(color: Colors.black))),
               ],
             )
@@ -90,7 +97,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                           Container(
                             child : mypagePhotoProfileSetting(callback: (value){
                               profilePhotoSetting = value;
-                              print("mypageProfileSetting : $profilePhotoSetting");
+                              // print("mypageProfileSetting : $profilePhotoSetting");
                             },),
                             height: size.height / 4,
                           ),
@@ -98,17 +105,17 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
 
                             child: mypageNickNameProfileSetting(callback: (value){
                               profilenickSetting = value;
-                              print("mypageNickNameProfileSetting : $profilenickSetting");
+                              // print("mypageNickNameProfileSetting : $profilenickSetting");
                             },),
                             margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
                           ),
                           mypageKeywordStateful(callback: (value) {
                             profileKeyword.add(value);
-                            print("mypageKeywordStateful : $profileKeyword");
+                            // print("mypageKeywordStateful : $profileKeyword");
                           }),
                           TagKeywordStateful(callback: (value) {
                             profilelocal.add(value);
-                            print("TagKeywordStateful $profilelocal");
+                            // print("TagKeywordStateful $profilelocal");
                           }),
                         ],
                       ),
@@ -167,7 +174,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                               icon: Icon(Icons.search),
                               onPressed: () {
                                 select_tags.add(myController.text);
-                                print("select_tags : $select_tags");
+                                // print("select_tags : $select_tags");
                                 setState(() {
                                   mypageCustomKeyword.add(myController.text);
                                   // print(mypageCustomKeyword);
@@ -343,6 +350,12 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
 
   Widget imageProfile() {
     final Size size = MediaQuery.of(context).size;
+    bool profileimagetype = true;
+
+    if(!profileImage!.contains("http")){
+      profileimagetype = false;
+    }
+
     return Center(
       child: Stack(
         children: <Widget>[
@@ -350,7 +363,9 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
               borderRadius: BorderRadius.circular(100),
               child: _imageFile == null
                   // ? Image.asset("assets/images/default-profile.png", fit: BoxFit.contain,)
-                  ? CachedNetworkImage(imageUrl: profileImage!)
+                  ? profileimagetype
+                    ? CachedNetworkImage(imageUrl: profileImage!)
+                    : Image.file(File(profileImage!), width: size.width / 5.5)
                   // : CachedNetworkImage(imageUrl: profileImage!)
                   // : Image.network(_imageFile!.path)
                   :Image.file(File(_imageFile!.path), width: size.width / 5.5)
@@ -425,11 +440,12 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
     // Pick an image
     // final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     final XFile? file = await ImagePicker().pickImage( source: source);
-    print("file : ${file}");
-    print("filepath : ${file?.path.runtimeType}");
-    print("source : ${source}");
+    // print("file : ${file}");
+    // print("filepath : ${file?.path.runtimeType}");
+    // print("source : ${source}");
     setState(() {
       _imageFile = file;
+      widget.callback(file!.path);
     });
   }
 }

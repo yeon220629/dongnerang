@@ -27,7 +27,7 @@ class mainScreenState extends State<mainScreen> {
     Get.put(NavigationController());
     Get.put(HomeController());
     final navigationController = Get.find<NavigationController>();
-    print(navigationController.currentBottomMenuIndex);
+    // print(navigationController.currentBottomMenuIndex);
     return Scaffold(
       bottomNavigationBar: Obx(
               () => Offstage(

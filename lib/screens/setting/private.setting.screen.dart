@@ -51,7 +51,6 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
-                    print("keyword : ${keyword}");
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance

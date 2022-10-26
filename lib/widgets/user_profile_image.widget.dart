@@ -11,6 +11,15 @@ class UserProfileCircleImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // print("imageUrl : $imageUrl");
+    // if(imageUrl!.contains('http')){
+    //   print("true");
+    // }else{
+    //   print("false");
+    //   imageUrl =
+    // }
+    // Image.file(File(_imageFile!.path)
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),
       child: imageUrl == null || imageUrl!.isEmpty
@@ -18,12 +27,15 @@ class UserProfileCircleImage extends StatelessWidget {
               "assets/images/default-profile.png",
               width: size,
             )
-          : CachedNetworkImage(
-              imageUrl: imageUrl!,
-              width: size,
-              // height: size,
-              fit: BoxFit.cover,
-            ),
+          : imageUrl!.contains('http')
+            ? CachedNetworkImage(
+                imageUrl: imageUrl!,
+                width: size,
+                // height: size,
+                fit: BoxFit.cover,
+              )
+            // : Image.file(File(imageUrl)
+            : null
     );
   }
 }
