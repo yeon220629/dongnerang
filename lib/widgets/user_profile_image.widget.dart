@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +22,7 @@ class UserProfileCircleImage extends StatelessWidget {
     //   imageUrl =
     // }
     // Image.file(File(_imageFile!.path)
+    File f = File(imageUrl!);
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),
       child: imageUrl == null || imageUrl!.isEmpty
@@ -35,7 +38,7 @@ class UserProfileCircleImage extends StatelessWidget {
                 fit: BoxFit.cover,
               )
             // : Image.file(File(imageUrl)
-            : null
+            : Image.file(f,width: size)
     );
   }
 }
