@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
+import '../../widgets/app_appbar_common.widget.dart';
+
 // class Notification extends StatelessWidget {
 //   const Notification({Key? key}) : super(key: key);
 //
@@ -23,11 +25,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0.0,
-        title: Text("알림 설정"),
-      ),
+      appBar: fnCommnAppbarWidget(title: '알림 설정',appBar: AppBar()),
       body: SwitchListTile(
         title: const Text('알림 허용'),
         value: _lights,

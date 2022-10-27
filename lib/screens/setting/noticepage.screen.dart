@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/app_appbar_common.widget.dart';
+
 class NoticePage extends StatelessWidget {
   const NoticePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0.0,
-          title: Text('공지사항'),
-        ),
+        appBar: fnCommnAppbarWidget(title: '공지사항',appBar: AppBar()),
         body: const MyStatefulWidget(),
     );
   }

@@ -139,7 +139,7 @@ class _searchScreenState extends State<searchScreen>
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
       int ListData = value.length;
       for(int i = 0; i < ListData; i++){
-        getUserLocaldata?.add(value[i]);
+        getUserLocaldata.add(value[i]);
       }
     });
   }
@@ -280,7 +280,7 @@ class _searchScreenState extends State<searchScreen>
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       // decoration: BoxDecoration(border: Border.all(width: 1)),
       child: GridView.builder(
-        itemCount: ResentSearch!.length,
+        itemCount: ResentSearch.length,
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, //1 개의 행에 보여줄 item 개수

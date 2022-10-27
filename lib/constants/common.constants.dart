@@ -14,47 +14,6 @@ const NO_CATEGORY_TEXT = "없음";
 final MAP_INITIAL_CENTER_LOCATION = LatLng(37.5547125, 126.9707878);
 const ZOOM_FOR_SHOW_MARKER_NAME = 13;
 
-class fnCommnAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const fnCommnAppbar({
-    required this.appBar,
-    required this.title,
-    this.center = false,
-    required this.email,
-    required this.ListData,
-    required this.keyName,
-  });
-
-  final AppBar appBar;
-  final String title;
-  final bool center;
-  final String email;
-  final List ListData;
-  final String keyName;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      iconTheme: IconThemeData(
-        color: AppColors.black,
-      ),
-      backgroundColor: AppColors.white,
-      centerTitle: true,
-      elevation: 0.0,
-      title: Text('$title', style: TextStyle(color: AppColors.black),),
-      actions: [
-        TextButton(onPressed: (){
-          FirebaseService.savePrivacyProfile(email, ListData, keyName);
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  mainScreen()), (route) => false);
-        }, child: Text("완료", style: TextStyle(color: AppColors.black),))
-      ],
-    );
-  }
-  @override
-  Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
-}
-
 var POPUP_MENU_ITEMS = [
   PopupMenuItem(
       value: "edit",

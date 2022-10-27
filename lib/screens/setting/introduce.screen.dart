@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/app_appbar_common.widget.dart';
+
 class Introduce extends StatelessWidget {
   const Introduce({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0.0,
-          // leading: IconButton(
-          //     icon: Icon(Icons.arrow_back_ios_new_outlined),
-          //     onPressed: () {
-          //         Navigator.pop(ctx);
-          //     },
-          // ),
-          title: Text('동네랑 소개'),
-        ),
-        body: const MyStatefulWidget(),
+      appBar: fnCommnAppbarWidget(title: '동네랑 소개',appBar: AppBar()),
+      body: const MyStatefulWidget(),
     );
   }
 }

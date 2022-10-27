@@ -3,17 +3,15 @@ import 'dart:core';
 import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../widgets/app_appbar_common.widget.dart';
+
 class Inquire extends StatelessWidget {
   const Inquire({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 1,
-        title: Text('동네랑 문의'),
-      ),
+      appBar: fnCommnAppbarWidget(title: '동네랑 문의',appBar: AppBar()),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 30.0, 0, 0),
         child: Column(
