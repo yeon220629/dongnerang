@@ -45,18 +45,21 @@ class _introduceWidgetState extends State<introduceWidget> {
     List saveData = [];
     return Scaffold(
       appBar: AppBar(
+        // title: Text('동네랑 소개'),
         elevation: 0.0,
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
-          color: AppColors.primary,
+          // color: AppColors.green,
         ),
         leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(Icons.arrow_back),
             //페이지 리로드
             onPressed: (){
               Navigator.pop(context);
             }
         ),
+        centerTitle: true,
+        title: Text('동네랑 소개', style: TextStyle(color: Colors.black)) ,
         actions: [
         ],
       ),

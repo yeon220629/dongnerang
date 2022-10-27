@@ -310,6 +310,7 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
                       children: [
                         DropdownButton(
                           // style: TextStyle(color: Colors.red,fontSize: 30),
+                          // menuMaxHeight: 50, //변경해줘야함!!
                           dropdownColor: AppColors.primary,
                           underline: Container(),
                             // iconDisabledColor: AppColors.grey,

@@ -342,14 +342,24 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
-            title: Container(
-                width: 50,
-                child: Image.asset("assets/images/logo.png"),
-            ),
+            elevation: 0,
+            // title: Container(
+            //     width: 50,
+            //     child: Image.asset("assets/images/logo.png"),
+            // ),
             // fit:BoxFit.cover,
             // height:20,
-            actions: <Widget>[
+            title:
               DropdownButton(
+                icon: const Icon(Icons.keyboard_arrow_down),
+                isExpanded: false,
+                // menuMaxHeight: 500,
+                // itemHeight: 300,
+                // elevation: 0,
+                // focusNode: size,
+                // style: TextStyle(fontSize: 8),
+                isDense: false,
+                underline: Container(),
                 value: dropdownValue,
                 items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
                   return DropdownMenuItem<String>(
@@ -370,7 +380,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   });
                 },
               ),
-              const SizedBox(width: 160,),
+            actions: <Widget>[
+              // const SizedBox(width: 160,),
               IconButton(onPressed: (){
                 // Get.to(() => searchScreen(title: '',));
                 Navigator.push(

@@ -9,6 +9,7 @@ import '../constants/colors.constants.dart';
 import '../models/main_view_model.dart';
 import '../services/kakao_login.dart';
 import '../widgets/app_appbar_common.widget.dart';
+import 'introduce.dart';
 import 'setting/inquire.screen.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -59,7 +60,7 @@ class SettingsPage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Introduce(),),);
+                    MaterialPageRoute(builder: (context) => introduceWidget(),),);
                 },
                 trailing:Icon(Icons.arrow_forward_ios_outlined),
             ),
