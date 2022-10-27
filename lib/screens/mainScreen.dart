@@ -390,16 +390,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               children: <Widget>[
                 //배너
                 GestureDetector(
-                    // onTap: _launchUrl,
-                      // child: Text('Show Flutter homepage'),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => introduceWidget(),),);
                     },
-                    // height: 200,
-                    // width: 200,
-                    child: Image.asset("assets/images/banner.png")),
+                    child: Image.asset("assets/images/banner.png")
+                ),
                 BottomNavigationBar(
                     currentIndex: cuindex,
                     elevation: 1.0,

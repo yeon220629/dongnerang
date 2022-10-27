@@ -14,14 +14,6 @@ class UserProfileCircleImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // print("imageUrl : $imageUrl");
-    // if(imageUrl!.contains('http')){
-    //   print("true");
-    // }else{
-    //   print("false");
-    //   imageUrl =
-    // }
-    // Image.file(File(_imageFile!.path)
     File f = File(imageUrl!);
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),

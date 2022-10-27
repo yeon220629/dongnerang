@@ -9,12 +9,6 @@ class NoticePage extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           elevation: 0.0,
-          // leading: IconButton(
-          //     icon: Icon(Icons.arrow_back_ios_new_outlined),
-          //     onPressed: () {
-          //         Navigator.pop(ctx);
-          //     },
-          // ),
           title: Text('공지사항'),
         ),
         body: const MyStatefulWidget(),
