@@ -39,6 +39,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         actions: [
           Row(
@@ -51,6 +52,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
+                    print("keyword : ${keyword}");
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance
@@ -73,7 +75,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                         EasyLoading.showSuccess("개인설정 추가 실패");
                       }
                     }
-                  }, child: Text("완료", style: TextStyle(color: Colors.black))),
+                  }, child: Text("완료", style: TextStyle(color: Colors.black, fontSize: 15))),
             ],
           )
         ],
@@ -86,54 +88,55 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
             icon: Icon(Icons.arrow_back)),
       ),
       body: SafeArea(
-      child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
-      return KeyboardDismissOnTap(
-        child: Form(
-          key: controller.formKey,
-          child: ListView(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-            children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Column(
+        child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
+          return KeyboardDismissOnTap(
+            child: Form(
+              key: controller.formKey,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+                children: [
+                  Center(
+                    child: Stack(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: size.height / 220),
-                          child : Container(
-                            alignment: Alignment.centerLeft,
-                            child:Text("생년월일", style: TextStyle(fontWeight: FontWeight.bold),),
-                          )
+                        Column(
+                          children: [
+                            Padding(
+                                padding: EdgeInsets.symmetric(vertical: size.height / 150),
+                                child : Container(
+                                  alignment: Alignment.centerLeft,
+                                  child:Text("생년월일", style: TextStyle(fontWeight: FontWeight.bold),),
+                                )
+                            ),
+                            SizedBox(height: 5,),
+                            AgeStatefulWidget(callback: (value) {
+                              ageValue = value;
+                            }),
+                            // SizedBox(height: 8,),
+                            // Container(
+                            //   alignment: Alignment.centerLeft,
+                            //   child: Text("  * 연령대에 맞는 공공사업을 추천할때 사용됩니다.", style: TextStyle(color: Colors.black45),),
+                            // )
+                          ],
                         ),
-                        SizedBox(height: 5,),
-                        AgeStatefulWidget(callback: (value) {
-                          ageValue = value;
+                        genderChoiceWidget(callback: (value){
+                          print(value);
+                          gender = value;
                         }),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text("*연령대에 맞는 공공사업을 추천할때 사용됩니다.", style: TextStyle(fontWeight: FontWeight.normal),),
-                        )
+                        KeywordStateful(callback: (value) {
+                          keyword.add(value);
+                        }),
+                        TagKeywordStateful(callback: (value) {
+                          local.add(value);
+                        }),
                       ],
                     ),
-                    genderChoiceWidget(callback: (value){
-                      print(value);
-                      gender = value;
-                    }),
-                    KeywordStateful(callback: (value) {
-                      keyword.add(value);
-                    }),
-                    TagKeywordStateful(callback: (value) {
-                      local.add(value);
-                    }),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      );
-    }),
-    ),
+            ),
+          );
+        }),
+      ),
     );
   }
 }
@@ -150,14 +153,14 @@ class _KeywordStatefulState extends State<KeywordStateful> {
   List tags = [];
   List selected_tags = [];
   List select_tags = [];
-
+  bool erased = false;
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
 
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 3.9),
+        padding: EdgeInsets.symmetric(vertical: size.height / 4),
         child: Column(
           children: [
             Row(
@@ -169,56 +172,67 @@ class _KeywordStatefulState extends State<KeywordStateful> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
               child: FittedBox(
-                fit: BoxFit.fill,
-                alignment: Alignment.topCenter,
-                child: Column(
-                  children: [
-                    Container(
-                      width: size.width,
-                      child: TextFormField(
-                        controller: myController,
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.search),
-                            onPressed: () {
-                              print("myController : ${myController.text}");
-                              select_tags.add(myController.text);
-                              setState(() {
-                                CustomKeyword.add(myController.text);
-                                widget.callback(select_tags);
-                              });
-                              myController.clear();
-                            },
-                          ),
-                          labelText: '관심키워드를 등록해주세요! ex)청년, 예술',
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            borderSide: BorderSide(
-                              color: Colors.blue,
+                  fit: BoxFit.fill,
+                  alignment: Alignment.topCenter,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: size.width,
+                        child: TextFormField(
+                          controller: myController,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.search),
+                              color: AppColors.grey,
+                              // color: select_tags.add(myController.text) ? AppColors.grey : AppColors.primary,
+                              onPressed: () {
+                                print("myController : ${myController.text}");
+                                select_tags.add(myController.text);
+                                setState(() {
+                                  CustomKeyword.add(myController.text);
+                                  widget.callback(select_tags);
+                                });
+                                myController.clear();
+                              },
+                            ),
+                            hintText: '관심 키워드를 등록해주세요! ex)예술, 공간, 모집',
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(13)),
+                                borderSide: BorderSide(
+                                  width: 1,
+                                  color: AppColors.primary,
+                                )
+                            ),
+                            focusColor: AppColors.primary,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(13)),
+                              borderSide: BorderSide(
+
+                                color: AppColors.grey,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: categoryHeight * 1.5,
-                          margin: const EdgeInsets.only(right: 5),
-                          height: categoryHeight - 170,
-                          child: Center(
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            width: categoryHeight * 1.5,
+                            // margin: const EdgeInsets.only(right: 5),
+                            height: categoryHeight - 180,
+                            // child: Center(
                             child: ListView(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              padding: EdgeInsets.all(10),
+                              // padding: EdgeInsets.all(5),
                               children: <Widget>[...generate_tags(CustomKeyword)],
                             ),
+                            // ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                )
+                        ],
+                      ),
+                    ],
+                  )
               ),
             ),
           ],
@@ -230,28 +244,38 @@ class _KeywordStatefulState extends State<KeywordStateful> {
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
-    return FilterChip(
-      selected: selected_tags.contains(name),
-      disabledColor: Colors.blue.shade400,
-      backgroundColor: AppColors.blue,
+    return erased? Container()
+        : Chip(
+      // selected: selected_tags.contains(name),
+      // disabledColor: Colors.blue.shade400,
+      backgroundColor: AppColors.primary,
       labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       label: Text("${name}"),
-      onSelected: (value) {
-        print("${value} : ${name}");
-        if (select_tags.length > 2) {
-          value = false;
-        }
-        if (value == true) {
-          select_tags.add(name);
-        }
-        if (value == false) {
-          select_tags.remove(name);
-        }
+      // useDeleteButtonTooltip: true,
+      deleteButtonTooltipMessage: '삭제하시겠습니까?',
+      deleteIcon: Icon(Icons.close, size: 15,),
+      deleteIconColor: Colors.white,
+      onDeleted: () {
         setState(() {
-          selected_tags = select_tags;
-          widget.callback(selected_tags);
+          erased = true;
         });
       },
+      // onSelected: (value) {
+      //   print("${value} : ${name}");
+      //   if (select_tags.length > 2) {
+      //     value = false;
+      //   }
+      //   if (value == true) {
+      //     select_tags.add(name);
+      //   }
+      //   if (value == false) {
+      //     select_tags.remove(name);
+      //   }
+      //   setState(() {
+      //     selected_tags = select_tags;
+      //     widget.callback(selected_tags);
+      //   });
+      // },
     );
   }
 }
@@ -271,64 +295,74 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     widget.callback(birth);
-
+    //생년월일 ui
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 0.5),
-        borderRadius: BorderRadius.circular(10)
-      ),
-      child: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  DropdownButton(
-                    value: defaultYear,
-                    items: dropdownYear.map( (value) {
-                        return DropdownMenuItem (
-                          value: value, child: Text(value),
-                        );
-                      },
-                    ).toList(),
-                    onChanged: (value){ setState(() {
-                      defaultYear = value as String?;
-                      birth.year = value!;
-                    });
-                    }
-                  ),
-                  DropdownButton( value: defaultMonth,
-                    items: dropdownMonth.map( (value) {
-                        return DropdownMenuItem (
-                          value: value, child: Text(value),
-                        );
-                      },
-                    ).toList(), onChanged: (value){ setState(() {
-                        defaultMonth = value as String?;
-                        birth.month = value!;
-                      });
-                    }
-                  ),
-                  DropdownButton( value: defaultDay,
-                    items: dropdownDay.map( (value) {
-                        return DropdownMenuItem (
-                          value: value, child: Text(value),
-                        );
-                      },
-                    ).toList(), onChanged: (value){
-                      setState(() {
-                        defaultDay = value as String?;
-                        birth.day = value!;
-                      });
-                    }
-                  )
-                ],
-              )
-            ],
-          )
+        decoration: BoxDecoration(
+            border: Border.all( color: AppColors.grey, width: 1),
+            borderRadius: BorderRadius.circular(10)
+        ),
+        child: Center(
+            child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        DropdownButton(
+                          // style: TextStyle(color: Colors.red,fontSize: 30),
+                          dropdownColor: AppColors.primary,
+                          underline: Container(),
+                            // iconDisabledColor: AppColors.grey,
+                            // iconEnabledColor: AppColors.primary,
+                            isDense: true,
+                            value: defaultYear,
+                            items: dropdownYear.map( (value) {
+                              return DropdownMenuItem (
+                                value: value, child: Text(value),
+                              );
+                            },
+                            ).toList(),
+                            onChanged: (value){ setState(() {
+                              defaultYear = value as String?;
+                              birth.year = value!;
+                            });
+                            }
+                        ),
+                        DropdownButton(
+                            underline: Container(),
+                            value: defaultMonth,
+                            items: dropdownMonth.map( (value) {
+                              return DropdownMenuItem (
+                                value: value, child: Text(value),
+                              );
+                            },
+                            ).toList(), onChanged: (value){ setState(() {
+                              defaultMonth = value as String?;
+                              birth.month = value!;
+                            });
+                            }
+                        ),
+                        DropdownButton(
+                            underline: Container(),
+                            value: defaultDay,
+                            items: dropdownDay.map( (value) {
+                              return DropdownMenuItem (
+                                value: value, child: Text(value),
+                              );
+                            },
+                            ).toList(), onChanged: (value){
+                              setState(() {
+                                defaultDay = value as String?;
+                                birth.day = value!;
+                              });
+                            }
+                        )
+                      ],
+                    )
+                  ],
+                )
+            )
         )
-      )
     );
   }
 }
@@ -348,8 +382,9 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 2.4),
+        padding: EdgeInsets.symmetric(vertical: size.height / 2.5),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -361,10 +396,10 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
             ),
             SizedBox(height: 5,),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Wrap( spacing: 4.0, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Wrap( spacing: 5.0, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
             ),
-            Text("지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.bold),),
+            Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
           ],
         )
     );
@@ -374,13 +409,24 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
-    return FilterChip(
+    return ChoiceChip(
+      // showCheckmark: false,
       selected: selected_tags.contains(name),
-      selectedColor: Colors.blue.shade800,
-      disabledColor: Colors.blue.shade400,
-      avatar: Text(""),
-      labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      selectedColor: AppColors.primary,
+      // checkmarkColor: AppColors.primary,
+      // sel
+      // selectedColor: AppColors.primary,
+      // disabledColor: AppColors.primary,
+      avatar: CircleAvatar(backgroundImage: AssetImage('assets/images/DONGJAK.PNG')),
+      // labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      backgroundColor: Colors.white,
+      shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
+      // autofocus: true,
+      // shape: OutlinedBorder(side: BorderSide(color: AppColors.grey,)),
       label: Text("${name}"),
+      labelStyle: TextStyle(
+        color: selected_tags.contains(name)? Colors.white : Colors.black,
+      ),
       onSelected: (value) {
         if (select_tags.length > 2) {
           value = false;
@@ -426,44 +472,47 @@ class _genderChoiceState extends State<genderChoiceWidget> {
     final Size size = MediaQuery.of(context).size;
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: size.height / 6.6),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Text("성별", style: TextStyle(fontWeight: FontWeight.bold),),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ToggleButtons(
-                borderRadius: BorderRadius.circular(10),
-                  fillColor: AppColors.blue,
-                  selectedColor: AppColors.white,
+        padding: EdgeInsets.symmetric(vertical: size.height / 7.6),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                Text("성별", style: TextStyle(fontWeight: FontWeight.bold),),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ToggleButtons(
+                  borderWidth: 1,
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black,
+                  fillColor: AppColors.primary,
+                  selectedColor: Colors.white,
                   focusColor: AppColors.white,
+                  selectedBorderColor: AppColors.primary,
                   children: [
                     Container(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: size.width / 6.5),
-                        child: Text('남성', style: TextStyle(fontSize: 18, color: AppColors.black))
+                          padding: EdgeInsets.symmetric(horizontal: size.width / 5.3),
+                          child: Text('남성', style: TextStyle(fontSize: 18))
                       ),
                     ),
                     Container(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: size.width / 6.5),
-                        child: Text('여성', style: TextStyle(fontSize: 18,color: AppColors.black))),
+                          padding: EdgeInsets.symmetric(horizontal: size.width / 6.5),
+                          child: Text('여성', style: TextStyle(fontSize: 18))),
                     )
                   ],
-                onPressed: toggleSelect,
-                isSelected: isClick,
-              )
-            ],
-          )
-        ],
-      )
+                  onPressed: toggleSelect,
+                  isSelected: isClick,
+                )
+              ],
+            )
+          ],
+        )
     );
   }
   void toggleSelect(value) {
@@ -493,7 +542,7 @@ class birthDay {
       {required this.year,
         required this.month,
         required this.day,
-        });
+      });
   birthDay.fromJson(Map<String, dynamic> json) {
     year = json['year'];
     month = json['month'];

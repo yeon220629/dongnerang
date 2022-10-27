@@ -45,6 +45,7 @@ class _introduceWidgetState extends State<introduceWidget> {
     List saveData = [];
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
           color: AppColors.primary,
