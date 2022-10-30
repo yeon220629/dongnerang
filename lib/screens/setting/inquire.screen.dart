@@ -1,3 +1,5 @@
+import 'package:dongnerang/constants/colors.constants.dart';
+import 'package:dongnerang/screens/setting/inquire.googleform.dart';
 import 'package:flutter/material.dart';
 import 'dart:core';
 import 'dart:async';
@@ -21,18 +23,31 @@ class Inquire extends StatelessWidget {
               style: TextStyle(
                 letterSpacing:2.0,
                 fontSize: 20.0,
+                fontWeight: FontWeight.bold
                 // fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 30.0,),
-        OutlinedButton.icon(
-            onPressed: UrlLauncher().email,
-          icon: Icon(Icons.question_mark_outlined),
-          label: Text('문의하기'),
+        ElevatedButton(
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => inquireGoogleform(),),);
+            },
+          // icon: Icon(Icons.question_answer_outlined),
+          child: Text('문의하기'),
           style: TextButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            // textStyle: TextStyle(color: Colors.red),
+            // primary: AppColors.skyBlue,
+            // textStyle: Color(value),
+              // TextStyle(
+              //   fontWeight: FontWeight.bold,
+              //   color: AppColors.black,
+              // )
             minimumSize: Size(300,50),
             // primary: Colors.bl,
-            onSurface: Colors.blueAccent, // 비활성화된 버튼 색상도 바꿔줄 수 있음
+            // onSurface: Colors.blueAccent, // 비활성화된 버튼 색상도 바꿔줄 수 있음
           ))
           ],
         ),
@@ -42,28 +57,28 @@ class Inquire extends StatelessWidget {
 }
 
 
-class UrlLauncher {
-  final Uri EMAIL = Uri(
-      scheme: 'mailto',
-      path: 'yeon220629@naver.com',
-      queryParameters: {'subject': '문의 드립니다', 'body': '개발자님 안녕하세요?'});
-
-  Future<void> launchURL(url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  Future<void> email() async {
-    if (await canLaunch(EMAIL.toString())) {
-      await launch(EMAIL.toString());
-    } else {
-      throw 'error email';
-    }
-  }
-}
+// class UrlLauncher {
+//   final Uri EMAIL = Uri(
+//       scheme: 'mailto',
+//       path: 'yeon220629@naver.com',
+//       queryParameters: {'subject': '문의 드립니다', 'body': '개발자님 안녕하세요?'});
+//
+//   Future<void> launchURL(url) async {
+//     if (await canLaunch(url)) {
+//       await launch(url);
+//     } else {
+//       throw 'Could not launch $url';
+//     }
+//   }
+//
+//   Future<void> email() async {
+//     if (await canLaunch(EMAIL.toString())) {
+//       await launch(EMAIL.toString());
+//     } else {
+//       throw 'error email';
+//     }
+//   }
+// }
 
 // Future<void> _launchUrl() async {
 //   if (!await launchUrl(_url)) {

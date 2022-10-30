@@ -26,8 +26,8 @@ class MainViewModel {
         AccessTokenInfo tokenInfo =
           await UserApi.instance.accessTokenInfo();
         print('토큰 유효성 체크 성공 ${tokenInfo.id} ${tokenInfo.expiresIn}');
-        Get.offAll(() => mainScreen());
-        // Get.offAll(() => privateSettingScreen());
+        // Get.offAll(() => mainScreen());
+        Get.offAll(() => privateSettingScreen());
       } catch (error) {
         if (error is KakaoException && error.isInvalidTokenError()) {
           print('토큰 만료 $error');

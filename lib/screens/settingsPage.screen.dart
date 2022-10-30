@@ -60,7 +60,7 @@ class SettingsPage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => introduceWidget(),),);
+                    MaterialPageRoute(builder: (context) => introduceWidget(),),); //Introduce
                 },
                 trailing:Icon(Icons.arrow_forward_ios_outlined),
             ),
@@ -77,15 +77,17 @@ class SettingsPage extends StatelessWidget {
                   barrierDismissible: true,
                   builder:(context) {
                     return AlertDialog(
-                      content: Text("로그아웃\n정말 로그아웃 하시겠습니까?"),
-                      insetPadding: const  EdgeInsets.fromLTRB(20,40,20, 40),
+                      content: Text("정말 로그아웃 하시겠습니까?"),
+                      insetPadding: const  EdgeInsets.fromLTRB(20,40,20,40),
                       actions: [
                         Column(
                           children: [
                             Container(
                               child: TextButton(
                                 child: const Text('확인', style: TextStyle(
-                                  color: AppColors.black,
+                                  // background: ,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.white,
                                 ),),
                                 onPressed: () async {
                                   await viewModel.logout();
@@ -98,17 +100,17 @@ class SettingsPage extends StatelessWidget {
                                     MaterialStateProperty.resolveWith((states) {
                                       if (states.contains(
                                           MaterialState.pressed)) {
-                                        return AppColors.skyBlue;
-                                      } else {
                                         return AppColors.white;
+                                      } else {
+                                        return AppColors.primary;
                                       }
                                     }
                                   )
                                 ),
                               ),
                               decoration: BoxDecoration(
-                                border: Border.all(width: 0.5),
-                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(width: 0.5, color: AppColors.grey),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                               width: size.width,
                               height: size.height/ 17.5,
@@ -117,6 +119,7 @@ class SettingsPage extends StatelessWidget {
                             Container(
                               child: TextButton(
                                 child: const Text('취소', style: TextStyle(
+                                  fontWeight: FontWeight.bold,
                                   color: AppColors.black,
                                 ),),
                                 onPressed: () async {
@@ -127,7 +130,7 @@ class SettingsPage extends StatelessWidget {
                                     MaterialStateProperty.resolveWith((states) {
                                       if (states.contains(
                                           MaterialState.pressed)) {
-                                        return AppColors.skyBlue;
+                                        return AppColors.primary;
                                       } else {
                                         return AppColors.white;
                                       }
@@ -136,8 +139,8 @@ class SettingsPage extends StatelessWidget {
                                 ),
                               ),
                               decoration: BoxDecoration(
-                                border: Border.all(width: 0.5),
-                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(width: 0.5, color: AppColors.grey),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                               width: size.width,
                               height: size.height/ 17.5,
@@ -149,7 +152,7 @@ class SettingsPage extends StatelessWidget {
                   },
               );
             },
-            trailing:Icon(Icons.arrow_forward_ios_outlined),
+            // trailing:Icon(Icons.arrow_forward_ios_outlined),
           ),
         ],
       )

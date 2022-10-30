@@ -310,8 +310,8 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
                       children: [
                         DropdownButton(
                           // style: TextStyle(color: Colors.red,fontSize: 30),
-                          // menuMaxHeight: 50, //변경해줘야함!!
-                          dropdownColor: AppColors.primary,
+                          menuMaxHeight: 580,
+                          // dropdownColor: AppColors.primary,
                           underline: Container(),
                             // iconDisabledColor: AppColors.grey,
                             // iconEnabledColor: AppColors.primary,
@@ -330,6 +330,7 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
                             }
                         ),
                         DropdownButton(
+                            menuMaxHeight: 580,
                             underline: Container(),
                             value: defaultMonth,
                             items: dropdownMonth.map( (value) {
@@ -344,6 +345,7 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
                             }
                         ),
                         DropdownButton(
+                            menuMaxHeight: 580,
                             underline: Container(),
                             value: defaultDay,
                             items: dropdownDay.map( (value) {

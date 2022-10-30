@@ -10,6 +10,7 @@ import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
 import '../settingsPage.screen.dart';
 import 'mypage.inform.setting.screen.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class mypageScreen extends StatefulWidget {
   const mypageScreen({Key? key}) : super(key: key);
@@ -60,10 +61,12 @@ class _mypageScreenState extends State<mypageScreen> {
             )));
           },
           child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-              ]),
+              width: 500,
+              height: 110,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                  border: Border.all(color: Colors.black12, width: 1)), //테두리
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
                 child: Column(
@@ -84,17 +87,18 @@ class _mypageScreenState extends State<mypageScreen> {
                         Container(
                             padding: EdgeInsets.all(3),
                             color: colorindex == 1
-                                ? AppColors.primary
-                                : AppColors.red,
+                                ? AppColors.blue
+                                : AppColors.green,
                             child: Text(
                               '${responseList[0][i][1]}',
-                              style: const TextStyle(fontSize: 13, color: Colors.black),
+                              style: const TextStyle(fontSize: 12, color: Colors.white),
                               textDirection: TextDirection.ltr,
                             )
                         ),
+                        SizedBox(width: 8),
                         Text(
                           '시작일 | ${responseList[0][i][2].toString().trim()}',
-                          style: const TextStyle(fontSize: 15, color: Colors.grey),
+                          style: const TextStyle(fontSize: 13, color: Colors.grey),
                           textDirection: TextDirection.ltr,
                         ),
                       ],
@@ -149,7 +153,7 @@ class _mypageScreenState extends State<mypageScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        elevation: 1,
+        elevation: 0,
         actions: [
           IconButton(
             icon: Icon(Icons.settings, color: Colors.black),
@@ -164,15 +168,21 @@ class _mypageScreenState extends State<mypageScreen> {
         backgroundColor: Colors.white,
       ),
       body: SizedBox(
-        height: size.height,
+        // height: size.height,
         child: Column(
           children: <Widget>[
-            Row(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                CircleAvatar(
+                  radius: 45,
                   child: UserProfileCircleImage(imageUrl: profileImage,size: size.height / 9,),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+                //   child: UserProfileCircleImage(imageUrl: profileImage,size: size.height / 9,),
+                // ),
                 Column(
                   children: [
                     Padding(
@@ -195,29 +205,31 @@ class _mypageScreenState extends State<mypageScreen> {
                                 }
                               });
                             },
-                            child: Text("프로필 수정"),
+                            child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
                           ),
-                        ],
+                          )],
                       ),
                     ),
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 27),
-                  child: Text('>', style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  )),
+                  padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                  child: Icon(
+                    Icons.arrow_forward_ios_outlined,
+                    color: AppColors.primary,
+                    size: 20,
+                  ),
                 ),
               ],
-            ),
-            SizedBox(height: 10,),
-            Container( decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+            ),),
+            SizedBox(height: 5,),
+            Container( decoration: BoxDecoration(border: Border.all(color: AppColors.grey)),
             ),
             Container(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.all(15),
-                  child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 )
             ),
             saveDataProfile(itemsData, topContainer),
