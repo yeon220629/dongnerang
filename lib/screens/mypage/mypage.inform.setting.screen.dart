@@ -24,6 +24,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
   String profilenickSetting = '';
   List profileKeyword = [];
   List profilelocal = [];
+
   @override
   Widget build(BuildContext context) {
     Get.put(PrivateSettingController());
@@ -46,25 +47,33 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                       // print("profilePhotoSetting : $profilePhotoSetting");
                       // print("profilenickSetting : $profilenickSetting");
                       // print("profileKeyword : $profileKeyword");
-                      // print("profilelocal : $profilelocal");
+                      // print("profilelocal : ${profilelocal}");
                       if (controller.formKey.currentState!.validate()) {
                         try {
                           await FirebaseFirestore.instance
                               .collection("users")
                               .doc(UserService.to.currentUser.value!.email)
                               .update(({
-                            "profileImage":profilePhotoSetting,
-                            "name":profilenickSetting,
+                            "profileImage":profilePhotoSetting == ''
+                                            ? profileImage!
+                                            : profilePhotoSetting,
+                            "name":profilenickSetting == ''
+                                      ? userName
+                                      : profilenickSetting,
                             "keyword": profileKeyword[0],
-                            "local": profilelocal[0],
+                            "local": profilelocal.isEmpty
+                                        ? PrivateLocalData
+                                        : profilelocal[0]
                           }));
                           profilePhotoSetting = '';
                           profilenickSetting = '';
                           profileKeyword = [];
                           profilelocal = [];
+                          mypageCustomKeyword = [];
+                          PrivateLocalData = [];
                           EasyLoading.showSuccess("프로필 수정 완료");
                           await FirebaseService.getCurrentUser();
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
                           builder: (BuildContext context) =>
                               mainScreen()), (route) => false);
                         } catch (e) {
@@ -110,12 +119,12 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                             margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
                           ),
                           mypageKeywordStateful(callback: (value) {
+                            // print("mypageKeywordStateful : $value");
                             profileKeyword.add(value);
-                            // print("mypageKeywordStateful : $profileKeyword");
                           }),
                           TagKeywordStateful(callback: (value) {
+                            // print("TagKeywordStateful : $value");
                             profilelocal.add(value);
-                            // print("TagKeywordStateful $profilelocal");
                           }),
                         ],
                       ),
@@ -204,7 +213,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
                                 padding: EdgeInsets.all(10),
-                                children: <Widget>[...generate_tags(mypageCustomKeyword)],
+                                children: <Widget>[Wrap(children: [...generate_tags(mypageCustomKeyword)],spacing: 2.0,)],
                               ),
                             ),
                           ),
@@ -220,31 +229,21 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
   }
   //키워드 삭제 하는 부분으로 일단 보류
   generate_tags(value) {
+    widget.callback(value);
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
-    return FilterChip(
-      selected: selected_tags.contains(name),
-      disabledColor: Colors.blue.shade400,
-      backgroundColor: AppColors.blue,
-      labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      label: Text("${name}"),
-      onSelected: (value) {
-        print("${value} : ${name}");
-        if (select_tags.length > 2) {
-          value = false;
-        }
-        if (value == true) {
-          select_tags.add(name);
-        }
-        if (value == false) {
-          select_tags.remove(name);
-        }
-        setState(() {
-          selected_tags = select_tags;
-          widget.callback(selected_tags);
-        });
-      },
+    return Container(
+      child: Chip(
+        backgroundColor: AppColors.blue,
+        labelStyle: TextStyle(color: AppColors.white),
+        label: Text('$name'),
+        onDeleted: (){
+          setState(() {
+            mypageCustomKeyword.remove(name);
+          });
+        },
+      )
     );
   }
 }

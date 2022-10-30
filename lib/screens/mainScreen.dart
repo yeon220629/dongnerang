@@ -22,7 +22,7 @@ class freeComponent_viewpage extends StatefulWidget {
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
   // final CategoriesScroller categoriesScroller = CategoriesScroller();
-
+  final List<bool> _selectedCenter = <bool>[true, false];
   List<String> LIST_MENU = [];
   bool closeTapContainer = false;
   double topContainer = 0;
@@ -30,7 +30,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   List<Widget> listItems = [];
   List listOrder = [];
   String url = "";
-  var label = "전체소식";
+
   var currentItem = "";
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String dropdownValue = '';
@@ -50,7 +50,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       getPostsData(checklocalItem);
 
       setState(() {
-        dropdownValue = LIST_MENU[0]!;
+        dropdownValue = LIST_MENU[0];
       });
     });
   }
@@ -77,7 +77,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     }
 
     for (String element in listOrder) {
-      valueDoc?.forEach((key, value) {
+      valueDoc.forEach((key, value) {
         if(element == key){
           valueData.add(value);
         }
@@ -126,7 +126,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             child: Row(
                               children: [
                                 Container(
-                                    // padding: EdgeInsets.all(3),
+                                  // padding: EdgeInsets.all(3),
                                     color: colorindex == 1
                                         ? AppColors.blue
                                         : AppColors.green,
@@ -286,19 +286,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   void initState() {
     super.initState();
 
-    pullToRefreshController = PullToRefreshController(
-        options: PullToRefreshOptions(
-          color : Colors.blue,
-        ),
-        onRefresh: () async {
-          webViewController?.reload();
-        }
-    );
     getUserLocalData();
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
       int ListData = value.length;
       for(int i = 0; i < ListData; i++){
-        CustomData.remove(value[i]);
+        PrivateLocalData.add(value[i]);
       }
     });
 
@@ -335,71 +327,81 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final double categoryHeight = size.height*0.30;
 
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
-            elevation: 0,
             // title: Container(
             //     width: 50,
             //     child: Image.asset("assets/images/logo.png"),
             // ),
-            // fit:BoxFit.cover,
-            // height:20,
-            title:
-              DropdownButton(
-                icon: const Icon(Icons.keyboard_arrow_down),
-                isExpanded: false,
-                // menuMaxHeight: 500,
-                // itemHeight: 300,
-                // elevation: 0,
-                // focusNode: size,
-                // style: TextStyle(fontSize: 8),
-                isDense: false,
-                underline: Container(),
-                value: dropdownValue,
-                items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
-                  return DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(item),
-                  );
-                }).toList(),
-                onChanged: (dynamic value){
-                  listItems = [];
-                  List? item = fnChecklocal(value);
-                  if(value == item?.first){
-                    getPostsData("${item?.first}_전체");
-                    // getPostsData(item?.last);
-                  }
-                  setState(() {
-                    dropdownValue = value;
-                    defaultCenter = "전체";
-                  });
-                },
-              ),
             actions: <Widget>[
-              // const SizedBox(width: 160,),
-              IconButton(onPressed: (){
-                // Get.to(() => searchScreen(title: '',));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => searchScreen(title: '',))
-                );
-              },
-              icon: const Icon(Icons.search)),
-              IconButton(onPressed: (){
-                Get.to(() => noticemainpage());
-              }, icon: const Icon(Icons.notifications_none_outlined)),
+              Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(width: size.width / 22,),
+                          Container(
+                            width: size.width / 8,
+                            child: Image.asset("assets/images/logo.png"),
+                          ),
+                          SizedBox(width: size.width / 15,),
+                          DropdownButton(
+                            value: dropdownValue,
+                            items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
+                              return DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(item),
+                              );
+                            }).toList(),
+                            onChanged: (dynamic value){
+                              listItems = [];
+                              List? item = fnChecklocal(value);
+                              if(value == item?.first){
+                                getPostsData("${item?.first}_전체");
+                                // getPostsData(item?.last);
+                              }
+                              setState(() {
+                                dropdownValue = value;
+                                defaultCenter = "전체";
+                              });
+                            },
+                          ),
+                          const SizedBox(width: 130,),
+                          IconButton(onPressed: (){
+                            // Get.to(() => searchScreen(title: '',));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => searchScreen(title: '',))
+                            );
+                          },
+                              icon: const Icon(Icons.search)),
+                          IconButton(onPressed: (){
+                            Get.to(() => noticemainpage());
+                          }, icon: const Icon(Icons.notifications_none_outlined)),
+                        ],
+                      ),
+                      // GestureDetector(
+                      //     onTap: () {
+                      //       Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(builder: (context) => introduceWidget(),),);
+                      //     },
+                      //     child: Image.asset("assets/images/banner.png")
+                      // ),
+                    ],
+                  )
+              )
             ],
           ),
           body: SizedBox(
             height: size.height,
             child: Column(
               children: <Widget>[
-                //배너
                 GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -408,108 +410,99 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     },
                     child: Image.asset("assets/images/banner.png")
                 ),
-                BottomNavigationBar(
-                    currentIndex: cuindex,
-                    elevation: 1.0,
-                    showUnselectedLabels: true,
-                    showSelectedLabels: true,
-                    selectedItemColor: AppColors.primary,
-                    unselectedItemColor: AppColors.grey,
-                    selectedLabelStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20
-                    ),
-                    unselectedLabelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    ),
-                    onTap: (value){
-                      setState(() {
-                        cuindex = value;
-                        if(value == 0){
-                          label = "동네소식";
-                          defaultCenter = '전체';
-                          getPostsData("${fnChecklocal(dropdownValue)?.first}_전체");
-                          setState(() {});
-                        }
-                        else if(value == 1){
-                          label = "서울시 소식";
-                          getPostsData('서울_전체');
-                          setState(() {});
-                        }
-                      });
-                    },
-                    items: [
-                      new BottomNavigationBarItem(
-                        label: "동네소식",
-                        icon: Icon(
-                          Icons.linear_scale, size: 0,
-                          color: cuindex == 0
-                              ? AppColors.primary
-                              : AppColors.grey,
-                          //
-                        )
-                      ),
-                      new BottomNavigationBarItem(
-                        label: "서울시 소식",
-                        icon: Icon(Icons.linear_scale, size: 0,
-                        color: cuindex == 1 ? AppColors.primary : AppColors.grey,
-                        )
-                      ),
-                    ]
-                ),
-                cuindex == 0
-                    ? DropdownButton(
-                    value: defaultCenter,
-                    items: centerCheck.map( (value) {
-                      if(value == "전체"){
-                        return DropdownMenuItem (
-                          value: value, child: Text(value),
-                        );
-                      }else{
-                        return DropdownMenuItem (
-                          value: value, child: Text("${dropdownValue+value}"),
-                          // value: value, child: Text(value),
-                        );
-                      }
-                    },
-                    ).toList(),
-                    onChanged: (value){
-                      setState(() {
-                        listItems = [];
-                        defaultCenter = value as String?;
-                        getPostsData(dropdownValue+"_"+defaultCenter!);
-                      }
-                      );
-                    }
-                )
-                : SizedBox(),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: itemsData.length,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (c, i){
-                      double scale = 1.0;
-                      if (topContainer > 0.5){
-                        scale = i + 0.5 - topContainer;
-                        if (scale < 0 ) { scale = 0;}
-                        else if (scale > 1) { scale = 1; }
-                      }
-                      return Opacity(
-                        opacity: scale,
-                        child: Transform(
-                          transform: Matrix4.identity()..scale(scale, scale),
-                          alignment: Alignment.bottomCenter,
-                          child: Align(
-                            heightFactor: 0.95,
-                            alignment: Alignment.topCenter,
-                            child: itemsData[i],
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        ToggleButtons(
+                          direction: Axis.horizontal,
+                          isSelected: _selectedCenter,
+                          onPressed: (int index) {
+                            setState(() {
+                              for (int i = 0; i < _selectedCenter.length; i++) {
+                                _selectedCenter[i] = i == index;
+                              }
+                              if(index == 0){
+                                cuindex = 0;
+                                defaultCenter = '전체';
+                                getPostsData("${fnChecklocal(dropdownValue)?.first}_전체");
+                              }else {
+                                cuindex = 1;
+                                getPostsData('서울_전체');
+                              }
+                            });
+                          },
+                          fillColor: AppColors.white,
+                          borderColor: AppColors.white,
+                          selectedBorderColor: AppColors.white,
+                          selectedColor: AppColors.blue,
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
+                          color: AppColors.black,
+                          constraints: const BoxConstraints(
+                            minHeight: 40.0,
+                            minWidth: 80.0,
+                          ),
+                          children: CategoryCenter,
                         ),
-                      );
-                    }
-                  )
-                )
+                      ],
+                    ),
+                    SizedBox(width: size.width / 4,),
+                    cuindex == 0
+                        ? DropdownButton(
+                        value: defaultCenter,
+                        items: centerCheck.map( (value) {
+                          if(value == "전체"){
+                            return DropdownMenuItem (
+                              value: value, child: Text(value),
+                            );
+                          }else{
+                            return DropdownMenuItem (
+                              value: value, child: Text("${dropdownValue+value}"),
+                              // value: value, child: Text(value),
+                            );
+                          }
+                        },
+                        ).toList(),
+                        onChanged: (value){
+                          setState(() {
+                            listItems = [];
+                            defaultCenter = value as String?;
+                            getPostsData(dropdownValue+"_"+defaultCenter!);
+                          }
+                          );
+                        }
+                    )
+                        : SizedBox(),
+                  ],
+                ),
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: itemsData.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (c, i){
+                          double scale = 1.0;
+                          if (topContainer > 0.5){
+                            scale = i + 0.5 - topContainer;
+                            if (scale < 0 ) { scale = 0;}
+                            else if (scale > 1) { scale = 1; }
+                          }
+                          return Opacity(
+                            opacity: scale,
+                            child: Transform(
+                              transform: Matrix4.identity()..scale(scale, scale),
+                              alignment: Alignment.bottomCenter,
+                              child: Align(
+                                heightFactor: 0.95,
+                                alignment: Alignment.topCenter,
+                                child: itemsData[i],
+                              ),
+                            ),
+                          );
+                        }
+                    )
+                ),
               ],
             ),
           ),
@@ -517,4 +510,5 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     );
   }
 }
+
 

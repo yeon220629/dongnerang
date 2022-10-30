@@ -93,12 +93,18 @@ final urlController = TextEditingController();
 List CustomKeyword = [];
 List mypageCustomKeyword = [];
 List mypageCustomlocal = [];
+List PrivateLocalData = [];
+
 String? profileImage = '';
 String? userName = '';
 late Future<List> mypageUserSaveData;
 String? userUpdageName;
 List userUpdateData = [];
 
+const List<Widget> CategoryCenter = <Widget>[
+  Text('동네소식'),
+  Text('서울시 소식'),
+];
 
 final List CustomData = [
   "강남", "강동", "강북","강서","관악",
@@ -127,7 +133,7 @@ List? fnChecklocal(String local){
   }else if(local == '광진'){
     return ['광진', 'GWANGZIN'];
   }else if(local == '구로'){  //구로 없어서 추가함
-    return ['구로', 'GOORO'];
+    return ['구로', 'GURO'];
   }else if(local == '금천'){
     return ['금천', 'GEUAMCHEOUN'];
   }else if(local == '노원'){

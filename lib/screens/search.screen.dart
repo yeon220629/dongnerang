@@ -44,7 +44,7 @@ class _searchScreenState extends State<searchScreen>
     for (int i = 0; i < getUserLocaldata.length; i++) {
       item?.add(fnChecklocal(getUserLocaldata[i]));
     }
-    print(item);
+
     for (int i = 0; i < item!.length; i++) {
       DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore
           .instance.collection("crawlingData").doc(item![i][1]);
@@ -64,6 +64,7 @@ class _searchScreenState extends State<searchScreen>
 
     for (var post in responseList) {
       if (post['title'].contains(value)) {
+        listItems = [];
         listItems.add(GestureDetector(
             onTap: () async {
               final Uri url = Uri.parse('${post["link"]}');
@@ -147,7 +148,6 @@ class _searchScreenState extends State<searchScreen>
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    print("SearcheditingController.text : ${SearcheditingController.text}");
 
     return Scaffold(
       appBar: AppBar(
@@ -163,13 +163,12 @@ class _searchScreenState extends State<searchScreen>
               onChanged: (value){
                 setState(() {
                   if(value.isEmpty){
-                    print("빈값임");
+                    // print("빈값임");
                     label = '최근 검색어';
                     resetLabel = '전체 삭제';
                     isTextEdit = true;
                   }else{
-                    print("비어있지 않음");
-                    itemsData = [];
+                    // print("비어있지 않음");
                     label = '검색 결과';
                     resetLabel = '';
                     isTextEdit = false;
@@ -200,10 +199,7 @@ class _searchScreenState extends State<searchScreen>
       ),
       body: SizedBox(
         height: size.height,
-        child : Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
+          child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,17 +259,11 @@ class _searchScreenState extends State<searchScreen>
                 ],
               )
             ),
-          ],
         )
-      )
     );
   }
 
   Widget searchResult(double height, double width){
-
-    print(ResentSearch);
-    List searchListResult = [];
-
     return Container(
       height: height/ 2.3,
       width: width,
@@ -299,12 +289,11 @@ class _searchScreenState extends State<searchScreen>
             child: Column(
               children: [
                 Expanded(
-                  // width: width,
-                  // color: AppColors.white,
                   child: RichText(
                     text: TextSpan(
                       children: [
-                        WidgetSpan(child: TextButton(
+                        WidgetSpan(
+                          child: TextButton(
                             onPressed: (){
                               setState(() {
                                 SearcheditingController.text = ResentSearch[index];
@@ -312,14 +301,13 @@ class _searchScreenState extends State<searchScreen>
                                 getPostsData(ResentSearch[index]);
                               });
                             },
-                            child: Text("${ResentSearch[index]}"))
+                          child: Text("${ResentSearch[index]}",style: TextStyle(color: AppColors.black),)),
                         ),
                         WidgetSpan(
                           alignment: PlaceholderAlignment.bottom,
                           child: IconButton(
                               onPressed: (){
                                 setState(() {
-                                  print(index);
                                   ResentSearch.remove(ResentSearch[index]);
                                 });
                               },
