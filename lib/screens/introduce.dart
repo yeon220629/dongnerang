@@ -70,7 +70,7 @@ class _introduceWidgetState extends State<introduceWidget> {
               child: Stack(
                 children: [
                   InAppWebView(
-                     initialUrlRequest: URLRequest(url: Uri.parse('https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d')),
+                     initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse('https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d'))),
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
                       webViewController = controller;

@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
@@ -6,12 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
 import 'introduce.dart';
 import 'notice.main.screen.dart';
+
 
 class freeComponent_viewpage extends StatefulWidget {
   const freeComponent_viewpage({Key? key}) : super(key: key);
@@ -29,14 +32,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   List listOrder = [];
-  String url = "";
+  List dateTimeSort = [];
 
   var currentItem = "";
+  String compareTime = '';
+  String url = "";
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String dropdownValue = '';
   int cuindex = 0;
   int colorindex = 0;
   String? defaultCenter = '전체';
+  String? SeouldefaultCenter = "분야별 새소식";
   String? centerName = '';
 
   Future<void> getUserLocalData() async {
@@ -84,6 +90,25 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       });
     }
     responseList = valueData;
+
+    // print(valueData.runtimeType);
+    // print("responseList : ${responseList.runtimeType}");
+    //
+    // for( var dateSort in valueData){
+    //   if(dateSort['registrationdate'].contains("/")){
+    //     // print("데이터에 슬래시가 포함 되어 있음 : ${post['registrationdate'].split('/')[0]}");
+    //     dateSort['registrationdate'] = dateSort['registrationdate'].split('/')[0];
+    //   }
+    //   dateSort['registrationdate'] = dateSort['registrationdate'].trim();
+    //   var compareDate = DateTime.parse(dateSort['registrationdate']);
+    //   dateTimeSort.add(compareDate);
+    //   print(dateTimeSort.reversed);
+    //   dateTimeSort.sort((a,b) {
+    //     return a.compareTo(b);
+    //   });
+      // compareTime = dateTimeSort.toString().split(' ')[0];
+      // print(compareTime);
+    // }
 
     for ( var post in responseList){
       if(post["center_name "].toString().contains("구청")){
@@ -135,14 +160,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                     child: Text(
                                       '${post['center_name ']}',
                                       style: const TextStyle(fontSize: 12, color: Colors.white),
-                                      textDirection: TextDirection.ltr,
+                                      textDirection: ui.TextDirection.ltr,
                                     )
                                 ),
                                 SizedBox(width: 8),
                                 Text(
                                   '시작일 | ${post['registrationdate'].trim()}',
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
-                                  textDirection: TextDirection.ltr,
+                                  textDirection: ui.TextDirection.ltr,
                                 ),
                               ],
                             )
@@ -197,14 +222,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                     child: Text(
                                       '${post['center_name ']}',
                                       style: const TextStyle(fontSize: 13, color: Colors.white),
-                                      textDirection: TextDirection.ltr,
+                                      textDirection: ui.TextDirection.ltr,
                                     )
                                 ),
                                 SizedBox(width: 8),
                                 Text(
                                   '시작일 | ${post['registrationdate'].trim()}',
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
-                                  textDirection: TextDirection.ltr,
+                                  textDirection: ui.TextDirection.ltr,
                                 ),
                               ],
                             )
@@ -258,14 +283,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   child: Text(
                                     '${post['center_name ']}',
                                     style: const TextStyle(fontSize: 13, color: Colors.white),
-                                    textDirection: TextDirection.ltr,
+                                    textDirection: ui.TextDirection.ltr,
                                   )
                               ),
                               SizedBox(width: 8),
                               Text(
                                 '시작일 | ${post['registrationdate'].trim()}',
                                 style: const TextStyle(fontSize: 13, color: Colors.grey),
-                                textDirection: TextDirection.ltr,
+                                textDirection: ui.TextDirection.ltr,
                               ),
                             ],
                           )
@@ -451,15 +476,39 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     SizedBox(width: size.width / 4,),
                     cuindex == 0
                         ? DropdownButton(
-                        value: defaultCenter,
-                        items: centerCheck.map( (value) {
+                            value: defaultCenter,
+                            items: centerCheck.map( (value) {
+                              if(value == "전체"){
+                                return DropdownMenuItem (
+                                  value: value, child: Text(value),
+                                );
+                              }else{
+                                return DropdownMenuItem (
+                                  value: value, child: Text("${dropdownValue+value}"),
+                                  // value: value, child: Text(value),
+                                );
+                              }
+                            },
+                            ).toList(),
+                            onChanged: (value){
+                              setState(() {
+                                listItems = [];
+                                defaultCenter = value as String?;
+                                getPostsData(dropdownValue+"_"+defaultCenter!);
+                              }
+                              );
+                            }
+                        )
+                        : DropdownButton(
+                        value: SeouldefaultCenter,
+                        items: SeoulCheck.map( (value) {
                           if(value == "전체"){
                             return DropdownMenuItem (
                               value: value, child: Text(value),
                             );
                           }else{
                             return DropdownMenuItem (
-                              value: value, child: Text("${dropdownValue+value}"),
+                              value: value, child: Text("$value"),
                               // value: value, child: Text(value),
                             );
                           }
@@ -468,13 +517,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         onChanged: (value){
                           setState(() {
                             listItems = [];
-                            defaultCenter = value as String?;
-                            getPostsData(dropdownValue+"_"+defaultCenter!);
+                            SeouldefaultCenter = value as String?;
+                            if(SeouldefaultCenter == '분야별 새소식'){
+                              print("test");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => introduceWidget(),),);
+                            }
                           }
                           );
                         }
-                    )
-                        : SizedBox(),
+                    ),
                   ],
                 ),
                 Expanded(

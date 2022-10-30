@@ -40,9 +40,6 @@ class mainScreenState extends State<mainScreen> {
                       showUnselectedLabels: false,
                       selectedItemColor: AppColors.primary,
                       unselectedItemColor: AppColors.grey,
-                      // selectedLabelStyle: TextStyle(color : AppColors.primary),
-                      // unselectedLabelStyle: TextStyle(color : AppColors.grey),
-                      // currentIndex: _selectedIndex,
                       items: [
                         BottomNavigationBarItem(
                           icon: Icon(
@@ -74,16 +71,6 @@ class mainScreenState extends State<mainScreen> {
                             ),
                             label: "로그인 스크린"
                         ),
-                        BottomNavigationBarItem(
-                            icon: Icon(
-                              Icons.ac_unit,
-                              color:
-                                navigationController.currentBottomMenuIndex.value == 3
-                                  ? AppColors.primary
-                                  : AppColors.grey,
-                            ),
-                            label: "세팅 스크린"
-                        ),
                       ],
                       onTap: (index) {
                         // print(index);
@@ -101,7 +88,6 @@ class mainScreenState extends State<mainScreen> {
             children: [
               freeComponent_viewpage(),
               mypageScreen(),
-              // privateSettingScreen(),
               LoginScreen(),
               // SplashScreen()
             ],

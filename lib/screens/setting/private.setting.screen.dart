@@ -244,38 +244,20 @@ class _KeywordStatefulState extends State<KeywordStateful> {
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
-    return erased? Container()
-        : Chip(
-      // selected: selected_tags.contains(name),
-      // disabledColor: Colors.blue.shade400,
-      backgroundColor: AppColors.primary,
-      labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      label: Text("${name}"),
-      // useDeleteButtonTooltip: true,
-      deleteButtonTooltipMessage: '삭제하시겠습니까?',
-      deleteIcon: Icon(Icons.close, size: 15,),
-      deleteIconColor: Colors.white,
-      onDeleted: () {
-        setState(() {
-          erased = true;
-        });
-      },
-      // onSelected: (value) {
-      //   print("${value} : ${name}");
-      //   if (select_tags.length > 2) {
-      //     value = false;
-      //   }
-      //   if (value == true) {
-      //     select_tags.add(name);
-      //   }
-      //   if (value == false) {
-      //     select_tags.remove(name);
-      //   }
-      //   setState(() {
-      //     selected_tags = select_tags;
-      //     widget.callback(selected_tags);
-      //   });
-      // },
+    return Container(
+      child: Chip(
+        backgroundColor: AppColors.primary,
+        labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        deleteButtonTooltipMessage: '삭제하시겠습니까?',
+        deleteIcon: Icon(Icons.close, size: 15,),
+        deleteIconColor: Colors.white,
+        label: Text('$name'),
+        onDeleted: (){
+          setState(() {
+            CustomKeyword.remove(name);
+          });
+        },
+      )
     );
   }
 }
@@ -409,6 +391,7 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   }
 
   generate_tags(value) {
+    print(value);
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {

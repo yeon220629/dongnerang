@@ -103,7 +103,7 @@ List userUpdateData = [];
 
 const List<Widget> CategoryCenter = <Widget>[
   Text('동네소식'),
-  Text('서울시 소식'),
+  Text('서울소식'),
 ];
 
 final List CustomData = [
@@ -212,3 +212,4 @@ List dropdownDay = ['1','2','3','4','5','6','7','8','9','10','11','12','13',
             '27','28','29','30','31'
             ];
 List centerCheck = ['전체', '문화재단', '구청'];
+List SeoulCheck = ['분야별 새소식','행사및축제','이벤트 신청','NPO','청년몽땅정보통','서울산업진흥원'];

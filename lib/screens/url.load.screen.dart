@@ -165,7 +165,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                   InAppWebView(
                     // key: webViewKey,
                     // initialUrlRequest: URLRequest(url: Uri.parse("https://inappwebview.dev/")),
-                    initialUrlRequest: URLRequest(url: widget.urldata),
+                    initialUrlRequest: URLRequest(url: WebUri.uri(widget.urldata)),
                     initialOptions: options,
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
