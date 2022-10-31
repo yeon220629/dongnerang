@@ -132,7 +132,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               child: Container(
                   width: 500,
                   height: 110,
-                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                       border: Border.all(color: Colors.black12, width: 1)), //테두리
@@ -149,7 +149,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           maxLines: 2,
                         ),
                         const SizedBox(
-                          height: 15,
+                          height: 10,
                         ),
                         Expanded(
                             child: Row(
@@ -157,8 +157,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 Container(
                                   // padding: EdgeInsets.all(3),
                                     color: colorindex == 1
-                                        ? AppColors.blue
-                                        : AppColors.green,
+                                        ? Color(0xff5496D2)
+                                        : Color(0xff3CC181),
                                     // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
                                     // [_random.nextInt(9) * 100],
                                     child: Text(
@@ -390,7 +390,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
                 return DropdownMenuItem<String>(
                   value: item,
-                  child: Text(item),
+                  child: Text(item, style: TextStyle(fontWeight: FontWeight.w600)),
                 );
               }).toList(),
               onChanged: (dynamic value){
