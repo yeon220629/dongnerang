@@ -26,10 +26,10 @@ class _noticemainpageState extends State<noticemainpage>
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
-          color: AppColors.primary,
+          // color: AppColors.primary,
         ),
         centerTitle: true,
-        title: const Text('알림', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),),
+        title: const Text('알림', style: TextStyle( color: AppColors.black),),
         bottom: TabBar(
           // indicatorColor: AppColors.blue,
           unselectedLabelStyle: TextStyle(color: AppColors.grey),

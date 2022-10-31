@@ -361,75 +361,64 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final double categoryHeight = size.height*0.30;
 
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
+            elevation: 0,
             // title: Container(
             //     width: 50,
             //     child: Image.asset("assets/images/logo.png"),
             // ),
+            // fit:BoxFit.cover,
+            // height:20,
+            title:
+            DropdownButton(
+              icon: const Icon(Icons.keyboard_arrow_down),
+              isExpanded: false,
+              // menuMaxHeight: 500,
+              // itemHeight: 300,
+              // elevation: 0,
+              // focusNode: size,
+              // style: TextStyle(fontSize: 8),
+              isDense: false,
+              underline: Container(),
+              value: dropdownValue,
+              items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
+                return DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(item),
+                );
+              }).toList(),
+              onChanged: (dynamic value){
+                listItems = [];
+                List? item = fnChecklocal(value);
+                if(value == item?.first){
+                  getPostsData("${item?.first}_전체");
+                  // getPostsData(item?.last);
+                }
+                setState(() {
+                  dropdownValue = value;
+                  defaultCenter = "전체";
+                });
+              },
+            ),
             actions: <Widget>[
-              Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(width: size.width / 22,),
-                          Container(
-                            width: size.width / 8,
-                            child: Image.asset("assets/images/logo.png"),
-                          ),
-                          SizedBox(width: size.width / 15,),
-                          DropdownButton(
-                            value: dropdownValue,
-                            items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
-                              return DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(item),
-                              );
-                            }).toList(),
-                            onChanged: (dynamic value){
-                              listItems = [];
-                              List? item = fnChecklocal(value);
-                              if(value == item?.first){
-                                getPostsData("${item?.first}_전체");
-                                // getPostsData(item?.last);
-                              }
-                              setState(() {
-                                dropdownValue = value;
-                                defaultCenter = "전체";
-                              });
-                            },
-                          ),
-                          const SizedBox(width: 130,),
-                          IconButton(onPressed: (){
-                            // Get.to(() => searchScreen(title: '',));
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => searchScreen(title: '',))
-                            );
-                          },
-                              icon: const Icon(Icons.search)),
-                          IconButton(onPressed: (){
-                            Get.to(() => noticemainpage());
-                          }, icon: const Icon(Icons.notifications_none_outlined)),
-                        ],
-                      ),
-                      // GestureDetector(
-                      //     onTap: () {
-                      //       Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(builder: (context) => introduceWidget(),),);
-                      //     },
-                      //     child: Image.asset("assets/images/banner.png")
-                      // ),
-                    ],
-                  )
-              )
+              // const SizedBox(width: 160,),
+              IconButton(onPressed: (){
+                // Get.to(() => searchScreen(title: '',));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => searchScreen(title: '',))
+                );
+              },
+                  icon: const Icon(Icons.search)),
+              IconButton(onPressed: (){
+                Get.to(() => noticemainpage());
+              }, icon: const Icon(Icons.notifications_none_outlined)),
             ],
           ),
           body: SizedBox(

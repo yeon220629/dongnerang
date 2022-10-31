@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../constants/colors.constants.dart';
 import '../widgets/app_button.widget.dart';
@@ -29,6 +30,12 @@ class IntroScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 28, color: AppColors.primary),
               ),
               SizedBox(height: 250,),
+              Lottie.asset(
+                'assets/lottie/68894-running.json',
+                width: 100,
+                height: 100,
+                fit: BoxFit.fill,
+              ),
               SizedBox(
                 width: Get.size.width,
                 child: AppButton(
