@@ -32,7 +32,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   List listOrder = [];
-  List dateTimeSort = [];
 
   var currentItem = "";
   String compareTime = '';
@@ -82,33 +81,33 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       listOrder.add("${numberName}_${i.toString().trim()}");
     }
 
+    List<DateTime> f = [];
     for (String element in listOrder) {
       valueDoc.forEach((key, value) {
         if(element == key){
-          valueData.add(value);
+          DateTime dateTime = value["registrationdate"].toDate();
+          f.add(dateTime);
         }
       });
     }
-    responseList = valueData;
+    f.sort((a,b){
+      return b.compareTo(a);
+    });
 
-    // print(valueData.runtimeType);
-    // print("responseList : ${responseList.runtimeType}");
-    //
-    // for( var dateSort in valueData){
-    //   if(dateSort['registrationdate'].contains("/")){
-    //     // print("데이터에 슬래시가 포함 되어 있음 : ${post['registrationdate'].split('/')[0]}");
-    //     dateSort['registrationdate'] = dateSort['registrationdate'].split('/')[0];
-    //   }
-    //   dateSort['registrationdate'] = dateSort['registrationdate'].trim();
-    //   var compareDate = DateTime.parse(dateSort['registrationdate']);
-    //   dateTimeSort.add(compareDate);
-    //   print(dateTimeSort.reversed);
-    //   dateTimeSort.sort((a,b) {
-    //     return a.compareTo(b);
-    //   });
-      // compareTime = dateTimeSort.toString().split(' ')[0];
-      // print(compareTime);
-    // }
+    for(DateTime a in f){
+      for (String element in listOrder) {
+        valueDoc.forEach((key, value) {
+          if(element == key){
+            DateTime dateTime = value["registrationdate"].toDate();
+            if(a == dateTime){
+              valueData.add(value);
+            }
+          }
+        });
+      }
+    }
+
+    responseList = valueData;
 
     for ( var post in responseList){
       if(post["center_name "].toString().contains("구청")){
@@ -116,13 +115,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       }else{
         colorindex = 0;
       }
+
+      DateTime dateTime = post["registrationdate"].toDate();
+
       if(centerName == '구청'){
         if(post["center_name "].toString().contains("구청")){
           listItems.add( GestureDetector(
               onTap: () async{
                 final Uri url = Uri.parse('${post["link"]}');
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                    url, post["title"], post['center_name '], post['registrationdate'], 0
+                  // url, post["title"], post['center_name '], post['registrationdate'], 0
+                  url, post["title"], post['center_name '], dateTime, 0
                 )));
               },
               child: Container(
@@ -165,7 +168,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  '시작일 | ${post['registrationdate'].trim()}',
+                                  // '시작일 | ${post['registrationdate'].trim()}',
+                                  '시작일 | $dateTime',
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                                   textDirection: ui.TextDirection.ltr,
                                 ),
@@ -184,7 +188,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               onTap: () async{
                 final Uri url = Uri.parse('${post["link"]}');
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                    url, post["title"], post['center_name '], post['registrationdate'], 0
+                    // url, post["title"], post['center_name '], post['registrationdate'], 0
+                    url, post["title"], post['center_name '], dateTime, 0
                 )));
               },
               child: Container(
@@ -227,7 +232,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  '시작일 | ${post['registrationdate'].trim()}',
+                                  '시작일 | $dateTime',
+                                  // '시작일 | ${post['registrationdate'].trim()}',
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                                   textDirection: ui.TextDirection.ltr,
                                 ),
@@ -238,67 +244,69 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     ),
                   )
               ))
-          );
-        }
-      }else{
+            );
+          }
+        }else{
         listItems.add( GestureDetector(
-            onTap: () async{
-              final Uri url = Uri.parse('${post["link"]}');
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                  url, post["title"], post['center_name '], post['registrationdate'], 0
-              )));
-            },
-            child: Container(
-                width: 500,
-                height: 110,
-                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8), //모서리를 둥글게
-                    border: Border.all(color: Colors.black12, width: 1)), //테두리
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${post["title"]}',
-                        style: const TextStyle(fontSize: 15),
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.justify,
-                        maxLines: 2,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Expanded(
-                          child: Row(
-                            children: [
-                              Container(
-                                  padding: EdgeInsets.all(3),
-                                  color: colorindex == 1
-                                      ? AppColors.blue
-                                      : AppColors.green,
-                                  // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                                  // [_random.nextInt(9) * 100],
-                                  child: Text(
-                                    '${post['center_name ']}',
-                                    style: const TextStyle(fontSize: 13, color: Colors.white),
-                                    textDirection: ui.TextDirection.ltr,
-                                  )
-                              ),
-                              SizedBox(width: 8),
-                              Text(
-                                '시작일 | ${post['registrationdate'].trim()}',
-                                style: const TextStyle(fontSize: 13, color: Colors.grey),
-                                textDirection: ui.TextDirection.ltr,
-                              ),
-                            ],
-                          )
-                      )
-                    ],
-                  ),
-                )
-            ))
+          onTap: () async{
+            final Uri url = Uri.parse('${post["link"]}');
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
+                // url, post["title"], post['center_name '], post['registrationdate'], 0
+                url, post["title"], post['center_name '], dateTime, 0
+            )));
+          },
+          child: Container(
+              width: 500,
+              height: 110,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                  border: Border.all(color: Colors.black12, width: 1)), //테두리
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '${post["title"]}',
+                      style: const TextStyle(fontSize: 15),
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.justify,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Expanded(
+                        child: Row(
+                          children: [
+                            Container(
+                                padding: EdgeInsets.all(3),
+                                color: colorindex == 1
+                                    ? AppColors.blue
+                                    : AppColors.green,
+                                // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                                // [_random.nextInt(9) * 100],
+                                child: Text(
+                                  '${post['center_name ']}',
+                                  style: const TextStyle(fontSize: 13, color: Colors.white),
+                                  textDirection: ui.TextDirection.ltr,
+                                )
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              '시작일 | $dateTime',
+                              // '시작일 | ${post['registrationdate'].trim()}',
+                              style: const TextStyle(fontSize: 13, color: Colors.grey),
+                              textDirection: ui.TextDirection.ltr,
+                            ),
+                          ],
+                        )
+                    )
+                  ],
+                ),
+              )
+          ))
         );
       }
     }

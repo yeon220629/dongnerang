@@ -63,6 +63,9 @@ class _searchScreenState extends State<searchScreen>
     List<dynamic> responseList = valueData;
 
     for (var post in responseList) {
+
+      DateTime dateTime = post["registrationdate"].toDate();
+
       if (post['title'].contains(value)) {
         listItems = [];
         listItems.add(GestureDetector(
@@ -115,7 +118,8 @@ class _searchScreenState extends State<searchScreen>
                           ),
                           SizedBox(width: 10),
                           Text(
-                            '시작일 | ${post['registrationdate'].trim()}',
+                            // '시작일 | ${post['registrationdate'].trim()}',
+                            '시작일 | $dateTime',
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.grey),
                             textDirection: TextDirection.ltr,

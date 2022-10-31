@@ -10,7 +10,6 @@ import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
 import 'settingsPage.screen.dart';
 import 'mypage.inform.setting.screen.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class mypageScreen extends StatefulWidget {
   const mypageScreen({Key? key}) : super(key: key);
@@ -44,15 +43,16 @@ class _mypageScreenState extends State<mypageScreen> {
     });
 
     responseList = valueData;
-    // print(responseList[0].length);
     for(int i = 0; i< responseList[0].length; i++){
-      // print("$i 번호 : ${responseList[0][i]}");
       // 문화재단 pri
       if(responseList[0][i][1].toString().contains("_")){
         colorindex = 1;
       }else{
         colorindex = 0;
       }
+
+      DateTime dateTime = responseList[0][i][2].toDate();
+
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${responseList[0][i][0]}');
@@ -97,7 +97,8 @@ class _mypageScreenState extends State<mypageScreen> {
                         ),
                         SizedBox(width: 8),
                         Text(
-                          '시작일 | ${responseList[0][i][2].toString().trim()}',
+                          // '시작일 | ${responseList[0][i][2].toString().trim()}',
+                          '시작일 | $dateTime',
                           style: const TextStyle(fontSize: 13, color: Colors.grey),
                           textDirection: TextDirection.ltr,
                         ),
