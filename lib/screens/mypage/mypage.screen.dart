@@ -5,6 +5,7 @@ import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
@@ -233,11 +234,11 @@ class _mypageScreenState extends State<mypageScreen> {
             Container(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(10),
                   child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 )
             ),
-            saveDataProfile(itemsData, topContainer),
+            saveDataProfile(itemsData, topContainer)
           ]
         ),
     );
@@ -245,30 +246,57 @@ class _mypageScreenState extends State<mypageScreen> {
 }
 
 Widget saveDataProfile(List itemsData, topContainer) {
-  return Expanded(
-      child: ListView.builder(
-          itemCount: itemsData.length,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (c, i){
-            double scale = 1.0;
-            if (topContainer > 0.5){
-              scale = i + 0.5 - topContainer;
-              if (scale < 0 ) { scale = 0;}
-              else if (scale > 1) { scale = 1; }
-            }
-            return Opacity(
-              opacity: scale,
-              child: Transform(
-                transform: Matrix4.identity()..scale(scale, scale),
-                alignment: Alignment.bottomCenter,
-                child: Align(
-                  heightFactor: 0.95,
-                  alignment: Alignment.topCenter,
-                  child: itemsData[i],
+  return Expanded(child: ListView.builder(
+      shrinkWrap: true,
+      itemCount: itemsData.length,
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (c, i){
+        double scale = 1.0;
+        if (topContainer > 0.5){
+          scale = i + 0.5 - topContainer;
+          if (scale < 0 ) { scale = 0;}
+          else if (scale > 1) { scale = 1; }
+        }
+        return Slidable(
+            // Specify a key if the Slidable is dismissible.
+              key: const ValueKey(0),
+              child: Opacity(
+                opacity: scale,
+                child: Transform(
+                  transform: Matrix4.identity()..scale(scale, scale),
+                  alignment: Alignment.bottomCenter,
+                  child: Align(
+                    heightFactor: 0.95,
+                    alignment: Alignment.topCenter,
+                    child: itemsData[i],
+                  ),
                 ),
               ),
-            );
-          }
-      )
+              // The end action pane is the one at the right or the bottom side.
+              endActionPane: const ActionPane(
+                motion: ScrollMotion(),
+                children: [
+                  SlidableAction(
+                    // An action can be bigger than the others.
+                    flex: 1,
+                    onPressed: doNothing,
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    icon: Icons.share_outlined,
+                    label: '공유',
+                  ),
+                  SlidableAction(
+                    onPressed: doNothing,
+                    backgroundColor: AppColors.red,
+                    foregroundColor: Colors.white,
+                    icon: Icons.delete_outline_outlined,
+                    label: '삭제',
+                  ),
+                ],
+              ));
+      }
+  )
   );
 }
+
+void doNothing(BuildContext context) {}
