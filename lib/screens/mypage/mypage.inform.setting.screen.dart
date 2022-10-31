@@ -17,6 +17,7 @@ import '../../controller/private.setting.controller.dart';
 import '../../services/firebase.service.dart';
 import '../../services/user.service.dart';
 import '../../util/logger.service.dart';
+import '../../widgets/user_profile_image.widget.dart';
 import '../mainScreenBar.dart';
 
 class mypageInformSettingScreen extends GetView<PrivateSettingController> {
@@ -358,32 +359,42 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
     return Center(
       child: Stack(
         children: <Widget>[
-          ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: _imageFile == null
-                  // ? Image.asset("assets/images/default-profile.png", fit: BoxFit.contain,)
-                  ? profileimagetype
-                    ? CachedNetworkImage(imageUrl: profileImage!)
-                    : Image.file(File(profileImage!), width: size.width / 5.5)
-                  // : CachedNetworkImage(imageUrl: profileImage!)
-                  // : Image.network(_imageFile!.path)
-                  :Image.file(File(_imageFile!.path), width: size.width / 5.5)
+          InkWell(
+        onTap: () {
+          // 클릭시 모달 팝업을 띄워준다.
+          showModalBottomSheet(context: context, builder: ((builder) => bottomSheet()));
+        },
+            child: ClipOval(
+            child: SizedBox.fromSize(
+            size: Size.fromRadius(55),
+                // borderRadius: BorderRadius.circular(125),
+                // clipBehavior: Clip,
+            child: _imageFile == null
+                // ? Image.asset("assets/images/default-profile.png", fit: BoxFit.contain,)
+                    ? profileimagetype
+                    ? CachedNetworkImage(imageUrl: profileImage!, width: size.width / 2.2, fit: BoxFit.contain)
+                    : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
+                // : CachedNetworkImage(imageUrl: profileImage!)
+                // : Image.network(_imageFile!.path)
+                    :Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,))
+            )
           ),
+          // SizedBox(height: 660,),
           Positioned(
-              bottom: 20,
-              right: 20,
-              child: InkWell(
-                onTap: () {
-                  // 클릭시 모달 팝업을 띄워준다.
-                  showModalBottomSheet(context: context, builder: ((builder) => bottomSheet()));
-                },
-                child: Icon(
-                  Icons.camera_alt,
-                  color: AppColors.black,
-                  size: 40,
-                ),
-              )
-          )
+              bottom: 0,
+              right: 0,
+              child:CircleAvatar(
+                radius: 15,
+                      backgroundColor: AppColors.white,
+                          child:
+                          Icon(
+                            Icons.camera_alt,
+                            color: AppColors.grey,
+                            size: 17,
+                          ),
+                        ))
+
+
         ],
       ),
     );
@@ -412,8 +423,8 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
             ),
             Container(
               width: size.width,
-              height: 2,
-              color: AppColors.black,
+              height: 1.5,
+              color: AppColors.grey,
             ),
             Container(
               child: TextButton.icon(
@@ -424,7 +435,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                     _imageFile = null;
                   });
                 },
-                label: Text('프로필 사진 삭재', style: TextStyle(
+                label: Text('프로필 사진 삭제', style: TextStyle(
                     fontSize: 20, color: AppColors.red
                 ),),
               ),

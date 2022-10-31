@@ -5,12 +5,12 @@ import 'package:dongnerang/screens/setting/introduce.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/setting/notification.screen.dart';
-import '../constants/colors.constants.dart';
-import '../models/main_view_model.dart';
-import '../services/kakao_login.dart';
-import '../widgets/app_appbar_common.widget.dart';
-import 'introduce.dart';
-import 'setting/inquire.screen.dart';
+import '../../constants/colors.constants.dart';
+import '../../models/main_view_model.dart';
+import '../../services/kakao_login.dart';
+import '../../widgets/app_appbar_common.widget.dart';
+import '../introduce.dart';
+import '../setting/inquire.screen.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);

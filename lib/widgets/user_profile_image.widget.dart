@@ -15,23 +15,25 @@ class UserProfileCircleImage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     File f = File(imageUrl!);
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(100),
-      child: imageUrl == null || imageUrl!.isEmpty
-          ? Image.asset(
-              "assets/images/default-profile.png",
-              width: size,
-            )
-          : imageUrl!.contains('http')
-            ? CachedNetworkImage(
-                imageUrl: imageUrl!,
+    return ClipOval(
+      child: SizedBox.fromSize(
+        size: Size.fromRadius(45),
+        child: imageUrl == null || imageUrl!.isEmpty
+            ? Image.asset(
+                "assets/images/default-profile.png",
                 width: size,
-                height: size,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               )
-            // : Image.file(File(imageUrl)
-            : Image.file(f,width: size)
-    );
+            : imageUrl!.contains('http')
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl!,
+                  width: size,
+                  height: size,
+                  fit: BoxFit.fill,
+                )
+              // : Image.file(File(imageUrl)
+              : Image.file(f,width: size, fit: BoxFit.fill,)
+      ));
   }
 }
 

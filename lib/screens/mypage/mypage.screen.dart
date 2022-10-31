@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
-import '../settingsPage.screen.dart';
+import 'settingsPage.screen.dart';
 import 'mypage.inform.setting.screen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -167,23 +167,32 @@ class _mypageScreenState extends State<mypageScreen> {
         title: Text('내 정보 관리', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
-      body: SizedBox(
-        // height: size.height,
-        child: Column(
+      body:
+
+        Column(
           children: <Widget>[
+            InkWell(
+              onTap: (){
+                mypageCustomKeyword = [];
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (_) => mypageInformSettingScreen()));
+                FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value){
+                  int ListData = value.length;
+                  for(int i = 0; i < ListData; i++){
+                    mypageCustomKeyword.add(value[i]);
+                  }
+                });
+              },
+              child:
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: 45,
-                  child: UserProfileCircleImage(imageUrl: profileImage,size: size.height / 9,),
+                SizedBox(
+                    child: UserProfileCircleImage(imageUrl: profileImage,),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-                //   child: UserProfileCircleImage(imageUrl: profileImage,size: size.height / 9,),
-                // ),
-                Column(
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -192,39 +201,34 @@ class _mypageScreenState extends State<mypageScreen> {
                         children: [
                           Text('${userName}', style: TextStyle(
                             fontWeight: FontWeight.bold,
+                            fontSize: 17
                           )),
-                          TextButton(
-                            onPressed: (){
-                              mypageCustomKeyword = [];
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (_) => mypageInformSettingScreen()));
-                              FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value){
-                                int ListData = value.length;
-                                for(int i = 0; i < ListData; i++){
-                                  mypageCustomKeyword.add(value[i]);
-                                }
-                              });
-                            },
-                            child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
-                          ),
-                          )],
+                          SizedBox(height: 5),
+                          Text('프로필 수정', style: TextStyle(
+                              fontWeight: FontWeight.w100,
+                              color: AppColors.grey,
+                              fontSize: 14
+                          )),
+                            // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
+                          // ),
+                           ],
+                      ),
+                    ),
+                    SizedBox(width: 80,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      child: Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: AppColors.primary,
+                        size: 23,
                       ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                  child: Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: AppColors.primary,
-                    size: 20,
-                  ),
-                ),
+                // SizedBox(width: 80),
               ],
-            ),),
-            SizedBox(height: 5,),
-            Container( decoration: BoxDecoration(border: Border.all(color: AppColors.grey)),
-            ),
+            ),),),
+            // SizedBox(height: 5,),
             Container(
                 alignment: Alignment.centerLeft,
                 child: Padding(
@@ -235,7 +239,6 @@ class _mypageScreenState extends State<mypageScreen> {
             saveDataProfile(itemsData, topContainer),
           ]
         ),
-      )
     );
   }
 }
