@@ -127,7 +127,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
 
           IconButton(onPressed: ()async {
             String firebasesUrl = widget.urldata.toString();
-            // int templateId = 83950;
             print("firebasesUrl : $firebasesUrl");
             final TextTemplate defaultText = TextTemplate(
               text:

@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
@@ -6,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
@@ -53,12 +55,13 @@ class _mypageScreenState extends State<mypageScreen> {
       }
 
       DateTime dateTime = responseList[0][i][2].toDate();
+      DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${responseList[0][i][0]}');
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                url, responseList[0][i][3], responseList[0][i][1], responseList[0][i][2], 1
+                url, responseList[0][i][3], responseList[0][i][1], dateTime, 1
             )));
           },
           child: Container(
@@ -93,15 +96,15 @@ class _mypageScreenState extends State<mypageScreen> {
                             child: Text(
                               '${responseList[0][i][1]}',
                               style: const TextStyle(fontSize: 12, color: Colors.white),
-                              textDirection: TextDirection.ltr,
+                              textDirection: ui.TextDirection.ltr,
                             )
                         ),
                         SizedBox(width: 8),
                         Text(
                           // '시작일 | ${responseList[0][i][2].toString().trim()}',
-                          '시작일 | $dateTime',
+                          '시작일 | ${dateFormat.format(dateTime)}',
                           style: const TextStyle(fontSize: 13, color: Colors.grey),
-                          textDirection: TextDirection.ltr,
+                          textDirection: ui.TextDirection.ltr,
                         ),
                       ],
                     )

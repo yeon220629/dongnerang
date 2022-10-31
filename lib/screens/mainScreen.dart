@@ -41,7 +41,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   int cuindex = 0;
   int colorindex = 0;
   String? defaultCenter = '전체';
-  String? SeouldefaultCenter = "분야별 새소식";
+  String? SeouldefaultCenter = "NPO";
   String? centerName = '';
 
   Future<void> getUserLocalData() async {
@@ -116,6 +116,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         colorindex = 0;
       }
 
+      DateFormat dateFormat = DateFormat("yyyy-MM-dd");
       DateTime dateTime = post["registrationdate"].toDate();
 
       if(centerName == '구청'){
@@ -169,7 +170,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 SizedBox(width: 8),
                                 Text(
                                   // '시작일 | ${post['registrationdate'].trim()}',
-                                  '시작일 | $dateTime',
+                                  '시작일 | ${dateFormat.format(dateTime)}',
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                                   textDirection: ui.TextDirection.ltr,
                                 ),
@@ -232,7 +233,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  '시작일 | $dateTime',
+                                  '시작일 | ${dateFormat.format(dateTime)}',
                                   // '시작일 | ${post['registrationdate'].trim()}',
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                                   textDirection: ui.TextDirection.ltr,
@@ -295,7 +296,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             ),
                             SizedBox(width: 8),
                             Text(
-                              '시작일 | $dateTime',
+                              '시작일 | ${dateFormat.format(dateTime)}',
                               // '시작일 | ${post['registrationdate'].trim()}',
                               style: const TextStyle(fontSize: 13, color: Colors.grey),
                               textDirection: ui.TextDirection.ltr,
@@ -526,11 +527,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           setState(() {
                             listItems = [];
                             SeouldefaultCenter = value as String?;
-                            if(SeouldefaultCenter == '분야별 새소식'){
-                              print("test");
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => introduceWidget(),),);
+                            if(SeouldefaultCenter == 'NPO'){
+
                             }
                           }
                           );

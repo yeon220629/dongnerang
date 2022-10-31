@@ -1,9 +1,12 @@
 import 'dart:math';
+import 'dart:ui' as ui;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../constants/common.constants.dart';
 import '../services/firebase.service.dart';
 import 'url.load.screen.dart';
@@ -65,6 +68,7 @@ class _searchScreenState extends State<searchScreen>
     for (var post in responseList) {
 
       DateTime dateTime = post["registrationdate"].toDate();
+      DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
       if (post['title'].contains(value)) {
         listItems = [];
@@ -74,7 +78,7 @@ class _searchScreenState extends State<searchScreen>
               Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
                   urlLoadScreen(
                       url, post["title"], post['center_name '],
-                      post['registrationdate'], 2
+                      dateTime, 2
                   )));
             },
             child: Container(
@@ -113,16 +117,16 @@ class _searchScreenState extends State<searchScreen>
                                 '${post['center_name ']}',
                                 style: const TextStyle(fontSize: 13,
                                     color: Colors.black),
-                                textDirection: TextDirection.ltr,
+                                textDirection: ui.TextDirection.ltr,
                               )
                           ),
                           SizedBox(width: 10),
                           Text(
                             // '시작일 | ${post['registrationdate'].trim()}',
-                            '시작일 | $dateTime',
+                            '시작일 | ${dateFormat.format(dateTime)}',
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.grey),
-                            textDirection: TextDirection.ltr,
+                            textDirection: ui.TextDirection.ltr,
                           ),
                         ],
                       )
