@@ -67,10 +67,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
     }
-    // else{
-    //   value = 'SEOUL';
-    //   centerName = seoulCenterLabel;
-    // }
+    else{
+      value = 'SEOUL';
+      centerName = seoulCenterLabel;
+    }
 
     listOrder = [];
     listItems = [];
