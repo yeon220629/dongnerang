@@ -25,15 +25,16 @@ class _mypageScreenState extends State<mypageScreen> {
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String? profileImage = '';
   String? userName = '';
+
   late Future<List> userSaveData;
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
-  final _random = Random();
+  List valueBox = [];
+  List slideSendBox = [];
+
   bool closeTapContainer = false;
   double topContainer = 0;
-  List valueBox = [];
   int colorindex = 0;
-
 
   Future<void> getPostsData(value) async {
     valueBox.add(value);
@@ -134,6 +135,7 @@ class _mypageScreenState extends State<mypageScreen> {
     userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
     userSaveData.then((value){
       // print("userSaveData 1 :  ${value[1]}");
+      slideSendBox.add(value);
       setState(() {
         value[0]?.forEach((element) {
           print(element);
@@ -242,14 +244,14 @@ class _mypageScreenState extends State<mypageScreen> {
                   child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 )
             ),
-            saveDataProfile(itemsData, topContainer)
+            saveDataProfile(itemsData, topContainer, slideSendBox)
           ]
         ),
     );
   }
 }
 
-Widget saveDataProfile(List itemsData, topContainer) {
+Widget saveDataProfile(List itemsData, topContainer, userSaveData) {
   return Expanded(child: ListView.builder(
       shrinkWrap: true,
       itemCount: itemsData.length,
@@ -277,7 +279,7 @@ Widget saveDataProfile(List itemsData, topContainer) {
                 ),
               ),
               // The end action pane is the one at the right or the bottom side.
-              endActionPane: const ActionPane(
+              endActionPane: ActionPane(
                 motion: ScrollMotion(),
                 children: [
                   SlidableAction(
@@ -290,17 +292,22 @@ Widget saveDataProfile(List itemsData, topContainer) {
                     label: '공유',
                   ),
                   SlidableAction(
-                    onPressed: doNothing,
                     backgroundColor: AppColors.red,
                     foregroundColor: Colors.white,
                     icon: Icons.delete_outline_outlined,
                     label: '삭제',
+                    onPressed: (value) => fnDeleteAction(itemsData[i], userSaveData),
                   ),
                 ],
               ));
       }
   )
   );
+}
+
+fnDeleteAction(itemsData, userSaveData) {
+  print(itemsData);
+  print(userSaveData);
 }
 
 void doNothing(BuildContext context) {}

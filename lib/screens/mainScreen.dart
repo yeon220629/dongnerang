@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
@@ -65,50 +66,43 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
-    }else{
-      value = 'SEOUL';
-      centerName = seoulCenterLabel;
     }
+    // else{
+    //   value = 'SEOUL';
+    //   centerName = seoulCenterLabel;
+    // }
 
     listOrder = [];
     listItems = [];
     List<dynamic> valueData = [];
+    List<dynamic> orderValueData = [];
     List<dynamic> responseList = [];
 
     DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore.instance.collection("crawlingData").doc(value);
     final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await docref.get();
     late  Map<String, dynamic>? valueDoc = documentSnapshot.data();
-
     String? numberName = valueDoc?.keys.first.split("_")[0];
-    for(int i = 1; i < valueDoc!.length; i++){
+    for(int i = 1; i < valueDoc!.length + 2; i++){
       listOrder.add("${numberName}_${i.toString().trim()}");
     }
-
     List<DateTime> f = [];
-    for (String element in listOrder) {
+    for(int i = 0; i<listOrder.length; i++){
       valueDoc.forEach((key, value) {
-        if(element == key){
+        if(listOrder[i] == key){
           DateTime dateTime = value["registrationdate"].toDate();
+          // print("${value['title']} + $dateTime" );
+          // print(dateTime);
+          valueData.add(value);
           f.add(dateTime);
         }
       });
     }
-    f.sort((a,b){
-      return b.compareTo(a);
-    });
 
-    for(DateTime a in f){
-      for (String element in listOrder) {
-        valueDoc.forEach((key, value) {
-          if(element == key){
-            DateTime dateTime = value["registrationdate"].toDate();
-            if(a == dateTime){
-              valueData.add(value);
-            }
-          }
-        });
-      }
-    }
+    valueData.sort((a,b) {
+      var adate = a['registrationdate']; //before -> var adate = a.expiry;
+      var bdate = b['registrationdate']; //before -> var bdate = b.expiry;
+      return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
+    });
 
     responseList = valueData;
 
