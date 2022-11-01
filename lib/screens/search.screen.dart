@@ -43,11 +43,10 @@ class _searchScreenState extends State<searchScreen>
     List<dynamic> valueData = [];
     item = [];
     listItems = [];
-
     for (int i = 0; i < getUserLocaldata.length; i++) {
       item?.add(fnChecklocal(getUserLocaldata[i]));
     }
-
+    item?.add(fnChecklocal("서울"));
     for (int i = 0; i < item!.length; i++) {
       DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore
           .instance.collection("crawlingData").doc(item![i][1]);
@@ -64,14 +63,12 @@ class _searchScreenState extends State<searchScreen>
     }
 
     List<dynamic> responseList = valueData;
-
+    listItems = [];
     for (var post in responseList) {
-
       DateTime dateTime = post["registrationdate"].toDate();
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
       if (post['title'].contains(value)) {
-        listItems = [];
         listItems.add(GestureDetector(
             onTap: () async {
               final Uri url = Uri.parse('${post["link"]}');
