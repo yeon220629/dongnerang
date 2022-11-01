@@ -1,11 +1,6 @@
-import 'package:dongnerang/services/firebase.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
-
-import '../screens/mainScreenBar.dart';
-import 'colors.constants.dart';
 
 const CIRCLE_RADIUS = 50.0;
 const KAKAO_NATIVE_APP_KEY = "d7eaa723a1b0bbd17635330c5c561a5e"; //real
@@ -178,6 +173,7 @@ List? fnChecklocal(String local){
   }
 }
 
+
 // 반환에 사용할 클래스
 class ReturnValue{
   String result;
@@ -212,4 +208,4 @@ List dropdownDay = ['1','2','3','4','5','6','7','8','9','10','11','12','13',
             '27','28','29','30','31'
             ];
 List centerCheck = ['전체', '문화재단', '구청'];
-List SeoulCheck = ['NPO','청년몽땅정보통','서울산업진흥원'];
+List SeoulCheck = ['전체','NPO','청년몽땅정보통','서울산업진흥원','SBA지원센터','서울주거포털'];

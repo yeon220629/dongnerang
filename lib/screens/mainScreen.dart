@@ -33,16 +33,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   List<Widget> listItems = [];
   List listOrder = [];
 
-  var currentItem = "";
-  String compareTime = '';
+  String? defaultCenter = '전체';
+  String? SeouldefaultCenter = "전체";
   String url = "";
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String dropdownValue = '';
+  String? centerName = '';
+  String? centerLabel = '';
+  String? seoulCenterLabel = '';
+
   int cuindex = 0;
   int colorindex = 0;
-  String? defaultCenter = '전체';
-  String? SeouldefaultCenter = "NPO";
-  String? centerName = '';
 
   Future<void> getUserLocalData() async {
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
@@ -61,10 +62,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
-    // print(value);
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
+    }else{
+      value = 'SEOUL';
+      centerName = seoulCenterLabel;
     }
 
     listOrder = [];
@@ -118,9 +121,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
       DateTime dateTime = post["registrationdate"].toDate();
-
-      if(centerName == '구청'){
-        if(post["center_name "].toString().contains("구청")){
+      if(centerLabel == "전체"){
+        centerLabel = null;
+      }
+      if(centerName == centerLabel){
+        if(post["center_name "].toString().contains(centerLabel!)){
           listItems.add( GestureDetector(
               onTap: () async{
                 final Uri url = Uri.parse('${post["link"]}');
@@ -183,71 +188,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               ))
           );
         }
-      }else if(centerName == '문화재단'){
-        if(post["center_name "].toString().contains("문화재단")){
-          listItems.add( GestureDetector(
-              onTap: () async{
-                final Uri url = Uri.parse('${post["link"]}');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                    // url, post["title"], post['center_name '], post['registrationdate'], 0
-                    url, post["title"], post['center_name '], dateTime, 0
-                )));
-              },
-              child: Container(
-                  width: 500,
-                  height: 110,
-                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8), //모서리를 둥글게
-                      border: Border.all(color: Colors.black12, width: 1)), //테두리
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          '${post["title"]}',
-                          style: const TextStyle(fontSize: 15),
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Expanded(
-                            child: Row(
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.all(3),
-                                    color: colorindex == 1
-                                        ? AppColors.blue
-                                        : AppColors.green,
-                                    // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                                    // [_random.nextInt(9) * 100],
-                                    child: Text(
-                                      '${post['center_name ']}',
-                                      style: const TextStyle(fontSize: 13, color: Colors.white),
-                                      textDirection: ui.TextDirection.ltr,
-                                    )
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  '시작일 | ${dateFormat.format(dateTime)}',
-                                  // '시작일 | ${post['registrationdate'].trim()}',
-                                  style: const TextStyle(fontSize: 13, color: Colors.grey),
-                                  textDirection: ui.TextDirection.ltr,
-                                ),
-                              ],
-                            )
-                        )
-                      ],
-                    ),
-                  )
-              ))
-            );
-          }
-        }else{
+      }else{
         listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${post["link"]}');
@@ -369,21 +310,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
             elevation: 0,
-            // title: Container(
-            //     width: 50,
-            //     child: Image.asset("assets/images/logo.png"),
-            // ),
-            // fit:BoxFit.cover,
-            // height:20,
             title:
             DropdownButton(
               icon: const Icon(Icons.keyboard_arrow_down),
               isExpanded: false,
-              // menuMaxHeight: 500,
-              // itemHeight: 300,
-              // elevation: 0,
-              // focusNode: size,
-              // style: TextStyle(fontSize: 8),
               isDense: false,
               underline: Container(),
               value: dropdownValue,
@@ -491,6 +421,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             onChanged: (value){
                               setState(() {
                                 listItems = [];
+                                centerLabel = value as String?;
                                 defaultCenter = value as String?;
                                 getPostsData(dropdownValue+"_"+defaultCenter!);
                               }
@@ -515,10 +446,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         onChanged: (value){
                           setState(() {
                             listItems = [];
+                            seoulCenterLabel = value as String?;
+                            centerLabel = value as String?;
                             SeouldefaultCenter = value as String?;
-                            if(SeouldefaultCenter == 'NPO'){
-
-                            }
+                            getPostsData(value);
                           }
                           );
                         }

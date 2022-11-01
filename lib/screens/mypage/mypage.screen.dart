@@ -123,6 +123,13 @@ class _mypageScreenState extends State<mypageScreen> {
   void initState() {
     super.initState();
     print("새로고침 테스트");
+    mypageCustomKeyword = [];
+    FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value){
+      int ListData = value.length;
+      for(int i = 0; i < ListData; i++){
+        mypageCustomKeyword.add(value[i]);
+      }
+    });
     // my page 데이터 적용 진행 중
     userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
     userSaveData.then((value){
@@ -178,15 +185,9 @@ class _mypageScreenState extends State<mypageScreen> {
           children: <Widget>[
             InkWell(
               onTap: (){
-                mypageCustomKeyword = [];
                 Navigator.push(context, MaterialPageRoute(
                     builder: (_) => mypageInformSettingScreen()));
-                FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value){
-                  int ListData = value.length;
-                  for(int i = 0; i < ListData; i++){
-                    mypageCustomKeyword.add(value[i]);
-                  }
-                });
+
               },
               child:
             Padding(

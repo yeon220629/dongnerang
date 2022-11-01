@@ -17,7 +17,6 @@ import '../../controller/private.setting.controller.dart';
 import '../../services/firebase.service.dart';
 import '../../services/user.service.dart';
 import '../../util/logger.service.dart';
-import '../../widgets/user_profile_image.widget.dart';
 import '../mainScreenBar.dart';
 
 class mypageInformSettingScreen extends GetView<PrivateSettingController> {
@@ -47,8 +46,8 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                     onPressed: () async {
                       // print("profilePhotoSetting : $profilePhotoSetting");
                       // print("profilenickSetting : $profilenickSetting");
-                      // print("profileKeyword : $profileKeyword");
-                      // print("profilelocal : ${profilelocal}");
+                      print("profileKeyword : $profileKeyword");
+                      print("profilelocal : ${profilelocal}");
                       if (controller.formKey.currentState!.validate()) {
                         try {
                           await FirebaseFirestore.instance
@@ -66,12 +65,14 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                                         ? PrivateLocalData
                                         : profilelocal[0]
                           }));
+
                           profilePhotoSetting = '';
                           profilenickSetting = '';
                           profileKeyword = [];
                           profilelocal = [];
                           mypageCustomKeyword = [];
                           PrivateLocalData = [];
+
                           EasyLoading.showSuccess("프로필 수정 완료");
                           await FirebaseService.getCurrentUser();
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
@@ -149,9 +150,9 @@ class mypageKeywordStateful extends StatefulWidget {
 }
 class _mypageKeywordStateful extends State<mypageKeywordStateful> {
   final myController = TextEditingController();
-  List tags = [];
-  List selected_tags = [];
-  List select_tags = [];
+  final List tags = [];
+  final List selected_tags = [];
+  final List select_tags = [];
 
   @override
   Widget build(BuildContext context) {
@@ -259,13 +260,16 @@ class TagKeywordStateful extends StatefulWidget {
 
 class _TagKeywordStatefulState extends State<TagKeywordStateful> {
 
-  List tags = [];
+  final List tags = [];
+  final List select_tags = [];
   List selected_tags = [];
-  List select_tags = [];
+  bool selectCheck = false;
 
   @override
   Widget build(BuildContext context) {
+
     final Size size = MediaQuery.of(context).size;
+
     return Padding(
         padding: EdgeInsets.symmetric(vertical: size.height / 2.4),
         child: Column(
@@ -290,17 +294,38 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   }
 
   generate_tags(value) {
+    // for(var v in value){
+    //   for(var a in PrivateLocalData){
+    //     if(v == a){
+    //       selectCheck = false;
+    //       print(selectCheck);
+    //     }else{
+    //       selectCheck = true;
+    //     }
+    //   }
+    // }
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
+    for(int i =0; i < PrivateLocalData.length; i++){
+      // print(PrivateLocalData[1]);
+      if(name == PrivateLocalData[0] || name == PrivateLocalData[1] || name == PrivateLocalData[2]){
+        selectCheck = false;
+      }else{
+        selectCheck = true;
+      }
+    }
     return FilterChip(
       selected: selected_tags.contains(name),
       selectedColor: Colors.blue.shade800,
       disabledColor: Colors.blue.shade400,
       avatar: Text(""),
-      labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-      label: Text("${name}"),
-      onSelected: (value) {
+      label: selectCheck == false
+              ? Text("${name}", style: TextStyle(
+                  color: AppColors.red, fontWeight: FontWeight.bold),
+              )
+              : Text("${name}"),
+    onSelected: (value) {
         if (select_tags.length > 2) {
           value = false;
         }
@@ -340,9 +365,6 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
         child: ListView(
           children: <Widget>[
             imageProfile(),
-            // Text("닉네임", style: TextStyle(fontWeight: FontWeight.bold)),
-            // SizedBox(height: 5),
-            // nameTextField(),
           ],
         )
     );
@@ -512,3 +534,5 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
     );
   }
 }
+
+
