@@ -207,7 +207,6 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(13)),
                               borderSide: BorderSide(
-
                                 color: AppColors.grey,
                               ),
                             ),
@@ -375,14 +374,14 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
               children: [
                 Container(
                   alignment: Alignment.topLeft,
-                  child: Text("지역 선택", style: TextStyle(fontWeight: FontWeight.bold),),
+                  child: Text("지역선택", style: TextStyle(fontWeight: FontWeight.bold),),
                 )
               ],
             ),
             SizedBox(height: 5,),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: Wrap( spacing: 5.0, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
+              padding: const EdgeInsets.symmetric(horizontal: 0),
+              child: Wrap( spacing: 4.0, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
             ),
             Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
           ],

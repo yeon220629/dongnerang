@@ -160,7 +160,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
     final double categoryHeight = size.height * 0.30;
 
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 3.7),
+        padding: EdgeInsets.symmetric(vertical: size.height / 3.5),
         child: Column(
           children: [
             Row(
@@ -194,11 +194,19 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                                 myController.clear();
                               },
                             ),
-                            labelText: '관심키워드를 등록해주세요! ex)청년, 예술',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                            hintText: '관심 키워드를 등록해주세요! ex)예술, 공간, 모집',
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(13)),
                               borderSide: BorderSide(
-                                color: Colors.blue,
+                                width: 1,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            focusColor: AppColors.primary,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(13)),
+                              borderSide: BorderSide(
+                                color: AppColors.grey,
                               ),
                             ),
                           ),
@@ -271,14 +279,14 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
     final Size size = MediaQuery.of(context).size;
 
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 2.4),
+        padding: EdgeInsets.symmetric(vertical: size.height / 2.25),
         child: Column(
           children: [
             Row(
               children: [
                 Container(
                   alignment: Alignment.topLeft,
-                  child: Text("지역 선택", style: TextStyle(fontWeight: FontWeight.bold),),
+                  child: Text("지역선택", style: TextStyle(fontWeight: FontWeight.bold),),
                 )
               ],
             ),
@@ -287,7 +295,7 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
               padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Wrap( spacing: 4.0, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
             ),
-            Text("지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.bold),),
+            Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
           ],
         )
     );
@@ -317,14 +325,20 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
     }
     return FilterChip(
       selected: selected_tags.contains(name),
-      selectedColor: Colors.blue.shade800,
-      disabledColor: Colors.blue.shade400,
-      avatar: Text(""),
+      selectedColor: AppColors.primary,
+      // disabledColor: Colors.blue.shade400,
+      avatar: CircleAvatar(backgroundImage: AssetImage('assets/images/DONGJAK.PNG')),
+      backgroundColor: Colors.white,
+      shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
       label: selectCheck == false
               ? Text("${name}", style: TextStyle(
-                  color: AppColors.red, fontWeight: FontWeight.bold),
+                  color:AppColors.primary, fontWeight: FontWeight.bold),
               )
-              : Text("${name}"),
+              : Text("${name}"
+      ),
+      labelStyle: TextStyle(
+        color: selected_tags.contains(name)? Colors.white : Colors.black,
+      ),
     onSelected: (value) {
         if (select_tags.length > 2) {
           value = false;
@@ -510,17 +524,24 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
           decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: AppColors.black,
+                  color: AppColors.grey,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: AppColors.primary,
+                  )
+              ),
+              focusColor: AppColors.primary,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(13)),
                 borderSide: BorderSide(
-                  color: AppColors.black,
-                  width: 2,
+                  color: AppColors.grey,
                 ),
               ),
-
-              labelText: '${userName}',
+              // labelText: '${userName}',
               hintText: '${userName}'
           ),
           // onSaved: ,

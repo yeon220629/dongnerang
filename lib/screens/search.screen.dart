@@ -155,6 +155,7 @@ class _searchScreenState extends State<searchScreen>
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         iconTheme: IconThemeData(
             color: AppColors.black
