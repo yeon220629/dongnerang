@@ -327,7 +327,55 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
       selected: selected_tags.contains(name),
       selectedColor: AppColors.primary,
       // disabledColor: Colors.blue.shade400,
-      avatar: CircleAvatar(backgroundImage: AssetImage('assets/images/DONGJAK.PNG')),
+      avatar: (name == "강남") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/GANGNAM.PNG')) :
+      (name == "강동") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/GANGDONG.PNG')) :
+      (name == "강북") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/GANGBUK.PNG')) :
+      (name == "강서") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/GANGSEO.PNG')) :
+      (name == "관악") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/GWANAK.PNG')) :
+      (name == "광진") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/GWANGZIN.PNG')) :
+      (name == "구로") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/GOORO.PNG')) :
+      (name == "금천") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/GEUAMCHEOUN.PNG')) :
+      (name == "노원") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/NOWON.PNG')) :
+      (name == "도봉") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/DOBONG.PNG')) :
+      (name == "중구") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/JUNGGU.PNG')) :
+      (name == "동작") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/DONGJAK.PNG')) :
+      (name == "마포") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/MAPO.PNG')) :
+      (name == "서초") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/SEOCHO.PNG')) :
+      (name == "중랑") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/JUNGNANG.PNG')) :
+      (name == "종로") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/JONGRO.PNG')) :
+      (name == "성동") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/SEONGDONG.PNG')) :
+      (name == "성북") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/SEONGBUK.PNG')) :
+      (name == "송파") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/SONGPA.PNG')) :
+      (name == "양천") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/YANGCHEON.PNG')) :
+      (name == "용산") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/YONGSAN.PNG')) :
+      (name == "은평") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/EUNPYENG.PNG')) :
+      (name == "동대문") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/DONGDAEMUN.PNG')) :
+      (name == "영등포") ?
+      CircleAvatar(backgroundImage: AssetImage('assets/images/YEONGDEUNGPO.PNG')) :
+      SizedBox(),
       backgroundColor: Colors.white,
       shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
       label: selectCheck == false
