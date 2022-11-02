@@ -53,8 +53,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         LIST_MENU.add(value[i]);
       }
 
-      String? checklocalItem = fnChecklocal(LIST_MENU[0])?.last;
-      getPostsData(checklocalItem);
+      String? checklocalItem = fnChecklocal(LIST_MENU[0])?.first;
+      print(checklocalItem);
+      getPostsData("${checklocalItem}_전체");
 
       setState(() {
         dropdownValue = LIST_MENU[0];
@@ -63,6 +64,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
+    print(value);
+
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
