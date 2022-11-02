@@ -15,6 +15,7 @@ class AppColors {
   static const darkgreen = Color(0xFF33691E);
   static const yellow = Color(0xFFFFFF00);
   static const orange = Color(0xFFF57F17);
+  static const background = Color(0xFFFFAFAFA);
 }
 
 class MarkerColors {
