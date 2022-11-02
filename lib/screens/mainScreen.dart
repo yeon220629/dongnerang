@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/screens/seoul.url.screen.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -395,7 +396,79 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 getPostsData('서울_전체');
                               }else{
                                 cuindex = 2;
-                                print(index);
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context){
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(Radius.circular(0.0))),
+                                        contentPadding: EdgeInsets.only(top: 0.0),
+                                        content: Container(
+                                        width: size.width,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            InkWell(
+                                              child: Container(
+                                              padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.primary,
+                                                ),
+                                                child: Text(
+                                                  "서울 시청",
+                                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              child:TextButton(onPressed: (){
+                                                final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                    seoulUrlLoadScreen(
+                                                        url
+                                                    )));
+                                              }, child: Text('분야별 새소식', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
+                                              decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                            ),
+                                            Container(
+                                              child:TextButton(onPressed: (){
+                                                final Uri url = Uri.parse('https://www.seoul.go.kr/thismteventfstvl/list.do');
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                    seoulUrlLoadScreen(
+                                                        url
+                                                    )));
+                                              }, child: Text('이달의 행사', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
+                                              decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                            ),
+                                            Container(
+                                              child:TextButton(onPressed: (){
+                                                final Uri url = Uri.parse('https://www.seoul.go.kr/eventreqst/list.do');
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                    seoulUrlLoadScreen(
+                                                        url
+                                                    )));
+                                              }, child: Text('이벤트 신청', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
+                                              decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                            ),
+                                            Container(
+                                              child:TextButton(onPressed: (){
+                                                final Uri url = Uri.parse('https://mediahub.seoul.go.kr/competition/competitionList.do');
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                    seoulUrlLoadScreen(
+                                                        url
+                                                    )));
+                                              }, child: Text('내손안의 서울', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
+                                              decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                            )
+                                          ],
+                                        )
+                                      )
+                                    );
+                                  }
+                                );
                               }
                             });
                           },
@@ -510,4 +583,23 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 }
 
-
+// Widget setupAlertDialoadContainer() {
+//   return Scaffold(
+//     appBar: AppBar(
+//       title: Text("TEXT"),
+//     ),
+//     body: Container(
+//       height: 300.0, // Change as per your requirement
+//       width: 300.0, // Change as per your requirement
+//       child: ListView.builder(
+//         shrinkWrap: true,
+//         itemCount: 5,
+//         itemBuilder: (BuildContext context, int index) {
+//           return ListTile(
+//             title: Text('Gujarat, India'),
+//           );
+//         },
+//       ),
+//     )
+//   );
+// }

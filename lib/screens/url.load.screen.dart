@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-
 import '../constants/colors.constants.dart';
 
 

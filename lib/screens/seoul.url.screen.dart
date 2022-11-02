@@ -2,27 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-class introduceWidget extends StatefulWidget {
-
+class seoulUrlLoadScreen extends StatefulWidget {
+  final Uri s;
+  const seoulUrlLoadScreen(this.s);
   @override
-  State<introduceWidget> createState() => _introduceWidgetState();
+  State<seoulUrlLoadScreen> createState() => _seoulUrlLoadScreenState();
 }
 
-class _introduceWidgetState extends State<introduceWidget> {
-
+class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
   bool toggle = false;
-
   InAppWebViewController? webViewController;
-
   late PullToRefreshController pullToRefreshController = PullToRefreshController();
-  String url = "";
+
+  String url = '';
   double progress = 0;
   final urlController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-
     pullToRefreshController = PullToRefreshController(
         onRefresh: () async {
           webViewController?.reload();
@@ -32,34 +30,14 @@ class _introduceWidgetState extends State<introduceWidget> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
 
   }
 
   @override
   Widget build(BuildContext context) {
-    List saveData = [];
+    print(widget.s);
     return Scaffold(
-      appBar: AppBar(
-        // title: Text('동네랑 소개'),
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(
-          // color: AppColors.green,
-        ),
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            //페이지 리로드
-            onPressed: (){
-              Navigator.pop(context);
-            }
-        ),
-        centerTitle: true,
-        title: Text('동네랑 소개', style: TextStyle(color: Colors.black)) ,
-        actions: [
-        ],
-      ),
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -67,7 +45,7 @@ class _introduceWidgetState extends State<introduceWidget> {
               child: Stack(
                 children: [
                   InAppWebView(
-                     initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse('https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d'))),
+                    initialUrlRequest: URLRequest(url: WebUri.uri(widget.s)),
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
                       webViewController = controller;
