@@ -25,7 +25,9 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
-  final List<bool> _selectedCenter = <bool>[true, false];
+  final List<bool> _selectedCenter = <bool>[true, false, true];
+
+
   List<String> LIST_MENU = [];
   bool closeTapContainer = false;
   double topContainer = 0;
@@ -63,16 +65,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
-    print(value);
-    print(seoulCenterLabel);
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
     }else{
       value = 'SEOUL';
-      // if(seoulCenterLabel == 'NPO'){
-      //   centerName = ''
-      // }
       centerName = seoulCenterLabel;
     }
 
@@ -93,8 +90,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       valueDoc.forEach((key, value) {
         if(listOrder[i] == key){
           DateTime dateTime = value["registrationdate"].toDate();
-          // print("${value['title']} + $dateTime" );
-          // print(dateTime);
           valueData.add(value);
           f.add(dateTime);
         }
@@ -110,15 +105,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     responseList = valueData;
 
     for ( var post in responseList){
-      // print(post['center_name ']);
-      // fnCnterCheck(centerValue){}
-      // if(post["center_name "].toString().contains("구청")){
-      //   colorindex = 1;
-      // }else{
-      //   colorindex = 0;
-      // }
       colorindex = fnCnterCheck(post['center_name ']);
-      print(colorindex);
 
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
       DateTime dateTime = post["registrationdate"].toDate();
@@ -298,7 +285,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         });
       });
     });
-    // getPostsData(null);
     controllers.addListener(() {
 
       double value = controllers.offset/119;
@@ -319,7 +305,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final double categoryHeight = size.height*0.30;
+    final double categoryHeight = size.height / 25;
+
+    List<Widget> CategoryCenter = <Widget>[
+      Text('동네소식'),
+      Text('서울소식'),
+      // const Image.asset('assets/images/SEONGDONG.PNG'),
+      Image.asset('assets/images/seoul.png', width: categoryHeight, height: categoryHeight),
+    ];
 
     return SafeArea(
         child: Scaffold(
@@ -388,6 +381,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           direction: Axis.horizontal,
                           isSelected: _selectedCenter,
                           onPressed: (int index) {
+
                             setState(() {
                               for (int i = 0; i < _selectedCenter.length; i++) {
                                 _selectedCenter[i] = i == index;
@@ -396,9 +390,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 cuindex = 0;
                                 defaultCenter = '전체';
                                 getPostsData("${fnChecklocal(dropdownValue)?.first}_전체");
-                              }else {
+                              }else if(index == 1) {
                                 cuindex = 1;
                                 getPostsData('서울_전체');
+                              }else{
+                                cuindex = 2;
+                                print(index);
                               }
                             });
                           },
@@ -411,14 +408,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           ),
                           color: AppColors.black,
                           constraints: const BoxConstraints(
+                            maxWidth: 100,
+                            minWidth: 70,
                             minHeight: 40.0,
-                            minWidth: 80.0,
                           ),
                           children: CategoryCenter,
                         ),
                       ],
                     ),
-                    SizedBox(width: size.width / 4,),
+                    SizedBox(width: size.width / 10,),
                     cuindex == 0
                         ? DropdownButton(
                             value: defaultCenter,
@@ -445,36 +443,37 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               );
                             }
                         )
-                        : DropdownButton(
-                        value: SeouldefaultCenter,
-                        items: SeoulCheck.map( (value) {
-                          if(value == "전체"){
-                            return DropdownMenuItem (
-                              value: value, child: Text(value),
-                            );
-                          }else{
-                            return DropdownMenuItem (
-                              value: value, child: Text("$value"),
-                              // value: value, child: Text(value),
-                            );
-                          }
-                        },
-                        ).toList(),
-                        onChanged: (value){
-                          setState(() {
-                            listItems = [];
-                            seoulCenterLabel = value as String?;
-                            centerLabel = value as String?;
-                            SeouldefaultCenter = value as String?;
-                            print(value);
-                            if(value == 'NPO지원센터'){
-                              value = 'NPO';
-                            }
-                            getPostsData(value);
-                          }
-                          );
-                        }
-                    ),
+                        : cuindex == 1
+                            ?DropdownButton(
+                              value: SeouldefaultCenter,
+                              items: SeoulCheck.map( (value) {
+                                if(value == "전체"){
+                                  return DropdownMenuItem (
+                                    value: value, child: Text(value),
+                                  );
+                                }else{
+                                  return DropdownMenuItem (
+                                    value: value, child: Text("$value"),
+                                    // value: value, child: Text(value),
+                                  );
+                                }
+                              },
+                              ).toList(),
+                              onChanged: (value){
+                                setState(() {
+                                    listItems = [];
+                                    seoulCenterLabel = value as String?;
+                                    centerLabel = value as String?;
+                                    SeouldefaultCenter = value as String?;
+                                    if(value == 'NPO지원센터'){
+                                      value = 'NPO';
+                                    }
+                                    getPostsData(value);
+                                  }
+                                );
+                              }
+                          )
+                    : SizedBox(),
                   ],
                 ),
                 Expanded(
