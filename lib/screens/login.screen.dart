@@ -32,13 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: SafeArea(
-        child: SizedBox(
-          height: Get.size.height,
-          width: Get.size.width,
-        //   child:
-        // Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+        body: SafeArea(
+          child: SizedBox(
+            height: Get.size.height,
+            width: Get.size.width,
+            //   child:
+            // Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
             child: Column(
                 children: [
                   SizedBox(height: size.height / 6.5,),
@@ -86,27 +86,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   //     ),
                   //   ),
                   // ),
-            // InkWell(
-            //   onTap: () {
-            //     Navigator.pushNamed(context, "write your route");
-            //   },
-            //   child: new Text("Click Here", style: TextStyle(fontWeight: FontWeight.bold)),
-            // ),
-                   new Padding(
-                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
-                     child: RichText(
+                  // InkWell(
+                  //   onTap: () {
+                  //     Navigator.pushNamed(context, "write your route");
+                  //   },
+                  //   child: new Text("Click Here", style: TextStyle(fontWeight: FontWeight.bold)),
+                  // ),
+                  new Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
+                    child: RichText(
                       text: TextSpan(
                         text: '가입 진행 시 동네랑의 ', style: TextStyle(color: Colors.black54),
                         children: <TextSpan>[
                           TextSpan(text: '서비스 이용약관,',
-                              style: TextStyle(color: AppColors.primary),
+                            style: TextStyle(color: AppColors.primary),
                             recognizer: new TapGestureRecognizer()
                               ..onTap = () {
-                              Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => law1Widget(),),);
-                          },
-                        ),
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => law1Widget(),),);
+                              },
+                          ),
                           TextSpan(text: ' 개인정보 취급방침,', style: TextStyle(color: AppColors.primary),
                             recognizer: new TapGestureRecognizer()
                               ..onTap = () {
@@ -124,8 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextSpan(text: '에 동의하신것으로 확인합니다.', style: TextStyle(color: Colors.black54)),
                         ],
                       ),
+                    ),
                   ),
-                   ),
 
                   // GestureDetector(
                   //     onTap: () {
@@ -149,8 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   // const SizedBox(height: 20),
                 ]),
             // ),
-        ),
-      )
+          ),
+        )
     );
   }
 }
