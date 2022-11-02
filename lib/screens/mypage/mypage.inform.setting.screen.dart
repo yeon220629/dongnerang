@@ -48,6 +48,10 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                       // print("profilenickSetting : $profilenickSetting");
                       print("profileKeyword : $profileKeyword");
                       print("profilelocal : ${profilelocal}");
+                      if(profilelocal.isEmpty){
+                        print("PrivateLocalData : $PrivateLocalData");
+                        print("profilelocal[0] : ${profilelocal}");
+                      }
                       if (controller.formKey.currentState!.validate()) {
                         try {
                           await FirebaseFirestore.instance
@@ -125,7 +129,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                             profileKeyword.add(value);
                           }),
                           TagKeywordStateful(callback: (value) {
-                            // print("TagKeywordStateful : $value");
+                            print("TagKeywordStateful : $value");
                             profilelocal.add(value);
                           }),
                         ],
