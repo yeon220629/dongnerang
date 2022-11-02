@@ -64,13 +64,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
-    print(value);
-
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
-    }
-    else{
+    }else{
       value = 'SEOUL';
       centerName = seoulCenterLabel;
     }
@@ -78,7 +75,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     listOrder = [];
     listItems = [];
     List<dynamic> valueData = [];
-    List<dynamic> orderValueData = [];
     List<dynamic> responseList = [];
 
     DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore.instance.collection("crawlingData").doc(value);

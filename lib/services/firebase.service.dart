@@ -1,14 +1,12 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import '../models/app_user.model.dart';
 import 'package:http/http.dart' as http;
+
+import '../screens/mainScreenBar.dart';
 
 class FirebaseService {
   final String url ='https://us-central1-dbcurd-67641.cloudfunctions.net/createCustomToken';
@@ -125,6 +123,25 @@ class FirebaseService {
           };
           checkDuplicate.reference.update(data);
           // print(data);
+        }
+      }
+    });
+  }
+
+  static Future<void> deleteMypageUserPrivacyData(String email, String title, BuildContext context) async {
+    final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
+    checkDuplicate.data()?.forEach((key, value) async {
+      if(key.contains("userSaveData")){
+        if(value[3] == title){
+          // print("key number : $key");
+          var data = <String, dynamic>{
+            key: FieldValue.delete(),
+          };
+          checkDuplicate.reference.update(data);
+          // print(data);
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  mainScreen()), (route) => false);
         }
       }
     });

@@ -153,7 +153,6 @@ class _KeywordStatefulState extends State<KeywordStateful> {
   List tags = [];
   List selected_tags = [];
   List select_tags = [];
-  bool erased = false;
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;

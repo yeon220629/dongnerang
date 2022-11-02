@@ -1,17 +1,19 @@
-import 'dart:math';
+import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:dongnerang/screens/mainScreenBar.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
-import '../setting/introduce.screen.dart';
 import 'settingsPage.screen.dart';
 import 'mypage.inform.setting.screen.dart';
 
@@ -26,15 +28,16 @@ class _mypageScreenState extends State<mypageScreen> {
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String? profileImage = '';
   String? userName = '';
+  String? delListSting = '';
 
   late Future<List> userSaveData;
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   List valueBox = [];
-  List slideSendBox = [];
 
   bool closeTapContainer = false;
   double topContainer = 0;
+  int reloadindex = 0;
   int colorindex = 0;
 
   Future<void> getPostsData(value) async {
@@ -70,42 +73,51 @@ class _mypageScreenState extends State<mypageScreen> {
               width: 500,
               height: 110,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), //모서리를 둥글게
-                  border: Border.all(color: Colors.black12, width: 1)), //테두리
+              // decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+              //     border: Border.all(color: Colors.black12, width: 1)), //테두리
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
                 child: Slidable(
                   // Specify a key if the Slidable is dismissible.
                   key: UniqueKey(),
-
-                  // The start action pane is the one at the left or the top side.
-                  startActionPane: ActionPane(
-                    // A motion is a widget used to control how the pane animates.
-                    motion: const ScrollMotion(),
-
-                    // A pane can dismiss the Slidable.
-                    dismissible: DismissiblePane(onDismissed: () {}),
-
-                    // All actions are defined in the children parameter.
-                    children: const [
-                      // A SlidableAction can have an icon and/or a label.
+                  // The end action pane is the one at the right or the bottom side.
+                  endActionPane: ActionPane(
+                    motion: ScrollMotion(),
+                    children: [
                       SlidableAction(
-                        onPressed: doNothing,
+                        onPressed: (value) async {
+                          final TextTemplate defaultText = TextTemplate(
+                            text:
+                            '제목 : ${responseList[0][i][3]}\n\n 링크 : ${responseList[0][i][0]}',
+                            link: Link(
+                              webUrl: Uri.parse(responseList[0][i][0]),
+                            ),
+                          );
+                          bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
+                          if (isKakaoTalkSharingAvailable) {
+                            print('카카오톡으로 공유 가능');
+                            try{
+                              Uri uri =
+                                  await ShareClient.instance.shareDefault(template: defaultText);
+                              await ShareClient.instance.launchKakaoTalk(uri);
+                              EasyLoading.showSuccess("공유 완료");
+                            }catch (e){
+                              print('카카오톡 공유 실패 $e');
+                            }
+                          } else {
+                            print('카카오톡 미설치: 웹 공유 기능 사용 권장');
+                          }
+                        },
                         backgroundColor: AppColors.blue,
                         foregroundColor: AppColors.white,
                         icon: Icons.share,
                         label: '공유',
                       ),
-                    ],
-                  ),
-
-                  // The end action pane is the one at the right or the bottom side.
-                  endActionPane: const ActionPane(
-                    motion: ScrollMotion(),
-                    children: [
                       SlidableAction(
-                        onPressed: doNothing,
+                        onPressed: (value){
+                          delPostsData(responseList[0][i][3],context);
+                        },
                         backgroundColor: AppColors.grey,
                         foregroundColor: AppColors.black,
                         icon: Icons.delete,
@@ -114,8 +126,6 @@ class _mypageScreenState extends State<mypageScreen> {
                     ],
                   ),
 
-                  // The child of the Slidable is what the user sees when the
-                  // component is not dragged.
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -163,10 +173,15 @@ class _mypageScreenState extends State<mypageScreen> {
     });
   }
 
+  Future<void> delPostsData(value, BuildContext context) async {
+    setState(() {
+      FirebaseService.deleteMypageUserPrivacyData(userEmail!, value!, context);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    print("새로고침 테스트");
     mypageCustomKeyword = [];
     FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value){
       int ListData = value.length;
@@ -177,11 +192,8 @@ class _mypageScreenState extends State<mypageScreen> {
     // my page 데이터 적용 진행 중
     userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
     userSaveData.then((value){
-      // print("userSaveData 1 :  ${value[1]}");
-      slideSendBox.add(value);
       setState(() {
         value[0]?.forEach((element) {
-          print(element);
           if(element.toString().contains('/')){
             profileImage = element.toString();
           }else{
@@ -201,6 +213,7 @@ class _mypageScreenState extends State<mypageScreen> {
         closeTapContainer = controllers.offset > 50;
       });
     });
+
   }
 
   @override
@@ -287,14 +300,14 @@ class _mypageScreenState extends State<mypageScreen> {
                   child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 )
             ),
-            saveDataProfile(itemsData, topContainer, slideSendBox)
+            saveDataProfile(itemsData, topContainer)
           ]
       ),
     );
   }
 }
 
-Widget saveDataProfile(List itemsData, topContainer, userSaveData) {
+Widget saveDataProfile(List itemsData, topContainer) {
   return Expanded(
       child: ListView.builder(
           itemCount: itemsData.length,
