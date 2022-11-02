@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
+import '../setting/introduce.screen.dart';
 import 'settingsPage.screen.dart';
 import 'mypage.inform.setting.screen.dart';
 
@@ -43,7 +44,7 @@ class _mypageScreenState extends State<mypageScreen> {
     List<dynamic> responseList = [];
 
     valueBox.forEach((element) {
-        valueData.add(value);
+      valueData.add(value);
     });
 
     responseList = valueData;
@@ -74,42 +75,84 @@ class _mypageScreenState extends State<mypageScreen> {
                   border: Border.all(color: Colors.black12, width: 1)), //테두리
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '${responseList[0][i][3]}',
-                      style: const TextStyle(fontSize: 14),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.justify,
-                      maxLines: 2,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                            padding: EdgeInsets.all(3),
-                            color: colorindex == 1
-                                ? AppColors.blue
-                                : AppColors.green,
-                            child: Text(
-                              '${responseList[0][i][1]}',
-                              style: const TextStyle(fontSize: 12, color: Colors.white),
-                              textDirection: ui.TextDirection.ltr,
-                            )
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          // '시작일 | ${responseList[0][i][2].toString().trim()}',
-                          '시작일 | ${dateFormat.format(dateTime)}',
-                          style: const TextStyle(fontSize: 13, color: Colors.grey),
-                          textDirection: ui.TextDirection.ltr,
-                        ),
-                      ],
-                    )
-                  ],
+                child: Slidable(
+                  // Specify a key if the Slidable is dismissible.
+                  key: UniqueKey(),
+
+                  // The start action pane is the one at the left or the top side.
+                  startActionPane: ActionPane(
+                    // A motion is a widget used to control how the pane animates.
+                    motion: const ScrollMotion(),
+
+                    // A pane can dismiss the Slidable.
+                    dismissible: DismissiblePane(onDismissed: () {}),
+
+                    // All actions are defined in the children parameter.
+                    children: const [
+                      // A SlidableAction can have an icon and/or a label.
+                      SlidableAction(
+                        onPressed: doNothing,
+                        backgroundColor: AppColors.blue,
+                        foregroundColor: AppColors.white,
+                        icon: Icons.share,
+                        label: '공유',
+                      ),
+                    ],
+                  ),
+
+                  // The end action pane is the one at the right or the bottom side.
+                  endActionPane: const ActionPane(
+                    motion: ScrollMotion(),
+                    children: [
+                      SlidableAction(
+                        onPressed: doNothing,
+                        backgroundColor: AppColors.grey,
+                        foregroundColor: AppColors.black,
+                        icon: Icons.delete,
+                        label: '삭제',
+                      ),
+                    ],
+                  ),
+
+                  // The child of the Slidable is what the user sees when the
+                  // component is not dragged.
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '${responseList[0][i][3]}',
+                        style: const TextStyle(fontSize: 14),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                        maxLines: 2,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                              padding: EdgeInsets.all(3),
+                              color: colorindex == 1
+                                  ? AppColors.blue
+                                  : AppColors.green,
+                              child: Text(
+                                '${responseList[0][i][1]}',
+                                style: const TextStyle(fontSize: 12, color: Colors.white),
+                                textDirection: ui.TextDirection.ltr,
+                              )
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            // '시작일 | ${responseList[0][i][2].toString().trim()}',
+                            '시작일 | ${dateFormat.format(dateTime)}',
+                            style: const TextStyle(fontSize: 13, color: Colors.grey),
+                            textDirection: ui.TextDirection.ltr,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               )
           ))
@@ -183,7 +226,7 @@ class _mypageScreenState extends State<mypageScreen> {
       ),
       body:
 
-        Column(
+      Column(
           children: <Widget>[
             InkWell(
               onTap: (){
@@ -192,50 +235,50 @@ class _mypageScreenState extends State<mypageScreen> {
 
               },
               child:
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              children: [
-                SizedBox(
-                    child: UserProfileCircleImage(imageUrl: profileImage,),
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('${userName}', style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17
-                          )),
-                          SizedBox(height: 5),
-                          Text('프로필 수정', style: TextStyle(
-                              fontWeight: FontWeight.w100,
-                              color: AppColors.grey,
-                              fontSize: 14
-                          )),
-                            // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
-                          // ),
-                           ],
-                      ),
+                    SizedBox(
+                      child: UserProfileCircleImage(imageUrl: profileImage,),
                     ),
-                    SizedBox(width: 80,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                      child: Icon(
-                        Icons.arrow_forward_ios_outlined,
-                        color: AppColors.primary,
-                        size: 23,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('${userName}', style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17
+                              )),
+                              SizedBox(height: 5),
+                              Text('프로필 수정', style: TextStyle(
+                                  fontWeight: FontWeight.w100,
+                                  color: AppColors.grey,
+                                  fontSize: 14
+                              )),
+                              // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
+                              // ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: 80,),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                          child: Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            color: AppColors.primary,
+                            size: 23,
+                          ),
+                        ),
+                      ],
                     ),
+                    // SizedBox(width: 80),
                   ],
-                ),
-                // SizedBox(width: 80),
-              ],
-            ),),),
+                ),),),
             // SizedBox(height: 5,),
             Container(
                 alignment: Alignment.centerLeft,
@@ -246,68 +289,37 @@ class _mypageScreenState extends State<mypageScreen> {
             ),
             saveDataProfile(itemsData, topContainer, slideSendBox)
           ]
-        ),
+      ),
     );
   }
 }
 
 Widget saveDataProfile(List itemsData, topContainer, userSaveData) {
-  return Expanded(child: ListView.builder(
-      shrinkWrap: true,
-      itemCount: itemsData.length,
-      physics: const BouncingScrollPhysics(),
-      itemBuilder: (c, i){
-        double scale = 1.0;
-        if (topContainer > 0.5){
-          scale = i + 0.5 - topContainer;
-          if (scale < 0 ) { scale = 0;}
-          else if (scale > 1) { scale = 1; }
-        }
-        return Slidable(
-            // Specify a key if the Slidable is dismissible.
-              key: const ValueKey(0),
-              child: Opacity(
-                opacity: scale,
-                child: Transform(
-                  transform: Matrix4.identity()..scale(scale, scale),
-                  alignment: Alignment.bottomCenter,
-                  child: Align(
-                    heightFactor: 0.95,
-                    alignment: Alignment.topCenter,
-                    child: itemsData[i],
-                  ),
+  return Expanded(
+      child: ListView.builder(
+          itemCount: itemsData.length,
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: (c, i){
+            double scale = 1.0;
+            if (topContainer > 0.5){
+              scale = i + 0.5 - topContainer;
+              if (scale < 0 ) { scale = 0;}
+              else if (scale > 1) { scale = 1; }
+            }
+            return Opacity(
+              opacity: scale,
+              child: Transform(
+                transform: Matrix4.identity()..scale(scale, scale),
+                alignment: Alignment.bottomCenter,
+                child: Align(
+                  heightFactor: 0.95,
+                  alignment: Alignment.topCenter,
+                  child: itemsData[i],
                 ),
               ),
-              // The end action pane is the one at the right or the bottom side.
-              endActionPane: ActionPane(
-                motion: ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    // An action can be bigger than the others.
-                    flex: 1,
-                    onPressed: doNothing,
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    icon: Icons.share_outlined,
-                    label: '공유',
-                  ),
-                  SlidableAction(
-                    backgroundColor: AppColors.red,
-                    foregroundColor: Colors.white,
-                    icon: Icons.delete_outline_outlined,
-                    label: '삭제',
-                    onPressed: (value) => fnDeleteAction(itemsData[i], userSaveData),
-                  ),
-                ],
-              ));
-      }
-  )
+            );
+          }
+      )
   );
 }
 
-fnDeleteAction(itemsData, userSaveData) {
-  print(itemsData);
-  print(userSaveData);
-}
-
-void doNothing(BuildContext context) {}
