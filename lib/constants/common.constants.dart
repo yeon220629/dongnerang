@@ -208,4 +208,21 @@ List dropdownDay = ['1','2','3','4','5','6','7','8','9','10','11','12','13',
             '27','28','29','30','31'
             ];
 List centerCheck = ['전체', '문화재단', '구청'];
-List SeoulCheck = ['전체','NPO','청년몽땅정보통','서울산업진흥원','SBA지원센터','서울주거포털'];
+List SeoulCheck = ['전체','NPO지원센터','청년몽땅정보통','SBA지원센터','서울주거포털'];
+
+int fnCnterCheck(centerValue){
+  if(centerValue.contains("구청")){
+    return 1;
+  }else if(centerValue.contains("문화재단")){
+    return 0;
+  }else if(centerValue.contains("청년몽땅정보통")){
+    return 2;
+  }else if(centerValue.contains("SBA지원센터")){
+    return 3;
+  }else if(centerValue.contains("서울주거포털")){
+    return 4;
+  }else if(centerValue.contains("서울NPO지원센터")){
+    return 5;
+  }
+  return 0;
+}

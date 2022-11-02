@@ -25,7 +25,6 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
-  // final CategoriesScroller categoriesScroller = CategoriesScroller();
   final List<bool> _selectedCenter = <bool>[true, false];
   List<String> LIST_MENU = [];
   bool closeTapContainer = false;
@@ -64,11 +63,16 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
+    print(value);
+    print(seoulCenterLabel);
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
     }else{
       value = 'SEOUL';
+      // if(seoulCenterLabel == 'NPO'){
+      //   centerName = ''
+      // }
       centerName = seoulCenterLabel;
     }
 
@@ -106,11 +110,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     responseList = valueData;
 
     for ( var post in responseList){
-      if(post["center_name "].toString().contains("구청")){
-        colorindex = 1;
-      }else{
-        colorindex = 0;
-      }
+      // print(post['center_name ']);
+      // fnCnterCheck(centerValue){}
+      // if(post["center_name "].toString().contains("구청")){
+      //   colorindex = 1;
+      // }else{
+      //   colorindex = 0;
+      // }
+      colorindex = fnCnterCheck(post['center_name ']);
+      print(colorindex);
 
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
       DateTime dateTime = post["registrationdate"].toDate();
@@ -156,9 +164,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   // padding: EdgeInsets.all(3),
                                     color: colorindex == 1
                                         ? Color(0xff5496D2)
-                                        : Color(0xff3CC181),
-                                    // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                                    // [_random.nextInt(9) * 100],
+                                        : colorindex == 0
+                                          ? Color(0xff3CC181)
+                                          : colorindex == 2
+                                            ? AppColors.darkgreen
+                                            : colorindex == 3
+                                              ? AppColors.primary
+                                              : colorindex == 4
+                                                ? AppColors.orange
+                                                : colorindex == 5
+                                                  ? AppColors.red
+                                                  : AppColors.black,
                                     child: Text(
                                       '${post['center_name ']}',
                                       style: const TextStyle(fontSize: 12, color: Colors.white),
@@ -218,10 +234,18 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             Container(
                                 padding: EdgeInsets.all(3),
                                 color: colorindex == 1
-                                    ? AppColors.blue
-                                    : AppColors.green,
-                                // color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                                // [_random.nextInt(9) * 100],
+                                    ? Color(0xff5496D2)
+                                    : colorindex == 0
+                                    ? Color(0xff3CC181)
+                                    : colorindex == 2
+                                    ? AppColors.darkgreen
+                                    : colorindex == 3
+                                    ? AppColors.primary
+                                    : colorindex == 4
+                                    ? AppColors.orange
+                                    : colorindex == 5
+                                    ? AppColors.red
+                                    : AppColors.black,
                                 child: Text(
                                   '${post['center_name ']}',
                                   style: const TextStyle(fontSize: 13, color: Colors.white),
@@ -442,6 +466,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             seoulCenterLabel = value as String?;
                             centerLabel = value as String?;
                             SeouldefaultCenter = value as String?;
+                            print(value);
+                            if(value == 'NPO지원센터'){
+                              value = 'NPO';
+                            }
                             getPostsData(value);
                           }
                           );
