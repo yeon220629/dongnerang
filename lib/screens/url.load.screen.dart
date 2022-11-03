@@ -84,9 +84,10 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
         onPressed: (){
           // 메인 페이지
           if(widget.i == 0){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  mainScreen()), (route) => false);
+            Navigator.pop(context);
+            // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+            //   builder: (BuildContext context) =>
+            //       mainScreen()), (route) => false);
           }
           if(widget.i == 1){
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
