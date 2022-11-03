@@ -195,20 +195,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               )));
             },
             child: Container(
-                width: 500,
-                height: 110,
-                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 7.5,
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                     border: Border.all(color: Colors.black12, width: 1)), //테두리
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         '${post["title"]}',
-                        style: const TextStyle(fontSize: 15),
+                        style: const TextStyle(fontSize: 14),
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.justify,
                         maxLines: 2,
@@ -219,31 +219,34 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       Expanded(
                           child: Row(
                             children: [
-                              Container(
-                                  padding: EdgeInsets.all(3),
-                                  color: colorindex == 1
-                                      ? Color(0xff5496D2)
-                                      : colorindex == 0
-                                      ? Color(0xff3CC181)
-                                      : colorindex == 2
-                                      ? AppColors.darkgreen
-                                      : colorindex == 3
-                                      ? AppColors.primary
-                                      : colorindex == 4
-                                      ? AppColors.orange
-                                      : colorindex == 5
-                                      ? AppColors.red
-                                      : AppColors.black,
-                                  child: Text(
-                                    '${post['center_name ']}',
-                                    style: const TextStyle(fontSize: 13, color: Colors.white),
-                                    textDirection: ui.TextDirection.ltr,
-                                  )
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  // padding: EdgeInsets.all(3),
+                                    color: colorindex == 1
+                                        ? Color(0xff5496D2)
+                                        : colorindex == 0
+                                        ? Color(0xff3CC181)
+                                        : colorindex == 2
+                                        ? AppColors.darkgreen
+                                        : colorindex == 3
+                                        ? AppColors.primary
+                                        : colorindex == 4
+                                        ? AppColors.orange
+                                        : colorindex == 5
+                                        ? AppColors.red
+                                        : AppColors.black,
+                                    child: Text(
+                                      '${post['center_name ']}',
+                                      style: const TextStyle(fontSize: 12, color: Colors.white),
+                                      textDirection: ui.TextDirection.ltr,
+                                    )
+                                ),
                               ),
                               SizedBox(width: 8),
                               Text(
-                                '시작일 | ${dateFormat.format(dateTime)}',
                                 // '시작일 | ${post['registrationdate'].trim()}',
+                                '시작일 | ${dateFormat.format(dateTime)}',
                                 style: const TextStyle(fontSize: 13, color: Colors.grey),
                                 textDirection: ui.TextDirection.ltr,
                               ),
@@ -447,7 +450,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         }
                     )
                         : DropdownButton(
-
                         alignment: Alignment.center,
                         focusColor: AppColors.primary,
                         icon: const Icon(Icons.keyboard_arrow_down),
@@ -573,23 +575,23 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   ],
                 ),
                 Expanded(
-                    child: ListView.builder(
-                        itemCount: itemsData.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (c, i){
-                          double scale = 1.0;
-                          if (topContainer > 0.5){
-                            scale = i + 0.5 - topContainer;
-                            if (scale < 0 ) { scale = 0;}
-                            else if (scale > 1) { scale = 1; }
-                          }
-                          return Align(
-                            heightFactor: 0.95,
-                            alignment: Alignment.topCenter,
-                            child: itemsData[i],
-                          );
-                        }
-                    )
+                  child: ListView.builder(
+                    itemCount: itemsData.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (c, i){
+                      double scale = 1.0;
+                      if (topContainer > 0.5){
+                        scale = i + 0.5 - topContainer;
+                        if (scale < 0 ) { scale = 0;}
+                        else if (scale > 1) { scale = 1; }
+                      }
+                      return Align(
+                        heightFactor: 0.95,
+                        alignment: Alignment.topCenter,
+                        child: itemsData[i],
+                      );
+                    }
+                  )
                 ),
               ],
             ),

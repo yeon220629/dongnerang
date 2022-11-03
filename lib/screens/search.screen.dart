@@ -32,6 +32,7 @@ class _searchScreenState extends State<searchScreen>
 
   final _random = Random();
   double topContainer = 0;
+  int colorindex = 0;
 
   List ResentSearch = [];
   List<Widget> itemsData = [];
@@ -65,6 +66,7 @@ class _searchScreenState extends State<searchScreen>
     List<dynamic> responseList = valueData;
     listItems = [];
     for (var post in responseList) {
+      colorindex = fnCnterCheck(post['center_name ']);
       DateTime dateTime = post["registrationdate"].toDate();
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
@@ -79,17 +81,14 @@ class _searchScreenState extends State<searchScreen>
                   )));
             },
             child: Container(
-                width: 500,
-                height: 110,
-                margin: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 15),
-                decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withAlpha(100), blurRadius: 10.0),
-                ]),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 7.5,
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                    border: Border.all(color: Colors.black12, width: 1)), //테두리
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -101,28 +100,38 @@ class _searchScreenState extends State<searchScreen>
                         maxLines: 2,
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 11,
                       ),
                       Row(
                         children: [
-                          Container(
-                              padding: EdgeInsets.all(3),
-                              color: Colors.primaries[_random.nextInt(Colors
-                                  .primaries.length)]
-                              [_random.nextInt(9) * 100],
-                              child: Text(
-                                '${post['center_name ']}',
-                                style: const TextStyle(fontSize: 13,
-                                    color: Colors.black),
-                                textDirection: ui.TextDirection.ltr,
-                              )
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              // padding: EdgeInsets.all(3),
+                                color: colorindex == 1
+                                    ? Color(0xff5496D2)
+                                    : colorindex == 0
+                                    ? Color(0xff3CC181)
+                                    : colorindex == 2
+                                    ? AppColors.darkgreen
+                                    : colorindex == 3
+                                    ? AppColors.primary
+                                    : colorindex == 4
+                                    ? AppColors.orange
+                                    : colorindex == 5
+                                    ? AppColors.red
+                                    : AppColors.black,
+                                child: Text(
+                                  '${post['center_name ']}',
+                                  style: const TextStyle(fontSize: 13, color: Colors.white),
+                                  textDirection: ui.TextDirection.ltr,
+                                )
+                            ),
                           ),
-                          SizedBox(width: 10),
+                          SizedBox(width: 8),
                           Text(
-                            // '시작일 | ${post['registrationdate'].trim()}',
                             '시작일 | ${dateFormat.format(dateTime)}',
-                            style: const TextStyle(
-                                fontSize: 15, color: Colors.grey),
+                            style: const TextStyle(fontSize: 13, color: Colors.grey),
                             textDirection: ui.TextDirection.ltr,
                           ),
                         ],
