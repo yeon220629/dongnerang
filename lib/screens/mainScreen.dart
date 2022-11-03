@@ -121,50 +121,53 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 )));
               },
               child: Container(
-                  width: 500,
-                  height: 110,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 7.5,
                   margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                       border: Border.all(color: Colors.black12, width: 1)), //테두리
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
                           '${post["title"]}',
-                          style: const TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 14),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
                           maxLines: 2,
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         Expanded(
                             child: Row(
                               children: [
-                                Container(
-                                  // padding: EdgeInsets.all(3),
-                                    color: colorindex == 1
-                                        ? Color(0xff5496D2)
-                                        : colorindex == 0
-                                        ? Color(0xff3CC181)
-                                        : colorindex == 2
-                                        ? AppColors.darkgreen
-                                        : colorindex == 3
-                                        ? AppColors.primary
-                                        : colorindex == 4
-                                        ? AppColors.orange
-                                        : colorindex == 5
-                                        ? AppColors.red
-                                        : AppColors.black,
-                                    child: Text(
-                                      '${post['center_name ']}',
-                                      style: const TextStyle(fontSize: 12, color: Colors.white),
-                                      textDirection: ui.TextDirection.ltr,
-                                    )
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    // padding: EdgeInsets.all(3),
+                                      color: colorindex == 1
+                                          ? Color(0xff5496D2)
+                                          : colorindex == 0
+                                          ? Color(0xff3CC181)
+                                          : colorindex == 2
+                                          ? AppColors.darkgreen
+                                          : colorindex == 3
+                                          ? AppColors.primary
+                                          : colorindex == 4
+                                          ? AppColors.orange
+                                          : colorindex == 5
+                                          ? AppColors.red
+                                          : AppColors.black,
+                                      child: Text(
+                                        '${post['center_name ']}',
+                                        style: const TextStyle(fontSize: 12, color: Colors.white),
+                                        textDirection: ui.TextDirection.ltr,
+                                      )
+                                  ),
                                 ),
                                 SizedBox(width: 8),
                                 Text(
@@ -319,6 +322,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             elevation: 0,
             title:
             DropdownButton(
+              alignment: Alignment.center,
+              focusColor: AppColors.primary,
               icon: const Icon(Icons.keyboard_arrow_down),
               isExpanded: false,
               isDense: false,
@@ -391,10 +396,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               }
                             });
                           },
-                          fillColor: AppColors.white,
-                          borderColor: AppColors.white,
-                          selectedBorderColor: AppColors.white,
-                          selectedColor: AppColors.blue,
+                          fillColor: AppColors.background,
+                          borderColor: AppColors.background,
+                          selectedBorderColor: AppColors.background,
+                          selectedColor: AppColors.primary,
                           textStyle: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -411,6 +416,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     SizedBox(width: size.width / 4,),
                     cuindex == 0
                         ? DropdownButton(
+                        alignment: Alignment.center,
+                        focusColor: AppColors.primary,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        isExpanded: false,
+                        isDense: false,
+                        underline: Container(),
                         value: defaultCenter,
                         items: centerCheck.map( (value) {
                           if(value == "전체"){
@@ -436,6 +447,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         }
                     )
                         : DropdownButton(
+
+                        alignment: Alignment.center,
+                        focusColor: AppColors.primary,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        isExpanded: false,
+                        isDense: false,
+                        underline: Container(),
                         value: SeouldefaultCenter,
                         items: SeoulCheck.map( (value) {
                           if(value == "전체"){
@@ -448,7 +466,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               child: value == '서울시청'
                                   ? Row(
                                       children: [
-                                        Image.asset('assets/images/seoul.logo.png', width: 25,height: 25,),
+                                        Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
                                         Text(value)
                                       ],
                                     )
@@ -472,7 +490,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   builder: (BuildContext context){
                                     return AlertDialog(
                                         shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(Radius.circular(0.0))),
+                                            borderRadius: BorderRadius.all(Radius.circular(8.0))),
                                         contentPadding: EdgeInsets.only(top: 0.0),
                                         content: Container(
                                             width: size.width,
@@ -483,14 +501,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                               children: <Widget>[
                                                 InkWell(
                                                   child: Container(
-                                                    padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                                                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
                                                     decoration: BoxDecoration(
                                                       color: AppColors.primary,
                                                     ),
-                                                    child: Text(
-                                                      "서울시청",
-                                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                                      textAlign: TextAlign.center,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
+                                                        Text(
+                                                          " 서울시청",
+                                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -501,8 +525,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         seoulUrlLoadScreen(
                                                             url
                                                         )));
-                                                  }, child: Text('분야별 새소식', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                  }, child: Text('분야별 새소식', style: TextStyle(color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                 ),
                                                 Container(
                                                   child:TextButton(onPressed: (){
@@ -511,8 +535,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         seoulUrlLoadScreen(
                                                             url
                                                         )));
-                                                  }, child: Text('이달의 행사', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                  }, child: Text('이달의 행사 및 축제', style: TextStyle( color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                 ),
                                                 Container(
                                                   child:TextButton(onPressed: (){
@@ -521,8 +545,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         seoulUrlLoadScreen(
                                                             url
                                                         )));
-                                                  }, child: Text('이벤트 신청', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                  }, child: Text('이벤트 신청', style: TextStyle( color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                 ),
                                                 Container(
                                                   child:TextButton(onPressed: (){
@@ -531,8 +555,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         seoulUrlLoadScreen(
                                                             url
                                                         )));
-                                                  }, child: Text('내손안의 서울', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                  }, child: Text('내 손안의 서울(공모전)', style: TextStyle( color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                 )
                                               ],
                                             )
@@ -559,17 +583,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             if (scale < 0 ) { scale = 0;}
                             else if (scale > 1) { scale = 1; }
                           }
-                          return Opacity(
-                            opacity: scale,
-                            child: Transform(
-                              transform: Matrix4.identity()..scale(scale, scale),
-                              alignment: Alignment.bottomCenter,
-                              child: Align(
-                                heightFactor: 0.95,
-                                alignment: Alignment.topCenter,
-                                child: itemsData[i],
-                              ),
-                            ),
+                          return Align(
+                            heightFactor: 0.95,
+                            alignment: Alignment.topCenter,
+                            child: itemsData[i],
                           );
                         }
                     )

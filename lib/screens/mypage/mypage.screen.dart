@@ -49,7 +49,6 @@ class _mypageScreenState extends State<mypageScreen> {
     valueBox.forEach((element) {
       valueData.add(value);
     });
-
     responseList = valueData;
     for(int i = 0; i< responseList[0].length; i++){
       // 문화재단 pri
@@ -70,14 +69,14 @@ class _mypageScreenState extends State<mypageScreen> {
             )));
           },
           child: Container(
-              width: 500,
-              height: 110,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              width: MediaQuery.of(context).size.width,
+              // height: 110,
+              // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               // decoration: BoxDecoration(
               //     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
               //     border: Border.all(color: Colors.black12, width: 1)), //테두리
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
                 child: Slidable(
                   // Specify a key if the Slidable is dismissible.
                   key: UniqueKey(),
@@ -86,6 +85,7 @@ class _mypageScreenState extends State<mypageScreen> {
                     motion: ScrollMotion(),
                     children: [
                       SlidableAction(
+                        autoClose: true,
                         onPressed: (value) async {
                           final TextTemplate defaultText = TextTemplate(
                             text:
@@ -115,11 +115,12 @@ class _mypageScreenState extends State<mypageScreen> {
                         label: '공유',
                       ),
                       SlidableAction(
+                        autoClose: true,
                         onPressed: (value){
                           delPostsData(responseList[0][i][3],context);
                         },
-                        backgroundColor: AppColors.grey,
-                        foregroundColor: AppColors.black,
+                        backgroundColor: AppColors.red,
+                        foregroundColor: AppColors.white,
                         icon: Icons.delete,
                         label: '삭제',
                       ),
@@ -145,7 +146,7 @@ class _mypageScreenState extends State<mypageScreen> {
                               padding: EdgeInsets.all(3),
                               color: colorindex == 1
                                   ? AppColors.blue
-                                  : AppColors.green,
+                                  : AppColors.primary,
                               child: Text(
                                 '${responseList[0][i][1]}',
                                 style: const TextStyle(fontSize: 12, color: Colors.white),
@@ -246,48 +247,53 @@ class _mypageScreenState extends State<mypageScreen> {
                 Navigator.push(context, MaterialPageRoute(
                     builder: (_) => mypageInformSettingScreen()));
               },
-              child:
-              Padding(
+              child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
                   children: [
                     SizedBox(
                       child: UserProfileCircleImage(imageUrl: profileImage,),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width/2.3,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('$userName', style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17
+                                )),
+                                SizedBox(height: 5),
+                                Text('프로필 수정', style: TextStyle(
+                                    fontWeight: FontWeight.w100,
+                                    color: AppColors.grey,
+                                    fontSize: 14
+                                )),
+                                // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text('${userName}', style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17
-                              )),
-                              SizedBox(height: 5),
-                              Text('프로필 수정', style: TextStyle(
-                                  fontWeight: FontWeight.w100,
-                                  color: AppColors.grey,
-                                  fontSize: 14
-                              )),
-                              // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
-                              // ),
+                              Container(
+                                // padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                                child: Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  color: AppColors.primary,
+                                  size: 23,
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                        SizedBox(width: 80,),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                          child: Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: AppColors.primary,
-                            size: 23,
-                          ),
-                        ),
-                      ],
-                    ),
                     // SizedBox(width: 80),
                   ],
                 ),),),
@@ -308,8 +314,7 @@ class _mypageScreenState extends State<mypageScreen> {
 
 Widget saveDataProfile(List itemsData, topContainer) {
   return Expanded(
-      child: ListView.builder(
-
+      child: ListView.separated(
           itemCount: itemsData.length,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (c, i){
@@ -319,19 +324,15 @@ Widget saveDataProfile(List itemsData, topContainer) {
               if (scale < 0 ) { scale = 0;}
               else if (scale > 1) { scale = 1; }
             }
-            return Opacity(
-              opacity: scale,
-              child: Transform(
-                transform: Matrix4.identity()..scale(scale, scale),
-                alignment: Alignment.bottomCenter,
-                child: Align(
+            return Align(
                   heightFactor: 0.95,
                   alignment: Alignment.topCenter,
                   child: itemsData[i],
-                ),
-              ),
-            );
-          }
+                );
+          },
+          separatorBuilder: (BuildContext ctx, int idx) {
+            return Divider();
+  },
       )
   );
 }

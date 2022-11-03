@@ -588,7 +588,7 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
         ),
         SizedBox(height: 5,),
         TextFormField(
-          maxLength: 8,
+          maxLength: 20,
           decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(
