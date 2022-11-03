@@ -309,6 +309,7 @@ class _mypageScreenState extends State<mypageScreen> {
 Widget saveDataProfile(List itemsData, topContainer) {
   return Expanded(
       child: ListView.builder(
+
           itemCount: itemsData.length,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (c, i){

@@ -184,6 +184,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                               icon: Icon(Icons.search),
+                              color: AppColors.grey,
                               onPressed: () {
                                 select_tags.add(myController.text);
                                 // print("select_tags : $select_tags");
@@ -216,14 +217,14 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                       Row(
                         children: <Widget>[
                           Container(
-                            width: categoryHeight * 1.5,
-                            margin: const EdgeInsets.only(right: 5),
-                            height: categoryHeight - 170,
+                            width: categoryHeight * 1.7,
+                            // margin: const EdgeInsets.only(right: 5),
+                            height: categoryHeight - 180,
                             child: Center(
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
-                                padding: EdgeInsets.all(10),
+                                // padding: EdgeInsets.all(10),
                                 children: <Widget>[Wrap(children: [...generate_tags(mypageCustomKeyword)],spacing: 2.0,)],
                               ),
                             ),
@@ -244,13 +245,17 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
-    return Container(
-      child: Chip(
-        backgroundColor: AppColors.blue,
-        labelStyle: TextStyle(color: AppColors.white),
-        label: Text('$name'),
-        onDeleted: (){
-          setState(() {
+    return Padding(
+        padding: EdgeInsets.all(2),
+        child: Chip(
+          backgroundColor: AppColors.primary,
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          // deleteButtonTooltipMessage: '삭제하시겠습니까?',
+          deleteIcon: Icon(Icons.close, size: 15,),
+          deleteIconColor: Colors.white,
+          label: Text('$name'),
+          onDeleted: (){
+            setState(() {
             mypageCustomKeyword.remove(name);
           });
         },
@@ -583,6 +588,7 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
         ),
         SizedBox(height: 5,),
         TextFormField(
+          maxLength: 8,
           decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(

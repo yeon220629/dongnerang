@@ -205,7 +205,7 @@ List dropdownDay = ['1','2','3','4','5','6','7','8','9','10','11','12','13',
 List centerCheck = ['전체', '문화재단', '구청'];
 List SeoulCheck = ['전체',
   'NPO지원센터', '청년몽땅정보통','SBA지원센터','서울주거포털'
-  ,'서울시청'];
+  ,'   서울시청'];
 
 int fnCnterCheck(centerValue){
   if(centerValue.contains("구청")){

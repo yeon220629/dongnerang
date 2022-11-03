@@ -447,7 +447,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               child: value == '서울시청'
                                   ? Row(
                                       children: [
-                                        Image.asset('assets/images/seoul.png'),
+                                        Image.asset('assets/images/seoul.logo.png', width: 25,height: 25,),
                                         Text(value)
                                       ],
                                     )
@@ -487,7 +487,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                       color: AppColors.primary,
                                                     ),
                                                     child: Text(
-                                                      "서울 시청",
+                                                      "서울시청",
                                                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                       textAlign: TextAlign.center,
                                                     ),

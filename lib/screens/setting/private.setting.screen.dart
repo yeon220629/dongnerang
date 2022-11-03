@@ -214,12 +214,13 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                       ),
                       Row(
                         children: <Widget>[
-                          Container(
-                            width: categoryHeight * 1.5,
+                          SizedBox(
+                            width: categoryHeight * 1.7,
                             // margin: const EdgeInsets.only(right: 5),
                             height: categoryHeight - 180,
                             // child: Center(
                             child: ListView(
+                              // reverse: true,
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               // padding: EdgeInsets.all(5),
@@ -242,11 +243,12 @@ class _KeywordStatefulState extends State<KeywordStateful> {
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
-    return Container(
+    return Padding(
+      padding: EdgeInsets.all(2),
       child: Chip(
         backgroundColor: AppColors.primary,
         labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        deleteButtonTooltipMessage: '삭제하시겠습니까?',
+        // deleteButtonTooltipMessage: '삭제하시겠습니까?',
         deleteIcon: Icon(Icons.close, size: 15,),
         deleteIconColor: Colors.white,
         label: Text('$name'),
