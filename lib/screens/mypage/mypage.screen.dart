@@ -245,7 +245,6 @@ class _mypageScreenState extends State<mypageScreen> {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(
                     builder: (_) => mypageInformSettingScreen()));
-
               },
               child:
               Padding(

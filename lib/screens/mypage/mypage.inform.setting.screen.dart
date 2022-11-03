@@ -28,7 +28,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
   @override
   Widget build(BuildContext context) {
     Get.put(PrivateSettingController());
-
+    print(PrivateLocalData);
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
@@ -48,10 +48,8 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                       // print("profilenickSetting : $profilenickSetting");
                       print("profileKeyword : $profileKeyword");
                       print("profilelocal : ${profilelocal}");
-                      if(profilelocal.isEmpty){
-                        print("PrivateLocalData : $PrivateLocalData");
-                        print("profilelocal[0] : ${profilelocal}");
-                      }
+                      print("PrivateLocalData : $PrivateLocalData");
+                      print("profilelocal[0] : ${profilelocal}");
                       if (controller.formKey.currentState!.validate()) {
                         try {
                           await FirebaseFirestore.instance
@@ -69,7 +67,6 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                                         ? PrivateLocalData
                                         : profilelocal[0]
                           }));
-
                           profilePhotoSetting = '';
                           profilenickSetting = '';
                           profileKeyword = [];
@@ -320,11 +317,24 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   }
   get_chip(name) {
     for(int i =0; i < PrivateLocalData.length; i++){
-      // print(PrivateLocalData[1]);
-      if(name == PrivateLocalData[0] || name == PrivateLocalData[1] || name == PrivateLocalData[2]){
-        selectCheck = false;
+      if(PrivateLocalData.length == 3){
+        if(name == PrivateLocalData[0] || name == PrivateLocalData[1] || name == PrivateLocalData[2]){
+          selectCheck = false;
+        }else{
+          selectCheck = true;
+        }
+      }else if(PrivateLocalData.length == 2){
+        if(name == PrivateLocalData[0] || name == PrivateLocalData[1]){
+          selectCheck = false;
+        }else{
+          selectCheck = true;
+        }
       }else{
-        selectCheck = true;
+        if(name == PrivateLocalData[0]){
+          selectCheck = false;
+        }else{
+          selectCheck = true;
+        }
       }
     }
     return FilterChip(

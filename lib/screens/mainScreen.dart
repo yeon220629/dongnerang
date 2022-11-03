@@ -26,7 +26,7 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
-  final List<bool> _selectedCenter = <bool>[true, false, true];
+  final List<bool> _selectedCenter = <bool>[true, false];
 
 
   List<String> LIST_MENU = [];
@@ -120,13 +120,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 final Uri url = Uri.parse('${post["link"]}');
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
                   // url, post["title"], post['center_name '], post['registrationdate'], 0
-                  url, post["title"], post['center_name '], dateTime, 0
+                    url, post["title"], post['center_name '], dateTime, 0
                 )));
               },
               child: Container(
                   width: 500,
                   height: 110,
-                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                       border: Border.all(color: Colors.black12, width: 1)), //테두리
@@ -149,23 +149,23 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             child: Row(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.all(3),
+                                  // padding: EdgeInsets.all(3),
                                     color: colorindex == 1
                                         ? Color(0xff5496D2)
                                         : colorindex == 0
-                                          ? Color(0xff3CC181)
-                                          : colorindex == 2
-                                            ? AppColors.darkgreen
-                                            : colorindex == 3
-                                              ? AppColors.primary
-                                              : colorindex == 4
-                                                ? AppColors.orange
-                                                : colorindex == 5
-                                                  ? AppColors.red
-                                                  : AppColors.black,
+                                        ? Color(0xff3CC181)
+                                        : colorindex == 2
+                                        ? AppColors.darkgreen
+                                        : colorindex == 3
+                                        ? AppColors.primary
+                                        : colorindex == 4
+                                        ? AppColors.orange
+                                        : colorindex == 5
+                                        ? AppColors.red
+                                        : AppColors.black,
                                     child: Text(
                                       '${post['center_name ']}',
-                                      style: const TextStyle(fontSize: 13, color: Colors.white),
+                                      style: const TextStyle(fontSize: 12, color: Colors.white),
                                       textDirection: ui.TextDirection.ltr,
                                     )
                                 ),
@@ -187,73 +187,73 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         }
       }else{
         listItems.add( GestureDetector(
-          onTap: () async{
-            final Uri url = Uri.parse('${post["link"]}');
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
+            onTap: () async{
+              final Uri url = Uri.parse('${post["link"]}');
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
                 // url, post["title"], post['center_name '], post['registrationdate'], 0
-                url, post["title"], post['center_name '], dateTime, 0
-            )));
-          },
-          child: Container(
-              width: 500,
-              height: 110,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), //모서리를 둥글게
-                  border: Border.all(color: Colors.black12, width: 1)), //테두리
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '${post["title"]}',
-                      style: const TextStyle(fontSize: 15),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.justify,
-                      maxLines: 2,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Expanded(
-                        child: Row(
-                          children: [
-                            Container(
-                                padding: EdgeInsets.all(3),
-                                color: colorindex == 1
-                                    ? Color(0xff5496D2)
-                                    : colorindex == 0
-                                    ? Color(0xff3CC181)
-                                    : colorindex == 2
-                                    ? AppColors.darkgreen
-                                    : colorindex == 3
-                                    ? AppColors.primary
-                                    : colorindex == 4
-                                    ? AppColors.orange
-                                    : colorindex == 5
-                                    ? AppColors.red
-                                    : AppColors.black,
-                                child: Text(
-                                  '${post['center_name ']}',
-                                  style: const TextStyle(fontSize: 13, color: Colors.white),
-                                  textDirection: ui.TextDirection.ltr,
-                                )
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              '시작일 | ${dateFormat.format(dateTime)}',
-                              // '시작일 | ${post['registrationdate'].trim()}',
-                              style: const TextStyle(fontSize: 13, color: Colors.grey),
-                              textDirection: ui.TextDirection.ltr,
-                            ),
-                          ],
-                        )
-                    )
-                  ],
-                ),
-              )
-          ))
+                  url, post["title"], post['center_name '], dateTime, 0
+              )));
+            },
+            child: Container(
+                width: 500,
+                height: 110,
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                    border: Border.all(color: Colors.black12, width: 1)), //테두리
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '${post["title"]}',
+                        style: const TextStyle(fontSize: 15),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                        maxLines: 2,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Expanded(
+                          child: Row(
+                            children: [
+                              Container(
+                                  padding: EdgeInsets.all(3),
+                                  color: colorindex == 1
+                                      ? Color(0xff5496D2)
+                                      : colorindex == 0
+                                      ? Color(0xff3CC181)
+                                      : colorindex == 2
+                                      ? AppColors.darkgreen
+                                      : colorindex == 3
+                                      ? AppColors.primary
+                                      : colorindex == 4
+                                      ? AppColors.orange
+                                      : colorindex == 5
+                                      ? AppColors.red
+                                      : AppColors.black,
+                                  child: Text(
+                                    '${post['center_name ']}',
+                                    style: const TextStyle(fontSize: 13, color: Colors.white),
+                                    textDirection: ui.TextDirection.ltr,
+                                  )
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                '시작일 | ${dateFormat.format(dateTime)}',
+                                // '시작일 | ${post['registrationdate'].trim()}',
+                                style: const TextStyle(fontSize: 13, color: Colors.grey),
+                                textDirection: ui.TextDirection.ltr,
+                              ),
+                            ],
+                          )
+                      )
+                    ],
+                  ),
+                )
+            ))
         );
       }
     }
@@ -311,8 +311,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     List<Widget> CategoryCenter = <Widget>[
       Text('동네소식'),
       Text('서울소식'),
-      // const Image.asset('assets/images/SEONGDONG.PNG'),
-      Image.asset('assets/images/seoul.png', width: categoryHeight, height: categoryHeight),
     ];
 
     return SafeArea(
@@ -393,93 +391,18 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               }else if(index == 1) {
                                 cuindex = 1;
                                 getPostsData('서울_전체');
-                              }else{
-                                cuindex = 2;
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context){
-                                    return AlertDialog(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                                        contentPadding: EdgeInsets.only(top: 0.0),
-                                        content: Container(
-                                        width: size.width,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            InkWell(
-                                              child: Container(
-                                              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                                              decoration: BoxDecoration(
-                                                  color: AppColors.primary,
-                                                ),
-                                                child: Text(
-                                                  "서울시청",
-                                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              child:TextButton(onPressed: (){
-                                                final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                    seoulUrlLoadScreen(
-                                                        url
-                                                    )));
-                                              }, child: Text('분야별 새소식', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                              decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                            ),
-                                            Container(
-                                              child:TextButton(onPressed: (){
-                                                final Uri url = Uri.parse('https://www.seoul.go.kr/thismteventfstvl/list.do');
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                    seoulUrlLoadScreen(
-                                                        url
-                                                    )));
-                                              }, child: Text('이달의 행사', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                              decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                            ),
-                                            Container(
-                                              child:TextButton(onPressed: (){
-                                                final Uri url = Uri.parse('https://www.seoul.go.kr/eventreqst/list.do');
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                    seoulUrlLoadScreen(
-                                                        url
-                                                    )));
-                                              }, child: Text('이벤트 신청', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                              decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                            ),
-                                            Container(
-                                              child:TextButton(onPressed: (){
-                                                final Uri url = Uri.parse('https://mediahub.seoul.go.kr/competition/competitionList.do');
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                    seoulUrlLoadScreen(
-                                                        url
-                                                    )));
-                                              }, child: Text('내손안의 서울', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                              decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                            )
-                                          ],
-                                        )
-                                      )
-                                    );
-                                  }
-                                );
+                                SeouldefaultCenter = '전체';
                               }
                             });
                           },
-                          fillColor: AppColors.background,
-                          borderColor: AppColors.background,
-                          selectedBorderColor: AppColors.background,
-                          // selectedColor: AppColors.blue,
+                          fillColor: AppColors.white,
+                          borderColor: AppColors.white,
+                          selectedBorderColor: AppColors.white,
+                          selectedColor: AppColors.blue,
                           textStyle: TextStyle(
-                            // fontWeight: FontWeight.bold,
-                            fontSize: 15
+                            fontWeight: FontWeight.bold,
                           ),
-                          color: AppColors.grey,
+                          color: AppColors.black,
                           constraints: const BoxConstraints(
                             maxWidth: 100,
                             minWidth: 70,
@@ -489,72 +412,144 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         ),
                       ],
                     ),
-                    SizedBox(width: size.width / 25,),
+                    SizedBox(width: size.width / 4,),
                     cuindex == 0
                         ? DropdownButton(
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          isExpanded: false,
-                          isDense: false,
-                          underline: Container(),
-                            value: defaultCenter,
-                            items: centerCheck.map( (value) {
-                              if(value == "전체"){
-                                return DropdownMenuItem (
-                                  value: value, child: Text(value),
-                                );
-                              }else{
-                                return DropdownMenuItem (
-                                  value: value, child: Text("${dropdownValue+value}"),
-                                  // value: value, child: Text(value),
-                                );
-                              }
-                            },
-                            ).toList(),
-                            onChanged: (dynamic value){
-                              setState(() {
-                                listItems = [];
-                                centerLabel = value as String?;
-                                defaultCenter = value as String?;
-                                getPostsData(dropdownValue+"_"+defaultCenter!);
-                              }
+                        value: defaultCenter,
+                        items: centerCheck.map( (value) {
+                          if(value == "전체"){
+                            return DropdownMenuItem (
+                              value: value, child: Text(value),
+                            );
+                          }else{
+                            return DropdownMenuItem (
+                              value: value, child: Text("${dropdownValue+value}"),
+                              // value: value, child: Text(value),
+                            );
+                          }
+                        },
+                        ).toList(),
+                        onChanged: (value){
+                          setState(() {
+                            listItems = [];
+                            centerLabel = value as String?;
+                            defaultCenter = value as String?;
+                            getPostsData(dropdownValue+"_"+defaultCenter!);
+                          }
+                          );
+                        }
+                    )
+                        : DropdownButton(
+                        value: SeouldefaultCenter,
+                        items: SeoulCheck.map( (value) {
+                          if(value == "전체"){
+                            return DropdownMenuItem (
+                              value: value, child: Text(value),
+                            );
+                          }else{
+                            return DropdownMenuItem (
+                              value: value,
+                              child: value == '서울시청'
+                                  ? Row(
+                                      children: [
+                                        Image.asset('assets/images/seoul.png'),
+                                        Text(value)
+                                      ],
+                                    )
+                                  : Text(value),
+                              // value: value, child: Text(value),
+                            );
+                          }
+                        },
+                        ).toList(),
+                        onChanged: (value){
+                          setState(() {
+                            listItems = [];
+                            seoulCenterLabel = value as String?;
+                            centerLabel = value as String?;
+                            SeouldefaultCenter = value as String?;
+                            if(value == 'NPO지원센터'){
+                              value = 'NPO';
+                            }else if(value == '서울시청'){
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context){
+                                    return AlertDialog(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(Radius.circular(0.0))),
+                                        contentPadding: EdgeInsets.only(top: 0.0),
+                                        content: Container(
+                                            width: size.width,
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                InkWell(
+                                                  child: Container(
+                                                    padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.primary,
+                                                    ),
+                                                    child: Text(
+                                                      "서울 시청",
+                                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                      textAlign: TextAlign.center,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  child:TextButton(onPressed: (){
+                                                    final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
+                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                        seoulUrlLoadScreen(
+                                                            url
+                                                        )));
+                                                  }, child: Text('분야별 새소식', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                ),
+                                                Container(
+                                                  child:TextButton(onPressed: (){
+                                                    final Uri url = Uri.parse('https://www.seoul.go.kr/thismteventfstvl/list.do');
+                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                        seoulUrlLoadScreen(
+                                                            url
+                                                        )));
+                                                  }, child: Text('이달의 행사', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                ),
+                                                Container(
+                                                  child:TextButton(onPressed: (){
+                                                    final Uri url = Uri.parse('https://www.seoul.go.kr/eventreqst/list.do');
+                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                        seoulUrlLoadScreen(
+                                                            url
+                                                        )));
+                                                  }, child: Text('이벤트 신청', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                ),
+                                                Container(
+                                                  child:TextButton(onPressed: (){
+                                                    final Uri url = Uri.parse('https://mediahub.seoul.go.kr/competition/competitionList.do');
+                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                        seoulUrlLoadScreen(
+                                                            url
+                                                        )));
+                                                  }, child: Text('내손안의 서울', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                )
+                                              ],
+                                            )
+                                        )
+                                    );
+                                  }
                               );
                             }
-                        )
-                        : cuindex == 1
-                            ?DropdownButton(
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              isExpanded: false,
-                              isDense: false,
-                              underline: Container(),
-                              value: SeouldefaultCenter,
-                              items: SeoulCheck.map( (value) {
-                                if(value == "전체"){
-                                  return DropdownMenuItem (
-                                    value: value, child: Text(value),
-                                  );
-                                }else{
-                                  return DropdownMenuItem (
-                                    value: value, child: Text("$value"),
-                                    // value: value, child: Text(value),
-                                  );
-                                }
-                              },
-                              ).toList(),
-                              onChanged: (dynamic value){
-                                setState(() {
-                                    listItems = [];
-                                    seoulCenterLabel = value as String?;
-                                    centerLabel = value as String?;
-                                    SeouldefaultCenter = value as String?;
-                                    // if(value == 'NPO지원센터'){
-                                    //   value = 'NPO';
-                                    // }
-                                    getPostsData(value);
-                                  }
-                                );
-                              }
-                          )
-                    : SizedBox(),
+                            getPostsData(value);
+                          }
+                          );
+                        }
+                    )
                   ],
                 ),
                 Expanded(
@@ -591,23 +586,3 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 }
 
-// Widget setupAlertDialoadContainer() {
-//   return Scaffold(
-//     appBar: AppBar(
-//       title: Text("TEXT"),
-//     ),
-//     body: Container(
-//       height: 300.0, // Change as per your requirement
-//       width: 300.0, // Change as per your requirement
-//       child: ListView.builder(
-//         shrinkWrap: true,
-//         itemCount: 5,
-//         itemBuilder: (BuildContext context, int index) {
-//           return ListTile(
-//             title: Text('Gujarat, India'),
-//           );
-//         },
-//       ),
-//     )
-//   );
-// }

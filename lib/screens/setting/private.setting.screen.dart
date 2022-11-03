@@ -389,7 +389,6 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   }
 
   generate_tags(value) {
-    print(value);
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {

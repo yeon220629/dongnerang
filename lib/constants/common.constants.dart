@@ -70,16 +70,16 @@ var POPUP_MENU_ITEMS_OTHERS = [
 final ScrollController controllers = ScrollController();
 InAppWebViewController? webViewController;
 InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
-  crossPlatform: InAppWebViewOptions(
-    useShouldOverrideUrlLoading: true,
-    mediaPlaybackRequiresUserGesture: false,
-  ),
-  android: AndroidInAppWebViewOptions(
-    useHybridComposition: true,
-  ),
-  ios: IOSInAppWebViewOptions(
-    allowsInlineMediaPlayback: true,
-  )
+    crossPlatform: InAppWebViewOptions(
+      useShouldOverrideUrlLoading: true,
+      mediaPlaybackRequiresUserGesture: false,
+    ),
+    android: AndroidInAppWebViewOptions(
+      useHybridComposition: true,
+    ),
+    ios: IOSInAppWebViewOptions(
+      allowsInlineMediaPlayback: true,
+    )
 );
 late PullToRefreshController pullToRefreshController = PullToRefreshController();
 final urlController = TextEditingController();
@@ -136,7 +136,7 @@ List? fnChecklocal(String local){
     return ['동작', 'DONGJAK'];
   }else if(local == '마포'){
     return ['마포', 'MAPO'];
-  //  서대문 잠깐 보류
+    //  서대문 잠깐 보류
   }
   // else if(local == '서대문'){
   //   return ['마포', 'MAPO'];
@@ -178,8 +178,8 @@ class Arguments {
   late String arg;   // 전달에 사용할 데이터
   ReturnValue returnValue; //반환때 사용할 클래스
   Arguments(
-    {this.arg: '', required this.returnValue}
-  );
+      {this.arg: '', required this.returnValue}
+      );
 }
 
 List dropdownYear = [
@@ -199,11 +199,13 @@ List dropdownYear = [
 ];
 List dropdownMonth = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 List dropdownDay = ['1','2','3','4','5','6','7','8','9','10','11','12','13',
-            '14','15','16','17','18','19','20','21','22','23','24','25','26',
-            '27','28','29','30','31'
-            ];
-List centerCheck = ['전체', '구청', '문화재단'];
-List SeoulCheck = ['전체','서울NPO지원센터','청년몽땅정보통','SBA지원센터','서울주거포털', '서울시청'];
+  '14','15','16','17','18','19','20','21','22','23','24','25','26',
+  '27','28','29','30','31'
+];
+List centerCheck = ['전체', '문화재단', '구청'];
+List SeoulCheck = ['전체',
+  'NPO지원센터', '청년몽땅정보통','SBA지원센터','서울주거포털'
+  ,'서울시청'];
 
 int fnCnterCheck(centerValue){
   if(centerValue.contains("구청")){
@@ -221,3 +223,4 @@ int fnCnterCheck(centerValue){
   }
   return 0;
 }
+
