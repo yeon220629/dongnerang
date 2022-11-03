@@ -146,7 +146,7 @@ class _mypageScreenState extends State<mypageScreen> {
                               padding: EdgeInsets.all(3),
                               color: colorindex == 1
                                   ? AppColors.blue
-                                  : AppColors.green,
+                                  : AppColors.primary,
                               child: Text(
                                 '${responseList[0][i][1]}',
                                 style: const TextStyle(fontSize: 12, color: Colors.white),
