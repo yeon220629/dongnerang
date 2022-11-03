@@ -134,9 +134,10 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
             // print("firebasesUrl : $firebasesUrl");
             final TextTemplate defaultText = TextTemplate(
               text:
-              '[${widget.o}] ${widget.s}\n\n 링크 : ${firebasesUrl}',
+              '[*동네랑*]\n(${widget.o})\n ${widget.s}\n\n${firebasesUrl}',
               link: Link(
-                webUrl: Uri.parse(firebasesUrl),
+                webUrl: Uri.parse('firebasesUrl'),
+                mobileWebUrl: Uri.parse('firebasesUrl'),
               ),
             );
             // 카카오톡 실행 가능 여부 확인
