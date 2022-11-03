@@ -447,7 +447,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               child: value == '서울시청'
                                   ? Row(
                                       children: [
-                                        Image.asset('assets/images/seoul.logo.png', width: 25,height: 25,),
+                                        Image.asset('assets/images/seoul.logo.png', width: 18,height: 18,),
                                         Text(value)
                                       ],
                                     )
@@ -471,7 +471,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   builder: (BuildContext context){
                                     return AlertDialog(
                                         shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(Radius.circular(0.0))),
+                                            borderRadius: BorderRadius.all(Radius.circular(8.0))),
                                         contentPadding: EdgeInsets.only(top: 0.0),
                                         content: Container(
                                             width: size.width,
@@ -482,14 +482,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                               children: <Widget>[
                                                 InkWell(
                                                   child: Container(
-                                                    padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                                                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
                                                     decoration: BoxDecoration(
                                                       color: AppColors.primary,
                                                     ),
-                                                    child: Text(
-                                                      "서울시청",
-                                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                                      textAlign: TextAlign.center,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
+                                                        Text(
+                                                          " 서울시청",
+                                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -500,8 +506,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         seoulUrlLoadScreen(
                                                             url
                                                         )));
-                                                  }, child: Text('분야별 새소식', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                  }, child: Text('분야별 새소식', style: TextStyle(color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                 ),
                                                 Container(
                                                   child:TextButton(onPressed: (){
@@ -510,8 +516,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         seoulUrlLoadScreen(
                                                             url
                                                         )));
-                                                  }, child: Text('이달의 행사', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                  }, child: Text('이달의 행사 및 축제', style: TextStyle( color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                 ),
                                                 Container(
                                                   child:TextButton(onPressed: (){
@@ -520,8 +526,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         seoulUrlLoadScreen(
                                                             url
                                                         )));
-                                                  }, child: Text('이벤트 신청', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                  }, child: Text('이벤트 신청', style: TextStyle( color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                 ),
                                                 Container(
                                                   child:TextButton(onPressed: (){
@@ -530,8 +536,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         seoulUrlLoadScreen(
                                                             url
                                                         )));
-                                                  }, child: Text('내손안의 서울', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
-                                                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
+                                                  }, child: Text('내 손안의 서울(공모전)', style: TextStyle( color: AppColors.black),)),
+                                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                 )
                                               ],
                                             )
