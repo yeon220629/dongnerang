@@ -82,22 +82,26 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
         icon: Icon(Icons.arrow_back, color: Colors.black),
         //페이지 리로드
         onPressed: (){
-          // 메인 페이지
-          if(widget.i == 0){
+          print("toggle : $toggle");
+          if(toggle == true){
+            // 메인 페이지
+            if(widget.i == 0){
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      mainScreen()), (route) => false);
+            }
+            if(widget.i == 1){
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      mainScreen()), (route) => false);
+            }
+            if(widget.i == 2){
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      searchScreen(title: "")), (route) => false);
+            }
+          }else{
             Navigator.pop(context);
-            // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-            //   builder: (BuildContext context) =>
-            //       mainScreen()), (route) => false);
-          }
-          if(widget.i == 1){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    mainScreen()), (route) => false);
-          }
-          if(widget.i == 2){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    searchScreen(title: "")), (route) => false);
           }
         }
       ),

@@ -266,6 +266,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     getUserLocalData();
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
       int ListData = value.length;
+      PrivateLocalData = [];
       for(int i = 0; i < ListData; i++){
         PrivateLocalData.add(value[i]);
       }
