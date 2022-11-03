@@ -1,12 +1,9 @@
-import 'dart:collection';
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
-import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
@@ -346,9 +343,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               },
             ),
             actions: <Widget>[
-              // const SizedBox(width: 160,),
               IconButton(onPressed: (){
-                // Get.to(() => searchScreen(title: '',));
                 Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => searchScreen(title: '',))

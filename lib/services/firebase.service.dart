@@ -3,6 +3,7 @@ import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../models/app_user.model.dart';
 import 'package:http/http.dart' as http;
 
@@ -195,11 +196,16 @@ class FirebaseService {
           }));
       }
     }
-    // if(key.contains("name")){
-    //   print(value);
-    //   await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
-    //     key: value,
-    //   }));
-    // }
   }
+
+
+
+
+  String getToday() {
+    DateTime now = DateTime.now();
+    DateFormat formatter = DateFormat('yyyy-MM-dd');
+    String strToday = formatter.format(now);
+    return strToday;
+  }
+
 }
