@@ -177,36 +177,38 @@ class _searchScreenState extends State<searchScreen>
         ),
         backgroundColor: Colors.white,
         actions: <Widget>[
-          const SizedBox(width: 60,),
+          const SizedBox(width: 50,),
           Expanded(
-            child: TextField(
-              autofocus: true,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: '키워드를 입력해주세요 ex) 예술, 대관',
-                hintStyle: TextStyle(fontSize: 13, color: AppColors.grey)
+            child: Center(
+              child: TextField(
+                autofocus: true,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: '키워드를 입력해주세요 ex) 예술, 대관',
+                  hintStyle: TextStyle(fontSize: 13, color: AppColors.grey)
+                ),
+                controller: SearcheditingController,
+                onChanged: (value){
+                  setState(() {
+                    if(value.isEmpty){
+                      // print("빈값임");
+                      label = '최근 검색어';
+                      resetLabel = '전체 삭제';
+                      isTextEdit = true;
+                    }else{
+                      // print("비어있지 않음");
+                      label = '검색결과';
+                      resetLabel = '';
+                      isTextEdit = false;
+                      getPostsData(value);
+                    }
+                  });
+                },
+                onSubmitted: (value){
+                  // 엔터 쳣을때 이벤트.
+                  ResentSearch.add(value);
+                },
               ),
-              controller: SearcheditingController,
-              onChanged: (value){
-                setState(() {
-                  if(value.isEmpty){
-                    // print("빈값임");
-                    label = '최근 검색어';
-                    resetLabel = '전체 삭제';
-                    isTextEdit = true;
-                  }else{
-                    // print("비어있지 않음");
-                    label = '검색결과';
-                    resetLabel = '';
-                    isTextEdit = false;
-                    getPostsData(value);
-                  }
-                });
-              },
-              onSubmitted: (value){
-                // 엔터 쳣을때 이벤트.
-                ResentSearch.add(value);
-              },
             ),
           ),
           IconButton(onPressed: (){
@@ -227,7 +229,7 @@ class _searchScreenState extends State<searchScreen>
       body: SizedBox(
         height: size.height,
           child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
