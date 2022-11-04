@@ -122,33 +122,36 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               },
               child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 7.5,
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  height: 90,
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                       border: Border.all(color: Colors.black12, width: 1)), //테두리
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Text(
-                          '${post["title"]}',
-                          style: const TextStyle(fontSize: 14),
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            '${post["title"]}',
+                            style: const TextStyle(fontSize: 15),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.justify,
+                            maxLines: 2,
+                          ),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
+                        // const SizedBox(
+                        //   height: 3,
+                        // ),
                         Expanded(
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(5.0),
                                   child: Container(
-                                    // padding: EdgeInsets.all(3),
+                                    padding: EdgeInsets.all(2),
                                       color: colorindex == 1
                                           ? Color(0xff5496D2)
                                           : colorindex == 0
@@ -163,13 +166,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                           ? AppColors.red
                                           : AppColors.black,
                                       child: Text(
-                                        '${post['center_name ']}',
-                                        style: const TextStyle(fontSize: 12, color: Colors.white),
+                                        ' ${post['center_name ']} ',
+                                        style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
                                         textDirection: ui.TextDirection.ltr,
                                       )
                                   ),
                                 ),
-                                SizedBox(width: 8),
+                                SizedBox(width: 7),
                                 Text(
                                   // '시작일 | ${post['registrationdate'].trim()}',
                                   '시작일 | ${dateFormat.format(dateTime)}',
@@ -196,33 +199,36 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             },
             child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 7.5,
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                height: 90,
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                     border: Border.all(color: Colors.black12, width: 1)), //테두리
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text(
-                        '${post["title"]}',
-                        style: const TextStyle(fontSize: 14),
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.justify,
-                        maxLines: 2,
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          '${post["title"]}',
+                          style: const TextStyle(fontSize: 15),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                      // const SizedBox(
+                      //   height: 3,
+                      // ),
                       Expanded(
                           child: Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(5.0),
                                 child: Container(
-                                  // padding: EdgeInsets.all(3),
+                                  padding: EdgeInsets.all(2),
                                     color: colorindex == 1
                                         ? Color(0xff5496D2)
                                         : colorindex == 0
@@ -237,13 +243,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                         ? AppColors.red
                                         : AppColors.black,
                                     child: Text(
-                                      '${post['center_name ']}',
-                                      style: const TextStyle(fontSize: 12, color: Colors.white),
+                                      ' ${post['center_name ']} ',
+                                      style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
                                       textDirection: ui.TextDirection.ltr,
                                     )
                                 ),
                               ),
-                              SizedBox(width: 8),
+                              SizedBox(width: 7),
                               Text(
                                 // '시작일 | ${post['registrationdate'].trim()}',
                                 '시작일 | ${dateFormat.format(dateTime)}',

@@ -142,18 +142,34 @@ class _mypageScreenState extends State<mypageScreen> {
                       ),
                       Row(
                         children: [
-                          Container(
-                              padding: EdgeInsets.all(3),
-                              color: colorindex == 1
-                                  ? AppColors.blue
-                                  : AppColors.primary,
-                              child: Text(
-                                '${responseList[0][i][1]}',
-                                style: const TextStyle(fontSize: 12, color: Colors.white),
-                                textDirection: ui.TextDirection.ltr,
-                              )
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                                padding: EdgeInsets.all(2),
+                                color: colorindex == 1
+                                    ? AppColors.blue
+                                    : AppColors.primary,
+                                // colorindex == 1
+                                //     ? Color(0xff5496D2)
+                                //     : colorindex == 0
+                                //     ? Color(0xff3CC181)
+                                //     : colorindex == 2
+                                //     ? AppColors.darkgreen
+                                //     : colorindex == 3
+                                //     ? AppColors.primary
+                                //     : colorindex == 4
+                                //     ? AppColors.orange
+                                //     : colorindex == 5
+                                //     ? AppColors.red
+                                //     : AppColors.black,
+                                child: Text(
+                                  ' ${responseList[0][i][1]} ',
+                                  style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+                                  textDirection: ui.TextDirection.ltr,
+                                )
+                            ),
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: 7),
                           Text(
                             // '시작일 | ${responseList[0][i][2].toString().trim()}',
                             '시작일 | ${dateFormat.format(dateTime)}',
