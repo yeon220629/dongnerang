@@ -74,7 +74,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                           mypageCustomKeyword = [];
                           PrivateLocalData = [];
 
-                          EasyLoading.showSuccess("프로필 수정 완료");
+                          // EasyLoading.showSuccess("프로필 수정 완료");
                           await FirebaseService.getCurrentUser();
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
                           builder: (BuildContext context) =>

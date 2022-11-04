@@ -171,6 +171,7 @@ class _searchScreenState extends State<searchScreen>
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        elevation: 0,
         iconTheme: IconThemeData(
             color: AppColors.black
         ),
@@ -179,6 +180,12 @@ class _searchScreenState extends State<searchScreen>
           const SizedBox(width: 60,),
           Expanded(
             child: TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: '키워드를 입력해주세요 ex) 예술, 대관',
+                hintStyle: TextStyle(fontSize: 13, color: AppColors.grey)
+              ),
               controller: SearcheditingController,
               onChanged: (value){
                 setState(() {
@@ -189,7 +196,7 @@ class _searchScreenState extends State<searchScreen>
                     isTextEdit = true;
                   }else{
                     // print("비어있지 않음");
-                    label = '검색 결과';
+                    label = '검색결과';
                     resetLabel = '';
                     isTextEdit = false;
                     getPostsData(value);
