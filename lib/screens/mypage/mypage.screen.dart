@@ -243,7 +243,7 @@ class _mypageScreenState extends State<mypageScreen> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.settings, color: Colors.black),
+            icon: Icon(Icons.settings, color: AppColors.primary),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(
                   builder: (_) => SettingsPage())
@@ -254,75 +254,75 @@ class _mypageScreenState extends State<mypageScreen> {
         title: Text('내 정보 관리', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
-      body:
-
-      Column(
-          children: <Widget>[
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (_) => mypageInformSettingScreen()));
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      child: UserProfileCircleImage(imageUrl: profileImage,),
-                    ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width/2.3,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: Column(
+            children: <Widget>[
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (_) => mypageInformSettingScreen()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        child: UserProfileCircleImage(imageUrl: profileImage,),
+                      ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width/2.3,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('$userName', style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17
+                                  )),
+                                  SizedBox(height: 5),
+                                  Text('프로필 수정', style: TextStyle(
+                                      fontWeight: FontWeight.w100,
+                                      color: AppColors.grey,
+                                      fontSize: 14
+                                  )),
+                                  // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
+                                  // ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text('$userName', style: TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17
-                                )),
-                                SizedBox(height: 5),
-                                Text('프로필 수정', style: TextStyle(
-                                    fontWeight: FontWeight.w100,
-                                    color: AppColors.grey,
-                                    fontSize: 14
-                                )),
-                                // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
-                                // ),
+                                Container(
+                                  // padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: AppColors.primary,
+                                    size: 23,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                        ),
-                        SizedBox(),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                // padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                                child: Icon(
-                                  Icons.arrow_forward_ios_outlined,
-                                  color: AppColors.primary,
-                                  size: 23,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                    // SizedBox(width: 80),
-                  ],
-                ),),),
-            // SizedBox(height: 5,),
-            Container(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-                )
-            ),
-            saveDataProfile(itemsData, topContainer)
-          ]
+                      // SizedBox(width: 80),
+                    ],
+                  ),),),
+              // SizedBox(height: 5,),
+              Container(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                  )
+              ),
+              saveDataProfile(itemsData, topContainer)
+            ]
+        ),
       ),
     );
   }

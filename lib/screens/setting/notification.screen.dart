@@ -25,6 +25,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: fnCommnAppbarWidget(title: '알림 설정',appBar: AppBar()),
       body: SwitchListTile(
         title: const Text('알림 허용'),

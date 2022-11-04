@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 
@@ -112,12 +113,12 @@ class _noticemainpageState extends State<noticemainpage>
         centerTitle: true,
         title: const Text('알림', style: TextStyle( color: AppColors.black),),
         bottom: TabBar(
-          labelColor: AppColors.blue,
+          labelColor: AppColors.primary,
           labelStyle: TextStyle(fontWeight: FontWeight.bold, ),
           unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
           unselectedLabelColor: AppColors.black,
           controller: _tabController,
-          indicatorColor: AppColors.blue,
+          indicatorColor: AppColors.primary,
           tabs: const <Widget>[
             Tab(
               text: '키워드 알림',
@@ -140,14 +141,23 @@ class _noticemainpageState extends State<noticemainpage>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          Center(
-            child: Text("준비중 입니다..", style: TextStyle(fontSize: size.width / 10),),
-          ),
+            Lottie.asset(
+              'assets/lottie/125106-designer.json',
+              // width: 10,
+              // height: 10,
+              fit: BoxFit.fill,
+            ),
           Center(
             child: SizedBox(
               height: size.height,
               child: Column(
                 children: [
+                  Lottie.asset(
+                  'assets/lottie/77412-design.json',
+                  // width: 10,
+                  // height: 10,
+                  fit: BoxFit.fill,
+                ),
                   Expanded(
                       child: ListView.builder(
                           itemCount: noticeItemsData.length,

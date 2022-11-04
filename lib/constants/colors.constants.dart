@@ -7,6 +7,8 @@ class AppColors {
   static const primary = Color(0xff5B88E2);
   static const red = Color(0xffff7777);
   static const grey = Colors.grey;
+  static const greylottie = Color(0xffDDDDDD);
+
   static const hintText = Color(0xffbcbcbc);
   static const hintBorder = Color(0xffebebeb);
   static final skyBlue = const Color(0xffC2E5FF).withOpacity(0.8);

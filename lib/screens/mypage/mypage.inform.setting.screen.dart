@@ -114,7 +114,6 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                             height: size.height / 4,
                           ),
                           Container(
-
                             child: mypageNickNameProfileSetting(callback: (value){
                               profilenickSetting = value;
                               // print("mypageNickNameProfileSetting : $profilenickSetting");

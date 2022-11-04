@@ -61,16 +61,16 @@ class mainScreenState extends State<mainScreen> {
                           ),
                           label: "마이페이지",
                         ),
-                        BottomNavigationBarItem(
-                            icon: Icon(
-                              Icons.login_outlined,
-                              color:
-                                navigationController.currentBottomMenuIndex.value == 2
-                                  ? AppColors.primary
-                                  : AppColors.grey,
-                            ),
-                            label: "로그인 스크린"
-                        ),
+                        // BottomNavigationBarItem(
+                        //     icon: Icon(
+                        //       Icons.login_outlined,
+                        //       color:
+                        //         navigationController.currentBottomMenuIndex.value == 2
+                        //           ? AppColors.primary
+                        //           : AppColors.grey,
+                        //     ),
+                        //     label: "로그인 스크린"
+                        // ),
                       ],
                       onTap: (index) {
                         // print(index);

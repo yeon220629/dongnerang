@@ -6,6 +6,7 @@ import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:intl/intl.dart';
 import '../constants/common.constants.dart';
 import '../services/firebase.service.dart';
@@ -83,7 +84,7 @@ class _searchScreenState extends State<searchScreen>
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 90,
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                     border: Border.all(color: Colors.black12, width: 1)), //테두리
@@ -96,7 +97,7 @@ class _searchScreenState extends State<searchScreen>
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
                           '${post["title"]}',
-                          style: const TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 16),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
                           maxLines: 2,
@@ -223,10 +224,12 @@ class _searchScreenState extends State<searchScreen>
               isTextEdit = true;
               itemsData = [];
             });
-          }, icon: Icon(Icons.clear, color: Colors.black,))
+          }, icon: Icon(Icons.clear, color: Colors.black))
         ],
       ),
-      body: SizedBox(
+    body: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
+    return KeyboardDismissOnTap(
+    child: SizedBox(
         height: size.height,
           child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
@@ -237,7 +240,7 @@ class _searchScreenState extends State<searchScreen>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("$label",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          style: TextStyle( fontSize: 20),),
                         TextButton(
                             onPressed: (){
                               setState(() {
@@ -288,33 +291,35 @@ class _searchScreenState extends State<searchScreen>
                 ],
               )
             ),
-        )
+        ),
+      );
+      }),
     );
   }
 
   Widget searchResult(double height, double width){
     return Container(
-      height: height/ 2.3,
+      height: height/ 2,
       width: width,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       // decoration: BoxDecoration(border: Border.all(width: 1)),
       child: GridView.builder(
         itemCount: ResentSearch.length,
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
-          childAspectRatio: 1 / 0.3, //item 의 가로 1, 세로 2 의 비율
-          mainAxisSpacing: 10, //수평 Padding
-          crossAxisSpacing: 10, //수직 Padding
+          childAspectRatio: 1 / 0.25, //item 의 가로 1, 세로 2 의 비율
+          // mainAxisSpacing: 5, //수평 Padding
+          // crossAxisSpacing: 5, //수직 Padding
         ),
         itemBuilder: (BuildContext context, int index) {
           return Container(
             // color: AppColors.red,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(width: 1)
-              )
-            ),
+            // decoration: BoxDecoration(
+            //   border: Border(
+            //     bottom: BorderSide(width: 0.5)
+            //   )
+            // ),
             child: Column(
               children: [
                 Expanded(
@@ -330,7 +335,7 @@ class _searchScreenState extends State<searchScreen>
                                 getPostsData(ResentSearch[index]);
                               });
                             },
-                          child: Text("${ResentSearch[index]}",style: TextStyle(color: AppColors.black),)),
+                          child: Text("${ResentSearch[index]}",style: TextStyle(color: AppColors.primary),)),
                         ),
                         WidgetSpan(
                           alignment: PlaceholderAlignment.bottom,

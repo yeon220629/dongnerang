@@ -87,52 +87,54 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
             color: Colors.black,
             icon: Icon(Icons.arrow_back)),
       ),
-      body: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
-          return KeyboardDismissOnTap(
-            child: Form(
-              key: controller.formKey,
-              child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                children: [
-                  Stack(
-                      children: [
-                        Column(
-                          children: [
-                            Padding(
-                                padding: EdgeInsets.symmetric(vertical: size.height / 150),
-                                child : Container(
-                                  alignment: Alignment.centerLeft,
-                                  child:Text("생년월일", style: TextStyle(fontWeight: FontWeight.bold),),
-                                )
-                            ),
-                            SizedBox(height: 5,),
-                            AgeStatefulWidget(callback: (value) {
-                              ageValue = value;
-                            }),
-                            // SizedBox(height: 8,),
-                            // Container(
-                            //   alignment: Alignment.centerLeft,
-                            //   child: Text("  * 연령대에 맞는 공공사업을 추천할때 사용됩니다.", style: TextStyle(color: Colors.black45),),
-                            // )
-                          ],
-                        ),
-                        genderChoiceWidget(callback: (value){
-                          print(value);
-                          gender = value;
-                        }),
-                        KeywordStateful(callback: (value) {
-                          keyword.add(value);
-                        }),
-                        TagKeywordStateful(callback: (value) {
-                          local.add(value);
-                        }),
-                      ],
-                    ),
-                ],
+      body: SafeArea(
+        child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
+            return KeyboardDismissOnTap(
+              child: Form(
+                key: controller.formKey,
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                  children: [
+                    Stack(
+                        children: [
+                          Column(
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.symmetric(vertical: size.height / 150),
+                                  child : Container(
+                                    alignment: Alignment.centerLeft,
+                                    child:Text("생년월일", style: TextStyle(fontWeight: FontWeight.bold),),
+                                  )
+                              ),
+                              SizedBox(height: 5,),
+                              AgeStatefulWidget(callback: (value) {
+                                ageValue = value;
+                              }),
+                              // SizedBox(height: 8,),
+                              // Container(
+                              //   alignment: Alignment.centerLeft,
+                              //   child: Text("  * 연령대에 맞는 공공사업을 추천할때 사용됩니다.", style: TextStyle(color: Colors.black45),),
+                              // )
+                            ],
+                          ),
+                          genderChoiceWidget(callback: (value){
+                            print(value);
+                            gender = value;
+                          }),
+                          KeywordStateful(callback: (value) {
+                            keyword.add(value);
+                          }),
+                          TagKeywordStateful(callback: (value) {
+                            local.add(value);
+                          }),
+                        ],
+                      ),
+                  ],
+                ),
               ),
-            ),
-          );
-        }),
+            );
+          }),
+      ),
       // ),
     );
   }
