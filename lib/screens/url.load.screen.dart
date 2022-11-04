@@ -8,6 +8,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../constants/colors.constants.dart';
+import 'mypage/mypage.screen.dart';
 
 
 class urlLoadScreen extends StatefulWidget {
@@ -85,6 +86,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               //페이지 리로드
               onPressed: (){
                 print("toggle : $toggle");
+                print("widget.i : ${widget.i}");
                 if(toggle == true){
                   // 메인 페이지
                   if(widget.i == 0){
@@ -103,7 +105,19 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                             searchScreen(title: "")), (route) => false);
                   }
                 }else{
-                  Navigator.pop(context);
+                  if(widget.i == 0){
+                    Navigator.pop(context);
+                  }
+                  if(widget.i == 1){
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            mainScreen()), (route) => false);
+                  }
+                  if(widget.i == 2){
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            searchScreen(title: "")), (route) => false);
+                  }
                 }
               }
           ),
@@ -163,29 +177,19 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
           ],
         ),
         body: WillPopScope(
-          onWillPop: () async {
-            if(toggle == true) {
-              // 메인 페이지
-              if (widget.i == 0) {
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        mainScreen()), (route) => false);
+          onWillPop: (){
+            var future = webViewController?.canGoBack();
+            print(future);
+            future?.then((canGoBack) {
+              if (canGoBack) {
+                webViewController?.goBack();
+              } else {
+                print('더이상 뒤로갈페이지가 없습니다.');
+                Navigator.pop(context);
+                //뒤로가기 시 처리코드
               }
-              if (widget.i == 1) {
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        mainScreen()), (route) => false);
-              }
-            }
-            bool? result= true;
-
-            setState(() {
-              _navigationPop(context);
             });
-            if(result == null){
-              result = false;
-            }
-            return result!;
+            return Future.value(false);
           },
           child: SafeArea(
             child: Column(

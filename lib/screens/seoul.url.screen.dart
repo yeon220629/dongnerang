@@ -36,8 +36,21 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.s);
-    return Scaffold(
+    return WillPopScope(
+    onWillPop: (){
+      var future = webViewController?.canGoBack();
+      future?.then((canGoBack) {
+        if (canGoBack) {
+          webViewController?.goBack();
+        } else {
+          print('더이상 뒤로갈페이지가 없습니다.');
+          Navigator.pop(context);
+          //뒤로가기 시 처리코드
+        }
+      });
+      return Future.value(false);
+    },
+    child : Scaffold(
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -94,6 +107,7 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 }
