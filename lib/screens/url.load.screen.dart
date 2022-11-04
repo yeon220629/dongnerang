@@ -148,7 +148,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 Uri uri =
                   await ShareClient.instance.shareDefault(template: defaultText);
                   await ShareClient.instance.launchKakaoTalk(uri);
-                EasyLoading.showSuccess("공유 완료");
+                // EasyLoading.showSuccess("공유 완료");
               }catch (e){
                 print('카카오톡 공유 실패 $e');
               }
