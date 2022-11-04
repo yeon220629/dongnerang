@@ -164,7 +164,21 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
         ),
         body: WillPopScope(
           onWillPop: () async {
+            if(toggle == true) {
+              // 메인 페이지
+              if (widget.i == 0) {
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        mainScreen()), (route) => false);
+              }
+              if (widget.i == 1) {
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        mainScreen()), (route) => false);
+              }
+            }
             bool? result= true;
+
             setState(() {
               _navigationPop(context);
             });
