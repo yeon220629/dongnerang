@@ -87,16 +87,14 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
             color: Colors.black,
             icon: Icon(Icons.arrow_back)),
       ),
-      body: SafeArea(
-        child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
+      body: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
           return KeyboardDismissOnTap(
             child: Form(
               key: controller.formKey,
               child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                 children: [
-                  Center(
-                    child: Stack(
+                  Stack(
                       children: [
                         Column(
                           children: [
@@ -130,13 +128,12 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                         }),
                       ],
                     ),
-                  ),
                 ],
               ),
             ),
           );
         }),
-      ),
+      // ),
     );
   }
 }
@@ -276,9 +273,11 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     widget.callback(birth);
     //생년월일 ui
     return Container(
+        width: size.width,
         decoration: BoxDecoration(
             border: Border.all( color: AppColors.grey, width: 1),
             borderRadius: BorderRadius.circular(10)
@@ -380,8 +379,8 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
               ],
             ),
             SizedBox(height: 5,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
+            Container(
+              // padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Wrap( spacing: 4.0, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
             ),
             Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
@@ -516,34 +515,38 @@ class _genderChoiceState extends State<genderChoiceWidget> {
               ],
             ),
             SizedBox(height: 5,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ToggleButtons(
-                  borderWidth: 1,
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.black,
-                  fillColor: AppColors.primary,
-                  selectedColor: Colors.white,
-                  focusColor: AppColors.white,
-                  selectedBorderColor: AppColors.primary,
-                  children: [
-                    Container(
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: size.width / 5.3),
-                          child: Text('남성', style: TextStyle(fontSize: 18))
+            Container(
+              width: size.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ToggleButtons(
+                    borderWidth: 1,
+                    borderRadius: BorderRadius.circular(10),
+                    borderColor: AppColors.grey,
+                    color: Colors.grey,
+                    fillColor: AppColors.primary,
+                    selectedColor: Colors.white,
+                    focusColor: AppColors.white,
+                    selectedBorderColor: AppColors.primary,
+                    children: [
+                      Container(
+                        child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: size.width / 6),
+                            child: Text('남성', style: TextStyle(fontSize: 16))
+                        ),
                       ),
-                    ),
-                    Container(
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: size.width / 6.5),
-                          child: Text('여성', style: TextStyle(fontSize: 18))),
-                    )
-                  ],
-                  onPressed: toggleSelect,
-                  isSelected: isClick,
-                )
-              ],
+                      Container(
+                        child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: size.width / 6),
+                            child: Text('여성', style: TextStyle(fontSize: 16))),
+                      )
+                    ],
+                    onPressed: toggleSelect,
+                    isSelected: isClick,
+                  )
+                ],
+              ),
             )
           ],
         )
