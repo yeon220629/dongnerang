@@ -53,12 +53,15 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
               TextButton(
                   onPressed: () async {
                     print("keyword : ${keyword}");
+                    print(controller.formKey.currentState!.validate());
+                    print(UserService.to.currentUser.value);
+
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance
                             .collection("users")
-                            .doc(UserService.to.currentUser.value!.email)
-                            .update(({
+                            .doc(UserService.to.currentUser.value?.email)
+                            .set(({
                           "age": ages.toJson(),
                           "keyword": keyword[0],
                           "local": local[0],
