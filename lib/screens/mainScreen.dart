@@ -274,7 +274,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   void initState() {
     super.initState();
-
     getUserLocalData();
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
       int ListData = value.length;

@@ -36,7 +36,7 @@ class SettingsPage extends StatelessWidget {
             ),
             ListTile(
             leading:  Icon(Icons.notifications_none_outlined),
-            title: Text('알림 설정'),
+            title: Text('알림설정'),
               onTap: () {
                 Navigator.push(
                   context,
@@ -66,7 +66,7 @@ class SettingsPage extends StatelessWidget {
             ),
             ListTile(
               leading:  Icon(Icons.star_border_outlined),
-              title: Text('현재버전 1.1'),
+              title: Text('현재버전 1.0'),
             ),
           ListTile(
             leading:  Icon(Icons.logout),

@@ -44,12 +44,6 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
-                    // print("profilePhotoSetting : $profilePhotoSetting");
-                    // print("profilenickSetting : $profilenickSetting");
-                    // print("profileKeyword : $profileKeyword");
-                    // print("profilelocal : ${profilelocal}");
-                    // print("PrivateLocalData : $PrivateLocalData");
-                    // print("profilelocal[0] : ${profilelocal}");
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance

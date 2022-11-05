@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/setting/private.setting.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart' as kakao ;
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import '../screens/login.screen.dart';
 import '../screens/mainScreenBar.dart';
 import '../services/firebase.service.dart';
 import '../services/social_login.dart';
@@ -21,7 +24,6 @@ class MainViewModel {
   Future login() async {
     // await _socialLogin.login();
     if (await AuthApi.instance.hasToken()) {
-      print("token 있음.");
         // try {
         //   AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
         //   print('토큰 유효성 체크 성공 ${tokenInfo.id} ${tokenInfo.expiresIn}');
@@ -41,12 +43,15 @@ class MainViewModel {
         AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
 
         user = await kakao.UserApi.instance.me();
+        final XFile defalutProfile = XFile('assets/images/default-profile.png');
 
         final customToken = await FirebaseService().createCustomToken({
           'uid': user!.id.toString(),
           'displayName': user!.kakaoAccount?.profile?.nickname,
           'email': user!.kakaoAccount!.email!,
-          'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
+          'photoURL' : user?.kakaoAccount?.profile?.isDefaultImage == null
+                        ? null
+                        : user?.kakaoAccount?.profile?.profileImageUrl,
         });
 
         await FirebaseAuth.instance.signInWithCustomToken(customToken);
@@ -76,6 +81,7 @@ class MainViewModel {
         Get.offAll(() => mainScreen());
       } catch (error) {
         print('로그인 실패 $error');
+        Get.offAll(() => LoginScreen());
       }
   } else {
       print('발급된 토큰 없음');
@@ -116,6 +122,7 @@ class MainViewModel {
         }
       } catch (error) {
         print('로그인 실패 $error');
+        Get.offAll(() => LoginScreen());
       }
     }
   }
