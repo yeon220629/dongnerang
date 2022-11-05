@@ -61,7 +61,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                         await FirebaseFirestore.instance
                             .collection("users")
                             .doc(UserService.to.currentUser.value?.email)
-                            .set(({
+                            .update(({
                           "age": ages.toJson(),
                           "keyword": keyword[0],
                           "local": local[0],

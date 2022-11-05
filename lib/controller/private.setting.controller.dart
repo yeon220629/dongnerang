@@ -17,11 +17,11 @@ class PrivateSettingController extends GetxController {
 
   @override
   void onInit() {
-    nicknameController.text = UserService.to.currentUser.value?.nickname ?? "";
-    nameController.text = UserService.to.currentUser.value?.name ?? "";
-    phoneController.text = UserService.to.currentUser.value?.phone ?? "";
-    ageSpan.value = UserService.to.currentUser.value?.ageSpan ?? "";
-    addressController.text = UserService.to.currentUser.value?.address ?? "";
+    nicknameController.text = UserService.to.currentUser.value!.nickname ?? "";
+    nameController.text = UserService.to.currentUser.value!.name ?? "";
+    phoneController.text = UserService.to.currentUser.value!.phone ?? "";
+    ageSpan.value = UserService.to.currentUser.value!.ageSpan ?? "";
+    addressController.text = UserService.to.currentUser.value!.address ?? "";
     super.onInit();
   }
 
