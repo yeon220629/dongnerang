@@ -178,6 +178,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                     children: [
                       Container(
                         width: size.width,
+                        height: size.height / 10.8,
                         child: TextFormField(
                           controller: myController,
                           decoration: InputDecoration(
@@ -452,8 +453,6 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
     if(!profileImage!.contains("http")){
       profileimagetype = false;
     }
-    print("_imageFile : ${_imageFile?.path}");
-    print("profileimagetype  ;$profileimagetype");
     return Center(
       child: Stack(
         children: <Widget>[
@@ -526,14 +525,8 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                 icon: Icon(null),
                 onPressed: () async {
                   // takePhoto("assets/images/default-profile.png");
-
-
                   // File file = File('assets/images/default-profile.png');
                   final XFile f = XFile('assets/images/default-profile.png');
-
-                  print("f : ${f?.path}");
-                  print("f : ${f.runtimeType}");
-                  print("f : ${f?.name}");
 
                   setState(() {
                     _imageFile = f;
@@ -583,6 +576,7 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
   }
 
   Widget nameTextField() {
+    final Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Container(
@@ -590,37 +584,41 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
           child: Text("닉네임", style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         SizedBox(height: 5,),
-        TextFormField(
-          maxLength: 20,
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.grey,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
+        Container(
+          height: size.height / 10.8,
+          child: TextFormField(
+            maxLength: 20,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 1,
-                    color: AppColors.primary,
-                  )
-              ),
-              focusColor: AppColors.primary,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(13)),
-                borderSide: BorderSide(
-                  color: AppColors.grey,
+                    color: AppColors.grey,
+                  ),
                 ),
-              ),
-              // labelText: '${userName}',
-              hintText: '${userName}'
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(13)),
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: AppColors.primary,
+                    )
+                ),
+                focusColor: AppColors.primary,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                  borderSide: BorderSide(
+                    color: AppColors.grey,
+                  ),
+                ),
+                // labelText: '${userName}',
+                hintText: '${userName}'
+            ),
+            // onSaved: ,
+            onChanged: (value){
+              setState(() {
+                widget.callback(value);
+              });
+            },
           ),
-          // onSaved: ,
-          onChanged: (value){
-            setState(() {
-              widget.callback(value);
-            });
-          },
         )
       ],
     );

@@ -42,6 +42,7 @@ class FirebaseService {
     List getDt = [];
     final doc = await FirebaseFirestore.instance.collection("users").doc(email).get();
     doc.data()?.forEach((key, value) {
+      print(value);
       if(key == param){
         for(int i = 0; i < value.toString().split(",").length; i++){
           getDt.add(value[i]);

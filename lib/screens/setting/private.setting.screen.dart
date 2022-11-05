@@ -52,10 +52,9 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
-                    print("keyword : ${keyword}");
-                    print(controller.formKey.currentState!.validate());
-                    print(UserService.to.currentUser.value);
-
+                    if(keyword.isEmpty){
+                      keyword.add('');
+                    }
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance
@@ -68,6 +67,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                           "gender" : gender,
                         }));
                         CustomKeyword = [];
+                        keyword = [];
                         EasyLoading.showSuccess("개인설정 추가 완료");
                         await FirebaseService.getCurrentUser();
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
@@ -371,10 +371,11 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 2.5),
+        padding: EdgeInsets.symmetric(vertical: size.height / 12.5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: size.height / 2.85,),
             Row(
               children: [
                 Container(

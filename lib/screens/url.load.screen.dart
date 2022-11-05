@@ -85,8 +85,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               icon: Icon(Icons.arrow_back, color: Colors.black),
               //페이지 리로드
               onPressed: (){
-                print("toggle : $toggle");
-                print("widget.i : ${widget.i}");
                 if(toggle == true){
                   // 메인 페이지
                   if(widget.i == 0){
@@ -147,10 +145,10 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
 
             IconButton(onPressed: ()async {
               String firebasesUrl = widget.urldata.toString();
-              // print("firebasesUrl : $firebasesUrl");
+              print("firebasesUrl : $firebasesUrl");
               final TextTemplate defaultText = TextTemplate(
                 text:
-                '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${widget.o}]\n${widget.s}\n\n${firebasesUrl}',
+                '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${widget.o}]\n${widget.s}\n\n$firebasesUrl',
                 link: Link(
                   webUrl: Uri.parse('$firebasesUrl'),
                   mobileWebUrl: Uri.parse('$firebasesUrl'),
@@ -161,8 +159,9 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               if (isKakaoTalkSharingAvailable) {
                 print('카카오톡으로 공유 가능');
                 try{
-                  Uri uri =
-                  await ShareClient.instance.shareDefault(template: defaultText);
+                  // Uri uri = await ShareClient.instance.shareScrap(url: firebasesUrl);
+                  // await ShareClient.instance.launchKakaoTalk(uri);
+                  Uri uri = await ShareClient.instance.shareDefault(template: defaultText);
                   await ShareClient.instance.launchKakaoTalk(uri);
                   EasyLoading.showSuccess("공유 완료");
                 }catch (e){
@@ -171,8 +170,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               } else {
                 print('카카오톡 미설치: 웹 공유 기능 사용 권장');
               }
-
-              // Get.to(() => NoticePage()),
             }, icon: const Icon(Icons.share)),
           ],
         ),

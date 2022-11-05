@@ -17,22 +17,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    FirebaseAuth.instance.signOut();
+    // FirebaseAuth.instance.signOut();
     // GoogleSignIn().signOut();
     checkPermissions();
     super.initState();
   }
 
   Future<void> checkPermissions() async {
-    // if ((await Permission.location.status != PermissionStatus.granted) ||
-    //     (await Permission.camera.status != PermissionStatus.granted) ||
-    //     (await Permission.photos.status != PermissionStatus.granted) ||
-    //     (await Permission.notification.status != PermissionStatus.granted) ||
-    //     (await Permission.storage.status != PermissionStatus.granted)) {
-    //   Future.delayed(const Duration(milliseconds: 1000), () {
-    //     Get.to(() => const PermissionScreen());
-    //   });
-    // } else {
       Future.delayed(const Duration(milliseconds: 1000), () {
         // print(FirebaseAuth.instance);
         // print(FirebaseAuth.instance.currentUser?.email);
