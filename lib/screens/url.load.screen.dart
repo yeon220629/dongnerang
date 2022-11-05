@@ -185,7 +185,25 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 webViewController?.goBack();
               } else {
                 print('더이상 뒤로갈페이지가 없습니다.');
-                Navigator.pop(context);
+                if(toggle == true){
+                  if(widget.i == 0){
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            mainScreen()), (route) => false);
+                  }
+                  if(widget.i == 1){
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            mainScreen()), (route) => false);
+                  }
+                  if(widget.i == 2){
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            searchScreen(title: "")), (route) => false);
+                  }
+                }else{
+                  Navigator.pop(context);
+                }
                 //뒤로가기 시 처리코드
               }
             });

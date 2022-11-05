@@ -35,7 +35,6 @@ class _noticemainpageState extends State<noticemainpage>
       noticeDataWidget = [];
     }
     for(var ntData in noticeData){
-      print(ntData);
       noticeDataWidget.add( GestureDetector(
           child: Container(
               width: size.width ,
@@ -142,10 +141,10 @@ class _noticemainpageState extends State<noticemainpage>
         controller: _tabController,
         children: <Widget>[
             Lottie.asset(
-              'assets/lottie/125106-designer.json',
+              'assets/lottie/77412-design.json',
               // width: 10,
               // height: 10,
-              fit: BoxFit.fill,
+              fit: BoxFit.contain,
             ),
           Center(
             child: SizedBox(
@@ -156,7 +155,7 @@ class _noticemainpageState extends State<noticemainpage>
                   'assets/lottie/77412-design.json',
                   // width: 10,
                   // height: 10,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ),
                   Expanded(
                       child: ListView.builder(

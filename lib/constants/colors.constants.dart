@@ -14,7 +14,7 @@ class AppColors {
   static final skyBlue = const Color(0xffC2E5FF).withOpacity(0.8);
   static const green = Color(0xff3CC181);
   static const blue = Color(0xff4C69D1);
-  static const darkgreen = Color(0xFF33691E);
+  static const darkgreen = Color(0xff019B81);
   static const yellow = Color(0xFFFFFF00);
   static const orange = Color(0xFFF57F17);
   static const background = Color(0xFFFFAFAFA);

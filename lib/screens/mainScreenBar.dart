@@ -88,7 +88,7 @@ class mainScreenState extends State<mainScreen> {
             children: [
               freeComponent_viewpage(),
               mypageScreen(),
-              LoginScreen(),
+              // LoginScreen(),
               // SplashScreen()
             ],
           )

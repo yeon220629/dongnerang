@@ -111,7 +111,7 @@ class MainViewModel {
           currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
           Get.offAll(() => privateSettingScreen());
         }else{
-          EasyLoading.showInfo("현재 사용자가 있습니다");
+          // EasyLoading.showInfo("현재 사용자가 있습니다");
           Get.offAll(() => mainScreen());
         }
       } catch (error) {

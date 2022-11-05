@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:dongnerang/screens/mainScreenBar.dart';
@@ -25,6 +24,7 @@ class mypageScreen extends StatefulWidget {
 }
 
 class _mypageScreenState extends State<mypageScreen> {
+  late final SlidableController slidableController;
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String? profileImage = '';
   String? userName = '';
@@ -60,6 +60,7 @@ class _mypageScreenState extends State<mypageScreen> {
 
       DateTime dateTime = responseList[0][i][2].toDate();
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+      colorindex = fnCnterCheck(responseList[0][i][1]);
 
       listItems.add( GestureDetector(
           onTap: () async{
@@ -70,17 +71,13 @@ class _mypageScreenState extends State<mypageScreen> {
           },
           child: Container(
               width: MediaQuery.of(context).size.width,
-              // height: 110,
-              // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              height: 90,
               // decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
-              //     border: Border.all(color: Colors.black12, width: 1)), //테두리
+              //   border: Border.all(width: 1)
+              // ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
                 child: Slidable(
-                  // Specify a key if the Slidable is dismissible.
-                  key: UniqueKey(),
-                  // The end action pane is the one at the right or the bottom side.
                   endActionPane: ActionPane(
                     motion: ScrollMotion(),
                     children: [
@@ -99,7 +96,7 @@ class _mypageScreenState extends State<mypageScreen> {
                             print('카카오톡으로 공유 가능');
                             try{
                               Uri uri =
-                                  await ShareClient.instance.shareDefault(template: defaultText);
+                              await ShareClient.instance.shareDefault(template: defaultText);
                               await ShareClient.instance.launchKakaoTalk(uri);
                               // EasyLoading.showSuccess("공유 완료");
                             }catch (e){
@@ -126,7 +123,6 @@ class _mypageScreenState extends State<mypageScreen> {
                       ),
                     ],
                   ),
-
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -146,22 +142,22 @@ class _mypageScreenState extends State<mypageScreen> {
                             padding: const EdgeInsets.all(5.0),
                             child: Container(
                                 padding: EdgeInsets.all(2),
+                                // color: colorindex == 1
+                                //     ? AppColors.blue
+                                //     : AppColors.primary,
                                 color: colorindex == 1
-                                    ? AppColors.blue
-                                    : AppColors.primary,
-                                // colorindex == 1
-                                //     ? Color(0xff5496D2)
-                                //     : colorindex == 0
-                                //     ? Color(0xff3CC181)
-                                //     : colorindex == 2
-                                //     ? AppColors.darkgreen
-                                //     : colorindex == 3
-                                //     ? AppColors.primary
-                                //     : colorindex == 4
-                                //     ? AppColors.orange
-                                //     : colorindex == 5
-                                //     ? AppColors.red
-                                //     : AppColors.black,
+                                    ? Color(0xff5496D2)
+                                    : colorindex == 0
+                                    ? Color(0xff3CC181)
+                                    : colorindex == 2
+                                    ? AppColors.darkgreen
+                                    : colorindex == 3
+                                    ? AppColors.primary
+                                    : colorindex == 4
+                                    ? AppColors.orange
+                                    : colorindex == 5
+                                    ? AppColors.red
+                                    : AppColors.black,
                                 child: Text(
                                   ' ${responseList[0][i][1]} ',
                                   style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
@@ -222,7 +218,6 @@ class _mypageScreenState extends State<mypageScreen> {
     });
 
     controllers.addListener(() {
-
       double value = controllers.offset/119;
 
       setState(() {
@@ -243,7 +238,7 @@ class _mypageScreenState extends State<mypageScreen> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.settings, color: AppColors.primary),
+            icon: Icon(Icons.settings, color: Colors.black),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(
                   builder: (_) => SettingsPage())
@@ -254,75 +249,75 @@ class _mypageScreenState extends State<mypageScreen> {
         title: Text('내 정보 관리', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
-      body: SafeArea(
-        child: Column(
-            children: <Widget>[
-              InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (_) => mypageInformSettingScreen()));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        child: UserProfileCircleImage(imageUrl: profileImage,),
+      body:
+
+      Column(
+          children: <Widget>[
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (_) => mypageInformSettingScreen()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      child: UserProfileCircleImage(imageUrl: profileImage,),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width/2.3,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('$userName', style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17
+                            )),
+                            SizedBox(height: 5),
+                            Text('프로필 수정', style: TextStyle(
+                                fontWeight: FontWeight.w100,
+                                color: AppColors.grey,
+                                fontSize: 14
+                            )),
+                            // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
+                            // ),
+                          ],
+                        ),
                       ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width/2.3,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('$userName', style: TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17
-                                  )),
-                                  SizedBox(height: 5),
-                                  Text('프로필 수정', style: TextStyle(
-                                      fontWeight: FontWeight.w100,
-                                      color: AppColors.grey,
-                                      fontSize: 14
-                                  )),
-                                  // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
-                                  // ),
-                                ],
-                              ),
+                    ),
+                    SizedBox(),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            // padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                            child: Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              color: AppColors.primary,
+                              size: 23,
                             ),
                           ),
-                          SizedBox(),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  // padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                                  child: Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: AppColors.primary,
-                                    size: 23,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                      // SizedBox(width: 80),
-                    ],
-                  ),),),
-              // SizedBox(height: 5,),
-              Container(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-                  )
-              ),
-              saveDataProfile(itemsData, topContainer)
-            ]
-        ),
+                        ],
+                      ),
+                    ),
+                    // SizedBox(width: 80),
+                  ],
+                ),),),
+            // SizedBox(height: 5,),
+            Container(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                )
+            ),
+            saveDataProfile(itemsData, topContainer)
+          ]
       ),
     );
   }
@@ -331,25 +326,26 @@ class _mypageScreenState extends State<mypageScreen> {
 Widget saveDataProfile(List itemsData, topContainer) {
   return Expanded(
       child: ListView.separated(
-          itemCount: itemsData.length,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (c, i){
-            double scale = 1.0;
-            if (topContainer > 0.5){
-              scale = i + 0.5 - topContainer;
-              if (scale < 0 ) { scale = 0;}
-              else if (scale > 1) { scale = 1; }
-            }
-            return Align(
-                  heightFactor: 0.95,
-                  alignment: Alignment.topCenter,
-                  child: itemsData[i],
-                );
-          },
-          separatorBuilder: (BuildContext ctx, int idx) {
-            return Divider();
-  },
+        itemCount: itemsData.length,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (c, i){
+          double scale = 1.0;
+          if (topContainer > 0.5){
+            scale = i + 0.5 - topContainer;
+            if (scale < 0 ) { scale = 0;}
+            else if (scale > 1) { scale = 1; }
+          }
+          return Align(
+            heightFactor: 0.85,
+            alignment: Alignment.topCenter,
+            child: itemsData[i],
+          );
+        },
+        separatorBuilder: (BuildContext ctx, int idx) {
+          return Divider();
+        },
       )
   );
 }
+
 

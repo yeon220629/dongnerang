@@ -31,112 +31,112 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
     print(PrivateLocalData);
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          actions: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('프로필 수정', style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.5,
-                    color: Colors.black)),
-                SizedBox(width: 100,),
-                TextButton(
-                    onPressed: () async {
-                      // print("profilePhotoSetting : $profilePhotoSetting");
-                      // print("profilenickSetting : $profilenickSetting");
-                      print("profileKeyword : $profileKeyword");
-                      print("profilelocal : ${profilelocal}");
-                      print("PrivateLocalData : $PrivateLocalData");
-                      print("profilelocal[0] : ${profilelocal}");
-                      if (controller.formKey.currentState!.validate()) {
-                        try {
-                          await FirebaseFirestore.instance
-                              .collection("users")
-                              .doc(UserService.to.currentUser.value!.email)
-                              .update(({
-                            "profileImage":profilePhotoSetting == ''
-                                            ? profileImage!
-                                            : profilePhotoSetting,
-                            "name":profilenickSetting == ''
-                                      ? userName
-                                      : profilenickSetting,
-                            "keyword": profileKeyword[0],
-                            "local": profilelocal.isEmpty
-                                        ? PrivateLocalData
-                                        : profilelocal[0]
-                          }));
-                          profilePhotoSetting = '';
-                          profilenickSetting = '';
-                          profileKeyword = [];
-                          profilelocal = [];
-                          mypageCustomKeyword = [];
-                          PrivateLocalData = [];
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        actions: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('프로필 수정', style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.5,
+                  color: Colors.black)),
+              SizedBox(width: 100,),
+              TextButton(
+                  onPressed: () async {
+                    // print("profilePhotoSetting : $profilePhotoSetting");
+                    // print("profilenickSetting : $profilenickSetting");
+                    // print("profileKeyword : $profileKeyword");
+                    // print("profilelocal : ${profilelocal}");
+                    // print("PrivateLocalData : $PrivateLocalData");
+                    // print("profilelocal[0] : ${profilelocal}");
+                    if (controller.formKey.currentState!.validate()) {
+                      try {
+                        await FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(UserService.to.currentUser.value!.email)
+                            .update(({
+                          "profileImage":profilePhotoSetting == ''
+                              ? profileImage!
+                              : profilePhotoSetting,
+                          "name":profilenickSetting == ''
+                              ? userName
+                              : profilenickSetting,
+                          "keyword": profileKeyword[0],
+                          "local": profilelocal.isEmpty
+                              ? PrivateLocalData
+                              : profilelocal[0]
+                        }));
+                        profilePhotoSetting = '';
+                        profilenickSetting = '';
+                        profileKeyword = [];
+                        profilelocal = [];
+                        mypageCustomKeyword = [];
+                        PrivateLocalData = [];
 
-                          // EasyLoading.showSuccess("프로필 수정 완료");
-                          await FirebaseService.getCurrentUser();
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              mainScreen()), (route) => false);
-                        } catch (e) {
-                          logger.e(e);
-                          EasyLoading.showSuccess("프로필 수정 실패");
-                        }
+                        // EasyLoading.showSuccess("프로필 수정 완료");
+                        await FirebaseService.getCurrentUser();
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                mainScreen()), (route) => false);
+                      } catch (e) {
+                        logger.e(e);
+                        EasyLoading.showSuccess("프로필 수정 실패");
                       }
-                    }, child: Text("완료", style: TextStyle(color: Colors.black))),
-              ],
-            )
-          ],
-          leading:  IconButton(
-              onPressed: () {
-                Navigator.pop(context); //뒤로가기
-              },
-              color: Colors.black,
-              icon: Icon(Icons.arrow_back)),
-        ),
-        body: SafeArea(
-          child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
-            return KeyboardDismissOnTap(
-              child: Form(
-                key: controller.formKey,
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-                  children: [
-                    Center(
-                      child: Stack(
-                        children: [
-                          Container(
-                            child : mypagePhotoProfileSetting(callback: (value){
-                              profilePhotoSetting = value;
-                              // print("mypageProfileSetting : $profilePhotoSetting");
-                            },),
-                            height: size.height / 4,
-                          ),
-                          Container(
-                            child: mypageNickNameProfileSetting(callback: (value){
-                              profilenickSetting = value;
-                              // print("mypageNickNameProfileSetting : $profilenickSetting");
-                            },),
-                            margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
-                          ),
-                          mypageKeywordStateful(callback: (value) {
-                            // print("mypageKeywordStateful : $value");
-                            profileKeyword.add(value);
-                          }),
-                          TagKeywordStateful(callback: (value) {
-                            print("TagKeywordStateful : $value");
-                            profilelocal.add(value);
-                          }),
-                        ],
-                      ),
+                    }
+                  }, child: Text("완료", style: TextStyle(color: Colors.black))),
+            ],
+          )
+        ],
+        leading:  IconButton(
+            onPressed: () {
+              Navigator.pop(context); //뒤로가기
+            },
+            color: Colors.black,
+            icon: Icon(Icons.arrow_back)),
+      ),
+      body: SizedBox(
+        child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
+          return KeyboardDismissOnTap(
+            child: Form(
+              key: controller.formKey,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+                children: [
+                  Center(
+                    child: Stack(
+                      children: [
+                        Container(
+                          child : mypagePhotoProfileSetting(callback: (value){
+                            profilePhotoSetting = value;
+                            // print("mypageProfileSetting : $profilePhotoSetting");
+                          },),
+                          height: size.height / 4,
+                        ),
+                        Container(
+                          child: mypageNickNameProfileSetting(callback: (value){
+                            profilenickSetting = value;
+                            // print("mypageNickNameProfileSetting : $profilenickSetting");
+                          },),
+                          margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
+                        ),
+                        mypageKeywordStateful(callback: (value) {
+                          // print("mypageKeywordStateful : $value");
+                          profileKeyword.add(value);
+                        }),
+                        TagKeywordStateful(callback: (value) {
+                          print("TagKeywordStateful : $value");
+                          profilelocal.add(value);
+                        }),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            );
-          }),
-        ),
+            ),
+          );
+        }),
+      ),
     );
   }
 }
@@ -255,10 +255,10 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
           label: Text('$name'),
           onDeleted: (){
             setState(() {
-            mypageCustomKeyword.remove(name);
-          });
-        },
-      )
+              mypageCustomKeyword.remove(name);
+            });
+          },
+        )
     );
   }
 }
@@ -284,9 +284,12 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
     final Size size = MediaQuery.of(context).size;
 
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 2.25),
+        padding: EdgeInsets.symmetric(
+            vertical: size.height / 12.5
+        ),
         child: Column(
           children: [
+            SizedBox(height: size.height / 2.85,),
             Row(
               children: [
                 Container(
@@ -307,16 +310,6 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   }
 
   generate_tags(value) {
-    // for(var v in value){
-    //   for(var a in PrivateLocalData){
-    //     if(v == a){
-    //       selectCheck = false;
-    //       print(selectCheck);
-    //     }else{
-    //       selectCheck = true;
-    //     }
-    //   }
-    // }
     return value.map((tag) => get_chip(tag)).toList();
   }
   get_chip(name) {
@@ -397,15 +390,15 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
       backgroundColor: Colors.white,
       shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
       label: selectCheck == false
-              ? Text("${name}", style: TextStyle(
-                  color:AppColors.primary, fontWeight: FontWeight.bold),
-              )
-              : Text("${name}"
+          ? Text("${name}", style: TextStyle(
+          color:AppColors.primary, fontWeight: FontWeight.bold),
+      )
+          : Text("${name}"
       ),
       labelStyle: TextStyle(
         color: selected_tags.contains(name)? Colors.white : Colors.black,
       ),
-    onSelected: (value) {
+      onSelected: (value) {
         if (select_tags.length > 2) {
           value = false;
         }
@@ -438,6 +431,8 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
   List BoxData = [];
   String? photo = '';
 
+  bool imageDelete = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -457,28 +452,27 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
     if(!profileImage!.contains("http")){
       profileimagetype = false;
     }
-
+    print("_imageFile : ${_imageFile?.path}");
+    print("profileimagetype  ;$profileimagetype");
     return Center(
       child: Stack(
         children: <Widget>[
           InkWell(
-        onTap: () {
-          // 클릭시 모달 팝업을 띄워준다.
-          showModalBottomSheet(context: context, builder: ((builder) => bottomSheet()));
-        },
-            child: ClipOval(
-            child: SizedBox.fromSize(
-            size: Size.fromRadius(55),
-                // borderRadius: BorderRadius.circular(125),
-                // clipBehavior: Clip,
-            child: _imageFile == null
-                // ? Image.asset("assets/images/default-profile.png", fit: BoxFit.contain,)
-                    ? profileimagetype
-                    ? CachedNetworkImage(imageUrl: profileImage!, width: size.width / 2.2, fit: BoxFit.contain)
-                    : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
-                // : CachedNetworkImage(imageUrl: profileImage!)
-                // : Image.network(_imageFile!.path)
-                    :Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,))
+              onTap: () {
+                // 클릭시 모달 팝업을 띄워준다.
+                showModalBottomSheet(context: context, builder: ((builder) => bottomSheet()));
+              },
+              child: ClipOval(
+                child: SizedBox.fromSize(
+                  size: Size.fromRadius(55),
+                  // borderRadius: BorderRadius.circular(125),
+                  // clipBehavior: Clip,
+                  child: _imageFile == null
+                      ? profileimagetype
+                      ? CachedNetworkImage(imageUrl: profileImage!, width: size.width / 2.2, fit: BoxFit.contain)
+                      : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
+                      : Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,)
+              )
             )
           ),
           // SizedBox(height: 660,),
@@ -487,16 +481,14 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
               right: 0,
               child:CircleAvatar(
                 radius: 15,
-                      backgroundColor: AppColors.white,
-                          child:
-                          Icon(
-                            Icons.camera_alt,
-                            color: AppColors.grey,
-                            size: 17,
-                          ),
-                        ))
-
-
+                backgroundColor: AppColors.white,
+                child:
+                Icon(
+                  Icons.camera_alt,
+                  color: AppColors.grey,
+                  size: 17,
+                ),
+              ))
         ],
       ),
     );
@@ -519,6 +511,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                 icon: Icon(null),
                 onPressed: () {
                   takePhoto(ImageSource.gallery);
+                  ImageSource.values;
                 },
                 label: Text('앨범에서 선택', style: TextStyle(fontSize: 20),),
               ),
@@ -533,8 +526,19 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                 icon: Icon(null),
                 onPressed: () async {
                   // takePhoto("assets/images/default-profile.png");
+
+
+                  // File file = File('assets/images/default-profile.png');
+                  final XFile f = XFile('assets/images/default-profile.png');
+
+                  print("f : ${f?.path}");
+                  print("f : ${f.runtimeType}");
+                  print("f : ${f?.name}");
+
                   setState(() {
-                    _imageFile = null;
+                    _imageFile = f;
+                    widget.callback(f!.path);
+                    // widget.callback(file!.path);
                   });
                 },
                 label: Text('프로필 사진 삭제', style: TextStyle(
@@ -551,10 +555,10 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
   takePhoto(ImageSource source) async {
     // Pick an image
     // final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    final XFile? file = await ImagePicker().pickImage( source: source);
     // print("file : ${file}");
     // print("filepath : ${file?.path.runtimeType}");
     // print("source : ${source}");
+    final XFile? file = await ImagePicker().pickImage( source: source);
     setState(() {
       _imageFile = file;
       widget.callback(file!.path);
@@ -622,5 +626,6 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
     );
   }
 }
+
 
 

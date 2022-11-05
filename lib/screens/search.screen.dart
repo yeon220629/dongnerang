@@ -190,14 +190,15 @@ class _searchScreenState extends State<searchScreen>
                 ),
                 controller: SearcheditingController,
                 onChanged: (value){
+                  print("value : $value");
                   setState(() {
                     if(value.isEmpty){
-                      // print("빈값임");
+                      print("빈값임");
                       label = '최근 검색어';
                       resetLabel = '전체 삭제';
                       isTextEdit = true;
                     }else{
-                      // print("비어있지 않음");
+                      print("비어있지 않음");
                       label = '검색결과';
                       resetLabel = '';
                       isTextEdit = false;
@@ -222,6 +223,7 @@ class _searchScreenState extends State<searchScreen>
             setState(() {
               SearcheditingController.clear();
               isTextEdit = true;
+              label = '최근 검색어';
               itemsData = [];
             });
           }, icon: Icon(Icons.clear, color: Colors.black))
