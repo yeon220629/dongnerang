@@ -13,7 +13,6 @@ class UserProfileCircleImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     File f = File(imageUrl!);
     return ClipOval(
       child: SizedBox.fromSize(
@@ -31,8 +30,11 @@ class UserProfileCircleImage extends StatelessWidget {
                   height: size,
                   fit: BoxFit.fill,
                 )
-              // : Image.file(File(imageUrl)
-              : Image.file(f,width: size, fit: BoxFit.fill,)
+              : imageUrl!.contains('assets/images/default-profile.png')
+                ? Image.asset(imageUrl!,width: size, fit: BoxFit.fill,)
+                : Image.file(f,width: size, fit: BoxFit.fill,)
+            // : Image.file(f,width: size, fit: BoxFit.fill,)
+            // : Image.asset(imageUrl!,width: size, fit: BoxFit.fill,)
       ));
   }
 }

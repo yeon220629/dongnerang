@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
+import 'package:dongnerang/screens/mainScreenBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -175,6 +176,15 @@ class _searchScreenState extends State<searchScreen>
         elevation: 0,
         iconTheme: IconThemeData(
             color: AppColors.black
+        ),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            //페이지 리로드
+            onPressed: (){
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      mainScreen()), (route) => false);
+            }
         ),
         backgroundColor: Colors.white,
         actions: <Widget>[

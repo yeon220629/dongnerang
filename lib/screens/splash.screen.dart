@@ -1,6 +1,8 @@
+import 'package:dongnerang/screens/permission.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../constants/colors.constants.dart';
 import 'login.screen.dart';
 import 'mainScreenBar.dart';
@@ -24,15 +26,26 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> checkPermissions() async {
+    if ((await Permission.location.status != PermissionStatus.granted) ||
+    //     (await Permission.camera.status != PermissionStatus.granted) ||
+    //     (await Permission.photos.status != PermissionStatus.granted) ||
+    //     (await Permission.notification.status != PermissionStatus.granted) ||
+        (await Permission.storage.status != PermissionStatus.granted)) {
       Future.delayed(const Duration(milliseconds: 1000), () {
-        // print(FirebaseAuth.instance);
-        // print(FirebaseAuth.instance.currentUser?.email);
+        Get.to(() => const PermissionScreen());
+      });
+    } else {
+      Future.delayed(const Duration(milliseconds: 1000), () {
         FirebaseAuth.instance.currentUser != null
             ? Get.offAll(() => const mainScreen())
             : Get.offAll(() => const LoginScreen());
       });
-    // }
+    }
   }
+  //   FirebaseAuth.instance.currentUser != null
+  //     ? Get.offAll(() => const mainScreen())
+  //     : Get.offAll(() => const LoginScreen());
+  // });
 
   @override
   Widget build(BuildContext context) {

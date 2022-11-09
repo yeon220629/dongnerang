@@ -1,4 +1,5 @@
 import 'dart:ui' as ui;
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart' as kakao ;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
@@ -11,6 +12,7 @@ import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
+import '../services/user.service.dart';
 import 'introduce.dart';
 import 'notice.main.screen.dart';
 
@@ -24,8 +26,6 @@ class freeComponent_viewpage extends StatefulWidget {
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
   final List<bool> _selectedCenter = <bool>[true, false];
-
-
   List<String> LIST_MENU = [];
   bool closeTapContainer = false;
   double topContainer = 0;
@@ -36,7 +36,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   String? defaultCenter = '전체';
   String? SeouldefaultCenter = "전체";
   String url = "";
-  String? userEmail = FirebaseAuth.instance.currentUser?.email;
+  String? userEmail = FirebaseAuth?.instance?.currentUser?.email;
   String dropdownValue = '';
   String? centerName = '';
   String? centerLabel = '';
@@ -274,6 +274,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   void initState() {
     super.initState();
+    // if(userEmail == null){
+    //   userEmail = UserService.to.currentUser.value?.email;
+    // }
+
     getUserLocalData();
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
       int ListData = value.length;
@@ -296,9 +300,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       });
     });
     controllers.addListener(() {
-
       double value = controllers.offset/119;
-
       setState(() {
         topContainer = value;
         closeTapContainer = controllers.offset > 50;

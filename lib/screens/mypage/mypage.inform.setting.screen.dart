@@ -44,6 +44,9 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
+                    // print("PrivateLocalData : $PrivateLocalData");
+                    // print("profilelocal : $profilelocal");
+                    // print("profilelocal.isEmpty : ${profilelocal.isEmpty}");
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance
@@ -51,7 +54,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                             .doc(UserService.to.currentUser.value!.email)
                             .update(({
                           "profileImage":profilePhotoSetting == ''
-                              ? profileImage!
+                              ? profileImage
                               : profilePhotoSetting,
                           "name":profilenickSetting == ''
                               ? userName
@@ -66,9 +69,9 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                         profileKeyword = [];
                         profilelocal = [];
                         mypageCustomKeyword = [];
-                        PrivateLocalData = [];
+                        // PrivateLocalData = [];
 
-                        // EasyLoading.showSuccess("프로필 수정 완료");
+                        EasyLoading.showSuccess("프로필 수정 완료");
                         await FirebaseService.getCurrentUser();
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
                             builder: (BuildContext context) =>
@@ -386,7 +389,7 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
       shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
       label: selectCheck == false
           ? Text("${name}", style: TextStyle(
-          color:AppColors.primary, fontWeight: FontWeight.bold),
+          color:AppColors.blue, fontWeight: FontWeight.bold),
       )
           : Text("${name}"
       ),
@@ -421,6 +424,7 @@ class mypagePhotoProfileSetting extends StatefulWidget {
 }
 
 class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
+  bool imageDeleteCheck = false;
   XFile? _imageFile; // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
   final ImagePicker _picker = ImagePicker(); // 카메라/갤러리에서 사진 가져올 때 사용함 (image_picker)
   List BoxData = [];
@@ -458,13 +462,18 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
               child: ClipOval(
                 child: SizedBox.fromSize(
                   size: Size.fromRadius(55),
-                  // borderRadius: BorderRadius.circular(125),
-                  // clipBehavior: Clip,
-                  child: _imageFile == null
-                      ? profileimagetype
-                      ? CachedNetworkImage(imageUrl: profileImage!, width: size.width / 2.2, fit: BoxFit.contain)
-                      : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
-                      : Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,)
+                  child : imageDeleteCheck == true
+                        ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
+                        : _imageFile == null
+                          ? profileimagetype
+                          ? CachedNetworkImage(imageUrl: profileImage!, width: size.width / 2.2, fit: BoxFit.contain)
+                          // : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
+                          : profileImage!.contains('assets/images/default-profile.png')
+                            ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
+                            : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
+                          : Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,)
+
+
               )
             )
           ),
@@ -521,11 +530,10 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                   // takePhoto("assets/images/default-profile.png");
                   // File file = File('assets/images/default-profile.png');
                   final XFile f = XFile('assets/images/default-profile.png');
-
                   setState(() {
-                    _imageFile = f;
+                    _imageFile = null;
                     widget.callback(f!.path);
-                    // widget.callback(file!.path);
+                    imageDeleteCheck = true;
                   });
                 },
                 label: Text('프로필 사진 삭제', style: TextStyle(
@@ -579,7 +587,7 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
         ),
         SizedBox(height: 5,),
         Container(
-          height: size.height / 10.8,
+          height: size.height / 11.4,
           child: TextFormField(
             maxLength: 20,
             decoration: InputDecoration(

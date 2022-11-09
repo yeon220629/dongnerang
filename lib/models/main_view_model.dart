@@ -23,6 +23,8 @@ class MainViewModel {
 
   Future login() async {
     // await _socialLogin.login();
+    bool isInstalled = await isKakaoTalkInstalled();
+    OAuthToken token;
     if (await AuthApi.instance.hasToken()) {
         // try {
         //   AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
@@ -38,13 +40,17 @@ class MainViewModel {
         // }
       try {
         // 카카오 계정으로 로그인
-        OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
-        print('로그인 성공 ${token.accessToken}');
-        AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
+        if(isInstalled){
+          OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
+          print('로그인 성공 ${token.accessToken}');
+        }else{
+          OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+          print('로그인 성공 ${token.accessToken}');
+        }
+        // OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+        // print('로그인 성공 ${token.accessToken}');
 
         user = await kakao.UserApi.instance.me();
-        final XFile defalutProfile = XFile('assets/images/default-profile.png');
-
         final customToken = await FirebaseService().createCustomToken({
           'uid': user!.id.toString(),
           'displayName': user!.kakaoAccount?.profile?.nickname,
@@ -58,7 +64,7 @@ class MainViewModel {
 
         var currentUser = await FirebaseService.findUserByEmail(
             user!.kakaoAccount!.email!);
-
+        print("currentUser : $currentUser");
         if (currentUser == null) {
           await FirebaseFirestore.instance
               .collection("users")
@@ -86,11 +92,19 @@ class MainViewModel {
   } else {
       print('발급된 토큰 없음');
       try {
-        OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
-        print('로그인 성공 ${token.accessToken}');
-        AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
-        print("tokenInfo : $tokenInfo");
+        if(isInstalled){
+          OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
+          print('로그인 성공 ${token.accessToken}');
+        }else{
+          OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+          print('로그인 성공 ${token.accessToken}');
+        }
+        // OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+        // print('로그인 성공 ${token.accessToken}');
+        // AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
+        // print("tokenInfo : $tokenInfo");
         // UserApi.instance.loginWithKakaoAccount();
+
         user = await kakao.UserApi.instance.me();
         final customToken = await FirebaseService().createCustomToken({
           'uid': user!.id.toString(),
@@ -98,10 +112,13 @@ class MainViewModel {
           'email': user!.kakaoAccount!.email!,
           'photoURL': user!.kakaoAccount!.profile!.profileImageUrl,
         });
+
         await FirebaseAuth.instance.signInWithCustomToken(customToken);
         var currentUser = await FirebaseService.findUserByEmail(
             user!.kakaoAccount!.email!);
+        print("currentUserlogin : $currentUser");
         if (currentUser == null) {
+          await FirebaseAuth.instance.signInWithCustomToken(customToken);
           EasyLoading.showInfo("회원가입 진행 필요");
           await FirebaseFirestore.instance
               .collection("users")
@@ -118,6 +135,8 @@ class MainViewModel {
           Get.offAll(() => privateSettingScreen());
         }else{
           // EasyLoading.showInfo("현재 사용자가 있습니다");
+          UserService.to.currentUser.value = currentUser;
+          print("UserService.to.currentUser.value : ${UserService.to.currentUser.value}");
           Get.offAll(() => mainScreen());
         }
       } catch (error) {
@@ -127,7 +146,7 @@ class MainViewModel {
     }
   }
   Future logout() async {
-    await _socialLogin.logout();
+    // await _socialLogin.logout();
     FirebaseAuth.instance.signOut();
     UserApi.instance.logout();
   }

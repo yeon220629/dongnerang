@@ -5,12 +5,16 @@ import 'package:dongnerang/screens/setting/introduce.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/setting/notification.screen.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../constants/colors.constants.dart';
 import '../../models/main_view_model.dart';
 import '../../services/kakao_login.dart';
+import '../../services/user.service.dart';
 import '../../widgets/app_appbar_common.widget.dart';
 import '../introduce.dart';
 import '../setting/inquire.screen.dart';
+import '../splash.screen.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -91,9 +95,8 @@ class SettingsPage extends StatelessWidget {
                                 ),),
                                 onPressed: () async {
                                   await viewModel.logout();
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          LoginScreen()), (route) => false);
+                                  Get.offAll(() => const SplashScreen());
+                                  UserService.to.currentUser.value = null;
                                 },
                                 style: ButtonStyle(
                                   backgroundColor:

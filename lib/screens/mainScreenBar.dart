@@ -1,4 +1,5 @@
 import 'package:dongnerang/screens/mypage/mypage.screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,15 +20,14 @@ class mainScreenState extends State<mainScreen> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
     Get.put(NavigationController());
     Get.put(HomeController());
+
     final navigationController = Get.find<NavigationController>();
-    // print(navigationController.currentBottomMenuIndex);
     return Scaffold(
       bottomNavigationBar: Obx(
               () => Offstage(

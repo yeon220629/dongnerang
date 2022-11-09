@@ -8,7 +8,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../constants/colors.constants.dart';
-import 'mypage/mypage.screen.dart';
 
 
 class urlLoadScreen extends StatefulWidget {
@@ -98,9 +97,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                             mainScreen()), (route) => false);
                   }
                   if(widget.i == 2){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            searchScreen(title: "")), (route) => false);
+                    Navigator.pop(context);
                   }
                 }else{
                   if(widget.i == 0){
@@ -112,9 +109,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                             mainScreen()), (route) => false);
                   }
                   if(widget.i == 2){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            searchScreen(title: "")), (route) => false);
+                    Navigator.pop(context);
                   }
                 }
               }
