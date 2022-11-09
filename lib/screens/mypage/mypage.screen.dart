@@ -39,6 +39,7 @@ class _mypageScreenState extends State<mypageScreen> {
   double topContainer = 0;
   int reloadindex = 0;
   int colorindex = 0;
+  int groupTagNumber = 0;
 
   Future<void> getPostsData(value) async {
     valueBox.add(value);
@@ -61,7 +62,6 @@ class _mypageScreenState extends State<mypageScreen> {
       DateTime dateTime = responseList[0][i][2].toDate();
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
       colorindex = fnCnterCheck(responseList[0][i][1]);
-
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${responseList[0][i][0]}');
@@ -78,6 +78,7 @@ class _mypageScreenState extends State<mypageScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
                 child: Slidable(
+                  groupTag: 0,
                   endActionPane: ActionPane(
                     motion: ScrollMotion(),
                     children: [
@@ -325,6 +326,9 @@ class _mypageScreenState extends State<mypageScreen> {
 
 Widget saveDataProfile(List itemsData, topContainer) {
   return Expanded(
+    child : SlidableAutoCloseBehavior(
+      closeWhenOpened: true,
+      closeWhenTapped: false,
       child: ListView.separated(
         itemCount: itemsData.length,
         physics: const BouncingScrollPhysics(),
@@ -344,7 +348,8 @@ Widget saveDataProfile(List itemsData, topContainer) {
         separatorBuilder: (BuildContext ctx, int idx) {
           return Divider();
         },
-      )
+      ),
+    )
   );
 }
 
