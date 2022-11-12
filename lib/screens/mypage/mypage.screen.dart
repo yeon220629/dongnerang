@@ -124,58 +124,61 @@ class _mypageScreenState extends State<mypageScreen> {
                       ),
                     ],
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${responseList[0][i][3]}',
-                        style: const TextStyle(fontSize: 14),
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.justify,
-                        maxLines: 2,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Container(
-                                padding: EdgeInsets.all(2),
-                                // color: colorindex == 1
-                                //     ? AppColors.blue
-                                //     : AppColors.primary,
-                                color: colorindex == 1
-                                    ? Color(0xff5496D2)
-                                    : colorindex == 0
-                                    ? Color(0xff3CC181)
-                                    : colorindex == 2
-                                    ? AppColors.darkgreen
-                                    : colorindex == 3
-                                    ? AppColors.primary
-                                    : colorindex == 4
-                                    ? AppColors.orange
-                                    : colorindex == 5
-                                    ? AppColors.red
-                                    : AppColors.black,
-                                child: Text(
-                                  ' ${responseList[0][i][1]} ',
-                                  style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
-                                  textDirection: ui.TextDirection.ltr,
-                                )
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0,0,8,0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '${responseList[0][i][3]}',
+                          style: const TextStyle(fontSize: 14),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Container(
+                                  padding: EdgeInsets.all(2),
+                                  // color: colorindex == 1
+                                  //     ? AppColors.blue
+                                  //     : AppColors.primary,
+                                  color: colorindex == 1
+                                      ? Color(0xff5496D2)
+                                      : colorindex == 0
+                                      ? Color(0xff3CC181)
+                                      : colorindex == 2
+                                      ? AppColors.darkgreen
+                                      : colorindex == 3
+                                      ? AppColors.primary
+                                      : colorindex == 4
+                                      ? AppColors.orange
+                                      : colorindex == 5
+                                      ? AppColors.red
+                                      : AppColors.black,
+                                  child: Text(
+                                    ' ${responseList[0][i][1]} ',
+                                    style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+                                    textDirection: ui.TextDirection.ltr,
+                                  )
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 7),
-                          Text(
-                            // '시작일 | ${responseList[0][i][2].toString().trim()}',
-                            '시작일 | ${dateFormat.format(dateTime)}',
-                            style: const TextStyle(fontSize: 13, color: Colors.grey),
-                            textDirection: ui.TextDirection.ltr,
-                          ),
-                        ],
-                      )
-                    ],
+                            SizedBox(width: 7),
+                            Text(
+                              // '시작일 | ${responseList[0][i][2].toString().trim()}',
+                              '시작일 | ${dateFormat.format(dateTime)}',
+                              style: const TextStyle(fontSize: 13, color: Colors.grey),
+                              textDirection: ui.TextDirection.ltr,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )

@@ -151,6 +151,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: Container(
+                                      // decoration: BoxDecoration(
+                                      //     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                                      //     border: Border.all(color: Colors.black12, width: 1)),
                                       padding: EdgeInsets.all(2),
                                       color: colorindex == 1
                                           ? Color(0xff5496D2)
