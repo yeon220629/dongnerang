@@ -142,32 +142,29 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             maxLines: 2,
                           ),
                         ),
-                        // const SizedBox(
-                        //   height: 3,
-                        // ),
                         Expanded(
                             child: Row(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: Container(
-                                      // decoration: BoxDecoration(
-                                      //     borderRadius: BorderRadius.circular(8), //모서리를 둥글게
-                                      //     border: Border.all(color: Colors.black12, width: 1)),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: colorindex == 1
+                                            ? Color(0xff5496D2)
+                                            : colorindex == 0
+                                            ? Color(0xff3CC181)
+                                            : colorindex == 2
+                                            ? AppColors.darkgreen
+                                            : colorindex == 3
+                                            ? AppColors.primary
+                                            : colorindex == 4
+                                            ? AppColors.orange
+                                            : colorindex == 5
+                                            ? AppColors.red
+                                            : AppColors.black,
+                                      ),
                                       padding: EdgeInsets.all(2),
-                                      color: colorindex == 1
-                                          ? Color(0xff5496D2)
-                                          : colorindex == 0
-                                          ? Color(0xff3CC181)
-                                          : colorindex == 2
-                                          ? AppColors.darkgreen
-                                          : colorindex == 3
-                                          ? AppColors.primary
-                                          : colorindex == 4
-                                          ? AppColors.orange
-                                          : colorindex == 5
-                                          ? AppColors.red
-                                          : AppColors.black,
                                       child: Text(
                                         ' ${post['center_name ']} ',
                                         style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
@@ -232,19 +229,22 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 padding: const EdgeInsets.all(5.0),
                                 child: Container(
                                     padding: EdgeInsets.all(2),
-                                    color: colorindex == 1
-                                        ? Color(0xff5496D2)
-                                        : colorindex == 0
-                                        ? Color(0xff3CC181)
-                                        : colorindex == 2
-                                        ? AppColors.darkgreen
-                                        : colorindex == 3
-                                        ? AppColors.primary
-                                        : colorindex == 4
-                                        ? AppColors.orange
-                                        : colorindex == 5
-                                        ? AppColors.red
-                                        : AppColors.black,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: colorindex == 1
+                                          ? Color(0xff5496D2)
+                                          : colorindex == 0
+                                          ? Color(0xff3CC181)
+                                          : colorindex == 2
+                                          ? AppColors.darkgreen
+                                          : colorindex == 3
+                                          ? AppColors.primary
+                                          : colorindex == 4
+                                          ? AppColors.orange
+                                          : colorindex == 5
+                                          ? AppColors.red
+                                          : AppColors.black,
+                                    ),
                                     child: Text(
                                       ' ${post['center_name ']} ',
                                       style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
@@ -345,7 +345,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
                 return DropdownMenuItem<String>(
                   value: item,
-                  child: Text(item, style: TextStyle(fontWeight: FontWeight.w600)),
+                  child: item == '중구'
+                    ? Text("${item}" , style: TextStyle(fontWeight: FontWeight.w600))
+                    : Text("${item}구", style: TextStyle(fontWeight: FontWeight.w600))
                 );
               }).toList(),
               onChanged: (dynamic value){

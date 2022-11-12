@@ -145,22 +145,22 @@ class _mypageScreenState extends State<mypageScreen> {
                               padding: const EdgeInsets.all(5.0),
                               child: Container(
                                   padding: EdgeInsets.all(2),
-                                  // color: colorindex == 1
-                                  //     ? AppColors.blue
-                                  //     : AppColors.primary,
-                                  color: colorindex == 1
-                                      ? Color(0xff5496D2)
-                                      : colorindex == 0
-                                      ? Color(0xff3CC181)
-                                      : colorindex == 2
-                                      ? AppColors.darkgreen
-                                      : colorindex == 3
-                                      ? AppColors.primary
-                                      : colorindex == 4
-                                      ? AppColors.orange
-                                      : colorindex == 5
-                                      ? AppColors.red
-                                      : AppColors.black,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: colorindex == 1
+                                        ? Color(0xff5496D2)
+                                        : colorindex == 0
+                                        ? Color(0xff3CC181)
+                                        : colorindex == 2
+                                        ? AppColors.darkgreen
+                                        : colorindex == 3
+                                        ? AppColors.primary
+                                        : colorindex == 4
+                                        ? AppColors.orange
+                                        : colorindex == 5
+                                        ? AppColors.red
+                                        : AppColors.black,
+                                  ),
                                   child: Text(
                                     ' ${responseList[0][i][1]} ',
                                     style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),

@@ -387,7 +387,7 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
             SizedBox(height: 5,),
             Container(
               // padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Wrap( spacing: 4.0, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
+              child: Wrap( spacing: size.width / 20, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
             ),
             Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
           ],
@@ -456,13 +456,18 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
                 CircleAvatar(backgroundImage: AssetImage('assets/images/DONGDAEMUN.PNG')) :
                 (name == "영등포") ?
                 CircleAvatar(backgroundImage: AssetImage('assets/images/YEONGDEUNGPO.PNG')) :
+                (name == "서대문") ?
+                CircleAvatar(backgroundImage: AssetImage('assets/images/SEODAEMUN.PNG')) :
                 SizedBox(),
       // labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       backgroundColor: Colors.white,
       shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
       // autofocus: true,
       // shape: OutlinedBorder(side: BorderSide(color: AppColors.grey,)),
-      label: Text("${name}"),
+      label: name == "중구"
+              ? Text("${name}")
+              : Text("${name}구"
+      ),
       labelStyle: TextStyle(
         color: selected_tags.contains(name)? Colors.white : Colors.black,
       ),

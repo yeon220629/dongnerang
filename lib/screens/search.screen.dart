@@ -114,6 +114,8 @@ class _searchScreenState extends State<searchScreen>
                               padding: const EdgeInsets.all(5.0),
                               child: Container(
                                 padding: EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
                                   color: colorindex == 1
                                       ? Color(0xff5496D2)
                                       : colorindex == 0
@@ -127,6 +129,7 @@ class _searchScreenState extends State<searchScreen>
                                       : colorindex == 5
                                       ? AppColors.red
                                       : AppColors.black,
+                                  ),
                                   child: Text(
                                     ' ${post['center_name ']} ',
                                     style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
