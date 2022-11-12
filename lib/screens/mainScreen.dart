@@ -36,7 +36,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   String? defaultCenter = '전체';
   String? SeouldefaultCenter = "전체";
   String url = "";
-  String? userEmail = FirebaseAuth?.instance?.currentUser?.email;
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String dropdownValue = '';
   String? centerName = '';
   String? centerLabel = '';
@@ -384,11 +384,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     child: Image.asset("assets/images/banner.png")
                 ),
                 SizedBox(
-                  width: size.width,
+                  width: size.width / 1.1,
                   // padding: EdgeInsetsDirectional.all(2),
                   child: Row(
                     // mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ToggleButtons(
                         direction: Axis.horizontal,
@@ -419,7 +419,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         color: AppColors.black,
                         constraints: const BoxConstraints(
                           maxWidth: 80,
-                          minWidth: 70,
+                          minWidth: 60,
                           minHeight: 40.0,
                         ),
                         children: CategoryCenter,

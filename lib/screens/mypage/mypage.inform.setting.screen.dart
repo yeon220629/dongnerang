@@ -532,7 +532,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                   final XFile f = XFile('assets/images/default-profile.png');
                   setState(() {
                     _imageFile = null;
-                    widget.callback(f!.path);
+                    widget.callback(f.path);
                     imageDeleteCheck = true;
                   });
                 },

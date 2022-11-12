@@ -306,7 +306,6 @@ class _mypageScreenState extends State<mypageScreen> {
                         ],
                       ),
                     ),
-                    // SizedBox(width: 80),
                   ],
                 ),),),
             // SizedBox(height: 5,),
@@ -329,7 +328,7 @@ Widget saveDataProfile(List itemsData, topContainer) {
     child : SlidableAutoCloseBehavior(
       closeWhenOpened: true,
       closeWhenTapped: false,
-      child: ListView.separated(
+      child: ListView.builder(
         itemCount: itemsData.length,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (c, i){
@@ -345,9 +344,9 @@ Widget saveDataProfile(List itemsData, topContainer) {
             child: itemsData[i],
           );
         },
-        separatorBuilder: (BuildContext ctx, int idx) {
-          return Divider();
-        },
+        // separatorBuilder: (BuildContext ctx, int idx) {
+        //   return Divider();
+        // },
       ),
     )
   );

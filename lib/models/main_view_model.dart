@@ -146,7 +146,7 @@ class MainViewModel {
     }
   }
   Future logout() async {
-    // await _socialLogin.logout();
+    await UserApi.instance.unlink();
     FirebaseAuth.instance.signOut();
     UserApi.instance.logout();
   }
