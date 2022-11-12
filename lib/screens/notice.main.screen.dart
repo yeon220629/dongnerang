@@ -130,7 +130,7 @@ class _noticemainpageState extends State<noticemainpage>
             print(value);
             if(value == 1){
               setState(() {
-                // getNoticeData(td);
+                getNoticeData(td);
               });
             }
           },
@@ -145,48 +145,47 @@ class _noticemainpageState extends State<noticemainpage>
               // height: 10,
               fit: BoxFit.contain,
             ),
-            Lottie.asset(
-              'assets/lottie/77412-design.json',
-              // width: 10,
-              // height: 10,
-              fit: BoxFit.contain,
-            ),
-          // Center(
-          //   child: SizedBox(
-          //     height: size.height,
-          //     child: Column(
-          //       children: [
-
-                  // Expanded(
-                  //     child: ListView.builder(
-                  //         itemCount: noticeItemsData.length,
-                  //         physics: const BouncingScrollPhysics(),
-                  //         itemBuilder: (c, i){
-                  //           double scale = 1.0;
-                  //           if (topContainer > 0.5){
-                  //             scale = i + 0.5 - topContainer;
-                  //             if (scale < 0 ) { scale = 0;}
-                  //             else if (scale > 1) { scale = 1; }
-                  //           }
-                  //           return Opacity(
-                  //             opacity: scale,
-                  //             child: Transform(
-                  //               transform: Matrix4.identity()..scale(scale, scale),
-                  //               alignment: Alignment.bottomCenter,
-                  //               child: Align(
-                  //                 heightFactor: 0.95,
-                  //                 alignment: Alignment.topCenter,
-                  //                 child: noticeItemsData[i],
-                  //               ),
-                  //             ),
-                  //           );
-                  //         }
-                  //     )
-                  // ),
-                // ],
-              // ),
+            // Lottie.asset(
+            //   'assets/lottie/77412-design.json',
+            //   // width: 10,
+            //   // height: 10,
+            //   fit: BoxFit.contain,
             // ),
-          // ),
+          Center(
+            child: SizedBox(
+              height: size.height,
+              child: Column(
+                children: [
+                  Expanded(
+                      child: ListView.builder(
+                          itemCount: noticeItemsData.length,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (c, i){
+                            double scale = 1.0;
+                            if (topContainer > 0.5){
+                              scale = i + 0.5 - topContainer;
+                              if (scale < 0 ) { scale = 0;}
+                              else if (scale > 1) { scale = 1; }
+                            }
+                            return Opacity(
+                              opacity: scale,
+                              child: Transform(
+                                transform: Matrix4.identity()..scale(scale, scale),
+                                alignment: Alignment.bottomCenter,
+                                child: Align(
+                                  heightFactor: 0.95,
+                                  alignment: Alignment.topCenter,
+                                  child: noticeItemsData[i],
+                                ),
+                              ),
+                            );
+                          }
+                      )
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

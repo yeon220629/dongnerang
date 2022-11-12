@@ -137,11 +137,9 @@ List? fnChecklocal(String local){
   }else if(local == '마포'){
     return ['마포', 'MAPO'];
     //  서대문 잠깐 보류
-  }
-  // else if(local == '서대문'){
-  //   return ['마포', 'MAPO'];
-  // }
-  else if(local == '서초'){
+  }else if(local == '서대문'){
+    return ['서대문', 'SEODAEMUN'];
+  }else if(local == '서초'){
     return ['서초', 'SEOCHO'];
   }else if(local == '성동'){
     return ['성동', 'SEONGDONG'];

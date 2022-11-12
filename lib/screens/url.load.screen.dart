@@ -168,6 +168,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
             }, icon: const Icon(Icons.share)),
           ],
         ),
+        // 백키옵션
         body: WillPopScope(
           onWillPop: (){
             var future = webViewController?.canGoBack();
