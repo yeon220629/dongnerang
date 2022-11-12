@@ -339,7 +339,7 @@ Widget saveDataProfile(List itemsData, topContainer) {
             else if (scale > 1) { scale = 1; }
           }
           return Align(
-            heightFactor: 0.85,
+            heightFactor: 1.1,
             alignment: Alignment.topCenter,
             child: itemsData[i],
           );
