@@ -40,7 +40,7 @@ class mainScreenState extends State<mainScreen> {
             return false;
           }
           currentBackPressTime = currentTime;
-          final _msg = '한 번 더 클릭시 앱이 종료 됩니다.';
+          final _msg = '한 번 더 클릭 시 앱이 종료 됩니다.';
           final snackBar = SnackBar(content: Text(_msg));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           return false;
