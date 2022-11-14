@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
@@ -25,6 +26,8 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
+  // 리스트 뷰 불러올시 로딩 중 메시지 띄우기 위한 변수
+  var listLength;
   final List<bool> _selectedCenter = <bool>[true, false];
   List<String> LIST_MENU = [];
   bool closeTapContainer = false;
@@ -321,6 +324,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height / 25;
+    listLength = itemsData.length;
 
     List<Widget> CategoryCenter = <Widget>[
       Text('동네소식'),
@@ -589,7 +593,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     ],
                   ),
                 ),
-                Expanded(
+                listLength > 0
+                  ? Expanded(
                     child: ListView.builder(
                         itemCount: itemsData.length,
                         physics: const BouncingScrollPhysics(),
@@ -607,7 +612,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           );
                         }
                     )
-                ),
+                )
+                : Expanded(
+                  child: Lottie.asset(
+                    'assets/lottie/searchdata.json',
+                  ),
+                )
               ],
             ),
           ),
