@@ -24,7 +24,7 @@ dependencies:
   url_launcher: ^6.1.4
   get: ^4.6.5
   http: ^0.13.4
-
+  shared_preferences: ^2.0.15
   flutter_easyloading: ^3.0.5
   flutter_signin_button: ^2.0.0
   flutter_html: ^2.2.1
@@ -52,6 +52,7 @@ dependencies:
   # flutter messaging fnc
   firebase_messaging: ^14.0.4
   flutter_local_notifications: ^9.6.0
+  fluttertoast: ^8.1.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"

@@ -8,14 +8,14 @@ class KakaoLogin implements SocialLogin{
       bool isInstalled = await isKakaoTalkInstalled();
       if(isInstalled) {
         try{
-          await UserApi.instance.loginWithKakaoTalk();
+          // await UserApi.instance.loginWithKakaoTalk();
           return true;
         }catch(error){
           return false;
         }
       }else {
         try{
-          await UserApi.instance.loginWithKakaoAccount();
+          // await UserApi.instance.loginWithKakaoAccount();
           return true;
         }catch(error){
           return false;
