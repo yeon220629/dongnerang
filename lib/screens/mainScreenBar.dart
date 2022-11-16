@@ -49,47 +49,50 @@ class mainScreenState extends State<mainScreen> {
         }
       },
       child: Scaffold(
-        bottomNavigationBar: Obx(
-                () => Offstage(
-              offstage:HomeController.to.hideBottomMenu.value,
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  BottomNavigationBar(
-                    showSelectedLabels: false,
-                    showUnselectedLabels: false,
-                    selectedItemColor: AppColors.primary,
-                    unselectedItemColor: AppColors.grey,
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Icon(
-                          Icons.home,
-                          color:
-                          navigationController.currentBottomMenuIndex.value == 0
-                              ? AppColors.primary
-                              : AppColors.grey,
+        bottomNavigationBar: SizedBox(
+          height: MediaQuery.of(context).size.height / 17,
+          child: Obx(
+                  () => Offstage(
+                offstage:HomeController.to.hideBottomMenu.value,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    BottomNavigationBar(
+                      showSelectedLabels: false,
+                      showUnselectedLabels: false,
+                      selectedItemColor: AppColors.primary,
+                      unselectedItemColor: AppColors.grey,
+                      items: [
+                        BottomNavigationBarItem(
+                          icon: Icon(
+                            Icons.home,
+                            color:
+                            navigationController.currentBottomMenuIndex.value == 0
+                                ? AppColors.primary
+                                : AppColors.grey,
+                          ),
+                          label: "홈",
                         ),
-                        label: "홈",
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(
-                          Icons.account_circle,
-                          color:
-                          navigationController.currentBottomMenuIndex.value == 1
-                              ? AppColors.primary
-                              : AppColors.grey,
+                        BottomNavigationBarItem(
+                          icon: Icon(
+                            Icons.account_circle,
+                            color:
+                            navigationController.currentBottomMenuIndex.value == 1
+                                ? AppColors.primary
+                                : AppColors.grey,
+                          ),
+                          label: "마이페이지",
                         ),
-                        label: "마이페이지",
-                      ),
-                    ],
-                    onTap: (index) {
-                      navigationController.currentBottomMenuIndex.value = index;
-                      setState(() {});
-                    },
-                  )
-                ],
-              ),
-            )
+                      ],
+                      onTap: (index) {
+                        navigationController.currentBottomMenuIndex.value = index;
+                        setState(() {});
+                      },
+                    )
+                  ],
+                ),
+              )
+          ),
         ),
         body: Obx(
               () => IndexedStack(

@@ -374,10 +374,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     MaterialPageRoute(builder: (context) => searchScreen(title: '',))
                 );
               },
-                  icon: const Icon(Icons.search)),
+                  icon: const Icon(Icons.search),color: AppColors.black),
               IconButton(onPressed: (){
                 Get.to(() => noticemainpage());
-              }, icon: const Icon(Icons.notifications_none_outlined)),
+              }, icon: const Icon(Icons.notifications_none_outlined),color: AppColors.black),
             ],
           ),
           body: SizedBox(

@@ -32,6 +32,8 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
         backgroundColor: Colors.white,
         actions: [
           Row(

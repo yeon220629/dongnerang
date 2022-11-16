@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:dongnerang/screens/mainScreenBar.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../../constants/colors.constants.dart';
@@ -24,6 +26,19 @@ class mypageScreen extends StatefulWidget {
 }
 
 class _mypageScreenState extends State<mypageScreen> {
+  //애드몹 테스트 ID
+  final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
+  final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
+
+  BannerAd? banner;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //
+  // }
+
   late final SlidableController slidableController;
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String? profileImage = '';
@@ -199,6 +214,16 @@ class _mypageScreenState extends State<mypageScreen> {
   @override
   void initState() {
     super.initState();
+
+
+    //애드몹
+    banner = BannerAd(
+      size: AdSize.banner,
+      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
+      listener: BannerAdListener(),
+      request: AdRequest(),
+    )..load();
+
     mypageCustomKeyword = [];
     FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value){
       int ListData = value.length;
@@ -319,7 +344,13 @@ class _mypageScreenState extends State<mypageScreen> {
                   child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 )
             ),
-            saveDataProfile(itemsData, topContainer)
+            saveDataProfile(itemsData, topContainer),
+            Container(height: MediaQuery.of(context).size.height / 17,
+            child: this.banner == null
+                ? Container()
+                : AdWidget(
+                    ad: this.banner!,
+            ),),
           ]
       ),
     );
@@ -355,4 +386,26 @@ Widget saveDataProfile(List itemsData, topContainer) {
   );
 }
 
+
+// final BannerAd myBanner = BannerAd(
+//   adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+//   size: AdSize.banner,
+//   request: AdRequest(),
+//   listener: BannerAdListener(),
+// );
+
+// final AdWidget adWidget = AdWidget(ad: myBanner);
+//
+// final Container adContainer = Container(
+//   alignment: Alignment.center,
+//   child: adWidget,
+//   width: myBanner.size.width.toDouble(),
+//   height: myBanner.size.height.toDouble(),
+// );
+
+// myBanner.load();
+
+// final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
+// final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
+//
 

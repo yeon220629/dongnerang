@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'constants/common.constants.dart';
@@ -89,6 +90,7 @@ void fcmSetting() async {
 void main() async {
   KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();      // 모바일 광고 SDK 초기화
   await Firebase.initializeApp(
     // options: DefaultFirebaseOptions.currentPlatform,
   );
