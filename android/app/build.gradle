@@ -50,7 +50,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 4
+        versionCode 6
         versionName flutterVersionName
     }
 
@@ -70,6 +70,7 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+            minifyEnabled true
         }
     }
     namespace 'com.dongnerang.com.dongnerang'

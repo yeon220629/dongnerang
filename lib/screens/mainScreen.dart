@@ -1,5 +1,4 @@
 import 'dart:ui' as ui;
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart' as kakao ;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
@@ -56,7 +55,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       }
 
       String? checklocalItem = fnChecklocal(LIST_MENU[0])?.first;
-      print(checklocalItem);
       getPostsData("${checklocalItem}_전체");
 
       setState(() {
@@ -82,20 +80,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore.instance.collection("crawlingData").doc(value);
     final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await docref.get();
     late  Map<String, dynamic>? valueDoc = documentSnapshot.data();
-    String? numberName = valueDoc?.keys.first.split("_")[0];
-    for(int i = 1; i < valueDoc!.length + 2; i++){
-      listOrder.add("${numberName}_${i.toString().trim()}");
-    }
-    List<DateTime> f = [];
-    for(int i = 0; i<listOrder.length; i++){
-      valueDoc.forEach((key, value) {
-        if(listOrder[i] == key){
-          DateTime dateTime = value["registrationdate"].toDate();
-          valueData.add(value);
-          f.add(dateTime);
-        }
-      });
-    }
+
+    valueDoc?.forEach((key, value) {
+      valueData.add(value);
+    });
 
     valueData.sort((a,b) {
       var adate = a['registrationdate']; //before -> var adate = a.expiry;
@@ -337,8 +325,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
             elevation: 0,
-            title:
-            DropdownButton(
+            title: DropdownButton(
               alignment: Alignment.center,
               focusColor: AppColors.primary,
               icon: const Icon(Icons.keyboard_arrow_down),
