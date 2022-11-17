@@ -461,7 +461,10 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
           InkWell(
               onTap: () {
                 // 클릭시 모달 팝업을 띄워준다.
-                showModalBottomSheet(context: context, builder: ((builder) => bottomSheet()));
+                showModalBottomSheet(
+                    context: context,
+                    builder: ((builder) => bottomSheet())
+                );
               },
               child: ClipOval(
                 child: SizedBox.fromSize(
@@ -518,6 +521,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                 onPressed: () {
                   takePhoto(ImageSource.gallery);
                   ImageSource.values;
+                  Navigator.pop(context);
                 },
                 label: Text('앨범에서 선택', style: TextStyle(fontSize: 20),),
               ),
@@ -538,6 +542,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                     _imageFile = null;
                     widget.callback(f.path);
                     imageDeleteCheck = true;
+                    Navigator.pop(context);
                   });
                 },
                 label: Text('프로필 사진 삭제', style: TextStyle(
