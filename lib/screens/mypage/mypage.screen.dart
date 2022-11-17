@@ -31,7 +31,6 @@ class _mypageScreenState extends State<mypageScreen> {
   // final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
   final String androidTestId = 'ca-app-pub-3415104781631988/9379594822';
 
-
   //애드몹 ID
   // ca-app-pub-3415104781631988/9379594822
 
@@ -101,9 +100,10 @@ class _mypageScreenState extends State<mypageScreen> {
                         onPressed: (value) async {
                           final TextTemplate defaultText = TextTemplate(
                             text:
-                            '제목 : ${responseList[0][i][3]}\n\n 링크 : ${responseList[0][i][0]}',
+                            '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${responseList[0][i][1]}]\n${responseList[0][i][3]}\n\n',
                             link: Link(
-                              webUrl: Uri.parse(responseList[0][i][0]),
+                              webUrl: Uri.parse('${responseList[0][i][0]}'),
+                              mobileWebUrl: Uri.parse('${responseList[0][i][0]}'),
                             ),
                           );
                           bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
