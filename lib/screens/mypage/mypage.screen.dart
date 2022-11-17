@@ -28,11 +28,10 @@ class mypageScreen extends StatefulWidget {
 class _mypageScreenState extends State<mypageScreen> {
   //애드몹 테스트 ID
   final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
-  // final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
-  final String androidTestId = 'ca-app-pub-3415104781631988/9379594822';
+  final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
 
-  //애드몹 ID
-  // ca-app-pub-3415104781631988/9379594822
+  //애드몹 ID ca-app-pub-3415104781631988/9379594822
+  // final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
 
 
   BannerAd? banner;
