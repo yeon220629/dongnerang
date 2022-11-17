@@ -28,16 +28,15 @@ class mypageScreen extends StatefulWidget {
 class _mypageScreenState extends State<mypageScreen> {
   //애드몹 테스트 ID
   final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
-  final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
+  // final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
+  final String androidTestId = 'ca-app-pub-3415104781631988/9379594822';
+
+
+  //애드몹 ID
+  // ca-app-pub-3415104781631988/9379594822
+
 
   BannerAd? banner;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //
-  //
-  // }
 
   late final SlidableController slidableController;
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
@@ -215,10 +214,9 @@ class _mypageScreenState extends State<mypageScreen> {
   void initState() {
     super.initState();
 
-
     //애드몹
     banner = BannerAd(
-      size: AdSize.banner,
+      size: AdSize.fullBanner,
       adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
       listener: BannerAdListener(),
       request: AdRequest(),
@@ -345,7 +343,7 @@ class _mypageScreenState extends State<mypageScreen> {
                 )
             ),
             saveDataProfile(itemsData, topContainer),
-            Container(height: MediaQuery.of(context).size.height / 17,
+            Container(height: 60,
             child: this.banner == null
                 ? Container()
                 : AdWidget(
