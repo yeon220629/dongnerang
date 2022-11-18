@@ -343,6 +343,7 @@ class _mypageScreenState extends State<mypageScreen> {
             ),
             saveDataProfile(itemsData, topContainer),
             Container(height: 60,
+            width: size.width,
             child: this.banner == null
                 ? Container()
                 : AdWidget(
