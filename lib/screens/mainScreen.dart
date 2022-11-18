@@ -64,6 +64,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
+    print("centerCheck : ${centerCheck[2]}");
+
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
@@ -92,7 +94,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     });
 
     responseList = valueData;
-
     for ( var post in responseList){
       colorindex = fnCnterCheck(post['center_name ']);
 
@@ -423,36 +424,36 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       SizedBox(width: size.width / 5),
                       cuindex == 0
                           ? DropdownButton(
-                          alignment: Alignment.center,
-                          focusColor: AppColors.primary,
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          isExpanded: false,
-                          isDense: false,
-                          underline: Container(),
-                          value: defaultCenter,
-                          items: centerCheck.map( (value) {
-                            if(value == "전체"){
-                              return DropdownMenuItem (
-                                value: value, child: Text(value),
-                              );
-                            }else{
-                              return DropdownMenuItem (
-                                value: value, child: Text("${dropdownValue+value}"),
-                                // value: value, child: Text(value),
-                              );
-                            }
-                          },
-                          ).toList(),
-                          onChanged: (value){
-                            setState(() {
-                              listItems = [];
-                              centerLabel = value as String?;
-                              defaultCenter = value as String?;
-                              getPostsData(dropdownValue+"_"+defaultCenter!);
-                            }
-                            );
-                          }
-                      )
+                              alignment: Alignment.center,
+                              focusColor: AppColors.primary,
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              isExpanded: false,
+                              isDense: false,
+                              underline: Container(),
+                              value: defaultCenter,
+                              items: centerCheck.map( (value) {
+                                if(value == "전체"){
+                                  return DropdownMenuItem (
+                                    value: value, child: Text(value),
+                                  );
+                                }else{
+                                  return DropdownMenuItem (
+                                    value: value, child: Text("${dropdownValue+value}"),
+                                    // value: value, child: Text(value),
+                                  );
+                                }
+                              },
+                              ).toList(),
+                              onChanged: (value){
+                                setState(() {
+                                  listItems = [];
+                                  centerLabel = value as String?;
+                                  defaultCenter = value as String?;
+                                  getPostsData(dropdownValue+"_"+defaultCenter!);
+                                }
+                                );
+                              }
+                          )
                           : DropdownButton(
                           alignment: Alignment.center,
                           focusColor: AppColors.primary,

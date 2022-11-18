@@ -203,7 +203,6 @@ class _searchScreenState extends State<searchScreen>
                 ),
                 controller: SearcheditingController,
                 onChanged: (value){
-                  print("value : $value");
                   setState(() {
                     if(value.isEmpty){
                       print("빈값임");

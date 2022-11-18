@@ -42,7 +42,6 @@ class FirebaseService {
     List getDt = [];
     final doc = await FirebaseFirestore.instance.collection("users").doc(email).get();
     doc.data()?.forEach((key, value) {
-      print(value);
       if(key == param){
         for(int i = 0; i < value.toString().split(",").length; i++){
           getDt.add(value[i]);
@@ -65,7 +64,6 @@ class FirebaseService {
         }
       }
     });
-    print("toggleValue : $toggleValue");
     return toggleValue;
   }
   
@@ -188,9 +186,7 @@ class FirebaseService {
   }
 
   static Future<void> savePrivacyProfileSetting(String email, List value, List key) async{
-    print("value : ${value}");
     for(int i = 0; i < key.length; i++){
-      print("key : ${key[i]}");
       if(key[i] == 'name'){
           await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
             key[i]: value[0],

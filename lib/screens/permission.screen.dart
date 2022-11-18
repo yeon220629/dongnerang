@@ -42,7 +42,6 @@ class PermissionScreen extends StatelessWidget {
                 text: "확인",
                 onPressed: () async {
                   final ok = await requestPermissions();
-                  print("ok : ${ok}");
                   if (ok) {
                     Get.to(() => const LoginScreen());
                   } else {

@@ -140,7 +140,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
 
             IconButton(onPressed: ()async {
               String firebasesUrl = widget.urldata.toString();
-              print("firebasesUrl : $firebasesUrl");
               final TextTemplate defaultText = TextTemplate(
                 text:
                 '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${widget.o}]\n${widget.s}\n\n',
@@ -172,7 +171,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
         body: WillPopScope(
           onWillPop: (){
             var future = webViewController?.canGoBack();
-            print(future);
             future?.then((canGoBack) {
               if (canGoBack) {
                 webViewController?.goBack();

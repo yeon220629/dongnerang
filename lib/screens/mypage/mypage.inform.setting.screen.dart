@@ -28,7 +28,6 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
   @override
   Widget build(BuildContext context) {
     Get.put(PrivateSettingController());
-    print(PrivateLocalData);
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -123,7 +122,6 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                           profileKeyword.add(value);
                         }),
                         TagKeywordStateful(callback: (value) {
-                          print("TagKeywordStateful : $value");
                           profilelocal.add(value);
                         }),
                       ],

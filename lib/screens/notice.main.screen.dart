@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
+import '../controller/AllController.dart';
 
 class noticemainpage extends StatefulWidget {
   const noticemainpage({super.key});
@@ -14,6 +17,7 @@ class noticemainpage extends StatefulWidget {
 
 class _noticemainpageState extends State<noticemainpage>
     with TickerProviderStateMixin {
+  // final AppController ac = Get.put(AppController());
   late TabController _tabController;
   double topContainer = 0;
   String td = FirebaseService().getToday();
@@ -127,7 +131,6 @@ class _noticemainpageState extends State<noticemainpage>
             ),
           ],
           onTap: (value) {
-            print(value);
             if(value == 1){
               setState(() {
                 getNoticeData(td);
@@ -139,18 +142,31 @@ class _noticemainpageState extends State<noticemainpage>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-            Lottie.asset(
+          // FutureBuilder(
+          //   future: ac.initialize(), // 여기서 앱 실행 전에 해야 하는 초기화 진행
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
+          //       return Center(
+          //           child: Column(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Text('title', style: TextStyle(fontSize: 20)),
+          //               Text('message', style: TextStyle(fontSize: 15)),
+          //             ],
+          //           ));
+          //     } else if (snapshot.hasError) {
+          //       return Center(child: Text('failed to initialize'));
+          //     } else {
+          //       return Center(child: Text('initializing...'));
+          //     }
+          //   }
+          // ),
+          Lottie.asset(
               'assets/lottie/77412-design.json',
               // width: 10,
               // height: 10,
               fit: BoxFit.contain,
-            ),
-            // Lottie.asset(
-            //   'assets/lottie/77412-design.json',
-            //   // width: 10,
-            //   // height: 10,
-            //   fit: BoxFit.contain,
-            // ),
+          ),
           Center(
             child: SizedBox(
               height: size.height,

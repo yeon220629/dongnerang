@@ -121,7 +121,6 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                             ],
                           ),
                           genderChoiceWidget(callback: (value){
-                            print(value);
                             gender = value;
                           }),
                           KeywordStateful(callback: (value) {
@@ -187,7 +186,6 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                               color: AppColors.grey,
                               // color: select_tags.add(myController.text) ? AppColors.grey : AppColors.primary,
                               onPressed: () {
-                                print("myController : ${myController.text}");
                                 select_tags.add(myController.text);
                                 setState(() {
                                   CustomKeyword.add(myController.text);
@@ -564,7 +562,6 @@ class _genderChoiceState extends State<genderChoiceWidget> {
     );
   }
   void toggleSelect(value) {
-    print(value);
     if (value == 0) {
       man = true;
       girl = false;

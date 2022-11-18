@@ -113,7 +113,6 @@ class MainViewModel {
         }else{
           // EasyLoading.showInfo("현재 사용자가 있습니다");
           UserService.to.currentUser.value = currentUser;
-          print("UserService.to.currentUser.value : ${UserService.to.currentUser.value}");
           Get.offAll(() => mainScreen());
         }
       } catch (error) {
