@@ -33,7 +33,7 @@ class mainScreenState extends State<mainScreen> {
     return WillPopScope(
       onWillPop: () async {
         DateTime currentTime = DateTime.now();
-        if(currentBackPressTime == null || currentTime.difference(currentBackPressTime!) > Duration(seconds: 2)){
+        if(currentBackPressTime == null || currentTime.difference(currentBackPressTime!) > Duration(seconds: 1)){
           print(navigationController.currentBottomMenuIndex.value);
           if(navigationController.currentBottomMenuIndex.value != 0){
             navigationController.currentBottomMenuIndex.value -= 1;
@@ -49,37 +49,38 @@ class mainScreenState extends State<mainScreen> {
         }
       },
       child: Scaffold(
-        bottomNavigationBar: SizedBox(
-          height: MediaQuery.of(context).size.height / 17,
-          child: Obx(
+        bottomNavigationBar: Obx(
                   () => Offstage(
                 offstage:HomeController.to.hideBottomMenu.value,
                 child: ListView(
                   shrinkWrap: true,
                   children: [
                     BottomNavigationBar(
-                      showSelectedLabels: false,
-                      showUnselectedLabels: false,
-                      selectedItemColor: AppColors.primary,
-                      unselectedItemColor: AppColors.grey,
+                      type: BottomNavigationBarType.fixed,
+                      showSelectedLabels: true,
+                      showUnselectedLabels: true,
+                      selectedItemColor:
+                          navigationController.currentBottomMenuIndex.value == 0
+                          ? AppColors.primary
+                          : AppColors.grey,
+                      unselectedItemColor:
+                          navigationController.currentBottomMenuIndex.value == 1
+                          ? AppColors.primary
+                          : AppColors.grey,
                       items: [
                         BottomNavigationBarItem(
                           icon: Icon(
-                            Icons.home,
-                            color:
                             navigationController.currentBottomMenuIndex.value == 0
-                                ? AppColors.primary
-                                : AppColors.grey,
+                                ? Icons.home
+                                : Icons.home_outlined,
                           ),
                           label: "홈",
                         ),
                         BottomNavigationBarItem(
                           icon: Icon(
-                            Icons.account_circle,
-                            color:
                             navigationController.currentBottomMenuIndex.value == 1
-                                ? AppColors.primary
-                                : AppColors.grey,
+                                ? Icons.person
+                                : Icons.person_outline_outlined,
                           ),
                           label: "마이페이지",
                         ),
@@ -93,7 +94,6 @@ class mainScreenState extends State<mainScreen> {
                 ),
               )
           ),
-        ),
         body: Obx(
               () => IndexedStack(
             index: navigationController.currentBottomMenuIndex.value,

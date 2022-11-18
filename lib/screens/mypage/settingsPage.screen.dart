@@ -70,7 +70,7 @@ class SettingsPage extends StatelessWidget {
             ),
             ListTile(
               leading:  Icon(Icons.star_border_outlined),
-              title: Text('현재버전 1.0'),
+              title: Text('현재버전 v1.0.2'),
             ),
           ListTile(
             leading:  Icon(Icons.logout),
