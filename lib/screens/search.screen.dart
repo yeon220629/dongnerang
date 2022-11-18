@@ -68,7 +68,7 @@ class _searchScreenState extends State<searchScreen>
     List<dynamic> responseList = valueData;
     listItems = [];
     for (var post in responseList) {
-      colorindex = fnCnterCheck(post['center_name ']);
+      colorindex = fnSeoulCnterCheck(post['center_name ']);
       DateTime dateTime = post["registrationdate"].toDate();
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 

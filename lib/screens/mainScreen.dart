@@ -64,8 +64,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
-    print("centerCheck : ${centerCheck[2]}");
-
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
@@ -95,7 +93,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
     responseList = valueData;
     for ( var post in responseList){
-      colorindex = fnCnterCheck(post['center_name ']);
+      if(fnCenterCheck(post['center_name ']) == 0){
+        centerCheck[1] = '문화재단';
+      }else if(fnCenterCheck(post['center_name ']) == 1){
+        centerCheck[1] = '문화원';
+      }else if(fnCenterCheck(post['center_name ']) == 2){
+        centerCheck[1] = '공단';
+      }
+
+      colorindex = fnSeoulCnterCheck(post['center_name ']);
 
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
       DateTime dateTime = post["registrationdate"].toDate();
@@ -108,7 +114,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               onTap: () async{
                 final Uri url = Uri.parse('${post["link"]}');
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                  // url, post["title"], post['center_name '], post['registrationdate'], 0
                     url, post["title"], post['center_name '], dateTime, 0
                 )));
               },

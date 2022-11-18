@@ -205,7 +205,7 @@ List SeoulCheck = ['전체',
   'NPO지원센터', '청년몽땅정보통','SBA지원센터','서울주거포털'
   ,'서울시청'];
 
-int fnCnterCheck(centerValue){
+int fnSeoulCnterCheck(centerValue){
   if(centerValue.contains("구청")){
     return 1;
   }else if(centerValue.contains("문화재단")){
@@ -218,6 +218,17 @@ int fnCnterCheck(centerValue){
     return 4;
   }else if(centerValue.contains("서울NPO지원센터")){
     return 5;
+  }
+  return 0;
+}
+
+int fnCenterCheck(centerValue){
+  if(centerValue.contains('문화원')){
+    return 1;
+  }else if(centerValue.contains('공단')){
+    return 2;
+  }else if(centerValue.contains('구청')){
+    return 3;
   }
   return 0;
 }

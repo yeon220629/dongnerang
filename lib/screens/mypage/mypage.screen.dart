@@ -73,7 +73,7 @@ class _mypageScreenState extends State<mypageScreen> {
 
       DateTime dateTime = responseList[0][i][2].toDate();
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
-      colorindex = fnCnterCheck(responseList[0][i][1]);
+      colorindex = fnSeoulCnterCheck(responseList[0][i][1]);
       listItems.add( GestureDetector(
           onTap: () async{
             final Uri url = Uri.parse('${responseList[0][i][0]}');
