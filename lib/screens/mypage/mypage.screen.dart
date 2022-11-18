@@ -31,7 +31,7 @@ class _mypageScreenState extends State<mypageScreen> {
   final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
 
   //애드몹 ID ca-app-pub-3415104781631988/9379594822
-  // final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
+  final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
 
 
   BannerAd? banner;
@@ -216,7 +216,8 @@ class _mypageScreenState extends State<mypageScreen> {
     //애드몹
     banner = BannerAd(
       size: AdSize.fullBanner,
-      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
+      // adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
+      adUnitId: Platform.isIOS ? iOSTestId : androidRealId,
       listener: BannerAdListener(),
       request: AdRequest(),
     )..load();
