@@ -477,11 +477,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 value: value,
                                 child: value == '서울시청'
                                     ? Row(
-                                  children: [
-                                    Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
-                                    Text(value)
-                                  ],
-                                )
+                                      children: [
+                                        Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
+                                        Text(value)
+                                      ],
+                                    )
+                                    : value == '아트누리'
+                                      ? Row(
+                                        children: [
+                                          Text("아트누리"),
+                                        ],
+                                      )
                                     : Text(value),
                                 // value: value, child: Text(value),시
                               );
