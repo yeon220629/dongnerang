@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "d346217d5c40ab4bb9d6c3e80f741b329c539d1979018359313424ea18fe92fc"
+build_start_time: [1668938161, 112492084]
+build_end_time: [1668938161, 229729175]
+inputs:
+  "/Users/seo/StudioProjects/dongnerang/ios/Runner/AppDelegate.swift": !private [1662195666, 990244150]

@@ -3,17 +3,17 @@
 <plist version="1.0">
 	<dict>
         <key>GADApplicationIdentifier</key>
-        <string>ca-app-pub-3415104781631988~3253170173</string>
+        <string>ca-app-pub-3415104781631988~6504027773</string>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>Dongnerang</string>
+		<string>동네랑</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 		<key>CFBundleInfoDictionaryVersion</key>
-		<string>6.0</string>
+		<string>1.0</string>
 		<key>CFBundleName</key>
 		<string>dongnerang</string>
 		<key>CFBundlePackageType</key>
@@ -258,3 +258,15 @@
           </array>
 	</dict>
 </plist>
+
+	<key> NSAppTransportSecurity </key>
+    <dict>
+        <key> NSExceptionDomains </key>
+        <dict>
+            <key> www.xxx.com </key>
+            <dict>
+                <key> NSTemporaryExceptionAllowsInsecureHTTPLoads </key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>

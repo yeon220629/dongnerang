@@ -1,0 +1,65 @@
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppWebView/WebMessage/WebMessageListenerChannelDelegate.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListenerChannelDelegate.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListenerChannelDelegate.dia"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListenerChannelDelegate.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListenerChannelDelegate.d"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/PluginScriptsJS/WebMessageListenerJS.swift":
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListenerJS.d"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListenerJS.swiftdeps"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListenerJS.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListenerJS.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/WebMessage.swift":
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessage.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessage.dia"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessage.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessage.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppWebView/WebMessage/WebMessageChannelChannelDelegate.swift":
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannelChannelDelegate.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannelChannelDelegate.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannelChannelDelegate.dia"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannelChannelDelegate.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/WebResourceRequest.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebResourceRequest.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebResourceRequest.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebResourceRequest.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebResourceRequest.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/WebAuthenticationSession/WebAuthenticationSessionManager.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionManager.swiftdeps"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionManager.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionManager.dia"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionManager.d"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/WebMessagePort.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessagePort.o"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessagePort.d"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessagePort.swiftdeps"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessagePort.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppWebView/WebMessage/WebMessageListener.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListener.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListener.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListener.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageListener.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppWebView/WebMessage/WebMessageChannel.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannel.o"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannel.d"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannel.swiftdeps"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannel.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/WebAuthenticationSession/WebAuthenticationSessionSettings.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionSettings.swiftdeps"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionSettings.dia"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionSettings.o"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionSettings.d"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/WebResourceError.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebResourceError.swiftdeps"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebResourceError.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebResourceError.dia"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebResourceError.d"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/PluginScriptsJS/WebMessageChannelJS.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannelJS.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannelJS.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannelJS.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebMessageChannelJS.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/WebAuthenticationSession/WebAuthenticationSessionChannelDelegate.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionChannelDelegate.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionChannelDelegate.dia"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionChannelDelegate.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/WebAuthenticationSessionChannelDelegate.d"

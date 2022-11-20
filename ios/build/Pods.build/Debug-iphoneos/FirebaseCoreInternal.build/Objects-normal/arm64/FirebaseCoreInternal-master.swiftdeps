@@ -1,0 +1,26 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "804567702d5e9f4db18329e9563d697b0897dbc9f0099beb5ae8b9de78504639"
+build_start_time: [1668938153, 250990867]
+build_end_time: [1668938155, 564339160]
+inputs:
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift"
+  : [1668933730, 54703712]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"
+  : [1668933730, 56427478]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatStorage.swift"
+  : [1668933730, 57255744]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsBundle.swift"
+  : [1668933730, 57564735]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsPayload.swift"
+  : [1668933730, 58857679]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/RingBuffer.swift"
+  : [1668933730, 55006980]
+  "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift": [1668933730, 54271459]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/StorageFactory.swift"
+  : [1668933730, 60298442]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/WeakContainer.swift"
+  : [1668933730, 58313369]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatController.swift"
+  : [1668933730, 55271863]
+  ? "/Users/seo/StudioProjects/dongnerang/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatsPayload.swift"
+  : [1668933730, 56753396]

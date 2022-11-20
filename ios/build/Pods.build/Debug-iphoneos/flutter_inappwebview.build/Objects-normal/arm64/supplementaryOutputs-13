@@ -1,0 +1,65 @@
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/SecCertificate.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SecCertificate.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SecCertificate.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SecCertificate.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SecCertificate.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/PullToRefresh/PullToRefreshSettings.swift":
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshSettings.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshSettings.dia"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshSettings.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshSettings.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/SafariViewController/SafariViewController.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariViewController.dia"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariViewController.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariViewController.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariViewController.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/SafariViewController/SafariBrowserSettings.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariBrowserSettings.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariBrowserSettings.swiftdeps"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariBrowserSettings.dia"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariBrowserSettings.d"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/ServerTrustChallenge.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ServerTrustChallenge.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ServerTrustChallenge.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ServerTrustChallenge.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ServerTrustChallenge.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/StringOrInt.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/StringOrInt.dia"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/StringOrInt.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/StringOrInt.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/StringOrInt.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/PluginScriptsJS/SupportZoomJS.swift":
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SupportZoomJS.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SupportZoomJS.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SupportZoomJS.swiftdeps"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SupportZoomJS.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/ServerTrustAuthResponse.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ServerTrustAuthResponse.dia"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ServerTrustAuthResponse.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ServerTrustAuthResponse.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ServerTrustAuthResponse.o"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/SwiftFlutterPlugin.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SwiftFlutterPlugin.dia"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SwiftFlutterPlugin.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SwiftFlutterPlugin.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SwiftFlutterPlugin.d"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/SslError.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SslError.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SslError.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SslError.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SslError.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/SslCertificate.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SslCertificate.swiftdeps"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SslCertificate.o"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SslCertificate.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SslCertificate.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/SafariViewController/SafariViewControllerChannelDelegate.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariViewControllerChannelDelegate.dia"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariViewControllerChannelDelegate.o"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariViewControllerChannelDelegate.d"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/SafariViewControllerChannelDelegate.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/Size2D.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/Size2D.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/Size2D.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/Size2D.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/Size2D.dia"

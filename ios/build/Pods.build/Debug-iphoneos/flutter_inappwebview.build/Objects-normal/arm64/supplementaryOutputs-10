@@ -1,0 +1,65 @@
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppBrowser/InAppBrowserSettings.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserSettings.dia"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserSettings.swiftdeps"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserSettings.o"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserSettings.d"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/PluginScriptsJS/InterceptFetchRequestJS.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptFetchRequestJS.swiftdeps"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptFetchRequestJS.o"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptFetchRequestJS.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptFetchRequestJS.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppBrowser/InAppBrowserNavigationController.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserNavigationController.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserNavigationController.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserNavigationController.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserNavigationController.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppWebView/InAppWebViewSettings.swift":
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewSettings.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewSettings.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewSettings.swiftdeps"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewSettings.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/JsPromptResponse.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsPromptResponse.dia"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsPromptResponse.o"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsPromptResponse.d"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsPromptResponse.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/PluginScriptsJS/JavaScriptBridgeJS.swift":
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JavaScriptBridgeJS.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JavaScriptBridgeJS.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JavaScriptBridgeJS.dia"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JavaScriptBridgeJS.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/JsAlertResponse.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsAlertResponse.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsAlertResponse.dia"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsAlertResponse.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsAlertResponse.d"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/ISettings.swift":
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ISettings.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ISettings.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ISettings.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/ISettings.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppBrowser/InAppBrowserWebViewController.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserWebViewController.dia"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserWebViewController.d"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserWebViewController.swiftdeps"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserWebViewController.o"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/Types/JsConfirmResponse.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsConfirmResponse.o"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsConfirmResponse.dia"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsConfirmResponse.d"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JsConfirmResponse.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/PluginScriptsJS/InterceptAjaxRequestJS.swift":
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptAjaxRequestJS.dia"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptAjaxRequestJS.d"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptAjaxRequestJS.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptAjaxRequestJS.swiftdeps"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppWebViewStatic.swift":
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewStatic.o"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewStatic.swiftdeps"
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewStatic.d"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewStatic.dia"
+"/Users/seo/Documents/flutter/.pub-cache/git/flutter_inappwebview-d39b1ef37475c87dd744ff3e2f07f24efd37dadb/ios/Classes/InAppWebView/InAppWebView.swift":
+  dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebView.d"
+  swift-dependencies: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebView.swiftdeps"
+  diagnostics: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebView.dia"
+  object: "/Users/seo/StudioProjects/dongnerang/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebView.o"

@@ -191,7 +191,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                                 myController.clear();
                               },
                             ),
-                            hintText: '관심 키워드를 등록해주세요! ex)예술, 공간, 모집',
+                            hintText: '관심 키워드를 등록해주세요! ex)예술,공간 등',
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(13)),
                               borderSide: BorderSide(

@@ -30,7 +30,8 @@ class _mypageScreenState extends State<mypageScreen> {
   final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
   final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
 
-  //애드몹 ID ca-app-pub-3415104781631988/9379594822
+  //애드몹 찐 ID
+  final String iOSRealId = 'ca-app-pub-3415104781631988/3367223383';
   final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
 
 
@@ -120,7 +121,7 @@ class _mypageScreenState extends State<mypageScreen> {
                             print('카카오톡 미설치: 웹 공유 기능 사용 권장');
                           }
                         },
-                        backgroundColor: AppColors.blue,
+                        backgroundColor: AppColors.primary,
                         foregroundColor: AppColors.white,
                         icon: Icons.share,
                         label: '공유',
@@ -130,7 +131,7 @@ class _mypageScreenState extends State<mypageScreen> {
                         onPressed: (value){
                           delPostsData(responseList[0][i][3],context);
                         },
-                        backgroundColor: AppColors.red,
+                        backgroundColor: AppColors.grey,
                         foregroundColor: AppColors.white,
                         icon: Icons.delete,
                         label: '삭제',
@@ -216,8 +217,8 @@ class _mypageScreenState extends State<mypageScreen> {
     //애드몹
     banner = BannerAd(
       size: AdSize.fullBanner,
-      // adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
-      adUnitId: Platform.isIOS ? iOSTestId : androidRealId,
+      // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
+      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
       listener: BannerAdListener(),
       request: AdRequest(),
     )..load();
