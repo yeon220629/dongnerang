@@ -512,12 +512,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                         Text(value)
                                       ],
                                     )
-                                    : value == '아트누리'
-                                      ? Row(
-                                        children: [
-                                          Text("아트누리"),
-                                        ],
-                                      )
                                     : Text(value),
                                 // value: value, child: Text(value),시
                               );
@@ -592,6 +586,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         onPressed: () async {
                                                           final Uri url = Uri.parse('https://mediahub.seoul.go.kr/competition/competitionList.do');
                                                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                  Container(
+                                                    child:AppTextButton( text: "50플러스포털",
+                                                        onPressed: () async {
+                                                          print('50플러스포털');
                                                         }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
                                                   Container(
