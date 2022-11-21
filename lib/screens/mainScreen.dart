@@ -1,4 +1,6 @@
 import 'dart:ui' as ui;
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
@@ -13,6 +15,7 @@ import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
 import '../services/user.service.dart';
+import '../widgets/app_button.widget.dart';
 import 'introduce.dart';
 import 'notice.main.screen.dart';
 
@@ -25,6 +28,12 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
+  CarouselController buttonCarouselController = CarouselController();
+  List<Image> product = [
+    Image.asset("assets/images/banner.png"),
+    Image.asset("assets/images/banner.png")
+  ];
+  
   // 리스트 뷰 불러올시 로딩 중 메시지 띄우기 위한 변수
   var listLength;
   final List<bool> _selectedCenter = <bool>[true, false];
@@ -317,7 +326,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final double categoryHeight = size.height / 25;
     listLength = itemsData.length;
 
     List<Widget> CategoryCenter = <Widget>[
@@ -374,16 +382,38 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             ],
           ),
           body: SizedBox(
-            height: size.height,
             child: Column(
               children: <Widget>[
-                GestureDetector(
+                Container(
+                //   child: CarouselSlider(
+                //     items: product,
+                //     options: CarouselOptions(
+                //       height: size.height / 9.5,
+                //       autoPlay: true,
+                //       viewportFraction: 0.9,
+                //       aspectRatio: 2.0,
+                //       initialPage: 2,
+                //     ),
+                //   ),
+                // ),
+                child : GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => introduceWidget(),),);
                     },
-                    child: Image.asset("assets/images/banner.png")
+                    child: CarouselSlider(
+                      items: product,
+                      options: CarouselOptions(
+                        height: size.height / 9.5,
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                        viewportFraction: 0.9,
+                        aspectRatio: 16 / 9,
+                        initialPage: 2,
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: size.width / 1.1,
@@ -528,9 +558,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
                                                           Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
-                                                          Text(
-                                                            " 서울시청",
-                                                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                          Text( " 서울시청", style: TextStyle( color: Colors.white,
+                                                            fontWeight: FontWeight.bold),
                                                             textAlign: TextAlign.center,
                                                           ),
                                                         ],
@@ -538,45 +567,54 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                     ),
                                                   ),
                                                   Container(
-                                                    child:TextButton(onPressed: (){
-                                                      final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
-                                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                          seoulUrlLoadScreen(
-                                                              url
-                                                          )));
-                                                    }, child: Text('분야별 새소식', style: TextStyle(color: AppColors.black),)),
-                                                    decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                    child:AppTextButton( text: "분야별 새소식",
+                                                      onPressed: () async {
+                                                        final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                    }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
                                                   Container(
-                                                    child:TextButton(onPressed: (){
-                                                      final Uri url = Uri.parse('https://www.seoul.go.kr/thismteventfstvl/list.do');
-                                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                          seoulUrlLoadScreen(
-                                                              url
-                                                          )));
-                                                    }, child: Text('이달의 행사 및 축제', style: TextStyle( color: AppColors.black),)),
-                                                    decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                    child:AppTextButton( text: "이달의 행사 및 축제",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://www.seoul.go.kr/thismteventfstvl/list.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
                                                   Container(
-                                                    child:TextButton(onPressed: (){
-                                                      final Uri url = Uri.parse('https://www.seoul.go.kr/eventreqst/list.do');
-                                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                          seoulUrlLoadScreen(
-                                                              url
-                                                          )));
-                                                    }, child: Text('이벤트 신청', style: TextStyle( color: AppColors.black),)),
-                                                    decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                    child:AppTextButton( text: "이벤트 신청",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://www.seoul.go.kr/eventreqst/list.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
                                                   Container(
-                                                    child:TextButton(onPressed: (){
-                                                      final Uri url = Uri.parse('https://mediahub.seoul.go.kr/competition/competitionList.do');
-                                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                          seoulUrlLoadScreen(
-                                                              url
-                                                          )));
-                                                    }, child: Text('내 손안의 서울(공모전)', style: TextStyle( color: AppColors.black),)),
-                                                    decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                                  )
+                                                    child:AppTextButton( text: "내 손안의 서울(공모전)",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://mediahub.seoul.go.kr/competition/competitionList.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                  Container(
+                                                    child:AppTextButton( text: "행사소식",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://50plus.or.kr/event.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                  Container(
+                                                    child:AppTextButton( text: "모집공고",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://www.50plus.or.kr/support.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                  Container(
+                                                    child:AppTextButton( text: "교육",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://50plus.or.kr/education.do?cost=ALL&state=JOIN&type=ALL');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
                                                 ],
                                               )
                                           )

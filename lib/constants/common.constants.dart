@@ -230,7 +230,6 @@ int fnCenterCheck(centerValue){
     return 2;
   }else if(centerValue.contains('구청')){
     return 3;
-  }
-  return 0;
+  } return 0;
 }
 
