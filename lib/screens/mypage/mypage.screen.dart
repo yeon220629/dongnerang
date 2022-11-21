@@ -217,8 +217,8 @@ class _mypageScreenState extends State<mypageScreen> {
     //애드몹
     banner = BannerAd(
       size: AdSize.fullBanner,
-      // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
-      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
+      adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
+      // adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
       listener: BannerAdListener(),
       request: AdRequest(),
     )..load();
