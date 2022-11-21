@@ -173,7 +173,7 @@ class _mypageScreenState extends State<mypageScreen> {
                                         ? AppColors.orange
                                         : colorindex == 5
                                         ? AppColors.red
-                                        : AppColors.black,
+                                        : Color(0xffEE6D01),
                                   ),
                                   child: Text(
                                     ' ${responseList[0][i][1]} ',
@@ -217,8 +217,8 @@ class _mypageScreenState extends State<mypageScreen> {
     //애드몹
     banner = BannerAd(
       size: AdSize.fullBanner,
-      adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
-      // adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
+      // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
+      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
       listener: BannerAdListener(),
       request: AdRequest(),
     )..load();

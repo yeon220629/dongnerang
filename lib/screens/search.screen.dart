@@ -128,7 +128,7 @@ class _searchScreenState extends State<searchScreen>
                                       ? AppColors.orange
                                       : colorindex == 5
                                       ? AppColors.red
-                                      : AppColors.black,
+                                      : Color(0xffEE6D01),
                                   ),
                                   child: Text(
                                     ' ${post['center_name ']} ',

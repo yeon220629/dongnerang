@@ -168,7 +168,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                             ? AppColors.orange
                                             : colorindex == 5
                                             ? AppColors.red
-                                            : AppColors.black,
+                                            : Color(0xffEE6D01),
                                       ),
                                       padding: EdgeInsets.all(2),
                                       child: Text(
@@ -249,7 +249,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                           ? AppColors.orange
                                           : colorindex == 5
                                           ? AppColors.red
-                                          : AppColors.black,
+                                          : Color(0xffEE6D01),
                                     ),
                                     child: Text(
                                       ' ${post['center_name ']} ',
