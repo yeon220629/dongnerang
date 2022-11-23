@@ -56,6 +56,7 @@ class mainScreenState extends State<mainScreen> {
                   shrinkWrap: true,
                   children: [
                     BottomNavigationBar(
+                      elevation: 0,
                       type: BottomNavigationBarType.fixed,
                       showSelectedLabels: true,
                       showUnselectedLabels: true,

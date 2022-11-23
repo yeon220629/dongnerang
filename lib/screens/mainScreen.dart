@@ -1,13 +1,16 @@
+import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/screens/banner.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
@@ -28,10 +31,22 @@ class freeComponent_viewpage extends StatefulWidget {
 }
 
 class freeComponentviewpageState extends State<freeComponent_viewpage> {
+
+  // //애드몹 테스트 ID
+  // final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
+  // final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
+  //
+  // //애드몹 찐 ID
+  // final String iOSRealId = 'ca-app-pub-3415104781631988/3367223383';
+  // final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
+  //
+  //
+  // BannerAd? banner;
+
   CarouselController buttonCarouselController = CarouselController();
   List<Image> product = [
-    Image.asset("assets/images/banner.png"),
-    Image.asset("assets/images/banner.png")
+    Image.asset("assets/images/banner_L.png", fit: BoxFit.cover,),
+    Image.asset("assets/images/police.png", fit: BoxFit.cover,),
   ];
   
   // 리스트 뷰 불러올시 로딩 중 메시지 띄우기 위한 변수
@@ -283,6 +298,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   void initState() {
     super.initState();
+
+    //애드몹
+    // banner = BannerAd(
+    //   size: AdSize.fullBanner,
+    //   // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
+    //   adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
+    //   listener: BannerAdListener(),
+    //   request: AdRequest(),
+    // )..load();
     // if(userEmail == null){
     //   userEmail = UserService.to.currentUser.value?.email;
     // }
@@ -384,6 +408,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           body: SizedBox(
             child: Column(
               children: <Widget>[
+                // //애드몹
+                // Container(height: 60,
+                //   width: size.width,
+                //   child: this.banner == null
+                //       ? Container()
+                //       : AdWidget(
+                //     ad: this.banner!,
+                //   ),),
                 Container(
                 //   child: CarouselSlider(
                 //     items: product,
@@ -396,19 +428,26 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 //     ),
                 //   ),
                 // ),
+
+
                 child : GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => introduceWidget(),),);
                     },
+                  // onTap: () {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(builder: (context) => bannerWidget(),),);
+                  // },
                     child: CarouselSlider(
                       items: product,
                       options: CarouselOptions(
                         height: size.height / 9.5,
                         autoPlay: true,
                         enlargeCenterPage: true,
-                        viewportFraction: 0.9,
+                        viewportFraction: 1.0,
                         aspectRatio: 16 / 9,
                         initialPage: 2,
                       ),

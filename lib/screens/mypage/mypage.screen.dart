@@ -344,6 +344,7 @@ class _mypageScreenState extends State<mypageScreen> {
                 )
             ),
             saveDataProfile(itemsData, topContainer),
+            //애드몹
             Container(height: 60,
             width: size.width,
             child: this.banner == null
