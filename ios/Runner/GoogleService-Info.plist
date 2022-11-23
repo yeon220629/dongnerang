@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>747660530943-jui64n18p9sc8vt7jsulsos9gt20komn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.747660530943-jui64n18p9sc8vt7jsulsos9gt20komn</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>747660530943-b9dj5grspcs6b6hiba0fj3p6os76gucp.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDaH20uvDLoZXhVMQNs-Lu3ceUI3X6TxtA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>747660530943</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.dongnerang.com.dongnerang</string>
+	<key>PROJECT_ID</key>
+	<string>dbcurd-67641</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dbcurd-67641.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:747660530943:ios:f14269df1c023281d0a8ca</string>
+	<key>DATABASE_URL</key>
+	<string>https://dbcurd-67641-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

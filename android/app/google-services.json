@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "747660530943-hghf014ttjqdongsu8q1ece5e09bl0pi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dongnerang.com.dongnerang",
+            "certificate_hash": "7eecf0a91fefa0fadb25e30b475d177aeff196b2"
+          }
+        },
+        {
+          "client_id": "747660530943-q7m0s6n09b3veurefcam3c1kken30plv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dongnerang.com.dongnerang",
+            "certificate_hash": "f3e0fa042ce42ea2f1319b5f2f7c4dc442a74adf"
+          }
+        },
+        {
           "client_id": "747660530943-8brvso0b8mho869gdjl2hfqigdjm02gt.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -48,7 +64,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-3415104781631988~3253170173"
     }
   ],
   "configuration_version": "1"
