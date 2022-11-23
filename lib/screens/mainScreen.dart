@@ -43,7 +43,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   //
   // BannerAd? banner;
 
-  CarouselController buttonCarouselController = CarouselController();
+  var _currentPage;
   List<Image> product = [
     Image.asset("assets/images/banner_L.png", fit: BoxFit.cover,),
     Image.asset("assets/images/police.png", fit: BoxFit.cover,),
@@ -432,22 +432,25 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 //     ),
                 //   ),
                 // ),
-
-
                 child : GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => introduceWidget(),),);
+                      print(_currentPage);
+                      if(_currentPage == 0){
+                        Navigator.push( context,
+                          MaterialPageRoute(builder: (context) => introduceWidget(),),);
+                      }else if(_currentPage == 1){
+                        Navigator.push( context,
+                          MaterialPageRoute(builder: (context) => bannerWidget(),),);
+                      }
                     },
-                  // onTap: () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => bannerWidget(),),);
-                  // },
                     child: CarouselSlider(
                       items: product,
                       options: CarouselOptions(
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _currentPage = index;
+                          });
+                        },
                         height: size.height / 9.5,
                         autoPlay: true,
                         enlargeCenterPage: true,
