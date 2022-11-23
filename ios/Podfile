@@ -1,6 +1,9 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '12.0'
 
+# 전체 추가
+pod 'KakaoSDK'
+
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
@@ -39,3 +42,4 @@ post_install do |installer|
     flutter_additional_ios_build_settings(target)
   end
 end
+
