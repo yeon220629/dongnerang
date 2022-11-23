@@ -33,6 +33,10 @@
     <!-- Permissions options for the `access notification policy` group -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
 
+    <!--queries에 카카오톡 패키지 추가-->
+    <queries>
+        <package android:name="com.kakao.talk" />
+    </queries>
 
     <application
         android:label="동네랑"
@@ -69,6 +73,9 @@
             android:exported="true">
             <intent-filter android:label="flutter_web_auth">
                 <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -90,3 +97,4 @@
             android:value="ca-app-pub-3415104781631988~3253170173" />
     </application>
 </manifest>
+

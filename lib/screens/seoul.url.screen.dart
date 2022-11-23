@@ -43,7 +43,7 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
         if (canGoBack) {
           webViewController?.goBack();
         } else {
-          print('더이상 뒤로갈페이지가 없습니다.');
+          print('더 이상 뒤로 갈 페이지가 없습니다.');
           Navigator.pop(context);
           //뒤로가기 시 처리코드
         }
