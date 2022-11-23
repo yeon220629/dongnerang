@@ -364,7 +364,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             foregroundColor: AppColors.primary,
             elevation: 0,
             title: DropdownButton(
-              alignment: Alignment.center,
+              style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.black),
+              // itemHeight: 10,
+              // enableFeedback: true,
+              borderRadius: BorderRadius.circular(10),
+              // alignment: Alignment.center,
               focusColor: AppColors.primary,
               icon: const Icon(Icons.keyboard_arrow_down),
               isExpanded: false,
@@ -490,46 +494,50 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         color: AppColors.black,
                         constraints: const BoxConstraints(
                           maxWidth: 80,
-                          minWidth: 60,
-                          minHeight: 40.0,
+                          minWidth: 65,
+                          minHeight: 20.0,
                         ),
                         children: CategoryCenter,
                       ),
-                      SizedBox(width: size.width / 5),
+                      // SizedBox(width: size.width / 15),
                       cuindex == 0
                           ? DropdownButton(
-                              alignment: Alignment.center,
-                              focusColor: AppColors.primary,
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              isExpanded: false,
-                              isDense: false,
-                              underline: Container(),
-                              value: defaultCenter,
-                              items: centerCheck.map( (value) {
-                                if(value == "전체"){
-                                  return DropdownMenuItem (
-                                    value: value, child: Text(value),
-                                  );
-                                }else{
-                                  return DropdownMenuItem (
-                                    value: value, child: Text("${dropdownValue+value}"),
-                                    // value: value, child: Text(value),
-                                  );
-                                }
-                              },
-                              ).toList(),
-                              onChanged: (value){
-                                setState(() {
-                                  listItems = [];
-                                  centerLabel = value as String?;
-                                  defaultCenter = value as String?;
-                                  getPostsData(dropdownValue+"_"+defaultCenter!);
-                                }
-                                );
-                              }
-                          )
+                                  // alignment: Alignment.center,
+                                  borderRadius: BorderRadius.circular(10),
+                                  // iconEnabledColor: AppColors.primary,
+                                  focusColor: AppColors.primary,
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  isExpanded: false,
+                                  isDense: false,
+                                  underline: Container(),
+                                  value: defaultCenter,
+                                  items: centerCheck.map( (value) {
+                                    if(value == "전체"){
+                                      return DropdownMenuItem (
+                                        value: value, child: Text(value),
+                                      );
+                                    }else{
+                                      return DropdownMenuItem (
+                                        value: value, child: Text("${dropdownValue+value}"),
+                                        // value: value, child: Text(value),
+                                      );
+                                    }
+                                  },
+                                  ).toList(),
+                                  onChanged: (value){
+                                    setState(() {
+                                      listItems = [];
+                                      centerLabel = value as String?;
+                                      defaultCenter = value as String?;
+                                      getPostsData(dropdownValue+"_"+defaultCenter!);
+                                    }
+                                    );
+                                  }
+                              )
                           : DropdownButton(
-                          alignment: Alignment.center,
+                          // alignment: Alignment.center,
+                          borderRadius: BorderRadius.circular(10),
+                          // iconEnabledColor: AppColors.primary,
                           focusColor: AppColors.primary,
                           icon: const Icon(Icons.keyboard_arrow_down),
                           isExpanded: false,
@@ -628,10 +636,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
                                                   Container(
-                                                    child:AppTextButton( text: "50플러스포털",
-                                                        onPressed: () async {
-                                                          print('50플러스포털');
-                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.primary,
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        // Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
+                                                        Text( " 50플러스포털", style: TextStyle( color: Colors.white,
+                                                            fontWeight: FontWeight.bold),
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                   Container(
                                                     child:AppTextButton( text: "행사소식",
@@ -648,7 +666,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
                                                   Container(
-                                                    child:AppTextButton( text: "교육",
+                                                    child:AppTextButton( text: "교육신청",
                                                         onPressed: () async {
                                                           final Uri url = Uri.parse('https://50plus.or.kr/education.do?cost=ALL&state=JOIN&type=ALL');
                                                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
