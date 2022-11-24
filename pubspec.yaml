@@ -18,10 +18,11 @@ dependencies:
   firebase_auth: ^4.1.0
   firebase_core: ^2.1.1
   firebase_storage: ^11.0.3
-  cloud_firestore: ^4.0.3
+  cloud_firestore: ^4.1.0
 
   # URL
   url_launcher: ^6.1.4
+  webview_flutter: ^2.0.4
   get: ^4.6.5
   http: ^0.13.4
   shared_preferences: ^2.0.15
