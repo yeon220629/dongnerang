@@ -34,6 +34,7 @@ dependencies:
   permission_handler: ^10.0.0
   kakao_flutter_sdk: ^1.2.2
   kakao_flutter_sdk_share: ^1.2.1
+  sign_in_with_apple: ^4.2.0
   cupertino_icons: ^1.0.2
   filter_list: ^1.0.2
   image_picker: ^0.8.5+3

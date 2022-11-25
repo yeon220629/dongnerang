@@ -421,18 +421,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 //     ad: this.banner!,
                 //   ),),
                 Container(
-                //   child: CarouselSlider(
-                //     items: product,
-                //     options: CarouselOptions(
-                //       height: size.height / 9.5,
-                //       autoPlay: true,
-                //       viewportFraction: 0.9,
-                //       aspectRatio: 2.0,
-                //       initialPage: 2,
-                //     ),
-                //   ),
-                // ),
-                child : GestureDetector(
+                  child : GestureDetector(
                     onTap: () {
                       print(_currentPage);
                       if(_currentPage == 0){
@@ -443,22 +432,44 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           MaterialPageRoute(builder: (context) => bannerWidget(),),);
                       }
                     },
-                    child: CarouselSlider(
-                      items: product,
-                      options: CarouselOptions(
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _currentPage = index;
-                          });
+                    // child: CarouselSlider(
+                    //   items: product,
+                    //   options: CarouselOptions(
+                    //     onPageChanged: (index, reason) {
+                    //       setState(() {
+                    //         _currentPage = index;
+                    //       });
+                    //     },
+                    //     height: size.height / 9.5,
+                    //     autoPlay: true,
+                    //     enlargeCenterPage: true,
+                    //     viewportFraction: 1.0,
+                    //     aspectRatio: 16 / 9,
+                    //     initialPage: 2,
+                    //   ),
+                    // ),
+                    child: CarouselSlider.builder(
+                        itemCount: product.length,
+                        itemBuilder: (ctx, index, realIdx) {
+                          return Container(
+                            width: size.width,
+                            child: product[index]
+                          );
                         },
-                        height: size.height / 9.5,
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                        viewportFraction: 1.0,
-                        aspectRatio: 16 / 9,
-                        initialPage: 2,
+                        options: CarouselOptions(
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _currentPage = index;
+                            });
+                          },
+                          height: size.height / 9.5,
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          viewportFraction: 1.0,
+                          aspectRatio: 16 / 9,
+                          initialPage: 2,
                       ),
-                    ),
+                    )
                   ),
                 ),
                 SizedBox(

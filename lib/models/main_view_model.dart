@@ -126,4 +126,8 @@ class MainViewModel {
     FirebaseAuth.instance.signOut();
     UserApi.instance.logout();
   }
+
+  Future AppleLogin() async {
+
+  }
 }

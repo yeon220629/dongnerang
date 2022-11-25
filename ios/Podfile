@@ -3,6 +3,16 @@ platform :ios, '12.0'
 
 # 전체 추가
 pod 'KakaoSDK'
+# 필요한 모듈 추가
+pod 'KakaoSDKCommon'  # 필수 요소를 담은 공통 모듈
+pod 'KakaoSDKAuth'  # 사용자 인증
+pod 'KakaoSDKUser'  # 카카오 로그인, 사용자 관리
+pod 'KakaoSDKTalk'  # 친구, 메시지(카카오톡)
+pod 'KakaoSDKStory'  # 카카오스토리
+pod 'KakaoSDKShare'  # 메시지(카카오톡 공유)
+pod 'KakaoSDKTemplate'  # 메시지 템플릿
+pod 'KakaoSDKNavi'  # 카카오내비
+pod 'KakaoSDKFriend' # 카카오톡 소셜 피커, 리소스 번들 파일 포함
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -34,6 +44,8 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
   pod 'Google-Mobile-Ads-SDK'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Core'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 

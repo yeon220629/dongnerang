@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dongnerang/screens/law/law1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     "내가 찾는 우리 동네의 공공소식",
                     style: TextStyle(fontSize: 15, color: AppColors.primary),
                   ),
-                  SizedBox(height: size.height / 2.5,),
+                  SizedBox(height: size.height / 3.0,),
                   InkWell(
                       onTap: () async {
                         await viewModel.login();
@@ -56,40 +58,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       child:
                       Image.asset('assets/images/kakao_login_large_wide.png', width: size.width/1.25,)
                   ),
+                  SizedBox(height: size.height / 50,),
+                  InkWell(
+                    onTap: () {
+                      if (Platform.isAndroid) {
+                        Get.snackbar('애플 로그인 오류', '현재 안드로이드 기기에서 \n애플 로그인은 지원되지 않습니다.', snackPosition: SnackPosition.BOTTOM);
+                      } else if (Platform.isIOS) {
+                        // signInWithApple();
+                      }
+                    },
+                    child: Container(
+                      width: size.width * 0.8,
+                      height: size.height / 16.5,
+                      child: Image.asset("assets/images/appleid_button_text@2x.png"),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 10,),
-                  // IconButton(
-                  //   onPressed: () async {
-                  //     await viewModel.login();
-                  //   },
-                  //   icon: Image.asset('assets/images/kakao_login_large_wide.png', fit: BoxFit.fill,
-                  //   height: size.height,
-                  //   width: size.width,),
-                  // ),
-                  // new Center(
-                  //   child: new RichText(
-                  //     text: new TextSpan(
-                  //       children: [
-                  //         new TextSpan(
-                  //           text: 'This is no Link, ',
-                  //           style: new TextStyle(color: Colors.black),
-                  //         ),
-                  //         new TextSpan(
-                  //           text: 'but this is',
-                  //           style: new TextStyle(color: Colors.blue),
-                  //           recognizer: new TapGestureRecognizer()
-                  //             ..onTap = ()  { launch('https://www.thisplace.kr');
-                  //             },
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  // InkWell(
-                  //   onTap: () {
-                  //     Navigator.pushNamed(context, "write your route");
-                  //   },
-                  //   child: new Text("Click Here", style: TextStyle(fontWeight: FontWeight.bold)),
-                  // ),
                   new Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
                     child: RichText(
@@ -124,16 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-
-                  // GestureDetector(
-                  //     onTap: () {
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => law1Widget(),),);
-                  //     },
-                  //     child: Text("가입 진행 시 동네랑의 서비스 이용약관, 개인정보 취급방침, 마케팅 정보 수신동의에 동의하신것으로 확인합니다."),
-                  // ),
-                  // Text("가입 진행 시 동네랑의 서비스 이용약관, 개인정보 취급방침, 마케팅 정보 수신동의에 동의하신것으로 확인합니다."),
                   // SizedBox(height: 10,),
                   SizedBox(height: size.height/20,),
                   Expanded(child:Lottie.asset(
