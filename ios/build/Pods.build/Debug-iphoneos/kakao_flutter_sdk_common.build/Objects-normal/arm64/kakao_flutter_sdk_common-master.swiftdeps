@@ -1,8 +1,0 @@
-version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
-options: "d8f6eea33e801f96fd8a22eb67ed25068949cced37f663d707a65c50e502bd99"
-build_start_time: [1668938153, 160382032]
-build_end_time: [1668938156, 208667993]
-inputs:
-  ? "/Users/seo/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_common-1.2.2/ios/Classes/SwiftKakaoFlutterSdkPlugin.swift"
-  : [1667651112, 750273704]
-  "/Users/seo/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_common-1.2.2/ios/Classes/Utility.swift": [1667651112, 750134944]

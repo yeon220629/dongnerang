@@ -1,6 +1,0 @@
-version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
-options: "2e3758170d35bc550dcd8d886096205534cdf534433fbfbc7c0a4295ff0835e1"
-build_start_time: [1668938153, 160355091]
-build_end_time: [1668938155, 515601158]
-inputs:
-  "/Users/seo/StudioProjects/dongnerang/ios/Pods/OrderedSet/Sources/OrderedSet.swift": [1668933731, 138192176]
