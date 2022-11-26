@@ -64,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (Platform.isAndroid) {
                         Get.snackbar('애플 로그인 오류', '현재 안드로이드 기기에서 \n애플 로그인은 지원되지 않습니다.', snackPosition: SnackPosition.BOTTOM);
                       } else if (Platform.isIOS) {
+                        Get.snackbar("애플 로그인", "현재 기기는 애플입니다.", snackPosition: SnackPosition.BOTTOM);
                         // signInWithApple();
                       }
                     },
