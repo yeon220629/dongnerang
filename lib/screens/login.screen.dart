@@ -14,6 +14,7 @@ import 'law/law2.dart';
 import 'law/law3.dart';
 
 final googleSignIn = GoogleSignIn(
+
   scopes: ['email'],
 );
 
