@@ -56,6 +56,9 @@ dependencies:
   flutter_local_notifications: ^9.6.0
   fluttertoast: ^8.1.1
   google_mobile_ads: ^2.2.0
+  # crypto:
+  crypto: ^3.0.2
+
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:latlong2/latlong.dart';
 
+
+
 const CIRCLE_RADIUS = 50.0;
 const KAKAO_NATIVE_APP_KEY = "d7eaa723a1b0bbd17635330c5c561a5e"; //real
 
@@ -233,4 +235,5 @@ int fnCenterCheck(centerValue){
     return 3;
   } return 0;
 }
+
 

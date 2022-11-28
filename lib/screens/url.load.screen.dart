@@ -272,5 +272,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
   }
   void _navigationPop(BuildContext context) =>
       Navigator.pop(context);
+
 }
+
 

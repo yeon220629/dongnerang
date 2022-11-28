@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../constants/colors.constants.dart';
 import '../models/main_view_model.dart';
 import '../services/kakao_login.dart';
@@ -37,9 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SizedBox(
             height: Get.size.height,
             width: Get.size.width,
-            //   child:
-            // Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
             child: Column(
                 children: [
                   SizedBox(height: size.height / 6.5,),
@@ -61,12 +59,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: size.height / 50,),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (Platform.isAndroid) {
                         Get.snackbar('애플 로그인 오류', '현재 안드로이드 기기에서 \n애플 로그인은 지원되지 않습니다.', snackPosition: SnackPosition.BOTTOM);
                       } else if (Platform.isIOS) {
                         Get.snackbar("애플 로그인", "현재 기기는 애플입니다.", snackPosition: SnackPosition.BOTTOM);
-                        // signInWithApple();
+                        await viewModel.signInWithApple();
                       }
                     },
                     child: Container(

@@ -21,6 +21,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
+
 }
 
 class ColorService { //기본 컬러 설정
@@ -64,4 +65,5 @@ class MyApp extends StatelessWidget {
       builder: EasyLoading.init(),
     );
   }
+
 }

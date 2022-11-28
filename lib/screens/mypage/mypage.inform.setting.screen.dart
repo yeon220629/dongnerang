@@ -449,9 +449,11 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
   Widget imageProfile() {
     final Size size = MediaQuery.of(context).size;
     bool profileimagetype = true;
-
     if(!profileImage!.contains("http")){
       profileimagetype = false;
+    }
+    if(profileImage == ''){
+      profileImage = "assets/images/default-profile.png";
     }
     return Center(
       child: Stack(
@@ -477,8 +479,6 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                             ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
                             : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
                           : Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,)
-
-
               )
             )
           ),
