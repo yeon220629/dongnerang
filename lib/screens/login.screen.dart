@@ -42,12 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   Image.asset('assets/images/logo.png',fit: BoxFit.cover,
                     height: size.height / 11.8,
                   ),
-                  SizedBox(height: 8,),
+                  SizedBox(height: 10,),
                   const Text(
                     "내가 찾는 우리 동네의 공공소식",
-                    style: TextStyle(fontSize: 15, color: AppColors.primary),
+                    style: TextStyle(fontSize: 17, color: AppColors.primary),
                   ),
-                  SizedBox(height: size.height / 3.0,),
+                  SizedBox(height: size.height / 3.3,),
                   InkWell(
                       onTap: () async {
                         await viewModel.login();
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Platform.isAndroid == true
                     ? SizedBox()
                     : CheckPlatform(size),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 8,),
                   new Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
                     child: RichText(
@@ -124,8 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           child: Container(
             width: size.width * 0.8,
-            height: size.height / 16.5,
-            child: Image.asset("assets/images/appleid_button_text@2x.png"),
+            // height: size.height / 16.5,
+            child: Image.asset("assets/images/appleid_button2x.png", width: size.width/1.35,),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Colors.black,

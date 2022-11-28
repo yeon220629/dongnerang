@@ -178,6 +178,7 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                     children: [
                       Container(
                         width: size.width,
+                        height: size.height / 13,
                         child: TextFormField(
                           controller: myController,
                           decoration: InputDecoration(
@@ -194,7 +195,7 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                                 myController.clear();
                               },
                             ),
-                            hintText: '관심 키워드를 등록해주세요! ex)예술, 공간, 모집',
+                            hintText: '관심 키워드를 등록해주세요! ex)예술, 공간 등',
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(13)),
                                 borderSide: BorderSide(
@@ -215,7 +216,7 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                       Row(
                         children: <Widget>[
                           SizedBox(
-                            width: categoryHeight * 1.7,
+                            // width: categoryHeight * 1.7,
                             // margin: const EdgeInsets.only(right: 5),
                             height: categoryHeight - 180,
                             // child: Center(
@@ -385,7 +386,7 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
             SizedBox(height: 5,),
             Container(
               // padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Wrap( spacing: size.width / 50, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
+              child: Wrap( spacing: size.width / 20, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
             ),
             Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
           ],

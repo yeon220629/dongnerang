@@ -34,7 +34,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         children: [
           ExpansionTile(
             title: Text('"동네랑"이 출시했어요!', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),),
-            subtitle: Text('22.11.12'),
+            subtitle: Text('22.11.29'),
             children: <Widget>[
               Lottie.asset(
                 'assets/lottie/112431-3d-success.json',
@@ -43,7 +43,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 fit: BoxFit.fill,
               ),
               ListTile(title:
-              Text('앞으로 우리 동네의 공공소식뿐만 아니라,\n'
+              Text('앞으로 내가 찾는 우리 동네의 공공소식뿐만 아니라,\n'
                   '동네에서 일어나는 다양한 소식들을 쉽게 접할 수 있게 하는 \'동네랑\'이 되겠습니다.\n\n'
                   '* 현재는 서울시의 소식들만 전달하고 있습니다.')),
             ],

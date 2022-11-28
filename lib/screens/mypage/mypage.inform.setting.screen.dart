@@ -173,7 +173,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                     children: [
                       Container(
                         width: size.width,
-                        height: size.height / 10.8,
+                        height: size.height / 13,
                         child: TextFormField(
                           controller: myController,
                           decoration: InputDecoration(
@@ -212,7 +212,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                       Row(
                         children: <Widget>[
                           Container(
-                            width: categoryHeight * 1.7,
+                            // width: categoryHeight * 1.7,
                             // margin: const EdgeInsets.only(right: 5),
                             height: categoryHeight - 180,
                             child: Center(
@@ -294,9 +294,9 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
                 )
               ],
             ),
-            SizedBox(height: 5,),
+            SizedBox(height: 8,),
             Container(
-              child: Wrap( spacing: size.width / 50, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
+              child: Wrap( spacing: size.width / 20, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
             ),
             Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
           ],
@@ -388,8 +388,8 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
       shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
       label: selectCheck == false
           ? name == "중구"
-            ? Text("${name}", style: TextStyle(color:AppColors.blue, fontWeight: FontWeight.bold))
-            : Text("${name}구", style: TextStyle(color:AppColors.blue, fontWeight: FontWeight.bold)
+            ? Text("${name}", style: TextStyle(color:AppColors.primary, fontWeight: FontWeight.bold))
+            : Text("${name}구", style: TextStyle(color:AppColors.primary, fontWeight: FontWeight.bold)
       )
           : name == "중구"
             ? Text("${name}")
@@ -595,13 +595,13 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
         SizedBox(height: 5,),
         Container(
           width: size.width,
-          height: size.height / 11.4,
+          height: size.height,
           child: TextFormField(
             maxLength: 20,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    width: 1,
+                    // width: 1,
                     color: AppColors.grey,
                   ),
                 ),
