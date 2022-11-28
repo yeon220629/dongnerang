@@ -30,9 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final Size size = MediaQuery.of(context).size;
-
     return Scaffold(
         body: SafeArea(
           child: SizedBox(
@@ -57,26 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       child:
                       Image.asset('assets/images/kakao_login_large_wide.png', width: size.width/1.25,)
                   ),
-                  SizedBox(height: size.height / 50,),
-                  InkWell(
-                    onTap: () async {
-                      if (Platform.isAndroid) {
-                        Get.snackbar('애플 로그인 오류', '현재 안드로이드 기기에서 \n애플 로그인은 지원되지 않습니다.', snackPosition: SnackPosition.BOTTOM);
-                      } else if (Platform.isIOS) {
-                        Get.snackbar("애플 로그인", "현재 기기는 애플입니다.", snackPosition: SnackPosition.BOTTOM);
-                        await viewModel.signInWithApple();
-                      }
-                    },
-                    child: Container(
-                      width: size.width * 0.8,
-                      height: size.height / 16.5,
-                      child: Image.asset("assets/images/appleid_button_text@2x.png"),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                  Platform.isAndroid == true
+                    ? SizedBox()
+                    : CheckPlatform(size),
                   SizedBox(height: 10,),
                   new Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
@@ -121,12 +102,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: size.height,
                     fit: BoxFit.fill,
                   ),)
-
                   // const SizedBox(height: 20),
                 ]),
             // ),
           ),
         )
+    );
+  }
+  Widget CheckPlatform(size){
+    return Column(
+      children: [
+        SizedBox(height: size.height / 50,),
+        InkWell(
+          onTap: () async {
+            if (Platform.isAndroid) {
+              Get.snackbar('애플 로그인 오류', '현재 안드로이드 기기에서 \n애플 로그인은 지원되지 않습니다.', snackPosition: SnackPosition.BOTTOM);
+            } else if (Platform.isIOS) {
+              Get.snackbar("애플 로그인", "현재 기기는 애플입니다.", snackPosition: SnackPosition.BOTTOM);
+              await viewModel.signInWithApple();
+            }
+          },
+          child: Container(
+            width: size.width * 0.8,
+            height: size.height / 16.5,
+            child: Image.asset("assets/images/appleid_button_text@2x.png"),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

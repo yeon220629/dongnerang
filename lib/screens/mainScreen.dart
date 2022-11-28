@@ -48,17 +48,14 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     Image.asset("assets/images/banner_L.png", fit: BoxFit.cover,),
     Image.asset("assets/images/police.png", fit: BoxFit.cover,),
   ];
-  
   // 리스트 뷰 불러올시 로딩 중 메시지 띄우기 위한 변수
   var listLength;
+  bool closeTapContainer = false;
   final List<bool> _selectedCenter = <bool>[true, false];
   List<String> LIST_MENU = [];
-  bool closeTapContainer = false;
-  double topContainer = 0;
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   List listOrder = [];
-
   String? defaultCenter = '전체';
   String? SeouldefaultCenter = "전체";
   String url = "";
@@ -67,9 +64,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   String? centerName = '';
   String? centerLabel = '';
   String? seoulCenterLabel = '';
-
   int cuindex = 0;
   int colorindex = 0;
+  double topContainer = 0;
 
   Future<void> getUserLocalData() async {
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
