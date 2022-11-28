@@ -277,9 +277,7 @@ class _mypageScreenState extends State<mypageScreen> {
         title: Text('내 정보 관리', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
-      body:
-
-      Column(
+      body: Column(
           children: <Widget>[
             InkWell(
               onTap: (){
@@ -345,13 +343,13 @@ class _mypageScreenState extends State<mypageScreen> {
             ),
             saveDataProfile(itemsData, topContainer),
             //애드몹
-            Container(height: 60,
-            width: size.width,
-            child: this.banner == null
-                ? Container()
-                : AdWidget(
-                    ad: this.banner!,
-            ),),
+            StatefulBuilder(
+                builder: (context, setState) => Container(height: 60,
+                  width: size.width,
+                  child: this.banner == null
+                      ? Container()
+                      : AdWidget( ad: this.banner!,),),
+            )
           ]
       ),
     );

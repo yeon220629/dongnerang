@@ -129,8 +129,8 @@ class MainViewModel {
   }
   Future logout() async {
     FirebaseAuth.instance.signOut();
-    // await UserApi.instance.unlink();
-    // UserApi.instance.logout();
+    await UserApi.instance.unlink();
+    UserApi.instance.logout();
   }
 
   String generateNonce([int length = 32]) {

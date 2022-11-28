@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dongnerang/screens/mypage/mypage.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,12 +31,11 @@ class mainScreenState extends State<mainScreen> {
     Get.put(HomeController());
 
     final navigationController = Get.find<NavigationController>();
-
     return WillPopScope(
       onWillPop: () async {
         DateTime currentTime = DateTime.now();
         if(currentBackPressTime == null || currentTime.difference(currentBackPressTime!) > Duration(seconds: 1)){
-          print(navigationController.currentBottomMenuIndex.value);
+          // print(navigationController.currentBottomMenuIndex.value);
           if(navigationController.currentBottomMenuIndex.value != 0){
             navigationController.currentBottomMenuIndex.value -= 1;
             return false;
@@ -48,8 +49,20 @@ class mainScreenState extends State<mainScreen> {
           return true;
         }
       },
-      child: Scaffold(
-        bottomNavigationBar: Obx(
+      child: GestureDetector(
+        onPanUpdate: (details){
+          if (details.delta.dx > 0) {
+            DateTime currentTime = DateTime.now();
+            if(currentBackPressTime == null || currentTime.difference(currentBackPressTime!) > Duration(seconds: 1)){
+              // print(navigationController.currentBottomMenuIndex.value);
+              if(navigationController.currentBottomMenuIndex.value != 0){
+                navigationController.currentBottomMenuIndex.value -= 1;
+              }
+            }
+          }
+        },
+        child: Scaffold(
+          bottomNavigationBar: Obx(
                   () => Offstage(
                 offstage:HomeController.to.hideBottomMenu.value,
                 child: ListView(
@@ -61,11 +74,11 @@ class mainScreenState extends State<mainScreen> {
                       showSelectedLabels: true,
                       showUnselectedLabels: true,
                       selectedItemColor:
-                          navigationController.currentBottomMenuIndex.value == 0
+                      navigationController.currentBottomMenuIndex.value == 0
                           ? AppColors.primary
                           : AppColors.grey,
                       unselectedItemColor:
-                          navigationController.currentBottomMenuIndex.value == 1
+                      navigationController.currentBottomMenuIndex.value == 1
                           ? AppColors.primary
                           : AppColors.grey,
                       items: [
@@ -95,18 +108,19 @@ class mainScreenState extends State<mainScreen> {
                 ),
               )
           ),
-        body: Obx(
-              () => IndexedStack(
-            index: navigationController.currentBottomMenuIndex.value,
-            children: [
-              freeComponent_viewpage(),
-              mypageScreen(),
-              // LoginScreen(),
-              // SplashScreen()
-            ],
-          )
+          body: Obx(
+                  () => IndexedStack(
+                index: navigationController.currentBottomMenuIndex.value,
+                children: [
+                  freeComponent_viewpage(),
+                  mypageScreen(),
+                  // LoginScreen(),
+                  // SplashScreen()
+                ],
+              )
+          ),
         ),
-      ),
+      )
     );
   }
 }
