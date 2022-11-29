@@ -14,14 +14,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'constants/common.constants.dart';
 
 void main() async {
-  KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
   WidgetsFlutterBinding.ensureInitialized();
+  KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
   MobileAds.instance.initialize();      // 모바일 광고 SDK 초기화
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
-
 }
 
 class ColorService { //기본 컬러 설정

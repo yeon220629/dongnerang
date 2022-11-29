@@ -825,7 +825,7 @@ PODS:
   - GTMSessionFetcher/Core (2.3.0)
   - image_picker_ios (0.0.1):
     - Flutter
-  - kakao_flutter_sdk_common (1.2.2):
+  - kakao_flutter_sdk_common (1.3.0-beta.4):
     - Flutter
   - KakaoSDK (2.11.3):
     - KakaoSDKAuth (= 2.11.3)
@@ -1066,7 +1066,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
   image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
-  kakao_flutter_sdk_common: 2fcd2c17ef69300497b9369f390766dd9af0514c
+  kakao_flutter_sdk_common: 99744198582dc78bd1153713bdf444eaaf5fc107
   KakaoSDK: 7ebf1862d9f9014e402eb756b2d906a60c092661
   KakaoSDKAuth: a64dde90516e18fdfc35b83bbad2677c3675c329
   KakaoSDKCommon: b4235203f67a5b6ee2df75eaf9bbc863c6d92e09

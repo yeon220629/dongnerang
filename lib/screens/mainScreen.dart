@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:ui' as ui;
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/banner.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
+import 'package:dongnerang/screens/seoul.url.screen2.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -423,7 +423,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       print(_currentPage);
                       if(_currentPage == 0){
                         Navigator.push( context,
-                          MaterialPageRoute(builder: (context) => introduceWidget(),),);
+                            // MaterialPageRoute(builder: (context) => seoulUrlLoadScreen2(),),);
+                            MaterialPageRoute(builder: (context) => introduceWidget(),),);
                       }else if(_currentPage == 1){
                         Navigator.push( context,
                           MaterialPageRoute(builder: (context) => bannerWidget(),),);

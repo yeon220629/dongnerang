@@ -94,7 +94,11 @@ class SettingsPage extends StatelessWidget {
                                   color: AppColors.white,
                                 ),),
                                 onPressed: () async {
-                                  await viewModel.logout();
+                                  if(Platform.isAndroid){
+                                    await viewModel.logout();
+                                  }else if(Platform.isIOS){
+                                    await viewModel.AppleLogout();
+                                  }
                                   Get.offAll(() => const SplashScreen());
                                   UserService.to.currentUser.value = null;
                                 },

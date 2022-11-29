@@ -29,8 +29,23 @@ class mainScreenState extends State<mainScreen> {
   Widget build(BuildContext context) {
     Get.put(NavigationController());
     Get.put(HomeController());
-
     final navigationController = Get.find<NavigationController>();
+    if(Platform.isIOS){
+      return GestureDetector(
+        onPanUpdate: (details){
+          if (details.delta.dx > 0) {
+            DateTime currentTime = DateTime.now();
+            if(currentBackPressTime == null || currentTime.difference(currentBackPressTime!) > Duration(seconds: 1)){
+              // print(navigationController.currentBottomMenuIndex.value);
+              if(navigationController.currentBottomMenuIndex.value != 0){
+                navigationController.currentBottomMenuIndex.value -= 1;
+              }
+            }
+          }
+        },
+        child: CheckPlatform(navigationController),
+      );
+    }
     return WillPopScope(
       onWillPop: () async {
         DateTime currentTime = DateTime.now();
@@ -48,79 +63,68 @@ class mainScreenState extends State<mainScreen> {
         }else{
           return true;
         }
-      },
-      child: GestureDetector(
-        onPanUpdate: (details){
-          if (details.delta.dx > 0) {
-            DateTime currentTime = DateTime.now();
-            if(currentBackPressTime == null || currentTime.difference(currentBackPressTime!) > Duration(seconds: 1)){
-              // print(navigationController.currentBottomMenuIndex.value);
-              if(navigationController.currentBottomMenuIndex.value != 0){
-                navigationController.currentBottomMenuIndex.value -= 1;
-              }
-            }
-          }
-        },
-        child: Scaffold(
-          bottomNavigationBar: Obx(
-                  () => Offstage(
-                offstage:HomeController.to.hideBottomMenu.value,
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    BottomNavigationBar(
-                      elevation: 0,
-                      type: BottomNavigationBarType.fixed,
-                      showSelectedLabels: true,
-                      showUnselectedLabels: true,
-                      selectedItemColor:
-                      navigationController.currentBottomMenuIndex.value == 0
-                          ? AppColors.primary
-                          : AppColors.grey,
-                      unselectedItemColor:
-                      navigationController.currentBottomMenuIndex.value == 1
-                          ? AppColors.primary
-                          : AppColors.grey,
-                      items: [
-                        BottomNavigationBarItem(
-                          icon: Icon(
-                            navigationController.currentBottomMenuIndex.value == 0
-                                ? Icons.home
-                                : Icons.home_outlined,
-                          ),
-                          label: "홈",
-                        ),
-                        BottomNavigationBarItem(
-                          icon: Icon(
-                            navigationController.currentBottomMenuIndex.value == 1
-                                ? Icons.person
-                                : Icons.person_outline_outlined,
-                          ),
-                          label: "마이페이지",
-                        ),
-                      ],
-                      onTap: (index) {
-                        navigationController.currentBottomMenuIndex.value = index;
-                        setState(() {});
-                      },
-                    )
+      }, child: CheckPlatform(navigationController),
+    );
+  }
+  Widget CheckPlatform(navigationController){
+    return Scaffold(
+      bottomNavigationBar: Obx(
+              () => Offstage(
+            offstage:HomeController.to.hideBottomMenu.value,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                BottomNavigationBar(
+                  elevation: 0,
+                  type: BottomNavigationBarType.fixed,
+                  showSelectedLabels: true,
+                  showUnselectedLabels: true,
+                  selectedItemColor:
+                  navigationController.currentBottomMenuIndex.value == 0
+                      ? AppColors.primary
+                      : AppColors.grey,
+                  unselectedItemColor:
+                  navigationController.currentBottomMenuIndex.value == 1
+                      ? AppColors.primary
+                      : AppColors.grey,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        navigationController.currentBottomMenuIndex.value == 0
+                            ? Icons.home
+                            : Icons.home_outlined,
+                      ),
+                      label: "홈",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        navigationController.currentBottomMenuIndex.value == 1
+                            ? Icons.person
+                            : Icons.person_outline_outlined,
+                      ),
+                      label: "마이페이지",
+                    ),
                   ],
-                ),
-              )
-          ),
-          body: Obx(
-                  () => IndexedStack(
-                index: navigationController.currentBottomMenuIndex.value,
-                children: [
-                  freeComponent_viewpage(),
-                  mypageScreen(),
-                  // LoginScreen(),
-                  // SplashScreen()
-                ],
-              )
-          ),
-        ),
-      )
+                  onTap: (index) {
+                    navigationController.currentBottomMenuIndex.value = index;
+                    setState(() {});
+                  },
+                )
+              ],
+            ),
+          )
+      ),
+      body: Obx(
+              () => IndexedStack(
+            index: navigationController.currentBottomMenuIndex.value,
+            children: [
+              freeComponent_viewpage(),
+              mypageScreen(),
+              // LoginScreen(),
+              // SplashScreen()
+            ],
+          )
+      ),
     );
   }
 }

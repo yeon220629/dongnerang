@@ -129,6 +129,11 @@ class MainViewModel {
   }
   Future logout() async {
     FirebaseAuth.instance.signOut();
+    await UserApi.instance.unlink();
+    UserApi.instance.logout();
+  }
+  Future AppleLogout() async {
+    FirebaseAuth.instance.signOut();
     // await UserApi.instance.unlink();
     // UserApi.instance.logout();
   }
