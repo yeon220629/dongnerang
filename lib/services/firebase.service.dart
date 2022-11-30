@@ -3,6 +3,7 @@ import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../models/app_user.model.dart';
 import 'package:http/http.dart' as http;
@@ -112,6 +113,23 @@ class FirebaseService {
 
     }
   }
+
+  static Future<void> deleteUser(String? email) async {
+    final checkUser =  await FirebaseFirestore.instance.collection("users").doc(email);
+    // print(FirebaseAuth.instance.currentUser);
+    if(checkUser.path.isEmail){
+      checkUser.delete();
+      try {
+        await FirebaseAuth.instance.currentUser!.delete();
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'requires-recent-login') {
+          print('The user must reauthenticate before this operation can be executed.');
+        }
+      }
+      await FirebaseAuth.instance.signOut();
+    }
+  }
+
   static Future<void> deleteUserPrivacyData(String email, String title) async {
     final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
     checkDuplicate.data()?.forEach((key, value) async {

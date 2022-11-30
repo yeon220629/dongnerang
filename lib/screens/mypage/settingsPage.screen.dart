@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:dongnerang/screens/login.screen.dart';
-import 'package:dongnerang/screens/setting/introduce.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/setting/notification.screen.dart';
@@ -15,6 +13,7 @@ import '../../widgets/app_appbar_common.widget.dart';
 import '../introduce.dart';
 import '../setting/inquire.screen.dart';
 import '../splash.screen.dart';
+import '../../services/firebase.service.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -159,7 +158,93 @@ class SettingsPage extends StatelessWidget {
                   },
               );
             },
-            // trailing:Icon(Icons.arrow_forward_ios_outlined),
+          ),
+          ListTile(
+            leading:  Icon(Icons.no_accounts),
+            title: Text('계정탈퇴'),
+            onTap: () {
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder:(context) {
+                  return AlertDialog(
+                    content: Text("정말 계정탈퇴 하시겠습니까?"),
+                    insetPadding: const  EdgeInsets.fromLTRB(20,40,20,40),
+                    actions: [
+                      Column(
+                        children: [
+                          Container(
+                            child: TextButton(
+                              child: const Text('확인', style: TextStyle(
+                                // background: ,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.white,
+                              ),),
+                              onPressed: () async {
+                                FirebaseService.deleteUser(UserService.to.currentUser.value?.email.toString());
+                                // if(Platform.isAndroid){
+                                // }else if(Platform.isIOS){
+                                // }
+                                Get.offAll(() => const SplashScreen());
+                                UserService.to.currentUser.value = null;
+                              },
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                  MaterialStateProperty.resolveWith((states) {
+                                    if (states.contains(
+                                        MaterialState.pressed)) {
+                                      return AppColors.white;
+                                    } else {
+                                      return AppColors.primary;
+                                    }
+                                  }
+                                  )
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 0.5, color: AppColors.grey),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            width: size.width,
+                            height: size.height/ 17.5,
+                          ),
+                          SizedBox(height: 5,),
+                          Container(
+                            child: TextButton(
+                              child: const Text('취소', style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.black,
+                              ),),
+                              onPressed: () async {
+                                Navigator.of(context).pop();
+                              },
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                  MaterialStateProperty.resolveWith((states) {
+                                    if (states.contains(
+                                        MaterialState.pressed)) {
+                                      return AppColors.primary;
+                                    } else {
+                                      return AppColors.white;
+                                    }
+                                  }
+                                  )
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 0.5, color: AppColors.grey),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            width: size.width,
+                            height: size.height/ 17.5,
+                          ),
+                        ],
+                      )
+                    ],
+                  );
+                },
+              );
+            },
           ),
         ],
       )
