@@ -5,10 +5,10 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 class bannerWidget extends StatefulWidget {
 
   @override
-  State<bannerWidget> createState() => _introduceWidgetState();
+  State<bannerWidget> createState() => _bannerWidgetState();
 }
 
-class _introduceWidgetState extends State<bannerWidget> {
+class _bannerWidgetState extends State<bannerWidget> {
 
   bool toggle = false;
 

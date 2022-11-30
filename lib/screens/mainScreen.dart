@@ -2,9 +2,9 @@ import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/banner.dart';
+import 'package:dongnerang/screens/banner/banner.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
-import 'package:dongnerang/screens/seoul.url.screen2.dart';
+// import 'package:dongnerang/screens/seoul.url.screen2.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,8 @@ import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
 import '../services/user.service.dart';
 import '../widgets/app_button.widget.dart';
-import 'introduce.dart';
+import 'banner/banner1.dart';
+import 'banner/introduce.dart';
 import 'notice.main.screen.dart';
 
 
@@ -47,6 +48,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   List<Image> product = [
     Image.asset("assets/images/banner_L.png", fit: BoxFit.cover,),
     Image.asset("assets/images/police.png", fit: BoxFit.cover,),
+    Image.asset("assets/images/seoulbanner.png", fit: BoxFit.cover,),
   ];
   // 리스트 뷰 불러올시 로딩 중 메시지 띄우기 위한 변수
   var listLength;
@@ -428,6 +430,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       }else if(_currentPage == 1){
                         Navigator.push( context,
                           MaterialPageRoute(builder: (context) => bannerWidget(),),);
+                      }else if(_currentPage == 2){
+                        Navigator.push( context,
+                          MaterialPageRoute(builder: (context) => banner1Widget(),),);
                       }
                     },
                     // child: CarouselSlider(

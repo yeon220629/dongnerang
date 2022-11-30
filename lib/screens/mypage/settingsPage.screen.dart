@@ -10,7 +10,7 @@ import '../../models/main_view_model.dart';
 import '../../services/kakao_login.dart';
 import '../../services/user.service.dart';
 import '../../widgets/app_appbar_common.widget.dart';
-import '../introduce.dart';
+import '../banner/introduce.dart';
 import '../setting/inquire.screen.dart';
 import '../splash.screen.dart';
 import '../../services/firebase.service.dart';
