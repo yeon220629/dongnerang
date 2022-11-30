@@ -181,12 +181,12 @@ class SettingsPage extends StatelessWidget {
                                 color: AppColors.white,
                               ),),
                               onPressed: () async {
-                                FirebaseService.deleteUser(UserService.to.currentUser.value?.email.toString());
+                                FirebaseService.deleteUser(UserService.to.currentUser.value?.email.toString(), UserService.to.currentUser.value?.provider);
                                 // if(Platform.isAndroid){
                                 // }else if(Platform.isIOS){
                                 // }
-                                Get.offAll(() => const SplashScreen());
                                 UserService.to.currentUser.value = null;
+                                Get.offAll(() => const SplashScreen());
                               },
                               style: ButtonStyle(
                                   backgroundColor:
