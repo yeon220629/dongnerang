@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-class bannerWidget extends StatefulWidget {
-  final title; final link;
-  bannerWidget(this.title, this.link);
+class banner1Widget extends StatefulWidget {
 
   @override
-  State<bannerWidget> createState() => _introduceWidgetState();
+  State<banner1Widget> createState() => _banner1WidgetState();
 }
 
-class _introduceWidgetState extends State<bannerWidget> {
+class _banner1WidgetState extends State<banner1Widget> {
 
   bool toggle = false;
 
@@ -58,7 +56,7 @@ class _introduceWidgetState extends State<bannerWidget> {
             }
         ),
         centerTitle: true,
-        title: Text(widget.title, style: TextStyle(color: Colors.black)) ,
+        title: Text('서울특별시 공공서비스 예약', style: TextStyle(color: Colors.black)) ,
         actions: [
         ],
       ),
@@ -69,7 +67,7 @@ class _introduceWidgetState extends State<bannerWidget> {
               child: Stack(
                 children: [
                   InAppWebView(
-                    initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse(widget.link))),
+                    initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse('https://yeyak.seoul.go.kr/'))),
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
                       webViewController = controller;

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dongnerang/screens/banner.dart';
 import 'package:flutter/material.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/setting/notification.screen.dart';
@@ -11,6 +10,7 @@ import '../../models/main_view_model.dart';
 import '../../services/kakao_login.dart';
 import '../../services/user.service.dart';
 import '../../widgets/app_appbar_common.widget.dart';
+import '../introduce.dart';
 import '../setting/inquire.screen.dart';
 import '../splash.screen.dart';
 import '../../services/firebase.service.dart';
@@ -63,7 +63,7 @@ class SettingsPage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => bannerWidget('동네랑 소개','https://moored-adasaurus-5d6.notion.site/bbdd58432e9d4f95a0863e691bffe61d'),),); //Introduce
+                    MaterialPageRoute(builder: (context) => introduceWidget(),),); //Introduce
                 },
                 trailing:Icon(Icons.arrow_forward_ios_outlined),
             ),

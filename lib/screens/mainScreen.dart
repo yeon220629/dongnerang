@@ -1,20 +1,25 @@
+import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/screens/banner.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
+import 'package:dongnerang/screens/seoul.url.screen2.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
+import '../services/user.service.dart';
 import '../widgets/app_button.widget.dart';
-import 'banner.dart';
+import 'introduce.dart';
 import 'notice.main.screen.dart';
 
 
