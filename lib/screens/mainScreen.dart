@@ -4,12 +4,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
@@ -37,17 +39,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   // //애드몹 찐 ID
   // final String iOSRealId = 'ca-app-pub-3415104781631988/3367223383';
   // final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
-  //
-  //
-  // BannerAd? banner;
 
+  // BannerAd? banner;
+  CarouselController buttonCarouselController = CarouselController();
   var _currentPage;
-  late List<dynamic> bannerData = [];
-  List<Image> product = [];
-  // 리스트 뷰 불러올시 로딩 중 메시지 띄우기 위한 변수
-  var listLength;
+  var listLength;   // 리스트 뷰 불러올시 로딩 중 메시지 띄우기 위한 변수
   bool closeTapContainer = false;
   final List<bool> _selectedCenter = <bool>[true, false];
+  late List<dynamic> bannerData = [];
+  List<Image> product = [];
   List<String> LIST_MENU = [];
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
@@ -434,11 +434,30 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     child: CarouselSlider.builder(
                       itemCount: product.length,
                       itemBuilder: (ctx, index, realIdx) {
-                        return Container(
-                          width: size.width,
-                          child: product.isEmpty
-                              ? Lottie.asset( 'assets/lottie/searchdata.json',)
-                              : product[index]
+                        return Column(
+                          children: [
+                            Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                Container(
+                                  height: size.height / 11,
+                                  width: size.width,
+                                  child: product.isEmpty
+                                      ? Lottie.asset( 'assets/lottie/searchdata.json',)
+                                      : product[index]
+                                ),
+                                DotsIndicator(
+                                  position: index + 0.1,
+                                  decorator: DotsDecorator(
+                                    color: AppColors.grey,
+                                    activeColor: AppColors.white
+                                  ),
+                                  dotsCount: product.length,
+
+                                )
+                              ],
+                            ),
+                          ],
                         );
                       },
                       options: CarouselOptions(
