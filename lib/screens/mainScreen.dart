@@ -1,25 +1,20 @@
-import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/banner.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
-import 'package:dongnerang/screens/seoul.url.screen2.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
-import '../services/user.service.dart';
 import '../widgets/app_button.widget.dart';
-import 'introduce.dart';
+import 'banner.dart';
 import 'notice.main.screen.dart';
 
 
@@ -44,10 +39,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   // BannerAd? banner;
 
   var _currentPage;
-  List<Image> product = [
-    Image.asset("assets/images/banner_L.png", fit: BoxFit.cover,),
-    Image.asset("assets/images/police.png", fit: BoxFit.cover,),
-  ];
+  late List<dynamic> bannerData = [];
+  List<Image> product = [];
   // 리스트 뷰 불러올시 로딩 중 메시지 띄우기 위한 변수
   var listLength;
   bool closeTapContainer = false;
@@ -295,7 +288,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   void initState() {
     super.initState();
-
+    FirebaseService.findBanner().then((value){
+      for(int i =0; i < value.length; i++){
+        product.add( Image.network(value[i]['image'], fit: BoxFit.cover,));
+        bannerData.add(value[i]);
+      }
+    });
     //애드몹
     // banner = BannerAd(
     //   size: AdSize.fullBanner,
@@ -420,52 +418,41 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 Container(
                   child : GestureDetector(
                     onTap: () {
-                      print(_currentPage);
-                      if(_currentPage == 0){
-                        Navigator.push( context,
-                            // MaterialPageRoute(builder: (context) => seoulUrlLoadScreen2(),),);
-                            MaterialPageRoute(builder: (context) => introduceWidget(),),);
-                      }else if(_currentPage == 1){
-                        Navigator.push( context,
-                          MaterialPageRoute(builder: (context) => bannerWidget(),),);
+                      // print("bannerData[1] : ${bannerData[1]["number"]}");
+                      for(int i = 0; i < bannerData.length; i++){
+                        if(_currentPage == bannerData[i]['number']){
+                          print(_currentPage);
+                          Navigator.push( context,
+                              MaterialPageRoute(
+                                  builder: (context) => bannerWidget(bannerData[i]['title'], bannerData[i]['link']))
+                          );
+                        }
                       }
                     },
-                    // child: CarouselSlider(
-                    //   items: product,
-                    //   options: CarouselOptions(
-                    //     onPageChanged: (index, reason) {
-                    //       setState(() {
-                    //         _currentPage = index;
-                    //       });
-                    //     },
-                    //     height: size.height / 9.5,
-                    //     autoPlay: true,
-                    //     enlargeCenterPage: true,
-                    //     viewportFraction: 1.0,
-                    //     aspectRatio: 16 / 9,
-                    //     initialPage: 2,
-                    //   ),
-                    // ),
                     child: CarouselSlider.builder(
-                        itemCount: product.length,
-                        itemBuilder: (ctx, index, realIdx) {
-                          return Container(
-                            width: size.width,
-                            child: product[index]
-                          );
+                      itemCount: product.length,
+                      itemBuilder: (ctx, index, realIdx) {
+                        print("itemBuilder : $index");
+                        return Container(
+                          width: size.width,
+                          child: product.isEmpty
+                              ? Lottie.asset( 'assets/lottie/searchdata.json',)
+                              : product[index]
+                        );
+                      },
+                      options: CarouselOptions(
+                        onPageChanged: (index, reason) {
+                          print("CarouselOptions : $index");
+                          setState(() {
+                            _currentPage = index;
+                          });
                         },
-                        options: CarouselOptions(
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              _currentPage = index;
-                            });
-                          },
-                          height: size.height / 9.5,
-                          autoPlay: true,
-                          enlargeCenterPage: true,
-                          viewportFraction: 1.0,
-                          aspectRatio: 16 / 9,
-                          initialPage: 2,
+                        height: size.height / 9.5,
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                        viewportFraction: 1.0,
+                        aspectRatio: 16 / 9,
+                        initialPage: 2,
                       ),
                     )
                   ),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class bannerWidget extends StatefulWidget {
+  final title; final link;
+  bannerWidget(this.title, this.link);
 
   @override
   State<bannerWidget> createState() => _introduceWidgetState();
@@ -56,7 +58,7 @@ class _introduceWidgetState extends State<bannerWidget> {
             }
         ),
         centerTitle: true,
-        title: Text('오늘의 집회/시위', style: TextStyle(color: Colors.black)) ,
+        title: Text(widget.title, style: TextStyle(color: Colors.black)) ,
         actions: [
         ],
       ),
@@ -67,7 +69,7 @@ class _introduceWidgetState extends State<bannerWidget> {
               child: Stack(
                 children: [
                   InAppWebView(
-                    initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse('https://www.smpa.go.kr/user/nd54882.do'))),
+                    initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse(widget.link))),
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
                       webViewController = controller;

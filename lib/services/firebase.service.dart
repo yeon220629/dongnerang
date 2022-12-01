@@ -19,6 +19,20 @@ class FirebaseService {
     return customTokenResponse.body;
   }
 
+  static Future<bool> findUserlocal(String email) async {
+    bool localCheck = false;
+    final doc = await FirebaseFirestore.instance.collection("users").doc(email).get();
+    doc.data()?.forEach((key, value) {
+      if(key == 'local'){
+        print("local true");
+        localCheck = true;
+      }else{
+        print("local false");
+        localCheck = false;
+      }
+    });
+    return localCheck;
+  }
 
   static Future<AppUser?> findUserByEmail(String email) async {
     final doc =
@@ -228,9 +242,6 @@ class FirebaseService {
     }
   }
 
-
-
-
   String getToday() {
     DateTime now = DateTime.now();
     DateFormat formatter = DateFormat('yyyy-MM-dd');
@@ -238,4 +249,12 @@ class FirebaseService {
     return strToday;
   }
 
+  static Future<List> findBanner() async {
+    List sendBannerdata = [];
+    final doc = await FirebaseFirestore.instance.collection("banner").doc('banner1').get();
+    doc.data()?.forEach((key, value) {
+      sendBannerdata.add(value);
+    });
+    return sendBannerdata;
+  }
 }
