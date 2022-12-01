@@ -131,10 +131,7 @@ class FirebaseService {
 
   static Future<void> deleteUser(String? email, provider) async {
     final checkUser =  await FirebaseFirestore.instance.collection("users").doc(email);
-    // print(FirebaseAuth.instance.currentUser);
-    // if(checkUser.path.isEmail){
     if(provider == 'kakao'){
-      print("kakaotalk");
       // await UserApi.instance.logout();
       await UserApi.instance.unlink();
     }
@@ -147,16 +144,6 @@ class FirebaseService {
       }
       await FirebaseAuth.instance.signOut();
     }
-    //   checkUser.delete();
-    //   try {
-    //     await FirebaseAuth.instance.currentUser!.delete();
-    //     await FirebaseAuth.instance.signOut();
-    //   } on FirebaseAuthException catch (e) {
-    //     if (e.code == 'requires-recent-login') {
-    //       print('The user must reauthenticate before this operation can be executed.');
-    //     }
-    //   }
-    // }
   }
 
   static Future<void> deleteUserPrivacyData(String email, String title) async {

@@ -4,6 +4,7 @@ import 'package:dongnerang/screens/banner/banner.dart';
 import 'package:flutter/material.dart';
 import 'package:dongnerang/screens/setting/noticepage.screen.dart';
 import 'package:dongnerang/screens/setting/notification.screen.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../constants/colors.constants.dart';
@@ -186,8 +187,12 @@ class SettingsPage extends StatelessWidget {
                                 // if(Platform.isAndroid){
                                 // }else if(Platform.isIOS){
                                 // }
-                                UserService.to.currentUser.value = null;
-                                Get.offAll(() => const SplashScreen());
+                                EasyLoading.showInfo("계정을 삭제 중 입니다...");
+
+                                Future.delayed(const Duration(milliseconds: 1000), () {
+                                  UserService.to.currentUser.value = null;
+                                  Get.offAll(() => const SplashScreen());
+                                });
                               },
                               style: ButtonStyle(
                                   backgroundColor:
