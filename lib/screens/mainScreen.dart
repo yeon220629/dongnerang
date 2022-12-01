@@ -2,9 +2,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/banner.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
-import 'package:dongnerang/screens/seoul.url.screen2.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +17,7 @@ import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
 import '../services/user.service.dart';
 import '../widgets/app_button.widget.dart';
-import 'introduce.dart';
+import 'banner/banner.dart';
 import 'notice.main.screen.dart';
 
 
