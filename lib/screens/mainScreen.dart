@@ -424,7 +424,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       // print("bannerData[1] : ${bannerData[1]["number"]}");
                       for(int i = 0; i < bannerData.length; i++){
                         if(_currentPage == bannerData[i]['number']){
-                          print(_currentPage);
                           Navigator.push( context,
                               MaterialPageRoute(
                                   builder: (context) => bannerWidget(bannerData[i]['title'], bannerData[i]['link']))
@@ -435,7 +434,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     child: CarouselSlider.builder(
                       itemCount: product.length,
                       itemBuilder: (ctx, index, realIdx) {
-                        print("itemBuilder : $index");
                         return Container(
                           width: size.width,
                           child: product.isEmpty
@@ -445,7 +443,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       },
                       options: CarouselOptions(
                         onPageChanged: (index, reason) {
-                          print("CarouselOptions : $index");
                           setState(() {
                             _currentPage = index;
                           });
