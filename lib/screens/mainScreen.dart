@@ -441,13 +441,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     child: CarouselSlider.builder(
                       itemCount: product.length,
                       itemBuilder: (ctx, index, realIdx) {
-                        return Column(
+                        return Row(
                           children: [
                             Stack(
                               alignment: Alignment.bottomCenter,
                               children: [
                                 Container(
-                                  height: size.height / 11,
+                                  height: size.height / 9.5,
                                   width: size.width,
                                   child: product.isEmpty
                                       ? Lottie.asset( 'assets/lottie/searchdata.json',)
@@ -456,6 +456,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 DotsIndicator(
                                   position: index + 0.1,
                                   decorator: DotsDecorator(
+                                      // spacing: const EdgeInsets.all(5.0)
                                     color: AppColors.grey,
                                     activeColor: AppColors.white
                                   ),
