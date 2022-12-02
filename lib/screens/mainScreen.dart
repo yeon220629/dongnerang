@@ -296,6 +296,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         product.add( Image.network(value[i]['image'], fit: BoxFit.cover,));
         bannerData.add(value[i]);
       }
+      // bannerData.sort((a,b) {
+      //   var adate = a['number']; //before -> var adate = a.expiry;
+      //   var bdate = b['number']; //before -> var bdate = b.expiry;
+      //   return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
+      // });
+
     });
     //애드몹
     // banner = BannerAd(
@@ -421,9 +427,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 Container(
                   child : GestureDetector(
                     onTap: () {
-                      // print("bannerData[1] : ${bannerData[1]["number"]}");
                       for(int i = 0; i < bannerData.length; i++){
-                        if(_currentPage == bannerData[i]['number']){
+                        // print("$i : ${bannerData[i]['number']} ${bannerData[i]['title']}");
+                        // print("_currentPage : $_currentPage");
+                        if(_currentPage == i){
                           Navigator.push( context,
                               MaterialPageRoute(
                                   builder: (context) => bannerWidget(bannerData[i]['title'], bannerData[i]['link']))
@@ -453,7 +460,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                     activeColor: AppColors.white
                                   ),
                                   dotsCount: product.length,
-
                                 )
                               ],
                             ),
