@@ -1,3 +1,4 @@
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dongnerang/firebase_options.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:dongnerang/screens/splash.screen.dart';

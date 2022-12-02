@@ -597,6 +597,8 @@ PODS:
     - abseil/base/config
     - abseil/meta/type_traits
   - Alamofire (5.6.4)
+  - app_tracking_transparency (0.0.1):
+    - Flutter
   - AppAuth (1.6.0):
     - AppAuth/Core (= 1.6.0)
     - AppAuth/ExternalUserAgent (= 1.6.0)
@@ -900,6 +902,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -974,6 +977,8 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
+  app_tracking_transparency:
+    :path: ".symlinks/plugins/app_tracking_transparency/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   firebase_auth:
@@ -1028,6 +1033,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   cloud_firestore: 14451f06cca99dbd56b069624621063150fef3e5

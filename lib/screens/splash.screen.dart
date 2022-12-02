@@ -1,6 +1,8 @@
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dongnerang/screens/permission.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../constants/colors.constants.dart';
@@ -17,12 +19,30 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String _authStatus = 'Unknown';
+
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => initPlugin());
     // FirebaseAuth.instance.signOut();
     // GoogleSignIn().signOut();
     checkPermissions();
     super.initState();
+  }
+
+  Future <void> initPlugin() async{
+    try{
+      final TrackingStatus status = await AppTrackingTransparency.trackingAuthorizationStatus;
+      setState(() => _authStatus = '$status');
+      if(status == TrackingStatus.notDetermined) {
+        final TrackingStatus status = await AppTrackingTransparency.requestTrackingAuthorization();
+        setState(() => _authStatus = '$status');
+      }
+    }on PlatformException{
+      setState(() => _authStatus = 'PlatformException was thrown');
+    }
+    final uuid = await AppTrackingTransparency.getAdvertisingIdentifier();
+    print("uuid : $uuid");
   }
 
   Future<void> checkPermissions() async {

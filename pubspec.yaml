@@ -57,6 +57,8 @@ dependencies:
   fluttertoast: ^8.1.1
   google_mobile_ads: ^2.2.0
   dots_indicator: ^2.1.0
+  app_tracking_transparency: ^2.0.3
+
   # crypto:
   crypto: ^3.0.2
 
