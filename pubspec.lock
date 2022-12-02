@@ -361,10 +361,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "2d32eff3f040facfcf74427d27f02317a9a1db42"
+      resolved-ref: fc98712f30e75edb3d70dbbf3fe07a77e0b0552f
       url: "https://github.com/pichillilorenzo/flutter_inappwebview.git"
     source: git
-    version: "6.0.0-beta.18"
+    version: "6.0.0-beta.19"
   flutter_inappwebview_internal_annotations:
     dependency: transitive
     description:

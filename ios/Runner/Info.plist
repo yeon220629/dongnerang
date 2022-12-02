@@ -55,7 +55,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사진앨범에 접근하도록 허용버튼을 눌러주세요.</string>
+	<string>프로필 이미지 변경을 위해서, 사진앨범에 접근하도록 허용버튼을 눌러주세요.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalized ads to you.</string>
 	<key>SKAdNetworkItems</key>
