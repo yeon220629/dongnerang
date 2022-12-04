@@ -135,14 +135,18 @@ class FirebaseService {
       // await UserApi.instance.logout();
       await UserApi.instance.unlink();
     }
+    print("1 delete");
+    checkUser.delete();
+    print("2 delete");
+    await FirebaseAuth.instance.signOut();
     try {
+      print("3 delete");
       await FirebaseAuth.instance.currentUser?.delete();
-      checkUser.delete();
+      print("4 delete");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
         print('The user must reauthenticate before this operation can be executed.');
       }
-      // await FirebaseAuth.instance.signOut();
     }
   }
 

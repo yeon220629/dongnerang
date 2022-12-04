@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui' as ui;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
@@ -293,7 +294,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     super.initState();
     FirebaseService.findBanner().then((value){
       for(int i =0; i < value.length; i++){
-        product.add( Image.network(value[i]['image'], fit: BoxFit.cover,));
+        // product.add( Image.CachedNetworkImage(value[i]['image'], fit: BoxFit.cover,));
+        // product.add(CachedNetworkImage(imageUrl: ));
         bannerData.add(value[i]);
       }
       // bannerData.sort((a,b) {
