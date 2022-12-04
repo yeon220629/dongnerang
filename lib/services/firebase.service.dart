@@ -248,4 +248,14 @@ class FirebaseService {
     });
     return sendBannerdata;
   }
+
+  static Future<String> findVersion() async {
+    String versionCode= '';
+    final doc = await FirebaseFirestore.instance.collection("banner").doc('version').get();
+    doc.data()?.forEach((key, value) {
+      versionCode = value;
+    });
+
+    return versionCode;
+  }
 }

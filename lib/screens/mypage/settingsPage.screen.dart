@@ -18,7 +18,8 @@ import '../splash.screen.dart';
 import '../../services/firebase.service.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  final versionCode;
+  const SettingsPage(this.versionCode);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,7 @@ class SettingsPage extends StatelessWidget {
             ),
             ListTile(
               leading:  Icon(Icons.star_border_outlined),
-              title: Text('현재버전 v1.0.0'),
+              title: Text('현재버전 v${versionCode}'),
             ),
           ListTile(
             leading:  Icon(Icons.logout),

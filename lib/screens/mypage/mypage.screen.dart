@@ -42,6 +42,7 @@ class _mypageScreenState extends State<mypageScreen> {
   String? profileImage = '';
   String? userName = '';
   String? delListSting = '';
+  String? versionCode = '';
 
   late Future<List> userSaveData;
   List<Widget> itemsData = [];
@@ -217,8 +218,8 @@ class _mypageScreenState extends State<mypageScreen> {
     //애드몹
     banner = BannerAd(
       size: AdSize.fullBanner,
-      adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
-      // adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
+      // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
+      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
       listener: BannerAdListener(),
       request: AdRequest(),
     )..load();
@@ -253,7 +254,11 @@ class _mypageScreenState extends State<mypageScreen> {
         closeTapContainer = controllers.offset > 50;
       });
     });
-
+    FirebaseService.findVersion().then((value){
+      setState(() {
+        versionCode = value;
+      });
+    });
   }
 
   @override
@@ -269,7 +274,7 @@ class _mypageScreenState extends State<mypageScreen> {
             icon: Icon(Icons.settings, color: Colors.black),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(
-                  builder: (_) => SettingsPage())
+                  builder: (_) => SettingsPage(versionCode))
               );
             },
           )
@@ -407,4 +412,5 @@ Widget saveDataProfile(List itemsData, topContainer) {
 // final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
 // final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
 //
+
 
