@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    //
     WidgetsBinding.instance.addPostFrameCallback((_) => initPlugin());
     // FirebaseAuth.instance.signOut();
     // GoogleSignIn().signOut();
@@ -47,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> checkPermissions() async {
     Future.delayed(const Duration(milliseconds: 1000), () {
-      // print("FirebaseAuth.instance.currentUser : ${FirebaseAuth.instance.currentUser}");
+      print("FirebaseAuth.instance.currentUser : ${FirebaseAuth.instance.currentUser}");
       FirebaseAuth.instance.currentUser != null
           ? Get.offAll(() => const mainScreen())
           : Get.offAll(() => const LoginScreen());

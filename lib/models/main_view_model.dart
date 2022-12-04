@@ -27,50 +27,52 @@ class MainViewModel {
   Future login() async {
     bool isInstalled = await isKakaoTalkInstalled();
     if (await AuthApi.instance.hasToken()) {
+    // if (await FirebaseAuth.instance.currentUser == null) {
       try {
-        print("token 있음");
-        if(isInstalled){
-          OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
-          print('로그인 성공 ${token.accessToken}');
-          Get.offAll(IntroScreen());
-        }else{
-          OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
-          print('로그인 성공 ${token.accessToken}');
-          Get.offAll(IntroScreen());
-        }
-        user = await kakao.UserApi.instance.me();
-        final customToken = await FirebaseService().createCustomToken({
-          'uid': user!.id.toString(),
-          'displayName': user!.kakaoAccount?.profile?.nickname,
-          'email': user!.kakaoAccount!.email!,
-          'photoURL' : user?.kakaoAccount?.profile?.isDefaultImage == null
-                        ? null
-                        : user?.kakaoAccount?.profile?.profileImageUrl,
-        });
+            print("token 있음");
+            if(isInstalled){
+              OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
+              print('로그인 성공 ${token.accessToken}');
+              Get.offAll(IntroScreen());
+            }else{
+              OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+              print('로그인 성공 ${token.accessToken}');
+              Get.offAll(IntroScreen());
+            }
+            user = await kakao.UserApi.instance.me();
+            final customToken = await FirebaseService().createCustomToken({
+              'uid': user!.id.toString(),
+              'displayName': user!.kakaoAccount?.profile?.nickname,
+              'email': user!.kakaoAccount!.email!,
+              'photoURL' : user?.kakaoAccount?.profile?.isDefaultImage == null
+                            ? null
+                            : user?.kakaoAccount?.profile?.profileImageUrl,
+            });
 
-        await FirebaseAuth.instance.signInWithCustomToken(customToken);
-        var currentUser = await FirebaseService.findUserByEmail(
-            user!.kakaoAccount!.email!);
-        if (currentUser == null) {
-          await FirebaseFirestore.instance
-              .collection("users")
-              .doc(user!.kakaoAccount!.email!)
-              .set({
-            "email": user!.kakaoAccount!.email!,
-            "provider": "kakao",
-            "createdAt": DateTime.now(),
-            "loggedAt": DateTime.now(),
-            "name": user!.kakaoAccount!.profile!.nickname,
-            "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
-          });
-          currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
-          if (currentUser == null) {
-            EasyLoading.showError("회원가입 진행 필요");
-            Get.offAll(() => privateSettingScreen());
-          }
-        }
-        UserService.to.currentUser.value = currentUser;
-        Get.offAll(() => mainScreen());
+            await FirebaseAuth.instance.signInWithCustomToken(customToken);
+            var currentUser = await FirebaseService.findUserByEmail(
+                user!.kakaoAccount!.email!);
+            print("currentUsercurrentUsercurrentUser : $currentUser");
+            if (currentUser == null) {
+              await FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(user!.kakaoAccount!.email!)
+                  .set({
+                "email": user!.kakaoAccount!.email!,
+                "provider": "kakao",
+                "createdAt": DateTime.now(),
+                "loggedAt": DateTime.now(),
+                "name": user!.kakaoAccount!.profile!.nickname,
+                "profileImage": user!.kakaoAccount!.profile!.profileImageUrl,
+              });
+              currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
+              if (currentUser == null) {
+                EasyLoading.showError("회원가입 진행 필요");
+                Get.offAll(() => privateSettingScreen());
+              }
+            }
+            UserService.to.currentUser.value = currentUser;
+            Get.offAll(() => mainScreen());
       } catch (error) {
         print('로그인 실패 $error');
         Get.offAll(() => LoginScreen());
@@ -98,6 +100,7 @@ class MainViewModel {
         await FirebaseAuth.instance.signInWithCustomToken(customToken);
         var currentUser = await FirebaseService.findUserByEmail(
             user!.kakaoAccount!.email!);
+        print("currentUsercurrentUsercurrentUser : $currentUser");
 
         if (currentUser == null) {
           await FirebaseAuth.instance.signInWithCustomToken(customToken);
