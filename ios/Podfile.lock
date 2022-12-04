@@ -829,41 +829,41 @@ PODS:
     - Flutter
   - kakao_flutter_sdk_common (1.3.0-beta.4):
     - Flutter
-  - KakaoSDK (2.11.3):
-    - KakaoSDKAuth (= 2.11.3)
-    - KakaoSDKCommon (= 2.11.3)
-    - KakaoSDKFriend (= 2.11.3)
-    - KakaoSDKNavi (= 2.11.3)
-    - KakaoSDKShare (= 2.11.3)
-    - KakaoSDKStory (= 2.11.3)
-    - KakaoSDKTalk (= 2.11.3)
-    - KakaoSDKTemplate (= 2.11.3)
-    - KakaoSDKUser (= 2.11.3)
-  - KakaoSDKAuth (2.11.3):
-    - KakaoSDKCommon (= 2.11.3)
-  - KakaoSDKCommon (2.11.3):
-    - KakaoSDKCommon/Common (= 2.11.3)
-    - KakaoSDKCommon/Network (= 2.11.3)
-  - KakaoSDKCommon/Common (2.11.3)
-  - KakaoSDKCommon/Network (2.11.3):
+  - KakaoSDK (2.12.0):
+    - KakaoSDKAuth (= 2.12.0)
+    - KakaoSDKCommon (= 2.12.0)
+    - KakaoSDKFriend (= 2.12.0)
+    - KakaoSDKNavi (= 2.12.0)
+    - KakaoSDKShare (= 2.12.0)
+    - KakaoSDKStory (= 2.12.0)
+    - KakaoSDKTalk (= 2.12.0)
+    - KakaoSDKTemplate (= 2.12.0)
+    - KakaoSDKUser (= 2.12.0)
+  - KakaoSDKAuth (2.12.0):
+    - KakaoSDKCommon (= 2.12.0)
+  - KakaoSDKCommon (2.12.0):
+    - KakaoSDKCommon/Common (= 2.12.0)
+    - KakaoSDKCommon/Network (= 2.12.0)
+  - KakaoSDKCommon/Common (2.12.0)
+  - KakaoSDKCommon/Network (2.12.0):
     - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.11.3)
-  - KakaoSDKFriend (2.11.3):
-    - KakaoSDKUser (= 2.11.3)
-  - KakaoSDKNavi (2.11.3):
-    - KakaoSDKCommon/Common (= 2.11.3)
-  - KakaoSDKShare (2.11.3):
-    - KakaoSDKCommon (= 2.11.3)
-    - KakaoSDKTemplate (= 2.11.3)
-  - KakaoSDKStory (2.11.3):
-    - KakaoSDKUser (= 2.11.3)
-  - KakaoSDKTalk (2.11.3):
-    - KakaoSDKTemplate (= 2.11.3)
-    - KakaoSDKUser (= 2.11.3)
-  - KakaoSDKTemplate (2.11.3):
-    - KakaoSDKCommon/Common (= 2.11.3)
-  - KakaoSDKUser (2.11.3):
-    - KakaoSDKAuth (= 2.11.3)
+    - KakaoSDKCommon/Common (= 2.12.0)
+  - KakaoSDKFriend (2.12.0):
+    - KakaoSDKUser (= 2.12.0)
+  - KakaoSDKNavi (2.12.0):
+    - KakaoSDKCommon/Common (= 2.12.0)
+  - KakaoSDKShare (2.12.0):
+    - KakaoSDKCommon (= 2.12.0)
+    - KakaoSDKTemplate (= 2.12.0)
+  - KakaoSDKStory (2.12.0):
+    - KakaoSDKUser (= 2.12.0)
+  - KakaoSDKTalk (2.12.0):
+    - KakaoSDKTemplate (= 2.12.0)
+    - KakaoSDKUser (= 2.12.0)
+  - KakaoSDKTemplate (2.12.0):
+    - KakaoSDKCommon/Common (= 2.12.0)
+  - KakaoSDKUser (2.12.0):
+    - KakaoSDKAuth (= 2.12.0)
   - leveldb-library (1.22.1)
   - Libuv-gRPC (0.0.10):
     - Libuv-gRPC/Implementation (= 0.0.10)
@@ -1073,16 +1073,16 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
   image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
   kakao_flutter_sdk_common: 99744198582dc78bd1153713bdf444eaaf5fc107
-  KakaoSDK: 7ebf1862d9f9014e402eb756b2d906a60c092661
-  KakaoSDKAuth: a64dde90516e18fdfc35b83bbad2677c3675c329
-  KakaoSDKCommon: b4235203f67a5b6ee2df75eaf9bbc863c6d92e09
-  KakaoSDKFriend: 0babeed5e025207a518a53fee08b7e369c009238
-  KakaoSDKNavi: 5168499579e915cf87c5f715b8de3c0706e310a3
-  KakaoSDKShare: 1a43689303e049a9b61a10e079ddb66e6e4a9806
-  KakaoSDKStory: d932e8a4a2d2ad9ca04b789aacb510eb65865c84
-  KakaoSDKTalk: f20736b6016c25b136cfc62b1949dc15686a2751
-  KakaoSDKTemplate: 295e57cf2826bc2cbdaf2c37e1ee62e69ea58d74
-  KakaoSDKUser: 9a42e9b74855ce876b071c841418aa6726534010
+  KakaoSDK: b6ea3827bfbade9a0fb58d18f949cd8ba14a43d5
+  KakaoSDKAuth: 46e9979113a2f1b6ce7b347465841c78f6e43b03
+  KakaoSDKCommon: 7a49d3c686a7b38b4736ab4b8e0f776feed15bcd
+  KakaoSDKFriend: 23a741a7275a68331cef2e66ae395c7c2eb2c284
+  KakaoSDKNavi: 5f150c988cadde8f402d329ca1326b2964bdd919
+  KakaoSDKShare: 8d2946db211283f39d9be962298031ff0960ac4f
+  KakaoSDKStory: 754db29f144d77c265cc241f3fa7a62909490821
+  KakaoSDKTalk: dd35b7fcfa7aec091adef107074287d87e23ec54
+  KakaoSDKTemplate: 2b5193288c09b484580fd891b0c79f6e785da229
+  KakaoSDKUser: addc31c3b9b5be71b231021467dbaef3086efbb2
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
