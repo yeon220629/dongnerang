@@ -48,7 +48,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   bool closeTapContainer = false;
   final List<bool> _selectedCenter = <bool>[true, false];
   late List<dynamic> bannerData = [];
-  List<Image> product = [];
+  var product = [];
   List<String> LIST_MENU = [];
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
@@ -64,6 +64,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   int cuindex = 0;
   int colorindex = 0;
   double topContainer = 0;
+  int dotindex =0;
 
   Future<void> getUserLocalData() async {
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
@@ -294,8 +295,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     super.initState();
     FirebaseService.findBanner().then((value){
       for(int i =0; i < value.length; i++){
-        // product.add( Image.CachedNetworkImage(value[i]['image'], fit: BoxFit.cover,));
-        // product.add(CachedNetworkImage(imageUrl: ));
+        // product.add( Image.network(value[i]['image'], fit: BoxFit.cover,));
+        product.add(
+            CachedNetworkImage(
+              imageUrl: value[i]['image'], fit: BoxFit.cover,
+              // placeholder: (context, url) => CircularProgressIndicator(),
+            )
+        );
         bannerData.add(value[i]);
       }
       // bannerData.sort((a,b) {
@@ -440,48 +446,56 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         }
                       }
                     },
-                    child: CarouselSlider.builder(
-                      itemCount: product.length,
-                      itemBuilder: (ctx, index, realIdx) {
-                        return Row(
+                    child: Column(
+                      children: [
+                        Stack(
+                          alignment: Alignment.bottomCenter,
                           children: [
-                            Stack(
-                              alignment: Alignment.bottomCenter,
-                              children: [
-                                Container(
-                                  height: size.height / 9.5,
-                                  width: size.width,
-                                  child: product.isEmpty
-                                      ? Lottie.asset( 'assets/lottie/searchdata.json',)
-                                      : product[index]
-                                ),
-                                DotsIndicator(
-                                  position: index + 0.1,
-                                  decorator: DotsDecorator(
-                                      // spacing: const EdgeInsets.all(5.0)
-                                    color: AppColors.grey,
-                                    activeColor: AppColors.white
-                                  ),
-                                  dotsCount: product.length,
-                                )
-                              ],
+                            CarouselSlider.builder(
+                              itemCount: product.length,
+                              itemBuilder: (ctx, index, realIdx) {
+                                dotindex = index;
+                                return Row(
+                                  children: [
+                                    Stack(
+                                      alignment: Alignment.bottomCenter,
+                                      children: [
+                                        Container(
+                                            height: size.height / 9.5,
+                                            width: size.width,
+                                            child: product[index]
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              },
+                              options: CarouselOptions(
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    _currentPage = index;
+                                  });
+                                },
+                                height: size.height / 9.5,
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                                viewportFraction: 1.0,
+                                aspectRatio: 16 / 9,
+                                initialPage: 2,
+                              ),
                             ),
+                            DotsIndicator(
+                              position: dotindex + 0.1,
+                              decorator: DotsDecorator(
+                                // spacing: const EdgeInsets.all(5.0)
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.white
+                              ),
+                              dotsCount: product.length,
+                            )
                           ],
-                        );
-                      },
-                      options: CarouselOptions(
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _currentPage = index;
-                          });
-                        },
-                        height: size.height / 9.5,
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                        viewportFraction: 1.0,
-                        aspectRatio: 16 / 9,
-                        initialPage: 2,
-                      ),
+                        )
+                      ],
                     )
                   ),
                 ),
