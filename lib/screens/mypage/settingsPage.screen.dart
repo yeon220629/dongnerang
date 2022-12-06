@@ -171,7 +171,7 @@ class SettingsPage extends StatelessWidget {
                 barrierDismissible: true,
                 builder:(context) {
                   return AlertDialog(
-                    content: Text("정말 계정탈퇴 하시겠습니까?"),
+                    content: Text("정말 계정탈퇴를 하시겠습니까?"),
                     insetPadding: const  EdgeInsets.fromLTRB(20,40,20,40),
                     actions: [
                       Column(
@@ -190,7 +190,7 @@ class SettingsPage extends StatelessWidget {
                                 // }
                                 EasyLoading.showInfo("계정을 삭제 중 입니다...");
 
-                                Future.delayed(const Duration(milliseconds: 1000), () {
+                                Future.delayed(const Duration(milliseconds: 2000), () {
                                   UserService.to.currentUser.value = null;
                                   Get.offAll(() => const SplashScreen());
                                 });

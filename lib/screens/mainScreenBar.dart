@@ -7,7 +7,9 @@ import 'package:get/get.dart';
 import '../constants/colors.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
+import 'login.screen.dart';
 import 'mainScreen.dart';
+import 'setting/private.setting.screen.dart';
 
 class mainScreen extends StatefulWidget {
   const mainScreen({Key? key}) : super(key: key);
@@ -104,6 +106,14 @@ class mainScreenState extends State<mainScreen> {
                       ),
                       label: "마이페이지",
                     ),
+                    // BottomNavigationBarItem(
+                    //   icon: Icon(
+                    //     navigationController.currentBottomMenuIndex.value == 1
+                    //         ? Icons.account_circle
+                    //         : Icons.account_circle,
+                    //   ),
+                    //   label: "개인설정테스트",
+                    // ),
                   ],
                   onTap: (index) {
                     navigationController.currentBottomMenuIndex.value = index;
@@ -120,6 +130,7 @@ class mainScreenState extends State<mainScreen> {
             children: [
               freeComponent_viewpage(),
               mypageScreen(),
+              // privateSettingScreen(),
               // LoginScreen(),
               // SplashScreen()
             ],

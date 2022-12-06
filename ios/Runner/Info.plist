@@ -57,7 +57,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>프로필 이미지 변경을 위해서, 사진앨범에 접근하도록 허용버튼을 눌러주세요.</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>[허용]을 누르면 관심사 기반 맞춤형 정보를 제공해드려요ð</string>
+	<string>[허용]을 누르면 관심사 기반 맞춤형 정보를 제공해드려요😊</string>ð
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

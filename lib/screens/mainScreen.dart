@@ -381,11 +381,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             foregroundColor: AppColors.primary,
             elevation: 0,
             title: DropdownButton2(
-              style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.black),
+              // style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.black),
               // itemHeight: 10,
               // enableFeedback: true,
               // borderRadius: BorderRadius.circular(10),
-              // alignment: Alignment.center,
+              alignment: Alignment.center,
               focusColor: AppColors.primary,
               icon: const Icon(Icons.keyboard_arrow_down),
               isExpanded: false,
@@ -421,6 +421,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   defaultCenter = "전체";
                 });
               },
+              barrierColor: Colors.black.withOpacity(0.5),
+              iconOnClick: Icon(Icons.keyboard_arrow_up),
+              offset: const Offset(0, -3),
+              dropdownDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
             actions: <Widget>[
               IconButton(onPressed: (){
@@ -587,7 +593,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                     getPostsData(dropdownValue+"_"+defaultCenter!);
                                   }
                                 );
-                              }
+                              },
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              iconOnClick: Icon(Icons.keyboard_arrow_up),
+                              offset: const Offset(0, -3),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             )
                           : DropdownButton2(
                           // alignment: Alignment.center,
@@ -737,7 +749,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               getPostsData(value);
                             }
                             );
-                          }
+                          },
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          iconOnClick: Icon(Icons.keyboard_arrow_up),
+                          offset: const Offset(0, -3),
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                       )
                     ],
                   ),
