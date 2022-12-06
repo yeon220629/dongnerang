@@ -473,7 +473,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                         ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
                         : _imageFile == null
                           ? profileimagetype
-                          ? CachedNetworkImage(imageUrl: profileImage!, width: size.width / 2.2, fit: BoxFit.contain)
+                          ? CachedNetworkImage(imageUrl: profileImage!, width: size.width / 2.2, fit: BoxFit.fill)
                           // : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
                           : profileImage!.contains('assets/images/default-profile.png')
                             ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)

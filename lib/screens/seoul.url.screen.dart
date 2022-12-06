@@ -60,7 +60,6 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     if(Platform.isAndroid){
       return WillPopScope(
           onWillPop: (){

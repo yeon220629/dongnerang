@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -83,6 +84,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
 
   Future<void> getPostsData(value) async {
+    // 리스트를 다시 부를때 스크롤 위치를 맨위로
+    var controller = PrimaryScrollController.of(context);
+    controller?.jumpTo(0);
+
     if(value.toString().contains("_")){
       centerName = value.toString().split("_")[1];
       value = fnChecklocal(value.toString().split("_")[0])?.last;
@@ -375,11 +380,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
             elevation: 0,
-            title: DropdownButton(
+            title: DropdownButton2(
               style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.black),
               // itemHeight: 10,
               // enableFeedback: true,
-              borderRadius: BorderRadius.circular(10),
+              // borderRadius: BorderRadius.circular(10),
               // alignment: Alignment.center,
               focusColor: AppColors.primary,
               icon: const Icon(Icons.keyboard_arrow_down),
@@ -388,11 +393,16 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               underline: Container(),
               value: dropdownValue,
               items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
+                if(item.contains('구')){
+                  item = '${item}구';
+                }
                 return DropdownMenuItem<String>(
                   value: item,
-                  child: item == '중구'
-                    ? Text("${item}" , style: TextStyle(fontWeight: FontWeight.w600))
-                    : Text("${item}구", style: TextStyle(fontWeight: FontWeight.w600))
+                  child: dropdownValue == item
+                        // ? Text("${item}" , style: TextStyle(fontWeight: FontWeight.w600))
+                      ? Text("${item}구" , style: TextStyle(fontWeight: FontWeight.bold))
+                      : Text("${item}구", style: TextStyle(fontWeight: FontWeight.normal))
+
                 );
               }).toList(),
               onChanged: (dynamic value){
@@ -403,6 +413,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   // getPostsData(item?.last);
                 }
                 setState(() {
+                  for (int i = 0; i < _selectedCenter.length; i++) {
+                    _selectedCenter[i] = i == 0;
+                  }
+                  cuindex = 0;
                   dropdownValue = value;
                   defaultCenter = "전체";
                 });
@@ -542,42 +556,42 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       ),
                       // SizedBox(width: size.width / 15),
                       cuindex == 0
-                          ? DropdownButton(
-                                  // alignment: Alignment.center,
-                                  borderRadius: BorderRadius.circular(10),
-                                  // iconEnabledColor: AppColors.primary,
-                                  focusColor: AppColors.primary,
-                                  icon: const Icon(Icons.keyboard_arrow_down),
-                                  isExpanded: false,
-                                  isDense: false,
-                                  underline: Container(),
-                                  value: defaultCenter,
-                                  items: centerCheck.map( (value) {
-                                    if(value == "전체"){
-                                      return DropdownMenuItem (
-                                        value: value, child: Text(value),
-                                      );
-                                    }else{
-                                      return DropdownMenuItem (
-                                        value: value, child: Text("${dropdownValue+value}"),
-                                        // value: value, child: Text(value),
-                                      );
-                                    }
-                                  },
-                                  ).toList(),
-                                  onChanged: (value){
-                                    setState(() {
-                                      listItems = [];
-                                      centerLabel = value as String?;
-                                      defaultCenter = value as String?;
-                                      getPostsData(dropdownValue+"_"+defaultCenter!);
-                                    }
-                                    );
+                          ? DropdownButton2(
+                              // alignment: Alignment.center,
+                              // borderRadius: BorderRadius.circular(10),
+                              // iconEnabledColor: AppColors.primary,
+                              focusColor: AppColors.primary,
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              isExpanded: false,
+                              isDense: false,
+                              underline: Container(),
+                              value: defaultCenter,
+                              items: centerCheck.map( (value) {
+                                if(value == "전체"){
+                                  return DropdownMenuItem (
+                                    value: value, child: Text(value),
+                                  );
+                                }else{
+                                  return DropdownMenuItem (
+                                    value: value, child: Text("${dropdownValue+value}"),
+                                    // value: value, child: Text(value),
+                                  );
+                                }
+                              },
+                              ).toList(),
+                                onChanged: (value){
+                                  setState(() {
+                                    listItems = [];
+                                    centerLabel = value as String?;
+                                    defaultCenter = value as String?;
+                                    getPostsData(dropdownValue+"_"+defaultCenter!);
                                   }
-                              )
-                          : DropdownButton(
+                                );
+                              }
+                            )
+                          : DropdownButton2(
                           // alignment: Alignment.center,
-                          borderRadius: BorderRadius.circular(10),
+                          // borderRadius: BorderRadius.circular(10),
                           // iconEnabledColor: AppColors.primary,
                           focusColor: AppColors.primary,
                           icon: const Icon(Icons.keyboard_arrow_down),
