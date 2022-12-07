@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,25 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
     ages = ageValue;
   }
 
+  fnCheckValue(age, gender, local){
+    // print("age : ${age}");
+    // print("age : ${age['year']}");
+    // print("gender : $gender");
+    // print("local : ${local.toString()}");
+
+    if(gender == ''){
+      EasyLoading.showInfo("성별을 선택해 주세요");
+      return false;
+    }else if(local.isEmpty){
+      EasyLoading.showInfo("지역을 선택해 주세요");
+      return false;
+    }else if(age['year'] == '' || age['month'] == '' || age['dat'] == ''){
+      EasyLoading.showInfo("생년월일을 선택해 주세요");
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -55,28 +75,33 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                     if(keyword.isEmpty){
                       keyword.add('');
                     }
-                    if (controller.formKey.currentState!.validate()) {
-                      try {
-                        await FirebaseFirestore.instance
-                            .collection("users")
-                            .doc(UserService.to.currentUser.value?.email)
-                            .update(({
-                          "age": ages.toJson(),
-                          "keyword": keyword[0],
-                          "local": local[0],
-                          "gender" : gender,
-                        }));
-                        CustomKeyword = [];
-                        keyword = [];
-                        EasyLoading.showSuccess("개인설정 추가 완료");
-                        await FirebaseService.getCurrentUser();
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                mainScreen()), (route) => false);
-                      } catch (e) {
-                        logger.e(e);
-                        EasyLoading.showSuccess("개인설정 추가 실패");
+                    var checkValue = fnCheckValue(ages.toJson(), gender, local);
+                    if(checkValue){
+                      if (controller.formKey.currentState!.validate()) {
+                        try {
+                          await FirebaseFirestore.instance
+                              .collection("users")
+                              .doc(UserService.to.currentUser.value?.email)
+                              .update(({
+                            "age": ages.toJson(),
+                            "keyword": keyword[0],
+                            "local": local[0],
+                            "gender" : gender,
+                          }));
+                          CustomKeyword = [];
+                          keyword = [];
+                          EasyLoading.showSuccess("개인설정 추가 완료");
+                          await FirebaseService.getCurrentUser();
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  mainScreen()), (route) => false);
+                        } catch (e) {
+                          logger.e(e);
+                          EasyLoading.showSuccess("개인설정 추가 실패");
+                        }
                       }
+                    }else{
+                      print("항목 선택 안 한 것 이 있 음...");
                     }
                   }, child: Text("완료", style: TextStyle(color: Colors.black, fontSize: 15))),
             ],
@@ -386,9 +411,7 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
             SizedBox(height: 5,),
             Container(
               // padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                spacing: size.width / 20, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
+              child: Wrap( spacing: size.width / 20, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
             ),
             Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
           ],

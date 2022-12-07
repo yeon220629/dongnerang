@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'dart:ui' as ui;
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,6 +9,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -54,6 +55,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   List listOrder = [];
+  String _authStatus = 'unknown';
   String? defaultCenter = '전체';
   String? SeouldefaultCenter = "전체";
   String url = "";
@@ -297,6 +299,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => initPlugin());
     super.initState();
     FirebaseService.findBanner().then((value){
       for(int i =0; i < value.length; i++){
@@ -357,7 +360,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       });
     });
   }
-
+  Future <void> initPlugin() async{
+    try{
+      final TrackingStatus status = await AppTrackingTransparency.trackingAuthorizationStatus;
+      setState(() => _authStatus = '$status');
+      if(status == TrackingStatus.notDetermined) {
+        final TrackingStatus status = await AppTrackingTransparency.requestTrackingAuthorization();
+        setState(() => _authStatus = '$status');
+      }
+    }on PlatformException{
+      setState(() => _authStatus = 'PlatformException was thrown');
+    }
+    final uuid = await AppTrackingTransparency.getAdvertisingIdentifier();
+    print("uuid : $uuid");
+  }
   @override
   void dispose() {
     // TODO: implement dispose

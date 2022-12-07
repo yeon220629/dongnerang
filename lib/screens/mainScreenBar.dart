@@ -32,22 +32,22 @@ class mainScreenState extends State<mainScreen> {
     Get.put(NavigationController());
     Get.put(HomeController());
     final navigationController = Get.find<NavigationController>();
-    if(Platform.isIOS){
-      return GestureDetector(
-        onPanUpdate: (details){
-          if (details.delta.dx > 0) {
-            DateTime currentTime = DateTime.now();
-            if(currentBackPressTime == null || currentTime.difference(currentBackPressTime!) > Duration(seconds: 1)){
-              // print(navigationController.currentBottomMenuIndex.value);
-              if(navigationController.currentBottomMenuIndex.value != 0){
-                navigationController.currentBottomMenuIndex.value -= 1;
-              }
-            }
-          }
-        },
-        child: CheckPlatform(navigationController),
-      );
-    }
+    // if(Platform.isIOS){
+    //   return GestureDetector(
+    //     onPanUpdate: (details){
+    //       if (details.delta.dx > 0) {
+    //         DateTime currentTime = DateTime.now();
+    //         if(currentBackPressTime == null || currentTime.difference(currentBackPressTime!) > Duration(seconds: 1)){
+    //           // print(navigationController.currentBottomMenuIndex.value);
+    //           if(navigationController.currentBottomMenuIndex.value != 0){
+    //             navigationController.currentBottomMenuIndex.value -= 1;
+    //           }
+    //         }
+    //       }
+    //     },
+    //     child: CheckPlatform(navigationController),
+    //   );
+    // }
     return WillPopScope(
       onWillPop: () async {
         DateTime currentTime = DateTime.now();
@@ -106,14 +106,6 @@ class mainScreenState extends State<mainScreen> {
                       ),
                       label: "마이페이지",
                     ),
-                    // BottomNavigationBarItem(
-                    //   icon: Icon(
-                    //     navigationController.currentBottomMenuIndex.value == 1
-                    //         ? Icons.account_circle
-                    //         : Icons.account_circle,
-                    //   ),
-                    //   label: "개인설정테스트",
-                    // ),
                   ],
                   onTap: (index) {
                     navigationController.currentBottomMenuIndex.value = index;
