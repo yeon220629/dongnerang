@@ -499,7 +499,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                         Container(
                                             height: size.height / 9.5,
                                             width: size.width,
-                                            child: product[index]
+                                            child: product.isEmpty
+                                                ? Lottie.asset( 'assets/lottie/searchdata.json', )
+                                                : product[index]
                                         ),
                                       ],
                                     ),
@@ -527,7 +529,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   color: AppColors.grey,
                                   activeColor: AppColors.white
                               ),
-                              dotsCount: product.length,
+                              dotsCount: product.length == 0
+                                  ? 2
+                                  : product.length
                             )
                           ],
                         )
