@@ -583,7 +583,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       // SizedBox(width: size.width / 15),
                       cuindex == 0
                           ? DropdownButton2(
-                              // alignment: Alignment.center,
+                              alignment: Alignment.center,
                               // borderRadius: BorderRadius.circular(10),
                               // iconEnabledColor: AppColors.primary,
                               focusColor: AppColors.primary,
@@ -622,6 +622,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               ),
                             )
                           : DropdownButton2(
+                          alignment: Alignment.center,
                           // alignment: Alignment.center,
                           // borderRadius: BorderRadius.circular(10),
                           // iconEnabledColor: AppColors.primary,
