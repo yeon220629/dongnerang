@@ -120,11 +120,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     responseList = valueData;
     for ( var post in responseList){
       if(fnCenterCheck(post['center_name ']) == 0){
-        centerCheck[1] = '문화재단';
+        centerCheck[2] = '문화재단';
       }else if(fnCenterCheck(post['center_name ']) == 1){
-        centerCheck[1] = '문화원';
+        centerCheck[2] = '문화원';
       }else if(fnCenterCheck(post['center_name ']) == 2){
-        centerCheck[1] = '공단';
+        centerCheck[2] = '공단';
       }
 
       colorindex = fnSeoulCnterCheck(post['center_name ']);
