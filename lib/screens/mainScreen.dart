@@ -460,14 +460,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           body: SizedBox(
             child: Column(
               children: <Widget>[
-                // //애드몹
-                // Container(height: 60,
-                //   width: size.width,
-                //   child: this.banner == null
-                //       ? Container()
-                //       : AdWidget(
-                //     ad: this.banner!,
-                //   ),),
                 Container(
                   child : GestureDetector(
                     onTap: () {
@@ -540,7 +532,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   ),
                 ),
                 SizedBox(
-                  width: size.width / 1.1,
+                  width: size.width / 1.05,
                   // padding: EdgeInsetsDirectional.all(2),
                   child: Row(
                     // mainAxisSize: MainAxisSize.max,
@@ -583,45 +575,48 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       // SizedBox(width: size.width / 15),
                       cuindex == 0
                           ? DropdownButton2(
-                              alignment: Alignment.center,
-                              // borderRadius: BorderRadius.circular(10),
-                              // iconEnabledColor: AppColors.primary,
-                              focusColor: AppColors.primary,
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              isExpanded: false,
-                              isDense: false,
-                              underline: Container(),
-                              value: defaultCenter,
-                              items: centerCheck.map( (value) {
-                                if(value == "전체"){
-                                  return DropdownMenuItem (
-                                    value: value, child: Text(value),
-                                  );
-                                }else{
-                                  return DropdownMenuItem (
-                                    value: value, child: Text("${dropdownValue+value}"),
-                                    // value: value, child: Text(value),
-                                  );
-                                }
-                              },
-                              ).toList(),
-                                onChanged: (value){
-                                  setState(() {
-                                    listItems = [];
-                                    centerLabel = value as String?;
-                                    defaultCenter = value as String?;
-                                    getPostsData(dropdownValue+"_"+defaultCenter!);
-                                  }
+                            alignment: Alignment.center,
+                            // borderRadius: BorderRadius.circular(10),
+                            // iconEnabledColor: AppColors.primary,
+                            focusColor: AppColors.primary,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            isExpanded: false,
+                            isDense: false,
+                            underline: Container(),
+                            value: defaultCenter,
+                            items: centerCheck.map( (value) {
+                              if(value == "전체"){
+                                return DropdownMenuItem (
+                                  alignment: Alignment.center,
+                                  value: value, child: Text("${value}"),
                                 );
-                              },
-                              barrierColor: Colors.black.withOpacity(0.5),
-                              iconOnClick: Icon(Icons.keyboard_arrow_up),
-                              offset: const Offset(0, -3),
-                              dropdownDecoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            )
-                          : DropdownButton2(
+                              }else{
+                                return DropdownMenuItem (
+                                  alignment: Alignment.center,
+                                  value: value,
+                                  child: Text("  ${dropdownValue+value}  "),
+                                  // value: value, child: Text(value),
+                                );
+                              }
+                            },
+                            ).toList(),
+                              onChanged: (value){
+                                setState(() {
+                                  listItems = [];
+                                  centerLabel = value as String?;
+                                  defaultCenter = value as String?;
+                                  getPostsData(dropdownValue+"_"+defaultCenter!);
+                                }
+                              );
+                            },
+                            barrierColor: Colors.black.withOpacity(0.5),
+                            iconOnClick: Icon(Icons.keyboard_arrow_up),
+                            offset: const Offset(0, -3),
+                            dropdownDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          )
+                        : DropdownButton2(
                           alignment: Alignment.center,
                           // alignment: Alignment.center,
                           // borderRadius: BorderRadius.circular(10),
@@ -635,13 +630,16 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           items: SeoulCheck.map( (value) {
                             if(value == "전체"){
                               return DropdownMenuItem (
+                                alignment: Alignment.center,
                                 value: value, child: Text(value),
                               );
                             }else{
                               return DropdownMenuItem (
+                                alignment: Alignment.center,
                                 value: value,
                                 child: value == '서울시청'
                                     ? Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
                                         Text(value)
