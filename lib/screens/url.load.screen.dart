@@ -119,51 +119,52 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
           }
       );
     }
-    return WillPopScope(
-        child: GestureDetector(
-            child: checkFlactform(saveData),
-            onHorizontalDragUpdate: (details) {
-              // Note: Sensitivity is integer used when you don't want to mess up vertical drag
-              int sensitivity = 8;
-              if (details.delta.dx > sensitivity) {
-                //Left Swipe
-                if(toggle == true){
-                  // 메인 페이지
-                  if(widget.i == 0){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            mainScreen()), (route) => false);
-                  }
-                  if(widget.i == 1){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            mainScreen()), (route) => false);
-                  }
-                  if(widget.i == 2){
-                    Navigator.pop(context);
-                  }
-                }else{
-                  if(widget.i == 0){
-                    Navigator.pop(context);
-                  }
-                  if(widget.i == 1){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            mainScreen()), (route) => false);
-                  }
-                  if(widget.i == 2){
-                    Navigator.pop(context);
-                  }
-                }
-              } else if(details.delta.dx < -sensitivity){
-                print("Left");
-              }
-            }
-        ),
-        onWillPop: () async {
-          return false;
-        },
-    );
+    return checkFlactform(saveData);
+    // return WillPopScope(
+    //     child: GestureDetector(
+    //         child: checkFlactform(saveData),
+    //         onHorizontalDragUpdate: (details) {
+    //           // Note: Sensitivity is integer used when you don't want to mess up vertical drag
+    //           int sensitivity = 8;
+    //           if (details.delta.dx > sensitivity) {
+    //             //Left Swipe
+    //             if(toggle == true){
+    //               // 메인 페이지
+    //               if(widget.i == 0){
+    //                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+    //                     builder: (BuildContext context) =>
+    //                         mainScreen()), (route) => false);
+    //               }
+    //               if(widget.i == 1){
+    //                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+    //                     builder: (BuildContext context) =>
+    //                         mainScreen()), (route) => false);
+    //               }
+    //               if(widget.i == 2){
+    //                 Navigator.pop(context);
+    //               }
+    //             }else{
+    //               if(widget.i == 0){
+    //                 Navigator.pop(context);
+    //               }
+    //               if(widget.i == 1){
+    //                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+    //                     builder: (BuildContext context) =>
+    //                         mainScreen()), (route) => false);
+    //               }
+    //               if(widget.i == 2){
+    //                 Navigator.pop(context);
+    //               }
+    //             }
+    //           } else if(details.delta.dx < -sensitivity){
+    //             print("Left");
+    //           }
+    //         }
+    //     ),
+    //     onWillPop: () async {
+    //       return false;
+    //     },
+    // );
   }
   Widget checkFlactform(saveData){
     return MaterialApp(
