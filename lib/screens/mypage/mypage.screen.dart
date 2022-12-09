@@ -314,8 +314,6 @@ class _mypageScreenState extends State<mypageScreen> {
                                 color: AppColors.grey,
                                 fontSize: 14
                             )),
-                            // child: Text("프로필 수정", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: AppColors.grey,),
-                            // ),
                           ],
                         ),
                       ),

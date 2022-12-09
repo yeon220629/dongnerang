@@ -1,3 +1,4 @@
+import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -77,7 +78,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
               topRight: Radius.circular(20),
               topLeft: Radius.circular(20),
             ),
-            color: Colors.indigo,
+            color: AppColors.primary,
           ),
           child: const Center(
             child: Icon(
@@ -173,15 +174,15 @@ class _UpdateDialogState extends State<UpdateDialog> {
                               width: 120,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.indigo,
+                                  color: AppColors.primary,
                                 ),
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: const Center(
                                 child: Text(
-                                  "LATER",
+                                  "다음에",
                                   style: TextStyle(
-                                    color: Colors.indigo,
+                                    color: AppColors.primary,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -200,10 +201,10 @@ class _UpdateDialogState extends State<UpdateDialog> {
                               width: 120,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                color: Colors.indigo,
+                                color: AppColors.primary,
                                 boxShadow: const [
                                   BoxShadow(
-                                    color: Colors.indigo,
+                                    color: AppColors.primary,
                                     blurRadius: 10,
                                     offset: Offset(2, 2),
                                   ),
@@ -211,7 +212,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
                               ),
                               child: const Center(
                                 child: Text(
-                                  "UPDATE",
+                                  "업데이트",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
