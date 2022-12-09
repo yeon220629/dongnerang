@@ -48,6 +48,7 @@ class ColorService { //기본 컬러 설정
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

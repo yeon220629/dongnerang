@@ -110,9 +110,9 @@ class mainScreenState extends State<mainScreen> {
                   onTap: (index) {
                     navigationController.currentBottomMenuIndex.value = index;
                     if(index == 1){
-
+                      print(navigationController.currentBottomMenuIndex.value);
+                      setState(() {});
                     }
-                    setState(() {});
                   },
                 )
               ],

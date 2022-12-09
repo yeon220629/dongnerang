@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>202212091</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3415104781631988~6504027773</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -286,6 +286,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>buildCount</key>
+	<string>1</string>
+	<key>buildDay</key>
+	<string>20221209</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

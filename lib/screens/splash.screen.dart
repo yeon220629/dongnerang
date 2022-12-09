@@ -1,14 +1,11 @@
-import 'dart:io';
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
-import 'package:dongnerang/screens/permission.screen.dart';
+import 'dart:async';
+
+import 'package:dongnerang/screens/updatedialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:new_version/new_version.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:store_redirect/store_redirect.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../constants/colors.constants.dart';
 import 'login.screen.dart';
 import 'mainScreenBar.dart';
@@ -29,11 +26,44 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // FirebaseAuth.instance.signOut();
     // GoogleSignIn().signOut();
-    checkPermissions();
+    final newVersion = NewVersion(
+      androidId: 'com.dongnerang.com.dongnerang',
+      iOSId: 'com.dongnerang.com.dongnerang',
+    );
+    Timer(const Duration(milliseconds: 800), () {
+      checkNewVersion(newVersion);
+    });
     super.initState();
   }
 
+  void checkNewVersion(NewVersion newVersion) async {
+    final status = await newVersion.getVersionStatus();
 
+    print("status canUpdate : ${status?.canUpdate}");
+    print("status appStoreLink : ${status?.appStoreLink}");
+    print("status LocalVersion : ${status?.localVersion}");
+    print("status storeVersion : ${status?.storeVersion}");
+    print("status releaseNotes : ${status?.releaseNotes}");
+    print("status : ${status != null}");
+
+    if(status != null) {
+      if(!status.canUpdate) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return UpdateDialog(
+              allowDismissal: true,
+              description: status.releaseNotes!,
+              version: status.storeVersion,
+              appLink: status.appStoreLink,
+            );
+          },
+        );
+      }else{
+        checkPermissions();
+      }
+    }
+  }
 
   Future<void> checkPermissions() async {
     Future.delayed(const Duration(milliseconds: 1000), () {
