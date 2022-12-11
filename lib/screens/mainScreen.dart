@@ -600,7 +600,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             value: defaultCenter,
                             items: centerCheck.map( (value) {
                               if(value == "전체"){
-                                print("전체 : $value");
                                 return DropdownMenuItem (
                                   alignment: Alignment.center,
                                   value: value, child: Text("${value}"),
