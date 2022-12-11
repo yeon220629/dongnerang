@@ -46,7 +46,10 @@ class _SplashScreenState extends State<SplashScreen> {
     // print("status : ${status != null}");
 
     if(status != null) {
-      if(!status.canUpdate) {
+      // 업데이트 테스트
+      // if(!status.canUpdate) {
+
+      if(status.canUpdate) {
         showDialog(
           context: context,
           builder: (BuildContext context) {

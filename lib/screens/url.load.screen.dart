@@ -189,6 +189,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                   saveData.add(widget.s);
                   saveData.add(toggle);
                   FirebaseService.saveUserPrivacyData(userEmail!, saveData);
+                  // mypageScreen(1);
                 }
                 if(!toggle){
                   FirebaseService.deleteUserPrivacyData(userEmail!, widget.s);

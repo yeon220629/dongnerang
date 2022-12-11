@@ -412,6 +412,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 if(item.contains('구')){
                   item = '${item}구';
                 }
+                print("item : $item");
+                print(dropdownValue);
                 return DropdownMenuItem<String>(
                   value: item,
                   child: dropdownValue == item

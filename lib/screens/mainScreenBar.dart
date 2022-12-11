@@ -117,7 +117,7 @@ class mainScreenState extends State<mainScreen>{
                       // print(navigationController.currentBottomMenuIndex.value);
 
                       mypageScreen(navigationController.currentBottomMenuIndex.value);
-                      //commonCode Status
+
                       setState(() {});
                     }
                   },
