@@ -10,6 +10,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../constants/colors.constants.dart';
+import 'mypage/mypage.screen.dart';
 
 
 class urlLoadScreen extends StatefulWidget {
@@ -82,36 +83,38 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               if (canGoBack) {
                 webViewController?.goBack();
               } else {
-                // print('더이상 뒤로갈페이지가 없습니다.');
-                if(toggle == true){
-                  if(widget.i == 0){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            mainScreen()), (route) => false);
-                  }
-                  if(widget.i == 1){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            mainScreen()), (route) => false);
-                  }
-                  if(widget.i == 2){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            searchScreen(title: "")), (route) => false);
-                  }
-                }else{
-                  if(widget.i == 0){
-                    Navigator.pop(context);
-                  }
-                  if(widget.i == 1){
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            mainScreen()), (route) => false);
-                  }
-                  if(widget.i == 2){
-                    Navigator.pop(context);
-                  }
-                }
+                print('더이상 뒤로갈페이지가 없습니다.');
+                mypageScreen(1);
+                Navigator.pop(context);
+                // if(toggle == true){
+                //   if(widget.i == 0){
+                //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                //         builder: (BuildContext context) =>
+                //             mainScreen()), (route) => false);
+                //   }
+                //   if(widget.i == 1){
+                //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                //         builder: (BuildContext context) =>
+                //             mainScreen()), (route) => false);
+                //   }
+                //   if(widget.i == 2){
+                //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                //         builder: (BuildContext context) =>
+                //             searchScreen(title: "")), (route) => false);
+                //   }
+                // }else{
+                //   if(widget.i == 0){
+                //     Navigator.pop(context);
+                //   }
+                //   if(widget.i == 1){
+                //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                //         builder: (BuildContext context) =>
+                //             mainScreen()), (route) => false);
+                //   }
+                //   if(widget.i == 2){
+                //     Navigator.pop(context);
+                //   }
+                // }
                 //뒤로가기 시 처리코드
               }
             });
@@ -120,51 +123,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
       );
     }
     return checkFlactform(saveData);
-    // return WillPopScope(
-    //     child: GestureDetector(
-    //         child: checkFlactform(saveData),
-    //         onHorizontalDragUpdate: (details) {
-    //           // Note: Sensitivity is integer used when you don't want to mess up vertical drag
-    //           int sensitivity = 8;
-    //           if (details.delta.dx > sensitivity) {
-    //             //Left Swipe
-    //             if(toggle == true){
-    //               // 메인 페이지
-    //               if(widget.i == 0){
-    //                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-    //                     builder: (BuildContext context) =>
-    //                         mainScreen()), (route) => false);
-    //               }
-    //               if(widget.i == 1){
-    //                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-    //                     builder: (BuildContext context) =>
-    //                         mainScreen()), (route) => false);
-    //               }
-    //               if(widget.i == 2){
-    //                 Navigator.pop(context);
-    //               }
-    //             }else{
-    //               if(widget.i == 0){
-    //                 Navigator.pop(context);
-    //               }
-    //               if(widget.i == 1){
-    //                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-    //                     builder: (BuildContext context) =>
-    //                         mainScreen()), (route) => false);
-    //               }
-    //               if(widget.i == 2){
-    //                 Navigator.pop(context);
-    //               }
-    //             }
-    //           } else if(details.delta.dx < -sensitivity){
-    //             print("Left");
-    //           }
-    //         }
-    //     ),
-    //     onWillPop: () async {
-    //       return false;
-    //     },
-    // );
   }
   Widget checkFlactform(saveData){
     return MaterialApp(
@@ -186,34 +144,35 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 icon: Icon(Icons.arrow_back, color: Colors.black),
                 //페이지 리로드
                 onPressed: (){
-                  if(toggle == true){
-                    // 메인 페이지
-                    if(widget.i == 0){
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              mainScreen()), (route) => false);
-                    }
-                    if(widget.i == 1){
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              mainScreen()), (route) => false);
-                    }
-                    if(widget.i == 2){
-                      Navigator.pop(context);
-                    }
-                  }else{
-                    if(widget.i == 0){
-                      Navigator.pop(context);
-                    }
-                    if(widget.i == 1){
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              mainScreen()), (route) => false);
-                    }
-                    if(widget.i == 2){
-                      Navigator.pop(context);
-                    }
-                  }
+                  Navigator.pop(context);
+                  // if(toggle == true){
+                  //   // 메인 페이지
+                  //   if(widget.i == 0){
+                  //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  //         builder: (BuildContext context) =>
+                  //             mainScreen()), (route) => false);
+                  //   }
+                  //   if(widget.i == 1){
+                  //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  //         builder: (BuildContext context) =>
+                  //             mainScreen()), (route) => false);
+                  //   }
+                  //   if(widget.i == 2){
+                  //     Navigator.pop(context);
+                  //   }
+                  // }else{
+                  //   if(widget.i == 0){
+                  //     Navigator.pop(context);
+                  //   }
+                  //   if(widget.i == 1){
+                  //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  //         builder: (BuildContext context) =>
+                  //             mainScreen()), (route) => false);
+                  //   }
+                  //   if(widget.i == 2){
+                  //     Navigator.pop(context);
+                  //   }
+                  // }
                 }
             ),
             actions: [

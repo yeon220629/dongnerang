@@ -212,8 +212,21 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                               color: AppColors.grey,
                               // color: select_tags.add(myController.text) ? AppColors.grey : AppColors.primary,
                               onPressed: () {
-                                select_tags.add(myController.text);
+                                if(myController.text == ''){
+                                  EasyLoading.showInfo("공백은 등록 하실 수 없습니다.");
+                                  return;
+                                }
+
+                                if(CustomKeyword.length != 0){
+                                  for(int i = 0; i < CustomKeyword.length; i++){
+                                    if(CustomKeyword[i] == myController.text){
+                                      EasyLoading.showInfo("중복값은 포함 될 수 없습니다..");
+                                      return;
+                                    }
+                                  }
+                                }
                                 setState(() {
+                                  select_tags.add(myController.text);
                                   CustomKeyword.add(myController.text);
                                   widget.callback(select_tags);
                                 });
@@ -281,6 +294,7 @@ class _KeywordStatefulState extends State<KeywordStateful> {
         onDeleted: (){
           setState(() {
             CustomKeyword.remove(name);
+            select_tags.remove(name);
           });
         },
       )

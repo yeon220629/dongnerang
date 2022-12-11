@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:dongnerang/screens/mypage/mypage.screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 
 import '../constants/colors.constants.dart';
+import '../constants/common.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
 import 'login.screen.dart';
@@ -18,7 +20,7 @@ class mainScreen extends StatefulWidget {
   State<mainScreen> createState() => mainScreenState();
 }
 
-class mainScreenState extends State<mainScreen> {
+class mainScreenState extends State<mainScreen>{
   DateTime? currentBackPressTime;
   bool isQuit = false;
 
@@ -110,7 +112,12 @@ class mainScreenState extends State<mainScreen> {
                   onTap: (index) {
                     navigationController.currentBottomMenuIndex.value = index;
                     if(index == 1){
-                      print(navigationController.currentBottomMenuIndex.value);
+                      // REFRESHSTATUSCODE = 1;
+                      // print("REFRESHSTATUSCODE : $REFRESHSTATUSCODE");
+                      // print(navigationController.currentBottomMenuIndex.value);
+
+                      mypageScreen(navigationController.currentBottomMenuIndex.value);
+                      //commonCode Status
                       setState(() {});
                     }
                   },
@@ -124,7 +131,7 @@ class mainScreenState extends State<mainScreen> {
             index: navigationController.currentBottomMenuIndex.value,
             children: [
               freeComponent_viewpage(),
-              mypageScreen(),
+              mypageScreen(navigationController.currentBottomMenuIndex.value),
               // privateSettingScreen(),
               // LoginScreen(),
               // SplashScreen()

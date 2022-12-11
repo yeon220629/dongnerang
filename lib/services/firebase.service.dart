@@ -10,6 +10,7 @@ import '../models/app_user.model.dart';
 import 'package:http/http.dart' as http;
 
 import '../screens/mainScreenBar.dart';
+import '../screens/mypage/mypage.screen.dart';
 
 class FirebaseService {
   final String url ='https://us-central1-dbcurd-67641.cloudfunctions.net/createCustomToken';
@@ -177,9 +178,10 @@ class FirebaseService {
           };
           checkDuplicate.reference.update(data);
           // print(data);
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  mainScreen()), (route) => false);
+          mypageScreen(1);
+          // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+          //     builder: (BuildContext context) =>
+          //         mainScreen()), (route) => false);
         }
       }
     });

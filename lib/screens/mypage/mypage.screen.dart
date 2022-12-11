@@ -19,7 +19,9 @@ import 'settingsPage.screen.dart';
 import 'mypage.inform.setting.screen.dart';
 
 class mypageScreen extends StatefulWidget {
-  const mypageScreen({Key? key}) : super(key: key);
+  final StatusNumber;
+  const mypageScreen(this.StatusNumber);
+
   @override
   State<mypageScreen> createState() => _mypageScreenState();
 
@@ -264,6 +266,22 @@ class _mypageScreenState extends State<mypageScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+
+    if(widget.StatusNumber == 1){
+      userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
+      userSaveData.then((value){
+        setState(() {
+          value[0]?.forEach((element) {
+            if(element.toString().contains('/')){
+              profileImage = element.toString();
+            }else{
+              userName = element.toString();
+            }
+          });
+          getPostsData(value[1]);
+        });
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(

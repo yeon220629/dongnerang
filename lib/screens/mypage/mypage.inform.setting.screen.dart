@@ -181,8 +181,21 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                               icon: Icon(Icons.search),
                               color: AppColors.grey,
                               onPressed: () {
-                                select_tags.add(myController.text);
+                                if(myController.text == ''){
+                                  EasyLoading.showInfo("공백은 등록 할 수 없습니다");
+                                  return;
+                                }
+                                if(mypageCustomKeyword.length != 0){
+                                  for(int i = 0; i < mypageCustomKeyword.length; i++){
+                                    if(mypageCustomKeyword[i] == myController.text){
+                                      EasyLoading.showInfo("중복값은 포함 될 수 없습니다..");
+                                      return;
+                                    }
+                                  }
+                                }
+                                // select_tags.add(myController.text);
                                 // print("select_tags : $select_tags");
+                                // print("mypageCustomKeyword : $mypageCustomKeyword");
                                 setState(() {
                                   mypageCustomKeyword.add(myController.text);
                                   // print(mypageCustomKeyword);
@@ -252,6 +265,7 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
           onDeleted: (){
             setState(() {
               mypageCustomKeyword.remove(name);
+              select_tags.remove(name);
             });
           },
         )
