@@ -188,7 +188,7 @@ class _mypageScreenState extends State<mypageScreen> {
                             SizedBox(width: 7),
                             Text(
                               // '시작일 | ${responseList[0][i][2].toString().trim()}',
-                              '시작일 | ${dateFormat.format(dateTime)}',
+                              '등록일 | ${dateFormat.format(dateTime)}',
                               style: const TextStyle(fontSize: 13, color: Colors.grey),
                               textDirection: ui.TextDirection.ltr,
                             ),
@@ -236,6 +236,13 @@ class _mypageScreenState extends State<mypageScreen> {
     // my page 데이터 적용 진행 중
     userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
     userSaveData.then((value){
+
+      value.sort((a,b) {
+        var adate = b[1][2]; //before -> var adate = a.expiry;
+        var bdate = b[1][2]; //before -> var bdate = b.expiry;
+        return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
+      });
+
       setState(() {
         value[0]?.forEach((element) {
           if(element.toString().contains('/')){

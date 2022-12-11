@@ -206,7 +206,7 @@ List dropdownDay = ['1','2','3','4','5','6','7','8','9','10','11','12','13',
 List centerCheck = ['전체', '구청', '문화재단'];
 List SeoulCheck = ['전체',
   // '서울관광재단','서울산업진흥원','서울주거포털','NPO지원센터', '청년몽땅정보통','아트누리','서울시청'];
-  '서울관광재단','서울산업진흥원','서울주거포털','NPO지원센터', '청년몽땅정보통','서울시청'];
+  '서울관광재단','서울산업진흥원','서울주거포털','NPO지원센터', '청년몽땅정보통','서울시청','서울시문화원'];
 
 int fnSeoulCnterCheck(centerValue){
   if(centerValue.contains("구청")){
@@ -236,5 +236,4 @@ int fnCenterCheck(centerValue){
     return 3;
   } return 0;
 }
-
 

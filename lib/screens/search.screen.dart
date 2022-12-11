@@ -139,7 +139,7 @@ class _searchScreenState extends State<searchScreen>
                             ),
                             SizedBox(width: 7),
                             Text(
-                              '시작일 | ${dateFormat.format(dateTime)}',
+                              '등록일 | ${dateFormat.format(dateTime)}',
                               style: const TextStyle(fontSize: 13, color: Colors.grey),
                               textDirection: ui.TextDirection.ltr,
                             ),

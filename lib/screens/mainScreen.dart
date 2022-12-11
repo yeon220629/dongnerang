@@ -119,14 +119,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
     responseList = valueData;
     for ( var post in responseList){
-      if(fnCenterCheck(post['center_name ']) == 0){
-        centerCheck[2] = '문화재단';
-      }else if(fnCenterCheck(post['center_name ']) == 1){
-        centerCheck[2] = '문화원';
-      }else if(fnCenterCheck(post['center_name ']) == 2){
-        centerCheck[2] = '공단';
+      if(post['center_name '].toString().contains('용산')){
+        centerCheck.remove("문화재단");
+      }else{
+        if(fnCenterCheck(post['center_name ']) == 0){
+          centerCheck[2] = '문화재단';
+        }else if(fnCenterCheck(post['center_name ']) == 1){
+          centerCheck[2] = '문화원';
+        }else if(fnCenterCheck(post['center_name ']) == 2){
+          centerCheck[2] = '공단';
+        }
       }
-
       colorindex = fnSeoulCnterCheck(post['center_name ']);
 
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
@@ -198,7 +201,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 SizedBox(width: 7),
                                 Text(
                                   // '시작일 | ${post['registrationdate'].trim()}',
-                                  '시작일 | ${dateFormat.format(dateTime)}',
+                                  '등록일 | ${dateFormat.format(dateTime)}',
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                                   textDirection: ui.TextDirection.ltr,
                                 ),
@@ -278,7 +281,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               SizedBox(width: 7),
                               Text(
                                 // '시작일 | ${post['registrationdate'].trim()}',
-                                '시작일 | ${dateFormat.format(dateTime)}',
+                                '등록일 | ${dateFormat.format(dateTime)}',
                                 style: const TextStyle(fontSize: 13, color: Colors.grey),
                                 textDirection: ui.TextDirection.ltr,
                               ),
@@ -410,17 +413,25 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               value: dropdownValue,
               items: LIST_MENU.map<DropdownMenuItem<String>>((String item) {
                 if(item.contains('구')){
-                  item = '${item}구';
+                  if(item == '중구'){
+                    item = item;
+                  }else{
+                    if(item == '구로'){
+                      item = item;
+                    }else{
+                      item = '${item}구';
+                    }
+                  }
                 }
-                print("item : $item");
-                print(dropdownValue);
                 return DropdownMenuItem<String>(
                   value: item,
-                  child: dropdownValue == item
-                        // ? Text("${item}" , style: TextStyle(fontWeight: FontWeight.w600))
+                  child: item == '중구' || item == '구로구'
+                    ? dropdownValue == item
+                      ? Text("${item}" , style: TextStyle(fontWeight: FontWeight.bold))
+                      : Text("${item}", style: TextStyle(fontWeight: FontWeight.normal))
+                    : dropdownValue == item
                       ? Text("${item}구" , style: TextStyle(fontWeight: FontWeight.bold))
                       : Text("${item}구", style: TextStyle(fontWeight: FontWeight.normal))
-
                 );
               }).toList(),
               onChanged: (dynamic value){
@@ -544,6 +555,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         direction: Axis.horizontal,
                         isSelected: _selectedCenter,
                         onPressed: (int index) {
+                          print("DropdownValue : ${dropdownValue}");
                           setState(() {
                             for (int i = 0; i < _selectedCenter.length; i++) {
                               _selectedCenter[i] = i == index;
@@ -588,6 +600,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             value: defaultCenter,
                             items: centerCheck.map( (value) {
                               if(value == "전체"){
+                                print("전체 : $value");
                                 return DropdownMenuItem (
                                   alignment: Alignment.center,
                                   value: value, child: Text("${value}"),
@@ -647,7 +660,22 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                         Text(value)
                                       ],
                                     )
-                                    : Text(value),
+                                    : value == '서울시문화원'
+                                        ? Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Image.asset('assets/images/SeoulCultureLand.png', width: size.width / 25),
+                                              // Text(value)
+                                              Container(
+                                                child:AppTextButton( text: "$value",
+                                                  onPressed: () async {
+                                                    final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
+                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                  }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                              ),
+                                            ],
+                                          )
+                                        : Text(value),
                                 // value: value, child: Text(value),시
                               );
                             }
