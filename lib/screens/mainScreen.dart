@@ -665,13 +665,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Image.asset('assets/images/SeoulCultureLand.png', width: size.width / 25),
-                                              // Text(value)
-                                              Container(
-                                                child:AppTextButton( text: "$value",
-                                                  onPressed: () async {
-                                                    final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
-                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                  }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                              InkWell(
+                                                onTap: () {
+                                                  final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
+                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                },
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(5.0),
+                                                  child: Text(value)
+                                                ),
                                               ),
                                             ],
                                           )
