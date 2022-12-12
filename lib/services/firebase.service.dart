@@ -190,23 +190,23 @@ class FirebaseService {
   static Future<List> getUserPrivacyProfile(String email) async {
     List getUserData = [];
     List getUserSaveData = [];
+    List getUserSaveKeyData = [];
     final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
     checkDuplicate.data()?.forEach((key, value) async {
       if(key.contains("name")){
-        // print("name value : $value");
         getUserData.add(value);
       }
       if(key.contains("profileImage")){
-        // print("profileImage value : $value");
         getUserData.add(value);
       }
       if(key.contains("userSaveData")){
-        // print("userSaveData value : $value");
         getUserSaveData.add(value);
+        getUserSaveKeyData.add(key);
       }
     });
-    // print("getUserData : $getUserData");
-    return [getUserData, getUserSaveData];
+
+    return [getUserData, getUserSaveData, checkDuplicate.data(), getUserSaveKeyData];
+
   }
 
   static Future<void> savePrivacyProfile(String email, List value, String key) async{

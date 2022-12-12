@@ -1,13 +1,12 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 
-import 'package:dongnerang/screens/mainScreenBar.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
@@ -35,8 +34,6 @@ class _mypageScreenState extends State<mypageScreen> {
   //애드몹 찐 ID
   final String iOSRealId = 'ca-app-pub-3415104781631988/3367223383';
   final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
-
-
   BannerAd? banner;
 
   late final SlidableController slidableController;
@@ -49,7 +46,7 @@ class _mypageScreenState extends State<mypageScreen> {
   late Future<List> userSaveData;
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
-  List valueBox = [];
+  List valueBox2 = [];
 
   bool closeTapContainer = false;
   double topContainer = 0;
@@ -57,32 +54,45 @@ class _mypageScreenState extends State<mypageScreen> {
   int colorindex = 0;
   int groupTagNumber = 0;
 
-  Future<void> getPostsData(value) async {
-    valueBox.add(value);
+  Future<void> getPostsData(value1, value2) async {
+    valueBox2 = [];
+    valueBox2.add(value2);
     listItems = [];
+    itemsData = [];
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
 
-    valueBox.forEach((element) {
-      valueData.add(value);
-    });
+    // print(valueBox2);
+    // valueBox2.sort((a,b) {
+    //   print("a : ${a}");
+    //   print("b : $b");
+    //   return 0;
+      // var adate = a['registrationdate']; //before -> var adate = a.expiry;
+      // var bdate = b['registrationdate']; //before -> var bdate = b.expiry;
+      // return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
+    // });
+
+    for(int i = 0; i < value2.length; i++){
+      valueData.add(value1[value2[i]]);
+    }
+
     responseList = valueData;
-    for(int i = 0; i< responseList[0].length; i++){
+    for(int i = 0; i< responseList.length; i++){
       // 문화재단 pri
-      if(responseList[0][i][1].toString().contains("_")){
+      if(responseList[i][1].toString().contains("_")){
         colorindex = 1;
       }else{
         colorindex = 0;
       }
 
-      DateTime dateTime = responseList[0][i][2].toDate();
+      DateTime dateTime = responseList[i][2].toDate();
       DateFormat dateFormat = DateFormat("yyyy-MM-dd");
-      colorindex = fnSeoulCnterCheck(responseList[0][i][1]);
+      colorindex = fnSeoulCnterCheck(responseList[i][1]);
       listItems.add( GestureDetector(
           onTap: () async{
-            final Uri url = Uri.parse('${responseList[0][i][0]}');
+            final Uri url = Uri.parse('${responseList[i][0]}');
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-                url, responseList[0][i][3], responseList[0][i][1], dateTime, 1
+                url, responseList[i][3], responseList[i][1], dateTime, 1
             )));
           },
           child: Container(
@@ -103,10 +113,10 @@ class _mypageScreenState extends State<mypageScreen> {
                         onPressed: (value) async {
                           final TextTemplate defaultText = TextTemplate(
                             text:
-                            '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${responseList[0][i][1]}]\n${responseList[0][i][3]}\n\n',
+                            '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${responseList[i][1]}]\n${responseList[i][3]}\n\n',
                             link: Link(
-                              webUrl: Uri.parse('${responseList[0][i][0]}'),
-                              mobileWebUrl: Uri.parse('${responseList[0][i][0]}'),
+                              webUrl: Uri.parse('${responseList[i][0]}'),
+                              mobileWebUrl: Uri.parse('${responseList[i][0]}'),
                             ),
                           );
                           bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
@@ -132,7 +142,7 @@ class _mypageScreenState extends State<mypageScreen> {
                       SlidableAction(
                         autoClose: true,
                         onPressed: (value){
-                          delPostsData(responseList[0][i][3],context);
+                          delPostsData(responseList[i][3],context);
                         },
                         backgroundColor: AppColors.grey,
                         foregroundColor: AppColors.white,
@@ -147,7 +157,7 @@ class _mypageScreenState extends State<mypageScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          '${responseList[0][i][3]}',
+                          '${responseList[i][3]}',
                           style: const TextStyle(fontSize: 14),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
@@ -179,7 +189,7 @@ class _mypageScreenState extends State<mypageScreen> {
                                         : Color(0xffEE6D01),
                                   ),
                                   child: Text(
-                                    ' ${responseList[0][i][1]} ',
+                                    ' ${responseList[i][1]} ',
                                     style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
                                     textDirection: ui.TextDirection.ltr,
                                   )
@@ -187,7 +197,7 @@ class _mypageScreenState extends State<mypageScreen> {
                             ),
                             SizedBox(width: 7),
                             Text(
-                              // '시작일 | ${responseList[0][i][2].toString().trim()}',
+                              // '시작일 | ${responseList[i][2].toString().trim()}',
                               '등록일 | ${dateFormat.format(dateTime)}',
                               style: const TextStyle(fontSize: 13, color: Colors.grey),
                               textDirection: ui.TextDirection.ltr,
@@ -216,7 +226,6 @@ class _mypageScreenState extends State<mypageScreen> {
   @override
   void initState() {
     super.initState();
-
     //애드몹
     banner = BannerAd(
       size: AdSize.fullBanner,
@@ -236,13 +245,6 @@ class _mypageScreenState extends State<mypageScreen> {
     // my page 데이터 적용 진행 중
     userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
     userSaveData.then((value){
-
-      value.sort((a,b) {
-        var adate = b[1][2]; //before -> var adate = a.expiry;
-        var bdate = b[1][2]; //before -> var bdate = b.expiry;
-        return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
-      });
-
       setState(() {
         value[0]?.forEach((element) {
           if(element.toString().contains('/')){
@@ -251,18 +253,18 @@ class _mypageScreenState extends State<mypageScreen> {
             userName = element.toString();
           }
         });
-        getPostsData(value[1]);
+        getPostsData(value[2],value[3]);
       });
     });
 
     controllers.addListener(() {
       double value = controllers.offset/119;
-
       setState(() {
         topContainer = value;
         closeTapContainer = controllers.offset > 50;
       });
     });
+
     FirebaseService.findVersion().then((value){
       setState(() {
         versionCode = value;
@@ -273,23 +275,14 @@ class _mypageScreenState extends State<mypageScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
     if(widget.StatusNumber == 1){
       userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
-      userSaveData.then((value){
-        setState(() {
-          value[0]?.forEach((element) {
-            if(element.toString().contains('/')){
-              profileImage = element.toString();
-            }else{
-              userName = element.toString();
-            }
-          });
-          getPostsData(value[1]);
-        });
+      userSaveData.then((value) {
+        // print("value[2] : ${value[2]}");
+        // print("value[1] : ${value[1]}");
+        getPostsData(value[2],value[3]);
       });
     }
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -412,28 +405,5 @@ Widget saveDataProfile(List itemsData, topContainer) {
     )
   );
 }
-
-
-// final BannerAd myBanner = BannerAd(
-//   adUnitId: 'ca-app-pub-3940256099942544/6300978111',
-//   size: AdSize.banner,
-//   request: AdRequest(),
-//   listener: BannerAdListener(),
-// );
-
-// final AdWidget adWidget = AdWidget(ad: myBanner);
-//
-// final Container adContainer = Container(
-//   alignment: Alignment.center,
-//   child: adWidget,
-//   width: myBanner.size.width.toDouble(),
-//   height: myBanner.size.height.toDouble(),
-// );
-
-// myBanner.load();
-
-// final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
-// final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
-//
 
 
