@@ -272,10 +272,11 @@ class _mypageScreenState extends State<mypageScreen> {
       });
     });
   }
-
   @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+  void didUpdateWidget(covariant mypageScreen oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    print("test");
     if(widget.StatusNumber == 1){
       userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
       userSaveData.then((value) {
@@ -284,6 +285,12 @@ class _mypageScreenState extends State<mypageScreen> {
         getPostsData(value[2],value[3]);
       });
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

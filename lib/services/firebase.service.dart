@@ -177,7 +177,7 @@ class FirebaseService {
             key: FieldValue.delete(),
           };
           checkDuplicate.reference.update(data);
-          // print(data);
+
           mypageScreen(1);
           // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
           //     builder: (BuildContext context) =>
@@ -204,9 +204,7 @@ class FirebaseService {
         getUserSaveKeyData.add(key);
       }
     });
-
     return [getUserData, getUserSaveData, checkDuplicate.data(), getUserSaveKeyData];
-
   }
 
   static Future<void> savePrivacyProfile(String email, List value, String key) async{
