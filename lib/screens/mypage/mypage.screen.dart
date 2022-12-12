@@ -55,6 +55,7 @@ class _mypageScreenState extends State<mypageScreen> {
   int groupTagNumber = 0;
 
   Future<void> getPostsData(value1, value2) async {
+    print(value2);
     valueBox2 = [];
     listItems = [];
     itemsData = [];
@@ -144,6 +145,12 @@ class _mypageScreenState extends State<mypageScreen> {
                         autoClose: true,
                         onPressed: (value){
                           delPostsData(responseList[i][3],context);
+                          userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
+                          userSaveData.then((value){
+                            setState(() {
+                              getPostsData(value[2],value[3]);
+                            });
+                          });
                         },
                         backgroundColor: AppColors.grey,
                         foregroundColor: AppColors.white,
@@ -219,9 +226,8 @@ class _mypageScreenState extends State<mypageScreen> {
   }
 
   Future<void> delPostsData(value, BuildContext context) async {
-    setState(() {
-      FirebaseService.deleteMypageUserPrivacyData(userEmail!, value!, context);
-    });
+    FirebaseService.deleteMypageUserPrivacyData(userEmail!, value!, context);print("test");
+
   }
 
   @override

@@ -177,7 +177,6 @@ class FirebaseService {
             key: FieldValue.delete(),
           };
           checkDuplicate.reference.update(data);
-
           mypageScreen(1);
           // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
           //     builder: (BuildContext context) =>
