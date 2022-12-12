@@ -56,14 +56,25 @@ class _mypageScreenState extends State<mypageScreen> {
 
   Future<void> getPostsData(value1, value2) async {
     valueBox2 = [];
-    valueBox2.add(value2);
     listItems = [];
     itemsData = [];
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
 
-    for(int i = value2.length - 1; i >= 0; i--){
-      valueData.add(value1[value2[i]]);
+    var defaultString = 'userSaveData';
+    List defatulNumber = [];
+
+    for(int i = 0; i < value2.length; i++){
+      valueBox2 = value2[i].toString().split("Data");
+      defatulNumber.add(int.parse(valueBox2[1]));
+    }
+    defatulNumber.sort((a,b) {
+      var adate = a; //before -> var adate = a.expiry;
+      var bdate = b; //before -> var bdate = b.expiry;
+      return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
+    });
+    for(int i = 0; i < defatulNumber.length; i++){
+      valueData.add(value1[defaultString+'${defatulNumber[i]}']);
     }
 
     responseList = valueData;

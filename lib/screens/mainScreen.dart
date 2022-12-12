@@ -676,7 +676,24 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                               ),
                                             ],
                                           )
-                                        : Text(value),
+                                        : value == '서울문화재단'
+                                          ? Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset('assets/images/seoulCultureland.png', width: size.width / 25),
+                                                InkWell(
+                                                  onTap: () {
+                                                    final Uri url = Uri.parse('https://www.sfac.or.kr/opensquare/notice/notice_list.do');
+                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                  },
+                                                  child: Padding(
+                                                      padding: EdgeInsets.all(5.0),
+                                                      child: Text(value)
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          : Text(value),
                                 // value: value, child: Text(value),시
                               );
                             }
