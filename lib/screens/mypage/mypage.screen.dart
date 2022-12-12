@@ -62,17 +62,7 @@ class _mypageScreenState extends State<mypageScreen> {
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
 
-    // print(valueBox2);
-    // valueBox2.sort((a,b) {
-    //   print("a : ${a}");
-    //   print("b : $b");
-    //   return 0;
-      // var adate = a['registrationdate']; //before -> var adate = a.expiry;
-      // var bdate = b['registrationdate']; //before -> var bdate = b.expiry;
-      // return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
-    // });
-
-    for(int i = 0; i < value2.length; i++){
+    for(int i = value2.length - 1; i >= 0; i--){
       valueData.add(value1[value2[i]]);
     }
 
