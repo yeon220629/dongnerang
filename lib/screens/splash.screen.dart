@@ -30,20 +30,18 @@ class _SplashScreenState extends State<SplashScreen> {
       androidId: 'com.dongnerang.com.dongnerang',
       iOSId: 'com.dongnerang.com.dongnerang',
     );
-    Timer(const Duration(milliseconds: 800), () {
-      checkNewVersion(newVersion);
-    });
+    checkNewVersion(newVersion);
     super.initState();
   }
 
   void checkNewVersion(NewVersion newVersion) async {
     final status = await newVersion.getVersionStatus();
-    print("status canUpdate : ${status?.canUpdate}");
-    print("status appStoreLink : ${status?.appStoreLink}");
-    print("status LocalVersion : ${status?.localVersion}");
-    print("status storeVersion : ${status?.storeVersion}");
-    print("status releaseNotes : ${status?.releaseNotes}");
-    print("status : ${status != null}");
+    // print("status canUpdate : ${status?.canUpdate}");
+    // print("status appStoreLink : ${status?.appStoreLink}");
+    // print("status LocalVersion : ${status?.localVersion}");
+    // print("status storeVersion : ${status?.storeVersion}");
+    // print("status releaseNotes : ${status?.releaseNotes}");
+    // print("status : ${status != null}");
 
     if(status != null) {
       // 업데이트 테스트
