@@ -680,7 +680,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                           ? Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
-                                                Image.asset('assets/images/seoulCultureland.png', width: size.width / 25),
+                                                Image.asset('assets/images/seoulCulture.png', width: size.width / 25),
                                                 InkWell(
                                                   onTap: () {
                                                     final Uri url = Uri.parse('https://www.sfac.or.kr/opensquare/notice/notice_list.do');
