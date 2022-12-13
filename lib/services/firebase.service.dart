@@ -167,7 +167,7 @@ class FirebaseService {
     });
   }
 
-  static Future<void> deleteMypageUserPrivacyData(String email, String title, BuildContext context) async {
+  static Future<void> deleteMypageUserPrivacyData(String email, String title, getPostsData) async {
     final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
     checkDuplicate.data()?.forEach((key, value) async {
       if(key.contains("userSaveData")){
@@ -177,12 +177,12 @@ class FirebaseService {
             key: FieldValue.delete(),
           };
           checkDuplicate.reference.update(data);
-          mypageScreen(1);
-          // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-          //     builder: (BuildContext context) =>
-          //         mainScreen()), (route) => false);
         }
       }
+    });
+    getUserPrivacyProfile(email).then((value) {
+      print("value : $value");
+      getPostsData(value[2],value[3]);
     });
   }
 

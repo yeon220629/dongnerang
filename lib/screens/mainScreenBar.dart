@@ -2,16 +2,12 @@ import 'dart:io';
 
 import 'package:dongnerang/screens/mypage/mypage.screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 
 import '../constants/colors.constants.dart';
-import '../constants/common.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
-import 'login.screen.dart';
 import 'mainScreen.dart';
-import 'setting/private.setting.screen.dart';
 
 class mainScreen extends StatefulWidget {
   const mainScreen({Key? key}) : super(key: key);
@@ -112,12 +108,7 @@ class mainScreenState extends State<mainScreen>{
                   onTap: (index) {
                     navigationController.currentBottomMenuIndex.value = index;
                     if(index == 1){
-                      // REFRESHSTATUSCODE = 1;
-                      // print("REFRESHSTATUSCODE : $REFRESHSTATUSCODE");
-                      // print(navigationController.currentBottomMenuIndex.value);
-
                       mypageScreen(navigationController.currentBottomMenuIndex.value);
-
                       setState(() {});
                     }
                   },

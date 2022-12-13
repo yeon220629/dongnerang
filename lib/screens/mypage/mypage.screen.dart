@@ -19,7 +19,7 @@ import 'mypage.inform.setting.screen.dart';
 
 class mypageScreen extends StatefulWidget {
   final StatusNumber;
-  const mypageScreen(this.StatusNumber);
+  mypageScreen(this.StatusNumber);
 
   @override
   State<mypageScreen> createState() => _mypageScreenState();
@@ -47,24 +47,24 @@ class _mypageScreenState extends State<mypageScreen> {
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
   List valueBox2 = [];
+  List<dynamic> responseListBox = [];
 
   bool closeTapContainer = false;
   double topContainer = 0;
-  int reloadindex = 0;
   int colorindex = 0;
   int groupTagNumber = 0;
+  int deleteState = 0;
 
   Future<void> getPostsData(value1, value2) async {
-    print(value2);
     valueBox2 = [];
     listItems = [];
     itemsData = [];
+    responseListBox = [];
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
-
-    var defaultString = 'userSaveData';
     List defatulNumber = [];
 
+    var defaultString = 'userSaveData';
     for(int i = 0; i < value2.length; i++){
       valueBox2 = value2[i].toString().split("Data");
       defatulNumber.add(int.parse(valueBox2[1]));
@@ -78,6 +78,7 @@ class _mypageScreenState extends State<mypageScreen> {
       valueData.add(value1[defaultString+'${defatulNumber[i]}']);
     }
 
+    responseListBox.add(valueData);
     responseList = valueData;
     for(int i = 0; i< responseList.length; i++){
       // 문화재단 pri
@@ -100,120 +101,62 @@ class _mypageScreenState extends State<mypageScreen> {
           child: Container(
               width: MediaQuery.of(context).size.width,
               height: 90,
-              // decoration: BoxDecoration(
-              //   border: Border.all(width: 1)
-              // ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
-                child: Slidable(
-                  groupTag: 0,
-                  endActionPane: ActionPane(
-                    motion: ScrollMotion(),
-                    children: [
-                      SlidableAction(
-                        autoClose: true,
-                        onPressed: (value) async {
-                          final TextTemplate defaultText = TextTemplate(
-                            text:
-                            '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${responseList[i][1]}]\n${responseList[i][3]}\n\n',
-                            link: Link(
-                              webUrl: Uri.parse('${responseList[i][0]}'),
-                              mobileWebUrl: Uri.parse('${responseList[i][0]}'),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0,0,8,0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '${responseList[i][3]}',
+                        style: const TextStyle(fontSize: 14),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                        maxLines: 2,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                                padding: EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: colorindex == 1
+                                      ? Color(0xff5496D2)
+                                      : colorindex == 0
+                                      ? Color(0xff3CC181)
+                                      : colorindex == 2
+                                      ? AppColors.darkgreen
+                                      : colorindex == 3
+                                      ? AppColors.primary
+                                      : colorindex == 4
+                                      ? AppColors.orange
+                                      : colorindex == 5
+                                      ? AppColors.red
+                                      : Color(0xffEE6D01),
+                                ),
+                                child: Text(
+                                  ' ${responseList[i][1]} ',
+                                  style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+                                  textDirection: ui.TextDirection.ltr,
+                                )
                             ),
-                          );
-                          bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
-                          if (isKakaoTalkSharingAvailable) {
-                            print('카카오톡으로 공유 가능');
-                            try{
-                              Uri uri =
-                              await ShareClient.instance.shareDefault(template: defaultText);
-                              await ShareClient.instance.launchKakaoTalk(uri);
-                              // EasyLoading.showSuccess("공유 완료");
-                            }catch (e){
-                              print('카카오톡 공유 실패 $e');
-                            }
-                          } else {
-                            print('카카오톡 미설치: 웹 공유 기능 사용 권장');
-                          }
-                        },
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: AppColors.white,
-                        icon: Icons.share,
-                        label: '공유',
-                      ),
-                      SlidableAction(
-                        autoClose: true,
-                        onPressed: (value){
-                          delPostsData(responseList[i][3],context);
-                          userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
-                          userSaveData.then((value){
-                            setState(() {
-                              getPostsData(value[2],value[3]);
-                            });
-                          });
-                        },
-                        backgroundColor: AppColors.grey,
-                        foregroundColor: AppColors.white,
-                        icon: Icons.delete,
-                        label: '삭제',
-                      ),
+                          ),
+                          SizedBox(width: 7),
+                          Text(
+                            // '시작일 | ${responseList[i][2].toString().trim()}',
+                            '등록일 | ${dateFormat.format(dateTime)}',
+                            style: const TextStyle(fontSize: 13, color: Colors.grey),
+                            textDirection: ui.TextDirection.ltr,
+                          ),
+                        ],
+                      )
                     ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0,0,8,0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          '${responseList[i][3]}',
-                          style: const TextStyle(fontSize: 14),
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Container(
-                                  padding: EdgeInsets.all(2),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: colorindex == 1
-                                        ? Color(0xff5496D2)
-                                        : colorindex == 0
-                                        ? Color(0xff3CC181)
-                                        : colorindex == 2
-                                        ? AppColors.darkgreen
-                                        : colorindex == 3
-                                        ? AppColors.primary
-                                        : colorindex == 4
-                                        ? AppColors.orange
-                                        : colorindex == 5
-                                        ? AppColors.red
-                                        : Color(0xffEE6D01),
-                                  ),
-                                  child: Text(
-                                    ' ${responseList[i][1]} ',
-                                    style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
-                                    textDirection: ui.TextDirection.ltr,
-                                  )
-                              ),
-                            ),
-                            SizedBox(width: 7),
-                            Text(
-                              // '시작일 | ${responseList[i][2].toString().trim()}',
-                              '등록일 | ${dateFormat.format(dateTime)}',
-                              style: const TextStyle(fontSize: 13, color: Colors.grey),
-                              textDirection: ui.TextDirection.ltr,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
                   ),
                 ),
               )
@@ -223,11 +166,6 @@ class _mypageScreenState extends State<mypageScreen> {
     setState(() {
       itemsData = listItems;
     });
-  }
-
-  Future<void> delPostsData(value, BuildContext context) async {
-    FirebaseService.deleteMypageUserPrivacyData(userEmail!, value!, context);print("test");
-
   }
 
   @override
@@ -263,7 +201,6 @@ class _mypageScreenState extends State<mypageScreen> {
         getPostsData(value[2],value[3]);
       });
     });
-
     controllers.addListener(() {
       double value = controllers.offset/119;
       setState(() {
@@ -282,12 +219,10 @@ class _mypageScreenState extends State<mypageScreen> {
   void didUpdateWidget(covariant mypageScreen oldWidget) {
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
-    print("test");
+    print("deleteState : ${deleteState}");
     if(widget.StatusNumber == 1){
       userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
       userSaveData.then((value) {
-        // print("value[2] : ${value[2]}");
-        // print("value[1] : ${value[1]}");
         getPostsData(value[2],value[3]);
       });
     }
@@ -376,7 +311,7 @@ class _mypageScreenState extends State<mypageScreen> {
                   child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 )
             ),
-            saveDataProfile(itemsData, topContainer),
+            saveDataProfile(itemsData, topContainer, responseListBox, userEmail!,getPostsData),
             //애드몹
             StatefulBuilder(
                 builder: (context, setState) => Container(height: 60,
@@ -391,33 +326,92 @@ class _mypageScreenState extends State<mypageScreen> {
   }
 }
 
-Widget saveDataProfile(List itemsData, topContainer) {
-  return Expanded(
-    child : SlidableAutoCloseBehavior(
-      closeWhenOpened: true,
-      closeWhenTapped: false,
-      child: ListView.builder(
-        itemCount: itemsData.length,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (c, i){
-          double scale = 1.0;
-          if (topContainer > 0.5){
-            scale = i + 0.5 - topContainer;
-            if (scale < 0 ) { scale = 0;}
-            else if (scale > 1) { scale = 1; }
-          }
-          return Align(
-            heightFactor: 1.1,
-            alignment: Alignment.topCenter,
-            child: itemsData[i],
-          );
-        },
-        // separatorBuilder: (BuildContext ctx, int idx) {
-        //   return Divider();
-        // },
-      ),
-    )
-  );
+class saveDataProfile extends StatefulWidget {
+  final itemsData; final topContainer; final responseListBox; final userEmail; final getPostsData;
+  saveDataProfile(this.itemsData, this.topContainer, this.responseListBox, this.userEmail,this.getPostsData);
+
+  @override
+  State<saveDataProfile> createState() => _saveDataProfileState();
+}
+
+class _saveDataProfileState extends State<saveDataProfile> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child : SlidableAutoCloseBehavior(
+          closeWhenOpened: true,
+          closeWhenTapped: false,
+          child: ListView.builder(
+            itemCount: widget.itemsData.length,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (c, i){
+              double scale = 1.0;
+              if (widget.topContainer > 0.5){
+                scale = i + 0.5 - widget.topContainer;
+                if (scale < 0 ) { scale = 0;}
+                else if (scale > 1) { scale = 1; }
+              }
+              return Align(
+                heightFactor: 1.1,
+                alignment: Alignment.topCenter,
+                // child: itemsData[i],
+                child: Slidable(
+                  child: widget.itemsData[i],
+                  key: ValueKey(1),
+                  groupTag: 0,
+                  endActionPane: ActionPane(
+                    motion: ScrollMotion(),
+                    children: [
+                      SlidableAction(
+                        autoClose: true,
+                        onPressed: (value) async {
+                          final TextTemplate defaultText = TextTemplate(
+                            text:
+                            '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${widget.responseListBox[0][i][1]}]\n${widget.responseListBox[0][i][3]}\n\n',
+                            link: Link(
+                              webUrl: Uri.parse('${widget.responseListBox[0][i][0]}'),
+                              mobileWebUrl: Uri.parse('${widget.responseListBox[0][i][0]}'),
+                            ),
+                          );
+                          bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
+                          if (isKakaoTalkSharingAvailable) {
+                            print('카카오톡으로 공유 가능');
+                            try{
+                              Uri uri =
+                              await ShareClient.instance.shareDefault(template: defaultText);
+                              await ShareClient.instance.launchKakaoTalk(uri);
+                              // EasyLoading.showSuccess("공유 완료");
+                            }catch (e){
+                              print('카카오톡 공유 실패 $e');
+                            }
+                          } else {
+                            print('카카오톡 미설치: 웹 공유 기능 사용 권장');
+                          }
+                        },
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: AppColors.white,
+                        icon: Icons.share,
+                        label: '공유',
+                      ),
+                      SlidableAction(
+                        autoClose: true,
+                        onPressed: (context){
+                          FirebaseService.deleteMypageUserPrivacyData(widget.userEmail!, widget.responseListBox[0][i][3]!,widget.getPostsData);
+                        },
+                        backgroundColor: AppColors.grey,
+                        foregroundColor: AppColors.white,
+                        icon: Icons.delete,
+                        label: '삭제',
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        )
+    );
+  }
 }
 
 
