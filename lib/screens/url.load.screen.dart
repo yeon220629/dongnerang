@@ -84,8 +84,18 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 webViewController?.goBack();
               } else {
                 print('더이상 뒤로갈페이지가 없습니다.');
-                mypageScreen(1);
-                Navigator.pop(context);
+                // Navigator.pop(context);
+                if(toggle != true){
+                  if(widget.i == 1){
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            mainScreen()), (route) => false);
+                  }else{
+                    Navigator.pop(context);
+                  }
+                }else{
+                  Navigator.pop(context);
+                }
                 // if(toggle == true){
                 //   if(widget.i == 0){
                 //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
@@ -144,7 +154,17 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 icon: Icon(Icons.arrow_back, color: Colors.black),
                 //페이지 리로드
                 onPressed: (){
-                  Navigator.pop(context);
+                  if(toggle != true){
+                    if(widget.i == 1){
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  mainScreen()), (route) => false);
+                    }else{
+                      Navigator.pop(context);
+                    }
+                  }else{
+                    Navigator.pop(context);
+                  }
                   // if(toggle == true){
                   //   // 메인 페이지
                   //   if(widget.i == 0){
