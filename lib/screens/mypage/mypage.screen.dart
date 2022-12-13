@@ -218,7 +218,6 @@ class _mypageScreenState extends State<mypageScreen> {
   }
   @override
   void didUpdateWidget(covariant mypageScreen oldWidget) {
-    print("didUpdateWidget  : ${widget.StatusNumber}");
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     if(widget.StatusNumber == 1){

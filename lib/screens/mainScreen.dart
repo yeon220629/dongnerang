@@ -553,7 +553,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         direction: Axis.horizontal,
                         isSelected: _selectedCenter,
                         onPressed: (int index) {
-                          print("DropdownValue : ${dropdownValue}");
                           setState(() {
                             for (int i = 0; i < _selectedCenter.length; i++) {
                               _selectedCenter[i] = i == index;
