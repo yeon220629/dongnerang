@@ -305,22 +305,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     WidgetsBinding.instance.addPostFrameCallback((_) => initPlugin());
     super.initState();
     FirebaseService.findBanner().then((value){
+      value.sort((a,b){
+        var adata = a['number'];
+        var bdata = b['number'];
+        return adata.compareTo(bdata);
+      });
+
       for(int i =0; i < value.length; i++){
-        // product.add( Image.network(value[i]['image'], fit: BoxFit.cover,));
         product.add(
             CachedNetworkImage(
               imageUrl: value[i]['image'], fit: BoxFit.cover,
-              // placeholder: (context, url) => CircularProgressIndicator(),
             )
         );
         bannerData.add(value[i]);
       }
-      // bannerData.sort((a,b) {
-      //   var adate = a['number']; //before -> var adate = a.expiry;
-      //   var bdate = b['number']; //before -> var bdate = b.expiry;
-      //   return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
-      // });
-
     });
     //애드몹
     // banner = BannerAd(

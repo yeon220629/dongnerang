@@ -53,7 +53,6 @@ class _mypageScreenState extends State<mypageScreen> {
   double topContainer = 0;
   int colorindex = 0;
   int groupTagNumber = 0;
-  int deleteState = 0;
 
   Future<void> getPostsData(value1, value2) async {
     valueBox2 = [];
@@ -219,7 +218,6 @@ class _mypageScreenState extends State<mypageScreen> {
   void didUpdateWidget(covariant mypageScreen oldWidget) {
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
-    print("deleteState : ${deleteState}");
     if(widget.StatusNumber == 1){
       userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
       userSaveData.then((value) {
@@ -375,7 +373,6 @@ class _saveDataProfileState extends State<saveDataProfile> {
                           );
                           bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
                           if (isKakaoTalkSharingAvailable) {
-                            print('카카오톡으로 공유 가능');
                             try{
                               Uri uri =
                               await ShareClient.instance.shareDefault(template: defaultText);
