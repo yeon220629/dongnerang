@@ -181,7 +181,6 @@ class FirebaseService {
       }
     });
     getUserPrivacyProfile(email).then((value) {
-      print("value : $value");
       getPostsData(value[2],value[3]);
     });
   }
