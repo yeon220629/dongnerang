@@ -70,7 +70,7 @@ class _introduceWidgetState extends State<inquireGoogleform> {
               child: Stack(
                 children: [
                   InAppWebView(
-                    initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse('bit.ly/dongnerangInquire'))),
+                    initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSdREaEl5md3baOYu_73VMoLdzPrWGaohr877d3ausfyLCJP0w/viewform'))),
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
                       webViewController = controller;
