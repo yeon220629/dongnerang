@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class bannerWidget extends StatefulWidget {
   final title; final link;
@@ -36,29 +38,58 @@ class _bannerWidgetState extends State<bannerWidget> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
   }
 
   @override
   Widget build(BuildContext context) {
-    List saveData = [];
+    if (Platform.isAndroid) {
+      return WillPopScope(
+        onWillPop: () {
+          var future = webViewController?.canGoBack();
+          future?.then((canGoBack) {
+            if (canGoBack) {
+              webViewController?.goBack();
+            } else {
+              print('더 이상 뒤로 갈 페이지가 없습니다.');
+              Navigator.pop(context);
+              //뒤로가기 시 처리코드
+            }
+          });
+          return Future.value(false);
+        },
+        child: platformCheck(),
+      );
+    }
+    return platformCheck();
+    // return GestureDetector(
+    //   child: platformCheck(),
+    //     onHorizontalDragUpdate: (details) {
+    //       int sensitivity = 8;
+    //       if (details.delta.dx > sensitivity) {
+    //         // Right Swipe
+    //       } else if(details.delta.dx < -sensitivity){
+    //         //Left Swipe
+    //       }
+    //   },
+    // );
+  }
+
+  Widget platformCheck() {
     return Scaffold(
       appBar: AppBar(
-        // title: Text('동네랑 소개'),
         elevation: 0.0,
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
-          // color: AppColors.green,
         ),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             //페이지 리로드
-            onPressed: (){
+            onPressed: () {
               Navigator.pop(context);
             }
         ),
         centerTitle: true,
-        title: Text(widget.title, style: TextStyle(color: Colors.black)) ,
+        title: Text(widget.title, style: TextStyle(color: Colors.black)),
         actions: [
         ],
       ),
@@ -69,7 +100,8 @@ class _bannerWidgetState extends State<bannerWidget> {
               child: Stack(
                 children: [
                   InAppWebView(
-                    initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse(widget.link))),
+                    initialUrlRequest: URLRequest(
+                        url: WebUri.uri(Uri.parse(widget.link))),
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
                       webViewController = controller;
@@ -80,7 +112,8 @@ class _bannerWidgetState extends State<bannerWidget> {
                         urlController.text = this.url;
                       });
                     },
-                    shouldOverrideUrlLoading: (controller, navigationAction) async {
+                    shouldOverrideUrlLoading: (controller,
+                        navigationAction) async {
                       var uri = navigationAction.request.url!;
 
                       if (![ "http", "https", "file", "chrome",

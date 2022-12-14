@@ -27,7 +27,6 @@ class MainViewModel {
   Future login() async {
     bool isInstalled = await isKakaoTalkInstalled();
     if (await AuthApi.instance.hasToken()) {
-    // if (await FirebaseAuth.instance.currentUser == null) {
       try {
             print("token 있음");
             if(isInstalled){

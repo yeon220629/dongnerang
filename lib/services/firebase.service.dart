@@ -20,16 +20,13 @@ class FirebaseService {
     return customTokenResponse.body;
   }
 
-  static Future<bool> findUserlocal(String email) async {
+  static Future<bool> findUserlocal(String? email) async {
     bool localCheck = false;
     final doc = await FirebaseFirestore.instance.collection("users").doc(email).get();
     doc.data()?.forEach((key, value) {
       if(key == 'local'){
         print("local true");
         localCheck = true;
-      }else{
-        print("local false");
-        localCheck = false;
       }
     });
     return localCheck;
@@ -153,15 +150,23 @@ class FirebaseService {
 
   static Future<void> deleteUserPrivacyData(String email, String title) async {
     final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
-    checkDuplicate.data()?.forEach((key, value) async {
-      if(key.contains("userSaveData")){
-        if(value[3] == title){
-          // print("key number : $key");
+    if(title == 'recentSearch'){
+      checkDuplicate.data()?.forEach((key, value) async {
+        if(key == "recentSearch"){
           var data = <String, dynamic>{
             key: FieldValue.delete(),
           };
           checkDuplicate.reference.update(data);
-          // print(data);
+        }
+      });
+    }
+    checkDuplicate.data()?.forEach((key, value) async {
+      if(key.contains("userSaveData")){
+        if(value[3] == title){
+          var data = <String, dynamic>{
+            key: FieldValue.delete(),
+          };
+          checkDuplicate.reference.update(data);
         }
       }
     });
@@ -206,10 +211,7 @@ class FirebaseService {
   }
 
   static Future<void> savePrivacyProfile(String email, List value, String key) async{
-    // print("email : $email");
-    // print("value : $value");
-    // final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
-      if(key.contains("keyword")){
+    if(key.contains("keyword")){
         await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
           key: value,
         }));
@@ -219,6 +221,11 @@ class FirebaseService {
           key: value,
         }));
       }
+    if(key.contains("recentSearch")){
+      await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
+        key: value,
+      }));
+    }
   }
 
   static Future<void> savePrivacyProfileSetting(String email, List value, List key) async{
@@ -256,4 +263,6 @@ class FirebaseService {
 
     return versionCode;
   }
+
+
 }

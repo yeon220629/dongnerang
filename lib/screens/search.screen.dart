@@ -36,6 +36,7 @@ class _searchScreenState extends State<searchScreen>
   double topContainer = 0;
   int colorindex = 0;
 
+  //최근검색어 담는 변수
   List ResentSearch = [];
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
@@ -167,12 +168,17 @@ class _searchScreenState extends State<searchScreen>
         getUserLocaldata.add(value[i]);
       }
     });
+    FirebaseService.getUserLocalData(userEmail!, 'recentSearch').then((value){
+      int ListData = value.length;
+      for(int i = 0; i < ListData; i++){
+        ResentSearch.add(value[i]);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -220,15 +226,23 @@ class _searchScreenState extends State<searchScreen>
                 },
                 onSubmitted: (value){
                   // 엔터 쳣을때 이벤트.
+                  if(ResentSearch.length == 8){
+                    ResentSearch.removeAt(0);
+                  }
                   ResentSearch.add(value);
+                  FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
                 },
               ),
             ),
           ),
           IconButton(onPressed: (){
             setState(() {
+              // 돋보기 버튼 클릭 했을때 이벤트
+              if(ResentSearch.length == 8){
+                ResentSearch.removeAt(0);
+              }
               ResentSearch.add(SearcheditingController.text);
-              // getPostsData(SearcheditingController.text);
+              FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
             });
           }, icon: Icon(Icons.search)),
           IconButton(onPressed: () {
@@ -236,6 +250,7 @@ class _searchScreenState extends State<searchScreen>
               SearcheditingController.clear();
               isTextEdit = true;
               label = '최근 검색어';
+              resetLabel = '전체 삭제';
               itemsData = [];
             });
           }, icon: Icon(Icons.clear, color: Colors.black))
@@ -259,6 +274,7 @@ class _searchScreenState extends State<searchScreen>
                             onPressed: (){
                               setState(() {
                                 ResentSearch = [];
+                                FirebaseService.deleteUserPrivacyData(userEmail!,"recentSearch");
                               });
                             },
                             child: Text("$resetLabel", style: TextStyle(
@@ -323,17 +339,9 @@ class _searchScreenState extends State<searchScreen>
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
           childAspectRatio: 1 / 0.25, //item 의 가로 1, 세로 2 의 비율
-          // mainAxisSpacing: 5, //수평 Padding
-          // crossAxisSpacing: 5, //수직 Padding
         ),
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            // color: AppColors.red,
-            // decoration: BoxDecoration(
-            //   border: Border(
-            //     bottom: BorderSide(width: 0.5)
-            //   )
-            // ),
             child: Column(
               children: [
                 Expanded(
@@ -357,6 +365,7 @@ class _searchScreenState extends State<searchScreen>
                               onPressed: (){
                                 setState(() {
                                   ResentSearch.remove(ResentSearch[index]);
+                                  FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
                                 });
                               },
                               icon: Icon(Icons.close)

@@ -1,12 +1,14 @@
 import 'dart:async';
 
+import 'package:dongnerang/screens/setting/private.setting.screen.dart';
 import 'package:dongnerang/screens/updatedialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:new_version/new_version.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import '../constants/colors.constants.dart';
+import '../services/firebase.service.dart';
 import 'login.screen.dart';
 import 'mainScreenBar.dart';
 import 'package:lottie/lottie.dart';
@@ -20,12 +22,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String _authStatus = 'Unknown';
 
   @override
   void initState() {
     // FirebaseAuth.instance.signOut();
     // GoogleSignIn().signOut();
+    // 버전 코드
     // final newVersion = NewVersion(
     //   androidId: 'com.dongnerang.com.dongnerang',
     //   iOSId: 'com.dongnerang.com.dongnerang',
@@ -37,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void checkNewVersion(NewVersion newVersion) async {
     final status = await newVersion.getVersionStatus();
-    // print("status canUpdate : ${status?.canUpdate}");
     // print("status appStoreLink : ${status?.appStoreLink}");
     // print("status LocalVersion : ${status?.localVersion}");
     // print("status storeVersion : ${status?.storeVersion}");
@@ -45,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if(status != null) {
       // 업데이트 테스트
       // if(!status.canUpdate) {
-      if(status.canUpdate) {
+      if(!status.canUpdate) {
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -64,11 +65,27 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> checkPermissions() async {
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      print("FirebaseAuth.instance.currentUser : ${FirebaseAuth.instance.currentUser}");
-      FirebaseAuth.instance.currentUser != null
-          ? Get.offAll(() => const mainScreen())
-          : Get.offAll(() => const LoginScreen());
+    Future.delayed(const Duration(milliseconds: 1000), () async {
+      if(FirebaseAuth.instance.currentUser != null){
+        print("FirebaseAuth.instance.currentUser : ${FirebaseAuth.instance.currentUser?.email.runtimeType}");
+        if(!await FirebaseService.findUserlocal(FirebaseAuth.instance.currentUser?.email)){
+          EasyLoading.showInfo("개인설정을 진행 해 주세요");
+          Get.offAll(() => privateSettingScreen());
+        }else{
+          Get.offAll(() => const mainScreen());
+        }
+      }else{
+        Get.offAll(() => const LoginScreen());
+      }
+      // print("FirebaseAuth.instance.currentUser : ${FirebaseAuth.instance.currentUser?.email.runtimeType}");
+      // if(!await FirebaseService.findUserlocal(FirebaseAuth.instance.currentUser?.email)){
+      //   EasyLoading.showInfo("개인설정을 진행 해 주세요");
+      //   Get.offAll(() => privateSettingScreen());
+      // }else{
+      //   FirebaseAuth.instance.currentUser != null
+      //       ? Get.offAll(() => const mainScreen())
+      //       : Get.offAll(() => const LoginScreen());
+      // }
     });
   }
 
