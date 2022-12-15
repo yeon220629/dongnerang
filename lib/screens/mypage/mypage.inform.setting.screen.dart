@@ -20,6 +20,8 @@ import '../../util/logger.service.dart';
 import '../mainScreenBar.dart';
 
 class mypageInformSettingScreen extends GetView<PrivateSettingController> {
+  final formKey = GlobalKey<FormState>();
+  
   String profilePhotoSetting = '';
   String profilenickSetting = '';
   List profileKeyword = [];
@@ -48,7 +50,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                     // print("PrivateLocalData : $PrivateLocalData");
                     // print("profilelocal : $profilelocal");
                     // print("profilelocal.isEmpty : ${profilelocal.isEmpty}");
-                    if (controller.formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance
                             .collection("users")
@@ -97,7 +99,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
         child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
           return KeyboardDismissOnTap(
             child: Form(
-              key: controller.formKey,
+              key: formKey,
               child: ListView(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                 children: [

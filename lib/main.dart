@@ -8,6 +8,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -16,15 +17,16 @@ import 'constants/common.constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
-  MobileAds.instance.initialize();      // 모바일 광고 SDK 초기화
+  KakaoSdk.init(nativeAppKey: KAKAO_NATIVE_APP_KEY);
+  MobileAds.instance.initialize(); // 모바일 광고 SDK 초기화
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
 }
 
-class ColorService { //기본 컬러 설정
+class ColorService {
+  //기본 컬러 설정
   static MaterialColor createMaterialColor(Color color) {
     List strengths = <double>[.05];
     Map<int, Color> swatch = {};
@@ -56,15 +58,25 @@ class MyApp extends StatelessWidget {
       title: '동네랑',
       theme: ThemeData(
         primaryColor: AppColors.primary,
-        primarySwatch: ColorService.createMaterialColor(const Color(0xff5B88E2)),
+        primarySwatch:
+            ColorService.createMaterialColor(const Color(0xff5B88E2)),
       ),
+      localizationsDelegates: [
+        // ... 앱 별 Localization Delegate를 여기에 정의
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en'), // 영어
+        const Locale('ko'), // 히브리어
+      ],
       home: const SplashScreen(),
       // home: const mainScreen(),
-      initialBinding: BindingsBuilder((){
+      initialBinding: BindingsBuilder(() {
         Get.put(UserService());
       }),
       builder: EasyLoading.init(),
     );
   }
-
 }

@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import '../services/user.service.dart';
 
 class PrivateSettingController extends GetxController {
-  final formKey = GlobalKey<FormState>();
+  // final formKey = GlobalKey<FormState>();
 
   final nicknameController = TextEditingController();
   final nameController = TextEditingController();

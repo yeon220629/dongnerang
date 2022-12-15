@@ -18,6 +18,8 @@ import '../../util/logger.service.dart';
 import '../mainScreenBar.dart';
 
 class privateSettingScreen extends GetView<PrivateSettingController> {
+  final formKey = GlobalKey<FormState>();
+  
   late birthDay ages;
   List keyword = [];
   List local = [];
@@ -77,7 +79,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
                     }
                     var checkValue = fnCheckValue(ages.toJson(), gender, local);
                     if(checkValue){
-                      if (controller.formKey.currentState!.validate()) {
+                      if (formKey.currentState!.validate()) {
                         try {
                           await FirebaseFirestore.instance
                               .collection("users")
@@ -119,7 +121,7 @@ class privateSettingScreen extends GetView<PrivateSettingController> {
         child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
             return KeyboardDismissOnTap(
               child: Form(
-                key: controller.formKey,
+                key: formKey,
                 child: ListView(
                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   children: [
