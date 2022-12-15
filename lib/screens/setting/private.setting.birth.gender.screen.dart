@@ -21,7 +21,7 @@ import '../mainScreenBar.dart';
 
 class privateSettingBirthGenderScreen
     extends GetView<PrivateSettingController> {
-     final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   late birthDay ages;
   String gender = '';
@@ -213,20 +213,23 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     widget.callback(birth);
+    print(size.width - 100);
     //생년월일 ui
     return Container(
         margin: EdgeInsets.only(top: 35),
         width: size.width,
-        height: size.height / 13,
+        height: size.height / 16.5,
         child: _DatePickerItem(
           children: <Widget>[
             CupertinoButton(
-                child: Text(
-                  '${date.year}년 ${date.month}월 ${date.day}일',
-                  style: const TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
+                child: Container(
+                    width: size.width - 130,
+                    child: Text(
+                      '${date.year}년 ${date.month}월 ${date.day}일',
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
+                    )),
                 onPressed: () => _showDialog(CupertinoDatePicker(
                       initialDateTime: date,
                       minimumYear: 1900,
@@ -256,7 +259,7 @@ class _DatePickerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(13),
         border: Border.all(
           width: 1,
           color: AppColors.grey,
@@ -301,10 +304,10 @@ class _genderChoiceState extends State<genderChoiceWidget> {
       padding: EdgeInsets.only(top: 35),
       child: SizedBox(
           width: size.width,
-          height: size.height / 13,
+          height: size.height / 16.5,
           child: ToggleButtons(
             borderWidth: 1,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(13),
             borderColor: AppColors.grey,
             color: Colors.grey,
             fillColor: AppColors.primary,

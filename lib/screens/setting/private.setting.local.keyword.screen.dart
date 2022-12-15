@@ -22,6 +22,7 @@ import '../mainScreenBar.dart';
 class privateSettingLocalKeywordScreen
     extends GetView<PrivateSettingController> {
   final formKey = GlobalKey<FormState>();
+
   List keyword = [];
   List local = [];
 
@@ -101,16 +102,7 @@ class privateSettingLocalKeywordScreen
         ],
         leading: IconButton(
             onPressed: () {
-              // Navigator.pop(context); //뒤로가기
-              // exit(0);
               Get.back();
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (BuildContext context) =>
-              //           privateSettingBirthGenderScreen()),
-              //   (route) => false,
-              // );
             },
             color: Colors.black,
             icon: Icon(Icons.arrow_back)),
@@ -128,10 +120,8 @@ class privateSettingLocalKeywordScreen
                     padding: EdgeInsets.only(top: 35),
                     child: Text(
                       "관심 키워드",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -146,8 +136,6 @@ class privateSettingLocalKeywordScreen
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  // Stack(
-                  // children: [
                   KeywordStateful(callback: (value) {
                     keyword.add(value);
                   }),
@@ -155,10 +143,8 @@ class privateSettingLocalKeywordScreen
                     padding: EdgeInsets.only(top: 30),
                     child: Text(
                       "지역 선택",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -178,13 +164,10 @@ class privateSettingLocalKeywordScreen
                   }),
                 ],
               ),
-              // ],
-              // ),
             ),
           );
         }),
       ),
-      // ),
     );
   }
 }
@@ -222,6 +205,7 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                     Container(
                       width: size.width,
                       height: size.height / 13,
+                      // height: 70,
                       child: TextFormField(
                         controller: myController,
                         decoration: InputDecoration(
@@ -274,7 +258,8 @@ class _KeywordStatefulState extends State<KeywordStateful> {
                         SizedBox(
                           width: size.width,
                           // margin: const EdgeInsets.only(right: 5),
-                          height: categoryHeight - 180,
+                          // height: categoryHeight - 180,
+                          height: 50,
                           // child: Center(
                           child: ListView(
                             // reverse: true,
@@ -352,20 +337,12 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
                   // direction: Axis.horizontal,
-                  // spacing: 2,
+                  spacing: size.width / 20,
                   runSpacing: 2.0,
                   children: <Widget>[...generate_tags(CustomData)],
                 ),
               ),
             ),
-            // Container(
-            //   padding: EdgeInsets.only(top: 10,bottom: 20),
-            //   child: Text(
-            //     "   * 지역 선택은 최대 3개까지 가능 합니다.",
-            //     style: TextStyle(
-            //         fontWeight: FontWeight.w600, color: AppColors.grey),
-            //   ),
-            // )
           ],
         ));
   }
@@ -377,13 +354,8 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   get_chip(name) {
     // String named = name;
     return ChoiceChip(
-      // showCheckmark: false,
       selected: selected_tags.contains(name),
       selectedColor: AppColors.primary,
-      // checkmarkColor: AppColors.primary,
-      // sel
-      // selectedColor: AppColors.primary,
-      // disabledColor: AppColors.primary,
       avatar: (name == "강남")
           ? CircleAvatar(
               backgroundImage: AssetImage('assets/images/GANGNAM.PNG'))
