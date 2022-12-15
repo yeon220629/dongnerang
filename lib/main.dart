@@ -62,14 +62,13 @@ class MyApp extends StatelessWidget {
             ColorService.createMaterialColor(const Color(0xff5B88E2)),
       ),
       localizationsDelegates: [
-        // ... 앱 별 Localization Delegate를 여기에 정의
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('en'), // 영어
-        const Locale('ko'), // 히브리어
+        Locale('en', 'US'),
+        Locale('ko', 'KR'),
       ],
       home: const SplashScreen(),
       // home: const mainScreen(),
