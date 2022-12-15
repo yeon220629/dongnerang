@@ -83,13 +83,6 @@ class privateSettingBirthGenderScreen
                             }));
                         EasyLoading.showSuccess("개인설정 추가 완료");
                         await FirebaseService.getCurrentUser();
-                        // Navigator.pushAndRemoveUntil(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (BuildContext context) =>
-                        //           privateSettingLocalKeywordScreen()),
-                        //   (route) => false,
-                        // );
                         Get.to(privateSettingLocalKeywordScreen());
                       } catch (e) {
                         logger.e(e);
@@ -196,14 +189,56 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => Container(
-        height: 216,
-        padding: const EdgeInsets.only(top: 6.0),
-        margin:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        color: CupertinoColors.systemBackground.resolveFrom(context),
-        child: SafeArea(
-          top: false,
-          child: child,
+        height: 290,
+        decoration: BoxDecoration(color: Colors.white),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CupertinoButton(
+                  child: Text(
+                    '취소',
+                    style: TextStyle(
+                      color: AppColors.red,
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      date = DateTime.now();
+                      birth.year = '';
+                      birth.month = '';
+                      birth.day = '';
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+                CupertinoButton(
+                  child: Text(
+                    '완료',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+            Container(
+              height: 220,
+              padding: const EdgeInsets.only(top: 6.0),
+              margin: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              color: CupertinoColors.systemBackground.resolveFrom(context),
+              child: SafeArea(
+                top: false,
+                child: child,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -218,18 +253,25 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
     return Container(
         margin: EdgeInsets.only(top: 35),
         width: size.width,
-        height: size.height / 16.5,
+        height: size.height / 13,
         child: _DatePickerItem(
           children: <Widget>[
             CupertinoButton(
                 child: Container(
                     width: size.width - 130,
-                    child: Text(
-                      '${date.year}년 ${date.month}월 ${date.day}일',
-                      style: const TextStyle(
-                        color: Colors.black,
-                      ),
-                    )),
+                    child: birth.year == ''
+                        ? Text(
+                            '생년월일을 입력해주세요',
+                            style: const TextStyle(
+                              color: AppColors.grey,
+                            ),
+                          )
+                        : Text(
+                            '${date.year}년 ${date.month}월 ${date.day}일',
+                            style: const TextStyle(
+                              color: Colors.black,
+                            ),
+                          )),
                 onPressed: () => _showDialog(CupertinoDatePicker(
                       initialDateTime: date,
                       minimumYear: 1900,
@@ -304,7 +346,7 @@ class _genderChoiceState extends State<genderChoiceWidget> {
       padding: EdgeInsets.only(top: 35),
       child: SizedBox(
           width: size.width,
-          height: size.height / 16.5,
+          height: size.height / 13,
           child: ToggleButtons(
             borderWidth: 1,
             borderRadius: BorderRadius.circular(13),
