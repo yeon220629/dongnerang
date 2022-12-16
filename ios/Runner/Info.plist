@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202212141</string>
+	<string>202212173</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3415104781631988~6504027773</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -47,6 +47,10 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NMFClientId</key>
+	<string>ikyjlcscfy</string>
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -54,6 +58,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Always and When In Use Usage</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Always</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>When In Use Usage</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>프로필 이미지 변경을 위해서, 사진앨범에 접근하도록 허용버튼을 눌러주세요.</string>
 	<key>NSUserTrackingUsageDescription</key>
@@ -287,25 +297,10 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>buildCount</key>
-	<string>1</string>
+	<string>3</string>
 	<key>buildDay</key>
-	<string>20221214</string>
+	<string>20221217</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-
-	<dict>
-	  <key>NMFClientId</key>
-	  <string>ikyjlcscfy</string>
-	  <key>io.flutter.embedded_views_preview</key>
-	  <true/>
-	  <key>NSAllowsArbitraryLoads</key>
-	  <true/>
-	  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	  <string>Always and When In Use Usage</string>
-	  <key>NSLocationAlwaysUsageDescription</key>
-	  <string>Always</string>
-	  <key>NSLocationWhenInUseUsageDescription</key>
-	  <string>When In Use Usage</string>
-	</dict>
 </dict>
 </plist>
