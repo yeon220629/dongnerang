@@ -69,6 +69,10 @@ dependencies:
   # crypto:
   crypto: ^3.0.2
 
+  # Naver map plugin
+  naver_map_plugin:
+    git: https://github.com/LBSTECH/naver_map_plugin.git
+
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
