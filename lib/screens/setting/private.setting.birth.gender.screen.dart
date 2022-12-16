@@ -165,7 +165,12 @@ class privateSettingBirthGenderScreen
                             print("항목 선택 안 한 것 이 있 음...");
                           }
                         },
-                        child: Text('다음'),
+                        child: Text(
+                          '다음',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(13),

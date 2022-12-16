@@ -52,51 +52,19 @@ class privateSettingLocalKeywordScreen
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('개인설정',
-                  style: TextStyle(
+              Container(
+                width: size.width,
+                child: Center(
+                  child: Text(
+                    '개인설정',
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.5,
-                      color: Colors.black)),
-              SizedBox(
-                width: 100,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
               ),
-              TextButton(
-                  onPressed: () async {
-                    if (keyword.isEmpty) {
-                      keyword.add('');
-                    }
-                    var checkValue = fnCheckValue(local);
-                    if (checkValue) {
-                      if (formKey.currentState!.validate()) {
-                        try {
-                          await FirebaseFirestore.instance
-                              .collection("users")
-                              .doc(UserService.to.currentUser.value?.email)
-                              .update(({
-                                "keyword": keyword[0],
-                                "local": local[0],
-                              }));
-                          CustomKeyword = [];
-                          keyword = [];
-                          EasyLoading.showSuccess("개인설정 추가 완료");
-                          await FirebaseService.getCurrentUser();
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      mainScreen()),
-                              (route) => false);
-                        } catch (e) {
-                          logger.e(e);
-                          EasyLoading.showSuccess("개인설정 추가 실패");
-                        }
-                      }
-                    } else {
-                      print("항목 선택 안 한 것 이 있 음...");
-                    }
-                  },
-                  child: Text("완료",
-                      style: TextStyle(color: Colors.black, fontSize: 15))),
             ],
           )
         ],
@@ -162,6 +130,57 @@ class privateSettingLocalKeywordScreen
                   TagKeywordStateful(callback: (value) {
                     local.add(value);
                   }),
+                  SizedBox(
+                    width: size.width,
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (keyword.isEmpty) {
+                          keyword.add('');
+                        }
+                        var checkValue = fnCheckValue(local);
+                        if (checkValue) {
+                          if (formKey.currentState!.validate()) {
+                            try {
+                              await FirebaseFirestore.instance
+                                  .collection("users")
+                                  .doc(UserService.to.currentUser.value?.email)
+                                  .update(({
+                                    "keyword": keyword[0],
+                                    "local": local[0],
+                                  }));
+                              CustomKeyword = [];
+                              keyword = [];
+                              EasyLoading.showSuccess("개인설정 추가 완료");
+                              await FirebaseService.getCurrentUser();
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          mainScreen()),
+                                  (route) => false);
+                            } catch (e) {
+                              logger.e(e);
+                              EasyLoading.showSuccess("개인설정 추가 실패");
+                            }
+                          }
+                        } else {
+                          print("항목 선택 안 한 것 이 있 음...");
+                        }
+                      },
+                      child: Text(
+                        '완료',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(13),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
