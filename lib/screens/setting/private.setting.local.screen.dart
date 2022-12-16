@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/setting/private.setting.birth.gender.screen.dart';
+import 'package:dongnerang/screens/setting/private.setting.keyword.screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,11 +19,9 @@ import '../../services/user.service.dart';
 import '../../util/logger.service.dart';
 import '../mainScreenBar.dart';
 
-class privateSettingLocalKeywordScreen
-    extends GetView<PrivateSettingController> {
+class privateSettingLocalScreen extends GetView<PrivateSettingController> {
   final formKey = GlobalKey<FormState>();
 
-  List keyword = [];
   List local = [];
 
   // 키워드 및 지역 변경 할 사항
@@ -32,7 +30,7 @@ class privateSettingLocalKeywordScreen
   get value => null;
 
   fnCheckValue(local) {
-    if (local.isEmpty) {
+    if (local.isEmpty || local[0].length == 0) {
       EasyLoading.showInfo("지역을 선택해 주세요");
       return false;
     }
@@ -80,250 +78,93 @@ class privateSettingLocalKeywordScreen
           return KeyboardDismissOnTap(
             child: Form(
               key: formKey,
-              child: ListView(
+              child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 35),
-                    child: Text(
-                      "관심 키워드",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: Text(
-                      "선택하신 관심 키워드에 따라\n개인 맞춤형 푸시 알림을 보내드려요",
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: AppColors.grey,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 30),
+                            child: Text(
+                              "지역 선택",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(
+                              "지역은 최대 3개 선택 가능하며,\n마이페이지-프로필 설정에서 변경 가능해요",
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: AppColors.grey,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          TagKeywordStateful(callback: (value) {
+                            print("value>>>");
+                            print(value);
+                            local.add(value);
+                          }),
+                        ],
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                  KeywordStateful(callback: (value) {
-                    keyword.add(value);
-                  }),
-                  Padding(
-                    padding: EdgeInsets.only(top: 30),
-                    child: Text(
-                      "지역 선택",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: Text(
-                      "지역은 최대 3개 선택 가능하며,\n마이페이지-프로필 설정에서 변경 가능해요",
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: AppColors.grey,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  TagKeywordStateful(callback: (value) {
-                    local.add(value);
-                  }),
-                  SizedBox(
-                    width: size.width,
-                    height: 55,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (keyword.isEmpty) {
-                          keyword.add('');
-                        }
-                        var checkValue = fnCheckValue(local);
-                        if (checkValue) {
-                          if (formKey.currentState!.validate()) {
-                            try {
-                              await FirebaseFirestore.instance
-                                  .collection("users")
-                                  .doc(UserService.to.currentUser.value?.email)
-                                  .update(({
-                                    "keyword": keyword[0],
-                                    "local": local[0],
-                                  }));
-                              CustomKeyword = [];
-                              keyword = [];
-                              EasyLoading.showSuccess("개인설정 추가 완료");
-                              await FirebaseService.getCurrentUser();
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          mainScreen()),
-                                  (route) => false);
-                            } catch (e) {
-                              logger.e(e);
-                              EasyLoading.showSuccess("개인설정 추가 실패");
+                    SizedBox(
+                      width: size.width,
+                      height: 55,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          var checkValue = fnCheckValue(local);
+                          if (checkValue) {
+                            if (formKey.currentState!.validate()) {
+                              try {
+                                await FirebaseFirestore.instance
+                                    .collection("users")
+                                    .doc(
+                                        UserService.to.currentUser.value?.email)
+                                    .update(({
+                                      "local": local[0],
+                                    }));
+                                // EasyLoading.showSuccess("개인설정 추가 완료");
+                                await FirebaseService.getCurrentUser();
+                                Get.to(privateSettingKeywordScreen());
+                              } catch (e) {
+                                logger.e(e);
+                                EasyLoading.showSuccess("개인설정 추가 실패");
+                              }
                             }
+                          } else {
+                            print("항목 선택 안 한 것 이 있 음...");
                           }
-                        } else {
-                          print("항목 선택 안 한 것 이 있 음...");
-                        }
-                      },
-                      child: Text(
-                        '완료',
-                        style: TextStyle(
-                          fontSize: 18,
+                        },
+                        child: Text(
+                          '다음',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(13),
+                          ),
                         ),
                       ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(13),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           );
         }),
       ),
     );
-  }
-}
-
-class KeywordStateful extends StatefulWidget {
-  late final Function callback;
-  KeywordStateful({required this.callback});
-
-  @override
-  State<KeywordStateful> createState() => _KeywordStatefulState();
-}
-
-class _KeywordStatefulState extends State<KeywordStateful> {
-  final myController = TextEditingController();
-  List tags = [];
-  List selected_tags = [];
-  List select_tags = [];
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final double categoryHeight = size.height * 0.30;
-
-    return Container(
-        margin: EdgeInsets.only(top: 35),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: FittedBox(
-                fit: BoxFit.fill,
-                alignment: Alignment.topCenter,
-                child: Column(
-                  children: [
-                    Container(
-                      width: size.width,
-                      height: size.height / 13,
-                      // height: 70,
-                      child: TextFormField(
-                        controller: myController,
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.search),
-                            color: AppColors.grey,
-                            // color: select_tags.add(myController.text) ? AppColors.grey : AppColors.primary,
-                            onPressed: () {
-                              if (myController.text == '') {
-                                EasyLoading.showInfo("공백은 등록 하실 수 없습니다.");
-                                return;
-                              }
-
-                              if (CustomKeyword.length != 0) {
-                                for (int i = 0; i < CustomKeyword.length; i++) {
-                                  if (CustomKeyword[i] == myController.text) {
-                                    EasyLoading.showInfo("중복값은 포함 될 수 없습니다..");
-                                    return;
-                                  }
-                                }
-                              }
-                              setState(() {
-                                select_tags.add(myController.text);
-                                CustomKeyword.add(myController.text);
-                                widget.callback(select_tags);
-                              });
-                              myController.clear();
-                            },
-                          ),
-                          hintText: '관심 키워드를 등록해주세요! ex)예술, 공간 등',
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(13)),
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: AppColors.primary,
-                              )),
-                          focusColor: AppColors.primary,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(13)),
-                            borderSide: BorderSide(
-                              color: AppColors.grey,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: size.width,
-                          // margin: const EdgeInsets.only(right: 5),
-                          // height: categoryHeight - 180,
-                          height: 50,
-                          // child: Center(
-                          child: ListView(
-                            // reverse: true,
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            // padding: EdgeInsets.all(5),
-                            children: <Widget>[...generate_tags(CustomKeyword)],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ));
-  }
-
-  //키워드 삭제 하는 부분으로 일단 보류
-  generate_tags(value) {
-    return value.map((tag) => get_chip(tag)).toList();
-  }
-
-  get_chip(name) {
-    return Padding(
-        padding: EdgeInsets.all(2),
-        child: Chip(
-          backgroundColor: AppColors.primary,
-          labelStyle:
-              TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          // deleteButtonTooltipMessage: '삭제하시겠습니까?',
-          deleteIcon: Icon(
-            Icons.close,
-            size: 15,
-          ),
-          deleteIconColor: Colors.white,
-          label: Text('$name'),
-          onDeleted: () {
-            setState(() {
-              CustomKeyword.remove(name);
-              select_tags.remove(name);
-            });
-          },
-        ));
   }
 }
 

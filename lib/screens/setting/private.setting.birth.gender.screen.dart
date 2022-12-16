@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/screens/setting/private.setting.local.keyword.screen.dart';
+import 'package:dongnerang/screens/setting/private.setting.local.screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -155,7 +155,7 @@ class privateSettingBirthGenderScreen
                                     }));
                                 // EasyLoading.showSuccess("개인설정 추가 완료");
                                 await FirebaseService.getCurrentUser();
-                                Get.to(privateSettingLocalKeywordScreen());
+                                Get.to(privateSettingLocalScreen());
                               } catch (e) {
                                 logger.e(e);
                                 EasyLoading.showSuccess("개인설정 추가 실패");
