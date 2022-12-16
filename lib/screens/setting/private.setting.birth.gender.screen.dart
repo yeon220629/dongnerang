@@ -57,52 +57,21 @@ class privateSettingBirthGenderScreen
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                '개인설정',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.5,
-                  color: Colors.black,
-                ),
-              ),
-              SizedBox(
-                width: 100,
-              ),
-              TextButton(
-                onPressed: () async {
-                  var checkValue = fnCheckValue(ages.toJson(), gender);
-                  if (checkValue) {
-                    if (formKey.currentState!.validate()) {
-                      try {
-                        await FirebaseFirestore.instance
-                            .collection("users")
-                            .doc(UserService.to.currentUser.value?.email)
-                            .update(({
-                              "age": ages.toJson(),
-                              "gender": gender,
-                            }));
-                        EasyLoading.showSuccess("개인설정 추가 완료");
-                        await FirebaseService.getCurrentUser();
-                        Get.to(privateSettingLocalKeywordScreen());
-                      } catch (e) {
-                        logger.e(e);
-                        EasyLoading.showSuccess("개인설정 추가 실패");
-                      }
-                    }
-                  } else {
-                    print("항목 선택 안 한 것 이 있 음...");
-                  }
-                },
-                child: Text(
-                  "다음",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
+              Container(
+                width: size.width,
+                child: Center(
+                  child: Text(
+                    '개인설정',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.5,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
             ],
-          )
+          ),
         ],
         leading: IconButton(
             onPressed: () {
@@ -117,50 +86,95 @@ class privateSettingBirthGenderScreen
           return KeyboardDismissOnTap(
             child: Form(
               key: formKey,
-              child: ListView(
+              child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 30),
-                    child: Text(
-                      "생년월일",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 30),
+                            child: Text(
+                              "생년월일",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(
+                              "생년월일 입력 시, 내 연령대에 맞는\n유용한 공공소식을 전해드려요",
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: AppColors.grey,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          AgeStatefulWidget(callback: (value) {
+                            ageValue = value;
+                          }),
+                          Padding(
+                            padding: EdgeInsets.only(top: 50),
+                            child: Text(
+                              "성별",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          genderChoiceWidget(callback: (value) {
+                            gender = value;
+                          }),
+                        ],
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: Text(
-                      "생년월일 입력 시, 내 연령대에 맞는\n유용한 공공소식을 전해드려요",
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: AppColors.grey,
+                    SizedBox(
+                      width: size.width,
+                      height: 55,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          var checkValue = fnCheckValue(ages.toJson(), gender);
+                          if (checkValue) {
+                            if (formKey.currentState!.validate()) {
+                              try {
+                                await FirebaseFirestore.instance
+                                    .collection("users")
+                                    .doc(
+                                        UserService.to.currentUser.value?.email)
+                                    .update(({
+                                      "age": ages.toJson(),
+                                      "gender": gender,
+                                    }));
+                                // EasyLoading.showSuccess("개인설정 추가 완료");
+                                await FirebaseService.getCurrentUser();
+                                Get.to(privateSettingLocalKeywordScreen());
+                              } catch (e) {
+                                logger.e(e);
+                                EasyLoading.showSuccess("개인설정 추가 실패");
+                              }
+                            }
+                          } else {
+                            print("항목 선택 안 한 것 이 있 음...");
+                          }
+                        },
+                        child: Text('다음'),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(13),
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  AgeStatefulWidget(callback: (value) {
-                    ageValue = value;
-                  }),
-                  Padding(
-                    padding: EdgeInsets.only(top: 50),
-                    child: Text(
-                      "성별",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  genderChoiceWidget(callback: (value) {
-                    gender = value;
-                  }),
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           );
@@ -253,7 +267,7 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
     return Container(
         margin: EdgeInsets.only(top: 35),
         width: size.width,
-        height: size.height / 13,
+        height: 55,
         child: _DatePickerItem(
           children: <Widget>[
             CupertinoButton(
@@ -346,7 +360,7 @@ class _genderChoiceState extends State<genderChoiceWidget> {
       padding: EdgeInsets.only(top: 35),
       child: SizedBox(
           width: size.width,
-          height: size.height / 13,
+          height: 55,
           child: ToggleButtons(
             borderWidth: 1,
             borderRadius: BorderRadius.circular(13),
