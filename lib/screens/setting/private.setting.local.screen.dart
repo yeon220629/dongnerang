@@ -87,7 +87,7 @@ class privateSettingLocalScreen extends GetView<PrivateSettingController> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 30),
+                            padding: EdgeInsets.only(top: 20),
                             child: Text(
                               "지역 선택",
                               style: TextStyle(
@@ -98,7 +98,7 @@ class privateSettingLocalScreen extends GetView<PrivateSettingController> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: EdgeInsets.only(top: 10),
                             child: Text(
                               "지역은 최대 3개 선택 가능하며,\n마이페이지-프로필 설정에서 변경 가능해요",
                               style: TextStyle(
@@ -186,19 +186,16 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-        margin: EdgeInsets.only(top: 35, bottom: 25),
+        margin: EdgeInsets.only(top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Container(
                 width: size.width / 1.2,
-                // alignment: C,
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
-                  // direction: Axis.horizontal,
                   spacing: size.width / 20,
-                  runSpacing: 2.0,
                   children: <Widget>[...generate_tags(CustomData)],
                 ),
               ),

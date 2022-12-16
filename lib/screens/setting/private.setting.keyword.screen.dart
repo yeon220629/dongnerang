@@ -28,20 +28,13 @@ class privateSettingKeywordScreen extends GetView<PrivateSettingController> {
   var select_tags = [];
   get value => null;
 
-  // fnCheckValue(local) {
-  //   if (local.isEmpty) {
-  //     EasyLoading.showInfo("지역을 선택해 주세요");
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   @override
   Widget build(BuildContext context) {
     Get.put(PrivateSettingController());
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -86,7 +79,7 @@ class privateSettingKeywordScreen extends GetView<PrivateSettingController> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 35),
+                            padding: EdgeInsets.only(top: 20),
                             child: Text(
                               "관심 키워드",
                               style: TextStyle(
@@ -95,7 +88,7 @@ class privateSettingKeywordScreen extends GetView<PrivateSettingController> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: EdgeInsets.only(top: 10),
                             child: Text(
                               "선택하신 관심 키워드에 따라\n개인 맞춤형 푸시 알림을 보내드려요",
                               style: TextStyle(
@@ -189,7 +182,7 @@ class _KeywordStatefulState extends State<KeywordStateful> {
     final double categoryHeight = size.height * 0.30;
 
     return Container(
-        margin: EdgeInsets.only(top: 35),
+        margin: EdgeInsets.only(top: 20),
         child: Column(
           children: [
             Padding(

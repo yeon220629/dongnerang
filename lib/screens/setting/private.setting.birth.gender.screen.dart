@@ -95,7 +95,7 @@ class privateSettingBirthGenderScreen
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 30),
+                            padding: EdgeInsets.only(top: 20),
                             child: Text(
                               "생년월일",
                               style: TextStyle(
@@ -106,7 +106,7 @@ class privateSettingBirthGenderScreen
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: EdgeInsets.only(top: 10),
                             child: Text(
                               "생년월일 입력 시, 내 연령대에 맞는\n유용한 공공소식을 전해드려요",
                               style: TextStyle(
@@ -270,7 +270,7 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
     print(size.width - 100);
     //생년월일 ui
     return Container(
-        margin: EdgeInsets.only(top: 35),
+        margin: EdgeInsets.only(top: 20),
         width: size.width,
         height: 55,
         child: _DatePickerItem(
@@ -362,7 +362,7 @@ class _genderChoiceState extends State<genderChoiceWidget> {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-      padding: EdgeInsets.only(top: 35),
+      padding: EdgeInsets.only(top: 20),
       child: SizedBox(
           width: size.width,
           height: 55,
