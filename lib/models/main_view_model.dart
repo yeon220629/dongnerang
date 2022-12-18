@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
+import 'package:dongnerang/screens/setting/private.setting.birth.gender.screen.dart';
 import 'package:dongnerang/screens/setting/private.setting.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -67,7 +68,7 @@ class MainViewModel {
               currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
               if (currentUser == null) {
                 EasyLoading.showError("회원가입 진행 필요");
-                Get.offAll(() => privateSettingScreen());
+                Get.offAll(() => privateSettingBirthGenderScreen());
               }
             }
             UserService.to.currentUser.value = currentUser;
@@ -117,7 +118,7 @@ class MainViewModel {
           });
           currentUser = await FirebaseService.findUserByEmail(user!.kakaoAccount!.email!);
 
-          Get.offAll(() => privateSettingScreen());
+          Get.offAll(() => privateSettingBirthGenderScreen());
         }else{
           // EasyLoading.showInfo("현재 사용자가 있습니다");
           UserService.to.currentUser.value = currentUser;
@@ -198,7 +199,7 @@ class MainViewModel {
       });
       currentUser = await FirebaseService.findUserByEmail(authResult.additionalUserInfo?.profile!['email']);
 
-      Get.offAll(() => privateSettingScreen());
+      Get.offAll(() => privateSettingBirthGenderScreen());
     }else{
       // EasyLoading.showInfo("현재 사용자가 있습니다");
       UserService.to.currentUser.value = currentUser;

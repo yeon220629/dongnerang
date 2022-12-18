@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dongnerang/screens/setting/private.setting.birth.gender.screen.dart';
 import 'package:dongnerang/screens/setting/private.setting.screen.dart';
 import 'package:dongnerang/screens/updatedialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -70,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
         print("FirebaseAuth.instance.currentUser : ${FirebaseAuth.instance.currentUser?.email.runtimeType}");
         if(!await FirebaseService.findUserlocal(FirebaseAuth.instance.currentUser?.email)){
           EasyLoading.showInfo("개인설정을 진행 해 주세요");
-          Get.offAll(() => privateSettingScreen());
+          Get.offAll(() => privateSettingBirthGenderScreen());
         }else{
           Get.offAll(() => const mainScreen());
         }
