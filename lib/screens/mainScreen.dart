@@ -21,6 +21,7 @@ import '../services/firebase.service.dart';
 import '../widgets/app_button.widget.dart';
 import 'banner/banner.dart';
 import 'notice.main.screen.dart';
+import 'onlie.url.screen.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -265,19 +266,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           maxLines: 1,
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(5.0),
-                      //   child: Text(
-                      //     '${post["title"]}',
-                      //     style: const TextStyle(fontSize: 15),
-                      //     overflow: TextOverflow.ellipsis,
-                      //     textAlign: TextAlign.justify,
-                      //     maxLines: 2,
-                      //   ),
-                      // ),
-                      // const SizedBox(
-                      //   height: 3,
-                      // ),
                       Expanded(
                           child: Row(
                             children: [
@@ -428,10 +416,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             foregroundColor: AppColors.primary,
             elevation: 0,
             title: DropdownButton2(
-              // style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.black),
-              // itemHeight: 10,
-              // enableFeedback: true,
-              // borderRadius: BorderRadius.circular(10),
               alignment: Alignment.center,
               focusColor: AppColors.primary,
               icon: const Icon(Icons.keyboard_arrow_down),
@@ -486,6 +470,37 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               ),
             ),
             actions: <Widget>[
+              TextButton(
+                  onPressed: (){
+                    print(fnOnlineUrl(dropdownValue));
+                    final Uri url = Uri.parse('${fnOnlineUrl(dropdownValue)}');
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlieUrl( url )));
+                  },
+                  // child: Text(  "동네접수",
+                  //   style: TextStyle( fontWeight: FontWeight.bold, ),
+                  // )
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                            width: 1.5,
+                            color: AppColors.primary,
+                        ),
+                        color: AppColors.white
+                      ),
+                      padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+                      child: Text(
+                        '동네접수',
+                        style: const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w500),
+                        textDirection: ui.TextDirection.ltr,
+                      )
+                  ),
+              ),
+              // IconButton(onPressed: (){
+              //   print(fnOnlineUrl(dropdownValue));
+              //   final Uri url = Uri.parse('${fnOnlineUrl(dropdownValue)}');
+              //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlieUrl( url )));
+              // }, icon: const Icon(Icons.add), color: AppColors.black,),
               IconButton(onPressed: (){
                 Navigator.push(
                     context,

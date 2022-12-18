@@ -237,3 +237,59 @@ int fnCenterCheck(centerValue){
   } return 0;
 }
 
+fnOnlineUrl(value){
+
+  print("dropDown Value : $value");
+
+  if(value == '중구'){
+    return 'http://www.junggu.seoul.kr/content.do?cmsid=14195';
+  }else if(value == '중랑'){
+    return 'https://www.jungnang.go.kr/portal/app/integrateApp/integrateList.do?programId=integrateApp&menuNo=200108';
+  }else if(value == '종로'){
+    return 'https://www.jongno.go.kr/portal/app/integrateApp/list.do?division=01&menuId=388366&menuNo=388366';
+  }else if(value == '은평'){
+    return 'https://www.ep.go.kr/www/selectUserCourseList.do?key=987&searchEdcKey=9';
+  }else if(value == '용산'){
+    return 'https://yedu.yongsan.go.kr/site/edtotal/lesson/userlist.do?sitecdv=S0000500&menucdv=02020000&decorator=user27EdTotal';
+  }else if(value == '영등포'){
+    return 'https://www.ydp.go.kr/reserve/index.do';
+  }else if(value == '양천'){
+    return 'https://www.yangcheon.go.kr/reservation/reservation/main.do';
+  }else if(value == '송파'){
+    return 'https://www.songpa.go.kr/www/userRecptMain.do?key=2173&';
+  }else if(value == '성북'){
+    return 'https://www.sb.go.kr/PageLink.do';
+  }else if(value == '성동'){
+    return 'https://www.sd.go.kr/reserve/index.do?';
+  }else if(value == '서초'){
+    return 'https://www.seocho.go.kr/site/seocho/ex/reservationMain/Sub_Main.do';
+  }else if(value == '서대문'){
+    return 'https://www.sdm.go.kr/educate/propose/information/app.do';
+  }else if(value == '마포'){
+    return 'https://www.mapo.go.kr/site/mll/edu/lecture_list';
+  }else if(value == '동작'){
+    return 'https://www.dongjak.go.kr/reservation/progrm/master/reservation/list.do?menuNo=400031';
+  }else if(value == '동대문'){
+    return 'https://www.ddm.go.kr/www/selectUserOnlineReceptionList.do?key=96';
+  }else if(value == '도봉'){
+    return 'https://www.dobong.go.kr/bbs.asp?code=10004125';
+  }else if(value == '노원'){
+    return 'https://www.nowon.kr/www/mlrd/onlineRcept/BD_selectOnlineRceptList.do#none';
+  }else if(value == '금천'){
+    return 'https://www.geumcheon.go.kr/reserve/webEdcLctreList.do?key=112&rep=1';
+  }else if(value == '구로'){
+    return 'https://www.guro.go.kr/yeyak/index.do';
+  }else if(value == '광진'){
+    return 'https://www.gwangjin.go.kr/portal/pgm/online/list.do?menuNo=200061';
+  }else if(value == '관악'){
+    return 'https://www.gwanak.go.kr/site/gwanak/ex/reservation/re00401.do?riType=A';
+  }else if(value == '강서'){
+    return 'https://www.gangseo.seoul.kr/reserve/re040101';
+  }else if(value == '강북'){
+    return 'https://www.gangbuk.go.kr/www/selectTnOnlineRceptWebList.do?key=12724';
+  }else if(value == '강동'){
+    return 'https://www.gangdong.go.kr/web/newreserve/reserve/list?basicType=reserveType_01';
+  }else if(value == '강남'){
+    return 'https://www.gangnam.go.kr/edu/lecture/edu/list.do?mid=ID04_02070201';
+  }
+}
