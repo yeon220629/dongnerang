@@ -131,7 +131,7 @@ class MainViewModel {
   }
   Future logout() async {
     FirebaseAuth.instance.signOut();
-    await UserApi.instance.unlink();
+    // await UserApi.instance.unlink();
     UserApi.instance.logout();
   }
   Future AppleLogout() async {
@@ -181,7 +181,6 @@ class MainViewModel {
     // print("authResult : ${authResult.additionalUserInfo}");
     var currentUser = await FirebaseService.findUserByEmail(
         authResult.additionalUserInfo?.profile!['email']);
-
 
     if (currentUser == null) {
       // await FirebaseAuth.instance.signInWithCustomToken(customToken);
