@@ -21,7 +21,7 @@ import '../services/firebase.service.dart';
 import '../widgets/app_button.widget.dart';
 import 'banner/banner.dart';
 import 'notice.main.screen.dart';
-import 'onlie.url.screen.dart';
+import 'online.url.screen.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -487,12 +487,17 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
                       child: Row(
                         children: [
-                          // Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
-                          Text(
-                            '$dropdownValue구신청',
-                            style: const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w500),
-                            textDirection: ui.TextDirection.ltr,
-                          )
+                          dropdownValue == '중구'
+                            ? Text(
+                                '$dropdownValue신청',
+                                style: const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w500),
+                                textDirection: ui.TextDirection.ltr,
+                              )
+                           : Text(
+                              '$dropdownValue구신청',
+                              style: const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w500),
+                              textDirection: ui.TextDirection.ltr,
+                            )
                         ],
                       )
                   ),
