@@ -472,13 +472,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             actions: <Widget>[
               TextButton(
                   onPressed: (){
-                    print(fnOnlineUrl(dropdownValue));
                     final Uri url = Uri.parse('${fnOnlineUrl(dropdownValue)}');
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlieUrl( url )));
                   },
-                  // child: Text(  "동네접수",
-                  //   style: TextStyle( fontWeight: FontWeight.bold, ),
-                  // )
                   child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
@@ -489,10 +485,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         color: AppColors.white
                       ),
                       padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                      child: Text(
-                        '동네접수',
-                        style: const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w500),
-                        textDirection: ui.TextDirection.ltr,
+                      child: Row(
+                        children: [
+                          // Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
+                          Text(
+                            '$dropdownValue구신청',
+                            style: const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w500),
+                            textDirection: ui.TextDirection.ltr,
+                          )
+                        ],
                       )
                   ),
               ),
