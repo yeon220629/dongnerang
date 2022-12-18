@@ -473,33 +473,38 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
               TextButton(
                   onPressed: (){
                     final Uri url = Uri.parse('${fnOnlineUrl(dropdownValue)}');
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlieUrl( url )));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlineUrl( url )));
                   },
                   child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                            width: 1.5,
-                            color: AppColors.primary,
-                        ),
-                        color: AppColors.white
-                      ),
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.circular(5),
+                      //   border: Border.all(
+                      //       width: 1.5,
+                      //       color: AppColors.primary,
+                      //   ),
+                      //   color: AppColors.white
+                      // ),
                       padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                      child: Row(
-                        children: [
-                          dropdownValue == '중구'
-                            ? Text(
-                                '$dropdownValue신청',
-                                style: const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w500),
-                                textDirection: ui.TextDirection.ltr,
-                              )
-                           : Text(
-                              '$dropdownValue구신청',
-                              style: const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w500),
-                              textDirection: ui.TextDirection.ltr,
-                            )
-                        ],
+                      child: Text(
+                        '동네신청',
+                        style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w700),
+                        textDirection: ui.TextDirection.ltr,
                       )
+                      // Row(
+                      //   children: [
+                      //     dropdownValue == '중구'
+                      //       ? Text(
+                      //           '$dropdownValue신청',
+                      //           style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w700),
+                      //           textDirection: ui.TextDirection.ltr,
+                      //         )
+                      //      : Text(
+                      //         '$dropdownValue구신청',
+                      //         style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w700),
+                      //         textDirection: ui.TextDirection.ltr,
+                      //       )
+                      //   ]
+                      // )
                   ),
               ),
               // IconButton(onPressed: (){

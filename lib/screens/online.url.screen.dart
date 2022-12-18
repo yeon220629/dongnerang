@@ -6,14 +6,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/common.constants.dart';
 
-class onlieUrl extends StatefulWidget {
+class onlineUrl extends StatefulWidget {
   final Uri s;
-  const onlieUrl(this.s);
+  const onlineUrl(this.s);
   @override
-  State<onlieUrl> createState() => _onlieUrlState();
+  State<onlineUrl> createState() => _onlineUrlState();
 }
 
-class _onlieUrlState extends State<onlieUrl> {
+class _onlineUrlState extends State<onlineUrl> {
 
   String url = '';
   double progress = 0;
