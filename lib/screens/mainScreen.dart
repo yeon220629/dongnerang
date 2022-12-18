@@ -12,15 +12,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
-import '../services/user.service.dart';
 import '../widgets/app_button.widget.dart';
 import 'banner/banner.dart';
 import 'notice.main.screen.dart';
@@ -139,6 +136,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       }
       if(centerName == centerLabel){
         if(post["center_name "].toString().contains(centerLabel!)){
+          // print("2022 강남페스티벌 문화센터 직원 만족도 조사 실시aa".length); 31
           listItems.add( GestureDetector(
               onTap: () async{
                 final Uri url = Uri.parse('${post["link"]}');
@@ -158,7 +156,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Padding(
+                        post["title"].length >= 31
+                          ? Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Text(
                             '${post["title"]}',
@@ -166,6 +165,16 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.justify,
                             maxLines: 2,
+                          ),
+                        )
+                        :Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '${post["title"]}',
+                            style: const TextStyle(fontSize: 15),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.justify,
+                            maxLines: 1,
                           ),
                         ),
                         Expanded(
@@ -235,7 +244,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Padding(
+                      post["title"].length >= 31
+                          ? Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
                           '${post["title"]}',
@@ -244,7 +254,27 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           textAlign: TextAlign.justify,
                           maxLines: 2,
                         ),
+                      )
+                          :Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          '${post["title"]}',
+                          style: const TextStyle(fontSize: 15),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
+                          maxLines: 1,
+                        ),
                       ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(5.0),
+                      //   child: Text(
+                      //     '${post["title"]}',
+                      //     style: const TextStyle(fontSize: 15),
+                      //     overflow: TextOverflow.ellipsis,
+                      //     textAlign: TextAlign.justify,
+                      //     maxLines: 2,
+                      //   ),
+                      // ),
                       // const SizedBox(
                       //   height: 3,
                       // ),
@@ -522,7 +552,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 enlargeCenterPage: true,
                                 viewportFraction: 1.0,
                                 aspectRatio: 16 / 9,
-                                initialPage: 2,
+                                initialPage: 0,
                               ),
                             ),
                             DotsIndicator(
@@ -583,34 +613,34 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         ),
                         children: CategoryCenter,
                       ),
-                      // SizedBox(width: size.width / 15),
+                      SizedBox(width: size.width / 7),
                       cuindex == 0
                           ? DropdownButton2(
-                            alignment: Alignment.center,
-                            // borderRadius: BorderRadius.circular(10),
-                            // iconEnabledColor: AppColors.primary,
-                            focusColor: AppColors.primary,
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            isExpanded: false,
-                            isDense: false,
-                            underline: Container(),
-                            value: defaultCenter,
-                            items: centerCheck.map( (value) {
-                              if(value == "전체"){
-                                return DropdownMenuItem (
-                                  alignment: Alignment.center,
-                                  value: value, child: Text("${value}"),
-                                );
-                              }else{
-                                return DropdownMenuItem (
-                                  alignment: Alignment.center,
-                                  value: value,
-                                  child: Text("  ${dropdownValue+value}  "),
-                                  // value: value, child: Text(value),
-                                );
-                              }
-                            },
-                            ).toList(),
+                              alignment: Alignment.center,
+                              // borderRadius: BorderRadius.circular(10),
+                              // iconEnabledColor: AppColors.primary,
+                              focusColor: AppColors.primary,
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              isExpanded: false,
+                              isDense: false,
+                              underline: Container(),
+                              value: defaultCenter,
+                              items: centerCheck.map( (value) {
+                                if(value == "전체"){
+                                  return DropdownMenuItem (
+                                    alignment: Alignment.center,
+                                    value: value, child: Text("${value}"),
+                                  );
+                                }else{
+                                  return DropdownMenuItem (
+                                    alignment: Alignment.center,
+                                    value: value,
+                                    child: Text("  ${dropdownValue+value}  "),
+                                    // value: value, child: Text(value),
+                                  );
+                                }
+                              },
+                              ).toList(),
                               onChanged: (value){
                                 setState(() {
                                   listItems = [];
@@ -618,27 +648,24 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   defaultCenter = value as String?;
                                   getPostsData(dropdownValue+"_"+defaultCenter!);
                                 }
-                              );
-                            },
-                            barrierColor: Colors.black.withOpacity(0.5),
-                            iconOnClick: Icon(Icons.keyboard_arrow_up),
-                            offset: const Offset(0, -3),
-                            dropdownDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          )
+                                );
+                              },
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              iconOnClick: Icon(Icons.keyboard_arrow_up),
+                              offset: const Offset(0, -3),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            )
                         : DropdownButton2(
-                          alignment: Alignment.center,
-                          // alignment: Alignment.center,
-                          // borderRadius: BorderRadius.circular(10),
-                          // iconEnabledColor: AppColors.primary,
-                          focusColor: AppColors.primary,
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          isExpanded: false,
-                          isDense: false,
-                          underline: Container(),
-                          value: SeouldefaultCenter,
-                          items: SeoulCheck.map( (value) {
+                            alignment: Alignment.center,
+                            focusColor: AppColors.primary,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            isExpanded: false,
+                            isDense: false,
+                            underline: Container(),
+                            value: SeouldefaultCenter,
+                            items: SeoulCheck.map( (value) {
                             if(value == "전체"){
                               return DropdownMenuItem (
                                 alignment: Alignment.center,
@@ -650,47 +677,47 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 value: value,
                                 child: value == '서울시청'
                                     ? Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
-                                        Text(value)
-                                      ],
-                                    )
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
+                                    Text(value)
+                                  ],
+                                )
                                     : value == '서울시문화원'
-                                        ? Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Image.asset('assets/images/culturewon.logo.png', width: size.width / 25),
-                                              InkWell(
-                                                onTap: () {
-                                                  final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
-                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                },
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(5.0),
-                                                  child: Text(value)
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        : value == '서울문화재단'
-                                          ? Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Image.asset('assets/images/seoulCulture.png', width: size.width / 25),
-                                                InkWell(
-                                                  onTap: () {
-                                                    final Uri url = Uri.parse('https://www.sfac.or.kr/opensquare/notice/notice_list.do');
-                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                  },
-                                                  child: Padding(
-                                                      padding: EdgeInsets.all(5.0),
-                                                      child: Text(value)
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          : Text(value),
+                                    ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/culturewon.logo.png', width: size.width / 25),
+                                    InkWell(
+                                      onTap: () {
+                                        final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                      },
+                                      child: Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Text(value)
+                                      ),
+                                    ),
+                                  ],
+                                )
+                                    : value == '서울문화재단'
+                                    ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/seoulCulture.png', width: size.width / 25),
+                                    InkWell(
+                                      onTap: () {
+                                        final Uri url = Uri.parse('https://www.sfac.or.kr/opensquare/notice/notice_list.do');
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                      },
+                                      child: Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Text(value)
+                                      ),
+                                    ),
+                                  ],
+                                )
+                                    : Text(value),
                                 // value: value, child: Text(value),시
                               );
                             }
@@ -731,7 +758,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                         children: [
                                                           Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
                                                           Text( " 서울시청", style: TextStyle( color: Colors.white,
-                                                            fontWeight: FontWeight.bold),
+                                                              fontWeight: FontWeight.bold),
                                                             textAlign: TextAlign.center,
                                                           ),
                                                         ],
@@ -740,10 +767,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                                   ),
                                                   Container(
                                                     child:AppTextButton( text: "분야별 새소식",
-                                                      onPressed: () async {
-                                                        final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
                                                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                    }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
                                                   Container(
                                                     child:AppTextButton( text: "이달의 행사 및 축제",
@@ -820,10 +847,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           dropdownDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
                 listLength > 0
                   ? Expanded(
                     child: ListView.builder(

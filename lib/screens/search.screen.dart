@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'dart:ui' as ui;
 
@@ -42,6 +43,24 @@ class _searchScreenState extends State<searchScreen>
   List<Widget> listItems = [];
   List? item = [];
   List getUserLocaldata = [];
+
+  // 실시간으로 변경 되는 단어들을 받기 위한 함수
+  Timer? _debounce;
+  _onSearchChanged(String text) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 1000), () {
+      if(ResentSearch.length == 8){
+        ResentSearch.removeAt(0);
+      }
+      //원하는 함수
+      if(text.isEmpty){
+        print("text가 공백입니다.");
+      }else{
+        ResentSearch.add(text);
+        FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
+      }
+    });
+  }
 
   Future<void> getPostsData(value) async {
     List<dynamic> valueData = [];
@@ -95,16 +114,27 @@ class _searchScreenState extends State<searchScreen>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          '${post["title"]}',
-                          style: const TextStyle(fontSize: 16),
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                        ),
-                      ),
+                        post["title"].length >= 31
+                          ? Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Text(
+                              '${post["title"]}',
+                              style: const TextStyle(fontSize: 15),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.justify,
+                              maxLines: 2,
+                            ),
+                          )
+                          :Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              '${post["title"]}',
+                              style: const TextStyle(fontSize: 15),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.justify,
+                              maxLines: 1,
+                            ),
+                          ),
                       // const SizedBox(
                       //   height: 11,
                       // ),
@@ -174,11 +204,17 @@ class _searchScreenState extends State<searchScreen>
         ResentSearch.add(value[i]);
       }
     });
+    SearcheditingController = new TextEditingController()
+      ..addListener(() {
+        _onSearchChanged(SearcheditingController.text);
+      });
+    ResentSearch = [];
   }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -235,16 +271,16 @@ class _searchScreenState extends State<searchScreen>
               ),
             ),
           ),
-          IconButton(onPressed: (){
-            setState(() {
-              // 돋보기 버튼 클릭 했을때 이벤트
-              if(ResentSearch.length == 8){
-                ResentSearch.removeAt(0);
-              }
-              ResentSearch.add(SearcheditingController.text);
-              FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
-            });
-          }, icon: Icon(Icons.search)),
+          // IconButton(onPressed: (){
+          //   setState(() {
+          //     // 돋보기 버튼 클릭 했을때 이벤트
+          //     if(ResentSearch.length == 8){
+          //       ResentSearch.removeAt(0);
+          //     }
+          //     ResentSearch.add(SearcheditingController.text);
+          //     FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
+          //   });
+          // }, icon: Icon(Icons.search)),
           IconButton(onPressed: () {
             setState(() {
               SearcheditingController.clear();

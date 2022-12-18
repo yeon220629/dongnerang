@@ -7,6 +7,7 @@ import 'package:dongnerang/screens/setting/notification.screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../constants/colors.constants.dart';
 import '../../models/main_view_model.dart';
 import '../../services/kakao_login.dart';
@@ -73,6 +74,18 @@ class SettingsPage extends StatelessWidget {
             ListTile(
               leading:  Icon(Icons.star_border_outlined),
               title: Text('현재버전 v${versionCode}'),
+              onTap: (){
+                final appId = Platform.isAndroid ? 'com.dongnerang.com.dongnerang' : 'com.dongnerang.com.dongnerang';
+                final url = Uri.parse(
+                  Platform.isAndroid
+                      ? "market://details?id=$appId"
+                      : "https://apps.apple.com/app/id$appId",
+                );
+                launchUrl(
+                  url,
+                  mode: LaunchMode.externalApplication,
+                );
+              },
             ),
           ListTile(
             leading:  Icon(Icons.logout),

@@ -28,12 +28,12 @@ class _SplashScreenState extends State<SplashScreen> {
     // FirebaseAuth.instance.signOut();
     // GoogleSignIn().signOut();
     // 버전 코드
-    // final newVersion = NewVersion(
-    //   androidId: 'com.dongnerang.com.dongnerang',
-    //   iOSId: 'com.dongnerang.com.dongnerang',
-    // );
-    // checkNewVersion(newVersion);
-    checkPermissions();
+    final newVersion = NewVersion(
+      androidId: 'com.dongnerang.com.dongnerang',
+      iOSId: 'com.dongnerang.com.dongnerang',
+    );
+    checkNewVersion(newVersion);
+    // checkPermissions();
     super.initState();
   }
 
@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if(status != null) {
       // 업데이트 테스트
       // if(!status.canUpdate) {
-      if(!status.canUpdate) {
+      if(status.canUpdate) {
         showDialog(
           context: context,
           builder: (BuildContext context) {

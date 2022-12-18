@@ -11,6 +11,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:new_version/new_version.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
@@ -170,8 +171,6 @@ class _mypageScreenState extends State<mypageScreen> {
   @override
   void initState() {
     super.initState();
-    print("initState  : ${widget.StatusNumber}");
-
     //애드몹
     banner = BannerAd(
       size: AdSize.fullBanner,
@@ -239,9 +238,16 @@ class _mypageScreenState extends State<mypageScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.settings, color: Colors.black),
-            onPressed: () {
+            onPressed: () async {
+              final newVersion = NewVersion(
+                androidId: 'com.dongnerang.com.dongnerang',
+                iOSId: 'com.dongnerang.com.dongnerang',
+              );
+
+              final status = await newVersion.getVersionStatus();
+
               Navigator.push(context, MaterialPageRoute(
-                  builder: (_) => SettingsPage(versionCode))
+                  builder: (_) => SettingsPage(status?.storeVersion))
               );
             },
           )

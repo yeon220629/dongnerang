@@ -39,21 +39,14 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
                 children: [
                   SizedBox(height: size.height / 6.5,),
-                  Image.asset('assets/images/logo.png',fit: BoxFit.cover,
-                    height: size.height / 11.8,
-                  ),
+                  Image.asset('assets/images/logo.png',fit: BoxFit.cover, height: size.height / 11.8,),
                   SizedBox(height: 10,),
-                  const Text(
-                    "내가 찾는 우리 동네의 공공소식",
-                    style: TextStyle(fontSize: 17, color: AppColors.primary),
-                  ),
+                  const Text( "내가 찾는 우리 동네의 공공소식",
+                    style: TextStyle(fontSize: 17, color: AppColors.primary),),
                   SizedBox(height: size.height / 3.3,),
                   InkWell(
-                      onTap: () async {
-                        await viewModel.login();
-                      },
-                      child:
-                      Image.asset('assets/images/kakao_login_large_wide.png', width: size.width/1.25,)
+                      onTap: () async { await viewModel.login(); },
+                      child: Image.asset('assets/images/kakao_login_large_wide.png', width: size.width/1.25,)
                   ),
                   Platform.isAndroid == true
                     ? SizedBox()

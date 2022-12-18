@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202212141</string>
+	<string>202212181</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3415104781631988~6504027773</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -289,7 +289,7 @@
 	<key>buildCount</key>
 	<string>1</string>
 	<key>buildDay</key>
-	<string>20221214</string>
+	<string>20221218</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

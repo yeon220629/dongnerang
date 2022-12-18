@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'dart:io';
 import 'login.screen.dart';
 import 'mainScreenBar.dart';
 
 class UpdateDialog extends StatefulWidget {
   final String version;
   final String description;
-  final String appLink;
+  late String appLink;
   final bool allowDismissal;
 
-  const UpdateDialog({Key? key,
+  UpdateDialog({Key? key,
     this.version = " ",
     required this.description,
     required this.appLink,
@@ -144,7 +144,9 @@ class _UpdateDialogState extends State<UpdateDialog> {
                           flex: 5,
                           child: SingleChildScrollView(
                             child: Text(
-                              widget.description,
+                              // widget.description,
+                              // "문구 테스트"
+                              "${widget.version} 버전이 업데이트 되었습니다. \n\n버그 수정 및 앱 안정성이 향상된 최신 버전을 이용하시기 바랍니다."
                             ),
                           ),
                         ),
@@ -194,7 +196,22 @@ class _UpdateDialogState extends State<UpdateDialog> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () async {
-                              await launchUrl(Uri.parse(widget.appLink));
+                              // String relaceLink = widget.appLink;
+                              // if(widget.appLink.contains('&hl=en')){
+                              //   relaceLink = widget.appLink.replaceAll('&hl=en', '');
+                              // }
+                              final appId = Platform.isAndroid ? 'com.dongnerang.com.dongnerang' : 'com.dongnerang.com.dongnerang';
+                              final url = Uri.parse(
+                                Platform.isAndroid
+                                    ? "market://details?id=$appId"
+                                    : "https://apps.apple.com/app/id$appId",
+                              );
+                              launchUrl(
+                                url,
+                                mode: LaunchMode.externalApplication,
+                              );
+                              // await launchUrl(Uri.parse(relaceLink));
+                              // await launchUrl(Uri.https("play.google.com", "/store/apps/details", {"id": "com.dongnerang.com.dongnerang"}));
                             },
                             child: Container(
                               height: 30,
