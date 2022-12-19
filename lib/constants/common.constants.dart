@@ -88,6 +88,7 @@ final urlController = TextEditingController();
 
 // 개인설정 공통값
 List CustomKeyword = [];
+List Privatekeyword = [];
 List mypageCustomKeyword = [];
 List mypageCustomlocal = [];
 List PrivateLocalData = [];

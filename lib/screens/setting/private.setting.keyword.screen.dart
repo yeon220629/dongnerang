@@ -21,8 +21,6 @@ import '../mainScreenBar.dart';
 class privateSettingKeywordScreen extends GetView<PrivateSettingController> {
   final formKey = GlobalKey<FormState>();
 
-  List keyword = [];
-
   // 키워드 및 지역 변경 할 사항
   var selected_tags = [];
   var select_tags = [];
@@ -99,7 +97,7 @@ class privateSettingKeywordScreen extends GetView<PrivateSettingController> {
                             ),
                           ),
                           KeywordStateful(callback: (value) {
-                            keyword.add(value);
+                            Privatekeyword.add(value);
                           }),
                         ],
                       ),
@@ -109,19 +107,31 @@ class privateSettingKeywordScreen extends GetView<PrivateSettingController> {
                       height: 55,
                       child: ElevatedButton(
                         onPressed: () async {
-                          if (keyword.isEmpty) {
-                            keyword.add('');
+                          var resultList = [];
+                          if (Privatekeyword.isEmpty) {
+                            Privatekeyword.add('');
                           }
+                          for (int i = 0; i < Privatekeyword.length; i ++){
+                            for(var i in Privatekeyword[i]){
+                              if(resultList.contains(i)){
+                                print("값이 이미 있음..");
+                              }else{
+                                resultList.add(i);
+                              }
+                            }
+                          }
+                          // print("After : $resultList");
+
                           if (formKey.currentState!.validate()) {
                             try {
                               await FirebaseFirestore.instance
                                   .collection("users")
                                   .doc(UserService.to.currentUser.value?.email)
                                   .update(({
-                                    "keyword": keyword[0],
+                                    "keyword": resultList,
                                   }));
                               CustomKeyword = [];
-                              keyword = [];
+                              Privatekeyword = [];
                               EasyLoading.showSuccess("개인설정 추가 완료");
                               await FirebaseService.getCurrentUser();
                               Navigator.pushAndRemoveUntil(
