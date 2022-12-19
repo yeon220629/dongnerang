@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202212185</string>
+	<string>202212191</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3415104781631988~6504027773</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -70,7 +70,7 @@
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
-			<string>4pfyvq9l8r.skadnetwork </string>
+			<string>4pfyvq9l8r.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
@@ -287,9 +287,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>buildCount</key>
-	<string>5</string>
+	<string>1</string>
 	<key>buildDay</key>
-	<string>20221218</string>
+	<string>20221219</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

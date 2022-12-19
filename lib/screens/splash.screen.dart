@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> checkPermissions() async {
-    Future.delayed(const Duration(milliseconds: 1000), () async {
+    Future.delayed(const Duration(milliseconds: 500), () async {
       if(FirebaseAuth.instance.currentUser != null){
         print("FirebaseAuth.instance.currentUser : ${FirebaseAuth.instance.currentUser?.email.runtimeType}");
         if(!await FirebaseService.findUserlocal(FirebaseAuth.instance.currentUser?.email)){
@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         // bottom: true,
       child: SizedBox(
@@ -105,22 +105,28 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   // SizedBox(height: 20),
-                  Image.asset("assets/images/app_logo_white.png", width: 180, height: 180,)
+                  Image.asset("assets/images/newlogo.png")
                 ],
               ),
             ),
-            Lottie.asset(
-              'assets/lottie/68894-running.json',
-              width: 100,
-              height: 100,
-              fit: BoxFit.fill,
-            ),
-            const Text(
-              "yeon",
-              style: TextStyle(fontSize: 20, color: AppColors.white),
-            ),
-            const SizedBox(height: 20),
-
+                // Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                // children: <Widget>[
+                  // SizedBox(height: 50),
+                  // Lottie.asset(
+                  //   'assets/lottie/68894-running.json',
+                  //   width: 100,
+                  //   height: 100,
+                  //   fit: BoxFit.fill,
+                  // ),
+                  // Image.asset("assets/images/logo.png", width: 80, height: 80,)
+              //   ],
+              // ),
+            // const Text(
+            //   "yeon",
+            //   style: TextStyle(fontSize: 20, color: AppColors.white),
+            // ),
+            // const SizedBox(height: 20),
           ]),
         ),
       ),

@@ -8,6 +8,7 @@ import '../constants/colors.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
 import 'mainScreen.dart';
+import 'splash.screen.dart';
 
 class mainScreen extends StatefulWidget {
   const mainScreen({Key? key}) : super(key: key);
@@ -104,6 +105,14 @@ class mainScreenState extends State<mainScreen>{
                       ),
                       label: "마이페이지",
                     ),
+                    // BottomNavigationBarItem(
+                    //   icon: Icon(
+                    //     navigationController.currentBottomMenuIndex.value == 1
+                    //         ? Icons.person
+                    //         : Icons.person_outline_outlined,
+                    //   ),
+                    //   label: "테스트페이지",
+                    // ),
                   ],
                   onTap: (index) {
                     navigationController.currentBottomMenuIndex.value = index;
