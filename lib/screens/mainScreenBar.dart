@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dongnerang/screens/mypage/mypage.screen.dart';
+import 'package:dongnerang/screens/naver.map.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -80,14 +81,9 @@ class mainScreenState extends State<mainScreen>{
                   type: BottomNavigationBarType.fixed,
                   showSelectedLabels: true,
                   showUnselectedLabels: true,
-                  selectedItemColor:
-                  navigationController.currentBottomMenuIndex.value == 0
-                      ? AppColors.primary
-                      : AppColors.grey,
-                  unselectedItemColor:
-                  navigationController.currentBottomMenuIndex.value == 1
-                      ? AppColors.primary
-                      : AppColors.grey,
+                  selectedItemColor: AppColors.primary,
+                  unselectedItemColor: AppColors.grey,
+                  currentIndex: navigationController.currentBottomMenuIndex.value,
                   items: [
                     BottomNavigationBarItem(
                       icon: Icon(
@@ -100,6 +96,14 @@ class mainScreenState extends State<mainScreen>{
                     BottomNavigationBarItem(
                       icon: Icon(
                         navigationController.currentBottomMenuIndex.value == 1
+                            ? Icons.location_on
+                            : Icons.location_on_outlined,
+                      ),
+                      label: "공간",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        navigationController.currentBottomMenuIndex.value == 2
                             ? Icons.person
                             : Icons.person_outline_outlined,
                       ),
@@ -131,6 +135,7 @@ class mainScreenState extends State<mainScreen>{
             index: navigationController.currentBottomMenuIndex.value,
             children: [
               freeComponent_viewpage(),
+              naverMapScreen(),
               mypageScreen(navigationController.currentBottomMenuIndex.value),
               // privateSettingScreen(),
               // LoginScreen(),
