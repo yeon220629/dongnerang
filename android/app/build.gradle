@@ -51,7 +51,7 @@ android {
         minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
         //버전 수정하는 곳
-        versionCode 20
+        versionCode 21
         versionName flutterVersionName
     }
 

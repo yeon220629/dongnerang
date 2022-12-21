@@ -487,7 +487,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                       padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
                       child: Text(
                         '동네신청 📝',
-                        style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w700),
+                        style: const TextStyle(fontSize: 15, color: Colors.black),
                         textDirection: ui.TextDirection.ltr,
                       )
                       // Row(

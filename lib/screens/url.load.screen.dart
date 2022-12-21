@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../constants/colors.constants.dart';
 import 'mypage/mypage.screen.dart';
@@ -23,6 +24,15 @@ class urlLoadScreen extends StatefulWidget {
 }
 
 class _urlLoadScreenState extends State<urlLoadScreen> {
+  //애드몹 테스트 ID
+  final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
+  final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
+
+  //애드몹 찐 ID
+  final String iOSRealId = 'ca-app-pub-3415104781631988/3367223383';
+  final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
+  BannerAd? banner;
+
   bool toggle = false;
 
   InAppWebViewController? webViewController;
@@ -47,6 +57,15 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
   @override
   void initState() {
     super.initState();
+    //애드몹
+    banner = BannerAd(
+      size: AdSize.fullBanner,
+      // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
+      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
+      listener: BannerAdListener(),
+      request: AdRequest(),
+    )..load();
+
     String? userEmail = FirebaseAuth.instance.currentUser?.email;
     // 사용자 북마크 클릭시 저장 여부 판단 부분 -> 현재 return 값을 bool 값으로 주고있음
     Future<bool> toggleVal = FirebaseService.getUserSaveToggleData(userEmail!,widget.s);
@@ -146,6 +165,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
         ),
         home: Scaffold(
           appBar: AppBar(
+            elevation: 0,
             backgroundColor: Colors.white,
             iconTheme: const IconThemeData(
               color: AppColors.primary,
@@ -255,6 +275,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               children: <Widget>[
                 Expanded(
                   child: Stack(
+                    // alignment: Alignment.bottomCenter,
                     children: [
                       InAppWebView(
                         // key: webViewKey,
@@ -312,8 +333,21 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                           ? LinearProgressIndicator(value: progress)
                           : Container(),
                     ],
+
                   ),
                 ),
+                //애드몹
+                // Positioned(
+                //     bottom: 20,
+                //     child:
+                StatefulBuilder(
+                  builder: (context, setState) => Container(height: 60,
+                    // width: size.width,
+                    child: this.banner == null
+                        ? Container()
+                        : AdWidget( ad: this.banner!,),),
+                ),
+                // ),
               ],
             ),
           ),
