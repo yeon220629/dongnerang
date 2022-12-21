@@ -314,7 +314,7 @@ class _mypageScreenState extends State<mypageScreen> {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.all(10),
-                  child: Text("나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                  child: Text("  나의 관심목록 (${itemsData.length})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 )
             ),
             saveDataProfile(itemsData, topContainer, responseListBox, userEmail!,getPostsData),

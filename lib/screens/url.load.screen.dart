@@ -333,13 +333,9 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                           ? LinearProgressIndicator(value: progress)
                           : Container(),
                     ],
-
                   ),
                 ),
                 //애드몹
-                // Positioned(
-                //     bottom: 20,
-                //     child:
                 StatefulBuilder(
                   builder: (context, setState) => Container(height: 60,
                     // width: size.width,
@@ -347,7 +343,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                         ? Container()
                         : AdWidget( ad: this.banner!,),),
                 ),
-                // ),
               ],
             ),
           ),
