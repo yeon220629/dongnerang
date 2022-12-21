@@ -1,18 +1,14 @@
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dongnerang/firebase_options.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:dongnerang/screens/splash.screen.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'constants/common.constants.dart';
 
 void main() async {

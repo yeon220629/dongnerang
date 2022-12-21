@@ -117,16 +117,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
     responseList = valueData;
     for ( var post in responseList){
-      if(post['center_name '].toString().contains('용산')){
-        centerCheck.remove("문화재단");
-      }else{
-        if(fnCenterCheck(post['center_name ']) == 0){
-          centerCheck[2] = '문화재단';
-        }else if(fnCenterCheck(post['center_name ']) == 1){
-          centerCheck[2] = '문화원';
-        }else if(fnCenterCheck(post['center_name ']) == 2){
-          centerCheck[2] = '공단';
-        }
+      if(fnCenterCheck(post['center_name ']) == 0){
+        centerCheck[2] = '문화재단';
+      }else if(fnCenterCheck(post['center_name ']) == 1){
+        centerCheck[2] = '문화원';
+      }else if(fnCenterCheck(post['center_name ']) == 2){
+        centerCheck[2] = '공단';
       }
       colorindex = fnSeoulCnterCheck(post['center_name ']);
 
