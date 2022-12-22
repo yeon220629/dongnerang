@@ -326,6 +326,7 @@ class _KeywordStatefulState extends State<KeywordStateful> {
           label: Text('$name'),
           onDeleted: () {
             setState(() {
+              Privatekeyword.remove(name);
               CustomKeyword.remove(name);
               select_tags.remove(name);
             });

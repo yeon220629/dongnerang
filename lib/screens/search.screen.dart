@@ -58,6 +58,7 @@ class _searchScreenState extends State<searchScreen>
       }else{
         ResentSearch.add(text);
         FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
+        FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'userSearchWord');
       }
     });
   }
@@ -260,27 +261,17 @@ class _searchScreenState extends State<searchScreen>
                     }
                   });
                 },
-                onSubmitted: (value){
-                  // 엔터 쳣을때 이벤트.
-                  if(ResentSearch.length == 8){
-                    ResentSearch.removeAt(0);
-                  }
-                  ResentSearch.add(value);
-                  FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
-                },
+                // onSubmitted: (value){
+                //   // 엔터 쳣을때 이벤트.
+                //   if(ResentSearch.length == 8){
+                //     ResentSearch.removeAt(0);
+                //   }
+                //   ResentSearch.add(value);
+                //   FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
+                // },
               ),
             ),
           ),
-          // IconButton(onPressed: (){
-          //   setState(() {
-          //     // 돋보기 버튼 클릭 했을때 이벤트
-          //     if(ResentSearch.length == 8){
-          //       ResentSearch.removeAt(0);
-          //     }
-          //     ResentSearch.add(SearcheditingController.text);
-          //     FirebaseService.savePrivacyProfile(userEmail!, ResentSearch, 'recentSearch');
-          //   });
-          // }, icon: Icon(Icons.search)),
           IconButton(onPressed: () {
             setState(() {
               SearcheditingController.clear();

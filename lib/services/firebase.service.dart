@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/constants/common.constants.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -130,13 +131,14 @@ class FirebaseService {
   static Future<void> deleteUser(String? email, provider) async {
     final checkUser =  await FirebaseFirestore.instance.collection("users").doc(email);
     if(provider == 'kakao'){
-      // await UserApi.instance.logout();
       await UserApi.instance.unlink();
     }
     print("1 delete");
     checkUser.delete();
     print("2 delete");
+
     await FirebaseAuth.instance.signOut();
+
     try {
       print("3 delete");
       await FirebaseAuth.instance.currentUser?.delete();
@@ -211,6 +213,7 @@ class FirebaseService {
   }
 
   static Future<void> savePrivacyProfile(String email, List value, String key) async{
+    var addValue = await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email);
     if(key.contains("keyword")){
         await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
           key: value,
@@ -225,6 +228,23 @@ class FirebaseService {
       await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
         key: value,
       }));
+    }
+    if(key.contains("userSearchWord")){
+      addValue.get().then((addValueList) {
+        addValueList.data()?.forEach((key, value2) {
+          if(key == 'userSearchWord'){
+            for(int i = 0; i < value2.length; i++){
+              for(int j = 0; j < value.length; j++){
+                if(value2[i] != value[j]){
+                  addValue.update(
+                    {'userSearchWord' : FieldValue.arrayUnion([value[j]])}
+                  );
+                }
+              }
+            }
+          }
+        });
+      });
     }
   }
 

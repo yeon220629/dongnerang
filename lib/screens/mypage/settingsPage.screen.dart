@@ -198,12 +198,10 @@ class SettingsPage extends StatelessWidget {
                               ),),
                               onPressed: () async {
                                 FirebaseService.deleteUser(UserService.to.currentUser.value?.email.toString(), UserService.to.currentUser.value?.provider);
-                                // if(Platform.isAndroid){
-                                // }else if(Platform.isIOS){
-                                // }
+
                                 EasyLoading.showInfo("계정을 삭제 중 입니다...");
 
-                                Future.delayed(const Duration(milliseconds: 2000), () {
+                                Future.delayed(const Duration(milliseconds: 1000), () {
                                   UserService.to.currentUser.value = null;
                                   Get.offAll(() => const SplashScreen());
                                 });
