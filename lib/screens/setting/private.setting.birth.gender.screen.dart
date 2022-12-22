@@ -202,7 +202,7 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
   String? defaultDay = '1';
   birthDay birth = new birthDay(year: '', month: '', day: '');
 
-  DateTime date = DateTime.now();
+  DateTime date = DateTime.utc(2000,1,1);
 
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
@@ -294,7 +294,7 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
                 onPressed: () => _showDialog(CupertinoDatePicker(
                       initialDateTime: date,
                       minimumYear: 1900,
-                      maximumDate: date,
+                      maximumDate: DateTime.now(),
                       mode: CupertinoDatePickerMode.date,
                       use24hFormat: true,
                       onDateTimeChanged: (DateTime newDate) {
