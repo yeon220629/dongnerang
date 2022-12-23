@@ -486,28 +486,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         style: const TextStyle(fontSize: 15, color: Colors.black),
                         textDirection: ui.TextDirection.ltr,
                       )
-                      // Row(
-                      //   children: [
-                      //     dropdownValue == '중구'
-                      //       ? Text(
-                      //           '$dropdownValue신청',
-                      //           style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w700),
-                      //           textDirection: ui.TextDirection.ltr,
-                      //         )
-                      //      : Text(
-                      //         '$dropdownValue구신청',
-                      //         style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w700),
-                      //         textDirection: ui.TextDirection.ltr,
-                      //       )
-                      //   ]
-                      // )
                   ),
               ),
-              // IconButton(onPressed: (){
-              //   print(fnOnlineUrl(dropdownValue));
-              //   final Uri url = Uri.parse('${fnOnlineUrl(dropdownValue)}');
-              //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlieUrl( url )));
-              // }, icon: const Icon(Icons.add), color: AppColors.black,),
               IconButton(onPressed: (){
                 Navigator.push(
                     context,
@@ -654,11 +634,19 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                     value: value, child: Text("${value}"),
                                   );
                                 }else{
+                                  if(dropdownValue == '중구'){
+                                    if(value == '구청'){
+                                      return DropdownMenuItem (
+                                        alignment: Alignment.center,
+                                        value: value,
+                                        child: Text("  중구청  "),
+                                      );
+                                    }
+                                  }
                                   return DropdownMenuItem (
                                     alignment: Alignment.center,
                                     value: value,
                                     child: Text("  ${dropdownValue+value}  "),
-                                    // value: value, child: Text(value),
                                   );
                                 }
                               },
@@ -679,6 +667,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             )
+                        // 서울 소식 지역 드롭다운
                         : DropdownButton2(
                             alignment: Alignment.center,
                             focusColor: AppColors.primary,
