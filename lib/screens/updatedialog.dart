@@ -204,7 +204,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
                               final url = Uri.parse(
                                 Platform.isAndroid
                                     ? "market://details?id=$appId"
-                                    : "https://apps.apple.com/app/id$appId",
+                                    : "https://apps.apple.com/app/id/$appId",
                               );
                               launchUrl(
                                 url,
