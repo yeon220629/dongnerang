@@ -75,11 +75,11 @@ class SettingsPage extends StatelessWidget {
               leading:  Icon(Icons.star_border_outlined),
               title: Text('현재버전 v${versionCode}'),
               onTap: (){
-                final appId = Platform.isAndroid ? 'com.dongnerang.com.dongnerang' : 'com.dongnerang.com.dongnerang';
+                final appId = Platform.isAndroid ? 'com.dongnerang.com.dongnerang' : '6444590791';
                 final url = Uri.parse(
                   Platform.isAndroid
                       ? "market://details?id=$appId"
-                      : "https://apps.apple.com/app/id$appId",
+                      : "https://apps.apple.com/app/id/$appId",
                 );
                 launchUrl(
                   url,

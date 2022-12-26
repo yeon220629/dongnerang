@@ -200,7 +200,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
                               // if(widget.appLink.contains('&hl=en')){
                               //   relaceLink = widget.appLink.replaceAll('&hl=en', '');
                               // }
-                              final appId = Platform.isAndroid ? 'com.dongnerang.com.dongnerang' : 'com.dongnerang.com.dongnerang';
+                              final appId = Platform.isAndroid ? 'com.dongnerang.com.dongnerang' : '6444590791';
                               final url = Uri.parse(
                                 Platform.isAndroid
                                     ? "market://details?id=$appId"
