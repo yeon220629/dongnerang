@@ -52,6 +52,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: '동네랑',
       theme: ThemeData(
+        appBarTheme: AppBarTheme( color: Colors.white),
+        iconTheme: IconThemeData( color: Colors.black),
         primaryColor: AppColors.primary,
         primarySwatch: ColorService.createMaterialColor(const Color(0xff5B88E2)),
       ),

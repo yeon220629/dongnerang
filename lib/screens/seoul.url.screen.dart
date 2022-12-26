@@ -40,7 +40,7 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
     super.initState();
     //애드몹
     banner = BannerAd(
-      size: AdSize.fullBanner,
+      size: AdSize.banner,
       // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
       adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
       listener: BannerAdListener(),
@@ -100,6 +100,7 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
     return ScaffordPlatform();
   }
   Widget ScaffordPlatform(){
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -166,8 +167,8 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
             ),
             // //애드몹
             StatefulBuilder(
-              builder: (context, setState) => Container(height: 60,
-                // width: size.width,
+              builder: (context, setState) => Container(height: 50,
+                width: size.width,
                 child: this.banner == null
                     ? Container()
                     : AdWidget( ad: this.banner!,),),

@@ -54,12 +54,13 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
 
   final urlController = TextEditingController();
 
+
   @override
   void initState() {
     super.initState();
     //애드몹
     banner = BannerAd(
-      size: AdSize.fullBanner,
+      size: AdSize.banner,
       // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
       adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
       listener: BannerAdListener(),
@@ -154,6 +155,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
     return checkFlactform(saveData);
   }
   Widget checkFlactform(saveData){
+    final Size size = MediaQuery.of(context).size;
     return MaterialApp(
         theme: ThemeData(
             pageTransitionsTheme: PageTransitionsTheme(
@@ -236,8 +238,8 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 }
               },
                   icon: toggle
-                      ? Icon(Icons.bookmark)
-                      : Icon(Icons.bookmark_border_rounded)
+                      ? Icon(Icons.bookmark, color: Colors.black)
+                      : Icon(Icons.bookmark_border_rounded, color: Colors.black)
               ),
 
               IconButton(onPressed: ()async {
@@ -266,7 +268,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 } else {
                   print('카카오톡 미설치: 웹 공유 기능 사용 권장');
                 }
-              }, icon: const Icon(Icons.share)),
+              }, icon: const Icon(Icons.share_outlined, color: Colors.black)),
             ],
           ),
           // 백키옵션
@@ -337,8 +339,8 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 ),
                 //애드몹
                 StatefulBuilder(
-                  builder: (context, setState) => Container(height: 60,
-                    // width: size.width,
+                  builder: (context, setState) => Container(height: 50,
+                    width: size.width,
                     child: this.banner == null
                         ? Container()
                         : AdWidget( ad: this.banner!,),),

@@ -34,10 +34,12 @@ class privateSettingBirthGenderScreen
     print("age: $age");
     print("gender: $gender");
 
-    if (gender == '') {
-      EasyLoading.showInfo("성별을 선택해 주세요");
-      return false;
-    } else if (age['year'] == '' || age['month'] == '' || age['dat'] == '') {
+    //성별 선택 때문에 애플심사 거절로 우선 보류
+    // if (gender == '') {
+    //   EasyLoading.showInfo("성별을 선택해 주세요");
+    //   return false;
+    // } else
+    if (age['year'] == '' || age['month'] == '' || age['dat'] == '') {
       EasyLoading.showInfo("생년월일을 선택해 주세요");
       return false;
     }
