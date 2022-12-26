@@ -73,56 +73,64 @@ class mainScreenState extends State<mainScreen>{
       bottomNavigationBar: Obx(
               () => Offstage(
             offstage:HomeController.to.hideBottomMenu.value,
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    showSelectedLabels: true,
-                    showUnselectedLabels: true,
-                    selectedItemColor:
-                    navigationController.currentBottomMenuIndex.value == 0
-                        ? AppColors.primary
-                        : AppColors.grey,
-                    unselectedItemColor:
-                    navigationController.currentBottomMenuIndex.value == 1
-                        ? AppColors.primary
-                        : AppColors.grey,
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Icon(
-                          navigationController.currentBottomMenuIndex.value == 0
-                              ? CupertinoIcons.doc_text_search
-                              : CupertinoIcons.doc_text,
+              child: Container(
+                decoration: BoxDecoration(border: Border(
+                  top: BorderSide( // POINT
+                  color: AppColors.greylottie,
+                  width: 0.3,
+                ),)),
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    BottomNavigationBar(
+                      elevation: 0,
+                      type: BottomNavigationBarType.fixed,
+                      showSelectedLabels: true,
+                      showUnselectedLabels: true,
+                      selectedItemColor:
+                      navigationController.currentBottomMenuIndex.value == 0
+                          ? AppColors.primary
+                          : AppColors.grey,
+                      unselectedItemColor:
+                      navigationController.currentBottomMenuIndex.value == 1
+                          ? AppColors.primary
+                          : AppColors.grey,
+                      items: [
+                        BottomNavigationBarItem(
+                          icon: Icon(
+                            navigationController.currentBottomMenuIndex.value == 0
+                                ? CupertinoIcons.doc_text_search
+                                : CupertinoIcons.doc_text,
+                          ),
+                          label: "홈",
                         ),
-                        label: "홈",
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(
-                          navigationController.currentBottomMenuIndex.value == 1
-                              ? CupertinoIcons.person_fill
-                              : CupertinoIcons.person,
+                        BottomNavigationBarItem(
+                          icon: Icon(
+                            navigationController.currentBottomMenuIndex.value == 1
+                                ? CupertinoIcons.person_fill
+                                : CupertinoIcons.person,
+                          ),
+                          label: "마이페이지",
                         ),
-                        label: "마이페이지",
-                      ),
-                      // BottomNavigationBarItem(
-                      //   icon: Icon(
-                      //     navigationController.currentBottomMenuIndex.value == 1
-                      //         ? Icons.person
-                      //         : Icons.person_outline_outlined,
-                      //   ),
-                      //   label: "테스트페이지",
-                      // ),
-                    ],
-                    onTap: (index) {
-                      navigationController.currentBottomMenuIndex.value = index;
-                      if(index == 1){
-                        mypageScreen(navigationController.currentBottomMenuIndex.value);
-                        setState(() {});
-                      }
-                    },
-                  )
-                ],
+                        // BottomNavigationBarItem(
+                        //   icon: Icon(
+                        //     navigationController.currentBottomMenuIndex.value == 1
+                        //         ? Icons.person
+                        //         : Icons.person_outline_outlined,
+                        //   ),
+                        //   label: "테스트페이지",
+                        // ),
+                      ],
+                      onTap: (index) {
+                        navigationController.currentBottomMenuIndex.value = index;
+                        if(index == 1){
+                          mypageScreen(navigationController.currentBottomMenuIndex.value);
+                          setState(() {});
+                        }
+                      },
+                    )
+                  ],
+                ),
               ),
           )
       ),
