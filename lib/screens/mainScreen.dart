@@ -153,22 +153,22 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        post["title"].length >= 31
+                        post["title"].length >= 28
                           ? Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Text(
                             '${post["title"]}',
-                            style: const TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.justify,
                             maxLines: 2,
                           ),
                         )
                         :Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.only(left: 5,top: 10,right: 5,bottom: 0),
                           child: Text(
                             '${post["title"]}',
-                            style: const TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.justify,
                             maxLines: 1,
@@ -241,22 +241,22 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      post["title"].length >= 31
+                      post["title"].length >= 28
                           ? Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
                           '${post["title"]}',
-                          style: const TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
                           maxLines: 2,
                         ),
                       )
                           :Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.only(left: 5,top: 10,right: 5,bottom: 0),
                         child: Text(
                           '${post["title"]}',
-                          style: const TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
                           maxLines: 1,
@@ -646,7 +646,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   return DropdownMenuItem (
                                     alignment: Alignment.center,
                                     value: value,
-                                    child: Text("  ${dropdownValue+value}  "),
+                                    child: Text("   ${dropdownValue+value}   "),
                                   );
                                 }
                               },
@@ -667,7 +667,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             )
-                        // 서울 소식 지역 드롭다운
+                        // 서울소식 드롭다운
                         : DropdownButton2(
                             alignment: Alignment.center,
                             focusColor: AppColors.primary,
@@ -690,7 +690,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                     ? Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
+                                    Image.asset('assets/images/seoul.logo.png', width: size.width / 26),
                                     Text(value)
                                   ],
                                 )
@@ -875,7 +875,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             else if (scale > 1) { scale = 1; }
                           }
                           return Align(
-                            heightFactor: 0.95,
+                            heightFactor: 0.98,
                             alignment: Alignment.topCenter,
                             child: itemsData[i],
                           );

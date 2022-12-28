@@ -71,7 +71,15 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingsBuilder((){
         Get.put(UserService());
       }),
-      builder: EasyLoading.init(),
+      builder: EasyLoading.init(
+        //폰트 사이즈 고정
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+            child: child!,
+          );
+        },
+      ),
     );
   }
 
