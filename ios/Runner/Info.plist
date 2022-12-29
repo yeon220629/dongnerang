@@ -34,9 +34,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202212271</string>
+	<string>202212291</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3415104781631988~6504027773</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>kakaokompassauth</string>
@@ -289,7 +291,7 @@
 	<key>buildCount</key>
 	<string>1</string>
 	<key>buildDay</key>
-	<string>20221227</string>
+	<string>20221229</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

@@ -106,11 +106,11 @@ class _mypageScreenState extends State<mypageScreen> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0,0,8,0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Text(
                         '${responseList[i][3]}',
-                        style: const TextStyle(fontSize: 14),
+                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.justify,
                         maxLines: 2,
