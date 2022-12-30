@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dongnerang/screens/mainScreenBar.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
+import 'package:dongnerang/util/admob.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,15 +25,6 @@ class urlLoadScreen extends StatefulWidget {
 }
 
 class _urlLoadScreenState extends State<urlLoadScreen> {
-  //애드몹 테스트 ID
-  final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
-  final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
-
-  //애드몹 찐 ID
-  final String iOSRealId = 'ca-app-pub-3415104781631988/3367223383';
-  final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
-  BannerAd? banner;
-
   bool toggle = false;
 
   InAppWebViewController? webViewController;
@@ -58,14 +50,6 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
   @override
   void initState() {
     super.initState();
-    //애드몹
-    banner = BannerAd(
-      size: AdSize.banner,
-      // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
-      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
-      listener: BannerAdListener(),
-      request: AdRequest(),
-    )..load();
 
     String? userEmail = FirebaseAuth.instance.currentUser?.email;
     // 사용자 북마크 클릭시 저장 여부 판단 부분 -> 현재 return 값을 bool 값으로 주고있음
@@ -338,13 +322,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                   ),
                 ),
                 //애드몹
-                StatefulBuilder(
-                  builder: (context, setState) => Container(height: 50,
-                    width: size.width,
-                    child: this.banner == null
-                        ? Container()
-                        : AdWidget( ad: this.banner!,),),
-                ),
+                BannerAdMob(),
               ],
             ),
           ),

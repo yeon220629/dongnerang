@@ -69,6 +69,12 @@ dependencies:
   # crypto:
   crypto: ^3.0.2
 
+  # naver map
+  flutter_naver_map:
+    git:
+      url: https://github.com/note11g/flutter_naver_map.git
+      ref: main
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"

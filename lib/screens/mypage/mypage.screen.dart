@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
+import 'package:dongnerang/util/admob.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,15 +29,6 @@ class mypageScreen extends StatefulWidget {
 }
 
 class _mypageScreenState extends State<mypageScreen> {
-  //애드몹 테스트 ID
-  final String iOSTestId = 'ca-app-pub-3940256099942544/2934735716';
-  final String androidTestId = 'ca-app-pub-3940256099942544/6300978111';
-
-  //애드몹 찐 ID
-  final String iOSRealId = 'ca-app-pub-3415104781631988/3367223383';
-  final String androidRealId = 'ca-app-pub-3415104781631988/9379594822';
-  BannerAd? banner;
-
   late final SlidableController slidableController;
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   String? profileImage = '';
@@ -171,14 +163,6 @@ class _mypageScreenState extends State<mypageScreen> {
   @override
   void initState() {
     super.initState();
-    //애드몹
-    banner = BannerAd(
-      size: AdSize.banner,
-      // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
-      adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
-      listener: BannerAdListener(),
-      request: AdRequest(),
-    )..load();
 
     mypageCustomKeyword = [];
     FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value){
@@ -318,13 +302,7 @@ class _mypageScreenState extends State<mypageScreen> {
             ),
             saveDataProfile(itemsData, topContainer, responseListBox, userEmail!,getPostsData),
             //애드몹
-            StatefulBuilder(
-                builder: (context, setState) => Container(height: 50,
-                  width: size.width,
-                  child: this.banner == null
-                      ? Container()
-                      : AdWidget( ad: this.banner!,),),
-            )
+            BannerAdMob(),
           ]
       ),
     );
