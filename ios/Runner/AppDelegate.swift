@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import FirebaseCore
+import CoreLocation
 // import KakaoSDKCommon
 
 @UIApplicationMain
