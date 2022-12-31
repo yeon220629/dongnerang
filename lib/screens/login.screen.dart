@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: size.height / 6.5,),
                   Image.asset('assets/images/logo.png',fit: BoxFit.cover, height: size.height / 11.8,),
                   SizedBox(height: 10,),
-                  const Text( "내가 찾는 우리 동네의 공공소식",
+                  const Text( "우리 동네의 모든 공공소식",
                     style: TextStyle(fontSize: 17, color: AppColors.primary),),
                   SizedBox(height: size.height / 3.3,),
                   InkWell(

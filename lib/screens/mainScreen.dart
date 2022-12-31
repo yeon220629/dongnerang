@@ -158,7 +158,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           padding: const EdgeInsets.all(5.0),
                           child: Text(
                             '${post["title"]}',
-                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                            style: const TextStyle(fontSize: 16),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.justify,
                             maxLines: 2,
@@ -168,7 +168,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           padding: const EdgeInsets.only(left: 5,top: 10,right: 5,bottom: 0),
                           child: Text(
                             '${post["title"]}',
-                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                            style: const TextStyle(fontSize: 16),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.justify,
                             maxLines: 1,
@@ -246,7 +246,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
                           '${post["title"]}',
-                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                          style: const TextStyle(fontSize: 16),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
                           maxLines: 2,
@@ -256,7 +256,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         padding: const EdgeInsets.only(left: 5,top: 10,right: 5,bottom: 0),
                         child: Text(
                           '${post["title"]}',
-                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                          style: const TextStyle(fontSize: 16),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
                           maxLines: 1,
@@ -663,6 +663,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                               barrierColor: Colors.black.withOpacity(0.5),
                               iconOnClick: Icon(Icons.keyboard_arrow_up),
                               offset: const Offset(0, -3),
+                              // buttonWidth: 150,
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),

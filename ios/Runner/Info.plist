@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202212301</string>
+	<string>202301011</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3415104781631988~6504027773</string>
 	<key>LSApplicationCategoryType</key>
@@ -59,7 +59,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app needs access to location when in the background.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location when open.</string>
+	<string>동네공간 서비스 이용을 위해서, 현위치를 알 수 있도록 허용버튼을 눌러주세요.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>프로필 이미지 변경을 위해서, 사진앨범에 접근하도록 허용버튼을 눌러주세요.</string>
 	<key>NSUserTrackingUsageDescription</key>
@@ -295,7 +295,7 @@
 	<key>buildCount</key>
 	<string>1</string>
 	<key>buildDay</key>
-	<string>20221230</string>
+	<string>20230101</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

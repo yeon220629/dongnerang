@@ -103,14 +103,14 @@ class mainScreenState extends State<mainScreen>{
                         BottomNavigationBarItem(
                           icon: Icon(
                             navigationController.currentBottomMenuIndex.value == 1
-                                ? Icons.location_on
-                                : Icons.location_on_outlined,
+                                ? CupertinoIcons.map_fill
+                                : CupertinoIcons.map,
                           ),
-                          label: "공간",
+                          label: "동네지도",
                         ),
                         BottomNavigationBarItem(
                           icon: Icon(
-                            navigationController.currentBottomMenuIndex.value == 1
+                            navigationController.currentBottomMenuIndex.value == 2
                                 ? CupertinoIcons.person_fill
                                 : CupertinoIcons.person,
                           ),

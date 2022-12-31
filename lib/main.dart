@@ -4,6 +4,7 @@ import 'package:dongnerang/screens/splash.screen.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -48,11 +49,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //앱 상태바 색상(appbar 없는 화면)
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: '동네랑',
       theme: ThemeData(
-        appBarTheme: AppBarTheme( color: Colors.white),
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          //앱 상태바 색상(appbar 있는 화면)
+          systemOverlayStyle: SystemUiOverlayStyle.dark,),
         iconTheme: IconThemeData( color: Colors.black),
         primaryColor: AppColors.primary,
         primarySwatch: ColorService.createMaterialColor(const Color(0xff5B88E2)),

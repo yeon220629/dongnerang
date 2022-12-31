@@ -12,6 +12,7 @@ import 'package:dongnerang/util/admob.dart';
 import 'package:dongnerang/util/location.dart' as mylocation;
 import 'package:dongnerang/util/logger.service.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -161,11 +162,11 @@ class _naverMapScreenState extends State<naverMapScreen> {
     return Visibility(
       visible: spaceVisibility[cate]!,
       child: SizedBox(
-        width: width - 36,
+        width: width - 26,
         child: Column(
           children: [
             const SizedBox(
-              height: 22,
+              height: 12,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,6 +174,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
               children: [
                 Flexible(
                   flex: 2,
+                  fit: FlexFit.tight,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -185,19 +187,19 @@ class _naverMapScreenState extends State<naverMapScreen> {
                               thisSpace.spaceName,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.blue,
-                                fontSize: 18,
+                                color: AppColors.primary,
+                                fontSize: 16,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           const SizedBox(
-                            width: 8,
+                            width: 5,
                           ),
                           Text(
                             cateStr,
                             style: const TextStyle(
-                              fontSize: 12,
+                              fontSize: 11,
                               color: Colors.grey,
                             ),
                           ),
@@ -206,7 +208,11 @@ class _naverMapScreenState extends State<naverMapScreen> {
                       const SizedBox(
                         height: 8,
                       ),
-                      Text(thisSpace.address),
+                      Text(
+                          thisSpace.address,
+                          style: TextStyle(
+                            fontSize: 14,
+                          )),
                       const SizedBox(
                         height: 8,
                       ),
@@ -215,20 +221,21 @@ class _naverMapScreenState extends State<naverMapScreen> {
                         children: [
                           const Icon(
                             Icons.location_on_outlined,
-                            size: 12,
-                            color: Colors.grey,
+                            size: 14,
+                            color: AppColors.red,
                           ),
                           Text(
                             distStr,
                             style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.red,
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(
-                        height: 3,
+                        height: 5,
                       ),
                       Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,
@@ -239,7 +246,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                             color: Colors.grey,
                           ),
                           Text(
-                            '업데이트일 ${thisSpace.updated.replaceAll('-', '.')}',
+                            ' 업데이트일 ${thisSpace.updated.replaceAll('-', '.')}',
                             style: const TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -252,6 +259,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                 ),
                 Flexible(
                   flex: 1,
+                  // fit: FlexFit.loose,
                   child: CachedNetworkImage(
                     imageUrl: imgurl!,
                     imageBuilder: ((context, imageProvider) => Container(
@@ -270,7 +278,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image: const DecorationImage(
-                          image: AssetImage("assets/images/newlogo.png"),
+                          image: AssetImage("assets/images/firstLogo.png"),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -280,7 +288,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
               ],
             ),
             const SizedBox(
-              height: 22,
+              height: 12,
             ),
             const Divider(),
           ],
@@ -474,7 +482,8 @@ class _naverMapScreenState extends State<naverMapScreen> {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
-
+    //모바일 상단 상태 바 높이 값
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -508,7 +517,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                     padding: const EdgeInsets.only(top: 50.0, left: 16.0),
                     child: Material(
                       elevation: 1,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton2(
                           items: items
@@ -566,13 +575,15 @@ class _naverMapScreenState extends State<naverMapScreen> {
                           },
                           buttonHeight: 30,
                           buttonWidth: 100,
-                          itemHeight: 40,
+                          itemHeight: 30,
                           buttonDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: Colors.white,
                           ),
                           buttonPadding:
                               const EdgeInsets.only(left: 14, right: 5),
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          offset: const Offset(0, -3),
                           dropdownDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -641,7 +652,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                               children: const [
                                 Icon(
                                   Icons.menu,
-                                  size: 12,
+                                  size: 15,
                                   color: AppColors.primary,
                                 ),
                                 SizedBox(
@@ -690,32 +701,35 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                   topRight: Radius.circular(20),
                                 ),
                               ),
-                              child: Column(
-                                children: <Widget>[
-                                  const SizedBox(
-                                    height: 50,
-                                  ),
-                                  // 애드몹
-                                  BannerAdMob(),
-                                  // 리스트
-                                  Expanded(
-                                    child: ListView.builder(
-                                      itemCount: spacesMap.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        String uid =
-                                            spacesMap.keys.toList()[index];
+                              child: Padding(
+                                padding: EdgeInsets.only(top: statusBarHeight),
+                                child: Column(
+                                  children: <Widget>[
+                                    // const SizedBox(
+                                    //   height: 30,
+                                    // ),
+                                    // 애드몹
+                                    BannerAdMob(),
+                                    // 리스트
+                                    Expanded(
+                                      child: ListView.builder(
+                                        itemCount: spacesMap.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          String uid =
+                                              spacesMap.keys.toList()[index];
 
-                                        return InkWell(
-                                          onTap: () {
-                                            onMarkerTabEvent(uid);
-                                          },
-                                          child: makeSpaceWidget(uid),
-                                        );
-                                      },
+                                          return InkWell(
+                                            onTap: () {
+                                              onMarkerTabEvent(uid);
+                                            },
+                                            child: makeSpaceWidget(uid),
+                                          );
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             // 지도보기 버튼
@@ -747,8 +761,8 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                             WrapCrossAlignment.center,
                                         children: const [
                                           Icon(
-                                            Icons.map_outlined,
-                                            size: 12,
+                                            CupertinoIcons.map,
+                                            size: 15,
                                             color: AppColors.primary,
                                           ),
                                           SizedBox(

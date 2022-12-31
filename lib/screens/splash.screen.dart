@@ -92,6 +92,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -100,13 +101,16 @@ class _SplashScreenState extends State<SplashScreen> {
           height: Get.size.height,
           width: Get.size.width,
           child: Column(children: [
-            // Image.asset("assets/images/newlogo.png")
+            // Image.asset("assets/images/newlogo.png"),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  // SizedBox(height: 20),
-                  Image.asset("assets/images/newlogo.png")
+                  Image.asset("assets/images/firstLogo.png")
+                  // Image.asset('assets/images/logo.png',fit: BoxFit.cover, height: size.height / 11.8,),
+                  // SizedBox(height: 10,),
+                  // const Text( "우리 동네의 모든 공공소식",
+                  //   style: TextStyle(fontSize: 17, color: AppColors.primary),),
                 ],
               ),
             ),
@@ -114,10 +118,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 // children: <Widget>[
                   // SizedBox(height: 50),
+
                   Lottie.asset(
                     'assets/lottie/68894-running.json',
-                    width: 100,
-                    height: 100,
+                    width: 150,
+                    height: 150,
                     fit: BoxFit.fill,
                   ),
                   // Image.asset("assets/images/logo.png", width: 80, height: 80,)

@@ -22,7 +22,7 @@ class _BannerAdMob extends State<BannerAdMob> {
   void initState() {
     super.initState();
     banner = BannerAd(
-      size: AdSize.fullBanner,
+      size: AdSize.banner,
       // adUnitId: Platform.isIOS ? iOSRealId : androidRealId,
       adUnitId: Platform.isIOS ? iOSTestId : androidTestId,
       listener: BannerAdListener(),
@@ -40,7 +40,7 @@ class _BannerAdMob extends State<BannerAdMob> {
   Widget build(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) => Container(
-        height: 60,
+        height: 50,
         width: MediaQuery.of(context).size.width,
         child: banner == null
             ? Container()
