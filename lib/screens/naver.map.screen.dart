@@ -99,10 +99,11 @@ class _naverMapScreenState extends State<naverMapScreen> {
         height: 46,
         captionText: space.spaceName,
         captionMinZoom: 14,
-        captionColor: Colors.blueAccent[700],
+        captionColor: Colors.black,
+        // captionColor: Colors.blueAccent[700],
         //글씨 밑줄
         captionHaloColor: Colors.white,
-        captionRequestedWidth: 150,
+        captionRequestedWidth: 200,
         captionTextSize: 15,
         captionPerspectiveEnabled: true,
         icon: await OverlayImage.fromAssetImage(
@@ -308,17 +309,19 @@ class _naverMapScreenState extends State<naverMapScreen> {
     moveMapCamera(space!.location["latitude"]!, space.location["longitude"]!);
 
     // 마커 이미지 및 크기 변경
-    markersMap.forEach((markerUid, markerValue) async {
-      if (markerUid == uid) {
-        markerValue.icon = await OverlayImage.fromAssetImage(
-            assetName: "assets/images/${onMarkImg[space?.category]}");
-        markerValue.width = 48;
-        markerValue.height = 69;
-      } else {
-        markerValue.width = 32;
-        markerValue.height = 46;
-      }
-    });
+    // markersMap.forEach((markerUid, markerValue) async {
+    //   if (markerUid == uid) {
+    //     markerValue.icon = await OverlayImage.fromAssetImage(
+    //         assetName: "assets/images/${onMarkImg[space?.category]}");
+    //     markerValue.width = 48;
+    //     markerValue.height = 69;
+    //     // markerValue.width = 32;
+    //     // markerValue.height = 46;
+    //   } else {
+    //     markerValue.width = 32;
+    //     markerValue.height = 46;
+    //   }
+    // });
 
     setState(() {
       showBottomSheetBtn = false;
