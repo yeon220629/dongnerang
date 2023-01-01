@@ -650,7 +650,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                           child: Container(
                             alignment: Alignment.center,
                             width: 100,
-                            height: 30,
+                            height: 38,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.rectangle,
@@ -661,7 +661,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                               children: const [
                                 Icon(
                                   Icons.menu,
-                                  size: 15,
+                                  size: 18,
                                   color: AppColors.primary,
                                 ),
                                 SizedBox(
@@ -670,7 +670,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                 Text(
                                   '목록보기',
                                   style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
@@ -697,121 +697,102 @@ class _naverMapScreenState extends State<naverMapScreen> {
                       maxWidth: double.infinity, maxHeight: height),
                   child: showBottomSheetBtn
                       ?
-                      // 목록보기 버튼 눌렀을 시 : 리스트 보임
-                      Stack(
-                          children: [
-                            // 리스트 전체
-                            Container(
-                              padding: const EdgeInsets.all(16.0),
-                              decoration: const BoxDecoration(
-                                color: AppColors.background,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
+                  // 목록보기 버튼 눌렀을 시 : 리스트 보임
+                  Stack(
+                    children: [
+                      // 리스트 전체
+                      Container(
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: const BoxDecoration(
+                          color: AppColors.background,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: statusBarHeight),
+                          child: Column(
+                            children: <Widget>[
+                              // 애드몹
+                              BannerAdMob(),
+                              //chip
+                              //     ChoiceChip(
+                              //     selected: _selected,
+                              //     label: Text('Woolha'),
+                              //     onSelected: (bool selected) {
+                              //       setState(() {
+                              //         _selected = !_selected;
+                              //       });
+                              //     }
+                              // ),
+                              // 리스트
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: spacesMap.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    String uid =
+                                    spacesMap.keys.toList()[index];
+
+                                    return InkWell(
+                                      onTap: () {
+                                        onMarkerTabEvent(uid);
+                                      },
+                                      child: makeSpaceWidget(uid),
+                                    );
+                                  },
                                 ),
                               ),
-                              child: Padding(
-                                padding: EdgeInsets.only(top: statusBarHeight),
-                                child: Column(
-                                  children: <Widget>[
-                                    // 애드몹
-                                    BannerAdMob(),
-                                    Wrap(
-                                      spacing: 5.0,
-                                      children: List<Widget>.generate( itemsList.length,
-                                        (int index) {
-                                          return ChoiceChip(
-                                            label: Text('${itemsList[index]}'),
-                                            selected: itemsList.length == index,
-                                            onSelected: (bool selected) {
-                                              setState(() {
-                                                switch (index) {
-                                                  case 0:
-                                                    centerValue = "B";
-                                                    break;
-                                                  case 1:
-                                                    centerValue = "A";
-                                                    break;
-                                                }
-                                              });
-                                            },
-                                          );
-                                        },
-                                      ).toList(),
-                                    ),
-                                    // 리스트 A 동네시설 B 체육시설
-                                    Expanded(
-                                      child: ListView.builder(
-                                        itemCount: spacesMap.length,
-                                        itemBuilder: (BuildContext context, int index) {
-                                          String uid = spacesMap.keys.toList()[index];
-                                          String uidtoo = '';
-
-                                          if(spacesMap[uid]?.category == centerValue) {
-                                            uidtoo =
-                                            spacesMap.keys.toList()[index];
-                                          }
-
-                                          return InkWell(
-                                            onTap: () {
-                                              onMarkerTabEvent(uid);
-                                            },
-                                            // child: makeSpaceWidget(uid),
-                                            child: uidtoo != ''
-                                              ? makeSpaceWidget(uidtoo)
-                                              : SizedBox(),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            // 지도보기 버튼
-                            Align(
-                              alignment: AlignmentDirectional.bottomEnd,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 16.0, bottom: 14.0),
-                                child: Material(
-                                  elevation: 1,
+                            ],
+                          ),
+                        ),
+                      ),
+                      // 지도보기 버튼
+                      Align(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              right: 16.0, bottom: 14.0),
+                          child: Material(
+                            elevation: 1,
+                            borderRadius: BorderRadius.circular(20),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  showBottomSheetBtn = false;
+                                });
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: 100,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(20),
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        showBottomSheetBtn = false;
-                                      });
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      width: 100,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Wrap(
+                                  crossAxisAlignment:
+                                  WrapCrossAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      CupertinoIcons.map,
+                                      size: 18,
+                                      color: AppColors.primary,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      '지도보기',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                       ),
-                                      child: Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        children: const [
-                                          Icon(
-                                            CupertinoIcons.map,
-                                            size: 15,
-                                            color: AppColors.primary,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            '지도보기',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black,
-                                            ),
-                                          ),
+
+                                    ),
                                         ],
                                       ),
                                     ),
