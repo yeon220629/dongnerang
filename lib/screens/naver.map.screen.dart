@@ -99,7 +99,10 @@ class _naverMapScreenState extends State<naverMapScreen> {
         height: 46,
         captionText: space.spaceName,
         captionMinZoom: 14,
-        captionColor: AppColors.black,
+        captionColor: Colors.blueAccent[700],
+        //글씨 밑줄
+        captionHaloColor: Colors.white,
+        captionRequestedWidth: 150,
         captionTextSize: 15,
         captionPerspectiveEnabled: true,
         icon: await OverlayImage.fromAssetImage(
@@ -705,11 +708,18 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                 padding: EdgeInsets.only(top: statusBarHeight),
                                 child: Column(
                                   children: <Widget>[
-                                    // const SizedBox(
-                                    //   height: 30,
-                                    // ),
                                     // 애드몹
                                     BannerAdMob(),
+                                //chip
+                                //     ChoiceChip(
+                                //     selected: _selected,
+                                //     label: Text('Woolha'),
+                                //     onSelected: (bool selected) {
+                                //       setState(() {
+                                //         _selected = !_selected;
+                                //       });
+                                //     }
+                                // ),
                                     // 리스트
                                     Expanded(
                                       child: ListView.builder(
