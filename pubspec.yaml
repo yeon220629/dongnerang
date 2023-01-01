@@ -12,17 +12,21 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_cupertino_localizations: ^1.0.1
-  latlong2: ^0.8.1
-  logger: ^1.1.0
-  flutter_switch: ^0.3.2
-  carousel_slider: ^4.1.1
   #  firebase
   firebase_auth: ^4.1.0
   firebase_core: ^2.1.1
   firebase_storage: ^11.0.3
   cloud_firestore: ^4.1.0
-
+  firebase_messaging: ^14.0.4
+  # Kakao
+  kakao_flutter_sdk: ^1.3.0-beta.4 # 전체 추가
+  kakao_flutter_sdk_share: ^1.3.0-beta.4 # 카카오톡 공유
+  # naver map
+  flutter_naver_map:
+    git:
+      url: https://github.com/note11g/flutter_naver_map.git
+      ref: main
+  geolocator: ^9.0.2
   # URL
   url_launcher: ^6.1.4
   webview_flutter: ^2.0.4
@@ -30,14 +34,24 @@ dependencies:
   http: ^0.13.4
   store_redirect: ^2.0.1
   shared_preferences: ^2.0.15
+  intl: ^0.17.0
+  flutter_inappwebview:
+    git:
+      url: https://github.com/pichillilorenzo/flutter_inappwebview.git
+      ref: master
+  # Util
+  flutter_cupertino_localizations: ^1.0.1
+  latlong2: ^0.8.1
+  logger: ^1.1.0
+  flutter_switch: ^0.3.2
+  carousel_slider: ^4.1.1
   flutter_easyloading: ^3.0.5
   flutter_signin_button: ^2.0.0
   flutter_html: ^2.2.1
   flutter_colorpicker: ^1.0.3
-  google_sign_in: ^5.3.3
   permission_handler: ^10.0.0
-  kakao_flutter_sdk: ^1.3.0-beta.4 # 전체 추가
-  kakao_flutter_sdk_share: ^1.3.0-beta.4 # 카카오톡 공유
+  crypto: ^3.0.2
+  google_sign_in: ^5.3.3
   sign_in_with_apple: ^4.2.0
   cupertino_icons: ^1.0.5
   filter_list: ^1.0.2
@@ -47,17 +61,10 @@ dependencies:
   cached_network_image: ^3.2.1
   material_tag_editor: ^0.1.2
   fluttertagselector: ^0.1.0
-  intl: ^0.17.0
-  flutter_inappwebview:
-    git:
-      url: https://github.com/pichillilorenzo/flutter_inappwebview.git
-      ref: master
   flutter_slidable: ^2.0.0
   dropdown_button2: ^1.9.2
   lottie: ^1.4.3
   flutter_native_splash: ^2.0.5
-  # flutter messaging fnc
-  firebase_messaging: ^14.0.4
   flutter_local_notifications: ^9.6.0
   fluttertoast: ^8.1.1
   google_mobile_ads: ^2.2.0
@@ -65,16 +72,6 @@ dependencies:
   app_tracking_transparency: ^2.0.3
   pull_to_refresh: ^2.0.0
   new_version: ^0.3.1
-
-  # crypto:
-  crypto: ^3.0.2
-
-  # naver map
-  flutter_naver_map:
-    git:
-      url: https://github.com/note11g/flutter_naver_map.git
-      ref: main
-  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
