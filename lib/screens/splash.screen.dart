@@ -106,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset("assets/images/firstLogo.png")
+                  Image.asset("assets/images/firstLogo.png", width: 280, height: 280,)
                   // Image.asset('assets/images/logo.png',fit: BoxFit.cover, height: size.height / 11.8,),
                   // SizedBox(height: 10,),
                   // const Text( "우리 동네의 모든 공공소식",
@@ -121,8 +121,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
                   Lottie.asset(
                     'assets/lottie/68894-running.json',
-                    width: 150,
-                    height: 150,
+                    width: 100,
+                    height: 100,
                     fit: BoxFit.fill,
                   ),
                   // Image.asset("assets/images/logo.png", width: 80, height: 80,)

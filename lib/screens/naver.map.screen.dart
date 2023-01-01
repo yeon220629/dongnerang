@@ -290,7 +290,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
             const SizedBox(
               height: 12,
             ),
-            const Divider(),
+            // const Divider(),
           ],
         ),
       ),
@@ -347,7 +347,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                 builder: (context) => seoulUrlLoadScreen(url)));
           }),
           child: Container(
-            height: 280,
+            height: 250,
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -423,9 +423,9 @@ class _naverMapScreenState extends State<naverMapScreen> {
                   ),
                   isSelected: const [false, false, false],
                   children: const <Widget>[
-                    Icon(Icons.phone),
-                    Icon(Icons.location_on),
-                    Icon(Icons.share)
+                    Icon(CupertinoIcons.phone),
+                    Icon(Icons.location_on_outlined),
+                    Icon(Icons.share_outlined)
                   ],
                 ),
               ],
