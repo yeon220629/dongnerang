@@ -443,7 +443,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                 );
               }).toList(),
               onChanged: (dynamic value){
+                var _msg = '';
                 listItems = [];
+                value == '중구'
+                    ? _msg = '현재 동네가 "$value"로 변경되었습니다.'
+                    : _msg = '현재 동네가 "$value구"로 변경되었습니다.';
+                final snackBar = SnackBar(content: Text(_msg));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 List? item = fnChecklocal(value);
                 if(value == item?.first){
                   getPostsData("${item?.first}_전체");

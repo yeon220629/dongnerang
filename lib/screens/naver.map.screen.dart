@@ -55,7 +55,10 @@ class _naverMapScreenState extends State<naverMapScreen> {
   };
 
   final List<String> items = ['전체', '체육시설', '동네시설']; // 카테고리
+  final List<String> itemsList = ['체육시설', '동네시설']; // 목록보기
   String selectedValue = ''; // 선택된 카테고리
+  String centerValue = "";
+
   Map<String, bool> spaceVisibility = <String, bool>{
     "A": true,
     "B": true
@@ -710,30 +713,50 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                   children: <Widget>[
                                     // 애드몹
                                     BannerAdMob(),
-                                //chip
-                                //     ChoiceChip(
-                                //     selected: _selected,
-                                //     label: Text('Woolha'),
-                                //     onSelected: (bool selected) {
-                                //       setState(() {
-                                //         _selected = !_selected;
-                                //       });
-                                //     }
-                                // ),
-                                    // 리스트
+                                    Wrap(
+                                      spacing: 5.0,
+                                      children: List<Widget>.generate( itemsList.length,
+                                        (int index) {
+                                          return ChoiceChip(
+                                            label: Text('${itemsList[index]}'),
+                                            selected: itemsList.length == index,
+                                            onSelected: (bool selected) {
+                                              setState(() {
+                                                switch (index) {
+                                                  case 0:
+                                                    centerValue = "B";
+                                                    break;
+                                                  case 1:
+                                                    centerValue = "A";
+                                                    break;
+                                                }
+                                              });
+                                            },
+                                          );
+                                        },
+                                      ).toList(),
+                                    ),
+                                    // 리스트 A 동네시설 B 체육시설
                                     Expanded(
                                       child: ListView.builder(
                                         itemCount: spacesMap.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          String uid =
-                                              spacesMap.keys.toList()[index];
+                                        itemBuilder: (BuildContext context, int index) {
+                                          String uid = spacesMap.keys.toList()[index];
+                                          String uidtoo = '';
+
+                                          if(spacesMap[uid]?.category == centerValue) {
+                                            uidtoo =
+                                            spacesMap.keys.toList()[index];
+                                          }
 
                                           return InkWell(
                                             onTap: () {
                                               onMarkerTabEvent(uid);
                                             },
-                                            child: makeSpaceWidget(uid),
+                                            // child: makeSpaceWidget(uid),
+                                            child: uidtoo != ''
+                                              ? makeSpaceWidget(uidtoo)
+                                              : SizedBox(),
                                           );
                                         },
                                       ),

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:dongnerang/screens/url.load.screen.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:new_version/new_version.dart';
@@ -34,7 +32,6 @@ class _mypageScreenState extends State<mypageScreen> {
   String? profileImage = '';
   String? userName = '';
   String? delListSting = '';
-  String? versionCode = '';
 
   late Future<List> userSaveData;
   List<Widget> itemsData = [];
@@ -190,12 +187,6 @@ class _mypageScreenState extends State<mypageScreen> {
       setState(() {
         topContainer = value;
         closeTapContainer = controllers.offset > 50;
-      });
-    });
-
-    FirebaseService.findVersion().then((value){
-      setState(() {
-        versionCode = value;
       });
     });
   }
