@@ -78,9 +78,9 @@ class _naverMapScreenState extends State<naverMapScreen> {
     late Map<String, dynamic>? valueDoc = documentSnapshot.data();
 
     valueDoc?.forEach((key, value) {
-      print("valueDOC >>>> :::: $key, $value");
       Space s = Space.fromJson(value);
-      s.dist = getDistance(s.location["latitude"].toDouble(), s.location["longitude"].toDouble());
+      s.dist = getDistance(s.location["latitude"].toDouble(),
+          s.location["longitude"].toDouble());
       spaces[s.uid] = s;
     });
 
@@ -102,7 +102,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
         position:
             LatLng(space.location["latitude"]!, space.location["longitude"]!),
         width: 32,
-        height: 46,
+        height: 32,
         captionText: space.spaceName,
         captionMinZoom: 14,
         captionColor: Colors.black,
@@ -132,12 +132,17 @@ class _naverMapScreenState extends State<naverMapScreen> {
 
   // 전체 마커 이미지 초기화
   markerInit() {
+
+    setState(() {
+      
+    });
+    
     markersMap.forEach((mUid, mValue) async {
       Space? tempSpace = spacesMap[mUid];
       String? tempCate = tempSpace?.category;
 
       mValue.width = 32;
-      mValue.height = 46;
+      mValue.height = 32;
       mValue.icon = await OverlayImage.fromAssetImage(
           assetName: spaceVisibility[tempCate] == true
               ? "assets/images/${offMarkImg[tempCate]}"
@@ -314,19 +319,19 @@ class _naverMapScreenState extends State<naverMapScreen> {
     moveMapCamera(space!.location["latitude"]!, space.location["longitude"]!);
 
     // 마커 이미지 및 크기 변경
-    // markersMap.forEach((markerUid, markerValue) async {
-    //   if (markerUid == uid) {
-    //     markerValue.icon = await OverlayImage.fromAssetImage(
-    //         assetName: "assets/images/${onMarkImg[space?.category]}");
-    //     markerValue.width = 48;
-    //     markerValue.height = 69;
-    //     // markerValue.width = 32;
-    //     // markerValue.height = 46;
-    //   } else {
-    //     markerValue.width = 32;
-    //     markerValue.height = 46;
-    //   }
-    // });
+    markersMap.forEach((markerUid, markerValue) async {
+      if (markerUid == uid) {
+        markerValue.icon = await OverlayImage.fromAssetImage(
+            assetName: "assets/images/${onMarkImg[space.category]}");
+        markerValue.width = 48;
+        markerValue.height = 69;
+        // markerValue.width = 32;
+        // markerValue.height = 46;
+      } else {
+        markerValue.width = 32;
+        markerValue.height = 32;
+      }
+    });
 
     setState(() {
       showBottomSheetBtn = false;
@@ -353,7 +358,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
 
         return InkWell(
           onTap: (() {
-            final Uri url = Uri.parse('${thisSpace.pageLink}');
+            final Uri url = Uri.parse('${thisSpace.pageLink}'.trim());
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => seoulUrlLoadScreen(url)));
           }),
@@ -398,10 +403,10 @@ class _naverMapScreenState extends State<naverMapScreen> {
                         content: Content(
                           title:
                               '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${thisSpace.spaceName}]\n\n',
-                          imageUrl: Uri.parse(thisSpace.spaceImage!),
+                          imageUrl: Uri.parse(thisSpace.spaceImage!.trim()),
                           link: Link(
-                            webUrl: Uri.parse(thisSpace.pageLink!),
-                            mobileWebUrl: Uri.parse(thisSpace.pageLink!),
+                            webUrl: Uri.parse(thisSpace.pageLink!.trim()),
+                            mobileWebUrl: Uri.parse(thisSpace.pageLink!.trim()),
                           ),
                         ),
                       );
