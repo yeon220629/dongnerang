@@ -55,7 +55,6 @@ class _naverMapScreenState extends State<naverMapScreen> {
   };
 
   final List<String> items = ['전체', '체육시설', '동네시설']; // 카테고리
-  final List<String> itemsList = ['체육시설', '동네시설']; // 목록보기
   String selectedValue = ''; // 선택된 카테고리
   String centerValue = "";
 
@@ -723,30 +722,54 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                   children: <Widget>[
                                     // 애드몹
                                     BannerAdMob(),
-                                    //chip
-                                    //     ChoiceChip(
-                                    //     selected: _selected,
-                                    //     label: Text('Woolha'),
-                                    //     onSelected: (bool selected) {
-                                    //       setState(() {
-                                    //         _selected = !_selected;
-                                    //       });
-                                    //     }
-                                    // ),
+                                    Wrap(
+                                      spacing: 5.0,
+                                      children: List<Widget>.generate(
+                                        items.length,
+                                        (int index) {
+                                          return ChoiceChip(
+                                            label: Text('${items[index]}'),
+                                            selected: items.length == index,
+                                            onSelected: (bool selected) {
+                                              setState(() {
+                                                switch (index) {
+                                                  case 0:
+                                                    centerValue = "C";
+                                                    break;
+                                                  case 1:
+                                                    centerValue = "B";
+                                                    break;
+                                                  case 2:
+                                                    centerValue = "A";
+                                                    break;
+                                                }
+                                              });
+                                            },
+                                          );
+                                        },
+                                      ).toList(),
+                                    ),
                                     // 리스트
                                     Expanded(
                                       child: ListView.builder(
                                         itemCount: spacesMap.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          String uid =
-                                              spacesMap.keys.toList()[index];
+                                        itemBuilder: (BuildContext context, int index) {
+                                          String uidtoo = '';
+                                          String uid = spacesMap.keys.toList()[index];
 
+                                          if(spacesMap[uid]?.category == centerValue) {
+                                            uidtoo = spacesMap.keys.toList()[index];
+                                          }else if(centerValue == "C"){
+                                            uidtoo = uid;
+                                          }
                                           return InkWell(
                                             onTap: () {
                                               onMarkerTabEvent(uid);
                                             },
-                                            child: makeSpaceWidget(uid),
+                                            // child: makeSpaceWidget(uid),
+                                            child: uidtoo != ''
+                                                ? makeSpaceWidget(uidtoo)
+                                                : SizedBox(),
                                           );
                                         },
                                       ),
