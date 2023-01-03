@@ -11,8 +11,7 @@ class Space {
   late String address;
   late String? category; // 공간 분류 (A: 일반, B: 체육)
   late Map<String, dynamic> location;
-  late Map<String, dynamic>?
-      detailInfo; // accommInfo(수용인원정보), priceInfo(가격정보), timeInfo(시간정보)
+  late String? detailInfo; // 상세정보
   late String? pageLink;
   late String? phoneNum;
   late String updated;

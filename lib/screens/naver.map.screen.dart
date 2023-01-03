@@ -67,18 +67,21 @@ class _naverMapScreenState extends State<naverMapScreen> {
   // firestore에서 전체 space 가져오기
   Future<List<Space>> getSpacesAll() async {
     Map<String, Space> spaces = {};
+    String value = 'SEOUL';
 
-    getLocationData(); // 현위치 가져오기
+    getLocationData();
 
-    await FirebaseFirestore.instance
-        .collection('spaces')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        Space s = Space.fromSnapshot(doc);
-        s.dist = getDistance(s.location["latitude"], s.location["longitude"]);
-        spaces[s.uid] = s;
-      });
+    DocumentReference<Map<String, dynamic>> docref =
+        FirebaseFirestore.instance.collection("spaces").doc(value);
+    final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+        await docref.get();
+    late Map<String, dynamic>? valueDoc = documentSnapshot.data();
+
+    valueDoc?.forEach((key, value) {
+      print("valueDOC >>>> :::: $key, $value");
+      Space s = Space.fromJson(value);
+      s.dist = getDistance(s.location["latitude"].toDouble(), s.location["longitude"].toDouble());
+      spaces[s.uid] = s;
     });
 
     setState(() {
@@ -215,8 +218,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                       const SizedBox(
                         height: 8,
                       ),
-                      Text(
-                          thisSpace.address,
+                      Text(thisSpace.address,
                           style: TextStyle(
                             fontSize: 14,
                           )),
@@ -613,7 +615,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                             moveMapCamera(
                                 myLocation.latitude, myLocation.longitude);
                             // await _ct?.moveCamera(CameraUpdate.scrollTo(LatLng(
-                                // myLocation.latitude, myLocation.longitude)));
+                            // myLocation.latitude, myLocation.longitude)));
                           },
                           child: Container(
                             width: 40,
@@ -697,102 +699,101 @@ class _naverMapScreenState extends State<naverMapScreen> {
                       maxWidth: double.infinity, maxHeight: height),
                   child: showBottomSheetBtn
                       ?
-                  // 목록보기 버튼 눌렀을 시 : 리스트 보임
-                  Stack(
-                    children: [
-                      // 리스트 전체
-                      Container(
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: const BoxDecoration(
-                          color: AppColors.background,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: statusBarHeight),
-                          child: Column(
-                            children: <Widget>[
-                              // 애드몹
-                              BannerAdMob(),
-                              //chip
-                              //     ChoiceChip(
-                              //     selected: _selected,
-                              //     label: Text('Woolha'),
-                              //     onSelected: (bool selected) {
-                              //       setState(() {
-                              //         _selected = !_selected;
-                              //       });
-                              //     }
-                              // ),
-                              // 리스트
-                              Expanded(
-                                child: ListView.builder(
-                                  itemCount: spacesMap.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    String uid =
-                                    spacesMap.keys.toList()[index];
-
-                                    return InkWell(
-                                      onTap: () {
-                                        onMarkerTabEvent(uid);
-                                      },
-                                      child: makeSpaceWidget(uid),
-                                    );
-                                  },
+                      // 목록보기 버튼 눌렀을 시 : 리스트 보임
+                      Stack(
+                          children: [
+                            // 리스트 전체
+                            Container(
+                              padding: const EdgeInsets.all(16.0),
+                              decoration: const BoxDecoration(
+                                color: AppColors.background,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // 지도보기 버튼
-                      Align(
-                        alignment: AlignmentDirectional.bottomEnd,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              right: 16.0, bottom: 14.0),
-                          child: Material(
-                            elevation: 1,
-                            borderRadius: BorderRadius.circular(20),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  showBottomSheetBtn = false;
-                                });
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: 100,
-                                height: 38,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Wrap(
-                                  crossAxisAlignment:
-                                  WrapCrossAlignment.center,
-                                  children: const [
-                                    Icon(
-                                      CupertinoIcons.map,
-                                      size: 18,
-                                      color: AppColors.primary,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      '지도보기',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      ),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: statusBarHeight),
+                                child: Column(
+                                  children: <Widget>[
+                                    // 애드몹
+                                    BannerAdMob(),
+                                    //chip
+                                    //     ChoiceChip(
+                                    //     selected: _selected,
+                                    //     label: Text('Woolha'),
+                                    //     onSelected: (bool selected) {
+                                    //       setState(() {
+                                    //         _selected = !_selected;
+                                    //       });
+                                    //     }
+                                    // ),
+                                    // 리스트
+                                    Expanded(
+                                      child: ListView.builder(
+                                        itemCount: spacesMap.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          String uid =
+                                              spacesMap.keys.toList()[index];
 
+                                          return InkWell(
+                                            onTap: () {
+                                              onMarkerTabEvent(uid);
+                                            },
+                                            child: makeSpaceWidget(uid),
+                                          );
+                                        },
+                                      ),
                                     ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // 지도보기 버튼
+                            Align(
+                              alignment: AlignmentDirectional.bottomEnd,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 16.0, bottom: 14.0),
+                                child: Material(
+                                  elevation: 1,
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        showBottomSheetBtn = false;
+                                      });
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: 100,
+                                      height: 38,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Wrap(
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        children: const [
+                                          Icon(
+                                            CupertinoIcons.map,
+                                            size: 18,
+                                            color: AppColors.primary,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            '지도보기',
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
