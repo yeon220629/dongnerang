@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/services/firebase.service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
-import '../controller/AllController.dart';
 
 class noticemainpage extends StatefulWidget {
   const noticemainpage({super.key});
@@ -20,7 +16,7 @@ class _noticemainpageState extends State<noticemainpage>
   // final AppController ac = Get.put(AppController());
   late TabController _tabController;
   double topContainer = 0;
-  String td = FirebaseService().getToday();
+  String td = getToday();
   List<Widget> noticeDataWidget = [];
   List<Widget> noticeItemsData = [];
 

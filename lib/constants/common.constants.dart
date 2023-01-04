@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 
 
@@ -111,6 +112,13 @@ final List mostPopularKeyword = [
   '인기', '키워드의', '종류는', '111', '222', '333', '444', '555'
   , '888', '777', '666'
 ];
+
+String getToday() {
+  DateTime now = DateTime.now();
+  DateFormat formatter = DateFormat('yyyy-MM-dd');
+  String strToday = formatter.format(now);
+  return strToday;
+}
 
 List? fnChecklocal(String local){
   if(local == '강남'){

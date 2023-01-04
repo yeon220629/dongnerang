@@ -1,17 +1,11 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dongnerang/constants/common.constants.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../models/app_user.model.dart';
 import 'package:http/http.dart' as http;
-
-import '../screens/mainScreenBar.dart';
-import '../screens/mypage/mypage.screen.dart';
 
 class FirebaseService {
   final String url ='https://us-central1-dbcurd-67641.cloudfunctions.net/createCustomToken';
@@ -258,13 +252,6 @@ class FirebaseService {
     }
   }
 
-  String getToday() {
-    DateTime now = DateTime.now();
-    DateFormat formatter = DateFormat('yyyy-MM-dd');
-    String strToday = formatter.format(now);
-    return strToday;
-  }
-
   static Future<List> findBanner() async {
     List sendBannerdata = [];
     final doc = await FirebaseFirestore.instance.collection("banner").doc('banner1').get();
@@ -273,16 +260,4 @@ class FirebaseService {
     });
     return sendBannerdata;
   }
-
-  static Future<String> findVersion() async {
-    String versionCode= '';
-    final doc = await FirebaseFirestore.instance.collection("banner").doc('version').get();
-    doc.data()?.forEach((key, value) {
-      versionCode = value;
-    });
-
-    return versionCode;
-  }
-
-
 }

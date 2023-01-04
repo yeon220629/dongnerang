@@ -1,8 +1,12 @@
+import 'dart:ui';
 import 'package:dongnerang/firebase_options.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:dongnerang/screens/splash.screen.dart';
 import 'package:dongnerang/services/user.service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -11,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'constants/common.constants.dart';
+import 'controller/NotificationController.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,6 +81,7 @@ class MyApp extends StatelessWidget {
       // home: const mainScreen(),
       initialBinding: BindingsBuilder((){
         Get.put(UserService());
+        Get.put(NotificationController());
       }),
       builder: EasyLoading.init(
         //폰트 사이즈 고정
