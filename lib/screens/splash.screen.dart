@@ -33,8 +33,8 @@ class _SplashScreenState extends State<SplashScreen> {
       androidId: 'com.dongnerang.com.dongnerang',
       iOSId: 'com.dongnerang.com.dongnerang',
     );
-    checkNewVersion(newVersion);
-    // checkPermissions();
+    // checkNewVersion(newVersion);
+    checkPermissions();
     super.initState();
   }
 
