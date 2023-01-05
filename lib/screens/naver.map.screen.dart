@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_html/style.dart';
 
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -23,17 +24,22 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
 enum SpaceType {
-  A('A', '동네프로그램', '일반시설', 'A_on.png', 'A_off.png'),
-  B('B', '동네체육', '체육시설', 'B_on.png', 'B_off.png'),
-  C('C', '동네대관', '대관시설', 'C_on.png', 'C_off.png');
+  sports('sports', '동네체육', '체육시설', 'sports_on.png', 'sports_off.png',
+      'sports_icon.png', 0xff5B88E2),
+  rental('rental', '동네대관', '대관시설', 'rental_on.png', 'rental_off.png',
+      'rental_icon.png', 0xffFF7272),
+  program('program', '동네프로그램', '일반시설', 'program_on.png', 'program_off.png',
+      'program_icon.png', 0xff55C759);
 
   const SpaceType(this.code, this.displayName, this.displaySubName,
-      this.onMarkImg, this.offMarkImg);
+      this.onMarkImg, this.offMarkImg, this.iconImg, this.iconColor);
   final String code; // Space.category와 같음
   final String displayName;
   final String displaySubName;
   final String onMarkImg;
   final String offMarkImg;
+  final String iconImg;
+  final int iconColor;
 
   factory SpaceType.getByCode(String code) {
     return SpaceType.values.firstWhere((value) => value.code == code);
@@ -193,8 +199,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                             width: 5,
                           ),
                           Text(
-                            SpaceType.getByCode(thisSpace.category!)
-                                .displaySubName,
+                            thisSpace.detailInfo!,
                             style: const TextStyle(
                               fontSize: 11,
                               color: Colors.grey,
@@ -600,7 +605,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
               child: GestureDetector(
                 child: SizedBox(
                   width: double.infinity,
-                  height: height - statusBarHeight - 100,
+                  height: height,
                   child: ConstrainedBox(
                     constraints: const BoxConstraints.expand(),
                     child: showBottomSheetBtn
@@ -609,7 +614,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                               // 리스트 전체
                               Container(
                                 padding: const EdgeInsets.only(
-                                    left: 16.0, right: 16.0),
+                                    top: 50.0, left: 16.0, right: 16.0),
                                 decoration: const BoxDecoration(
                                   color: AppColors.background,
                                 ),
@@ -696,42 +701,87 @@ class _naverMapScreenState extends State<naverMapScreen> {
             // 카테고리 선택 칩
             Container(
               width: width,
-              // height: statusBarHeight + 50,
+              padding: EdgeInsets.only(
+                  top: statusBarHeight, left: 16.0, right: 16.0),
               decoration: const BoxDecoration(color: AppColors.background),
-              child: Padding(
-                padding: EdgeInsets.only(top: statusBarHeight, left: 16.0),
-                child: Wrap(
-                  spacing: 5.0,
-                  children: categoryList.map((SpaceType choice) {
-                    return FilterChip(
-                      label: Text(choice.displayName),
-                      labelStyle: TextStyle(
-                          color: _selectedChoices.contains(choice.displayName)
-                              ? Colors.white
-                              : Colors.black),
-                      selectedColor: AppColors.primary,
-                      showCheckmark: false,
-                      selected: _selectedChoices.contains(choice.displayName),
-                      onSelected: (bool value) {
-                        setState(() {
-                          if (value) {
-                            if (!_selectedChoices
-                                .contains(choice.displayName)) {
-                              _selectedChoices.add(choice.displayName);
-                              categoryVisibility[choice.code.toString()] = true;
-                            }
-                          } else if (_selectedChoices.length > 1) {
-                            _selectedChoices.removeWhere((String name) {
-                              return name == choice.displayName;
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    child: Wrap(
+                      spacing: 5.0,
+                      children: categoryList.map((SpaceType choice) {
+                        return FilterChip(
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          avatar: CircleAvatar(
+                            radius: 12,
+                            child:
+                                Image.asset("assets/images/${choice.iconImg}"),
+                          ),
+                          label: SizedBox(
+                            child: Text(
+                              choice.displayName,
+                            ),
+                          ),
+                          labelStyle:
+                              _selectedChoices.contains(choice.displayName)
+                                  ? TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.fontSize
+                                          )
+                                  : TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.fontSize
+                                          ),
+                          selectedColor: Color(choice.iconColor),
+                          showCheckmark: false,
+                          selected:
+                              _selectedChoices.contains(choice.displayName),
+                          onSelected: (bool value) {
+                            setState(() {
+                              if (value) {
+                                if (!_selectedChoices
+                                    .contains(choice.displayName)) {
+                                  _selectedChoices.add(choice.displayName);
+                                  categoryVisibility[choice.code.toString()] =
+                                      true;
+                                }
+                              } else if (_selectedChoices.length > 1) {
+                                _selectedChoices.removeWhere((String name) {
+                                  return name == choice.displayName;
+                                });
+                                categoryVisibility[choice.code.toString()] =
+                                    false;
+                              }
                             });
-                            categoryVisibility[choice.code.toString()] = false;
-                          }
-                        });
-                        markerInit();
-                      },
-                    );
-                  }).toList(),
-                ),
+                            markerInit();
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  showBottomSheetBtn
+                      ? SizedBox(
+                          child: Text(
+                            '거리순',
+                            style: TextStyle(
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.fontSize,
+                            ),
+                          ),
+                        )
+                      : SizedBox()
+                ],
               ),
             ),
           ],

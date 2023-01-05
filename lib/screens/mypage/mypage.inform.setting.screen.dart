@@ -176,6 +176,29 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                         height: size.height / 13,
                         child: TextFormField(
                           controller: myController,
+                          onFieldSubmitted: (value) {
+                            if(myController.text == ''){
+                              EasyLoading.showInfo("공백은 등록 할 수 없습니다");
+                              return;
+                            }
+                            if(mypageCustomKeyword.length != 0){
+                              for(int i = 0; i < mypageCustomKeyword.length; i++){
+                                if(mypageCustomKeyword[i] == myController.text){
+                                  EasyLoading.showInfo("중복값은 포함 될 수 없습니다..");
+                                  return;
+                                }
+                              }
+                            }
+                            // select_tags.add(myController.text);
+                            // print("select_tags : $select_tags");
+                            // print("mypageCustomKeyword : $mypageCustomKeyword");
+                            setState(() {
+                              mypageCustomKeyword.add(myController.text);
+                              // print(mypageCustomKeyword);
+                              widget.callback(mypageCustomKeyword);
+                            });
+                            myController.clear();
+                          },
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                               icon: Icon(Icons.search),

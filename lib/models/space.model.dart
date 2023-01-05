@@ -24,7 +24,7 @@ class Space {
     required this.spaceName,
     this.spaceImage,
     required this.address,
-    this.category,
+    required this.category,
     required this.location,
     this.detailInfo,
     this.pageLink,
