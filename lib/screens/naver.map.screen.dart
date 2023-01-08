@@ -243,7 +243,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                         children: [
                           const Icon(
                             Icons.info_outline,
-                            size: 12,
+                            size: 13,
                             color: Colors.grey,
                           ),
                           Text(
@@ -346,7 +346,6 @@ class _naverMapScreenState extends State<naverMapScreen> {
       builder: (BuildContext context) {
         double widthSize = MediaQuery.of(context).size.width;
         Space thisSpace = space;
-
         return InkWell(
           onTap: (() {
             final Uri url = Uri.parse('${thisSpace.pageLink}'.trim());
@@ -773,6 +772,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                           child: Text(
                             '거리순',
                             style: TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .bodySmall

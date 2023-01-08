@@ -86,6 +86,18 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
   Widget ScaffordPlatform(){
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            //페이지 리로드
+            onPressed: (){
+                  Navigator.pop(context);
+            }
+        ),
+        // backgroundColor: Color(0x00ffffff),
+        elevation: 0,
+      ),
       body: SafeArea(
         child: Column(
           children: <Widget>[

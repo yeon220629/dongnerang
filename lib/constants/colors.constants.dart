@@ -5,7 +5,8 @@ class AppColors {
   static const text = Colors.black87;
   static const white = Color(0xffffffff);
   static const primary = Color(0xff5B88E2);
-  static const red = Color(0xffFF9F9F);
+  // static const red = Color(0xffFF9F9F);
+  static const red = Color(0xffFF747C);
   static const grey = Colors.grey;
   static const greylottie = Color(0xffDDDDDD);
 
