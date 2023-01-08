@@ -194,7 +194,8 @@ class _mypageScreenState extends State<mypageScreen> {
   void didUpdateWidget(covariant mypageScreen oldWidget) {
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
-    if(widget.StatusNumber == 1){
+    // 마이페이지 리스트 출력
+    if(widget.StatusNumber == 2){
       userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
       userSaveData.then((value) {
         getPostsData(value[2],value[3]);

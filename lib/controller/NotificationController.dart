@@ -35,7 +35,8 @@ class NotificationController extends GetxController {
         'high_importance_channel',
         'High Importance Notifications',
         importance: Importance.max,
-        priority: Priority.high
+        priority: Priority.high,
+        // icon:
     );
     var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
     var platformChannelSpecifics = new NotificationDetails(
@@ -51,7 +52,7 @@ class NotificationController extends GetxController {
       // debugPrint('Body >> ${event.notification!.body.toString()}');
       // debugPrint('Body >> ${event.data['link'].toString()}');
       FirebaseService.saveUserNotificationData(userEmail!,CustomNotification(title: event.notification!.title.toString(), link: event.data['link'].toString(), center_name: event.data['center_name'].toString()));
-
+      // push 알림 보기 설정
       await flutterLocalNotificationsPlugin.show(0, '${event.notification!.title.toString()}',
           '${event.notification!.body.toString()}',
           platformChannelSpecifics, payload: 'Default_Sound'

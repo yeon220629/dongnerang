@@ -64,6 +64,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint('Title >> ${message.notification!.title.toString()}');
   debugPrint('Body >> ${message.notification!.body.toString()}');
   FirebaseService.saveUserNotificationData(userEmail!,CustomNotification(title: message.notification!.title.toString(), link: message.data['link'].toString(), center_name: message.data['center_name'].toString()));
+
+  // push 알림 보기 설정
   await flutterLocalNotificationsPlugin.show(0, '${message.notification!.title.toString()}',
       '${message.notification!.body.toString()}',
       platformChannelSpecifics, payload: 'Default_Sound'

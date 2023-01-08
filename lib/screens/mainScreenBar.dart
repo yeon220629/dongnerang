@@ -127,7 +127,8 @@ class mainScreenState extends State<mainScreen>{
                       ],
                       onTap: (index) {
                         navigationController.currentBottomMenuIndex.value = index;
-                        if(index == 1){
+                        // 마이페이지 리스트 출력
+                        if(index == 2){
                           mypageScreen(navigationController.currentBottomMenuIndex.value);
                           setState(() {});
                         }
