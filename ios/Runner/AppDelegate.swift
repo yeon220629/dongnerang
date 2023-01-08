@@ -14,6 +14,9 @@ import CoreLocation
     FirebaseApp.configure()
     GeneratedPluginRegistrant.register(with: self)
 
+    //Ios Push 설정
+    if #available(iOS 10.0, *) { UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate }
+
     // NaverMap - 위치 추적
     if (CLLocationManager.locationServicesEnabled()) {
       switch CLLocationManager.authorizationStatus() {

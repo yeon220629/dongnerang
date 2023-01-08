@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/services/user.service.dart';
@@ -6,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import '../models/app_user.model.dart';
 import 'package:http/http.dart' as http;
+
+import '../models/notification.model.dart';
 
 class FirebaseService {
   final String url ='https://us-central1-dbcurd-67641.cloudfunctions.net/createCustomToken';
@@ -91,7 +94,6 @@ class FirebaseService {
     });
 
     if(keyTemp.isEmpty){
-      // print("항목이 비었음..");
       await FirebaseFirestore.instance.collection("users").doc(email).update(({
         'userSaveData0': param,
       }));
@@ -99,26 +101,19 @@ class FirebaseService {
 
     for(var keyCompare in keyTemp){
       int compareNumber = int.parse(keyCompare.replaceRange(0, 12, ''));
-      if('userSaveData${compareNumber}'.contains(compareNumber.toString())){
-        compareNumber ++;
-      }
+      if('userSaveData${compareNumber}'.contains(compareNumber.toString())){ compareNumber ++; }
       lastNumber.add(compareNumber);
     }
     lastNumber.sort();
     // lastNumber.reversed;
-
     for(var valueCompare in valueTemp){
-      if(valueCompare[3] == param[3]){
-        break;
-      }
+      if(valueCompare[3] == param[3]){ break; }
 
       if(valueCompare[3] != param[3]){
         await FirebaseFirestore.instance.collection("users").doc(email).update(({
           'userSaveData${lastNumber.reversed.first}': param,
         }));
-        // EasyLoading.showSuccess("저장 완료");
       }
-
     }
   }
 
@@ -259,5 +254,42 @@ class FirebaseService {
       sendBannerdata.add(value);
     });
     return sendBannerdata;
+  }
+  // notification Alram
+  static Future<void> saveUserNotificationData(String email,CustomNotification param)async {
+    List lastNumber = [];
+    var addNumber = '';
+    var updateObject = {
+      "title" : param.title,
+      "link" : param.link,
+      "center_name" : param.center_name,
+    };
+
+    // 수정 필요..
+    final checkDoc =  await FirebaseFirestore.instance.collection("keywordnotification").doc(email);
+    var checking=await checkDoc.get();
+    if(checking.exists){
+      final checkNotiDuplicate =  await FirebaseFirestore.instance.collection("keywordnotification").doc(email).get();
+      checkNotiDuplicate.data()?.forEach((key, value) async {
+        // if(key.contains('notification')){
+        //   addNumber = key.split('_')[1];
+          // if('notification_${addNumber}'.contains(addNumber)){
+          //   int compareNumber = int.parse(addNumber);
+          //   compareNumber++;
+          // }
+          // lastNumber.add(compareNumber);
+
+        //   print("lastNumber : $lastNumber");
+        //
+        //   await FirebaseFirestore.instance.collection("keywordnotification").doc(email).update(
+        //       {"notification_${lastNumber.reversed.first}": updateObject}
+        //   );
+        // }
+      });
+    }else{
+      await FirebaseFirestore.instance.collection("keywordnotification").doc(email).set(
+          {"notification_0": updateObject}
+      );
+    }
   }
 }

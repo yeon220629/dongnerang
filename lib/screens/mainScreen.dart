@@ -4,16 +4,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
+import 'package:dongnerang/screens/updatedialog.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:new_version/new_version.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import 'package:dongnerang/screens/search.screen.dart';
@@ -317,6 +320,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) => initPlugin());
+    final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+
+    _getToken(_messaging);
+
     super.initState();
     FirebaseService.findBanner().then((value){
       value.sort((a,b){
@@ -374,7 +381,53 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         closeTapContainer = controllers.offset > 50;
       });
     });
+
+    final newVersion = NewVersion(
+      androidId: 'com.dongnerang.com.dongnerang',
+      iOSId: 'com.dongnerang.com.dongnerang',
+    );
+    checkNewVersion(newVersion);
   }
+
+  void checkNewVersion(NewVersion newVersion) async {
+    final status = await newVersion.getVersionStatus();
+    // print("status appStoreLink : ${status?.appStoreLink}");
+    // print("status LocalVersion : ${status?.localVersion}");
+    // print("status storeVersion : ${status?.storeVersion}");
+    // print("status releaseNotes : ${status?.releaseNotes}");
+    if(status != null) {
+      // 업데이트 테스트
+      // if(!status.canUpdate) {
+      if(status.canUpdate) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return UpdateDialog(
+              allowDismissal: true,
+              description: status.releaseNotes!,
+              version: status.storeVersion,
+              appLink: status.appStoreLink,
+            );
+          },
+        );
+      }
+    }
+  }
+
+  Future<void> _getToken(_messaging) async {
+    String? userEmail = FirebaseAuth.instance.currentUser?.email;
+    // await Firebase.initializeApp();
+    _messaging.getToken().then((token) async {
+      debugPrint('token~: [$token]');
+      if(userEmail!= null){
+        print("userEmail not Null");
+        await FirebaseFirestore.instance.collection("users").doc(userEmail).update(({
+          'usertoken': token,
+        }));
+      }
+    });
+  }
+
   Future <void> initPlugin() async{
     try{
       final TrackingStatus status = await AppTrackingTransparency.trackingAuthorizationStatus;
