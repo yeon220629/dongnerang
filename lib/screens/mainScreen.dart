@@ -136,6 +136,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       }
       if(centerName == centerLabel){
         if(post["center_name "].toString().contains(centerLabel!)){
+          if(post['center_name '] == '중구구청'){ post['center_name '] = '중구청'; }
           // print("2022 강남페스티벌 문화센터 직원 만족도 조사 실시aa".length); 31
           listItems.add( GestureDetector(
               onTap: () async{
@@ -224,6 +225,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
           );
         }
       }else{
+        if(post['center_name '] == '중구구청'){ post['center_name '] = '중구청'; }
         listItems.add( GestureDetector(
             onTap: () async{
               final Uri url = Uri.parse('${post["link"]}');
