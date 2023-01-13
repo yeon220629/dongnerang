@@ -109,7 +109,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
         width: 32,
         height: 32,
         captionText: space.spaceName,
-        captionMinZoom: 14,
+        captionMinZoom: 13,
         captionColor: Colors.black,
         // captionColor: Colors.blueAccent[700],
         //글씨 밑줄
