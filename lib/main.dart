@@ -41,12 +41,14 @@ void main() async {
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  String? userEmail = FirebaseAuth.instance.currentUser?.email;
+  await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform, );
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
   var IOS = new IOSInitializationSettings();
   var settings = new InitializationSettings(android: android, iOS: IOS);
   flutterLocalNotificationsPlugin.initialize(settings);
+  List tempArray = [];
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
 
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       'Notification id',
@@ -63,8 +65,16 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint("NotificationController >> message received");
   debugPrint('Title >> ${message.notification!.title.toString()}');
   debugPrint('Body >> ${message.notification!.body.toString()}');
-  FirebaseService.saveUserNotificationData(userEmail!,CustomNotification(title: message.notification!.title.toString(), link: message.data['link'].toString(), center_name: message.data['center_name'].toString()));
-
+  tempArray.add(
+    CustomNotification(
+      title: message.notification!.title.toString(),
+      link: message.data['link'].toString(),
+      center_name: message.data['center_name'].toString(),
+      body: message.notification!.body.toString(),
+      registrationdate: message.data['registrationdate'].toString(),
+    )
+  );
+  FirebaseService.saveUserNotificationData(userEmail!,tempArray);
   // push 알림 보기 설정
   await flutterLocalNotificationsPlugin.show(0, '${message.notification!.title.toString()}',
       '${message.notification!.body.toString()}',

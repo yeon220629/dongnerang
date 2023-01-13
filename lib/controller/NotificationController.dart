@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/models/notification.model.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,7 +23,7 @@ class NotificationController extends GetxController {
     super.onInit();
   }
 
-  Future<void> _initNotification() async {
+  void _initNotification() {
     // 앱이 동작중일때 호출됨
     String? userEmail = FirebaseAuth.instance.currentUser?.email;
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -44,16 +45,30 @@ class NotificationController extends GetxController {
         iOS: iOSPlatformChannelSpecifics
     );
 
+    List tempArray = [];
     // 앱이 동작 중일 떄
     FirebaseMessaging.onMessage.listen((RemoteMessage event) async {
       _addNotification(event);
       debugPrint("NotificationController >> message received");
       // debugPrint('Title >> ${event.notification!.title.toString()}');
       // debugPrint('Body >> ${event.notification!.body.toString()}');
-      // debugPrint('Body >> ${event.data['link'].toString()}');
-      FirebaseService.saveUserNotificationData(userEmail!,CustomNotification(title: event.notification!.title.toString(), link: event.data['link'].toString(), center_name: event.data['center_name'].toString()));
-      // push 알림 보기 설정
-      await flutterLocalNotificationsPlugin.show(0, '${event.notification!.title.toString()}',
+      // debugPrint('link >> ${event.data['link'].toString()}');
+      tempArray.add(
+        CustomNotification(
+          title: event.notification!.title.toString(),
+          link: event.data['link'].toString(),
+          center_name: event.data['center_name'].toString(),
+          body: event.notification!.body.toString(),
+          registrationdate: event.data['registrationdate'].toString(),
+        )
+      );
+      FirebaseService.saveUserNotificationData(userEmail!,tempArray);
+      // 5초 뒤에 해당 배열 비우기
+      Future.delayed(Duration(milliseconds : 5000),() {
+        tempArray = [];
+      });
+        // push 알림 보기 설정
+      flutterLocalNotificationsPlugin.show(0, '${event.notification!.title.toString()}',
           '${event.notification!.body.toString()}',
           platformChannelSpecifics, payload: 'Default_Sound'
       );
@@ -70,7 +85,7 @@ class NotificationController extends GetxController {
 
 
   // 메시지를 변수에 저장
-  void _addNotification(RemoteMessage event) {
+  Future<void> _addNotification(RemoteMessage event) async {
     dateTime(event.sentTime);
     remoteMessage(event);
     debugPrint(dateTime.toString());

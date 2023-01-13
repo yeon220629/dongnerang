@@ -162,9 +162,8 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                 onPressed: (){
                   if(toggle != true){
                     if(widget.i == 1){
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  mainScreen()), (route) => false);
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                      builder: (BuildContext context) => mainScreen()), (route) => false);
                     }else{
                       Navigator.pop(context);
                     }
@@ -208,10 +207,15 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                   toggle = !toggle;
                 });
                 String? userEmail = FirebaseAuth.instance.currentUser?.email;
+                var widgetTime = widget.j;
+                if(widget.j.runtimeType == String){
+                  widgetTime = DateTime.parse(widget.j);
+                }
+
                 if(toggle){
                   saveData.add(widget.urldata.toString());
                   saveData.add(widget.o);
-                  saveData.add(widget.j);
+                  saveData.add(widgetTime);
                   saveData.add(widget.s);
                   saveData.add(toggle);
                   FirebaseService.saveUserPrivacyData(userEmail!, saveData);

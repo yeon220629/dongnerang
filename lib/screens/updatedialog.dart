@@ -1,6 +1,7 @@
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -163,13 +164,14 @@ class _UpdateDialogState extends State<UpdateDialog> {
                         widget.allowDismissal ? Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pop(context);
-                              setState(() {
-                                checkPageRout = true;
-                                if(checkPageRout){
-                                  checkPermissions();
-                                }
-                              });
+                              // Navigator.pop(context);
+                              // setState(() {
+                              //   checkPageRout = true;
+                              //   if(checkPageRout){
+                              //     checkPermissions();
+                              //   }
+                              // });
+                              SystemNavigator.pop();
                             },
                             child: Container(
                               height: 30,
