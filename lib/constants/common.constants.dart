@@ -1,3 +1,6 @@
+import 'dart:collection';
+
+import 'package:dongnerang/models/space.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:intl/intl.dart';
@@ -302,3 +305,6 @@ fnOnlineUrl(value){
     return 'https://www.gangnam.go.kr/edu/lecture/edu/list.do?mid=ID04_02070201';
   }
 }
+
+// 네이버 지도 로컬 DB에 저장될 데이터
+Queue<Space> SpacesQueue = ListQueue<Space>();

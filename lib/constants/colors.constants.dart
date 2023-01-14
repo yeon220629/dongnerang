@@ -22,12 +22,12 @@ class AppColors {
 }
 
 class MarkerColors {
-  static const red = "ffFF5757";
-  static const orange = "ffFF9A50";
-  static const yellow = "ffFFEE52";
-  static const lightGreen = "ff4DDE64";
-  static const green = "ff45DCD3";
-  static const blue = "ff5A92FF";
-  static const pink = "ffFFA7B2";
-  static const purple = "ff8378FF";
+  static const red = 0xffFF5757;
+  static const orange = 0xffFF9A50;
+  static const yellow = 0xffFFEE52;
+  static const lightGreen = 0xff4DDE64;
+  static const green = 0xff45DCD3;
+  static const blue = 0xff5A92FF;
+  static const pink = 0xffFFA7B2;
+  static const purple = 0xff8378FF;
 }
