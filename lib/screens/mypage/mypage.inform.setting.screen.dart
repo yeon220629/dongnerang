@@ -65,13 +65,25 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                               ? PrivateLocalData
                               : profilelocal[0]
                         }));
+                        await FirebaseService.getUserKeyExist(UserService.to.currentUser.value!.email).then((value) {
+                          if(value == true){
+                            // String email, List value, String key
+                            profilelocal.isEmpty
+                              ? FirebaseService.savePrivacyProfile(UserService.to.currentUser.value!.email,PrivateLocalData,'alramlocal')
+                              : FirebaseService.savePrivacyProfile(UserService.to.currentUser.value!.email,profilelocal[0],'alramlocal');
+                          }else{
+                            profilelocal.isEmpty
+                              ? FirebaseService.savePrivacyProfile(UserService.to.currentUser.value!.email,PrivateLocalData,'alramlocal')
+                              : FirebaseService.savePrivacyProfile(UserService.to.currentUser.value!.email,profilelocal[0],'alramlocal');
+                          }
+                        });
+
                         profilePhotoSetting = '';
                         profilenickSetting = '';
                         profileKeyword = [];
                         profilelocal = [];
                         mypageCustomKeyword = [];
                         // PrivateLocalData = [];
-
                         EasyLoading.showSuccess("프로필 수정 완료");
                         await FirebaseService.getCurrentUser();
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(

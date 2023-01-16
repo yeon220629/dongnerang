@@ -1,22 +1,42 @@
+import 'package:dongnerang/services/firebase.service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../constants/colors.constants.dart';
 
 class noticemainAlarmpage extends StatefulWidget {
-  final List keywordList;
-  final List localList;
-  const noticemainAlarmpage( this.keywordList, this.localList);
+  final List keywordList; final List localList; final List selectLocal;
+  const noticemainAlarmpage( this.keywordList, this.localList, this.selectLocal);
 
   @override
   State<noticemainAlarmpage> createState() => _noticemainAlarmpageState();
 }
 
 class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
+  TextEditingController addKeyword = new TextEditingController();
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
 
   @override
   void initState() {
     super.initState();
+    FirebaseService.getUserKeyExist(userEmail!).then((value) {
+      if(value == true){
+        FirebaseService.getUserLocalData(userEmail!, 'alramlocal').then((value) {
+          print('widget.selectLocal : ${widget.selectLocal}');
+          print('widget.selectLocal : ${value}');
+          // for (var element in widget.selectLocal) {
+          //   if(value.contains(element)){
+          //     print("true ele : $element");
+          //   }else{
+          //     print("false ele : $element");
+          //     widget.selectLocal.remove(element);
+          //   }
+          // }
+        });
+      }
+    });
   }
 
   @override
@@ -31,6 +51,20 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
         ),
         centerTitle: true,
         title: const Text('알림 키워드 설정', style: TextStyle( color: AppColors.black),),
+        actions: [
+          TextButton(
+              onPressed: (){
+                // print("widgetkeyword : ${widget.keywordList}");
+                // print("local : ${widget.selectLocal}");
+                FirebaseService.savePrivacyProfile(userEmail!, widget.keywordList, 'keyword');
+                FirebaseService.savePrivacyProfile(userEmail!, widget.selectLocal, 'alramlocal');
+                EasyLoading.showInfo("알람 키워드 변경 되었습니다.");
+
+                Navigator.pop(context);
+              },
+              child: Text("완료", style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)
+          ),
+        ],
       ),
       body: Container(
         alignment: Alignment.center,
@@ -47,13 +81,26 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
                   width: size.width / 1.25,
                   height: size.height / 15,
                   child: TextField(
+                    controller: addKeyword,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide(width: 1),
                         borderRadius: BorderRadius.circular(10) 
                       ),
                       suffixIcon: TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          if(widget.keywordList.length > 19){
+                            EasyLoading.showError("키워드는 20개 이상은 불가 합니다.");
+                            return;
+                          }else if(addKeyword.text == ''){
+                            EasyLoading.showError("공백은 등록 불가 합니다.");
+                            return;
+                          }
+                          setState(() {
+                            widget.keywordList.add(addKeyword.text);
+                          });
+                          addKeyword.text = '';
+                        },
                         child: Text("확인", style: TextStyle(color: AppColors.grey),)
                       )
                     ),
@@ -99,6 +146,7 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
       ),
     );
   }
+  // keyword 삭제
   generate_tags(value) {
     return value.map( (tag) => get_chip(tag) ).toList();
   }
@@ -113,13 +161,11 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
         deleteIconColor: Colors.black,
         label: Text('${name}'),
         onDeleted: () {
-          setState(() {
-          });
+          setState(() { widget.keywordList.remove(name); });
         },
       )
     );
   }
-  var _value = '';
   localgenerate_tags(value) {
     return value.map( (tag) => localget_chip(tag) ).toList();
   }
@@ -130,14 +176,23 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
       child: ChoiceChip(
         padding: EdgeInsets.all(8),
         label: Text('${name}', style: TextStyle(color: AppColors.white),),
-        selected: _value == name,
+        selected: widget.selectLocal.contains(name),
+        // selected: _value != name,
         selectedColor: AppColors.primary,
         disabledColor: AppColors.white,
         // backgroundColor: AppColors.primary,
         onSelected: (bool selec){
           setState(() {
-            _value = selec ? name : null;
-            // print("_value : $_value");
+            print("widget.selectLocal : ${widget.selectLocal}");
+            setState(() {
+              // remove
+              if(!selec){
+                print("name :$name");
+                widget.selectLocal.remove(name);
+              }else{
+                widget.selectLocal.add(name);
+              }
+            });
           });
         },
       )

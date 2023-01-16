@@ -151,9 +151,7 @@ class FirebaseService {
     checkDuplicate.data()?.forEach((key, value) async {
       if(key.contains("userSaveData")){
         if(value[3] == title){
-          var data = <String, dynamic>{
-            key: FieldValue.delete(),
-          };
+          var data = <String, dynamic>{ key: FieldValue.delete(), };
           checkDuplicate.reference.update(data);
         }
       }
@@ -197,6 +195,15 @@ class FirebaseService {
     });
     return [getUserData, getUserSaveData, checkDuplicate.data(), getUserSaveKeyData];
   }
+  //user key exist check
+  static Future<bool?> getUserKeyExist(String email) async {
+    bool? ch = false;
+    var checkKey = FirebaseFirestore.instance.collection("users").doc(email).get();
+    await checkKey.then((value){
+      ch = value.data()?.keys.contains('alramlocal');
+    });
+    return ch;
+  }
 
   static Future<void> savePrivacyProfile(String email, List value, String key) async{
     var addValue = await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email);
@@ -211,6 +218,11 @@ class FirebaseService {
         }));
       }
     if(key.contains("recentSearch")){
+      await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
+        key: value,
+      }));
+    }
+    if(key.contains('alramlocal')){
       await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
         key: value,
       }));

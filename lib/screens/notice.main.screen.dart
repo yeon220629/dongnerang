@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:lottie/lottie.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import '../services/firebase.service.dart';
@@ -31,8 +32,10 @@ class _noticemainpageState extends State<noticemainpage>
   List<Widget> userDataWidget = [];
   List<Widget> userItemsData = [];
 
+  //알림 키워드 설정으로 보낼 데이터
   List keywordList = [];
   List localList = [];
+  List selectLocal = [];
 
   Future<void> getNoticeData(td) async {
     final Size size = MediaQuery.of(context).size;
@@ -119,7 +122,7 @@ class _noticemainpageState extends State<noticemainpage>
         onTap: () async{
           final Uri url = Uri.parse('${userKeyword["link"]}');
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
-            url, userKeyword["title"], userKeyword['center_name'], userKeyword['registrationdate'], 0
+            url, userKeyword["body"], userKeyword['center_name'], userKeyword['registrationdate'], 0
           )));
         },
         child: Container(
@@ -198,11 +201,25 @@ class _noticemainpageState extends State<noticemainpage>
         keywordList.add(element);
       });
     });
+
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value) {
       value.forEach((element) {
         localList.add(element);
+        selectLocal.add(element);
       });
       localList.add('서울시');
+    });
+
+    // local exist Check
+    FirebaseService.getUserKeyExist(userEmail!).then((value) {
+      if(value == true){
+        selectLocal = [];
+        FirebaseService.getUserLocalData(userEmail!, 'alramlocal').then((value) {
+          value.forEach((element) {
+            selectLocal.add(element);
+          });
+        });
+      }
     });
   }
 
@@ -210,7 +227,6 @@ class _noticemainpageState extends State<noticemainpage>
   Widget build(BuildContext context) {
 
     final Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -254,7 +270,7 @@ class _noticemainpageState extends State<noticemainpage>
                 children: [
                   TextButton(
                       onPressed: (){
-                        Get.to(() => noticemainAlarmpage(keywordList, localList));
+                        Get.to(() => noticemainAlarmpage(keywordList, localList,selectLocal));
                         // Navigator.push(
                         //   context, MaterialPageRoute(builder: (context) => noticemainAlarmpage(),),);
                       },
@@ -272,7 +288,6 @@ class _noticemainpageState extends State<noticemainpage>
                             children: [
                               Icon(Icons.settings, color: AppColors.white),
                               Text("   키워드 설정", style: TextStyle(
-                              // backgroundColor: AppColors.primary,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.white
                               ),)
@@ -282,41 +297,39 @@ class _noticemainpageState extends State<noticemainpage>
                       )
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: userItemsData.length,
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (c, i){
-                        double scale = 1.0;
-                        if (topContainer > 0.5){
-                          scale = i + 0.5 - topContainer;
-                          if (scale < 0 ) { scale = 0;}
-                          else if (scale > 1) { scale = 1; }
-                        }
-                        return Opacity(
-                          opacity: scale,
-                          child: Transform(
-                            transform: Matrix4.identity()..scale(scale, scale),
-                            alignment: Alignment.bottomCenter,
-                            child: Align(
-                              heightFactor: 0.95,
-                              alignment: Alignment.topCenter,
-                              child: userItemsData[i],
+                    child: userItemsData.length == 0
+                      ? Lottie.asset( 'assets/lottie/searchdata.json', width: size.width, height: size.height / 10, fit: BoxFit.contain, )
+                      :ListView.builder(
+                        itemCount: userItemsData.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (c, i){
+                          double scale = 1.0;
+                          if (topContainer > 0.5){
+                            scale = i + 0.5 - topContainer;
+                            if (scale < 0 ) { scale = 0;}
+                            else if (scale > 1) { scale = 1; }
+                          }
+                          return Opacity(
+                            opacity: scale,
+                            child: Transform(
+                              transform: Matrix4.identity()..scale(scale, scale),
+                              alignment: Alignment.bottomCenter,
+                              child: Align(
+                                  heightFactor: 0.95,
+                                  alignment: Alignment.topCenter,
+                                  // child: userItemsData[i],
+                                  child : userItemsData[i]
+                              ),
                             ),
-                          ),
-                        );
-                      }
+                          );
+                        }
                     )
                   ),
                 ],
               ),
             ),
           ),
-          // Lottie.asset(
-          //     'assets/lottie/77412-design.json',
-          //     // width: 10,
-          //     // height: 10,
-          //     fit: BoxFit.contain,
-          // ),
+
           Center(
             child: SizedBox(
               height: size.height,
