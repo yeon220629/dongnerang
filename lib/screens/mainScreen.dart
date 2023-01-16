@@ -389,6 +389,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       iOSId: 'com.dongnerang.com.dongnerang',
     );
     checkNewVersion(newVersion);
+    FirebaseService.getUserKeyExist(userEmail!).then((value) {
+      // print("PrivateLocalData : $PrivateLocalData");
+      if(value == false){
+        FirebaseService.savePrivacyProfile(userEmail!,PrivateLocalData,'alramlocal');
+      }
+    });
   }
 
   void checkNewVersion(NewVersion newVersion) async {

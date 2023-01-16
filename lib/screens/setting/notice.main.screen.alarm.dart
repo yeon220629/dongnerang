@@ -21,22 +21,6 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
   @override
   void initState() {
     super.initState();
-    FirebaseService.getUserKeyExist(userEmail!).then((value) {
-      if(value == true){
-        FirebaseService.getUserLocalData(userEmail!, 'alramlocal').then((value) {
-          print('widget.selectLocal : ${widget.selectLocal}');
-          print('widget.selectLocal : ${value}');
-          // for (var element in widget.selectLocal) {
-          //   if(value.contains(element)){
-          //     print("true ele : $element");
-          //   }else{
-          //     print("false ele : $element");
-          //     widget.selectLocal.remove(element);
-          //   }
-          // }
-        });
-      }
-    });
   }
 
   @override
