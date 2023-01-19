@@ -1,22 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class crawliingModel {
-  final String imgLink;
-  final String imgLinkA;
-  final List<String> imgStatus;
-  final String imgStringTitle;
+  final String result;
+  final int number;
+  final String center_name;
+  final Timestamp registrationdate;
+  final String title;
+  final String apperiod;
 
   crawliingModel ({
-    required this.imgLink,
-    required this.imgLinkA,
-    required this.imgStatus,
-    required this.imgStringTitle,
+    required this.result,
+    required this.number,
+    required this.center_name,
+    required this.registrationdate,
+    required this.title,
+    required this.apperiod,
 
   });
   factory crawliingModel.fromJson(Map<String, dynamic> json){
     return crawliingModel(
-      imgLink: json['imgLink'] as String,
-      imgLinkA: json['imgLinkA'] as String,
-      imgStatus: json['imgStatus'] as List<String>,
-      imgStringTitle: json['imgStringTitle'] as String,
+      result: json['result'] as String,
+      number: json['number'] as int,
+      center_name: json['center_name '] as String,
+      registrationdate: json['registrationdate'] as Timestamp,
+      title: json['title'] as String,
+      apperiod: json['apperiod'] as String,
     );
   }
 }
