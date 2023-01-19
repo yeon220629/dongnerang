@@ -73,6 +73,9 @@ dependencies:
   pull_to_refresh: ^2.0.0
   new_version: ^0.3.1
   sqflite: ^2.2.2
+  styled_text: ^6.0.0
+  auto_size_text: ^3.0.0
+  loading_animation_widget: ^1.2.0+4
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"

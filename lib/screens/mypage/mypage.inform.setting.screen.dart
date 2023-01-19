@@ -259,19 +259,17 @@ class _mypageKeywordStateful extends State<mypageKeywordStateful> {
                       ),
                       Row(
                         children: <Widget>[
-                          Container(
-                            // width: categoryHeight * 1.7,
+                          SizedBox(
+                            width: size.width,
                             // margin: const EdgeInsets.only(right: 5),
                             height: categoryHeight - 180,
-                            child: Center(
-                              child: ListView(
+                            child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
                                 // padding: EdgeInsets.all(10),
                                 children: <Widget>[Wrap(children: [...generate_tags(mypageCustomKeyword)],spacing: 2.0,)],
                               ),
                             ),
-                          ),
                         ],
                       ),
                     ],

@@ -3,17 +3,24 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SpaceDBHelper {
-  late Database _database;
+  static final SpaceDBHelper instance = SpaceDBHelper._create();
 
-  Future<Database?> get database async {
-    _database = await initDB();
-    return _database;
+  late String databasePath;
+  static Database? _database;
+
+  Future<Database> get database async {
+    return _database ??= await _initDB();
+  }
+
+  // private constructor
+  SpaceDBHelper._create() {
+    print("create private SpaceDBHelper constructor");
   }
 
   // 데이터베이스 생성
-  initDB() async {
-    final databasePath = await getDatabasesPath();
-    String path = join(databasePath, 'space_database.db');
+  Future<Database> _initDB() async {
+    databasePath = await getDatabasesPath();
+    String path = join(databasePath, 'spacedatabase.db');
 
     return await openDatabase(
       path,
@@ -32,7 +39,7 @@ class SpaceDBHelper {
             detailInfo TEXT,
             pageLink TEXT,
             phoneNum TEXT,
-            updated TEXT,
+            updated TEXT NOT NULL,
             svcName TEXT,
             svcStat TEXT,
             svcTimeMin TEXT,
@@ -46,10 +53,10 @@ class SpaceDBHelper {
   }
 
   // 데이터 추가
-  Future<void> insertSpace(Space space) async {
-    final db = await database;
+  Future<void> insertSpace(Space space, String today) async {
+    Database db = await instance.database;
 
-    await db?.insert(
+    await db.insert(
       'spaces', // table name
       {
         'uid': space.uid,
@@ -63,7 +70,7 @@ class SpaceDBHelper {
         'detailInfo': space.detailInfo ?? '',
         'pageLink': space.pageLink ?? '',
         'phoneNum': space.phoneNum ?? '',
-        'updated': space.updated ?? '',
+        'updated': today,
         'svcName': space.svcName ?? '',
         'svcStat': space.svcStat ?? '',
         'svcTimeMin': space.svcTimeMin ?? '',
@@ -75,12 +82,16 @@ class SpaceDBHelper {
     );
   }
 
+  // 전체 데이터 삭제
+  Future<int> deleteDataAll() async {
+    var db = await instance.database;
+    return await db.rawDelete("DELETE FROM spaces");
+  }
+
   // 자치구(gu)로 리스트 조회
   Future<List<Space>> getSpaceListByGu(String gu) async {
-    final db = await database;
-
-    final List<Map<String, dynamic>> maps =
-        await db!.rawQuery('SELECT * FROM spaces WHERE gu=?', [gu]);
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.rawQuery('SELECT * FROM spaces WHERE gu=?', [gu]);
 
     if (maps.isEmpty) return [];
 
@@ -92,10 +103,7 @@ class SpaceDBHelper {
           spaceImage: maps[i]['spaceImage'],
           address: maps[i]['address'],
           category: maps[i]['category'],
-          location: {
-            'latitude': double.parse(maps[i]['latitude']),
-            'longitude': double.parse(maps[i]['longitude'])
-          },
+          location: {'latitude': double.parse(maps[i]['latitude']), 'longitude': double.parse(maps[i]['longitude'])},
           detailInfo: maps[i]['detailInfo'],
           pageLink: maps[i]['pageLink'],
           phoneNum: maps[i]['phoneNum'],
@@ -107,5 +115,22 @@ class SpaceDBHelper {
           payInfo: maps[i]['payInfo'],
           useTarget: maps[i]['useTarget']);
     });
+  }
+
+  // 전체 리스트 조회
+  Future<List<Map<String, dynamic>>> getAllSpaceList() async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.rawQuery('SELECT * FROM spaces', null);
+
+    return maps;
+  }
+
+  // 업데이트 일자 구하기
+  Future<String> getUpdatedDate() async {
+    Database db = await instance.database;
+    var updatedDateMap = await db.rawQuery('SELECT updated FROM spaces LIMIT 1');
+
+    if (updatedDateMap.isEmpty) return '';
+    return updatedDateMap[0]['updated'].toString();
   }
 }

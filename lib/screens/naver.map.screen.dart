@@ -1,7 +1,4 @@
-import 'dart:collection';
-import 'dart:convert';
 import 'dart:io';
-import 'dart:ui' as ui;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
@@ -20,14 +17,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_html/style.dart';
 
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:intl/intl.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:latlong2/latlong.dart' as latlong2;
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart' as lottie;
+import 'package:sqflite/sqflite.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
+import 'package:styled_text/styled_text.dart' as styledText;
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:path/path.dart' as path;
+import 'dart:math';
 
 // 카테고리 설정
 enum SpaceType {
@@ -60,23 +63,30 @@ class naverMapScreen extends StatefulWidget {
 
 class _naverMapScreenState extends State<naverMapScreen> {
   NaverMapController? _ct;
-  final SpaceDBHelper _spaceDBHelper = SpaceDBHelper();
-  // 기본 설정 : 상도 창업지원센터
-  mylocation.Location myLocation = mylocation.Location(latitude: 37.50475398269641, longitude: 126.95395829730329);
+
+  // sqflite
+  final SpaceDBHelper _spaceDBHelper = SpaceDBHelper.instance;
+
+  // 기본 설정 : 상도역
+  mylocation.Location myLocation = mylocation.Location(latitude: 37.494705, longitude: 126.959945);
+  String myGu = '동작구';
 
   Map<String, Space> spacesMap = {};
   Map<String, Marker> markersMap = {};
 
-  bool isLoaded = false; // 로딩 보여주기 유무
+  bool isLoaded = false; // 리스트 전체 로딩 보여주기 유무
   bool showBottomSheetBtn = false; // 리스트 보여주기 유무
+  bool showReSearchBtn = true; // [현 동네에서 검색] 버튼 보여주기 유무
 
   List<SpaceType> categoryList = SpaceType.values.toList(); // 카테고리 리스트
   final List<String> _selectedChoices = <String>[]; // 선택된 카테고리 리스트
   Map<String, bool> categoryVisibility = {}; // 카테고리 보여주기 속성
 
-  // 로컬 db에 저장 : queue -> sqflite DB
-  insertSpacesToSqflite() async {
-    // queue에 저장
+  Map<String, int> categoryCount = {};
+  int categoryCountSum = 0;
+
+  // 데이터 조회 후 queue에 저장
+  Future<int> makeSpacesQueue() async {
     SpacesQueue.clear();
 
     // 서울 공공시설 api 데이터
@@ -84,79 +94,145 @@ class _naverMapScreenState extends State<naverMapScreen> {
     await SeoulOpenApi.getOpenApiSeoulSpaces('ListPublicReservationInstitution'); // 시설대관
     await SeoulOpenApi.getOpenApiSeoulSpaces('ListPublicReservationCulture'); // 문화체험
     await SeoulOpenApi.getOpenApiSeoulSpaces('ListPublicReservationEducation'); // 교육강좌
+
     // firebase 데이터
     await getFirebaseSpaces();
 
-    print(SpacesQueue.length);
+    return SpacesQueue.length;
+  }
+
+  // 로컬 db에 저장 : queue -> sqflite
+  Future<void> insertSpacesToLocalDB() async {
+    String databasePath = await getDatabasesPath();
+    String dbpath = path.join(databasePath, 'spacedatabase.db');
+
+    DateTime now = DateTime.now();
+    DateFormat formatter = DateFormat('yyyy.MM.dd');
+    String strToday = formatter.format(now);
+
+    bool isDBExists = await databaseExists(dbpath);
+
+    if (isDBExists) {
+      String upDtStr = await _spaceDBHelper.getUpdatedDate();
+      // 데이터 받은 일자 체크
+      if (upDtStr != '') {
+        List<String> upDtStrL = upDtStr.split('.');
+        int y = int.parse(upDtStrL[0]);
+        int m = int.parse(upDtStrL[1]);
+        int d = int.parse(upDtStrL[2]);
+        DateTime upDt = DateTime(y, m, d);
+        Duration duration = now.difference(upDt);
+
+        if (duration.inDays < 31) {
+          return;
+        }
+      }
+    }
+
+    int dataNum = await makeSpacesQueue();
 
     // sqflite 로컬 DB에 저장
-    while (SpacesQueue.isNotEmpty) {
-      Space s = SpacesQueue.removeFirst();
-      try {
-        await _spaceDBHelper.insertSpace(s);
-      } catch (e) {
-        print(s);
-        print(e);
+    try {
+      while (SpacesQueue.isNotEmpty) {
+        Space s = SpacesQueue.removeFirst();
+
+        // Sqflite
+        await _spaceDBHelper.insertSpace(s, strToday);
       }
+    } catch (e) {
+      int deleteResult = await _spaceDBHelper.deleteDataAll();
+      print("sqflite insert error ::: $e");
+      // print("deleteResult :: $deleteResult");
     }
   }
 
   // firestore 데이터 queue에 저장
-  getFirebaseSpaces() async {
+  Future<void> getFirebaseSpaces() async {
     String value = 'SEOUL';
 
     DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore.instance.collection("spaces").doc(value);
     final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await docref.get();
     late Map<String, dynamic>? valueDoc = documentSnapshot.data();
+    List<String> categoryStrList = categoryList.map((e) => e.code.toString()).toList();
 
     valueDoc?.forEach((key, value) {
+      if (value['gu'] == "" ||
+          value['category'] == "" ||
+          value['spaceName'] == "" ||
+          value['location']['latitude'] == "" ||
+          value['location']['longitude'] == "") {
+        return;
+      }
+
+      // 위도, 경도 유효성 검사
+      double lat = value['location']['latitude'];
+      double long = value['location']['longitude'];
+      if ((lat < 33 && lat > 43) || (long < 124 && long > 132)) {
+        return;
+      } else {
+        value['location']['latitude'] = double.parse(lat.toStringAsFixed(6));
+        value['location']['longitude'] = double.parse(long.toStringAsFixed(6));
+      }
+
+      // 카테고리 유효성 검사
+      if (!categoryStrList.contains(value['category'])) {
+        return;
+      }
+
       Space s = Space.fromJson(value);
       SpacesQueue.add(s);
     });
   }
 
-  // 로컬 db에서 자치구로 리스트 조회
-  getSpacesFromSqflite(String gu) async {
-    print("getSpacesFromSqflite");
+  // 로컬 db에서 자치구로 공간 리스트 조회
+  getSpacesByGu(String gu) async {
+    categoryCount.clear();
+
     Map<String, Space> spaces = {};
+
+    // Sqflite
     List<Space> spacesByGu = await _spaceDBHelper.getSpaceListByGu(gu);
 
-    print("spacesByGu.length: ${spacesByGu.length}");
+    try {
+      // 현위치와 거리계산
+      for (var s in spacesByGu) {
+        categoryCount[s.category!] = (categoryCount[s.category] ?? 0) + 1;
+        s.dist = getDistance(s.location["latitude"].toDouble(), s.location["longitude"].toDouble());
+        spaces[s.uid] = s;
+      }
 
-    // 현위치와 거리계산
-    for (var s in spacesByGu) {
-      s.dist = getDistance(s.location["latitude"].toDouble(), s.location["longitude"].toDouble());
-      spaces[s.uid] = s;
+      setState(() {
+        spacesMap = Map.fromEntries(spaces.entries.toList()..sort((e1, e2) => e1.value.dist!.compareTo(e2.value.dist!))); // 거리순 정렬
+        categoryCountSum = getCategoryCountSum();
+      });
+    } catch (e) {
+      print("getSpacesByGu error ::: $e");
+      print("getSpacesByGu error in gu ::: $gu");
     }
-
-    setState(() {
-      spacesMap = Map.fromEntries(spaces.entries.toList()..sort((e1, e2) => e1.value.dist!.compareTo(e2.value.dist!))); // 거리순 정렬
-    });
   }
 
   // marker 만들기
   makeMarkers() async {
-    print("makeMarkers");
     Map<String, Marker> markers = {};
     List<Space> spaces = spacesMap.values.toList();
 
-    for (var space in spaces) {
+    for (var space in spaces.toSet()) {
       Marker m = Marker(
         markerId: space.uid,
         position: LatLng(space.location["latitude"]!, space.location["longitude"]!),
         width: 32,
         height: 32,
         captionText: space.spaceName,
-        captionMinZoom: 13,
+        captionMinZoom: 15,
         captionColor: Colors.black,
         captionHaloColor: Colors.white,
         captionRequestedWidth: 200,
-        captionTextSize: 15,
+        captionTextSize: 12.5,
         captionPerspectiveEnabled: true,
         icon: await OverlayImage.fromAssetImage(assetName: "assets/images/${SpaceType.getByCode(space.category!).offMarkImg}"),
         onMarkerTab: (marker, iconSize) async {
           // 마커 선택시 이벤트
-          onMarkerTabEvent(marker!.markerId);
+          onMarkerTabEvent(marker!.markerId, false);
         },
       );
 
@@ -185,20 +261,21 @@ class _naverMapScreenState extends State<naverMapScreen> {
     double width = MediaQuery.of(context).size.width;
     Space thisSpace = spacesMap[uid]!;
     String? imgurl = thisSpace.spaceImage;
-    // 구글드라이브 이미지는 이미지 주소 변경 필요 아래 참조
-    // 변경 전 예시: 'https://drive.google.com/file/d/1y-CzrDCrJroPZD0wPmAuzB6JQntp0Uej';
-    // 변경 후 예시: "https://drive.google.com/uc?export=view&id=1y-CzrDCrJroPZD0wPmAuzB6JQntp0Uej";
-/*
-    1. 장소명, 예약구분(기존 엑셀파일에서 상세정보 부분)
-    2. 서비스명 (기존 엑셀파일 정보들은 주소 출력)
-    3. 서비스대상 (제한없음이면 서비스 이용시간 출력 > 기존 엑셀파일 정보들은 출력안함? or 이용시간 추가 필요?)
-    4. 거리 / 서비스상태 / 결제방법 (기존 엑셀파일정보들 출력안함? or 서비스 상태와 결제방법 추가 필요?)
-*/
-    String addrOrSvcNm = (thisSpace.address ?? '') == '' ? thisSpace.svcName ?? '' : thisSpace.address ?? '';
-    String svcInfo = (thisSpace.useTarget ?? '').trim() == '' || (thisSpace.useTarget ?? '').trim() == '제한없음'
-        ? ((thisSpace.svcTimeMin ?? '') == '' ? '' : '이용시간 : ${thisSpace.svcTimeMin} ~ ${thisSpace.svcTimeMax}')
-        : '서비스 대상 : ${thisSpace.useTarget!.trim()}';
+    /*
+    1. 장소명
+    2. 이용시간 (or 주소)
+    3. 카테고리명 / 거리 / [서비스상태] / [결제방법]
+    4. [서비스명]
+    */
     String distStr = thisSpace.dist! >= 1000 ? "${(thisSpace.dist! / 1000).toStringAsFixed(1)}km" : "${(thisSpace.dist)!.round()}m";
+    String addrOrTimeInfoStr = (thisSpace.address ?? '') == ''
+        ? ((thisSpace.svcTimeMin ?? '') == '' ? '' : '이용시간 | ${thisSpace.svcTimeMin} ~ ${thisSpace.svcTimeMax}')
+        : thisSpace.address ?? '';
+    List<String> thirdStrList = ['<black>${SpaceType.getByCode(thisSpace.category!).displayName}</black>', '<red>$distStr</red>'];
+    if ((thisSpace.svcStat ?? '').trim() != '') {
+      thirdStrList.add('${thisSpace.svcStat == '접수중' ? '<blue>' : ''}${thisSpace.svcStat!}${thisSpace.svcStat == '접수중' ? '</blue>' : ''}');
+    }
+    if ((thisSpace.payInfo ?? '').trim() != '') thirdStrList.add('<black>${thisSpace.payInfo!}</black>');
 
     return Visibility(
       visible: categoryVisibility[thisSpace.category]!,
@@ -218,104 +295,84 @@ class _naverMapScreenState extends State<naverMapScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: Text(
-                              thisSpace.spaceName,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary,
-                                fontSize: 16,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            SpaceType.getByCode(thisSpace.category!).displayName,
-                            style: const TextStyle(
-                              fontSize: 11,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
+                      // 1. 장소명
+                      AutoSizeText(
+                        thisSpace.spaceName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.darkBlue,
+                          fontSize: 16,
+                        ),
+                        minFontSize: 12,
+                        maxFontSize: 16,
+                        maxLines: 1,
                       ),
                       const SizedBox(
                         height: 8,
                       ),
-                      Text(addrOrSvcNm,
+                      // 2. 이용시간 (or 주소)
+                      Text(addrOrTimeInfoStr,
                           style: const TextStyle(
                             fontSize: 14,
                           )),
                       const SizedBox(
-                        height: 2,
+                        height: 4,
                       ),
-                      Text(svcInfo,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          )),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Text(
-                            distStr,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.red,
-                            ),
+                      // 3. 카테고리명 / 거리 / [서비스상태] / [결제방법]
+                      styledText.StyledText(
+                        text: thirdStrList.join(' / '),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: AppColors.grey,
+                        ),
+                        tags: {
+                          'black': styledText.StyledTextTag(
+                            style: const TextStyle(color: AppColors.black),
                           ),
-                          ((thisSpace.svcStat ?? '') != '')
-                              ? Wrap(children: [
-                                  const Text(
-                                    ' / ',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: AppColors.black,
-                                    ),
-                                  ),
-                                  Text(
-                                    thisSpace.svcStat!,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.blue,
-                                    ),
-                                  )
-                                ])
-                              : Wrap(),
-                          ((thisSpace.payInfo ?? '') != '')
-                              ? Wrap(children: [
-                                  const Text(
-                                    ' / ',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: AppColors.black,
-                                    ),
-                                  ),
-                                  Text(
-                                    thisSpace.payInfo!,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.black,
-                                    ),
-                                  )
-                                ])
-                              : Wrap(),
-                        ],
+                          'blue': styledText.StyledTextTag(
+                            style: const TextStyle(color: AppColors.blue),
+                          ),
+                          'red': styledText.StyledTextTag(
+                            style: const TextStyle(color: AppColors.red),
+                          ),
+                        },
                       ),
                       const SizedBox(
                         height: 5,
                       ),
+                      // 4. [서비스명] or 업데이트일
+                      ((thisSpace.svcName ?? '') == '')
+                          ? styledText.StyledText(
+                              text: (thisSpace.svcName ?? '').replaceAll('&#39', '&apos'),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: AppColors.black,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            )
+                          : Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                const Icon(
+                                  CupertinoIcons.info,
+                                  size: 14,
+                                  color: AppColors.grey,
+                                ),
+                                const SizedBox(
+                                  width: 2,
+                                ),
+                                styledText.StyledText(
+                                  text: "업데이트일 ${thisSpace.updated ?? ''}",
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: AppColors.grey,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ],
+                            ),
                     ],
                   ),
                 ),
@@ -363,29 +420,27 @@ class _naverMapScreenState extends State<naverMapScreen> {
   }
 
   // 마커 선택시 이벤트
-  onMarkerTabEvent(String uid) async {
+  onMarkerTabEvent(String uid, bool cameraMove) async {
     Space? space = spacesMap[uid];
 
     // 같은 위치에 있는 공간 리스트
     List<Space> selectedSpaces = spacesMap.values
         .where((s) => s.location['latitude'] == space!.location['latitude'] && s.location['longitude'] == space!.location['longitude'])
         .toList();
-
-    selectedSpaces.forEach((e) {
-      print(e);
-    });
+    // selectedSpace uid 리스트
+    List<String> selectedUids = selectedSpaces.map((e) => e.uid).toList();
 
     // 지도 카메라 이동
-    moveMapCamera(space!.location["latitude"]!, space.location["longitude"]!);
+    if (cameraMove) {
+      await moveMapCamera(space!.location["latitude"]!, space.location["longitude"]!);
+    }
 
     // 마커 이미지 및 크기 변경
     markersMap.forEach((markerUid, markerValue) async {
-      if (markerUid == uid) {
-        markerValue.icon = await OverlayImage.fromAssetImage(assetName: "assets/images/${SpaceType.getByCode(space.category!).onMarkImg}");
+      if (selectedUids.contains(markerUid)) {
+        markerValue.icon = await OverlayImage.fromAssetImage(assetName: "assets/images/${SpaceType.getByCode(space!.category!).onMarkImg}");
         markerValue.width = 48;
         markerValue.height = 69;
-        // markerValue.width = 32;
-        // markerValue.height = 46;
       } else {
         markerValue.width = 32;
         markerValue.height = 32;
@@ -403,7 +458,6 @@ class _naverMapScreenState extends State<naverMapScreen> {
   // 공간 상세 모달
   showSpaceBottomSheet(List<Space> selectedSpace) {
     showModalBottomSheet<void>(
-      useRootNavigator: false,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -412,12 +466,11 @@ class _naverMapScreenState extends State<naverMapScreen> {
       ),
       context: context,
       builder: (BuildContext context) {
-        print("selectedlength:: ${selectedSpace.length}");
         double widthSize = MediaQuery.of(context).size.width;
-        double heightSize = selectedSpace.length > 1 ? 500 : 250;
+        double heightSize = selectedSpace.length > 1 ? 420 : 240;
 
         return SizedBox(
-          height: heightSize + 38.0,
+          height: heightSize,
           child: Column(
             children: [
               Padding(
@@ -444,19 +497,15 @@ class _naverMapScreenState extends State<naverMapScreen> {
                           final Uri url = Uri.parse('${thisSpace.pageLink}'.trim());
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen(url)));
                         }),
-                        child: Container(
-                          height: 250,
-                          padding: const EdgeInsets.all(16.0),
+                        child: SizedBox(
+                          height: 180,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              // const SizedBox(
-                              //   height: 4,
-                              // ),
                               makeSpaceWidget(thisSpace.uid, true),
                               ToggleButtons(
+                                borderRadius: BorderRadius.circular(5),
                                 direction: Axis.horizontal,
                                 onPressed: (int index) async {
                                   if (index == 0) {
@@ -470,6 +519,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                     ));
                                   }
                                   if (index == 2) {
+                                    // print("공유");
                                     String lat = thisSpace.location['latitude'].toStringAsFixed(5);
                                     String long = thisSpace.location['longitude'].toStringAsFixed(5);
                                     String addr = "";
@@ -478,42 +528,35 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                     } else {
                                       addr = thisSpace.address!;
                                     }
-                                    // print("공유");
                                     final LocationTemplate defaultText = LocationTemplate(
                                       address: addr,
                                       content: Content(
-                                        title: '''
-                                        우리 동네의 모든 공공소식 \'동네랑\'\n\n
-                                        [${thisSpace.spaceName}]\n\n
-                                        $addr\n\n
-                                        ${thisSpace.svcName ?? ''}\n\n
-                                        ''',
-                                        imageUrl: Uri.parse(thisSpace.spaceImage!.trim()),
-                                        link: Link(
-                                          webUrl: Uri.parse(thisSpace.pageLink!.trim()),
-                                          mobileWebUrl: Uri.parse(thisSpace.pageLink!.trim()),
-                                        ),
-                                      ),
+                                          title: '우리 동네의 모든 공공소식 \'동네랑\'',
+                                          description: '[${thisSpace.spaceName}]\n${thisSpace.svcName ?? addr}',
+                                          imageUrl: Uri.parse(thisSpace.spaceImage!.trim()),
+                                          link: Link(
+                                            webUrl: Uri.parse(thisSpace.pageLink!.trim()),
+                                            mobileWebUrl: Uri.parse(thisSpace.pageLink!.trim()),
+                                          ),
+                                          imageHeight: 50),
                                     );
 
                                     // 카카오톡 실행 가능 여부 확인
                                     bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
                                     if (isKakaoTalkSharingAvailable) {
-                                      print('카카오톡으로 공유 가능');
+                                      // print('카카오톡으로 공유 가능');
                                       try {
-                                        // Uri uri = await ShareClient.instance.shareScrap(url: firebasesUrl);
-                                        // await ShareClient.instance.launchKakaoTalk(uri);
                                         Uri uri = await ShareClient.instance.shareDefault(template: defaultText);
                                         await ShareClient.instance.launchKakaoTalk(uri);
-                                        // EasyLoading.showSuccess("공유 완료");
                                       } catch (e) {
                                         print('카카오톡 공유 실패 $e');
                                       }
                                     } else {
-                                      print('카카오톡 미설치: 웹 공유 기능 사용 권장');
+                                      EasyLoading.showError("카카오톡이 설치되지 않았습니다.");
                                     }
                                   }
                                 },
+                                borderColor: AppColors.greylottie,
                                 color: AppColors.grey,
                                 constraints: BoxConstraints(
                                   minHeight: 40.0,
@@ -542,14 +585,16 @@ class _naverMapScreenState extends State<naverMapScreen> {
   }
 
   // 현위치 구하기
-  getLocationData() async {
-    await myLocation.getCurrentLocation();
-    // print("getLocationData>> ${myLocation.latitude} ### ${myLocation.longitude}");
+  Future<String> getLocationData() async {
+    await myLocation.getCurrentLocation(); // 시뮬레이터에서는 주석처리
+    String gu = await ReverseGeo.getGuByCoords(myLocation.latitude.toString(), myLocation.longitude.toString());
+
+    return gu;
   }
 
   // 지도 카메라 이동하기
-  void moveMapCamera(double lat, double long) async {
-    await _ct?.moveCamera(CameraUpdate.scrollTo(LatLng(lat, long)));
+  Future<void> moveMapCamera(double lat, double long) async {
+    await _ct?.moveCamera(CameraUpdate.scrollTo(LatLng(lat, long + 0.001)));
   }
 
   // 좌표 사이 거리 구하기
@@ -560,18 +605,35 @@ class _naverMapScreenState extends State<naverMapScreen> {
     return distM;
   }
 
+  // 공간 개수 합 구하기
+  int getCategoryCountSum() {
+    int sum = 0;
+
+    categoryCount.forEach((key, value) {
+      sum += categoryVisibility[key] == true ? (value) : 0;
+    });
+
+    return sum;
+  }
+
+  Future<void> _asyncInitState() async {
+    String gu = await getLocationData();
+    await insertSpacesToLocalDB();
+    await getSpacesByGu(gu);
+    await makeMarkers();
+
+    setState(() {
+      isLoaded = true;
+      myGu = gu;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    print("initState ======>");
-    // 로컬 db에 저장 > 현위치 가져오기 > 현위치 자치구로 리스트 가져오기 > 마커만들기
-    insertSpacesToSqflite().then((value) {
-      getSpacesFromSqflite("동작구").then((value) => makeMarkers());
 
-      setState(() {
-        isLoaded = true;
-      });
-    });
+    // 현위치 가져오기 > 로컬 DB에 저장 > 현위치 자치구로 리스트 가져오기 > 마커만들기
+    _asyncInitState();
 
     setState(() {
       // 카테고리
@@ -599,8 +661,9 @@ class _naverMapScreenState extends State<naverMapScreen> {
               useSurface: kReleaseMode,
               contentPadding: const EdgeInsets.only(left: 60.0),
               minZoom: 7,
-              onMapCreated: ((NaverMapController ct) {
+              onMapCreated: ((NaverMapController ct) async {
                 _ct = ct;
+                await _ct!.moveCamera(CameraUpdate.zoomOut());
                 moveMapCamera(myLocation.latitude, myLocation.longitude);
               }),
               markers: markersMap.values.toList(),
@@ -614,8 +677,13 @@ class _naverMapScreenState extends State<naverMapScreen> {
                   markerInit();
                 });
               },
+              onCameraChange: ((latLng, reason, isAnimated) {
+                setState(() {
+                  showReSearchBtn = true;
+                });
+              }),
             ),
-            // 현 지도에서 검색 버튼
+            // 현 동네에서 검색 버튼
             Align(
               alignment: AlignmentDirectional.topCenter,
               child: Padding(
@@ -625,55 +693,77 @@ class _naverMapScreenState extends State<naverMapScreen> {
                   borderRadius: BorderRadius.circular(20),
                   child: InkWell(
                     onTap: () async {
-                      setState(() {
-                        isLoaded = false;
-                      });
+                      if (isLoaded) {
+                        setState(() {
+                          isLoaded = false;
+                        });
 
-                      CameraPosition? a = await _ct?.getCameraPosition();
-                      String cameraLat = a!.target.latitude.toStringAsFixed(5);
-                      String cameraLong = a.target.longitude.toStringAsFixed(5);
-                      String gu = await ReverseGeo.getGuByCoords(cameraLat, cameraLong);
-                      print("gu>> $gu");
+                        CameraPosition? cp = await _ct?.getCameraPosition();
+                        String gu = await ReverseGeo.getGuByCoords(cp!.target.latitude.toString(), cp.target.longitude.toString());
 
-                      await getSpacesFromSqflite(gu);
-                      await makeMarkers();
+                        Future.delayed(const Duration(milliseconds: 500), () async {
+                          await getSpacesByGu(gu);
+                          await makeMarkers();
+                          setState(() {
+                            isLoaded = true;
+                            showReSearchBtn = false;
+                            markerInit();
+                            myGu = gu;
+                          });
+                        });
 
-                      setState(() {
-                        markerInit();
-                        isLoaded = true;
-                      });
+                        if (gu == '') {
+                          const snackBar = SnackBar(content: Text('동네시설을 찾기 위해 위치를 조정해주세요.'));
+
+                          // ignore: use_build_context_synchronously
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      } else {
+                        print("로딩 중");
+                      }
                     },
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 140,
-                      height: 38,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: const [
-                          Icon(
-                            Icons.replay_outlined,
-                            size: 18,
-                            color: AppColors.primary,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            '현 지도에서 검색',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.blue,
+                    child: showReSearchBtn
+                        ? Container(
+                            alignment: Alignment.center,
+                            width: 140,
+                            height: 38,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                !isLoaded
+                                    ? LoadingAnimationWidget.inkDrop(
+                                        color: AppColors.primary,
+                                        size: 15,
+                                      )
+                                    : Transform(
+                                        alignment: Alignment.center,
+                                        transform: Matrix4.rotationY(pi),
+                                        child: const Icon(
+                                          CupertinoIcons.arrow_counterclockwise,
+                                          size: 16,
+                                          color: AppColors.primary,
+                                        ),
+                                      ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Text(
+                                  '현 동네에서 검색',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.normal,
+                                    color: AppColors.blue,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox(),
                   ),
                 ),
               ),
@@ -688,7 +778,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                   borderRadius: BorderRadius.circular(10),
                   child: InkWell(
                     onTap: () async {
-                      moveMapCamera(myLocation.latitude, myLocation.longitude);
+                      await moveMapCamera(myLocation.latitude, myLocation.longitude);
                     },
                     child: Container(
                       width: 40,
@@ -778,46 +868,50 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                 child: isLoaded
                                     ? Column(
                                         children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 40.0),
+                                            child: SizedBox(
+                                              width: width,
+                                              height: 50,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '총 $categoryCountSum개의 공간이 검색되었습니다.',
+                                                  ),
+                                                  const Text('거리순'),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                           Expanded(
-                                            child: ListView.builder(
-                                              itemCount: spacesMap.length + 1,
-                                              itemBuilder: (BuildContext context, int index) {
-                                                if (spacesMap.length == 0) {
-                                                  return Column(
-                                                    children: [
-                                                      BannerAdMob(),
-                                                      const Padding(
-                                                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                                                        child: Text(
-                                                          '0건이 조회되었습니다.',
-                                                          style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  );
-                                                }
-                                                // 애드몹
-                                                if (index == 0) {
-                                                  return BannerAdMob();
-                                                } else {
-                                                  String uid = spacesMap.keys.toList()[index - 1];
+                                            flex: 1,
+                                            child: MediaQuery.removePadding(
+                                              context: context,
+                                              removeTop: true,
+                                              child: ListView.builder(
+                                                itemCount: spacesMap.length + 1,
+                                                itemBuilder: (BuildContext context, int index) {
+                                                  // 애드몹
+                                                  if (index == 0) {
+                                                    return BannerAdMob();
+                                                  } else {
+                                                    String uid = spacesMap.keys.toList()[index - 1];
 
-                                                  return InkWell(
-                                                    onTap: () {
-                                                      onMarkerTabEvent(uid);
-                                                    },
-                                                    child: makeSpaceWidget(uid, false),
-                                                  );
-                                                }
-                                              },
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        onMarkerTabEvent(uid, true);
+                                                      },
+                                                      child: makeSpaceWidget(uid, false),
+                                                    );
+                                                  }
+                                                },
+                                              ),
                                             ),
                                           ),
                                         ],
                                       )
-                                    : Container(
+                                    : SizedBox(
                                         width: width,
                                         height: height,
                                         child: lottie.Lottie.asset('assets/lottie/searchdata.json'),
@@ -879,75 +973,121 @@ class _naverMapScreenState extends State<naverMapScreen> {
                 ),
               ),
             ),
-            // 카테고리 선택 칩
-            Container(
-              width: width,
-              padding: EdgeInsets.only(top: statusBarHeight, left: 16.0, right: 16.0),
-              decoration: const BoxDecoration(color: AppColors.background),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
+            // 상단 :: 카테고리 선택 칩
+            Stack(
+              children: [
+                Container(
+                  width: width,
+                  padding: EdgeInsets.only(
+                    top: statusBarHeight,
+                  ),
+                  decoration: const BoxDecoration(color: AppColors.background),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10, left: 90),
+                          child: Wrap(
+                            spacing: 5.0,
+                            children: categoryList.map((SpaceType choice) {
+                              return FilterChip(
+                                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                avatar: CircleAvatar(
+                                  radius: 12,
+                                  child: Image.asset("assets/images/${choice.iconImg}"),
+                                ),
+                                label: SizedBox(
+                                  child: Text(
+                                    choice.displayName,
+                                  ),
+                                ),
+                                labelStyle: _selectedChoices.contains(choice.displayName)
+                                    ? TextStyle(color: Colors.white, fontSize: Theme.of(context).textTheme.bodySmall?.fontSize)
+                                    : TextStyle(color: Colors.grey, fontSize: Theme.of(context).textTheme.bodySmall?.fontSize),
+                                selectedColor: Color(choice.iconColor),
+                                showCheckmark: false,
+                                selected: _selectedChoices.contains(choice.displayName),
+                                onSelected: (bool value) {
+                                  setState(() {
+                                    if (value) {
+                                      if (!_selectedChoices.contains(choice.displayName)) {
+                                        _selectedChoices.add(choice.displayName);
+                                        categoryVisibility[choice.code.toString()] = true;
+                                      }
+                                    } else if (_selectedChoices.length > 1) {
+                                      _selectedChoices.removeWhere((String name) {
+                                        return name == choice.displayName;
+                                      });
+                                      categoryVisibility[choice.code.toString()] = false;
+                                    }
+                                  });
+                                  markerInit();
+                                  categoryCountSum = getCategoryCountSum();
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // 상단 :: 자치구 칩
+                Positioned(
+                  left: -20,
+                  child: Container(
+                    padding: EdgeInsets.only(top: statusBarHeight, right: 16.0),
+                    child: Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Wrap(
                         spacing: 5.0,
-                        children: categoryList.map((SpaceType choice) {
-                          return FilterChip(
+                        children: [
+                          FilterChip(
+                            pressElevation: 0,
+                            backgroundColor: AppColors.background,
+                            shape: const StadiumBorder(side: BorderSide(color: AppColors.ligthGrey)),
                             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            avatar: CircleAvatar(
-                              radius: 12,
-                              child: Image.asset("assets/images/${choice.iconImg}"),
-                            ),
                             label: SizedBox(
-                              child: Text(
-                                choice.displayName,
+                              child: Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  const Icon(
+                                    CupertinoIcons.location_solid,
+                                    size: 14,
+                                    color: Color(0xff4D4D4D),
+                                  ),
+                                  const SizedBox(
+                                    width: 3,
+                                  ),
+                                  SizedBox(
+                                    width: 40,
+                                    child: styledText.StyledText(
+                                      text: ((myGu) == '') ? '⎯' : myGu,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Color(0xff4D4D4D),
+                                      ),
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            labelStyle: _selectedChoices.contains(choice.displayName)
-                                ? TextStyle(color: Colors.white, fontSize: Theme.of(context).textTheme.bodySmall?.fontSize)
-                                : TextStyle(color: Colors.grey, fontSize: Theme.of(context).textTheme.bodySmall?.fontSize),
-                            selectedColor: Color(choice.iconColor),
-                            showCheckmark: false,
-                            selected: _selectedChoices.contains(choice.displayName),
-                            onSelected: (bool value) {
-                              setState(() {
-                                if (value) {
-                                  if (!_selectedChoices.contains(choice.displayName)) {
-                                    _selectedChoices.add(choice.displayName);
-                                    categoryVisibility[choice.code.toString()] = true;
-                                  }
-                                } else if (_selectedChoices.length > 1) {
-                                  _selectedChoices.removeWhere((String name) {
-                                    return name == choice.displayName;
-                                  });
-                                  categoryVisibility[choice.code.toString()] = false;
-                                }
-                              });
-                              markerInit();
-                            },
-                          );
-                        }).toList(),
+                            onSelected: (bool value) {},
+                            showCheckmark: null,
+                          ),
+                        ],
                       ),
                     ),
-                    // showBottomSheetBtn
-                    //     ? SizedBox(
-                    //         child: Text(
-                    //           '거리순',
-                    //           style: TextStyle(
-                    //             fontWeight: FontWeight.bold,
-                    //             fontSize: Theme.of(context)
-                    //                 .textTheme
-                    //                 .bodySmall
-                    //                 ?.fontSize,
-                    //           ),
-                    //         ),
-                    //       )
-                    //     : SizedBox()
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),

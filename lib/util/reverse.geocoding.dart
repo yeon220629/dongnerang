@@ -2,11 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class Addr {
-  // region : area0(kr), area1(서울특별시), area2(강남구), area3(개포동), area4()
-  // land : name(개포로28길), number1(47), number2(),
-}
-
 class ReverseGeo {
   static String APIKEYID = "ikyjlcscfy";
   static String APIKEY = "4ESm2upE4mgEG5Sff1aBbBwfhYL1Q6ml4h0yoFUT";
@@ -20,36 +15,8 @@ class ReverseGeo {
     // https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=127.0518537,37.4770471&output=json
     try {
       Uri apiAddr = Uri.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=$long,$lat&orders=roadaddr&output=json");
-      print(apiAddr);
       response = await http.get(apiAddr, headers: headers);
       data = jsonDecode(response.body);
-
-      Map<String, dynamic> roadAddrRegion = data['results'][0]['region'];
-      Map<String, dynamic> roadAddrLand = data['results'][0]['land'];
-      List<String> addrList = [];
-      /*
-      // 시,도
-      String si = roadAddrRegion['area1']['name'] ?? '';
-      if (si != '') addrList.add(si);
-      // 시,군,구
-      String gu = roadAddrRegion['area2']['name'] ?? '';
-      if (gu != '') addrList.add(gu);
-      // 읍,면,동
-      String dong = roadAddrRegion['area3']['name'] ?? '';
-      if (dong != '') addrList.add(dong);
-      // 리
-      String ri = roadAddrRegion['area4']['name'] ?? '';
-      if (ri != '') addrList.add(ri);
-      // 도로명
-      String roadName = roadAddrLand['name'] ?? '';
-      if (roadName != '') addrList.add(roadName);
-      // 도로명 상세주소
-      String roadNumber = roadAddrLand['number1'] ?? '';
-      if (roadNumber != '') addrList.add(roadNumber);
-
-      print(addrList);
-      print(addrList.join(' '));
-      */
 
       return data['results'][0]['region']['area2']['name'] ?? '';
     } catch (e) {
@@ -65,7 +32,6 @@ class ReverseGeo {
     // https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=127.0518537,37.4770471&output=json
     try {
       Uri apiAddr = Uri.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=$long,$lat&orders=roadaddr&output=json");
-      print(apiAddr);
       response = await http.get(apiAddr, headers: headers);
       data = jsonDecode(response.body);
       Map<String, dynamic> roadAddrRegion = data['results'][0]['region'];
@@ -90,9 +56,6 @@ class ReverseGeo {
       // 도로명 상세주소
       String roadNumber = roadAddrLand['number1'] ?? '';
       if (roadNumber != '') addrList.add(roadNumber);
-
-      print(addrList);
-      print(addrList.join(' '));
 
       return addrList.join(' ');
     } catch (e) {

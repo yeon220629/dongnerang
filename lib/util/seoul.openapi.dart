@@ -9,7 +9,7 @@ class SeoulOpenApi {
   static int limit = 500;
 
   // 서울 공공서비스 api 데이터 queue에 저장
-  static getOpenApiSeoulSpaces(String service) async {
+  static Future<int> getOpenApiSeoulSpaces(String service) async {
     late http.Response response;
     late Map<String, dynamic> data;
     String category = '';
@@ -27,58 +27,60 @@ class SeoulOpenApi {
         category = 'rental';
         break;
       default:
-        return;
+        return 0;
     }
 
     try {
-      Uri apiAddr = Uri.parse(
-          "http://openAPI.seoul.go.kr:8088/$apiKey/json/$service/1/$limit/");
+      Uri apiAddr = Uri.parse("http://openAPI.seoul.go.kr:8088/$apiKey/json/$service/1/$limit/");
+
       response = await http.get(apiAddr);
+
       data = jsonDecode(response.body);
 
       int listTotalCount = data[service]['list_total_count'];
       if (listTotalCount == 0) {
-        return;
+        return 0;
       }
       int repeat = (listTotalCount / limit).ceil();
 
-      // 처음 100개 이하는 여기서 처리
+      // 처음 : limit 이하는 여기서 처리
       dataRowToSpace(data, service, category);
 
-      print("listTotalCount : $listTotalCount");
-
-      // 100개 초과일 경우 반복 처리
+      // limit 초과일 경우 반복 처리
       for (int i = 0; i < repeat - 1; i++) {
         try {
-          Uri apiAddr = Uri.parse(
-              "http://openAPI.seoul.go.kr:8088/$apiKey/json/$service/${100 * (i + 1) + 1}/${100 * (i + 2)}/");
+          Uri apiAddr = Uri.parse("http://openAPI.seoul.go.kr:8088/$apiKey/json/$service/${100 * (i + 1) + 1}/${100 * (i + 2)}/");
           response = await http.get(apiAddr);
           data = jsonDecode(response.body);
-
-          print("apiAddr >>>> $apiAddr");
 
           dataRowToSpace(data, service, category);
         } catch (e) {
           print(e);
         }
       }
+
+      return listTotalCount;
     } catch (e) {
       print(e);
+      return 0;
     }
-
-    // return data1;
   }
 
   // response 내역 Space 객체로 변환 후 queue에 저장
-  static dataRowToSpace(
-      Map<String, dynamic> data, String service, String category) {
+  static dataRowToSpace(Map<String, dynamic> data, String service, String category) {
     data[service]['row'].forEach((spaceData) {
-      if (spaceData['SVCID'] == "" ||
-          spaceData['AREANM'] == "" ||
-          spaceData['PLACENM'] == "" ||
-          spaceData['X'] == "" ||
-          spaceData['Y'] == "") {
+      if (spaceData['SVCID'] == "" || spaceData['AREANM'] == "" || spaceData['PLACENM'] == "" || spaceData['X'] == "" || spaceData['Y'] == "") {
         return;
+      }
+
+      // 위도, 경도 유효성 검사
+      double lat = double.parse(spaceData['Y']);
+      double long = double.parse(spaceData['X']);
+      if ((lat < 33 && lat > 43) || (long < 124 && long > 132)) {
+        return;
+      } else {
+        lat = double.parse(lat.toStringAsFixed(6));
+        long = double.parse(long.toStringAsFixed(6));
       }
 
       Space space = Space(
@@ -86,10 +88,7 @@ class SeoulOpenApi {
           gu: spaceData['AREANM'],
           spaceName: spaceData['PLACENM'],
           category: category,
-          location: {
-            'latitude': double.parse(spaceData['Y']),
-            'longitude': double.parse(spaceData['X'])
-          },
+          location: {'latitude': lat, 'longitude': long},
           spaceImage: spaceData['IMGURL'],
           detailInfo: spaceData['MAXCLASSNM'],
           pageLink: spaceData['SVCURL'],

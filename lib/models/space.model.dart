@@ -15,7 +15,7 @@ class Space {
   late String? pageLink;
   late String? phoneNum;
   late String? updated;
-  late double? dist; // 현위치와 공간 거리
+  late double? dist = 0; // 현위치와 공간 거리
 
   // 서울 공공서비스에서만 사용
   late String? svcName;
@@ -131,8 +131,20 @@ class Space {
     reference = document.reference;
   }
 
+  // 마커 중복 체크 (중복 조건 : 카테고리, 경도, 위도)
+  @override
+  bool operator ==(Object other) {
+    return other is Space &&
+        category == other.category &&
+        location['latitude'] == other.location['latitude'] &&
+        location['longitude'] == other.location['longitude'];
+  }
+
   @override
   String toString() {
-    return 'Space ==> (uid: $uid, gu: $gu, spaceName: $spaceName, spaceImage: $spaceImage, category: $category, location: $location, detailInfo: $detailInfo, pageLink: $pageLink, phoneNum: $phoneNum)';
+    return 'Space ==> (uid: $uid, gu: $gu, category: $category, location: $location, spaceName: $spaceName, spaceImage: $spaceImage, detailInfo: $detailInfo, pageLink: $pageLink, phoneNum: $phoneNum)';
   }
+
+  @override
+  int get hashCode => Object.hash(category, location['latitude'], location['longitude']);
 }
