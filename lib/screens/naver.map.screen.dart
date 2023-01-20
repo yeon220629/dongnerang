@@ -311,15 +311,10 @@ class _naverMapScreenState extends State<naverMapScreen> {
                         height: 8,
                       ),
                       // 2. 이용시간 (or 주소)
-                      AutoSizeText(
-                        addrOrTimeInfoStr,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: AppColors.black,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      Text(addrOrTimeInfoStr,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          )),
                       const SizedBox(
                         height: 4,
                       ),
@@ -341,21 +336,20 @@ class _naverMapScreenState extends State<naverMapScreen> {
                             style: const TextStyle(color: AppColors.red),
                           ),
                         },
-                        maxLines: 1,
                       ),
                       const SizedBox(
-                        height: 4,
+                        height: 5,
                       ),
                       // 4. [서비스명] or 업데이트일
-                      (thisSpace.uid.startsWith('S'))
+                      ((thisSpace.svcName ?? '') == '')
                           ? styledText.StyledText(
                               text: (thisSpace.svcName ?? '').replaceAll('&#39', '&apos'),
                               style: const TextStyle(
                                 fontSize: 14,
                                 color: AppColors.black,
                               ),
-                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
                             )
                           : Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
@@ -504,6 +498,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen(url)));
                         }),
                         child: SizedBox(
+                          height: 180,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
@@ -599,7 +594,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
 
   // 지도 카메라 이동하기
   Future<void> moveMapCamera(double lat, double long) async {
-    await _ct?.moveCamera(CameraUpdate.scrollTo(LatLng(lat, long + 0.002)));
+    await _ct?.moveCamera(CameraUpdate.scrollTo(LatLng(lat, long + 0.001)));
   }
 
   // 좌표 사이 거리 구하기

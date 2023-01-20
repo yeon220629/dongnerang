@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+    <key>FirebaseAppDelegateProxyEnabled</key>
+	<string>0</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -34,13 +38,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202301201</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<string>0</string>
+	<string>202301031</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3415104781631988~6504027773</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -306,7 +306,7 @@
 	<key>buildCount</key>
 	<string>1</string>
 	<key>buildDay</key>
-	<string>20230120</string>
+	<string>20230103</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

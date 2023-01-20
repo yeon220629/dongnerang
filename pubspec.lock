@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  auto_size_text:
-    dependency: "direct main"
-    description:
-      name: auto_size_text
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -844,13 +837,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-  loading_animation_widget:
-    dependency: "direct main"
-    description:
-      name: loading_animation_widget
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0+4"
   logger:
     dependency: "direct main"
     description:
@@ -1276,13 +1262,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
-  styled_text:
-    dependency: "direct main"
-    description:
-      name: styled_text
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.0"
   synchronized:
     dependency: transitive
     description:
@@ -1528,13 +1507,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.4.1"
-  xmlstream:
-    dependency: transitive
-    description:
-      name: xmlstream
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   yaml:
     dependency: transitive
     description:
