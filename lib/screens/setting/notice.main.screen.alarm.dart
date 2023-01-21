@@ -28,13 +28,14 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
           // color: AppColors.primary,
         ),
         centerTitle: true,
-        title: const Text('알림 키워드 설정', style: TextStyle( color: AppColors.black),),
+        title: const Text('키워드 설정', style: TextStyle( color: AppColors.black),),
         actions: [
           TextButton(
               onPressed: (){
@@ -69,7 +70,7 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide(width: 1),
-                        borderRadius: BorderRadius.circular(10) 
+                        borderRadius: BorderRadius.circular(10)
                       ),
                       suffixIcon: TextButton(
                         onPressed: (){
@@ -90,25 +91,27 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
                     ),
                   ),
                 ),
-                SizedBox(height: size.height / 22.5,),
-                Text("나의 키워드 (${widget.keywordList.length}/20)", style: TextStyle(
+                SizedBox(height: size.height / 25,),
+                Text("나의 키워드 (${widget.keywordList.length}/20)",
+                  style: TextStyle(
                   fontWeight: FontWeight.bold
-                ),),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: SizedBox(
+                  ),
+                ),
+                  SizedBox(
                     width: size.width,
-                    height: size.height / 4,
+                    height: size.height/3,
                     child: GridView(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
-                        childAspectRatio: 1 / 0.6,
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 80,
+                          childAspectRatio: 3 / 2,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5
                       ),
                       children: <Widget>[...generate_tags(widget.keywordList)],
                     ),
                   ),
-                ),
-                Text("알림 동네", style: TextStyle(fontWeight: FontWeight.bold)),
+                //나의 키워드 칩 개수 많아지면 스크롤로 되는데, 알림동네가 아래로 밀려나게 해야할 듯
+                Text("알림동네", style: TextStyle(fontWeight: FontWeight.bold)),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: SizedBox(
@@ -116,7 +119,7 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
                     height: size.height / 4,
                     child: GridView(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
+                        crossAxisCount: 4, //1 개의 행에 보여줄 item 개수
                         childAspectRatio: 1 / 0.6,
                       ),
                       children: <Widget>[...localgenerate_tags(widget.localList)],
@@ -139,7 +142,8 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
       padding: EdgeInsets.all(2),
       child: Chip(
         backgroundColor: AppColors.white,
-        side: BorderSide(width: 1),
+
+        side: BorderSide(width: 1, color: AppColors.grey),
         labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         deleteIcon: Icon( Icons.close,  size: 15, ),
         deleteIconColor: Colors.black,

@@ -275,25 +275,25 @@ class _noticemainpageState extends State<noticemainpage>
                         //   context, MaterialPageRoute(builder: (context) => noticemainAlarmpage(),),);
                       },
                       child: Container(
-                        width: size.width / 3,
-                        height: size.height / 20,
+                        width: size.width / 4,
+                        height: size.height / 23,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: AppColors.grey
+                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                          color: AppColors.ligthGrey
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 9),
+                        // child: Padding(
+                        //   padding: const EdgeInsets.symmetric(2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.settings, color: AppColors.white),
-                              Text("   키워드 설정", style: TextStyle(
+                              // Icon(Icons.settings, color: AppColors.white),
+                              Text("키워드 설정", style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.white
+                                color: AppColors.black
                               ),)
                             ],
                           ),
-                        )
+                        // )
                       )
                   ),
                   Expanded(
