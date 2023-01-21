@@ -223,11 +223,11 @@ class _naverMapScreenState extends State<naverMapScreen> {
         width: 32,
         height: 32,
         captionText: space.spaceName,
-        captionMinZoom: 15,
+        captionMinZoom: 14,
         captionColor: Colors.black,
         captionHaloColor: Colors.white,
         captionRequestedWidth: 200,
-        captionTextSize: 12.5,
+        captionTextSize: 13,
         captionPerspectiveEnabled: true,
         icon: await OverlayImage.fromAssetImage(assetName: "assets/images/${SpaceType.getByCode(space.category!).offMarkImg}"),
         onMarkerTab: (marker, iconSize) async {
@@ -349,7 +349,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                       // 4. [서비스명] or 업데이트일
                       (thisSpace.uid.startsWith('S'))
                           ? styledText.StyledText(
-                              text: (thisSpace.svcName ?? '').replaceAll('&#39', '&apos'),
+                              text: (thisSpace.svcName ?? '').replaceAll('&#39', '&apos').replaceAll('&middot;', '•'),
                               style: const TextStyle(
                                 fontSize: 14,
                                 color: AppColors.black,
@@ -464,6 +464,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
   // 공간 상세 모달
   showSpaceBottomSheet(List<Space> selectedSpace) {
     showModalBottomSheet<void>(
+      barrierColor: AppColors.black.withOpacity(0.08),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
