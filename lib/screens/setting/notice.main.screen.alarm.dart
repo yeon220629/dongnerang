@@ -43,8 +43,7 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
                 // print("local : ${widget.selectLocal}");
                 FirebaseService.savePrivacyProfile(userEmail!, widget.keywordList, 'keyword');
                 FirebaseService.savePrivacyProfile(userEmail!, widget.selectLocal, 'alramlocal');
-                EasyLoading.showInfo("알람 키워드 변경 되었습니다.");
-
+                EasyLoading.showSuccess("알람 키워드 변경 되었습니다.");
                 Navigator.pop(context);
               },
               child: Text("완료", style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)
