@@ -14,6 +14,9 @@ import 'package:new_version/new_version.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
+import '../notice.main.screen.dart';
+import '../setting/notice.main.screen.alarm.dart';
+import 'mysite.dart';
 import 'settingsPage.screen.dart';
 import 'mypage.inform.setting.screen.dart';
 
@@ -284,7 +287,52 @@ class _mypageScreenState extends State<mypageScreen> {
                     ),
                   ],
                 ),),),
-            // SizedBox(height: 5,),
+            SizedBox(height: 5,),
+            SizedBox(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (_) => noticemainpage()));
+                          //관심 키워드로 바로 넘어가야 하는데 잘 안 되서 우선 이렇게 해놓음.
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset('/Users/seo/StudioProjects/dongnerang/assets/mypage/keyword.png', width: 30,),
+                            SizedBox(height: 3,),
+                            Text(
+                              '관심 키워드', style: TextStyle(color: AppColors.black),
+                            ),
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (_) => mypageInformSettingScreen()));
+                          //mysite.dart 만들어 놓음, 여기에 지역만 빼서 넣어야함 1.22
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Image.asset('/Users/seo/StudioProjects/dongnerang/assets/mypage/mysite.png', width: 30,),
+                            SizedBox(height: 3,),
+                            Text(
+                                '나의 지역', style: TextStyle(color: AppColors.black),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 5,),
             Container(
                 alignment: Alignment.centerLeft,
                 child: Padding(

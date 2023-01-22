@@ -50,85 +50,77 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
           ),
         ],
       ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 40),
-          child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("관심 키워드" , style: TextStyle(fontWeight: FontWeight.bold),),
-                SizedBox(height: 5,),
-                Container(
-                  width: size.width / 1.25,
-                  height: size.height / 15,
-                  child: TextField(
-                    controller: addKeyword,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1),
-                        borderRadius: BorderRadius.circular(10)
+      body: SingleChildScrollView(
+        child: Container(
+          alignment: Alignment.center,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 40),
+            child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("관심 키워드" , style: TextStyle(fontWeight: FontWeight.bold),),
+                  SizedBox(height: 5,),
+                  Container(
+                    width: size.width / 1.25,
+                    height: size.height / 15,
+                    child: TextField(
+                      controller: addKeyword,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(width: 1),
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        suffixIcon: TextButton(
+                          onPressed: (){
+                            if(widget.keywordList.length > 19){
+                              EasyLoading.showError("키워드는 20개 이상은 불가 합니다.");
+                              return;
+                            }else if(addKeyword.text == ''){
+                              EasyLoading.showError("공백은 등록 불가 합니다.");
+                              return;
+                            }
+                            setState(() {
+                              widget.keywordList.add(addKeyword.text);
+                            });
+                            addKeyword.text = '';
+                          },
+                          child: Text("확인", style: TextStyle(color: AppColors.grey),)
+                        )
                       ),
-                      suffixIcon: TextButton(
-                        onPressed: (){
-                          if(widget.keywordList.length > 19){
-                            EasyLoading.showError("키워드는 20개 이상은 불가 합니다.");
-                            return;
-                          }else if(addKeyword.text == ''){
-                            EasyLoading.showError("공백은 등록 불가 합니다.");
-                            return;
-                          }
-                          setState(() {
-                            widget.keywordList.add(addKeyword.text);
-                          });
-                          addKeyword.text = '';
-                        },
-                        child: Text("확인", style: TextStyle(color: AppColors.grey),)
-                      )
                     ),
                   ),
-                ),
-                SizedBox(height: size.height / 25,),
-                Text("나의 키워드 (${widget.keywordList.length}/20)",
-                  style: TextStyle(
-                  fontWeight: FontWeight.bold
-                  ),
-                ),
-                  SizedBox(
-                    width: size.width,
-                    height: size.height/3,
-                    child: GridView(
-                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 80,
-                          childAspectRatio: 3 / 2,
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5
-                      ),
-                      children: <Widget>[...generate_tags(widget.keywordList)],
+                  SizedBox(height: size.height / 30,),
+                  Text("나의 키워드 (${widget.keywordList.length}/20)",
+                    style: TextStyle(
+                    fontWeight: FontWeight.bold
                     ),
                   ),
-                //나의 키워드 칩 개수 많아지면 스크롤로 되는데, 알림동네가 아래로 밀려나게 해야할 듯
-                Text("알림동네", style: TextStyle(fontWeight: FontWeight.bold)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: SizedBox(
-                    width: size.width,
-                    height: size.height / 4,
-                    child: GridView(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4, //1 개의 행에 보여줄 item 개수
-                        childAspectRatio: 1 / 0.6,
+                      Wrap(
+                        children: <Widget>[...generate_tags(widget.keywordList)],
                       ),
-                      children: <Widget>[...localgenerate_tags(widget.localList)],
-                    ),
-                  ),
-                ),
-              ],
-            ),],
-          ),
-        )
+                  SizedBox(height: size.height / 30,),
+                  Text("알림동네", style: TextStyle(fontWeight: FontWeight.bold)),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 1),
+                  //   child:
+                  //   SizedBox(
+                  //     width: size.width,
+                  //     height: size.height / 8,
+                  //     child:
+                      Wrap(
+                        children: <Widget>[...localgenerate_tags(widget.localList)],
+                        ),
+
+                      // ),
+                    // ),
+                  // ),
+                ],
+              ),],
+            ),
+          )
+        ),
       ),
     );
   }
@@ -138,12 +130,11 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
   }
   get_chip(name) {
     return Padding(
-      padding: EdgeInsets.all(2),
+      padding: EdgeInsets.fromLTRB(0,0,5,0),
       child: Chip(
         backgroundColor: AppColors.white,
-
         side: BorderSide(width: 1, color: AppColors.grey),
-        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        labelStyle: TextStyle(color: Colors.black),
         deleteIcon: Icon( Icons.close,  size: 15, ),
         deleteIconColor: Colors.black,
         label: Text('${name}'),
