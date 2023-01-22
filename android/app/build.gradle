@@ -50,8 +50,8 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
-        //버전 수정하는 곳 22.01.21
-        versionCode 31
+        //버전 수정하는 곳 22.01.22
+        versionCode 32
         versionName flutterVersionName
     }
 
