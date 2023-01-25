@@ -1,5 +1,5 @@
 import 'dart:ui' as ui;
-
+import 'package:dongnerang/constants/common.constants2.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:dongnerang/util/admob.dart';
@@ -10,7 +10,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:new_version/new_version.dart';
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants.dart';
 import '../../widgets/user_profile_image.widget.dart';
@@ -192,6 +191,32 @@ class _mypageScreenState extends State<mypageScreen> {
         closeTapContainer = controllers.offset > 50;
       });
     });
+    // print("chekc : ${commonConstant2().toString()}");
+    // 키워드 설정으로 바로 보내기 위한 변수 세팅
+    FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value) {
+      value.forEach((element) {
+        commonConstant2.keywordList.add(element);
+      });
+    });
+    FirebaseService.getUserLocalData(userEmail!, 'local').then((value) {
+      value.forEach((element) {
+        commonConstant2.localList.add(element);
+        commonConstant2.selectLocal.add(element);
+      });
+      commonConstant2.localList.add('서울시');
+    });
+
+    // local exist Check
+    FirebaseService.getUserKeyExist(userEmail!).then((value) {
+      if(value == true){
+        commonConstant2.selectLocal = [];
+        FirebaseService.getUserLocalData(userEmail!, 'alramlocal').then((value) {
+          value.forEach((element) {
+            commonConstant2.selectLocal.add(element);
+          });
+        });
+      }
+    });
   }
   @override
   void didUpdateWidget(covariant mypageScreen oldWidget) {
@@ -298,8 +323,10 @@ class _mypageScreenState extends State<mypageScreen> {
                     children: [
                       InkWell(
                         onTap: (){
+                          // print(commonConstant2().toString());
                           Navigator.push(context, MaterialPageRoute(
-                              builder: (_) => noticemainpage()));
+                              builder: (_) => noticemainAlarmpage(commonConstant2.keywordList, commonConstant2.localList,commonConstant2.selectLocal)));
+                              // builder: (_) => noticemainpage()));
                           //관심 키워드로 바로 넘어가야 하는데 잘 안 되서 우선 이렇게 해놓음.
                         },
                         child: Column(
