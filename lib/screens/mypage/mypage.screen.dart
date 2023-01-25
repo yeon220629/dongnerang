@@ -302,7 +302,7 @@ class _mypageScreenState extends State<mypageScreen> {
                         },
                         child: Column(
                           children: [
-                            Image.asset('/Users/seo/StudioProjects/dongnerang/assets/mypage/keyword.png', width: 30,),
+                            Image.asset('assets/mypage/keyword.png', width: 30,),
                             SizedBox(height: 3,),
                             Text(
                               '관심 키워드', style: TextStyle(color: AppColors.black),
@@ -319,7 +319,7 @@ class _mypageScreenState extends State<mypageScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Image.asset('/Users/seo/StudioProjects/dongnerang/assets/mypage/mysite.png', width: 30,),
+                            Image.asset('assets/mypage/mysite.png', width: 30,),
                             SizedBox(height: 3,),
                             Text(
                                 '나의 지역', style: TextStyle(color: AppColors.black),
