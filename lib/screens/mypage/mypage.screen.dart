@@ -286,7 +286,9 @@ class _mypageScreenState extends State<mypageScreen> {
                       ),
                     ),
                   ],
-                ),),),
+                ),
+              ),
+            ),
             SizedBox(height: 5,),
             SizedBox(
               child: Column(
@@ -313,7 +315,7 @@ class _mypageScreenState extends State<mypageScreen> {
                       InkWell(
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(
-                              builder: (_) => mypageInformSettingScreen()));
+                              builder: (_) => mysite()));
                           //mysite.dart 만들어 놓음, 여기에 지역만 빼서 넣어야함 1.22
                         },
                         child: Column(
