@@ -14,11 +14,30 @@ class ReverseGeo {
 
     // https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=127.0518537,37.4770471&output=json
     try {
-      Uri apiAddr = Uri.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=$long,$lat&orders=roadaddr&output=json");
+      // Uri apiAddr = Uri.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=$long,$lat&orders=roadaddr&output=json");
+      Uri apiAddr = Uri.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=$long,$lat&output=json");
       response = await http.get(apiAddr, headers: headers);
       data = jsonDecode(response.body);
 
-      return data['results'][0]['region']['area2']['name'] ?? '';
+      String areaCode = data['results'][0]['code']['id'];
+      String area1 = data['results'][0]['region']['area1']['name'];
+      String area2 = data['results'][0]['region']['area2']['name'];
+
+      if (area2 == '') {
+        if (area1 == '세종특별자치시') return '세종시';
+        return area1;
+      }
+
+      if (area2.contains(' ')) {
+        area2 = area2.split(' ')[0];
+      }
+
+      // print("Reverse geo lat, long ::: $lat, $long");
+      // print("Reverse geo >>> ${data['results'][0]['region']}");
+      // print("Reverse geo areaCode >>> $areaCode");
+      // print("Reverse geo area2 >>> $area2");
+
+      return area2;
     } catch (e) {
       print(e);
       return '';
@@ -65,7 +84,141 @@ class ReverseGeo {
   }
 }
 
-/* response 예시
+/* 기본 response
+{
+    "status": {
+        "code": 0,
+        "name": "ok",
+        "message": "done"
+    },
+    "results": [
+        {
+            "name": "legalcode",
+            "code": {
+                "id": "1162010300",
+                "type": "L",
+                "mappingId": "09620103"
+            },
+            "region": {
+                "area0": {
+                    "name": "kr",
+                    "coords": {
+                        "center": {
+                            "crs": "",
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                "area1": {
+                    "name": "서울특별시",
+                    "coords": {
+                        "center": {
+                            "crs": "EPSG:4326",
+                            "x": 126.9783882,
+                            "y": 37.5666103
+                        }
+                    },
+                    "alias": "서울"
+                },
+                "area2": {
+                    "name": "관악구",
+                    "coords": {
+                        "center": {
+                            "crs": "EPSG:4326",
+                            "x": 126.9514847,
+                            "y": 37.4781549
+                        }
+                    }
+                },
+                "area3": {
+                    "name": "남현동",
+                    "coords": {
+                        "center": {
+                            "crs": "EPSG:4326",
+                            "x": 126.9778366,
+                            "y": 37.4745394
+                        }
+                    }
+                },
+                "area4": {
+                    "name": "",
+                    "coords": {
+                        "center": {
+                            "crs": "",
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "admcode",
+            "code": {
+                "id": "1162063000",
+                "type": "S",
+                "mappingId": "09620103"
+            },
+            "region": {
+                "area0": {
+                    "name": "kr",
+                    "coords": {
+                        "center": {
+                            "crs": "",
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                "area1": {
+                    "name": "서울특별시",
+                    "coords": {
+                        "center": {
+                            "crs": "EPSG:4326",
+                            "x": 126.9783882,
+                            "y": 37.5666103
+                        }
+                    },
+                    "alias": "서울"
+                },
+                "area2": {
+                    "name": "관악구",
+                    "coords": {
+                        "center": {
+                            "crs": "EPSG:4326",
+                            "x": 126.9514847,
+                            "y": 37.4781549
+                        }
+                    }
+                },
+                "area3": {
+                    "name": "남현동",
+                    "coords": {
+                        "center": {
+                            "crs": "EPSG:4326",
+                            "x": 126.9778366,
+                            "y": 37.4745394
+                        }
+                    }
+                },
+                "area4": {
+                    "name": "",
+                    "coords": {
+                        "center": {
+                            "crs": "",
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
+*/
+
+/* 도로명 response 예시
 {
   "status": {
       "code": 0,

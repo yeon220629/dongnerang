@@ -297,7 +297,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                     children: [
                       // 1. 장소명
                       AutoSizeText(
-                        thisSpace.spaceName,
+                        thisSpace.spaceName.replaceAll('&amp;', '&'),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: AppColors.darkBlue,
@@ -705,7 +705,10 @@ class _naverMapScreenState extends State<naverMapScreen> {
                         });
 
                         CameraPosition? cp = await _ct?.getCameraPosition();
-                        String gu = await ReverseGeo.getGuByCoords(cp!.target.latitude.toString(), cp.target.longitude.toString());
+                        String lat = cp!.target.latitude.toStringAsFixed(6);
+                        String long = cp.target.longitude.toStringAsFixed(6);
+
+                        String gu = await ReverseGeo.getGuByCoords(lat, long);
 
                         Future.delayed(const Duration(milliseconds: 500), () async {
                           await getSpacesByGu(gu);
@@ -1071,13 +1074,14 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                     width: 3,
                                   ),
                                   SizedBox(
-                                    width: 40,
-                                    child: styledText.StyledText(
-                                      text: ((myGu) == '') ? '⎯' : myGu,
+                                    width: 42,
+                                    child: AutoSizeText(
+                                      ((myGu) == '') ? '⎯' : myGu,
                                       style: const TextStyle(
                                         fontSize: 14,
                                         color: Color(0xff4D4D4D),
                                       ),
+                                      minFontSize: 12,
                                       maxLines: 1,
                                       textAlign: TextAlign.center,
                                     ),
