@@ -1063,7 +1063,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                 crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
                                   const SizedBox(
-                                    width: 20,
+                                    width: 15,
                                   ),
                                   const Icon(
                                     CupertinoIcons.location_solid,
@@ -1074,7 +1074,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                                     width: 3,
                                   ),
                                   SizedBox(
-                                    width: 42,
+                                    width: 45,
                                     child: AutoSizeText(
                                       ((myGu) == '') ? '⎯' : myGu,
                                       style: const TextStyle(

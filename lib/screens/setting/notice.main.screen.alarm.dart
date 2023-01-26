@@ -30,6 +30,7 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
           // color: AppColors.primary,

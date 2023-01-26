@@ -255,7 +255,7 @@ class _mypageScreenState extends State<mypageScreen> {
             },
           )
         ],
-        title: Text('내 정보 관리', style: TextStyle(color: Colors.black)),
+        title: Text('마이 페이지', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
       body: Column(
@@ -327,11 +327,11 @@ class _mypageScreenState extends State<mypageScreen> {
                           Navigator.push(context, MaterialPageRoute(
                               builder: (_) => noticemainAlarmpage(commonConstant2.keywordList, commonConstant2.localList,commonConstant2.selectLocal)));
                               // builder: (_) => noticemainpage()));
-                          //관심 키워드로 바로 넘어가야 하는데 잘 안 되서 우선 이렇게 해놓음.
                         },
                         child: Column(
                           children: [
-                            Image.asset('assets/mypage/keyword.png', width: 30,),
+                            Image.asset('assets/mypage/keyword.png',
+                              width:MediaQuery.of(context).size.width/13),
                             SizedBox(height: 3,),
                             Text(
                               '관심 키워드', style: TextStyle(color: AppColors.black),
@@ -348,7 +348,8 @@ class _mypageScreenState extends State<mypageScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Image.asset('assets/mypage/mysite.png', width: 30,),
+                            Image.asset('assets/mypage/mysite.png',
+                                width:MediaQuery.of(context).size.width/13),
                             SizedBox(height: 3,),
                             Text(
                                 '나의 지역', style: TextStyle(color: AppColors.black),

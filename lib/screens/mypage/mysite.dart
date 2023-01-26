@@ -26,15 +26,16 @@ class mysite extends GetView<PrivateSettingController> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
+        title: const Text('나의 지역', style: TextStyle( color: AppColors.black),),
         actions: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('나의 지역', style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.5,
-                  color: Colors.black)),
-              SizedBox(width: 100,),
+              // Text('나의 지역', style: TextStyle(
+              //     fontWeight: FontWeight.bold,
+              //     fontSize: 18.5,
+              //     color: Colors.black)),
+              // SizedBox(width: 100,),
               TextButton(
                   onPressed: () async {
                     print("PrivateLocalData : $PrivateLocalData");
@@ -73,7 +74,7 @@ class mysite extends GetView<PrivateSettingController> {
                         EasyLoading.showSuccess("프로필 수정 실패");
                       }
                     }
-                  }, child: Text("완료", style: TextStyle(color: Colors.black))),
+                  }, child: Text("완료", style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)),
             ],
           )
         ],
