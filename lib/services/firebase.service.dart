@@ -314,4 +314,12 @@ class FirebaseService {
       }
     }
   }
+
+  // 자치구에 따라 url 가져오기
+  static Future<Map<String, dynamic>> getUrlsByGu(String gu) async {
+    final doc = await FirebaseFirestore.instance.collection("banner").doc("urls").get();
+    print(doc.data()?[gu]);
+
+    return doc.data()?[gu];
+  }
 }

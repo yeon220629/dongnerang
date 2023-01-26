@@ -11,30 +11,14 @@
         "longitude": 127.0518537
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0871",
       "address": "서울 강남구 개포로28길 47",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
     "2": {
       "uid": "2",
-      "spaceName": "신길3동 주민센터",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20220921/1663746771415NI7LTEFEX8KTRDJFC82UNOCIB.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S220921162114404013",
-      "location": {
-        "latitude": 37.507263,
-        "longitude": 126.9077281
-      },
-      "gu": "영등포구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "02-2670-1266",
-      "address": "서울 영등포구 신길로41라길 13-8",
-      "updated": "2023-01-05"
-    },
-    "3": {
-      "uid": "3",
       "spaceName": "창의예술교육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F020%2F2020%2F11%2F10%2F0003319659_001_20201110173742235.jpg&type=a340",
       "pageLink": "https://www.instagram.com/artsedu_ydp/",
@@ -43,30 +27,30 @@
         "longitude": 126.8959494
       },
       "gu": "영등포구",
-      "detailInfo": "프로그램",
+      "detailInfo": "동네 프로그램",
       "category": "program",
       "phoneNum": "02-3667-9060",
       "address": "서울 영등포구 신길로41라길 13-8 지하1층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "4": {
-      "uid": "4",
+    "3": {
+      "uid": "3",
       "spaceName": "강남스포츠문화센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEwMjlfMzQg%2FMDAxNjY3MDUzMTYzMzAz.fiFf9Yz9kMv_QW7VscD5xCeqso7wXZKPJ0iAtmK29o8g.M3oU6j2l2oE4w-4ntdVEFsGyCbCoHyU-TWkO8NsBzXYg.JPEG.sapi23%2FKakaoTalk_20220710_160757942.jpg&type=a340",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC02&event=1000000000&class=&subject=",
       "location": {
-        "latitude": 37.4889672,
-        "longitude": 127.1052745
+        "latitude": 37.491088,
+        "longitude": 127.076723
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0801",
       "address": "서울 강남구 밤고개로1길 52 강남스포츠문화센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "5": {
-      "uid": "5",
+    "4": {
+      "uid": "4",
       "spaceName": "구민회관 체육교실",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTExMDlfMjA0%2FMDAxNTczMjc0NTUzNzk1.UxsAK_ZqrzPc0QXXQKeaBpqR__0XyxCjXNBiTmuWC8Ig.xNLvI012_AxBW1zcLflaKde4nNOZbluwkbRp_fmmW6og.JPEG.eunjin8101%2FKakaoTalk_20191109_133217706_01.jpg&type=a340",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC02&event=1000000000&class=&subject=",
@@ -75,14 +59,14 @@
         "longitude": 127.0642598
       },
       "gu": "강남구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2176-0892",
       "address": "서울 강남스포츠문화센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "6": {
-      "uid": "6",
+    "5": {
+      "uid": "5",
       "spaceName": "대진체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20110406_147%2Fdudgus00700_1302078319549GIz64_jpg%2F%25B9%25E8%25B5%25E5%25B9%25CE%25C5%25CF_dudgus00700.jpg&type=a340",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC04&event=1000000000&class=&subject=",
@@ -91,14 +75,14 @@
         "longitude": 127.0783333
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0880",
       "address": "서울 강남구 개포로109길 62",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "7": {
-      "uid": "7",
+    "6": {
+      "uid": "6",
       "spaceName": "봉은테니스장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA2MjNfMTUy%2FMDAxNTkyODkwOTE0NjIw.4ssGUBLCQ7pr_88yzcm9Ik4FNlBmkoa5zR_HnIPr50cg.tZAyqt4DyEJ9kdSV15zxqKtAkPgYUnK8S9Kb43zibBMg.JPEG.0192582776%2FIMG_4474.jpg&type=a340",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC05&event=1000000000&class=&subject=",
@@ -107,14 +91,14 @@
         "longitude": 127.055259
       },
       "gu": "강남구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2176-0890",
       "address": "서울 강남구 삼성동 75",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "8": {
-      "uid": "8",
+    "7": {
+      "uid": "7",
       "spaceName": "포이테니스장",
       "spaceImage": "https://search.pstatic.net/common/?src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F3764_000_1%2F20150310162745065_V9EKL7X32.jpg%2FGC048P00660.jpg%3Ftype%3Dm4500_4500_fst_nce&type=a340",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC06&event=1000000000&class=&subject=",
@@ -123,14 +107,14 @@
         "longitude": 127.0541313
       },
       "gu": "강남구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2176-0871",
       "address": "서울 강남구 개포동 1274",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "9": {
-      "uid": "9",
+    "8": {
+      "uid": "8",
       "spaceName": "개포2 문화센터",
       "spaceImage": "https://search.pstatic.net/common/?src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F3764_000_1%2F20150310163531575_ZJIIJF678.jpg%2FGC048P00715.jpg%3Ftype%3Dm4500_4500_fst_nce&type=a340",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=2&lecture_type=R&center=GNCC07&event=1000000000&class=&subject=",
@@ -139,14 +123,14 @@
         "longitude": 127.0685184
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0750",
       "address": "서울 강남구 개포로 511 개포2동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "10": {
-      "uid": "10",
+    "9": {
+      "uid": "9",
       "spaceName": "논현1 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/nh_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC08&event=1000000000&class=&subject=",
@@ -155,14 +139,14 @@
         "longitude": 127.0285217
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0611",
       "address": "서울 강남구 학동로20길 25 논현1동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "11": {
-      "uid": "11",
+    "10": {
+      "uid": "10",
       "spaceName": "논현2 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/nh2_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC09&event=1000000000&class=&subject=",
@@ -171,14 +155,14 @@
         "longitude": 127.0371596
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0621",
       "address": "서울 강남구 학동로43길 17 논현2동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "12": {
-      "uid": "12",
+    "11": {
+      "uid": "11",
       "spaceName": "대치1 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/dc_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC10&event=1000000000&class=&subject=",
@@ -187,14 +171,14 @@
         "longitude": 127.0567417
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0681",
       "address": "서울 강남구 남부순환로391길 19 대치1문화센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "13": {
-      "uid": "13",
+    "12": {
+      "uid": "12",
       "spaceName": "대치2 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/dc2_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC11&event=1000000000&class=&subject=",
@@ -203,14 +187,14 @@
         "longitude": 127.0643841
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0701",
       "address": "서울 강남구 영동대로65길 24 대치2동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "14": {
-      "uid": "14",
+    "13": {
+      "uid": "13",
       "spaceName": "대치4 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/dc4_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC12&event=1000000000&class=&subject=",
@@ -219,14 +203,14 @@
         "longitude": 127.0578905
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0711",
       "address": "서울 강남구 도곡로77길 23 대치4동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "15": {
-      "uid": "15",
+    "14": {
+      "uid": "14",
       "spaceName": "도곡1 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/dg_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC13&event=1000000000&class=&subject=",
@@ -235,14 +219,14 @@
         "longitude": 127.0392707
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0771",
       "address": "서울 강남구 도곡로18길 57",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "16": {
-      "uid": "16",
+    "15": {
+      "uid": "15",
       "spaceName": "도곡 2문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/dg2_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC14&event=1000000000&class=&subject=",
@@ -251,14 +235,14 @@
         "longitude": 127.0463819
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0741",
       "address": "서울 강남구 남부순환로378길 34-9 도곡2동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "17": {
-      "uid": "17",
+    "16": {
+      "uid": "16",
       "spaceName": "삼성1 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/ss_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC15&event=1000000000&class=&subject=",
@@ -267,14 +251,14 @@
         "longitude": 127.0625678
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0661",
       "address": "서울 강남구 봉은사로 616 삼성1동 주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "18": {
-      "uid": "18",
+    "17": {
+      "uid": "17",
       "spaceName": "삼성 2 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/ss2_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC16&event=1000000000&class=&subject=",
@@ -283,14 +267,14 @@
         "longitude": 127.0459922
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0671",
       "address": "서울 강남구 봉은사로 419 삼성2동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "19": {
-      "uid": "19",
+    "18": {
+      "uid": "18",
       "spaceName": "세곡 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/sg_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC17&event=1000000000&class=&subject=",
@@ -299,14 +283,14 @@
         "longitude": 127.1069042
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0761",
       "address": "서울 강남구 밤고개로 286",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "20": {
-      "uid": "20",
+    "19": {
+      "uid": "19",
       "spaceName": "신사 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/sinsa_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC19&event=1000000000&class=&subject=",
@@ -315,14 +299,14 @@
         "longitude": 127.0227857
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0601",
       "address": "서울 강남구 압구정로 128 신사동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "21": {
-      "uid": "21",
+    "20": {
+      "uid": "20",
       "spaceName": "역삼1 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/ys_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC20&event=1000000000&class=&subject=",
@@ -331,14 +315,14 @@
         "longitude": 127.0332162
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0721",
       "address": "서울 강남구 역삼로7길 16 역삼1문화센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "22": {
-      "uid": "22",
+    "21": {
+      "uid": "21",
       "spaceName": "역삼2 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/ys2_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC21&event=1000000000&class=&subject=",
@@ -347,14 +331,14 @@
         "longitude": 127.0467718
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0731",
       "address": "서울 강남구 도곡로43길 25",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "23": {
-      "uid": "23",
+    "22": {
+      "uid": "22",
       "spaceName": "청담 문화센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/cd_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC22&event=1000000000&class=&subject=",
@@ -363,14 +347,14 @@
         "longitude": 127.0492971
       },
       "gu": "강남구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2176-0641",
       "address": "서울 강남구 압구정로79길 26",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "24": {
-      "uid": "24",
+    "23": {
+      "uid": "23",
       "spaceName": "매봉산 실내 배드민턴장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA3MThfMTI2%2FMDAxNjI2NjA3Mjk3MjQ0.jJmmZ1UEnpCqhtsuKRsP-HlOxKsMCoBHvGYtcxD7dt0g.VwqVNFY63flYr5etAbiictd_KX7HndlqzNUrXvIbf5Ag.JPEG.kms0411%2F20210717%25A3%25DF081344.jpg&type=l340_165",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC26&event=1000000000&class=&subject=",
@@ -379,30 +363,30 @@
         "longitude": 127.042309
       },
       "gu": "강남구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2176-0885",
       "address": "서울 강남구 남부순환로 2711",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "25": {
-      "uid": "25",
+    "24": {
+      "uid": "24",
       "spaceName": "일원스포츠문화센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAzMDVfMTUg%2FMDAxNjQ2NDQyNDE3MjE4.04FON0bkl4S6zjumTZB3epeS6XHEjE3pJ9lHSfxWVjgg.aJgvfaN1WUt8bkCAlkIUKtYr3puIdE76MGCbwwHsPL8g.JPEG.khan386%2F20220305%25A3%25DF092512.jpg&type=a340",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC30&event=1000000000&class=&subject=",
       "location": {
-        "latitude": 37.4889672,
-        "longitude": 127.1052745
+        "latitude": 37.489165,
+        "longitude": 127.105255
       },
       "gu": "강남구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2176-0984",
       "address": "서울 강남구 영동대로 22 디에이치 자이 개포",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "26": {
-      "uid": "26",
+    "25": {
+      "uid": "25",
       "spaceName": "자곡문화센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F016%2F2022%2F01%2F03%2F20220103000115_0_20220103094001647.jpg&type=a340",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC31&event=1000000000&class=&subject=",
@@ -411,14 +395,14 @@
         "longitude": 127.0944806
       },
       "gu": "강남구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-6712-0580",
       "address": "서울 강남구 자곡로 100",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "27": {
-      "uid": "27",
+    "26": {
+      "uid": "26",
       "spaceName": "세곡커뮤니티센터",
       "spaceImage": "https://life.gangnam.go.kr/design/homepage/gangnamgu_pc/image/pic/sgc_img01.jpg",
       "pageLink": "https://life.gangnam.go.kr/fmcs/52?page=1&lecture_type=R&center=GNCC27&event=1000000000&class=&subject=",
@@ -427,14 +411,14 @@
         "longitude": 127.1026767
       },
       "gu": "강남구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2176-0630",
       "address": "서울 강남구 헌릉로590길 68",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "28": {
-      "uid": "28",
+    "27": {
+      "uid": "27",
       "spaceName": "온조대왕문화체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA4MDJfODkg%2FMDAxNTY0NzE4MjkxMDE5.nPNNbpLnRzgy1OUkhOJHIeSi4n74zB3JdjgoLQTOC8cg.scxCRvmVuXulEF8vHTOphBryJ9jPcMGI-jmRuz6EPdcg.JPEG.cozete_kim%2F1564717775748.jpg&type=a340",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10002&Item0=10002&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -443,14 +427,14 @@
         "longitude": 127.1574515
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2045-7800",
       "address": "서울 강동구 고덕로 285",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "29": {
-      "uid": "29",
+    "28": {
+      "uid": "28",
       "spaceName": "고덕어울림수영장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMTNfMTE0%2FMDAxNjM2ODEzNDY3ODQ5.LDn4nYCcRAV09Dm_qe3-KaQFrevc54k3ctUR5klmD94g.SC654KK4koSnZEJbCTDdtDdcTB_zoTjM-Y4-EN_es2Ig.JPEG.cielhoii%2F20211113_124808.jpg&type=a340",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10018&Item0=10018&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -459,14 +443,14 @@
         "longitude": 127.1688517
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2045-7630",
       "address": "서울 강동구 고덕로 399 센트럴 푸르지오 지하1층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "30": {
-      "uid": "30",
+    "29": {
+      "uid": "29",
       "spaceName": "강동유소년스포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150112_48%2Fguminnews_1421031306063LEwUN_JPEG%2F%25B0%25AD%25B5%25BF%25B0%25F8%25B4%25DC-%25C0%25AF%25BC%25D2%25B3%25E2-1.9.jpg&type=a340",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10013&Item0=10013&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -475,14 +459,14 @@
         "longitude": 127.1742941
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3428-7979",
       "address": "서울 강동구 상일로12길 60",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "31": {
-      "uid": "31",
+    "30": {
+      "uid": "30",
       "spaceName": "해공체육문화센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEyMjhfMzIg%2FMDAxNjA5MTI3MDc2MTI1.4oNN8npKO5WA7jfE5r3mbM221YCLCoCSR18wYw5TOPsg.2aGuYo0mGHpsXECYNDHVUzaJf0NHM-aAjIamRIJawKkg.JPEG.anstb156%2FIMG_1432.jpg&type=a340",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10005&Item0=10005&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -491,14 +475,14 @@
         "longitude": 127.1298443
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2045-7651",
       "address": "서울 강동구 천중로18길 61 해공체육문화센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "32": {
-      "uid": "32",
+    "31": {
+      "uid": "31",
       "spaceName": "일자산제1 체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDAyMDhfMjE0%2FMDAxNTgxMTY3NTkyOTY1.bbQtT6Aq75rwbdOyBv9JHU2B5DaHu8526WxBePuDtZMg.TezsqtEZXiIae9J1m3Pm5ylGzmMMBLGnpMeDrZDFV0Ug.JPEG.episode21%2F1581167592559.jpg&type=a340",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10007&Item0=10007&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -507,14 +491,14 @@
         "longitude": 127.151191
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2045-7860",
       "address": "서울 강동구 동남로 660",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "33": {
-      "uid": "33",
+    "32": {
+      "uid": "32",
       "spaceName": "일자산제2 체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5582%2F2020%2F06%2F25%2F0000097884_001_20200625124829396.jpg&type=l340_165",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10008&Item0=10008&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -523,14 +507,14 @@
         "longitude": 127.149698
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2045-7864",
       "address": "서울 강동구 동남로 620",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "34": {
-      "uid": "34",
+    "33": {
+      "uid": "33",
       "spaceName": "샘터배드민턴장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDAyMDhfMjI2%2FMDAxNTgxMTY2NDEzNjk3.mwpXB88zazldwGA1k8mwibj2Bou8UBzyXx1_Z3HJH1gg.TQDoF1jVD3RkGCizrwi6AKEvU5PT8ibmUJMmDf-pS8sg.JPEG.episode21%2F1581166413151.jpg&type=a340",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10016&Item0=10016&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -539,14 +523,14 @@
         "longitude": 127.1571194
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2045-7875",
       "address": "서울 강동구 동남로 990",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "35": {
-      "uid": "35",
+    "34": {
+      "uid": "34",
       "spaceName": "강일테니스장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxOTAxMjlfMzcg%2FMDAxNTQ4NzM2MzQ4ODA1.b07qRet6YQNA7qWNvT0ToWm2Gqu_5xa9efNlWIx8HMIg.O7JyrIgApke8Zt3HZpaczQya7bxp3_65JqSwk2o4NWsg.PNG.monkoi2%2F21.PNG&type=a340",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10019&Item0=10019&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -555,14 +539,14 @@
         "longitude": 127.1646363
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2045-7872",
       "address": "서울 강동구 아리수로93가길 314",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "36": {
-      "uid": "36",
+    "35": {
+      "uid": "35",
       "spaceName": "명일테니스장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MThfMTUy%2FMDAxNTY4NzgxOTE4Mjc3.OG3kyj7oDGKxgqJw-II0rccHsCgaXBcNpdmHJCI-6E4g.3Df5x9Wvz9fLk7WkwCc3skhm6d4v5O51FZZrS1Sfq50g.JPEG.guminnews%2F%25B8%25ED%25C0%25CF%25C5%25D7%25B4%25CF%25BD%25BA%25C0%25E51.JPG&type=l340_165",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10017&Item0=10017&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -571,14 +555,14 @@
         "longitude": 127.153331
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2045-7870",
       "address": "서울 강동구 동남로 785",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "37": {
-      "uid": "37",
+    "36": {
+      "uid": "36",
       "spaceName": "강동구민회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTAzMDRfMTM1%2FMDAxNTUxNjcyMDcyMzg3.vH0hPRtaqcWSwdCbYRjy4zcEegooVxS9H4XXKpIDtdQg.f9GOi7MvSCO-W1pH334W8mSuCTiPaSmmvOJhrUG4xQYg.JPEG.63swlee%2F%25B0%25AD%25B5%25BF%25B1%25B8%2528304_%25B0%25AD%25B5%25BF%25B1%25B8%25B9%25CE%25C8%25B8%25B0%25FC_%25282%2529%25C5%25A9%25B1%25E2%25BA%25AF%25C8%25AF_.jpg&type=l340_165",
       "pageLink": "https://online.igangdong.or.kr/lecture/list.do?SiteCode=10001&Item0=10001&s_item=&Item2=&itemid=&dayname=&GotoPage=1&rowsSel=10&icode=4001&flag=&total_keyword=",
@@ -587,14 +571,14 @@
         "longitude": 127.1412042
       },
       "gu": "강동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-488-5542",
       "address": "서울 강동구 상암로 168 강동구민회관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "38": {
-      "uid": "38",
+    "37": {
+      "uid": "37",
       "spaceName": "강북문화예술회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150907_277%2Fmlpml1_14415974863306CJ4C_JPEG%2F20150907_114436.jpg&type=l340_165",
       "pageLink": "https://gbcmc.or.kr/fmcs/33?lecture_type=R&page=1&center=GANG_BUK01&event=&class=&subject=&weekname=&target=&lerturer_name=",
@@ -603,14 +587,14 @@
         "longitude": 127.0131584
       },
       "gu": "강북구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-944-3068",
       "address": "서울 강북구 삼각산로 85",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "39": {
-      "uid": "39",
+    "38": {
+      "uid": "38",
       "spaceName": "강북웰빙스포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEyMDNfMjkx%2FMDAxNjcwMDYzMTAxMzQ4.uF1BcQIMZS4OqemGjqz_GX342lY0ye615BeiH1As0Jog.xa_BRO4dfPkB3cQfXy88paxotNUr7BbBVgCiXyiK2bEg.JPEG.hawoonpyo3%2F20221127%25A3%25DF164239.jpg&type=a340",
       "pageLink": "https://gbcmc.or.kr/fmcs/33?lecture_type=R&page=1&center=GANG_BUK02&event=&class=&subject=&weekname=&target=&lerturer_name=",
@@ -619,14 +603,14 @@
         "longitude": 127.0377586
       },
       "gu": "강북구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-944-2914",
       "address": "서울 강북구 오현로31길 51 강북웰빙스포츠센타",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "40": {
-      "uid": "40",
+    "39": {
+      "uid": "39",
       "spaceName": "강서구민올림픽체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxODEyMDFfMTAg%2FMDAxNTQzNjMwMTYzMjEz.-fTrzIRy5DBRrI27H8TnFNd2zFIkxtSNMJ15Ay0l9Jkg.EgIjDVa8ibWw6S87o-LTb2lQN85186XQU5ukTFoTz5Qg.JPEG.shalif%2FexternalFile.jpg&type=a340",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/01",
@@ -635,14 +619,14 @@
         "longitude": 126.8505933
       },
       "gu": "강서구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-3661-1999",
       "address": "서울 강서구 화곡로65길 62 강서구민올림픽체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "41": {
-      "uid": "41",
+    "40": {
+      "uid": "40",
       "spaceName": "공항동문화체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150831_19%2F1440998712608CLYxK_JPEG%2F11576458_4.jpg&type=a340",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/02",
@@ -651,14 +635,14 @@
         "longitude": 126.8100905
       },
       "gu": "강서구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2666-9003",
       "address": "서울 강서구 송정로 45 공항동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "42": {
-      "uid": "42",
+    "41": {
+      "uid": "41",
       "spaceName": "마곡래포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA1MTdfODIg%2FMDAxNjUyNzY3MzA5NDc4.t3fm1D5X-G7qJA2S54Eo5DdXcCVjpigz7uBn5F9QJ2Qg.lU9zX7kYrss1Erhs47TnYodDTUloFupQ8TCxJp1Ulvgg.JPEG.yhhelloapril%2FKakaoTalk_20220517_145154261.jpg&type=a340",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/03",
@@ -667,14 +651,14 @@
         "longitude": 126.8321234
       },
       "gu": "강서구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-3663-7171",
       "address": "서울 강서구 양천로 251 마곡레포츠센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "43": {
-      "uid": "43",
+    "42": {
+      "uid": "42",
       "spaceName": "마곡실내배드민턴장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAzMTlfMTcw%2FMDAxNjQ3NjY1NzkzMjEw.tRejJ6PrCJtnDPKbLzeUa7Zl8f8ROPJRAjMecfAkJdIg.OGoO15s1XCiKGck9C-TTuI-BMFS-hS7-yhMn8ka4tiwg.JPEG.gkduddl0323%2FIMG_5318.jpg&type=a340",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/04",
@@ -683,14 +667,14 @@
         "longitude": 126.8312345
       },
       "gu": "강서구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2063-3990",
       "address": "서울 강서구 양천로 251",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "44": {
-      "uid": "44",
+    "43": {
+      "uid": "43",
       "spaceName": "가양레포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F015%2F2015%2F05%2F21%2F1868_988_3739_99_20150521153410.JPG&type=a340",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/05",
@@ -699,14 +683,14 @@
         "longitude": 126.8644121
       },
       "gu": "강서구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-3662-9081",
       "address": "서울 강서구 양천로61길 101",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "45": {
-      "uid": "45",
+    "44": {
+      "uid": "44",
       "spaceName": "수명산다목적체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA3MTdfMjE0%2FMDAxNTMxNzg2MDcwNjY0.qNKqSy_5-pTsUs_AopcOHH9pyubSUEjfpJgMhqrhW-og.X0YlKVX0xIHYpA3t6RuTwrDAJ86jjcWwTXLJxs7AcoQg.JPEG.gangseokkachi%2F%25BC%25F6%25B8%25ED%25BB%25EA%25B4%25D9%25B8%25F1%25C0%25FB%25C3%25BC%25C0%25B0%25B0%25FC1.jpg&type=a340",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/06",
@@ -715,14 +699,14 @@
         "longitude": 126.8311434
       },
       "gu": "강서구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-6229-6682",
       "address": "서울 강서구 강서로45길 131-11",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "46": {
-      "uid": "46",
+    "45": {
+      "uid": "45",
       "spaceName": "궁산다목적체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F277%2F2019%2F01%2F25%2F0004401247_001_20190125082548881.jpg&type=l340_165",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/07",
@@ -731,14 +715,14 @@
         "longitude": 126.8383499
       },
       "gu": "강서구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2607-9023",
       "address": "서울 강서구 양천로49길 106",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "47": {
-      "uid": "47",
+    "46": {
+      "uid": "46",
       "spaceName": "화곡배수지다목적체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEyMTRfOTAg%2FMDAxNjcxMDI5NjU4MzE2.8jwYKDedpmq1rrh9_wUHq9EpxtLLAWqEYdgNEnSBskQg.7wrk96gdRl7KmkLs-2NgCN-Zt09a9f_NqbBkj-BS1ywg.JPEG.wngml7532%2FIMG_0590.jpg&type=a340",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/08",
@@ -747,14 +731,14 @@
         "longitude": 126.8554943
       },
       "gu": "강서구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2604-7286",
       "address": "서울 강서구 초록마을로15길 81 화곡배수지다목적체육관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "48": {
-      "uid": "48",
+    "47": {
+      "uid": "47",
       "spaceName": "강서다목적체육관",
       "spaceImage": "https://myplace-phinf.pstatic.net/20220128_131/1643370589860g70Fc_JPEG/upload_9665a7b85f3ce2a619f0eedb1c2ad099.jpg",
       "pageLink": "https://sport.gssi.or.kr/lecture/list/09",
@@ -763,14 +747,14 @@
         "longitude": 126.8558576
       },
       "gu": "강서구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3662-9082",
       "address": "서울 강서구 화곡동 산22-3 강서다목적체육관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "49": {
-      "uid": "49",
+    "48": {
+      "uid": "48",
       "spaceName": "광진구문화예술회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150606_72%2Fprettypine10_1433576861682Xp1yg_JPEG%2FIMG_0149.JPG&type=a340",
       "pageLink": "https://booking.gwangjin.or.kr/lecture/llist/index/GWANGJIN03/2001/L/101/0/0/0/0/0/0/0/1/-/-/2/1",
@@ -779,14 +763,14 @@
         "longitude": 127.0705248
       },
       "gu": "광진구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2049-4570",
       "address": "서울 광진구 능동로 76 광진문화예술회관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "50": {
-      "uid": "50",
+    "49": {
+      "uid": "49",
       "spaceName": "광진구민체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODEwMTJfMjkz%2FMDAxNTM5Mjc2Nzg5NjIw.B4TQjxdSkbQFI8la9k6KoMQ8pw6pzuZfNeq_b79C39wg.jI--asnJ5lNsqVUuHANqn-RbZQJWlWFywY-aUWuccigg.JPEG.be_interested%2F%25B1%25A4%25C1%25F8%25B1%25B8%25B9%25CE%25C3%25BC%25C0%25B0%25BC%25BE%25C5%25CD_%25C3%25A4%25B3%25CE%25BB%25E7%25C0%25CE.JPG&type=l340_165",
       "pageLink": "https://booking.gwangjin.or.kr/lecture/llist/index/GWANGJIN01",
@@ -795,14 +779,14 @@
         "longitude": 127.1069853
       },
       "gu": "광진구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2049-4800",
       "address": "서울 광진구 구천면로 2 광진청소년수련관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "51": {
-      "uid": "51",
+    "50": {
+      "uid": "50",
       "spaceName": "중곡문화체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MjdfMTA4%2FMDAxNjUxMDI4OTU1NzUz.wgJvVR6in3M5ZRNVvIPJxX-RuTe3qWxwUJ5Rn8T5d98g.7fT8jbdejLrV9t71X0JZLkfH_4EZeAeeYTMIdafa4swg.JPEG.fancy_dress%2F20220416%25A3%25DF114814.jpg&type=a340",
       "pageLink": "https://booking.gwangjin.or.kr/lecture/llist/index/GWANGJIN02",
@@ -811,14 +795,14 @@
         "longitude": 127.0847646
       },
       "gu": "광진구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3408-4900",
       "address": "서울 광진구 능동로 433 중곡문화체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "52": {
-      "uid": "52",
+    "51": {
+      "uid": "51",
       "spaceName": "광장동실내배드민턴장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDAxMjVfMTQg%2FMDAxNTc5OTE5ODMyNjI4.n__SCfuJdsKzAJGAgify_pZ4_PxKVl2FpbscYFABSrwg.vcLKF2GiI6wbYoDtGhHHFmFgjFb2QjKVOvpSauovRDMg.JPEG.cutebbora%2Foutput_2413459896.jpg&type=a340",
       "pageLink": "https://booking.gwangjin.or.kr/lecture/llist/index/GWANGJIN05",
@@ -827,14 +811,14 @@
         "longitude": 127.1002916
       },
       "gu": "광진구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-458-9062",
       "address": "서울 광진구 천호대로140길 40 광장동실내배드민턴장",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "53": {
-      "uid": "53",
+    "52": {
+      "uid": "52",
       "spaceName": "아차산배수지체육공원",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxODEwMjBfNSAg%2FMDAxNTM5OTgwNjIyODEw.Ffj4p7GgKYtHXo3UGWCuaTzxnlYt_IBN66nJssIXfKsg.pdFtsc3ahrj3tJomcTEeaQGrUhbYr2pm0cW7NMuXZiMg.JPEG.yy8899y%2FexternalFile.jpg&type=a340",
       "pageLink": "https://booking.gwangjin.or.kr/lecture/llist/index/GWANGJIN04",
@@ -843,14 +827,14 @@
         "longitude": 127.0958048
       },
       "gu": "광진구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3437-7234",
       "address": "서울 광진구 천호대로 731 아차산배수지체육공원",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "54": {
-      "uid": "54",
+    "53": {
+      "uid": "53",
       "spaceName": "구로구민체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20120326_223%2Fjasmin525_1332739040801zhv6q_jpg%2Fna1332738471_jasmin525.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b01-3",
@@ -859,14 +843,14 @@
         "longitude": 126.8531819
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2681-9595",
       "address": "서울 구로구 고척로45길 39 구로구민체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "55": {
-      "uid": "55",
+    "54": {
+      "uid": "54",
       "spaceName": "개웅산생활체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MjJfMzcg%2FMDAxNjU4NDc3OTY1NDEz.CGsCg5UuapX0TlwI_8EIsVSQXlIGaGnpA-9GNUfcKjMg.AIBxSvX_x5m2MSeqi2mlntnljSby7mzqH7KI7nh1HL0g.JPEG.guropromotion%2Fsub2_1_1.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b02-3",
@@ -875,14 +859,14 @@
         "longitude": 126.8485626
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2067-9333",
       "address": "서울 구로구 개봉로3길 108-20",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "56": {
-      "uid": "56",
+    "55": {
+      "uid": "55",
       "spaceName": "오류고가배드민턴장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA1MTZfMjcg%2FMDAxNDk0ODk0NTA4NDkx.gipdeyKhzvjxo9Cf3Rv-nzRC3j9R4p374gkbgx7kDz4g.XO6wHBukGc0hSlJQ-JvWjszW-u5-hAf0dewL-GY0VaAg.JPEG.mellow502%2FIMG_1639.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b09-1&t=2",
@@ -891,14 +875,14 @@
         "longitude": 126.8321803
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2060-7259",
       "address": "서울 구로구 오류동 90-22",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "57": {
-      "uid": "57",
+    "56": {
+      "uid": "56",
       "spaceName": "계남테니스장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA3MjBfNDYg%2FMDAxNjI2NzU4NTU5MjI1.6VGBbEVcK2_T4CQccOtVM8KAZOlePYnixRFFhaajMGog.GaEqOMtxqoskTEW35276PP3XrfzWApr9kaUyG1BmEhUg.JPEG.junho_0406%2FKakaoTalk_20210608_153045447_09.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b11-1&t=3",
@@ -907,14 +891,14 @@
         "longitude": 126.8575889
       },
       "gu": "구로구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2681-5199",
       "address": "서울 구로구 중앙로17길 10",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "58": {
-      "uid": "58",
+    "57": {
+      "uid": "57",
       "spaceName": "신도림생활체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MzFfMTc4%2FMDAxNjYxOTQ1NzQzMjI0.rZJYmgGmlGszsHfa1It3jP_q72LssWEMGKNetF3dLiYg.5PpVjaWYesLb1p1Qbtzl4I5qy6B6tgQ_A2_mgq2ZaSUg.JPEG.rkatjdepdl%2F1661945279452.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b04-3&t=1&c=2",
@@ -923,14 +907,14 @@
         "longitude": 126.8910678
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "1899-9912",
       "address": "서울 구로구 경인로67길 149 신도림동복지관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "59": {
-      "uid": "59",
+    "58": {
+      "uid": "58",
       "spaceName": "구로누리배드민턴장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140831_168%2Fsmst1973_1409473354313PLVoM_JPEG%2F1409473349291_20140830_132321.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b09-2&t=2",
@@ -939,14 +923,14 @@
         "longitude": 126.8927973
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-869-9677",
       "address": "서울 구로구 새말로18길 39",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "60": {
-      "uid": "60",
+    "59": {
+      "uid": "59",
       "spaceName": "신도림테니스장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5181%2F2016%2F03%2F30%2F20160330162613_99_20160330172610.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b11-2&t=3",
@@ -955,14 +939,14 @@
         "longitude": 126.8809403
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "070-4944-4503",
       "address": "서울 구로구 신도림동 276-4",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "61": {
-      "uid": "61",
+    "60": {
+      "uid": "60",
       "spaceName": "구로안양천파크골프장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MjNfMjg0%2FMDAxNjU1OTM5MzY1MDA5.t9yr-OKeJe16pBPUQivYNew9uNz14ADDYkmtgeEsTp4g.aKTRsPV64c5gTLEwYEO3L3WNFeJyhjEei21mbj0s0lAg.JPEG.skj0228%2F20220620%25A3%25DF083235.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b12-3",
@@ -971,14 +955,14 @@
         "longitude": 126.8789822
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "010-4230-4501",
       "address": "서울 구로구 안양천로 642",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "62": {
-      "uid": "62",
+    "61": {
+      "uid": "61",
       "spaceName": "항동생활체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F277%2F2019%2F03%2F12%2F0004427949_001_20190312080402828.jpg&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b10-3",
@@ -987,14 +971,14 @@
         "longitude": 126.822351
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2066-3002",
       "address": "서울 구로구 항동 166-2",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "63": {
-      "uid": "63",
+    "62": {
+      "uid": "62",
       "spaceName": "50플러스수영장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMjlfMjYg%2FMDAxNjM4MTkzOTEyMzIz.7oy-LUgNx0gCTUSMLZxHzKjMzK8FObiffSy3Va4DLqYg.GcbyA29MpSmeB4URLeZipYDkLMmapMXNkh1vX2bqWzMg.PNG.jasmine2024%2F50pool_1_2.png&type=a340",
       "pageLink": "https://www.gurosisul.or.kr/mod.asp?m=business&s=b07-4",
@@ -1003,14 +987,14 @@
         "longitude": 126.8419077
       },
       "gu": "구로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2066-1515",
       "address": "서울 구로구 오류로 36-25",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "64": {
-      "uid": "64",
+    "63": {
+      "uid": "63",
       "spaceName": "금천구민문화센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MDhfMjkz%2FMDAxNjU3MjUxNDg3OTkx.jCkewJgHIB4wYgaderv6asXq2wnp2VA5PsKAq9fxldEg.JfcUxeVhTWEsyH3MEKZFQ7mSEiuFdAMUmrV_3U0pdnkg.JPEG.shik0916%2FIMG_6525.jpg&type=a340",
       "pageLink": "https://s.gfmc.kr/item/it.lecture.list.php",
@@ -1019,14 +1003,14 @@
         "longitude": 126.907368
       },
       "gu": "금천구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-861-1313",
       "address": "서울 금천구 독산로54길 188 금천구민문화체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "65": {
-      "uid": "65",
+    "64": {
+      "uid": "64",
       "spaceName": "창동문화체육",
       "spaceImage": "https://storage.googleapis.com/cr-resource/image/0a093f301e9b813b67fdf96ecc301a01/1010237/1920/d9b095f9e2d285133655479978f99b80.jpg",
       "pageLink": "https://yeyak.dobongsiseol.or.kr/lecture/index.php?c_id=01&page_info=index&n_type=lecture",
@@ -1035,46 +1019,46 @@
         "longitude": 127.0506149
       },
       "gu": "도봉구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-901-5000",
       "address": "서울 도봉구 노해로69길 132",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "66": {
-      "uid": "66",
+    "65": {
+      "uid": "65",
       "spaceName": "도봉동 실내스포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MTZfMTQ3%2FMDAxNjMxNzc3MjYxOTM0.wHtQzl_Obsjw7AZu6E3Lh_FWFKM4ubV05cAF7iYjKHUg.DoNyPmaHDKG39TN-rhyKL94FlhyS5qM0d7oJG_awrTkg.JPEG.pool3344%2F20210916%25A3%25DF135505.jpg&type=a340",
       "pageLink": "https://yeyak.dobongsiseol.or.kr/lecture/index.php?c_id=02&page_info=index&n_type=lecture",
       "location": {
-        "latitude": 37.6676581,
-        "longitude": 127.049132
+        "latitude": 37.68131,
+        "longitude": 127.050307
       },
       "gu": "도봉구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-901-5170",
       "address": "서울 도봉구 마들로 805",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "67": {
-      "uid": "67",
+    "66": {
+      "uid": "66",
       "spaceName": "도봉동 실내스포츠센터 별관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fpost.phinf.naver.net%2FMjAyMjA4MjRfMjMz%2FMDAxNjYxMzM0NDUzNjA1.uMmHGbBGLU477_dMrHoFV-dFQntkb413Tn4mIX2yagog.RL0cLJYCL3p6a0pxwJxKY9TbnoBMznFEeNYXyhMDdi8g.JPEG%2FIwvgXIQLu_XCvsi0NXtWFM0Su2GA.jpg&type=a340",
       "pageLink": "https://yeyak.dobongsiseol.or.kr/lecture/index.php?c_id=11&page_info=index&n_type=lecture",
       "location": {
-        "latitude": 37.6676581,
-        "longitude": 127.049132
+        "latitude": 37.68131,
+        "longitude": 127.050307
       },
       "gu": "도봉구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-901-5084",
       "address": "서울 도봉구 도봉로180나길 41 지하2층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "68": {
-      "uid": "68",
+    "67": {
+      "uid": "67",
       "spaceName": "도봉구민회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA4MTNfMzUg%2FMDAxNjI4ODM2MjQzMTQ5.93aB6-unQkArw0YSFA0zS0q093MBgauSxXegk7XCs2Ag.D1gA6wonxpmieHUgxSF9evHgKKklv1fucIqalc1wm_4g.JPEG.happydobong%2F20210623_141309.jpg&type=a340",
       "pageLink": "https://yeyak.dobongsiseol.or.kr/lecture/index.php?c_id=03&page_info=index&n_type=lecture",
@@ -1083,14 +1067,14 @@
         "longitude": 127.0384056
       },
       "gu": "도봉구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-901-5160",
       "address": "서울 도봉구 도봉로 552 도봉구민회관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "69": {
-      "uid": "69",
+    "68": {
+      "uid": "68",
       "spaceName": "다락체육공원",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMTBfMTk1%2FMDAxNjM2NTA0Mjk4NDQ0.Ae5q_Yd4OUTJyWK4Cw9L98uWEQdTTKhhLCqy-XN0ko8g.QEinHNO35WJcl32It-J1vcc3ULAZxZ0PbrNqagY01pAg.JPEG.happyday_forme%2F20210909%25A3%25DF155913.jpg&type=a340",
       "pageLink": "https://yeyak.dobongsiseol.or.kr/lecture/index.php?c_id=05&page_info=index&n_type=lecture",
@@ -1099,14 +1083,14 @@
         "longitude": 127.0469367
       },
       "gu": "도봉구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-901-5190",
       "address": "서울 도봉구 마들로 932 평화문화진지",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "70": {
-      "uid": "70",
+    "69": {
+      "uid": "69",
       "spaceName": "창골축구장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA3MDJfMTg2%2FMDAxNTkzNjgyNTM4NTc1.czmOU_TJnwN4_3Wvv7FjhZ5LD3FAcwJ6KiaUW_yNCgMg.1zNRTfPgmANoFw8DOpTMbhUxxmMKJ0d40jNtBB-4naAg.JPEG.aecongi0508%2F1593682537870.jpg&type=a340",
       "pageLink": "https://yeyak.dobongsiseol.or.kr/lecture/index.php?c_id=07&page_info=index&n_type=lecture",
@@ -1115,14 +1099,14 @@
         "longitude": 127.0409504
       },
       "gu": "도봉구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-901-5127",
       "address": "서울 도봉구 창동 677",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "71": {
-      "uid": "71",
+    "70": {
+      "uid": "70",
       "spaceName": "성미산체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160128_69%2Fkinessbanpo_1453985488829yJUaA_JPEG%2F1453355945695.jpeg&type=l340_165",
       "pageLink": "http://mapogym.or.kr/96",
@@ -1131,14 +1115,14 @@
         "longitude": 126.9119675
       },
       "gu": "마포구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-324-9877 ",
       "address": "서울 마포구 월드컵북로15길 31-11",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "72": {
-      "uid": "72",
+    "71": {
+      "uid": "71",
       "spaceName": "염리생활체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEwMjhfMjA3%2FMDAxNjAzODc4MjI4MTU2.LLrnIRe98Cj0G6VJw7GfDRMY1paGxNKdxhCp2hmNOTEg.9aisRBvj7dvP2emY4xb2TAnPaaSVJB3nYL-U8FMBl-og.JPEG.candi01%2F1603878228933.jpg&type=a340",
       "pageLink": "http://mapogym.or.kr/98",
@@ -1147,14 +1131,14 @@
         "longitude": 126.9452062
       },
       "gu": "마포구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-704-9400",
       "address": "서울 마포구 큰우물로 61 염리 제2공영주차장",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "73": {
-      "uid": "73",
+    "72": {
+      "uid": "72",
       "spaceName": "망원나들목체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MjdfOTEg%2FMDAxNjU2MzIzMTk4NTcw.gOvp5XXWHneqL-dZDVS6f_3xBRk6WFySxleM0XO3C4Ag.zXsqslhke3Sr-Q6DOCZyIFkJqoBhz_02MYngAYE9dwUg.JPEG.tarae0423%2F20220625%25A3%25DF213532.jpg",
       "pageLink": "http://mapogym.or.kr/100",
@@ -1163,14 +1147,14 @@
         "longitude": 126.9119675
       },
       "gu": "마포구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-332-6199",
       "address": "서울 마포구 동교로1길 45",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "74": {
-      "uid": "74",
+    "73": {
+      "uid": "73",
       "spaceName": "서대문문화체육회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTAyMjNfMTA2%2FMDAxNTUwOTI2OTYxODc3.vMkIfDzMdI3xt_vPjyGC8EU-wtV161FBxDF9m4L_zKgg.Q-ydQmAIfoaIFE0rdf5sshJ9SYltzhJAhlLyyno5KAsg.JPEG.yoons6rain%2F2019-02-23-07-45-30.jpg&type=a340",
       "pageLink": "https://cs.sscmc.or.kr/sdmcs/161",
@@ -1179,14 +1163,14 @@
         "longitude": 126.9317169
       },
       "gu": "서대문구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-360-8686",
       "address": "서울 서대문구 백련사길 39 서대문문화체육회관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "75": {
-      "uid": "75",
+    "74": {
+      "uid": "74",
       "spaceName": "북아현문화체육센터",
       "spaceImage": "https://cs.sscmc.or.kr/File/Download/e7aed4fb3e4a176afe6f433faf52413b",
       "pageLink": "https://cs.sscmc.or.kr/bahcs/162",
@@ -1195,14 +1179,14 @@
         "longitude": 126.955632
       },
       "gu": "서대문구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-360-8660",
       "address": "서울 서대문구 북아현동 1012-2 북아현문화체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "76": {
-      "uid": "76",
+    "75": {
+      "uid": "75",
       "spaceName": "서초구민체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20130520_234%2Fdaesanjee_13690233566505oUFJ_JPEG%2F%25BF%25CF%25B7%25E1.jpg&type=a340",
       "pageLink": "http://www.seochoymca.com/%EC%A0%91%EC%88%98%EC%95%88%EB%82%B4",
@@ -1211,14 +1195,14 @@
         "longitude": 126.9904937
       },
       "gu": "서초구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-591-6060",
       "address": "서울 서초구 사평대로 55 심산김창숙선생기념관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "77": {
-      "uid": "77",
+    "76": {
+      "uid": "76",
       "spaceName": "언남문화체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20130704_51%2Faryun8970_1372902083288q7zJ6_JPEG%2FiPhone_2.jpg&type=a340",
       "pageLink": "http://www.eonnamcscenter.com/%EC%88%98%EC%98%81",
@@ -1227,14 +1211,14 @@
         "longitude": 127.0433924
       },
       "gu": "서초구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-577-7718",
       "address": "서울 서초구 동산로13길 35",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "78": {
-      "uid": "78",
+    "77": {
+      "uid": "77",
       "spaceName": "성동구민종합체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTJfMTYx%2FMDAxNjU3NjA3NDcxNzA4.vtIEq2Pvfy9r7Q_87Tb_-2o1cKE1Y18ohNHUEgYr8KUg.p_7lrZjjgTx1X82kcO0zaOkvlIh30JlZSIOGC-UQqfUg.JPEG.ns5452%2FKakaoTalk_20220712_142459109_09_%25BC%25F6%25C1%25A4.jpg&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191",
@@ -1243,14 +1227,14 @@
         "longitude": 127.0441303
       },
       "gu": "성동구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2204-7600",
       "address": "서울 성동구 왕십리로 89",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "79": {
-      "uid": "79",
+    "78": {
+      "uid": "78",
       "spaceName": "열린금호교육문화관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150909_273%2Fnicebr2_1441761465943mlz2N_JPEG%2F20150909_065824.jpg&type=l340_165",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191?page=1&lecture_type=R&center=SUNGDONG01&event=&class=&category=&subject=",
@@ -1259,14 +1243,14 @@
         "longitude": 127.0196603
       },
       "gu": "성동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2204-7650",
       "address": "서울 성동구 무수막길 69 금호초등학교",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "80": {
-      "uid": "80",
+    "79": {
+      "uid": "79",
       "spaceName": "마장국민체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA2MjRfMjIw%2FMDAxNTkyOTY5NTA0MDkz.oEEhkzfiLzyjxp7hX-WvC2aIYn0NpBrg_Ca4O7rXNWkg.u_4x6j0amoLcu9Hp9NIvugk54GpyIdbkNK42soJ_rb4g.JPEG.so6198%2F%25B8%25B6%25C0%25E5%25B1%25B9%25B9%25CE%25C3%25BC%25C0%25B0%25BC%25BE%25C5%25CD-22.jpg&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191?page=1&lecture_type=R&center=SUNGDONG08&event=&class=&category=&subject=",
@@ -1275,14 +1259,14 @@
         "longitude": 127.0407691
       },
       "gu": "성동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2204-7640",
       "address": "서울 성동구 마조로11길 6 마장국민체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "81": {
-      "uid": "81",
+    "80": {
+      "uid": "80",
       "spaceName": "용답체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220819_245%2F1660867823701LrA9S_JPEG%2F%25BC%25F6%25BF%25B5%25C0%25E5.jpeg&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191?page=1&lecture_type=R&center=SUNGDONG02&event=&class=&category=&subject=",
@@ -1291,14 +1275,14 @@
         "longitude": 127.0567077
       },
       "gu": "성동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2204-6620",
       "address": "서울 성동구 천호대로78길 15-48 서울교통공사 별관 지하1층 성동구립용답체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "82": {
-      "uid": "82",
+    "81": {
+      "uid": "81",
       "spaceName": "금호스포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMTBfNjAg%2FMDAxNjEyOTM0MjAyNTIw.cpis5haqwqYajLi6ctczlhox0yqku50QD5cHm5_Psp8g.2gZ3jM52zN-gGNA1MCAPn5DOx2WAdUFwH2lUeFBqdj8g.JPEG.eej1030%2F35FCB60F-5969-47A9-B1F4-03B86D0D1BC9.jpeg&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191?page=1&lecture_type=R&center=SUNGDONG04&event=&class=&category=&subject=",
@@ -1307,14 +1291,14 @@
         "longitude": 127.0250663
       },
       "gu": "성동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2204-7675",
       "address": "서울 노원구 상계로5길 32",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "83": {
-      "uid": "83",
+    "82": {
+      "uid": "82",
       "spaceName": "금호공원체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140611_26%2Fttnara777_1402464811097I9ESR_JPEG%2F%25BB%25E7%25C1%25F8_1%25282%2529.JPG&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191?page=1&lecture_type=R&center=SUNGDONG09&event=&class=&category=&subject=",
@@ -1323,14 +1307,14 @@
         "longitude": 127.0189938
       },
       "gu": "성동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2204-7690",
       "address": "서울 성동구 장터1길 20",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "84": {
-      "uid": "84",
+    "83": {
+      "uid": "83",
       "spaceName": "대현산체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMjlfMjg4%2FMDAxNTcyMzQzNzkwODE2.UYDzipEqnemY8uH2ebzyWvYn7vafyEmWKiLfw-0XBNEg.pjlcF9LCf9xjCldrA4ODGr1ptnS5NTDcq7mKeOrdwYQg.JPEG.happysdmc%2F123123.jpg&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191?page=1&lecture_type=R&center=SUNGDONG03&event=&class=&category=&subject=",
@@ -1339,14 +1323,14 @@
         "longitude": 127.0303249
       },
       "gu": "성동구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2204-7680",
       "address": "서울 성동구 독서당로63길 44 대현산체육관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "85": {
-      "uid": "85",
+    "84": {
+      "uid": "84",
       "spaceName": "살곶이물놀이장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MThfMTgy%2FMDAxNjU1NTM1OTgyNTAz.2cIXBlwCSxPYRXt3ul3DzIY6ACpccsiliiv8khAdF9Ig.mnlI8-rEa6ZhMJdNpYhorqF_6-MNSh5KJb_LWwyVaBgg.JPEG.aksmfghdud%2FIMG_9830.JPG&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191?page=1&lecture_type=R&center=SUNGDONG06&event=&class=&category=&subject=",
@@ -1355,14 +1339,14 @@
         "longitude": 127.050429
       },
       "gu": "성동구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2204-7600",
       "address": "서울 성동구 중랑천서자전거길 209",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "86": {
-      "uid": "86",
+    "85": {
+      "uid": "85",
       "spaceName": "서울숲복합문화체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MDNfODIg%2FMDAxNjU5NTM2NTExNjI4.yfjVibxRSlhrelkHxW1Yk0mrKRRT6uLpp_VR7NLZBQUg.P0JR307FR-_-ys1ZzmuBz8lN6ujlPuJtvnJS4IeXQfMg.JPEG.hazi_0%2FIMG_6956.jpg&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/191?page=1&lecture_type=R&center=SUNGDONG13&event=&class=&category=&subject=",
@@ -1371,14 +1355,14 @@
         "longitude": 127.041097
       },
       "gu": "성동구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2204-6640",
       "address": "서울 성동구 성수동1가 685-63",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "87": {
-      "uid": "87",
+    "86": {
+      "uid": "86",
       "spaceName": "성북종합레포츠타운",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MDdfMjM4%2FMDAxNjYyNTUyOTg1NzQ1.1waNgzf3L-duw_48JiSCDUigstdtUvgT2qxUSMWi43gg.wfrfM9vOOORVufPr9oUnFmjtw2sr-YgCDwOD5lAW1bEg.PNG.aircap05%2Fimage.png&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/main/main.do",
@@ -1387,14 +1371,14 @@
         "longitude": 127.0699871
       },
       "gu": "성북구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-6917-1100",
       "address": "서울 성북구 한천로58길 307 성북종합레포츠타운",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "88": {
-      "uid": "88",
+    "87": {
+      "uid": "87",
       "spaceName": "개운산스포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxNzA3MjVfODUg%2FMDAxNTAwOTE0MzIxMjAx.ZsLZFaFF7RpeSkoPn6x4HoRBdnx6G4iVcou6RAfmZ24g.6Mgm9KoloYDG1DdblOajm3xQKfaLge5dLSZWl9zEiVMg.JPEG.bk4425%2FexternalFile.jpg&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1403,14 +1387,14 @@
         "longitude": 127.0262406
       },
       "gu": "성북구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-925-9960",
       "address": "서울 성북구 북악산로 949-60 성북구의회청사",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "89": {
-      "uid": "89",
+    "88": {
+      "uid": "88",
       "spaceName": "성북구민체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140304_244%2Fjinimbs_13939164703278hXFU_JPEG%2F2014-03-04_13.57.56.jpg&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1419,14 +1403,14 @@
         "longitude": 127.0422676
       },
       "gu": "성북구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-909-3497",
       "address": "서울 성북구 화랑로13길 144",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "90": {
-      "uid": "90",
+    "89": {
+      "uid": "89",
       "spaceName": "성북구민회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20130501_156%2Fsuyun002_1367336181486FROTA_JPEG%2Fna1367336050606.jpg&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1435,14 +1419,14 @@
         "longitude": 127.008438
       },
       "gu": "성북구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": " 02-2241-0677",
       "address": "서울 성북구 성북로4길 177",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "91": {
-      "uid": "91",
+    "90": {
+      "uid": "90",
       "spaceName": "해오름휘트니스",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMTBfMjg0%2FMDAxNjA0OTcxMTE4OTE0.iR6q2DMg2kpzF7kNIb_tBFQBFd1zrobV_JKGrd1KIzkg.XVHxSWqF6T-0OaIAV4fSLOMpgUFbrYGetPope-dxEzIg.JPEG.seongbukgongdan%2F7DEBC1D9-69E6-4877-9462-AA224E3FC624.jpeg&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1451,14 +1435,14 @@
         "longitude": 127.0105996
       },
       "gu": "성북구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-6925-7003",
       "address": "서울 성북구 성북로4길 52 해오름도서관 지하",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "92": {
-      "uid": "92",
+    "91": {
+      "uid": "91",
       "spaceName": "월곡배드민턴장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODAxMjZfMjU1%2FMDAxNTE2OTUzMDY0NDY0.UhZlGtmo7Ahxfb_YAOINalUFTkw5O-ek9PNUTB39JeIg.00GBFCcA8MzL3NU5J1xQdniwAeEnShTAVapAjJAfoUIg.JPEG.tam7890%2FKakaoTalk_20180126_091903947.jpg&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1467,14 +1451,14 @@
         "longitude": 127.041968
       },
       "gu": "성북구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2241-0661",
       "address": "서울 성북구 화랑로13길 144",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "93": {
-      "uid": "93",
+    "92": {
+      "uid": "92",
       "spaceName": "펜싱경기장",
       "spaceImage": "https://mblogthumb-phinf.pstatic.net/MjAyMDExMTZfNjgg/MDAxNjA1NDg3NjA5NTYx.4LnZ_bdzM3g64NhFRHX2mNhK2kjJG8Ul4k6HkK43AlQg.QjdNxoqP-MVQ-1Qneev0H5XCK5BNPukxbI_RZS4xT4sg.JPEG.seongbukgongdan/A2DEC75C-7528-4521-9A2E-D5F2DFB1F9E7.jpeg?type=w800",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1483,14 +1467,14 @@
         "longitude": 127.036672
       },
       "gu": "성북구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2241-0681",
       "address": "서울 성북구 종암로24가길 109 성북펜싱체육관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "94": {
-      "uid": "94",
+    "93": {
+      "uid": "93",
       "spaceName": "성북구립휘트니스",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTEwMjFfMjI0%2FMDAxNjM0ODA3ODkxMDMx.scmI4tLu6MeGvAUsvITPG-lLmMNFBoQ9_4ouGY98vTog.C7zcRRJYTZrYRjjnjomYLYKcN_87n8W0AxQiROwoPdAg.JPEG.yogalinekh%2F1119.jpg&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1499,14 +1483,14 @@
         "longitude": 127.0149147
       },
       "gu": "성북구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2241-0691",
       "address": "서울 성북구 보문로29길 49 동인관 B1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "95": {
-      "uid": "95",
+    "94": {
+      "uid": "94",
       "spaceName": "물빛수영장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MDRfMjc2%2FMDAxNjU5NjE4NjUzNDYw.SyyXGJCopWluOTpu3aRixtjCyri2EhIiIv2Lp5qLf9gg.rUhQt2r041omaAdp6G7gpf7cgTpd56UskwXmjDSRygEg.PNG.candyami17%2F%25C4%25B8%25C3%25B3.PNG&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1515,14 +1499,14 @@
         "longitude": 127.0226004
       },
       "gu": "성북구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2241-0151",
       "address": "서울 성북구 길음로7길 20",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "96": {
-      "uid": "96",
+    "95": {
+      "uid": "95",
       "spaceName": "장위건강누림",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MjdfMjgx%2FMDAxNjUwOTg2MjI1MzM0.NtExUuyU1cqXUNIt0Fb0XLUVzaz6f73MfPe986FJXnEg.ryROhd4HHmgAk7bp6fYBpLNGDxD-QTXHOOudJPPQVn8g.JPEG.minc92%2F14AA8159-58ED-45A0-BDB4-5180FE221F69.jpeg&type=a340",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectEduList.do",
@@ -1531,14 +1515,14 @@
         "longitude": 127.0444821
       },
       "gu": "성북구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2214-0171",
       "address": "서울 성북구 장위동 230 158번지",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "97": {
-      "uid": "97",
+    "96": {
+      "uid": "96",
       "spaceName": "송파구체육문화회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151024_52%2Ftynews_144565604125211MQN_JPEG%2F%25BC%25DB%25C6%25C4%25B9%25AE%25C8%25AD%25C3%25BC%25C0%25B02.jpg&type=a340",
       "pageLink": "https://www.esongpa.or.kr/fmcs/169?ctgcd=1110000000",
@@ -1547,14 +1531,14 @@
         "longitude": 127.142844
       },
       "gu": "송파구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-402-3291",
       "address": "서울 송파구 양산로 15 송파구체육문화회관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "98": {
-      "uid": "98",
+    "97": {
+      "uid": "97",
       "spaceName": "신월문화체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20121130_59%2Fganaswimming_1354242230587lrWa3_JPEG%2F%25BE%25E7%25C3%25B5%25B1%25B8%25BC%25F6%25BF%25B5%25C0%25E51.JPG&type=a340",
       "pageLink": "https://www.ycs.or.kr/fmcs/3?page=1&lecture_type=R&center=YCS01&event=&class=&subject=&target=&lerturer_name=",
@@ -1563,14 +1547,14 @@
         "longitude": 126.8349848
       },
       "gu": "양천구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2605-4093",
       "address": "서울 양천구 지양로 47",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "99": {
-      "uid": "99",
+    "98": {
+      "uid": "98",
       "spaceName": "목동문화체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimage.nmv.naver.net%2Fblog_2018_08_30_1434%2F8547d9f8-ac11-11e8-9918-48df37269ee2_03.jpg&type=l340_165",
       "pageLink": "https://www.ycs.or.kr/fmcs/3?page=1&lecture_type=R&center=YCS02&event=&class=&subject=&target=&lerturer_name=",
@@ -1579,14 +1563,14 @@
         "longitude": 126.8691753
       },
       "gu": "양천구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2062-1862",
       "address": "서울 양천구 목동중앙본로 73 목동문화체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "100": {
-      "uid": "100",
+    "99": {
+      "uid": "99",
       "spaceName": "양천구민체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODAzMjFfMjQw%2FMDAxNTIxNTYxMjU2MTE4.aWH9UcSYVKOLN7nnWw-Bini9d8Tn1dXDWGWzn3Wvg2wg.B5LhhYq4it5fG6BvfBAF7WpEXoZY7Aa6aSy2VNM6UdQg.JPEG.kimsy2014%2F180304_%25B1%25B8%25B9%25CE%25C3%25BC%25C0%25B0%25BC%25BE%25C5%25CD2.jpg&type=a340",
       "pageLink": "https://www.ycs.or.kr/fmcs/3?page=1&lecture_type=R&center=YCS&event=&class=&subject=&target=&lerturer_name=",
@@ -1595,14 +1579,14 @@
         "longitude": 126.8643431
       },
       "gu": "양천구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2652-1792",
       "address": "서울 양천구 목동동로 87 양천구민체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "101": {
-      "uid": "101",
+    "100": {
+      "uid": "100",
       "spaceName": "건강힐링문화관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MTJfMTM3%2FMDAxNjQ5NzQyNzQxMzI0.BnLxkGwbaA3_kxuwz5G20yCnL3Q_wTSjBJ9uIpmG5DQg.DkLTOqK0fSXkKHT53k3eZEHjlHXi9oKxpVy7tUYGqZog.JPEG.dia2003go%2F20220406_152640.jpg&type=sc960_832",
       "pageLink": "https://www.ycs.or.kr/fmcs/3?page=1&lecture_type=R&center=YCS07&event=&class=&subject=&target=&lerturer_name=",
@@ -1611,14 +1595,14 @@
         "longitude": 126.8457215
       },
       "gu": "양천구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2691-9810",
       "address": "서울 양천구 남부순환로83길 54",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "102": {
-      "uid": "102",
+    "101": {
+      "uid": "101",
       "spaceName": "용산구문화체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160531_224%2Fishw2003_1464666677215M76Xk_JPEG%2FKakaoTalk_20160531_124316192.jpg&type=a340",
       "pageLink": "https://www.yong-san.or.kr/site/cs/home#",
@@ -1627,14 +1611,14 @@
         "longitude": 126.9676133
       },
       "gu": "용산구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-707-2492",
       "address": "서울 용산구 백범로 350 용산구 문화체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "103": {
-      "uid": "103",
+    "102": {
+      "uid": "102",
       "spaceName": "은평구민체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA5MjlfMTcy%2FMDAxNTA2NjUxOTY2MDYz.wj4-IMaGbPtsMp9v7WGeRyDirP4cxnHRhVWBMtcSD7Ig.d-pxsdM__TCcV38Q7ArJ6vDRJt-JUrOwTHHwGKOivMMg.JPEG.maponfa100%2F%25C0%25BA%25C6%25F2%25B1%25B8%25B9%25CE%25C3%25BC%25C0%25B0%25BC%25BE%25C5%25CD%25284%2529.jpg&type=a340",
       "pageLink": "https://www.efmc.or.kr/fmcs/27",
@@ -1643,14 +1627,14 @@
         "longitude": 126.9236119
       },
       "gu": "은평구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-350-5351",
       "address": "서울 은평구 진관1로 40",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "104": {
-      "uid": "104",
+    "103": {
+      "uid": "103",
       "spaceName": "올림픽기념국민생활관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMDJfNTUg%2FMDAxNTcwMDA0Mzk1ODY2.cMkPmGuY4UAYAalcUn6WsIAvKN8-2UuRWWG3phU7ewgg.qdFsSkdPH4eTZMO8EEAoln-Uy8vIpBcCTd9dCMJKfxkg.JPEG.jongnosisul%2F01._%25BF%25C3%25B8%25B2%25C7%25C8%25B1%25E2%25B3%25E4%25B1%25B9%25B9%25CE%25BB%25FD%25C8%25B0%25B0%25FC.jpg&type=a340",
       "pageLink": "https://www.ijongno.co.kr/front/program/11/01",
@@ -1659,14 +1643,14 @@
         "longitude": 126.999086
       },
       "gu": "종로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-745-6701",
       "address": "서울 종로구 성균관로 91 국민생활관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "105": {
-      "uid": "105",
+    "104": {
+      "uid": "104",
       "spaceName": "삼청테니스장",
       "spaceImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBP36fHUMY4Qhn8M8GDlV3kgDTAGQgRg_jxq6Uf2f_LN5_PijwlBim9PsGtlAup_PJQSk&usqp=CAU",
       "pageLink": "https://www.ijongno.co.kr/front/program/33/01",
@@ -1675,14 +1659,14 @@
         "longitude": 126.982979
       },
       "gu": "종로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2148-4068",
       "address": "서울 종로구 삼청로 156",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "106": {
-      "uid": "106",
+    "105": {
+      "uid": "105",
       "spaceName": "종로구민회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA5MDdfMTkx%2FMDAxNTM2Mjk0NzI2MjEw.fntgjEjY4aiczPjAb0PJrKsRevNGnGpJzT_u6p2YREUg.5hKWHsIYu-78fc7rAsJdpaNCItWPPauO2HhpPH_kQqUg.JPEG.songhee8076%2Foutput_3392099114.jpg&type=sc960_832",
       "pageLink": "https://www.ijongno.co.kr/front/program/21/01",
@@ -1691,14 +1675,14 @@
         "longitude": 127.0143719
       },
       "gu": "종로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3672-2530",
       "address": "서울 종로구 지봉로5길 7-5",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "107": {
-      "uid": "107",
+    "106": {
+      "uid": "106",
       "spaceName": "동부여성문화센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140805_168%2Fwkdtmdwosla_1407245558693UgCEW_JPEG%2F20140805_162618.jpg&type=a340",
       "pageLink": "https://www.ijongno.co.kr/front/program/31/01",
@@ -1707,14 +1691,14 @@
         "longitude": 127.0097015
       },
       "gu": "종로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3675-5861",
       "address": "서울 종로구 창신길 124 동부여성문화센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "108": {
-      "uid": "108",
+    "107": {
+      "uid": "107",
       "spaceName": "종로문화체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDAxMDFfNDEg%2FMDAxNTc3ODY0OTMzMTY4.my4NAABl4KUSFGjiwfMp-33_1DHUBb70ISz7v8hQYhsg.yDEK7oX1wYXSEfN16vM3fkNPENp5BBMGoxJII8ewUnQg.JPEG.k5219097%2FSE-a67b13a2-72bf-4bda-a01c-56c7bc9e2dbd.jpg&type=a340",
       "pageLink": "https://www.ijongno.co.kr/front/program/41/01",
@@ -1723,14 +1707,14 @@
         "longitude": 126.964606
       },
       "gu": "종로구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-732-9392",
       "address": "서울 종로구 인왕산로1길 21 종로문화체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "109": {
-      "uid": "109",
+    "108": {
+      "uid": "108",
       "spaceName": "충무스포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MDNfNTQg%2FMDAxNjMwNjMyMTc3NDg2.F3tXBOVzuOOyWGx6Lt2pVBLw8pRbCnrTi7IOzJc11jAg.fbQBT9-dB0LhR-U19nuReme8AhZjgTkuQ0xjBNSLICwg.JPEG.djngkim5%2FIMG_3039.jpg&type=sc960_832",
       "pageLink": "https://www.e-junggu.or.kr/fmcs/181?lecture_type=R&page=1&center=JUNGGU01&event=&class=&subject=&weekname=&target=",
@@ -1739,14 +1723,14 @@
         "longitude": 126.9815806
       },
       "gu": "중구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2280-8400",
       "address": "서울 중구 퇴계로 387 충무아트홀",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "110": {
-      "uid": "110",
+    "109": {
+      "uid": "109",
       "spaceName": "회현체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F001%2F2017%2F11%2F07%2FAKR20171107036900004_01_i_20171107085733116.jpg&type=a340",
       "pageLink": "https://www.e-junggu.or.kr/fmcs/181?lecture_type=R&page=1&center=JUNGGU02&event=&class=&subject=&weekname=&target=",
@@ -1755,14 +1739,14 @@
         "longitude": 126.9815806
       },
       "gu": "중구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2280-8430",
       "address": "서울 중구 퇴계로12길 78 중구회현체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "111": {
-      "uid": "111",
+    "110": {
+      "uid": "110",
       "spaceName": "무학봉체육관",
       "spaceImage": "https://www.e-junggu.or.kr/design/homepage/junggu/images/sub/muhakbong_1.jpg",
       "pageLink": "https://www.e-junggu.or.kr/fmcs/181?lecture_type=R&page=1&center=JUNGGU03&event=&class=&subject=&weekname=&target=",
@@ -1771,14 +1755,14 @@
         "longitude": 127.024544
       },
       "gu": "중구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2280-8426",
       "address": "서울 중구 난계로6길 8",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "112": {
-      "uid": "112",
+    "111": {
+      "uid": "111",
       "spaceName": "장충문화체육센터",
       "spaceImage": "https://www.e-junggu.or.kr/design/homepage/junggu/images/sub/jangchung_1.jpg",
       "pageLink": "https://www.e-junggu.or.kr/fmcs/181?lecture_type=R&page=1&center=JUNGGU04&event=&class=&subject=&weekname=&target=",
@@ -1787,14 +1771,14 @@
         "longitude": 127.001273
       },
       "gu": "중구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2280-8469",
       "address": "서울 중구 퇴계로50길 59",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "113": {
-      "uid": "113",
+    "112": {
+      "uid": "112",
       "spaceName": "훈련원공원종합체육관",
       "spaceImage": "https://www.e-junggu.or.kr/design/homepage/junggu/images/center/center_13.jpg",
       "pageLink": "https://www.e-junggu.or.kr/fmcs/181?lecture_type=R&page=1&center=JUNGGU05&event=&class=&subject=&weekname=&target=",
@@ -1803,14 +1787,14 @@
         "longitude": 127.0035571
       },
       "gu": "중구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2280-8397",
       "address": "서울 중구 을지로 227 훈련원공원",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "114": {
-      "uid": "114",
+    "113": {
+      "uid": "113",
       "spaceName": "손기정문화체육센터",
       "spaceImage": "https://www.e-junggu.or.kr/design/homepage/junggu/images/sub/song_phy_1.jpg",
       "pageLink": "https://www.e-junggu.or.kr/fmcs/181?lecture_type=R&page=1&center=JUNGGU06&event=&class=&subject=&weekname=&target=",
@@ -1819,14 +1803,14 @@
         "longitude": 126.9645497
       },
       "gu": "중구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2280-8460",
       "address": "서울 중구 손기정로 101 손기정공원",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "115": {
-      "uid": "115",
+    "114": {
+      "uid": "114",
       "spaceName": "남산타운문화체육센터",
       "spaceImage": "https://www.e-junggu.or.kr/design/homepage/junggu/images/sub/ns_c_intro1.jpg",
       "pageLink": "https://www.e-junggu.or.kr/fmcs/181?lecture_type=R&page=1&center=JUNGGU07&event=&class=&subject=&weekname=&target=",
@@ -1835,14 +1819,14 @@
         "longitude": 127.0119534
       },
       "gu": "중구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2280-8480",
       "address": "서울 중구 다산로 32 남산타운",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "116": {
-      "uid": "116",
+    "115": {
+      "uid": "115",
       "spaceName": "중구구민회관",
       "spaceImage": "https://www.e-junggu.or.kr/design/homepage/junggu/images/sub/jggumin_intro1.jpg",
       "pageLink": "https://www.e-junggu.or.kr/fmcs/181?lecture_type=R&page=1&center=JUNGGU08&event=&class=&subject=&weekname=&target=",
@@ -1851,14 +1835,14 @@
         "longitude": 127.0060501
       },
       "gu": "중구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2280-8383",
       "address": "서울 중구 을지로39길 40 구민회관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "117": {
-      "uid": "117",
+    "116": {
+      "uid": "116",
       "spaceName": "중랑구민체육센터",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_01_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/lecture/list/JUNGNANG01",
@@ -1867,14 +1851,14 @@
         "longitude": 127.0874763
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3423-1070",
       "address": "서울 중랑구 신내로15길 189 중랑구민체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "118": {
-      "uid": "118",
+    "117": {
+      "uid": "117",
       "spaceName": "중랑문화체육관",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_02_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/lecture/list/JUNGNANG01",
@@ -1883,14 +1867,14 @@
         "longitude": 127.0957077
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-436-9200",
       "address": "서울 중랑구 사가정로72길 47 중랑문화체육관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "119": {
-      "uid": "119",
+    "118": {
+      "uid": "118",
       "spaceName": "면목2동 체육관",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_03_03.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/lecture/list/JUNGNANG01",
@@ -1899,14 +1883,14 @@
         "longitude": 127.0808914
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-495-5200",
       "address": "서울 중랑구 사가정로72길 47 중랑문화체육관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "120": {
-      "uid": "120",
+    "119": {
+      "uid": "119",
       "spaceName": "중랑구립잔디운동장",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_04_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/html/01040100",
@@ -1915,14 +1899,14 @@
         "longitude": 127.112983
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-432-4522",
       "address": "서울 중랑구 겸재로23길 27",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "121": {
-      "uid": "121",
+    "120": {
+      "uid": "120",
       "spaceName": "용마폭포공원축구장",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_05_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/html/01050100",
@@ -1931,14 +1915,14 @@
         "longitude": 127.0901063
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-436-3466",
       "address": "서울 중랑구 용마산로 250-12",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "122": {
-      "uid": "122",
+    "121": {
+      "uid": "121",
       "spaceName": "신내차량기지 축구장, 야구장",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_06_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/html/01060100",
@@ -1947,14 +1931,14 @@
         "longitude": 127.1077606
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-432-4453",
       "address": "서울 중랑구 용마산로 136길 33",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "123": {
-      "uid": "123",
+    "122": {
+      "uid": "122",
       "spaceName": "신내다목적체육관",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_07_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/html/01070100",
@@ -1963,30 +1947,30 @@
         "longitude": 127.0894686
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3422-4350",
       "address": "서울 중랑구 신내로21길 115-14 신내근린공원내",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "124": {
-      "uid": "124",
+    "123": {
+      "uid": "123",
       "spaceName": "묵동다목적체육관",
-      "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_07_01.jpg",
+      "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_08_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/html/01080100",
       "location": {
         "latitude": 37.6144444,
         "longitude": 127.0841667
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-949-5577",
       "address": "서울 중랑구 숙선옹주로 66",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "125": {
-      "uid": "125",
+    "124": {
+      "uid": "124",
       "spaceName": "중랑구립테니스장",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_09_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/html/01090100",
@@ -1995,14 +1979,14 @@
         "longitude": 127.1144927
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-6952-2949",
       "address": "서울 중랑구 신내동 3번지",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "126": {
-      "uid": "126",
+    "125": {
+      "uid": "125",
       "spaceName": "용마폭포공원테니스장",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_10_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/html/01100100",
@@ -2011,14 +1995,14 @@
         "longitude": 127.090782
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-437-294",
       "address": "서울 중랑구 용마산로250-12",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "127": {
-      "uid": "127",
+    "126": {
+      "uid": "126",
       "spaceName": "서울중랑워터파크",
       "spaceImage": "https://www.jungnangimc.or.kr/resource/images/sub/sisul/sisul_01_11_01.jpg",
       "pageLink": "https://www.jungnangimc.or.kr/html/01110100",
@@ -2027,14 +2011,14 @@
         "longitude": 127.0772843
       },
       "gu": "중랑구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-3422-3400",
       "address": "서울 중랑구 면목동 중랑천 장안교 상류 둔치",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "128": {
-      "uid": "128",
+    "127": {
+      "uid": "127",
       "spaceName": "동대문구민체육센터",
       "spaceImage": "https://www.dfmc.kr:8443/course/sports/design/homepage/dongdaemun/images/contents/gumin_img.jpg",
       "pageLink": "https://www.dfmc.kr:8443/course/sports/fmcs/10?lecture_type=A&page=1&center=DFMC01&event=&class=&subject=&weekname=&target=&lerturer_name=",
@@ -2043,14 +2027,14 @@
         "longitude": 127.0734602
       },
       "gu": "동대문구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2247-9772",
       "address": "서울 동대문구 장안벚꽃로 67",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "129": {
-      "uid": "129",
+    "128": {
+      "uid": "128",
       "spaceName": "이문체육문화센터",
       "spaceImage": "https://www.dfmc.kr:8443/course/sports/design/homepage/dongdaemun/images/contents/3_center.jpg",
       "pageLink": "https://www.dfmc.kr:8443/course/sports/fmcs/10?lecture_type=A&page=1&center=DFMC01&event=&class=&subject=&weekname=&target=&lerturer_name=",
@@ -2059,14 +2043,14 @@
         "longitude": 127.0687332
       },
       "gu": "동대문구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-963-0536",
       "address": "서울 동대문구 한천로58길 81-49",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "130": {
-      "uid": "130",
+    "129": {
+      "uid": "129",
       "spaceName": "용두복지문화센터",
       "spaceImage": "https://www.dfmc.kr:8443/course/sports/design/homepage/dongdaemun/images/contents/5_center.jpg",
       "pageLink": "https://www.dfmc.kr:8443/course/sports/fmcs/10?lecture_type=A&page=1&center=DFMC01&event=&class=&subject=&weekname=&target=&lerturer_name=",
@@ -2075,14 +2059,14 @@
         "longitude": 127.0391385
       },
       "gu": "동대문구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-6929-2652",
       "address": "서울 동대문구 고산자로28길 13",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "131": {
-      "uid": "131",
+    "130": {
+      "uid": "130",
       "spaceName": "중랑천체육시설",
       "spaceImage": "https://www.dfmc.kr:8443/course/sports/design/homepage/dongdaemun/images/contents/jungrang_img02.jpg",
       "pageLink": "https://www.dfmc.kr:8443/course/sports/fmcs/10?lecture_type=A&page=1&center=DFMC01&event=&class=&subject=&weekname=&target=&lerturer_name=",
@@ -2091,14 +2075,14 @@
         "longitude": 127.0755918
       },
       "gu": "동대문구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2247-9611",
       "address": "서울 동대문구 장안1동 23-15",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "132": {
-      "uid": "132",
+    "131": {
+      "uid": "131",
       "spaceName": "장평테니스장",
       "spaceImage": "https://www.dfmc.kr:8443/course/sports/design/homepage/dongdaemun/images/contents/4_tennis01.jpg",
       "pageLink": "https://www.dfmc.kr:8443/course/sports/fmcs/10?lecture_type=A&page=1&center=DFMC07&event=&class=&subject=&weekname=&target=&lerturer_name=",
@@ -2107,14 +2091,14 @@
         "longitude": 127.0739112
       },
       "gu": "동대문구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2247-9772",
       "address": "서울 동대문구 장안벚꽃로 67 장평근린공원 내",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "133": {
-      "uid": "133",
+    "132": {
+      "uid": "132",
       "spaceName": "다목적체육관",
       "spaceImage": "https://www.efmc.or.kr/File/Download/95e2dfbb02ea3b23b2d847cf8d2d7885",
       "pageLink": "https://www.efmc.or.kr/fmcs/12",
@@ -2123,14 +2107,14 @@
         "longitude": 126.9236287
       },
       "gu": "은평구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-350-5325",
       "address": "서울 은평구 진관1로 52",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "134": {
-      "uid": "134",
+    "133": {
+      "uid": "133",
       "spaceName": "구립축구장",
       "spaceImage": "https://www.efmc.or.kr/File/Download/cda7bc06d6617b4358de3a8fec44ed67",
       "pageLink": "https://www.efmc.or.kr/fmcs/13",
@@ -2139,14 +2123,14 @@
         "longitude": 126.9246861
       },
       "gu": "은평구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-350-5393",
       "address": "서울 은평구 진관1로 46",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "135": {
-      "uid": "135",
+    "134": {
+      "uid": "134",
       "spaceName": "구립테니스장",
       "spaceImage": "https://www.efmc.or.kr/File/Download/0f1803c2d42764b33fb7f81e21f5f529",
       "pageLink": "https://efmc.or.kr/fmcs/224",
@@ -2155,14 +2139,14 @@
         "longitude": 126.9236119
       },
       "gu": "은평구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-350-5306",
       "address": "서울 은평구민체육센터 건물 우측 주차장 위",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "136": {
-      "uid": "136",
+    "135": {
+      "uid": "135",
       "spaceName": "백련실내배드민턴장",
       "spaceImage": "https://www.efmc.or.kr/File/Download/54d2a86b405ed2333bc7327aee20df22",
       "pageLink": "https://www.efmc.or.kr/fmcs/27?page=1&lecture_type=R&center=EFMC01&event=1140000000&class=1140010000&subject=&target=&lerturer_name=#lecture_R",
@@ -2171,14 +2155,14 @@
         "longitude": 126.9257511
       },
       "gu": "은평구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-350-5306",
       "address": "서울 백련산로4길 26",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "137": {
-      "uid": "137",
+    "136": {
+      "uid": "136",
       "spaceName": "북한산 저류조 상부 체육시설테니스장)",
       "spaceImage": "https://www.efmc.or.kr/File/Download/ff87c540666fe53c9222ea02e52c094a",
       "pageLink": "https://www.efmc.or.kr/fmcs/442",
@@ -2187,14 +2171,14 @@
         "longitude": 126.9391849
       },
       "gu": "은평구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-350-5306",
       "address": "서울 은평구 녹번동 산1-1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "138": {
-      "uid": "138",
+    "137": {
+      "uid": "137",
       "spaceName": "제1 스포츠센터",
       "spaceImage": "https://spc.y-sisul.or.kr/images/sub/center/center1_b2_01.png",
       "pageLink": "https://spc.y-sisul.or.kr/page/lect/lect.n.list.asp",
@@ -2203,14 +2187,14 @@
         "longitude": 126.9063157
       },
       "gu": "영등포구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2650-1500",
       "address": "서울 영등포구 신풍로 1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "139": {
-      "uid": "139",
+    "138": {
+      "uid": "138",
       "spaceName": "제2 스포츠센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzEwMjVfMTY2%2FMDAxNTA4ODk4MTE5NzEy.zNW8HDm5HAEvpvztKJOPXxM2IFSt9DEXZg6ZKEOMDfUg.SUATNGiUfDKR6hiLqQ31twLfS4rkP7BGcF03Jf8-Zokg.JPEG.he7028%2FIMG_7477.jpg&type=a340",
       "pageLink": "https://spc.y-sisul.or.kr/?s_center=2",
@@ -2219,14 +2203,14 @@
         "longitude": 126.9027019
       },
       "gu": "영등포구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-2630-2900",
       "address": "서울 영등포구 신풍로 1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "140": {
-      "uid": "140",
+    "139": {
+      "uid": "139",
       "spaceName": "클라이밍 경기장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA4MzBfMTkx%2FMDAxNTY3MDkyNTE0MDE0.5V9h-mbq87n219iZyBseHHpZOjrfYVP8FZXT7Q7l9hUg.Wy-NAMYTLOBEVCAjSylzjvVy00kALYioNjHoq5oBO8kg.JPEG.lim40529%2FIMG_2748.JPG&type=a340",
       "pageLink": "https://www.y-sisul.or.kr/mod.asp?m=business&s=h01",
@@ -2235,14 +2219,14 @@
         "longitude": 126.8975485
       },
       "gu": "영등포구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2630-2991",
       "address": "서울 영등포구 도신로 15길 11",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "141": {
-      "uid": "141",
+    "140": {
+      "uid": "140",
       "spaceName": "관악구민종합체육센터",
       "spaceImage": "https://www.gwanakgongdan.or.kr/File/download/91e6bc77383b5d6f7563f441012efbce?list",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK01&event=&class=&subject=&target=&lerturer_name=",
@@ -2251,14 +2235,14 @@
         "longitude": 126.9603062
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-875-1188",
       "address": "서울 관악구 낙성대로3길 37 관악구민종합체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "142": {
-      "uid": "142",
+    "141": {
+      "uid": "141",
       "spaceName": "관악제2구민운동장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA3MTBfMjgz%2FMDAxNTk0MzgzNDc2MDcz.MVGqqXrovNUj1GHhP4taD-nxxwDwMLi_4PUyV_yKscMg.UpNVrt6mrsVpCRXxS4YrydUMy197x7Rc10sKS49PicQg.JPEG.whereismyoffice%2F20190601_085145433_iOS.jpg&type=a340",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK05&event=&class=&subject=&target=&lerturer_name=",
@@ -2267,14 +2251,14 @@
         "longitude": 126.9336436
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2081-2652",
       "address": "서울 관악구 약수암길 43-1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "143": {
-      "uid": "143",
+    "142": {
+      "uid": "142",
       "spaceName": "구민운동장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2Fdata43%2F2009%2F6%2F18%2F274%2Fpic_1218_coolvscool.jpg&type=a340",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK03&event=&class=&subject=&target=&lerturer_name=",
@@ -2283,14 +2267,14 @@
         "longitude": 126.9576963
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2081-2652",
       "address": "서울 관악구 낙성대로 40",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "144": {
-      "uid": "144",
+    "143": {
+      "uid": "143",
       "spaceName": "국사봉체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzEyMTBfNDUg%2FMDAxNTEyODc3Nzk3NDM3.V3V8ZM3ItafrUcXhilsIbiNueq9fktkrvLlTxU60RAUg.-rpVTkv3h3MFXjvrCc8BG5V27C0fBgjJ-4vyzHoMtwsg.JPEG.mellow502%2F20171210_124226.jpg&type=a340",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK04&event=&class=&subject=&target=&lerturer_name=",
@@ -2299,14 +2283,14 @@
         "longitude": 126.9417286
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2081-2690",
       "address": "서울 관악구 국회단지길 144 51녹지관리초",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "145": {
-      "uid": "145",
+    "144": {
+      "uid": "144",
       "spaceName": "까치관체육센터",
       "spaceImage": "https://www.gwanakgongdan.or.kr/File/download/d7827b18cd1c5b721851769ede8b517f?list",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK09&event=&class=&subject=&target=&lerturer_name=",
@@ -2315,14 +2299,14 @@
         "longitude": 126.9616626
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-870-7690",
       "address": "서울 관악구 행운10길 23",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "146": {
-      "uid": "146",
+    "145": {
+      "uid": "145",
       "spaceName": "미성체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMDhfMTk1%2FMDAxNjEyNzg3ODI1MDk3.fiqed-RMvGUXKjhmgqQKJIraPUVyYMg7QlxS8HT0iZ8g.u-5XpsDBDn1vtvGbpybgmsSrlJoj2LQT1fYGYx8-yyog.JPEG.ody0918%2FIMG_9792.JPG&type=sc960_832",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK06&event=&class=&subject=&target=&lerturer_name=",
@@ -2331,14 +2315,14 @@
         "longitude": 126.9188017
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2081-2643",
       "address": "서울 관악구 난우16길 37",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "147": {
-      "uid": "147",
+    "146": {
+      "uid": "146",
       "spaceName": "선우체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAzMDFfNjEg%2FMDAxNjQ2MTI0Njk0NTIz.dx7eyugX24eYht20XhMTBr55_Kdb2PUBMxHQl64h10Ag.DeRA4FLcSBxc2WS2MkGJTIbamd2x54v92iBAnonoO-gg.JPEG.rmfdnjfans4%2F20220103%25A3%25DF195822.jpg&type=a340",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK10&event=&class=&subject=&target=&lerturer_name=",
@@ -2347,14 +2331,14 @@
         "longitude": 126.9109141
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2081-2665",
       "address": "서울 관악구 문성로16다길 133-70 선우체육관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "148": {
-      "uid": "148",
+    "147": {
+      "uid": "147",
       "spaceName": "신림체육센터",
       "spaceImage": "https://www.gwanakgongdan.or.kr/File/download/3c25bf8ca5b7b5119dd891253943931d?list",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK02&event=&class=&subject=&target=&lerturer_name=",
@@ -2363,14 +2347,14 @@
         "longitude": 126.9160058
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-869-1888",
       "address": "서울 관악구 난곡로58길 13 신림다목적체육센타",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "149": {
-      "uid": "149",
+    "148": {
+      "uid": "148",
       "spaceName": "장군봉체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA3MDlfMTUy%2FMDAxNTYyNjM5MjI1MTIz.T1YyaO9dChFxruw8XIVhp-PPbxrs2bwsvEUPcv8s8ssg.KBhnc-s7cpt9Lv82lXnYNwc2ubuE6Hzl10sdPYnalm8g.JPEG.ldh7145%2F20190630_182329.jpg&type=a340",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK07&event=&class=&subject=&target=&lerturer_name=",
@@ -2379,14 +2363,14 @@
         "longitude": 126.9341533
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2081-2645",
       "address": "서울 관악구 남부순환로194길 81-12 장군봉체육관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "150": {
-      "uid": "150",
+    "149": {
+      "uid": "149",
       "spaceName": "청룡산체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMDdfNjkg%2FMDAxNjY3ODI2ODkwMjIx.Fb1rRxTxfHrp7dtIrwuA-lV0O_n2nlG7RcBLgY5NMWwg.46dtHQ0mOmyFRx3-Iwo8NC-fVuO2GmcJlKaNRTn5EZsg.JPEG.eh9745%2F20221105%25A3%25DF134546.jpg&type=ofullfill340_600_png",
       "pageLink": "https://www.gwanakgongdan.or.kr/fmcs/115?page=1&lecture_type=R&center=KWAN_AK08&event=&class=&subject=&target=&lerturer_name=",
@@ -2395,14 +2379,14 @@
         "longitude": 126.9495015
       },
       "gu": "관악구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2081-2695",
       "address": "서울 관악구 관악로5길 91-42",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "151": {
-      "uid": "151",
+    "150": {
+      "uid": "150",
       "spaceName": "상도스포츠클럽",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5844%2F2021%2F07%2F28%2F0000013469_001_20210728171248665.jpg&type=a340",
       "pageLink": "https://sports.idongjak.or.kr/home/171?center=DONGJAK05&category1=ALL&category2=ALL&title=&train_day=",
@@ -2411,14 +2395,14 @@
         "longitude": 126.9313649
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-826-2500",
       "address": "서울 동작구 성대로2길 11 상도3동 주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "152": {
-      "uid": "152",
+    "151": {
+      "uid": "151",
       "spaceName": "사당종합체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA0MDRfMTUy%2FMDAxNDkxMjg1MTEzMjMw.8KaJwq4oAI545QbaYRddxGUNQvgYUS9yzL_oBk-IGyog.naq7dIHtD5B3px4Ie1jDrZeU2emsBU7KYDpJ-FLqAsAg.JPEG.ktnjisun%2FKakaoTalk_Moim_4zN004gDYV7lMvfeI5HeWje414IQoy.jpg&type=a340",
       "pageLink": "https://sports.idongjak.or.kr/home/171?center=DONGJAK06&category1=ALL&category2=ALL&title=&train_day=",
@@ -2427,14 +2411,14 @@
         "longitude": 126.9696156
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-595-5556",
       "address": "서울 동작구 사당로27길 232",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "153": {
-      "uid": "153",
+    "152": {
+      "uid": "152",
       "spaceName": "사당문화회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAyMDFfNDQg%2FMDAxNjQzNjU4NTA1Njc1.2ugyCuMw6fqhk3CPb7J5v7aMktuF-YCK-6mMhqByVTcg.lU9Xs8rDH0_gAdc5d1Y1V1ihvnjhkGNws7xSqUdEafsg.JPEG.twinklybin%2FIMG_1402.jpg&type=a340",
       "pageLink": "https://sports.idongjak.or.kr/home/171?center=DONGJAK03&category1=ALL&category2=ALL&title=&train_day=",
@@ -2443,14 +2427,14 @@
         "longitude": 126.969601
       },
       "gu": "동작구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-588-4111",
       "address": "서울 동작구 사당로8길 9 사당문화회관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "154": {
-      "uid": "154",
+    "153": {
+      "uid": "153",
       "spaceName": "삼일수영장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMzBfMzIg%2FMDAxNTcyNDIzNzUyMjQ0.CeMI0wyFB--V-ncFaBRRhoBR9fvvF79WC-IUGIcjlywg.VS0xWIy3jo0K65kyegbsIlHXlEf0oo7L6UrtQT2yhYAg.JPEG.heysuky%2FIMG_0475.JPG&type=a340",
       "pageLink": "https://sports.idongjak.or.kr/home/171?center=DONGJAK07&category1=ALL&category2=ALL&title=&train_day=",
@@ -2459,14 +2443,14 @@
         "longitude": 126.9744729
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-535-3341",
       "address": "서울 동작구 사당로27길 103",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "155": {
-      "uid": "155",
+    "154": {
+      "uid": "154",
       "spaceName": "흑석체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA4MDJfMTA4%2FMDAxNTMzMTg4NTQzNjU4.7FJhHmFrtOoUcBZXrzX2NxpgosVXcKa06u8W9xmNujgg.hjhJS-V_s-cI3yb2cUKgocTmkkLh6SxSvvsDCZ3y4N8g.JPEG.idongjak%2FKakaoTalk_20180802_143649822.jpg&type=a340",
       "pageLink": "https://sports.idongjak.or.kr/home/171?center=DONGJAK02&category1=ALL&category2=ALL&title=&train_day=",
@@ -2475,14 +2459,14 @@
         "longitude": 126.9633892
       },
       "gu": "동작구",
-      "detailInfo": "수강신청/대관",
+      "detailInfo": "동네 프로그램/대관",
       "category": "sports",
       "phoneNum": "02-823-2273",
       "address": "서울 동작구 현충로 73 흑석 체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "156": {
-      "uid": "156",
+    "155": {
+      "uid": "155",
       "spaceName": "동작구민체육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MTBfMTgz%2FMDAxNjYwMTA2NTQ5NDgw.mKarRWjtM12CFAdVpYEtlgtdqSzsGwJadEqR5aFs5xIg.yxHuxQ_swzCZGoyWl92kProOGd9h2zZDhnnnlEECXXAg.JPEG.hot2hot2seoul%2F%25BE%25C8%25BC%25F6%25BA%25F31.jpg&type=a340",
       "pageLink": "https://sports.idongjak.or.kr/home/171?center=DONGJAK01&category1=ALL&category2=ALL&title=&train_day=",
@@ -2491,14 +2475,14 @@
         "longitude": 126.9167406
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-849-0100",
       "address": "서울 동작구 여의대방로16길 53 동작구민체육센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "157": {
-      "uid": "157",
+    "156": {
+      "uid": "156",
       "spaceName": "노들나루공원풋살장",
       "spaceImage": "https://www.dongjak.go.kr/static/portal/img/04/200940_01.gif",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200940",
@@ -2507,14 +2491,14 @@
         "longitude": 126.953907
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2812-9505",
       "address": "서울 동작구 노량진로 74",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "158": {
-      "uid": "158",
+    "157": {
+      "uid": "157",
       "spaceName": "노들나루공원 인조잔디구장",
       "spaceImage": "https://www.dongjak.go.kr/static/portal/img/04/200940_05.gif",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200940",
@@ -2523,14 +2507,14 @@
         "longitude": 126.9330865
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-1267",
       "address": "서울 동작구 노량진로 74",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "159": {
-      "uid": "159",
+    "158": {
+      "uid": "158",
       "spaceName": "남사초등학교",
       "spaceImage": "https://www.dongjak.go.kr/static/portal/img/04/200940_12.gif",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200940",
@@ -2539,14 +2523,14 @@
         "longitude": 126.9784544
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-1267",
       "address": "서울 동작구 동작대로13길 22",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "160": {
-      "uid": "160",
+    "159": {
+      "uid": "159",
       "spaceName": "여의도한강공원파크골프장",
       "spaceImage": "https://www.dongjak.go.kr/static/portal/img/04/200940_19.gif",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200940",
@@ -2555,14 +2539,14 @@
         "longitude": 126.9426158
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-1267",
       "address": "서울 동작구 동작대로13길 22",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "161": {
-      "uid": "161",
+    "160": {
+      "uid": "160",
       "spaceName": "노량진근린공원",
       "spaceImage": "https://www.dongjak.go.kr/static/portal/img/04/200940_23.gif",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200940",
@@ -2571,14 +2555,14 @@
         "longitude": 126.9262539
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-1267",
       "address": "서울 동작구 본동 486",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "162": {
-      "uid": "162",
+    "161": {
+      "uid": "161",
       "spaceName": "한숲볼링센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMTRfMjAg%2FMDAxNjM2ODQ5NjU2NDE3.CHZqOvjRsPnU-916iq5SXqdpnHOTC_D9rhAvqCyQLh4g.-nNnOip1WlCkPyEkk5NPuiJ3gc1xBOFiKvRSd3XP6h4g.JPEG.jmleealex%2FIMG_3040.jpg&type=a340",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2587,14 +2571,14 @@
         "longitude": 126.9247632
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 여의대방로 250 대림쇼핑타운 한숲볼링센타 309호",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "163": {
-      "uid": "163",
+    "162": {
+      "uid": "162",
       "spaceName": "노들나루공원 자전거연습장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNjExMjJfMTIg%2FMDAxNDc5Nzc1NDExNDE2.ARTzejY_WBmE71A8O12rRpIkpQx7K0BZS2RVKveY3Zkg.ap0K9tqx1hF_unCGlkSz3WUJhqFLO52XnHiaUo6jt1gg.JPEG.court_expert%2FIMG_0105.JPG&type=a340",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2603,14 +2587,14 @@
         "longitude": 126.953529
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 노량진1동 노량진로 247",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "164": {
-      "uid": "164",
+    "163": {
+      "uid": "163",
       "spaceName": "국사봉약수터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160225_99%2Flets_go_out_1456360433773GYziA_JPEG%2FattachImage_629832019.jpeg&type=sc960_832",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2619,14 +2603,14 @@
         "longitude": 126.9418799
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 상도4동 산65-220",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "165": {
-      "uid": "165",
+    "164": {
+      "uid": "164",
       "spaceName": "국사봉정상",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20120727_1%2Ftoyou10123_1343390628277i7LCF_JPEG%2F4%25B1%25B9%25BB%25E7%25BA%25C04.jpg&type=sc960_832",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2635,14 +2619,14 @@
         "longitude": 126.9406489
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 관악구 봉천동 번지 1층 산103-52",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "166": {
-      "uid": "166",
+    "165": {
+      "uid": "165",
       "spaceName": "백로공원",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTZfMTY0%2FMDAxNjIzODIzMDgxMTk3.Bs_WXDcFIkEa7pnw9NcIrlneUUMWZ4NdBtzR9nLDZfwg.uZP-tz63bmfHtuFG-EodFDYBfeZvLlNdJsKZOmrhTLcg.JPEG.jehj325%2FKakaoTalk_20210616_133151704_18.jpg&type=sc960_832",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2651,14 +2635,14 @@
         "longitude": 126.9345577
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 대방동 2-2",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "167": {
-      "uid": "167",
+    "166": {
+      "uid": "166",
       "spaceName": "노량진근린공원 대방지구",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MjFfMjYg%2FMDAxNjUwNTI4NjgzOTI2.uZwe3C909kRohdDbKrbdx0re2LaEaHRjcRCbJe5a4GUg.urqkiRMjkkYvSNfis4aZ8pcxQubk-mISmhjRynvVy3kg.JPEG.lovetndbs%2F20220421%25A3%25DF105802%25A3%25DFHDR.jpg&type=a340",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2667,14 +2651,14 @@
         "longitude": 126.955617
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 본동 486",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "168": {
-      "uid": "168",
+    "167": {
+      "uid": "167",
       "spaceName": "까치산정상",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20120811_259%2Ftoyou10123_13446807263027Bt1G_JPEG%2F1%25B1%25EE%25C4%25A1%25BB%25EA4.jpg&type=sc960_832",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2683,14 +2667,14 @@
         "longitude": 126.8439279
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 강서구 화곡동 산 162-17",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "169": {
-      "uid": "169",
+    "168": {
+      "uid": "168",
       "spaceName": "송학대공원",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA3MTFfMTA1%2FMDAxNjI1OTk5ODE0NjM3.89_VtSV2RS9DphLugOpK3pP4JtCBc7aK4w1rEUiqZaAg.a8koTcQeB4Nf6hCjgwwKH9u08xzJOo312KFzPfd01ocg.JPEG.chxndygks%2F20210710_185619.jpg&type=a340",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2699,14 +2683,14 @@
         "longitude": 126.9440659
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 노량진동 325-2",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "170": {
-      "uid": "170",
+    "169": {
+      "uid": "169",
       "spaceName": "고구동산",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEyMTFfMzYg%2FMDAxNjA3Njg5NDk1MDYx.yjBqAMaAXfCwsKF3yNw_Ni_oKz4XaYoyxevX6WvdGe0g.aTZxwwosDiAOuWfd20j2_ZfBNGXmWf6bzQcBt8R6Stkg.JPEG.choyyyy457%2F2020-12-11-12-43-54-085.jpg&type=a340",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2715,14 +2699,14 @@
         "longitude": 126.9555935
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 본동 30-45",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "171": {
-      "uid": "171",
+    "170": {
+      "uid": "170",
       "spaceName": "보라매공원",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MThfMTgg%2FMDAxNjUwMjMzNDM4Mjg5.8fITuJpoGZ7ZOGxhcbar8VM9H8rLYODXcHUWokEUPRAg.kUCm15fixhKBJHtqJxpdD-DV--ZB5e2-0S5E709DNmUg.JPEG.o_opeanut%2F_DSC5507.jpg&type=a340",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2731,14 +2715,14 @@
         "longitude": 126.9197115
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 여의대방로20길 33",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "172": {
-      "uid": "172",
+    "171": {
+      "uid": "171",
       "spaceName": "삼일공원",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA4MjFfNDAg%2FMDAxNjI5NDgyNjY1OTc4.kZTPpOaC7MojBkOz1htPfOFmdROAFPcT_uWQtg31JqQg.B36b25GjWvtvRjBV23Bv99gRUoxKdnsPYscekIfB5zMg.JPEG.mihyepark306%2F20210813%25A3%25DF184424.jpg&type=a340",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2747,30 +2731,14 @@
         "longitude": 126.9745555
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 사당로23길 93 삼일공원",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "173": {
-      "uid": "173",
-      "spaceName": "학수약수터",
-      "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEwMjJfMjMz%2FMDAxNjAzMzY4NDgzMzg5.fR_HUnTrFjHWAfxhC2IqOZk1Q-7ILWXNafMJ4CXkr_4g.TCtJ0jeCkjwCl_5ZjwGJE1RKQP5oumC54EzChARioWEg.JPEG.allsubrosa%2FP20181101_114832270_CF734640-36F4-4002-9ED0-53AFCC231E3D.JPG&type=a340",
-      "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
-      "location": {
-        "latitude": 37.4941513,
-        "longitude": 126.9418799
-      },
-      "gu": "동작구",
-      "detailInfo": "수강신청",
-      "category": "sports",
-      "phoneNum": "02-820-9585",
-      "address": "서울 동작구 상도4동 산65-220",
-      "updated": "2023-01-05"
-    },
-    "174": {
-      "uid": "174",
+    "172": {
+      "uid": "172",
       "spaceName": "노들나루공원 축구장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160707_78%2Fhanicouple_146789694132927T5h_JPEG%2F20160625_152240.jpg&type=a340",
       "pageLink": "https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200941#",
@@ -2779,14 +2747,14 @@
         "longitude": 126.953059
       },
       "gu": "동작구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-820-9585",
       "address": "서울 동작구 노량진로 247",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "175": {
-      "uid": "175",
+    "173": {
+      "uid": "173",
       "spaceName": "야구장",
       "spaceImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw7tT7_wrgp_Bme6hDTDx3yyv2d0AuDNagVqkH8F8JJom6JWylbslPPcRmlWz7jHFVa00&usqp=CAU",
       "pageLink": "https://srent.y-sisul.or.kr/page/rent/s01.sisul.asp",
@@ -2795,14 +2763,14 @@
         "longitude": 126.8849942
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "010-7389-2988",
       "address": "서울 영등포구 양화동 4-1 일대",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "176": {
-      "uid": "176",
+    "174": {
+      "uid": "174",
       "spaceName": "제2축구장",
       "spaceImage": "https://srent.y-sisul.or.kr/images/sub/sisul_02.jpg",
       "pageLink": "https://srent.y-sisul.or.kr/page/rent/s02.sisul.asp",
@@ -2811,14 +2779,14 @@
         "longitude": 126.8849942
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "010-7389-2988",
       "address": "서울 영등포구 양화동 4-1 일대",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "177": {
-      "uid": "177",
+    "175": {
+      "uid": "175",
       "spaceName": "파크골프장",
       "spaceImage": "https://srent.y-sisul.or.kr/images/sub/sisul_04.jpg",
       "pageLink": "https://srent.y-sisul.or.kr/page/rent/s03.sisul.asp",
@@ -2827,14 +2795,14 @@
         "longitude": 126.8849942
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "010-7389-2988",
       "address": "서울 영등포구 양화동 4-1 일대",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "178": {
-      "uid": "178",
+    "176": {
+      "uid": "176",
       "spaceName": "테니스장",
       "spaceImage": "https://srent.y-sisul.or.kr/images/sub/sisul_03.jpg",
       "pageLink": "https://srent.y-sisul.or.kr/page/rent/s04.sisul.asp",
@@ -2843,14 +2811,14 @@
         "longitude": 126.8849942
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "010-7389-2988",
       "address": "서울 영등포구 양화동 4-1 일대",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "179": {
-      "uid": "179",
+    "177": {
+      "uid": "177",
       "spaceName": "야구장 (어린이)",
       "spaceImage": "https://srent.y-sisul.or.kr/images/sub/sisul_01.jpg",
       "pageLink": "https://srent.y-sisul.or.kr/page/rent/s05.sisul.asp",
@@ -2859,14 +2827,14 @@
         "longitude": 126.8849942
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "010-7389-2988",
       "address": "서울 영등포구 양화동 4-1 일대",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "180": {
-      "uid": "180",
+    "178": {
+      "uid": "178",
       "spaceName": "제1축구장",
       "spaceImage": "https://srent.y-sisul.or.kr/images/sub/sisul_02.jpg",
       "pageLink": "https://srent.y-sisul.or.kr/page/rent/s06.sisul.asp",
@@ -2875,14 +2843,14 @@
         "longitude": 126.8849942
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "010-7389-2988",
       "address": "서울 영등포구 양화동 4-1 일대",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "181": {
-      "uid": "181",
+    "179": {
+      "uid": "179",
       "spaceName": "무중력지대",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMTdfMTA0%2FMDAxNTcxMjk3NDE4MTMz.4431RYmA3eZ0H6PSD3vULtTd2WkMusJJnS5fLeUxBWYg.aQGiNNWVPF7mxtk2-zsCQZbYxxtT0t5nBzaKHdV-5zAg.JPEG.fbtmddus2%2FIMG_3589.JPG&type=a340",
       "pageLink": "https://youth.seoul.go.kr/site/main/content/weightless_Yeongdeungpo",
@@ -2891,46 +2859,14 @@
         "longitude": 126.9020592
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2671-2225",
       "address": "서울 영등포구 당산로 235",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "182": {
-      "uid": "182",
-      "spaceName": "신길3동 주민센터 다목적회의실",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20220921/1663746771415NI7LTEFEX8KTRDJFC82UNOCIB.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S220921162114404013",
-      "location": {
-        "latitude": 37.507263,
-        "longitude": 126.9077281
-      },
-      "gu": "영등포구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "02-2670-1456",
-      "address": "서울 영등포구 당산로 235",
-      "updated": "2023-01-05"
-    },
-    "183": {
-      "uid": "183",
-      "spaceName": "신길3동 주민센터 회의실",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20220922/1663844684633FF1D6EIGMB9V6BZBDAZ839QNX.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S220921161320289621",
-      "location": {
-        "latitude": 37.507263,
-        "longitude": 126.9077281
-      },
-      "gu": "영등포구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "02-2670-1456",
-      "address": "서울 영등포구 신길로41라길 13-8",
-      "updated": "2023-01-05"
-    },
-    "184": {
-      "uid": "184",
+    "180": {
+      "uid": "180",
       "spaceName": "스튜디오영원",
       "spaceImage": "https://www.ydp.go.kr/site/www/images/contents/cts5631_img01.png",
       "pageLink": "https://m.place.naver.com/place/1454741965/home",
@@ -2939,14 +2875,14 @@
         "longitude": 126.8911719
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "0507-1368-2767",
       "address": "서울 영등포구 문래로20길 49",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "185": {
-      "uid": "185",
+    "181": {
+      "uid": "181",
       "spaceName": "술술센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MjBfMjEg%2FMDAxNjI0MTg4NTg0MDIw.lSWR5Se6fSWJcV-kL2NfLfAOiUQmWwSbLuLpYc9wBV4g.5fIw1r9DhkJM3Yrd_uebQdcKmUDzH0C3R-fgR7tjMu8g.JPEG.yhjesther%2F1624187063962.jpg&type=a340",
       "pageLink": "https://booking.naver.com/booking/10/bizes/548622",
@@ -2955,14 +2891,14 @@
         "longitude": 126.8941327
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2634-2220",
       "address": "서울 영등포구 도림로133길 15 술술센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "186": {
-      "uid": "186",
+    "182": {
+      "uid": "182",
       "spaceName": "영등포 아트홀 공연장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTEwMjVfMzQg%2FMDAxNjM1MTI4NDU0NDIx.x54lobh5UozVvH-VMrCFiRTVuoaSqLwDFnL2zd2BCjkg._CbI5EaOeTuqY7dZGiOxBHw-nnXiyxjlQEgqqw_ausMg.JPEG.vbyul%2FIMG_7351.jpg&type=a340",
       "pageLink": "https://www.ydpcf.or.kr/arthall/arthallregister.do",
@@ -2971,14 +2907,14 @@
         "longitude": 126.9000964
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2629-2200",
       "address": "서울 영등포구 국회대로 596 영등포아트홀",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "187": {
-      "uid": "187",
+    "183": {
+      "uid": "183",
       "spaceName": "영등포 아트홀 전시실",
       "spaceImage": "https://mblogthumb-phinf.pstatic.net/MjAyMDEwMzBfMjMz/MDAxNjA0MDQ0MDQ3NDYy.SEG8gTwcrqXTCyJMlQ5Cp85q8eRGXVtBpmDm4mlAfDog.NwAgL6tHhYd1SOvJc7W079XUVueNinMKsEBf_5WWk_cg.JPEG.samwon_paper/KakaoTalk_20201030_163821370_15.jpg?type=w800",
       "pageLink": "https://www.ydpcf.or.kr/artexhibit/artexhibitlease.do",
@@ -2987,14 +2923,14 @@
         "longitude": 126.9000964
       },
       "gu": "영등포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2629-2200",
       "address": "서울 영등포구 국회대로 596 영등포아트홀",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "188": {
-      "uid": "188",
+    "184": {
+      "uid": "184",
       "spaceName": "노량진 청년일자리센터",
       "spaceImage": "https://www.youthcenter.go.kr/framework/filedownload/getImage.do?filePathName=K43kYCzEpw54N3DsTLz6bAFPBUmEbSDqtIBomLi%2BHb6GSlcDHm%2Bxyrw16UIAFmNfVeX6uVjzURFLOeoThS3O%2BQ%3D%3D",
       "pageLink": "https://www.youthcenter.go.kr/youngSpc/youngSpcDetail.do?pageIndex=2&srchYgmnSpceId=201909170001&dtlOpenYn=Y&srchSpceWdrCtpvCd=003002001&srchSpceBsgaCd=&srchUtzeCostCd=&srchOperSttsCd=&srchSpnm=&srchProgYN=&srchEmpmConsCd=&srchVdcnOperYn=&srchSortOrder=latest",
@@ -3003,14 +2939,14 @@
         "longitude": 126.9469753
       },
       "gu": "동작구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-812-1114",
       "address": "서울 동작구 노량진로 190 어바니엘 한강빌딩 2,3층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "189": {
-      "uid": "189",
+    "185": {
+      "uid": "185",
       "spaceName": "대방동 주민센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODEwMDdfNCAg%2FMDAxNTM4ODk5NTUwODIy.tR18NigpO_3RGxnHZvvUR3rIxfxIQ0NvmThkSZmCFJ8g.4OV4lAIP_nHZyJ5MYt4Lh_hQYYLY3879mmxx_lWlPT8g.JPEG.seol0077%2F181007084.jpg&type=a340",
       "pageLink": "https://www.dongjak.go.kr/dong/main/contents.do?menuNo=802649&dongCd=13",
@@ -3019,14 +2955,14 @@
         "longitude": 126.9263096
       },
       "gu": "동작구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-815-0226",
       "address": "서울 동작구 여의대방로44길 20",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "190": {
-      "uid": "190",
+    "186": {
+      "uid": "186",
       "spaceName": "동작아트갤러리",
       "spaceImage": "http://www.idfac.or.kr/www/resources/user/img/sub/sub_02_07_01.jpg",
       "pageLink": "http://www.idfac.or.kr/sub_new/menu02_01_01.php",
@@ -3035,14 +2971,14 @@
         "longitude": 126.9231523
       },
       "gu": "동작구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "070-7204-3257",
       "address": "서울 동작구 보라매로5길 28-1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "191": {
-      "uid": "191",
+    "187": {
+      "uid": "187",
       "spaceName": "구립 김영삼도서관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMjRfOTIg%2FMDAxNjM3NzY1OTIzMzk0.bL3wZcEqcO6M7IaJ05RWykozLhFwyk_k-xtlP-CKhUAg.Og5-gSm_KHDoH2H6BRvJg0_mKgnls5WPaqyRxJcHD6Qg.JPEG.gallerygagi%2F20211105_132921.jpg&type=ofullfill340_600_png",
       "pageLink": "https://lib.dongjak.go.kr/dj/html.do?menu_idx=206",
@@ -3051,14 +2987,14 @@
         "longitude": 126.949863
       },
       "gu": "동작구",
-      "detailInfo": "공간대관/수강신청",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-827-0557",
       "address": "서울 동작구 매봉로 1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "192": {
-      "uid": "192",
+    "188": {
+      "uid": "188",
       "spaceName": "청년공간이음",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160923_158%2Fi-eum7_14746303337870xo2H_JPEG%2F%25C3%25BB%25B3%25E2%25B0%25F8%25B0%25A3%25C0%25CC%25C0%25BD_05.jpg&type=a340",
       "pageLink": "http://i-eum.net/?page_id=138",
@@ -3067,14 +3003,14 @@
         "longitude": 126.9588719
       },
       "gu": "관악구",
-      "detailInfo": "공간대관/수강신청(청년공간)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-873-3575",
       "address": "서울 관악구 봉천로62길 5 옥산빌딩",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "193": {
-      "uid": "193",
+    "189": {
+      "uid": "189",
       "spaceName": "관악아트홀",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20120215_80%2Fjblforte_1329312406095Lhd2Q_JPEG%2FP1310144.JPG&type=a340",
       "pageLink": "https://www.gfac.or.kr/html/government/government3.html",
@@ -3083,14 +3019,14 @@
         "longitude": 126.9448533
       },
       "gu": "관악구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-828-5700",
       "address": "서울 관악구 신림로3길 35",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "194": {
-      "uid": "194",
+    "190": {
+      "uid": "190",
       "spaceName": "미디어센터관악",
       "spaceImage": "https://mcga.or.kr/uploadfile/ecms/media/media/2022/02/657b457d3dde90d18ea8c6f05aa6ff61_thumb.jpg",
       "pageLink": "https://mcga.or.kr/site/main/space/list?searchCategoryName=",
@@ -3099,14 +3035,14 @@
         "longitude": 126.9163876
       },
       "gu": "관악구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-6385-7500",
       "address": "서울 관악구 남부순환로 1491 6층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "195": {
-      "uid": "195",
+    "191": {
+      "uid": "191",
       "spaceName": "싱글벙글교육센터",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5181%2F2015%2F06%2F16%2F20150616150718_99_20150616153121.jpg&type=a340",
       "pageLink": "https://www.gfac.or.kr/html/government/government3_2.html#government3_2",
@@ -3115,14 +3051,14 @@
         "longitude": 126.9562242
       },
       "gu": "관악구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-878-1114",
       "address": "서울 관악구 남부순환로234길 73",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "196": {
-      "uid": "196",
+    "192": {
+      "uid": "192",
       "spaceName": "관천로 문화플랫폼S1472",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMjBfMjk5%2FMDAxNjM3MzkzNTczOTg2.KyLgM3ttJlRZhTlh8HzAfzYlzvty9qPsSKlCvGMJ_Cgg.8pkYXakOP9Gc1OM8bbduUdsmMHShE0Fh7G6Uq3V67s8g.JPEG.happydoakong%2FIMG_2330.jpg&type=a340",
       "pageLink": "https://www.gfac.or.kr/html/government/government2.html?forcu_name=&facility_name=%EA%B4%80%EC%B2%9C%EB%A1%9C&year=2022&month=10",
@@ -3131,14 +3067,14 @@
         "longitude": 126.9257009
       },
       "gu": "관악구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-6357-5000",
       "address": "서울 관악구 관천로 53",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "197": {
-      "uid": "197",
+    "193": {
+      "uid": "193",
       "spaceName": "1인가구 커뮤니티 센터  STAY.G",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDAzMjNfNDcg%2FMDAxNTg0OTQyMzM4NjM4.zUpKDOA-l0xjIxz5YhJMcbc1vZxOhFwapyCgvlA_4Yog.LMyV61Po7mrKhfANhMioQg_r2x2FA33SqMbNSpMNoIgg.JPEG.iseefeeldo%2F20200130_155229.jpg&type=a340",
       "pageLink": "https://gangnam1.org/space/",
@@ -3147,14 +3083,14 @@
         "longitude": 127.0399708
       },
       "gu": "강남구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-552-1101",
       "address": "서울 강남구 논현로86길 29 강남 1인가구 커뮤니티센터 STAY.G",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "198": {
-      "uid": "198",
+    "194": {
+      "uid": "194",
       "spaceName": "오유아트홀",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20161015_69%2Fpdk928_1476536173462ySkLE_JPEG%2F%25BF%25C0%25C0%25AF%25BE%25C6%25C6%25AE%25C8%25A62.jpg&type=a340",
       "pageLink": "https://www.gangnam.go.kr/office/gfac/contents/gfac_place01/1/view.do?mid=gfac_place01",
@@ -3163,14 +3099,14 @@
         "longitude": 127.0464243
       },
       "gu": "강남구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2176-0743",
       "address": "서울 강남구 남부순환로378길 34-9 도곡2동주민센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "199": {
-      "uid": "199",
+    "195": {
+      "uid": "195",
       "spaceName": "강남씨어터",
       "spaceImage": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210513_231%2F1620895283290NXG5f_JPEG%2FqJUvLHA_I-cKeEtnuJT10crh.jpg&type=a340",
       "pageLink": "https://www.gangnam.go.kr/office/gfac/contents/gfac_place02/1/view.do?mid=gfac_place02",
@@ -3179,14 +3115,14 @@
         "longitude": 127.0332163
       },
       "gu": "강남구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2176-0724",
       "address": "서울 강남구 역삼로7길 16, 3층 역삼1문화센터 3층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "200": {
-      "uid": "200",
+    "196": {
+      "uid": "196",
       "spaceName": "강남전시실",
       "spaceImage": "https://www.gangnam.go.kr/upload/editor/2021/11/16/48c7d1aa-dcb4-4bb8-9951-e6a763b25141.jpg",
       "pageLink": "https://www.gangnam.go.kr/office/gfac/contents/gfac_place03/1/view.do?mid=gfac_place03",
@@ -3195,14 +3131,14 @@
         "longitude": 127.0332163
       },
       "gu": "강남구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2176-0724",
       "address": "서울 강남구 역삼로7길 16, 1층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "201": {
-      "uid": "201",
+    "197": {
+      "uid": "197",
       "spaceName": "삼양청년회관",
       "spaceImage": "https://www.youthcenter.go.kr/framework/filedownload/getImage.do?filePathName=K43kYCzEpw54N3DsTLz6bPvnUEcTOAzrXG8YAmgtW05L0PdXC734TN1DGYdk8cGwqAaPX7nRJIFK6Hcx61VRxA%3D%3D",
       "pageLink": "https://www.youthcenter.go.kr/youngSpc/youngSpcDetail.do?pageIndex=1&srchYgmnSpceId=202102260001&dtlOpenYn=Y&srchSpceWdrCtpvCd=003002001&srchSpceBsgaCd=&srchUtzeCostCd=&srchOperSttsCd=&srchSpnm=&srchProgYN=&srchEmpmConsCd=&srchVdcnOperYn=&srchSortOrder=latest",
@@ -3211,30 +3147,14 @@
         "longitude": 127.0175014
       },
       "gu": "강북구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "070-5088-4078",
       "address": "서울 강북구 솔매로 3-10 희망아지트 B-1층 삼양청년회관 2관",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "202": {
-      "uid": "202",
-      "spaceName": "인수동 나눔터관",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20220713/1657682378628FAEE1XTTJEU65HBEO44IVSSDR.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S220713121939145914",
-      "location": {
-        "latitude": 37.635315,
-        "longitude": 127.0190478
-      },
-      "gu": "강북구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "02-3778-4956",
-      "address": "서울 강북구 수유로 49",
-      "updated": "2023-01-05"
-    },
-    "203": {
-      "uid": "203",
+    "198": {
+      "uid": "198",
       "spaceName": "강북문화예술회관",
       "spaceImage": "https://gbcmc.or.kr/design/homepage/gangbuk/img/sub/art1.jpg",
       "pageLink": "https://gbcmc.or.kr/fmcs/35?action=list&facilities_type=C&base_date=20201110&center=GANG_BUK01&type=&part=&place=&rent_type=",
@@ -3243,14 +3163,14 @@
         "longitude": 127.0131584
       },
       "gu": "강북구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-944-3068",
       "address": "서울 강북구 삼각산로 85",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "204": {
-      "uid": "204",
+    "199": {
+      "uid": "199",
       "spaceName": "강북웰빙스포츠센터",
       "spaceImage": "https://gbcmc.or.kr/design/homepage/gangbuk/img/sub/being1.jpg",
       "pageLink": "https://gbcmc.or.kr/fmcs/35?action=list&facilities_type=C&base_date=20201110&center=GANG_BUK02&type=&part=07&place=&rent_type=",
@@ -3259,14 +3179,14 @@
         "longitude": 127.0377586
       },
       "gu": "강북구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-944-2914",
       "address": "서울 강북구 오현로31길 51 강북웰빙스포츠센타",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "205": {
-      "uid": "205",
+    "200": {
+      "uid": "200",
       "spaceName": "서울생각마루 개인석",
       "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20210316/1615877674361TCH2OMNJ0DSOW7ANJP6JCJ2D9.jpg",
       "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S210314160730451665",
@@ -3275,14 +3195,14 @@
         "longitude": 127.0652385
       },
       "gu": "광진구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-3780-0517",
       "address": "서울 광진구 강변북로 68",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "206": {
-      "uid": "206",
+    "201": {
+      "uid": "201",
       "spaceName": "나루아트센터",
       "spaceImage": "http://www.naruart.or.kr/data/file/rentinfo01/thumb-2040645213_MKpHDT5n_ec5ebd24e2decc5e0f4d1799250710de94c43460_980x440.jpg",
       "pageLink": "http://www.naruart.or.kr/src/procedures.php?info=p01",
@@ -3291,62 +3211,14 @@
         "longitude": 127.0705248
       },
       "gu": "광진구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2049-4741",
       "address": "서울 광진구 능동로 76 나루아트센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "207": {
-      "uid": "207",
-      "spaceName": "오류골 사랑방",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20211229/1640760673338L82F3B6BK4F45EBZ2SRSXQSP0.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S211229155046604038",
-      "location": {
-        "latitude": 37.4952997,
-        "longitude": 126.8461672
-      },
-      "gu": "구로구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "070-4244-2209",
-      "address": "서울 구로구 경인로20가길 38",
-      "updated": "2023-01-05"
-    },
-    "208": {
-      "uid": "208",
-      "spaceName": "천왕역 버들마을 활력소",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20211229/1640754214368GOOQWL2R4Q2II2G1MSUT88SUL.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S211229140307321222",
-      "location": {
-        "latitude": 37.4855081,
-        "longitude": 126.8399802
-      },
-      "gu": "구로구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "070-8958-2203",
-      "address": "서울 구로구 오리로 지하 1154",
-      "updated": "2023-01-05"
-    },
-    "209": {
-      "uid": "209",
-      "spaceName": "구일 마을꿈터",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20211229/1640759915364MLJWHPLZMFJ8TQT2UZ9RL1NTE.png",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S211229153807105676",
-      "location": {
-        "latitude": 37.4957011,
-        "longitude": 126.8744343
-      },
-      "gu": "구로구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "070-4212-0844",
-      "address": "서울 구로구 구일로10길 49구로동 다원그린빌",
-      "updated": "2023-01-05"
-    },
-    "210": {
-      "uid": "210",
+    "202": {
+      "uid": "202",
       "spaceName": "구로아트벨리예술극장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA1MDZfMTEz%2FMDAxNjIwMjg3MjE5NTQw.CeWeDVbrLEqQj3JohAK-zMiRlOPF_aRslD1j79w9aRsg.En8QFXXj5MtL0srfRHMmrln6GC3j8SIZ3bCpeYNYPt4g.JPEG.newblockbaby%2F25.jpg&type=a340",
       "pageLink": "https://www.guroartsvalley.or.kr/user/overall/overallArt.do",
@@ -3355,14 +3227,14 @@
         "longitude": 126.8888969
       },
       "gu": "구로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2029-1700",
       "address": "서울 구로구 가마산로25길 9-24",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "211": {
-      "uid": "211",
+    "203": {
+      "uid": "203",
       "spaceName": "갤러리 구루지",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F277%2F2015%2F11%2F06%2F2015110615020296689_1_99_20151106150802.jpg&type=a340",
       "pageLink": "https://www.guroartsvalley.or.kr/user/overall/overallArt3.do",
@@ -3371,14 +3243,14 @@
         "longitude": 126.8895588
       },
       "gu": "구로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2029-1700",
       "address": "서울 구로구 가마산로25길 21",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "212": {
-      "uid": "212",
+    "204": {
+      "uid": "204",
       "spaceName": "구로구민회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA4MDVfMjQ5%2FMDAxNTMzNDc0MTU1MzA4.jtyYfJwsKGsxooBZiOOnT4so437_5E3zIH6lIy42bw4g.MTIT_3lMojFiOcjBDOhVwGKrVq_FczqYBySkh6o2FjUg.JPEG.suky_kr%2FIMG_7208_DSC09772.JPG&type=sc960_832",
       "pageLink": "https://www.guroartsvalley.or.kr/user/overall/overallArt4.do",
@@ -3387,14 +3259,14 @@
         "longitude": 126.8895588
       },
       "gu": "구로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2029-1700",
       "address": "서울 구로구 가마산로25길 21",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "213": {
-      "uid": "213",
+    "205": {
+      "uid": "205",
       "spaceName": "꿈나무극장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxODEwMDNfMjA0%2FMDAxNTM4NTY3OTg5Mzk0.QElpdyc0ADqLV9rkKwUMS7_QRWQnrFdlBL7myhC-Xwkg.8iC59J7t8_KE--0HEUuLDH7EMNffJne2nxR7PZ2DNV0g.JPEG.twinpop%2FIMG_20181002_165200.jpg&type=a340",
       "pageLink": "https://www.guroartsvalley.or.kr/user/overall/overallArt5.do",
@@ -3403,14 +3275,14 @@
         "longitude": 126.8872465
       },
       "gu": "구로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2029-1700",
       "address": "서울 구로구 구로동로26길 54",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "214": {
-      "uid": "214",
+    "206": {
+      "uid": "206",
       "spaceName": "오류아트홀",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMTdfMjkz%2FMDAxNTcxMjc1OTUwNDc0.zinqynBEkzprfFjoDEXeMwsT2t4Eqs7MX0CqKUbYveEg.f-cU740I_mxBVgfy-Cr0m1HdRaa91YxRIyw-8IrhiMUg.JPEG.digital9ro%2FIMG_3925.JPG&type=a340",
       "pageLink": "https://www.guroartsvalley.or.kr/user/overall/overallArt6.do",
@@ -3419,14 +3291,14 @@
         "longitude": 126.8461967
       },
       "gu": "구로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2029-1700",
       "address": "서울 구로구 경인로20가길 38 오류문화센터 2층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "215": {
-      "uid": "215",
+    "207": {
+      "uid": "207",
       "spaceName": "신도림오페라하우스",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MjFfMTk5%2FMDAxNjMyMjE2MjUwNTk3.uHUmEfpBCASVIXqElRRbHK1vJn8Z6BuJ9Trm58aVk4sg.iTRGFQ5BE03VOrkUzRsp9XxE0LjY91DZQPR02DWVR1sg.JPEG.freshap%2F0.jpg&type=a340",
       "pageLink": "https://www.guroartsvalley.or.kr/user/overall/overallArt8.do",
@@ -3435,14 +3307,14 @@
         "longitude": 126.890901
       },
       "gu": "구로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2029-1700",
       "address": "서울 구로구 구로동 3-33",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "216": {
-      "uid": "216",
+    "208": {
+      "uid": "208",
       "spaceName": "서울생활문화센터신도림",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEyMjFfMTYw%2FMDAxNjA4NTI5ODMyODY2.xq8I7-KzOpO495ZfiPBkB5qkQm1SnLwwFJlVBLZneKMg.VjLbDh2eSzXbPWcwMJ0tsKsB7Dd0VgXZBFghHT6TLkwg.PNG.120seoulcall%2F%25BC%25AD%25BF%25EF%25BB%25FD%25C8%25B0%25B9%25AE%25C8%25AD%25BC%25BE%25C5%25CD.png&type=a340",
       "pageLink": "https://www.artgori.or.kr:40019/load.asp?subPage=310",
@@ -3451,14 +3323,14 @@
         "longitude": 126.8910678
       },
       "gu": "구로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-867-2202",
       "address": "서울 구로구 새말로 117-21 지하1층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "217": {
-      "uid": "217",
+    "209": {
+      "uid": "209",
       "spaceName": "청춘삘딩",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAxMDlfMTY4%2FMDAxNjQxNzM1OTYyMzM3.Qw-rFyaoJn6V95-32Z8iXU1Wpe105PAxKLH8ZCBrCs0g.ouSflgOJ-N6dw8xZ4cCY56qq7cH-42yEWWNi67OiaCkg.JPEG.jkm0484%2FIMG_3514.jpg&type=a340",
       "pageLink": "https://www.youthcenter.go.kr/youngSpc/youngSpcDetail.do?pageIndex=2&srchYgmnSpceId=201808280010&dtlOpenYn=Y&srchSpceWdrCtpvCd=003002001&srchSpceBsgaCd=&srchUtzeCostCd=&srchOperSttsCd=&srchSpnm=&srchProgYN=&srchEmpmConsCd=&srchVdcnOperYn=&srchSortOrder=latest",
@@ -3467,14 +3339,14 @@
         "longitude": 126.8992715
       },
       "gu": "금천구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "070-7777-3745",
       "address": "서울 금천구 시흥대로138길 10-11",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "218": {
-      "uid": "218",
+    "210": {
+      "uid": "210",
       "spaceName": "어울샘",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MTZfMjEw%2FMDAxNjU1MzUyMjE1NDE2.IObtPuaIcalQguIuClaJPOYVQRga2OunaU_mvPOmpssg.C-uEi8p0RlMEWADhJDe-NqRuzWHmHz5GdLgp1MoU97wg.JPEG.culture_geumcheon%2F20220611_113759.jpg&type=sc960_832",
       "pageLink": "https://www.geumcheon.go.kr/portal/contents.do?key=2132",
@@ -3483,30 +3355,14 @@
         "longitude": 126.9116504
       },
       "gu": "금천구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-809-7860",
       "address": "서울 금천구 탑골로 22",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "219": {
-      "uid": "219",
-      "spaceName": "월계2동 자치회관",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20220707/1657181238460BCEVKG449RD5OG2MC5JN5DSWO.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S220707164351162461&code=T500&dCode=T506&sch_order=1&sch_choose_list=&sch_type=&sch_text=%EC%9B%94%EA%B3%842%EB%8F%99%20%EC%9E%90%EC%B9%98%ED%9A%8C%EA%B4%80&sch_recpt_begin_dt=&sch_recpt_end_dt=&sch_use_begin_dt=&sch_use_end_dt=&svc_prior=N&sch_reqst_value=",
-      "location": {
-        "latitude": 37.6324725,
-        "longitude": 127.0507383
-      },
-      "gu": "노원구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "02-2116-2435",
-      "address": "서울 노원구 초안산로5길 28",
-      "updated": "2023-01-05"
-    },
-    "220": {
-      "uid": "220",
+    "211": {
+      "uid": "211",
       "spaceName": "함석현기념관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F277%2F2015%2F08%2F31%2F2015083108274547205_1_99_20150831085104.jpg&type=a340",
       "pageLink": "http://hamsokhon.dobong.go.kr/reservation/introduce",
@@ -3515,14 +3371,14 @@
         "longitude": 127.0347856
       },
       "gu": "도봉구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-905-7007",
       "address": "서울 도봉구 도봉로 123길 33-6",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "221": {
-      "uid": "221",
+    "212": {
+      "uid": "212",
       "spaceName": "평화문화진지",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMTRfMTMz%2FMDAxNjEzMjkwMjQ3NzE1.-vR0uS0WNvrDRlXWr7H6j9NSctGIQi_22m0k_CNsb0Mg.z7X2_72k7Ro5sxXTsXRDT1W2pS8PwfgP1eNaWr2gG-kg.JPEG.jsa0738%2FSmartSelect%25A3%25DF20210214%25A3%25AD163544%25A3%25DFInstagram.jpg&type=a340",
       "pageLink": "https://culturebunker.or.kr/space/spacetable",
@@ -3531,14 +3387,14 @@
         "longitude": 127.0471938
       },
       "gu": "도봉구",
-      "detailInfo": "공간대관/수강신청(문화시설)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-3494-1970",
       "address": "서울 도봉구 마들로 932",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "222": {
-      "uid": "222",
+    "213": {
+      "uid": "213",
       "spaceName": "서울창업허브 공덕",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5738%2F2021%2F01%2F14%2F0000006699_001_20210114135551584.jpg&type=l340_165",
       "pageLink": "http://bit.ly/hubgongdeokstartup-plus",
@@ -3547,14 +3403,14 @@
         "longitude": 126.9498512
       },
       "gu": "마포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2115-2078",
       "address": "서울 마포구 백범로31길 21 서울창업허브",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "223": {
-      "uid": "223",
+    "214": {
+      "uid": "214",
       "spaceName": "소금나루도서관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAyMDNfMjg2%2FMDAxNjQzODYwOTIzMjIy.5Dpv8j8ihjCIT04GGbyoeNDi8MhTktVA8b48LcBf86wg.NQkbczdOh08f_O6rDWRwGZuM3KJojdR6vii-A2r2gfYg.JPEG.wngp715%2FIMG_7932.jpg&type=a340",
       "pageLink": "http://bit.ly/mplibmapogo",
@@ -3563,14 +3419,14 @@
         "longitude": 126.9460754
       },
       "gu": "마포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-3153-1618",
       "address": "서울 마포구 숭문길 72",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "224": {
-      "uid": "224",
+    "215": {
+      "uid": "215",
       "spaceName": "마포중앙도서관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzEyMzFfMjQw%2FMDAxNTE0NjQ2MDY5MDc5.ZG2ZJuZJSgpdLnbQV9NspoJJ_cjUTMtyU55WF7TYJ5wg.Mcd8iyuY7ns9z-lEk5GK1_9gVsi9ghJjdNZGG1FgywMg.JPEG.bleach234%2FIMG_1544.jpg&type=a340",
       "pageLink": "http://bit.ly/seoripulacor",
@@ -3579,14 +3435,14 @@
         "longitude": 126.907996
       },
       "gu": "마포구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-3153-5815",
       "address": "서울 마포구 성산로 128",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "225": {
-      "uid": "225",
+    "216": {
+      "uid": "216",
       "spaceName": "서리풀악기거리",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MTdfMTE2%2FMDAxNjYzNDI2NjA1MjQ2.QND9vW4O9n3XwFYFwa7sXw0Lx4iIfWS_KRbBKZxVm_og.d9lUN9i_wR8IUK-Biny1cYbsgFFdZJE0eDmQqteuvLMg.JPEG.sundukhwa%2F20220917%25A3%25DF181929.jpg&type=a340",
       "pageLink": "http://bit.ly/seoripulacor",
@@ -3595,14 +3451,14 @@
         "longitude": 127.0133406
       },
       "gu": "서초구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-3474-2911",
       "address": "서울 서초구 반포대로 58 104동 상가 3층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "226": {
-      "uid": "226",
+    "217": {
+      "uid": "217",
       "spaceName": "반포도서관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTEyMjJfMjkz%2FMDAxNjQwMTYyNTU2NDUz.JZHzv0sr1K8OO3pdLA050M7tBYJo4gyidtDIG9lUfmMg.coLVztjMLEDGhZOOwBGYp8ai4iu460BlsFAnH9WbBl4g.JPEG.heesun713%2F20211222%25A3%25DF134634.jpg&type=a340",
       "pageLink": "http://bit.ly/seocholibor",
@@ -3611,14 +3467,14 @@
         "longitude": 127.0124167
       },
       "gu": "서초구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-520-8700",
       "address": "서울 서초구 고무래로 34",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "227": {
-      "uid": "227",
+    "218": {
+      "uid": "218",
       "spaceName": "내곡도서관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA1MjFfOTMg%2FMDAxNTI2ODUzOTY4NTI3.vdC_Ie2mcLGfPnGgw_7fy6yqOHOL_oRXtjsGEEXd-rAg.jLHHRFSkqs6aFOPbQ2oi__XphphGhfMZ8TUQqK6MigMg.JPEG.solbim24%2F%25B3%25BB%25B0%25EE%25B5%25B5%25BC%25AD%25B0%25FC_%25C0%25FC%25B0%25E6.jpg&type=sc960_832",
       "pageLink": "http://bit.ly/naegokseocholibor",
@@ -3627,30 +3483,14 @@
         "longitude": 127.054202
       },
       "gu": "서초구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-3461-3007",
       "address": "서울 서초구 청계산로7길 9-20서울 서초구 청계산로7길 9-20",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "228": {
-      "uid": "228",
-      "spaceName": "용답동 주민센터 작은도서관",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20220826/16614887751237Z5BRG1GCXDLURVFQ610RKMEX.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S220826132921500116",
-      "location": {
-        "latitude": 37.5640643,
-        "longitude": 127.0555731
-      },
-      "gu": "성동구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "02-2286-7523",
-      "address": "서울 성동구 용답중앙23길 20",
-      "updated": "2023-01-05"
-    },
-    "229": {
-      "uid": "229",
+    "219": {
+      "uid": "219",
       "spaceName": "생활문화센터",
       "spaceImage": "https://www.sdfac.or.kr/images/kor/sdfac/content/imp_life_02.png",
       "pageLink": "https://www.sdfac.or.kr/kor/sdfac/rent/life/application.do?gotoMenuNo=04050300",
@@ -3659,14 +3499,14 @@
         "longitude": 127.0349267
       },
       "gu": "성동구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2204-7558",
       "address": "서울 성동구 고산자로 10길9",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "230": {
-      "uid": "230",
+    "220": {
+      "uid": "220",
       "spaceName": "다락옥수",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA1MDhfMjE4%2FMDAxNTI1NzA1OTMzNjAz.c79ZQzf6xBwVaOTnWaZlSNAa_RTXnk2FIfkfwBrdmIkg.EapBh-lDfTR3wf3jiLnklYcWWxolm0cib5JsWK0dRlMg.JPEG.antique1%2F20180504_192421.jpg&type=a340",
       "pageLink": "https://www.sdfac.or.kr/kor/sdfac/rent/daracoksu/application.do?gotoMenuNo=04050500",
@@ -3675,14 +3515,14 @@
         "longitude": 127.0169779
       },
       "gu": "성동구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2204-7541",
       "address": "서울 성동구 옥수동 360-4",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "231": {
-      "uid": "231",
+    "221": {
+      "uid": "221",
       "spaceName": "갈산문화예술센터",
       "spaceImage": "https://yfac.kr/nanum/site/builder/dir/main/img/menu2589/hall4_img1.jpg",
       "pageLink": "https://yfac.kr/main/contents.do?a_num=12102061",
@@ -3691,14 +3531,14 @@
         "longitude": 126.8701411
       },
       "gu": "양천구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-6289-3000",
       "address": "서울 양천구 목동남로 106",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "232": {
-      "uid": "232",
+    "222": {
+      "uid": "222",
       "spaceName": "청년지음",
       "spaceImage": "https://www.youthcenter.go.kr/framework/filedownload/getImage.do?filePathName=K43kYCzEpw54N3DsTLz6bFLRxzviQ3x2hmaApPVvGQa5yS5FIrM6VDLCsTfeNR7I0hllb%2Fwtq8t4%2B%2FDeSHdqMQ%3D%3D",
       "pageLink": "https://www.youthcenter.go.kr/youngSpc/youngSpcDetail.do?pageIndex=2&srchYgmnSpceId=202012110001&dtlOpenYn=Y&srchSpceWdrCtpvCd=003002001&srchSpceBsgaCd=&srchUtzeCostCd=&srchOperSttsCd=&srchSpnm=&srchProgYN=&srchEmpmConsCd=&srchVdcnOperYn=&srchSortOrder=latest",
@@ -3707,46 +3547,14 @@
         "longitude": 126.9665712
       },
       "gu": "용산구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-6261-1934",
       "address": "서울 용산구 서빙고로 17 공공시설동 3층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "233": {
-      "uid": "233",
-      "spaceName": "서울시 공익활동 공간 삼각지",
-      "spaceImage": "https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20220914/1663117281868XCOAMD4EKJC93LCUSRNNIFIRJ.jpg",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S220914095917324135",
-      "location": {
-        "latitude": 37.53614,
-        "longitude": 126.9716016
-      },
-      "gu": "용산구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "070-8160-2000",
-      "address": "서울 용산구 백범로99길 40한강로2가, 용산 베르디움 프렌즈) 101동 지하1층",
-      "updated": "2023-01-05"
-    },
-    "234": {
-      "uid": "234",
-      "spaceName": "서울청년활동지원센터",
-      "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F001%2F2022%2F08%2F17%2FAKR20220817022100004_01_i_P4_20220817111613052.jpg&type=a340",
-      "pageLink": "https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S220722181132827566",
-      "location": {
-        "latitude": 37.5412063,
-        "longitude": 126.9695419
-      },
-      "gu": "용산구",
-      "detailInfo": "공간대관",
-      "category": "rental",
-      "phoneNum": "02-6358-0607",
-      "address": "서울 용산구 원효로97길 15",
-      "updated": "2023-01-05"
-    },
-    "235": {
-      "uid": "235",
+    "223": {
+      "uid": "223",
       "spaceName": "은평문화예술회관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEyMTFfMjQ2%2FMDAxNTc2MDM0MzE0OTg4.iiLYdgokUSbNQ9WmLRNWyTcTA9Fhc4wZAK5puGmxGR0g.7N587A4O4BNNzStmAJu1fkolqrbAhn-mlqLgLGD8HxUg.JPEG.dlskdms07%2FKakaoTalk_20191211_120147522.jpg&type=a340",
       "pageLink": "https://www.efac.or.kr/sub05/sub09.php",
@@ -3755,14 +3563,14 @@
         "longitude": 126.927865
       },
       "gu": "은평구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-351-3736",
       "address": "서울 은평구 녹번로 16 ",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "236": {
-      "uid": "236",
+    "224": {
+      "uid": "224",
       "spaceName": "청년재단",
       "spaceImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiv7vSX3us_HROiWFV1NKKC0JLcZenQ2Zynw&usqp=CAU",
       "pageLink": "https://www.youthcenter.go.kr/youngSpc/youngSpcDetail.do?pageIndex=3&srchYgmnSpceId=201903080001&dtlOpenYn=Y&srchSpceWdrCtpvCd=003002001&srchSpceBsgaCd=&srchUtzeCostCd=&srchOperSttsCd=&srchSpnm=&srchProgYN=&srchEmpmConsCd=&srchVdcnOperYn=&srchSortOrder=latest",
@@ -3771,14 +3579,14 @@
         "longitude": 126.9812758
       },
       "gu": "종로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-6731-2600",
       "address": "서울 종로구 청계천로 35 관정빌딩 3층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "237": {
-      "uid": "237",
+    "225": {
+      "uid": "225",
       "spaceName": "무계원",
       "spaceImage": "https://www.jfac.or.kr/design/theme/jfac/images/re_sub/moogw_rent.png",
       "pageLink": "https://www.jfac.or.kr/site/main/board/rent/list",
@@ -3787,14 +3595,14 @@
         "longitude": 126.9634368
       },
       "gu": "종로구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-6203-1155",
       "address": "서울 종로구 창의문로 5가길 2",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "238": {
-      "uid": "238",
+    "226": {
+      "uid": "226",
       "spaceName": "청운문학도서관",
       "spaceImage": "https://www.jfac.or.kr/design/theme/jfac/images/re_sub/chungwoon_rent.png",
       "pageLink": "https://www.jfac.or.kr/site/main/board/rent/list",
@@ -3803,14 +3611,14 @@
         "longitude": 126.9661081
       },
       "gu": "종로구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-6203-1155",
       "address": "서울 종로구 자하문로 36길 40 청운동 4-20",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "239": {
-      "uid": "239",
+    "227": {
+      "uid": "227",
       "spaceName": "우리소리도서관",
       "spaceImage": "https://www.jfac.or.kr/design/theme/jfac/images/re_sub/woorisr_rent.png",
       "pageLink": "https://www.jfac.or.kr/site/main/board/rent/list",
@@ -3819,14 +3627,14 @@
         "longitude": 126.9902322
       },
       "gu": "종로구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-6203-1155",
       "address": "서울 종로구 삼일대로 30길 47 익선동 99",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "240": {
-      "uid": "240",
+    "228": {
+      "uid": "228",
       "spaceName": "상촌재",
       "spaceImage": "https://www.jfac.or.kr/design/theme/jfac/images/re_sub/sangchj_rent.png",
       "pageLink": "https://www.jfac.or.kr/site/main/board/rent/list",
@@ -3835,14 +3643,14 @@
         "longitude": 126.9694984
       },
       "gu": "종로구",
-      "detailInfo": "공간대관/수강신청(문화재단)",
+      "detailInfo": "동네 대관/프로그램",
       "category": "rental",
       "phoneNum": "02-6203-1155",
       "address": "서울 종로구 자하문로 17길 12-11 옥인동 19-16",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "241": {
-      "uid": "241",
+    "229": {
+      "uid": "229",
       "spaceName": "서울청년일자리센터",
       "spaceImage": "https://www.youthcenter.go.kr/framework/filedownload/getImage.do?filePathName=K43kYCzEpw54N3DsTLz6bAFPBUmEbSDqtIBomLi%2BHb6NJLIP1EfsUVkBadVWG7lAB3PzWHmhH8KdyJzitzxwyA%3D%3D",
       "pageLink": "https://www.youthcenter.go.kr/youngSpc/youngSpcDetail.do?pageIndex=3&srchYgmnSpceId=201808280023&dtlOpenYn=Y&srchSpceWdrCtpvCd=003002001&srchSpceBsgaCd=&srchUtzeCostCd=&srchOperSttsCd=&srchSpnm=&srchProgYN=&srchEmpmConsCd=&srchVdcnOperYn=&srchSortOrder=latest",
@@ -3851,14 +3659,14 @@
         "longitude": 126.9869696
       },
       "gu": "중구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-731-9570",
       "address": "서울 중구 삼일대로 363 장교빌딩 1층 서울시 청년일자리센터",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "242": {
-      "uid": "242",
+    "230": {
+      "uid": "230",
       "spaceName": "신당생활문화예술터 일상",
       "spaceImage": "http://junggu-art.com/images/room_2_2_1.jpg",
       "pageLink": "https://www.caci.or.kr/caci/main/contents.do?menuNo=200024",
@@ -3867,14 +3675,14 @@
         "longitude": 127.0169873
       },
       "gu": "중구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2230-6621",
       "address": "서울 중구 퇴계로 408 신당동) 신당사거리 공영주차장 1층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "243": {
-      "uid": "243",
+    "231": {
+      "uid": "231",
       "spaceName": "청년살이발전소",
       "spaceImage": "https://www.sbculture.or.kr/resources/culture/images/sub/subpageImg_15.jpg",
       "pageLink": "https://www.spacecloud.kr/space/45247?type=search",
@@ -3883,14 +3691,14 @@
         "longitude": 127.0093965
       },
       "gu": "성북구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-919-8059",
       "address": "서울 성북구 정릉로23길 56, 2",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "244": {
-      "uid": "244",
+    "232": {
+      "uid": "232",
       "spaceName": "품다 (대강당)",
       "spaceImage": "http://www.snpo.kr/img/place01b.JPG",
       "pageLink": "https://www.snpo.kr/npo_rent.php",
@@ -3899,14 +3707,14 @@
         "longitude": 126.9802317
       },
       "gu": "NPO",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-734-1109",
       "address": "서울 중구 남대문로 9길 39 부림빌딩 1층, 2층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "245": {
-      "uid": "245",
+    "233": {
+      "uid": "233",
       "spaceName": "주다 (교육장1)",
       "spaceImage": "http://www.snpo.kr/img/place02b.JPG",
       "pageLink": "https://www.snpo.kr/npo_rent.php",
@@ -3915,14 +3723,14 @@
         "longitude": 126.9802317
       },
       "gu": "NPO",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-734-1109",
       "address": "서울 중구 남대문로 9길 39 부림빌딩 1층, 2층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "246": {
-      "uid": "246",
+    "234": {
+      "uid": "234",
       "spaceName": "받다 (교육장2)",
       "spaceImage": "http://www.snpo.kr/img/place03b.JPG",
       "pageLink": "https://www.snpo.kr/npo_rent.php",
@@ -3931,14 +3739,14 @@
         "longitude": 126.9802317
       },
       "gu": "NPO",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-734-1109",
       "address": "서울 중구 남대문로 9길 39 부림빌딩 1층, 2층",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "247": {
-      "uid": "247",
+    "235": {
+      "uid": "235",
       "spaceName": "동대문구체육관",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTAzMjVfNTQg%2FMDAxNTUzNTIyMjkyNjky.AZE1gTRihZ9OBZSdrI-YlOZnf-fi2tcFjIqGQnG67xog.lTaCjGDCCrYoXcwMqYq3Mcz-73xJ_YPf7NmTNLgbWsMg.JPEG.ddmydy%2F54731055_2229581197125752_3322466316547260416_n.jpg&type=l340_165",
       "pageLink": "https://www.dfmc.kr:8443/course/sports/fmcs/10?lecture_type=R&page=1&center=DFMC03&event=1010000000&class=1010010000&subject=&weekname=&target=&lerturer_name=",
@@ -3947,14 +3755,14 @@
         "longitude": 127.0639667
       },
       "gu": "동대문구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-2247-9611",
       "address": "서울 동대문구 답십리로 210-3",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "248": {
-      "uid": "248",
+    "236": {
+      "uid": "236",
       "spaceName": "용두문화복지센터",
       "spaceImage": "https://search.pstatic.net/sunny/?src=http%3A%2F%2Fwww.jeonmae.co.kr%2Fnews%2Fphoto%2F201809%2F20180912_1_242408.jpg&type=a340",
       "pageLink": "https://www.dfmc.kr:8443/course/sports/fmcs/10?lecture_type=R&page=1&center=DFMC08&event=&class=&subject=&weekname=&target=&lerturer_name=",
@@ -3963,14 +3771,14 @@
         "longitude": 127.0391385
       },
       "gu": "동대문구",
-      "detailInfo": "수강신청",
+      "detailInfo": "동네 프로그램",
       "category": "sports",
       "phoneNum": "02-6929-2652",
       "address": "서울 동대문구 용두동 고산자로28길 13",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "249": {
-      "uid": "249",
+    "237": {
+      "uid": "237",
       "spaceName": "구로아트벨리 소극장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA0MTBfODMg%2FMDAxNTg2NDk4MDU2MjA2.ltQqQQDsBJ6jBP-md415GUvAu9HpFW9rbKRlkhOf5jEg.7YnmKYDPJjpb2irAiyH5OxQ7TZmIATUKHWoN7L4v4ukg.JPEG.myfower%2F20200409_151052.jpg&type=sc960_832",
       "pageLink": "https://www.guroartsvalley.or.kr/user/overall/overallArt2.do",
@@ -3979,14 +3787,14 @@
         "longitude": 126.888807
       },
       "gu": "구로구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2029-1748",
       "address": "서울 구로구 가마산로 25길 9-24",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "250": {
-      "uid": "250",
+    "238": {
+      "uid": "238",
       "spaceName": "대치 평생학습관",
       "spaceImage": "https://life.gangnam.go.kr/upload/file/20220922093755450_57046.png",
       "pageLink": "https://life.gangnam.go.kr/fmcs/54?facilities_type=C&base_date=20230104&rent_type=1001&center=GNCC23&part=04&place=4",
@@ -3995,14 +3803,14 @@
         "longitude": 127.0669484
       },
       "gu": "강남구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2176-0851",
       "address": "서울 강남구 영동대로57길 7",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "251": {
-      "uid": "251",
+    "239": {
+      "uid": "239",
       "spaceName": "청담 평생학습관",
       "spaceImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnB7wfqdxRMqQ4sJJc-4x2sxY6Gk_TJLuizQ&usqp=CAU",
       "pageLink": "https://life.gangnam.go.kr/fmcs/54?facilities_type=C&base_date=20230104&rent_type=1001&center=GNCC25&part=03&place=1",
@@ -4011,14 +3819,14 @@
         "longitude": 127.0464302
       },
       "gu": "강남구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2176-0831",
       "address": "서울 강남구 학동로67길 11",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "252": {
-      "uid": "252",
+    "240": {
+      "uid": "240",
       "spaceName": "종암박스파크",
       "spaceImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-GYtYYHMgtmXTKgi2hsseGOVLCoEnVf1scbMgI2nnGQ&s",
       "pageLink": "http://www.gongdan.go.kr/ezPay/reservation/selectRentList.do?",
@@ -4027,14 +3835,14 @@
         "longitude": 127.0330044
       },
       "gu": "성북구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2241-0176",
       "address": "서울 성북구 하월곡동 90-1373",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "253": {
-      "uid": "253",
+    "241": {
+      "uid": "241",
       "spaceName": "응봉축구풋살족구장",
       "spaceImage": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDAxMzBfNzUg%2FMDAxNTgwMzY4MjMzNTYy.J_8MyQ3sjhHn--uM--h1wzxgy65qk1ktyv0kkKOmAlEg.AW4NJa8VbhBih0dytHZrofN-_o47mIAdd73ndZAfqmEg.JPEG%2FexternalFile.jpg&type=a340",
       "pageLink": "https://sports.happysd.or.kr/fmcs/192?facilities_type=C&base_date=20230104&rent_type=1001&center=SUNGDONG12&part=01&place=",
@@ -4043,14 +3851,14 @@
         "longitude": 127.035583
       },
       "gu": "성동구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2204-7655",
       "address": "서울 성동구 응봉동 240-1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "254": {
-      "uid": "254",
+    "242": {
+      "uid": "242",
       "spaceName": "응봉 테니스장",
       "spaceImage": "https://sports.happysd.or.kr/File/Download/f7af6dabe952bdbe94c19ac26ced6a0c",
       "pageLink": "https://sports.happysd.or.kr/fmcs/192?facilities_type=C&base_date=20230104&rent_type=1001&center=SUNGDONG10&part=02&place=",
@@ -4059,14 +3867,14 @@
         "longitude": 127.0362233
       },
       "gu": "성동구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2204-7655",
       "address": "서울 성동구 응봉동 240-1",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     },
-    "255": {
-      "uid": "255",
+    "243": {
+      "uid": "243",
       "spaceName": "마장 테니스장",
       "spaceImage": "https://sports.happysd.or.kr/File/Download/d929b069378cb9f7c56dd0dbe8c51bcc",
       "pageLink": "https://sports.happysd.or.kr/fmcs/192?facilities_type=C&base_date=20230104&rent_type=1001&center=SUNGDONG11&part=02&place=",
@@ -4075,11 +3883,11 @@
         "longitude": 127.0389211
       },
       "gu": "성동구",
-      "detailInfo": "공간대관",
+      "detailInfo": "동네 대관",
       "category": "rental",
       "phoneNum": "02-2204-7640",
       "address": "서울 성동구 마장동 832",
-      "updated": "2023-01-05"
+      "updated": "2023-01-26"
     }
   }
 ]

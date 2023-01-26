@@ -69,6 +69,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   int colorindex = 0;
   double topContainer = 0;
   int dotindex =0;
+  Map<String, dynamic> urls = {};
+
+  // 자치구 관련 url들 가져오기
+  Future<void> checkUrls(String gu) async {
+    urls = await FirebaseService.getUrlsByGu(gu);
+  }
 
   Future<void> getUserLocalData() async {
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value){
@@ -82,6 +88,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
       setState(() {
         dropdownValue = LIST_MENU[0];
+        checkUrls(dropdownValue);
       });
     });
   }
@@ -524,6 +531,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   cuindex = 0;
                   dropdownValue = value;
                   defaultCenter = "전체";
+                  checkUrls(dropdownValue);
                 });
               },
               barrierColor: Colors.black.withOpacity(0.5),
@@ -536,8 +544,98 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             actions: <Widget>[
               TextButton(
                   onPressed: (){
-                    final Uri url = Uri.parse('${fnOnlineUrl(dropdownValue)}');
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlineUrl( url )));
+                    // final Uri url = Uri.parse('${fnOnlineUrl(dropdownValue)}');
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlineUrl( url )));
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                          contentPadding: EdgeInsets.only(top: 0.0),
+                          content: SizedBox(
+                            width: size.width,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                InkWell(
+                                  child: Container(
+                                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primary,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "동네신청",
+                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  child: AppTextButton(
+                                      text: "구청신청",
+                                      onPressed: () async {
+                                        final Uri url = Uri.parse(urls['reserveUrl']);
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen(url)));
+                                      }),
+                                  decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                ),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: urls['performUrl'].length,
+                                  itemBuilder: (context, index) {
+                                    String urlName = "공연・전시";
+
+                                    if (urls['performUrl'].length > 1) {
+                                      urlName += " (${urls['performUrl'][index]['name']})";
+                                    }
+
+                                    return Container(
+                                      decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                      child: AppTextButton(
+                                        text: urlName,
+                                        onPressed: () async {
+                                          final Uri url = Uri.parse(urls['performUrl'][index]['url']);
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen(url)));
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: urls['cultureUrl'].length,
+                                  itemBuilder: (context, index) {
+                                    String urlName = "문화강좌";
+
+                                    if (urls['cultureUrl'].length > 1) {
+                                      urlName += " (${urls['cultureUrl'][index]['name']})";
+                                    }
+
+                                    return Container(
+                                      decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                      child: AppTextButton(
+                                        text: urlName,
+                                        onPressed: () async {
+                                          final Uri url = Uri.parse(urls['cultureUrl'][index]['url']);
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen(url)));
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                   child: Container(
                       // decoration: BoxDecoration(
