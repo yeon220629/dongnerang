@@ -125,54 +125,64 @@ class _noticemainpageState extends State<noticemainpage>
             url, userKeyword["body"], userKeyword['center_name'], userKeyword['registrationdate'], 0
           )));
         },
-        child: Container(
-          width: size.width ,
-          height: size.height / 7.5,
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        child: SizedBox(
+          width: size.width,
+          height: 90,
+          // height: size.height / 7.5,
+          // margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           // decoration: BoxDecoration(
           //   borderRadius: BorderRadius.circular(8), //모서리를 둥글게
           //   border: Border.all(color: Colors.black, width: 1)), //테두리
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  '${userKeyword['body']}',
-                  style: const TextStyle(fontSize: 15),
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.start,
-                  maxLines: 2,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: colorindex == 1
-                      ? Color(0xff5496D2)
-                      : colorindex == 0
-                      ? Color(0xff3CC181)
-                      : colorindex == 2
-                      ? AppColors.darkgreen
-                      : colorindex == 3
-                      ? AppColors.primary
-                      : colorindex == 4
-                      ? AppColors.orange
-                      : colorindex == 5
-                      ? AppColors.red
-                      : Color(0xffEE6D01),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0,0,8,0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Text(
+                    '${userKeyword['body']}',
+                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.justify,
+                    maxLines: 2,
                   ),
-                  padding: EdgeInsets.all(2),
-                  child: Text(
-                    ' ${userKeyword['center_name']} ',
-                    style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
-                    textDirection: ui.TextDirection.ltr,
-                  )
-                ),
-              ],
-            )
+                  // const SizedBox(
+                  //   height: 15,
+                  // ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: colorindex == 1
+                              ? Color(0xff5496D2)
+                              : colorindex == 0
+                              ? Color(0xff3CC181)
+                              : colorindex == 2
+                              ? AppColors.darkgreen
+                              : colorindex == 3
+                              ? AppColors.primary
+                              : colorindex == 4
+                              ? AppColors.orange
+                              : colorindex == 5
+                              ? AppColors.red
+                              : Color(0xffEE6D01),
+                          ),
+                          child: Text(
+                            ' ${userKeyword['center_name']} ',
+                            style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+                            textDirection: ui.TextDirection.ltr,
+                          )
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ),
           )
         )
       ));
@@ -309,18 +319,11 @@ class _noticemainpageState extends State<noticemainpage>
                             if (scale < 0 ) { scale = 0;}
                             else if (scale > 1) { scale = 1; }
                           }
-                          return Opacity(
-                            opacity: scale,
-                            child: Transform(
-                              transform: Matrix4.identity()..scale(scale, scale),
-                              alignment: Alignment.bottomCenter,
-                              child: Align(
-                                  heightFactor: 0.95,
+                          return Align(
+                                  heightFactor: 1.1,
                                   alignment: Alignment.topCenter,
                                   // child: userItemsData[i],
                                   child : userItemsData[i]
-                              ),
-                            ),
                           );
                         }
                     )
@@ -330,10 +333,7 @@ class _noticemainpageState extends State<noticemainpage>
             ),
           ),
 
-          Center(
-            child: SizedBox(
-              height: size.height,
-              child: Column(
+              Column(
                 children: [
                   Expanded(
                     child: ListView.builder(
@@ -346,25 +346,16 @@ class _noticemainpageState extends State<noticemainpage>
                           if (scale < 0 ) { scale = 0;}
                           else if (scale > 1) { scale = 1; }
                         }
-                        return Opacity(
-                          opacity: scale,
-                          child: Transform(
-                            transform: Matrix4.identity()..scale(scale, scale),
-                            alignment: Alignment.bottomCenter,
-                            child: Align(
-                              heightFactor: 0.95,
+                        return Align(
+                              heightFactor: 0.98,
                               alignment: Alignment.topCenter,
                               child: noticeItemsData[i],
-                            ),
-                          ),
                         );
                       }
                     )
                   ),
                 ],
               ),
-            ),
-          ),
         ],
       ),
     );

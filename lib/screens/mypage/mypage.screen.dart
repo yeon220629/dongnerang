@@ -106,46 +106,45 @@ class _mypageScreenState extends State<mypageScreen> {
                         textAlign: TextAlign.justify,
                         maxLines: 2,
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Container(
-                                padding: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: colorindex == 1
-                                      ? Color(0xff5496D2)
-                                      : colorindex == 0
-                                      ? Color(0xff3CC181)
-                                      : colorindex == 2
-                                      ? AppColors.darkgreen
-                                      : colorindex == 3
-                                      ? AppColors.primary
-                                      : colorindex == 4
-                                      ? AppColors.orange
-                                      : colorindex == 5
-                                      ? AppColors.red
-                                      : Color(0xffEE6D01),
-                                ),
-                                child: Text(
-                                  ' ${responseList[i][1]} ',
-                                  style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
-                                  textDirection: ui.TextDirection.ltr,
-                                )
+                      // const SizedBox(
+                      //   height: 15,
+                      // ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Container(
+                                  padding: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: colorindex == 1
+                                        ? Color(0xff5496D2)
+                                        : colorindex == 0
+                                        ? Color(0xff3CC181)
+                                        : colorindex == 2
+                                        ? AppColors.darkgreen
+                                        : colorindex == 3
+                                        ? AppColors.primary
+                                        : colorindex == 4
+                                        ? AppColors.orange
+                                        : colorindex == 5
+                                        ? AppColors.red
+                                        : Color(0xffEE6D01),
+                                  ),
+                                  child: Text(
+                                    ' ${responseList[i][1]} ',
+                                    style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+                                    textDirection: ui.TextDirection.ltr,
+                                  )
+                              ),
+                            SizedBox(width: 7),
+                            Text(
+                              // '시작일 | ${responseList[i][2].toString().trim()}',
+                              '등록일 | ${dateFormat.format(dateTime)}',
+                              style: const TextStyle(fontSize: 13, color: Colors.grey),
+                              textDirection: ui.TextDirection.ltr,
                             ),
-                          ),
-                          SizedBox(width: 7),
-                          Text(
-                            // '시작일 | ${responseList[i][2].toString().trim()}',
-                            '등록일 | ${dateFormat.format(dateTime)}',
-                            style: const TextStyle(fontSize: 13, color: Colors.grey),
-                            textDirection: ui.TextDirection.ltr,
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     ],
                   ),

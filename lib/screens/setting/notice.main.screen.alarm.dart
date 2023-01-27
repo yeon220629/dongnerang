@@ -67,8 +67,23 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
                     width: size.width / 1.25,
                     height: size.height / 15,
                     child: TextField(
+                      onSubmitted: (value) {
+                        if(widget.keywordList.length > 19){
+                          EasyLoading.showError("키워드는 20개 이상은 불가 합니다.");
+                          return;
+                        }else if(addKeyword.text == ''){
+                          EasyLoading.showError("공백은 등록 불가 합니다.");
+                          return;
+                        }
+                        setState(() {
+                          widget.keywordList.add(addKeyword.text);
+                        });
+                        addKeyword.text = '';
+                      },
                       controller: addKeyword,
                       decoration: InputDecoration(
+                        hintText: '키워드를 입력해주세요 ex) 예술, 모집',
+                        hintStyle: TextStyle(fontSize: 13),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(width: 1),
                           borderRadius: BorderRadius.circular(10)

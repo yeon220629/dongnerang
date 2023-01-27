@@ -34,7 +34,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         children: [
           ExpansionTile(
             title: Text('"동네랑"이 출시했어요!', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),),
-            subtitle: Text('22.11.29'),
+            subtitle: Text('23.1.1'),
             children: <Widget>[
               Lottie.asset(
                 'assets/lottie/112431-3d-success.json',
