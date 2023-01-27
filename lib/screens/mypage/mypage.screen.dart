@@ -174,16 +174,12 @@ class _mypageScreenState extends State<mypageScreen> {
     userSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
     userSaveData.then((value){
       setState(() {
-        value[0]?.forEach((element) {
-          if(element.toString().contains('/')){
-            profileImage = element.toString();
-          }else{
-            userName = element.toString();
-          }
-        });
+        profileImage = value[0]['profileImage'];
+        userName = value[0]['name'];
         getPostsData(value[2],value[3]);
       });
     });
+
     controllers.addListener(() {
       double value = controllers.offset/119;
       setState(() {

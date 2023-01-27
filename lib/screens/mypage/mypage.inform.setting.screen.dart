@@ -12,7 +12,7 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../constants/colors.constants.dart';
-import '../../constants/common.constants.dart';
+import '../../constants/common.constants2.dart' as commonValue;
 import '../../controller/private.setting.controller.dart';
 import '../../services/firebase.service.dart';
 import '../../services/user.service.dart';
@@ -20,10 +20,9 @@ import '../../util/logger.service.dart';
 import '../mainScreenBar.dart';
 
 class mypageInformSettingScreen extends GetView<PrivateSettingController> {
-  String profilePhotoSetting = '';
-  String profilenickSetting = '';
-  List profileKeyword = [];
-  List profilelocal = [];
+  set ageValue(ageValue) {
+    commonValue.commonConstant2.mypageInformAgeValue = ageValue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,52 +37,30 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('프로필 수정', style: TextStyle(
+              Text('내 정보 수정', style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.5,
                   color: Colors.black)),
-              SizedBox(width: 100,),
+              SizedBox(width: size.width / 5,),
               TextButton(
                   onPressed: () async {
-                    // print("PrivateLocalData : $PrivateLocalData");
-                    // print("profilelocal : $profilelocal");
-                    // print("profilelocal.isEmpty : ${profilelocal.isEmpty}");
+                    print(commonValue.commonConstant2.mypageInformPhotoSetting);
+                    print(commonValue.commonConstant2.mypageInformNickSetting);
+                    print(commonValue.commonConstant2.mypageInformGender);
+                    print(commonValue.commonConstant2.mypageInformAgeValue);
+
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance
-                            .collection("users")
-                            .doc(UserService.to.currentUser.value!.email)
-                            .update(({
-                          "profileImage":profilePhotoSetting == ''
-                              ? profileImage
-                              : profilePhotoSetting,
-                          "name":profilenickSetting == ''
-                              ? userName
-                              : profilenickSetting,
-                          "keyword": profileKeyword[0],
-                          "local": profilelocal.isEmpty
-                              ? PrivateLocalData
-                              : profilelocal[0]
-                        }));
-                        await FirebaseService.getUserKeyExist(UserService.to.currentUser.value!.email).then((value) {
-                          if(value == true){
-                            // String email, List value, String key
-                            profilelocal.isEmpty
-                              ? FirebaseService.savePrivacyProfile(UserService.to.currentUser.value!.email,PrivateLocalData,'alramlocal')
-                              : FirebaseService.savePrivacyProfile(UserService.to.currentUser.value!.email,profilelocal[0],'alramlocal');
-                          }else{
-                            profilelocal.isEmpty
-                              ? FirebaseService.savePrivacyProfile(UserService.to.currentUser.value!.email,PrivateLocalData,'alramlocal')
-                              : FirebaseService.savePrivacyProfile(UserService.to.currentUser.value!.email,profilelocal[0],'alramlocal');
-                          }
-                        });
-
-                        profilePhotoSetting = '';
-                        profilenickSetting = '';
-                        profileKeyword = [];
-                        profilelocal = [];
-                        mypageCustomKeyword = [];
-                        // PrivateLocalData = [];
+                          .collection("users")
+                          .doc(UserService.to.currentUser.value!.email)
+                          .update(({
+                            "profileImage": commonValue.commonConstant2.mypageInformPhotoSetting,
+                            "name": commonValue.commonConstant2.mypageInformNickSetting,
+                            "gender": commonValue.commonConstant2.mypageInformGender,
+                            "age" : commonValue.commonConstant2.mypageInformAgeValue
+                          }));
+                          // PrivateLocalData = [];
                         EasyLoading.showSuccess("프로필 수정 완료");
                         await FirebaseService.getCurrentUser();
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
@@ -114,30 +91,37 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                 children: [
                   Stack(
-                      children: [
-                        Container(
-                          child : mypagePhotoProfileSetting(callback: (value){
-                            profilePhotoSetting = value;
-                            // print("mypageProfileSetting : $profilePhotoSetting");
-                          },),
-                          height: size.height / 4,
+                    children: [
+                      Container(
+                        child : mypagePhotoProfileSetting(callback: (value){
+                          commonValue.commonConstant2.mypageInformPhotoSetting = value;
+                        },),
+                        height: size.height / 4,
+                      ),
+                      Container(
+                        child: mypageNickNameProfileSetting(callback: (value){
+                          commonValue.commonConstant2.mypageInformNickSetting = value;
+                        },),
+                        margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
+                      ),
+                      Positioned(
+                        top: size.height / 3,
+                        child: Container(
+                          child: genderChoiceWidget(callback: (value) {
+                            commonValue.commonConstant2.mypageInformGender = value;
+                          }),
+                        )
+                      ),
+                      Positioned(
+                        top: size.height / 2,
+                        child: Container(
+                          child: AgeStatefulWidget(callback: (value){
+                            commonValue.commonConstant2.mypageInformAgeValue = value;
+                          }
                         ),
-                        Container(
-                          child: mypageNickNameProfileSetting(callback: (value){
-                            profilenickSetting = value;
-                            // print("mypageNickNameProfileSetting : $profilenickSetting");
-                          },),
-                          margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
-                        ),
-                        mypageKeywordStateful(callback: (value) {
-                          // print("mypageKeywordStateful : $value");
-                          profileKeyword.add(value);
-                        }),
-                        TagKeywordStateful(callback: (value) {
-                          profilelocal.add(value);
-                        }),
-                      ],
-                    ),
+                      ))
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -148,320 +132,250 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
   }
 }
 
-class mypageKeywordStateful extends StatefulWidget {
-  late final Function callback;
-  mypageKeywordStateful({required this.callback});
+class genderChoiceWidget extends StatefulWidget {
+  final Function callback;
+  genderChoiceWidget({required this.callback});
+  @override
+  State<genderChoiceWidget> createState() => _genderChoiceState();
+}
+
+class _genderChoiceState extends State<genderChoiceWidget> {
+  late List<bool> isClick;
+  bool man = false;
+  bool girl = false;
+  String gender = '';
 
   @override
-  State<mypageKeywordStateful> createState() => _mypageKeywordStateful();
-}
-class _mypageKeywordStateful extends State<mypageKeywordStateful> {
-  final myController = TextEditingController();
-  final List tags = [];
-  final List selected_tags = [];
-  final List select_tags = [];
+  void initState() {
+    // TODO: implement initState
+    if(commonValue.commonConstant2.mypageInformGender == '남성'){
+      setState(() {
+        man = true;
+      });
+    }else{
+      setState(() {
+        girl = true;
+      });
+    }
+
+    isClick = [man, girl];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final double categoryHeight = size.height * 0.30;
 
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height / 3.5),
+    return Container(
+      padding: EdgeInsets.only(top: 20),
+      child: SizedBox(
+          width: size.width,
+          height: 55,
+          child: ToggleButtons(
+            borderWidth: 1,
+            borderRadius: BorderRadius.circular(13),
+            borderColor: AppColors.grey,
+            color: Colors.grey,
+            fillColor: AppColors.primary,
+            selectedColor: Colors.white,
+            focusColor: AppColors.white,
+            selectedBorderColor: AppColors.primary,
+            children: [
+              Container(
+                child: SizedBox(
+                  width: (size.width - 56) / 2,
+                  // padding: EdgeInsets.symmetric(horizontal: size.width / 6),
+                  child: Text(
+                    '남성',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              Container(
+                child: SizedBox(
+                  width: (size.width - 56) / 2,
+                  // padding: EdgeInsets.symmetric(horizontal: 100),
+                  child: Text(
+                    '여성',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+            ],
+            onPressed: toggleSelect,
+            isSelected: isClick,
+          )),
+    );
+  }
+
+  void toggleSelect(value) {
+    if (value == 0) {
+      man = true;
+      girl = false;
+      gender = '남성';
+      widget.callback(gender);
+    }
+    if (value == 1) {
+      girl = true;
+      man = false;
+      gender = '여성';
+      widget.callback(gender);
+    }
+    setState(() {
+      isClick = [man, girl];
+    });
+  }
+}
+
+class AgeStatefulWidget extends StatefulWidget {
+  final Function callback;
+  AgeStatefulWidget({required this.callback});
+  @override
+  State<AgeStatefulWidget> createState() => _AgeStatefulWidgetWidgetState();
+}
+
+class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
+  String? defaultYear = '2022';
+  String? defaultMonth = '1';
+  String? defaultDay = '1';
+  // birthDay birth = new birthDay(year: commonValue.commonConstant2.mypageInformAgeValue['year'], month: commonValue.commonConstant2.mypageInformAgeValue['month'], day: commonValue.commonConstant2.mypageInformAgeValue['day']);
+
+  DateTime date = DateTime.utc(2000,1,1);
+
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 290,
+        decoration: BoxDecoration(color: Colors.white),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("키워드", style: TextStyle(fontWeight: FontWeight.bold),),
+                CupertinoButton(
+                  child: Text(
+                    '취소',
+                    style: TextStyle(
+                      color: AppColors.red,
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      date = DateTime.now();
+                      commonValue.commonConstant2.mypageInformAgeValue['year'] = '';
+                      commonValue.commonConstant2.mypageInformAgeValue['month'] = '';
+                      commonValue.commonConstant2.mypageInformAgeValue['day'] = '';
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+                CupertinoButton(
+                  child: Text(
+                    '완료',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ],
             ),
-            SizedBox(height: 5,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: FittedBox(
-                  // fit: BoxFit.fill,
-                  // alignment: Alignment.topLeft,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: size.width,
-                        height: size.height / 13,
-                        child: TextFormField(
-                          controller: myController,
-                          onFieldSubmitted: (value) {
-                            if(myController.text == ''){
-                              EasyLoading.showInfo("공백은 등록 할 수 없습니다");
-                              return;
-                            }
-                            if(mypageCustomKeyword.length != 0){
-                              for(int i = 0; i < mypageCustomKeyword.length; i++){
-                                if(mypageCustomKeyword[i] == myController.text){
-                                  EasyLoading.showInfo("중복값은 포함 될 수 없습니다..");
-                                  return;
-                                }
-                              }
-                            }
-                            // select_tags.add(myController.text);
-                            // print("select_tags : $select_tags");
-                            // print("mypageCustomKeyword : $mypageCustomKeyword");
-                            setState(() {
-                              mypageCustomKeyword.add(myController.text);
-                              // print(mypageCustomKeyword);
-                              widget.callback(mypageCustomKeyword);
-                            });
-                            myController.clear();
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: Icon(Icons.search),
-                              color: AppColors.grey,
-                              onPressed: () {
-                                if(myController.text == ''){
-                                  EasyLoading.showInfo("공백은 등록 할 수 없습니다");
-                                  return;
-                                }
-                                if(mypageCustomKeyword.length != 0){
-                                  for(int i = 0; i < mypageCustomKeyword.length; i++){
-                                    if(mypageCustomKeyword[i] == myController.text){
-                                      EasyLoading.showInfo("중복값은 포함 될 수 없습니다..");
-                                      return;
-                                    }
-                                  }
-                                }
-                                // select_tags.add(myController.text);
-                                // print("select_tags : $select_tags");
-                                // print("mypageCustomKeyword : $mypageCustomKeyword");
-                                setState(() {
-                                  mypageCustomKeyword.add(myController.text);
-                                  // print(mypageCustomKeyword);
-                                  widget.callback(mypageCustomKeyword);
-                                });
-                                myController.clear();
-                              },
-                            ),
-                            hintText: '관심 키워드를 등록해주세요! ex)예술,공간 등',
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(13)),
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            focusColor: AppColors.primary,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(13)),
-                              borderSide: BorderSide(
-                                color: AppColors.grey,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: size.width,
-                            // margin: const EdgeInsets.only(right: 5),
-                            height: categoryHeight - 180,
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                // padding: EdgeInsets.all(10),
-                                children: <Widget>[Wrap(children: [...generate_tags(mypageCustomKeyword)],spacing: 2.0,)],
-                              ),
-                            ),
-                        ],
-                      ),
-                    ],
-                  )
+            Container(
+              height: 220,
+              padding: const EdgeInsets.only(top: 6.0),
+              margin: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              color: CupertinoColors.systemBackground.resolveFrom(context),
+              child: SafeArea(
+                top: false,
+                child: child,
               ),
             ),
           ],
-        )
+        ),
+      ),
     );
   }
-  //키워드 삭제 하는 부분으로 일단 보류
-  generate_tags(value) {
-    widget.callback(value);
-    return value.map((tag) => get_chip(tag)).toList();
-  }
-  get_chip(name) {
-    return Padding(
-        padding: EdgeInsets.all(2),
-        child: Chip(
-          backgroundColor: AppColors.primary,
-          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          // deleteButtonTooltipMessage: '삭제하시겠습니까?',
-          deleteIcon: Icon(Icons.close, size: 15,),
-          deleteIconColor: Colors.white,
-          label: Text('$name'),
-          onDeleted: (){
-            setState(() {
-              mypageCustomKeyword.remove(name);
-              select_tags.remove(name);
-            });
-          },
-        )
-    );
-  }
-}
-
-class TagKeywordStateful extends StatefulWidget {
-  late final Function callback;
-  TagKeywordStateful({required this.callback});
-
-  @override
-  State<TagKeywordStateful> createState() => _TagKeywordStatefulState();
-}
-
-class _TagKeywordStatefulState extends State<TagKeywordStateful> {
-
-  final List tags = [];
-  final List select_tags = [];
-  List selected_tags = [];
-  bool selectCheck = false;
 
   @override
   Widget build(BuildContext context) {
-
     final Size size = MediaQuery.of(context).size;
-
-    return Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: size.height / 12.5
-        ),
-        child: Column(
-          children: [
-            SizedBox(height: size.height / 2.85,),
-            Row(
-              children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Text("지역선택", style: TextStyle(fontWeight: FontWeight.bold),),
-                )
-              ],
-            ),
-            SizedBox(height: 5,),
-            Container(
-              child: Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                spacing: size.width / 20, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
-            ),
-            Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
+    widget.callback(commonValue.commonConstant2.mypageInformAgeValue);
+    //생년월일 ui
+    return Container(
+        padding: EdgeInsets.only(right: size.width / 7.5),
+        width: size.width / 1,
+        height: 55,
+        child: _DatePickerItem(
+          children: <Widget>[
+            CupertinoButton(
+                child: Container(
+                    // width: size.width - 130,
+                    child: commonValue.commonConstant2.mypageInformAgeValue['year'] == ''
+                        ? Text(
+                      // '생년월일을 입력해주세요',
+                      '${commonValue.commonConstant2.mypageInformAgeValue['year']}년 ${commonValue.commonConstant2.mypageInformAgeValue['month']}월 ${commonValue.commonConstant2.mypageInformAgeValue['day']}일',
+                      style: const TextStyle(
+                        color: AppColors.grey,
+                      ),
+                    )
+                        : Text(
+                      '${date.year}년 ${date.month}월 ${date.day}일',
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
+                    )),
+                onPressed: () => _showDialog(CupertinoDatePicker(
+                  initialDateTime: date,
+                  minimumYear: 1900,
+                  maximumDate: DateTime.now(),
+                  mode: CupertinoDatePickerMode.date,
+                  use24hFormat: true,
+                  onDateTimeChanged: (DateTime newDate) {
+                    setState(() => date = newDate);
+                    setState(() {
+                      // birth.year = newDate.year.toString();
+                      // birth.month = newDate.month.toString();
+                      // birth.day = newDate.day.toString();
+                      commonValue.commonConstant2.mypageInformAgeValue['year'] = newDate.year.toString();
+                      commonValue.commonConstant2.mypageInformAgeValue['month'] = newDate.month.toString();
+                      commonValue.commonConstant2.mypageInformAgeValue['day'] = newDate.day.toString();
+                    });
+                  },
+                )))
           ],
-        )
-    );
+        ));
   }
+}
 
-  generate_tags(value) {
-    return value.map((tag) => get_chip(tag)).toList();
-  }
-  get_chip(name) {
-    for(int i =0; i < PrivateLocalData.length; i++){
-      if(PrivateLocalData.length == 3){
-        if(name == PrivateLocalData[0] || name == PrivateLocalData[1] || name == PrivateLocalData[2]){
-          selectCheck = false;
-        }else{
-          selectCheck = true;
-        }
-      }else if(PrivateLocalData.length == 2){
-        if(name == PrivateLocalData[0] || name == PrivateLocalData[1]){
-          selectCheck = false;
-        }else{
-          selectCheck = true;
-        }
-      }else{
-        if(name == PrivateLocalData[0]){
-          selectCheck = false;
-        }else{
-          selectCheck = true;
-        }
-      }
-    }
-    return FilterChip(
-      selected: selected_tags.contains(name),
-      selectedColor: AppColors.primary,
-      // disabledColor: Colors.blue.shade400,
-      avatar: (name == "강남") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/GANGNAM.PNG')) :
-      (name == "강동") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/GANGDONG.PNG')) :
-      (name == "강북") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/GANGBUK.PNG')) :
-      (name == "강서") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/GANGSEO.PNG')) :
-      (name == "관악") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/GWANAK.PNG')) :
-      (name == "광진") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/GWANGZIN.PNG')) :
-      (name == "구로") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/GOORO.PNG')) :
-      (name == "금천") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/GEUAMCHEOUN.PNG')) :
-      (name == "노원") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/NOWON.PNG')) :
-      (name == "도봉") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/DOBONG.PNG')) :
-      (name == "중구") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/JUNGGU.PNG')) :
-      (name == "동작") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/DONGJAK.PNG')) :
-      (name == "마포") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/MAPO.PNG')) :
-      (name == "서초") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/SEOCHO.PNG')) :
-      (name == "중랑") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/JUNGNANG.PNG')) :
-      (name == "종로") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/JONGRO.PNG')) :
-      (name == "성동") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/SEONGDONG.PNG')) :
-      (name == "성북") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/SEONGBUK.PNG')) :
-      (name == "송파") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/SONGPA.PNG')) :
-      (name == "양천") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/YANGCHEON.PNG')) :
-      (name == "용산") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/YONGSAN.PNG')) :
-      (name == "은평") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/EUNPYENG.PNG')) :
-      (name == "동대문") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/DONGDAEMUN.PNG')) :
-      (name == "영등포") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/YEONGDEUNGPO.PNG')) :
-      (name == "서대문") ?
-      CircleAvatar(backgroundImage: AssetImage('assets/images/SEODAEMUN.PNG')) :
-      SizedBox(),
-      backgroundColor: Colors.white,
-      shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
-      label: selectCheck == false
-          ? name == "중구"
-            ? Text("${name}", style: TextStyle(color:AppColors.primary, fontWeight: FontWeight.bold))
-            : Text("${name}구", style: TextStyle(color:AppColors.primary, fontWeight: FontWeight.bold)
-      )
-          : name == "중구"
-            ? Text("${name}")
-            : Text("${name}구"
+class _DatePickerItem extends StatelessWidget {
+  const _DatePickerItem({required this.children});
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(13),
+        border: Border.all(
+          width: 1,
+          color: AppColors.grey,
+        ),
       ),
-      labelStyle: TextStyle(
-        color: selected_tags.contains(name)? Colors.white : Colors.black,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: children,
+        ),
       ),
-      onSelected: (value) {
-        if (select_tags.length > 2) {
-          value = false;
-        }
-        if (value == true) {
-          select_tags.add(name);
-        }
-        if (value == false) {
-          select_tags.remove(name);
-        }
-        setState(() {
-          selected_tags = select_tags;
-          widget.callback(selected_tags);
-        });
-      },
     );
   }
 }
@@ -498,11 +412,12 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
   Widget imageProfile() {
     final Size size = MediaQuery.of(context).size;
     bool profileimagetype = true;
-    if(!profileImage!.contains("http")){
+
+    if(!commonValue.commonConstant2.mypageInformPhotoSetting!.contains("http")){
       profileimagetype = false;
     }
-    if(profileImage == ''){
-      profileImage = "assets/images/default-profile.png";
+    if(commonValue.commonConstant2.mypageInformPhotoSetting == ''){
+      commonValue.commonConstant2.mypageInformPhotoSetting = "assets/images/default-profile.png";
     }
     return Center(
       child: Stack(
@@ -522,11 +437,11 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                         ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
                         : _imageFile == null
                           ? profileimagetype
-                          ? CachedNetworkImage(imageUrl: profileImage!, width: size.width / 2.2, fit: BoxFit.fill)
+                          ? CachedNetworkImage(imageUrl: commonValue.commonConstant2.mypageInformPhotoSetting!, width: size.width / 2.2, fit: BoxFit.fill)
                           // : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
-                          : profileImage!.contains('assets/images/default-profile.png')
+                          : commonValue.commonConstant2.mypageInformPhotoSetting!.contains('assets/images/default-profile.png')
                             ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
-                            : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
+                            : Image.file(File(commonValue.commonConstant2.mypageInformPhotoSetting!), width: size.width / 2.2, fit: BoxFit.fill,)
                           : Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,)
               )
             )
@@ -554,7 +469,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
   Widget bottomSheet() {
     final Size size = MediaQuery.of(context).size;
     return Container(
-        height: 100,
+        height: size.height / 7,
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.symmetric(
             horizontal: 20,
@@ -604,11 +519,6 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
 
 
   takePhoto(ImageSource source) async {
-    // Pick an image
-    // final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    // print("file : ${file}");
-    // print("filepath : ${file?.path.runtimeType}");
-    // print("source : ${source}");
     final XFile? file = await ImagePicker().pickImage( source: source);
     setState(() {
       _imageFile = file;
@@ -669,7 +579,7 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
                   ),
                 ),
                 // labelText: '${userName}',
-                hintText: '${userName}'
+                hintText: '${commonValue.commonConstant2.mypageInformNickSetting}'
             ),
             // onSaved: ,
             onChanged: (value){
@@ -684,5 +594,165 @@ class _mypageNickNameProfileSettingState extends State<mypageNickNameProfileSett
   }
 }
 
+
+// class TagKeywordStateful extends StatefulWidget {
+//   late final Function callback;
+//   TagKeywordStateful({required this.callback});
+//
+//   @override
+//   State<TagKeywordStateful> createState() => _TagKeywordStatefulState();
+// }
+//
+// class _TagKeywordStatefulState extends State<TagKeywordStateful> {
+//
+//   final List tags = [];
+//   final List select_tags = [];
+//   List selected_tags = [];
+//   bool selectCheck = false;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//
+//     final Size size = MediaQuery.of(context).size;
+//
+//     return Padding(
+//         padding: EdgeInsets.symmetric(
+//             vertical: size.height / 12.5
+//         ),
+//         child: Column(
+//           children: [
+//             SizedBox(height: size.height / 2.85,),
+//             Row(
+//               children: [
+//                 Container(
+//                   alignment: Alignment.topLeft,
+//                   child: Text("지역선택", style: TextStyle(fontWeight: FontWeight.bold),),
+//                 )
+//               ],
+//             ),
+//             SizedBox(height: 5,),
+//             Container(
+//               child: Wrap(
+//                 alignment: WrapAlignment.spaceBetween,
+//                 spacing: size.width / 20, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
+//             ),
+//             Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
+//           ],
+//         )
+//     );
+//   }
+//
+//   generate_tags(value) {
+//     return value.map((tag) => get_chip(tag)).toList();
+//   }
+//   get_chip(name) {
+//     for(int i =0; i < PrivateLocalData.length; i++){
+//       if(PrivateLocalData.length == 3){
+//         if(name == PrivateLocalData[0] || name == PrivateLocalData[1] || name == PrivateLocalData[2]){
+//           selectCheck = false;
+//         }else{
+//           selectCheck = true;
+//         }
+//       }else if(PrivateLocalData.length == 2){
+//         if(name == PrivateLocalData[0] || name == PrivateLocalData[1]){
+//           selectCheck = false;
+//         }else{
+//           selectCheck = true;
+//         }
+//       }else{
+//         if(name == PrivateLocalData[0]){
+//           selectCheck = false;
+//         }else{
+//           selectCheck = true;
+//         }
+//       }
+//     }
+//     return FilterChip(
+//       selected: selected_tags.contains(name),
+//       selectedColor: AppColors.primary,
+//       // disabledColor: Colors.blue.shade400,
+//       avatar: (name == "강남") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/GANGNAM.PNG')) :
+//       (name == "강동") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/GANGDONG.PNG')) :
+//       (name == "강북") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/GANGBUK.PNG')) :
+//       (name == "강서") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/GANGSEO.PNG')) :
+//       (name == "관악") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/GWANAK.PNG')) :
+//       (name == "광진") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/GWANGZIN.PNG')) :
+//       (name == "구로") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/GOORO.PNG')) :
+//       (name == "금천") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/GEUAMCHEOUN.PNG')) :
+//       (name == "노원") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/NOWON.PNG')) :
+//       (name == "도봉") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/DOBONG.PNG')) :
+//       (name == "중구") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/JUNGGU.PNG')) :
+//       (name == "동작") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/DONGJAK.PNG')) :
+//       (name == "마포") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/MAPO.PNG')) :
+//       (name == "서초") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/SEOCHO.PNG')) :
+//       (name == "중랑") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/JUNGNANG.PNG')) :
+//       (name == "종로") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/JONGRO.PNG')) :
+//       (name == "성동") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/SEONGDONG.PNG')) :
+//       (name == "성북") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/SEONGBUK.PNG')) :
+//       (name == "송파") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/SONGPA.PNG')) :
+//       (name == "양천") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/YANGCHEON.PNG')) :
+//       (name == "용산") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/YONGSAN.PNG')) :
+//       (name == "은평") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/EUNPYENG.PNG')) :
+//       (name == "동대문") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/DONGDAEMUN.PNG')) :
+//       (name == "영등포") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/YEONGDEUNGPO.PNG')) :
+//       (name == "서대문") ?
+//       CircleAvatar(backgroundImage: AssetImage('assets/images/SEODAEMUN.PNG')) :
+//       SizedBox(),
+//       backgroundColor: Colors.white,
+//       shape: StadiumBorder(side: selected_tags.contains(name)? BorderSide(color: AppColors.white) : BorderSide(color: AppColors.grey)),
+//       label: selectCheck == false
+//           ? name == "중구"
+//             ? Text("${name}", style: TextStyle(color:AppColors.primary, fontWeight: FontWeight.bold))
+//             : Text("${name}구", style: TextStyle(color:AppColors.primary, fontWeight: FontWeight.bold)
+//       )
+//           : name == "중구"
+//             ? Text("${name}")
+//             : Text("${name}구"
+//       ),
+//       labelStyle: TextStyle(
+//         color: selected_tags.contains(name)? Colors.white : Colors.black,
+//       ),
+//       onSelected: (value) {
+//         if (select_tags.length > 2) {
+//           value = false;
+//         }
+//         if (value == true) {
+//           select_tags.add(name);
+//         }
+//         if (value == false) {
+//           select_tags.remove(name);
+//         }
+//         setState(() {
+//           selected_tags = select_tags;
+//           widget.callback(selected_tags);
+//         });
+//       },
+//     );
+//   }
+// }
 
 

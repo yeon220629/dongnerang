@@ -177,24 +177,31 @@ class FirebaseService {
   }
 
   static Future<List> getUserPrivacyProfile(String email) async {
-    List getUserData = [];
+    // List getUserData = [];
     List getUserSaveData = [];
     List getUserSaveKeyData = [];
+    var name =''; var profileImage = ''; var gender = ''; var age;
     final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
     checkDuplicate.data()?.forEach((key, value) async {
-      if(key.contains("name")){
-        getUserData.add(value);
-      }
-      if(key.contains("profileImage")){
-        getUserData.add(value);
-      }
+      if(key.contains("name")){ name = value; }
+      if(key.contains("profileImage")){ profileImage = value; }
+      if(key.contains('gender')){ gender = value; }
+      if(key.contains('age')){ age = value; }
       if(key.contains("userSaveData")){
         getUserSaveData.add(value);
         getUserSaveKeyData.add(key);
       }
     });
+    var getUserData = {
+      'name': name,
+      'profileImage': profileImage,
+      'gender': gender,
+      'age' : age
+    };
+    // print("test : $test");
     return [getUserData, getUserSaveData, checkDuplicate.data(), getUserSaveKeyData];
   }
+
   //user key exist check
   static Future<bool?> getUserKeyExist(String email) async {
     bool? ch = false;

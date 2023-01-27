@@ -19,12 +19,12 @@ import 'package:lottie/lottie.dart';
 import 'package:new_version/new_version.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
+import '../constants/common.constants2.dart';
 import 'package:dongnerang/screens/search.screen.dart';
 import '../services/firebase.service.dart';
 import '../widgets/app_button.widget.dart';
 import 'banner/banner.dart';
 import 'notice.main.screen.dart';
-import 'online.url.screen.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -371,7 +371,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       }
     });
     FirebaseService.getUserKeyExist(userEmail!).then((value) {
-      print("PrivateLocalData : $PrivateLocalData");
+      // print("PrivateLocalData : $PrivateLocalData");
       if(value == false){
         FirebaseService.savePrivacyProfile(userEmail!,PrivateLocalData,'alramlocal');
       }
@@ -380,13 +380,13 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     mypageUserSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
     mypageUserSaveData.then((value){
       setState(() {
-        value[0]?.forEach((element) {
-          if(element.toString().contains('/')){
-            profileImage = element.toString();
-          }else{
-            userName = element.toString();
-          }
-        });
+        commonConstant2.mypageInformPhotoSetting = value[0]['profileImage'];
+        commonConstant2.mypageInformNickSetting = value[0]['name'];
+        commonConstant2.mypageInformGender = value[0]['gender'];
+        // commonConstant2.mypageInformAgeValue = ;
+        commonConstant2.mypageInformAgeValue = value[0]['age'];
+        // print(commonConstant2.mypageInformAgeValue['year']);
+        // print("commonConstant2.mypageInformAgeValue ${commonConstant2.mypageInformAgeValue.year}");
       });
     });
     controllers.addListener(() {
