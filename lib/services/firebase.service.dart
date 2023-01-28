@@ -186,7 +186,7 @@ class FirebaseService {
       if(key.contains("name")){ name = value; }
       if(key.contains("profileImage")){ profileImage = value; }
       if(key.contains('gender')){ gender = value; }
-      if(key.contains('age')){ age = value; }
+      if(key == 'age'){ age = value; }
       if(key.contains("userSaveData")){
         getUserSaveData.add(value);
         getUserSaveKeyData.add(key);
