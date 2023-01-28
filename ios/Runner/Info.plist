@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202301222</string>
+	<string>202301282</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>0</string>
 	<key>GADApplicationIdentifier</key>
@@ -306,7 +306,7 @@
 	<key>buildCount</key>
 	<string>2</string>
 	<key>buildDay</key>
-	<string>20230122</string>
+	<string>20230128</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

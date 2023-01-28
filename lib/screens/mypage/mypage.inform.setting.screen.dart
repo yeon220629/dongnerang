@@ -24,6 +24,13 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
     commonValue.commonConstant2.mypageInformAgeValue = ageValue;
   }
 
+  void fnResetValue(){
+    print("함수 초기화");
+    commonValue.commonConstant2.keywordList = [];
+    commonValue.commonConstant2.localList = [];
+    commonValue.commonConstant2.selectLocal = [];
+  }
+
   @override
   Widget build(BuildContext context) {
     Get.put(PrivateSettingController());
@@ -44,10 +51,14 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: size.width / 5,),
               TextButton(
                   onPressed: () async {
-                    print(commonValue.commonConstant2.mypageInformPhotoSetting);
-                    print(commonValue.commonConstant2.mypageInformNickSetting);
-                    print(commonValue.commonConstant2.mypageInformGender);
-                    print(commonValue.commonConstant2.mypageInformAgeValue);
+                    // print(commonValue.commonConstant2.mypageInformPhotoSetting);
+                    // print(commonValue.commonConstant2.mypageInformNickSetting);
+                    // print(commonValue.commonConstant2.mypageInformGender);
+                    // print(commonValue.commonConstant2.mypageInformAgeValue);
+                    //
+                    // print(commonValue.commonConstant2.keywordList);
+                    // print(commonValue.commonConstant2.localList);
+                    // print(commonValue.commonConstant2.selectLocal);
 
                     if (controller.formKey.currentState!.validate()) {
                       try {
@@ -61,6 +72,7 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                             "age" : commonValue.commonConstant2.mypageInformAgeValue
                           }));
                           // PrivateLocalData = [];
+                        fnResetValue();
                         EasyLoading.showSuccess("프로필 수정 완료");
                         await FirebaseService.getCurrentUser();
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
@@ -165,23 +177,28 @@ class _genderChoiceState extends State<genderChoiceWidget> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
-    return Container(
-      padding: EdgeInsets.only(top: 20),
-      child: SizedBox(
-          width: size.width,
-          height: 55,
-          child: ToggleButtons(
-            borderWidth: 1,
-            borderRadius: BorderRadius.circular(13),
-            borderColor: AppColors.grey,
-            color: Colors.grey,
-            fillColor: AppColors.primary,
-            selectedColor: Colors.white,
-            focusColor: AppColors.white,
-            selectedBorderColor: AppColors.primary,
-            children: [
-              Container(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          child: Text("성별", style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        Container(
+          padding: EdgeInsets.only(top: 5),
+          child: SizedBox(
+            width: size.width,
+            height: 55,
+            child: ToggleButtons(
+              borderWidth: 1,
+              borderRadius: BorderRadius.circular(13),
+              borderColor: AppColors.grey,
+              color: Colors.grey,
+              fillColor: AppColors.primary,
+              selectedColor: Colors.white,
+              focusColor: AppColors.white,
+              selectedBorderColor: AppColors.primary,
+              children: [
+                Container(
                 child: SizedBox(
                   width: (size.width - 56) / 2,
                   // padding: EdgeInsets.symmetric(horizontal: size.width / 6),
@@ -191,22 +208,25 @@ class _genderChoiceState extends State<genderChoiceWidget> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-              ),
-              Container(
-                child: SizedBox(
+                ),
+                Container(
+                  child: SizedBox(
                   width: (size.width - 56) / 2,
                   // padding: EdgeInsets.symmetric(horizontal: 100),
                   child: Text(
                     '여성',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-              )
-            ],
-            onPressed: toggleSelect,
-            isSelected: isClick,
-          )),
+                )
+              ],
+              onPressed: toggleSelect,
+              isSelected: isClick,
+            )
+          ),
+        )
+      ],
     );
   }
 
@@ -242,7 +262,7 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
   String? defaultDay = '1';
   // birthDay birth = new birthDay(year: commonValue.commonConstant2.mypageInformAgeValue['year'], month: commonValue.commonConstant2.mypageInformAgeValue['month'], day: commonValue.commonConstant2.mypageInformAgeValue['day']);
 
-  DateTime date = DateTime.utc(2000,1,1);
+  DateTime date = DateTime.utc(int.parse(commonValue.commonConstant2.mypageInformAgeValue['year']),int.parse(commonValue.commonConstant2.mypageInformAgeValue['month']),int.parse(commonValue.commonConstant2.mypageInformAgeValue['day']));
 
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
@@ -308,49 +328,58 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
     final Size size = MediaQuery.of(context).size;
     widget.callback(commonValue.commonConstant2.mypageInformAgeValue);
     //생년월일 ui
-    return Container(
-        padding: EdgeInsets.only(right: size.width / 7.5),
-        width: size.width / 1,
-        height: 55,
-        child: _DatePickerItem(
-          children: <Widget>[
-            CupertinoButton(
-                child: Container(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          child: Text("생년월일", style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        SizedBox(height: size.height / 100,),
+        Container(
+          padding: EdgeInsets.only(right: size.width / 7.5),
+          width: size.width / 1,
+          height: 55,
+          child: _DatePickerItem(
+            children: <Widget>[
+              CupertinoButton(
+                  child: Container(
                     // width: size.width - 130,
-                    child: commonValue.commonConstant2.mypageInformAgeValue['year'] == ''
-                        ? Text(
-                      // '생년월일을 입력해주세요',
-                      '${commonValue.commonConstant2.mypageInformAgeValue['year']}년 ${commonValue.commonConstant2.mypageInformAgeValue['month']}월 ${commonValue.commonConstant2.mypageInformAgeValue['day']}일',
-                      style: const TextStyle(
-                        color: AppColors.grey,
-                      ),
-                    )
-                        : Text(
-                      '${date.year}년 ${date.month}월 ${date.day}일',
-                      style: const TextStyle(
-                        color: Colors.black,
-                      ),
-                    )),
-                onPressed: () => _showDialog(CupertinoDatePicker(
-                  initialDateTime: date,
-                  minimumYear: 1900,
-                  maximumDate: DateTime.now(),
-                  mode: CupertinoDatePickerMode.date,
-                  use24hFormat: true,
-                  onDateTimeChanged: (DateTime newDate) {
-                    setState(() => date = newDate);
-                    setState(() {
-                      // birth.year = newDate.year.toString();
-                      // birth.month = newDate.month.toString();
-                      // birth.day = newDate.day.toString();
-                      commonValue.commonConstant2.mypageInformAgeValue['year'] = newDate.year.toString();
-                      commonValue.commonConstant2.mypageInformAgeValue['month'] = newDate.month.toString();
-                      commonValue.commonConstant2.mypageInformAgeValue['day'] = newDate.day.toString();
-                    });
-                  },
-                )))
-          ],
-        ));
+                      child: commonValue.commonConstant2.mypageInformAgeValue['year'] == ''
+                          ? Text(
+                        // '생년월일을 입력해주세요',
+                        '${commonValue.commonConstant2.mypageInformAgeValue['year']}년 ${commonValue.commonConstant2.mypageInformAgeValue['month']}월 ${commonValue.commonConstant2.mypageInformAgeValue['day']}일',
+                        style: const TextStyle(
+                          color: AppColors.grey,
+                        ),
+                      )
+                          : Text(
+                        '${date.year}년 ${date.month}월 ${date.day}일',
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+                      )),
+                  onPressed: () => _showDialog(CupertinoDatePicker(
+                    initialDateTime: date,
+                    minimumYear: 1900,
+                    maximumDate: DateTime.now(),
+                    mode: CupertinoDatePickerMode.date,
+                    use24hFormat: true,
+                    onDateTimeChanged: (DateTime newDate) {
+                      setState(() => date = newDate);
+                      setState(() {
+                        // birth.year = newDate.year.toString();
+                        // birth.month = newDate.month.toString();
+                        // birth.day = newDate.day.toString();
+                        commonValue.commonConstant2.mypageInformAgeValue['year'] = newDate.year.toString();
+                        commonValue.commonConstant2.mypageInformAgeValue['month'] = newDate.month.toString();
+                        commonValue.commonConstant2.mypageInformAgeValue['day'] = newDate.day.toString();
+                      });
+                    },
+                  )))
+            ],
+          ))
+      ],
+    );
   }
 }
 

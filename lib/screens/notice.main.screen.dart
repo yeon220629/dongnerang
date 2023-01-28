@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dongnerang/constants/common.constants2.dart';
 import 'package:dongnerang/screens/setting/notice.main.screen.alarm.dart';
 import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,11 +32,6 @@ class _noticemainpageState extends State<noticemainpage>
   List<Widget> noticeItemsData = [];
   List<Widget> userDataWidget = [];
   List<Widget> userItemsData = [];
-
-  //알림 키워드 설정으로 보낼 데이터
-  List keywordList = [];
-  List localList = [];
-  List selectLocal = [];
 
   Future<void> getNoticeData(td) async {
     final Size size = MediaQuery.of(context).size;
@@ -128,11 +124,6 @@ class _noticemainpageState extends State<noticemainpage>
         child: SizedBox(
           width: size.width,
           height: 90,
-          // height: size.height / 7.5,
-          // margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          // decoration: BoxDecoration(
-          //   borderRadius: BorderRadius.circular(8), //모서리를 둥글게
-          //   border: Border.all(color: Colors.black, width: 1)), //테두리
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
             child: Padding(
@@ -173,10 +164,18 @@ class _noticemainpageState extends State<noticemainpage>
                           ),
                           child: Text(
                             ' ${userKeyword['center_name']} ',
-                            style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+                            style: const TextStyle(fontSize: 12, color: AppColors.white, fontWeight: FontWeight.w500),
                             textDirection: ui.TextDirection.ltr,
-                          )
+                          ),
                         ),
+                        SizedBox(width: size.width / 20,),
+                        Container(
+                          child: Text(
+                            '등록일 | ${userKeyword['registrationdate']}',
+                            style: const TextStyle(fontSize: 12, color: AppColors.grey, fontWeight: FontWeight.w500),
+                            textDirection: ui.TextDirection.ltr,
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -208,25 +207,25 @@ class _noticemainpageState extends State<noticemainpage>
     });
     FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value) {
       value.forEach((element) {
-        keywordList.add(element);
+        commonConstant2.keywordList.add(element);
       });
     });
 
     FirebaseService.getUserLocalData(userEmail!, 'local').then((value) {
       value.forEach((element) {
-        localList.add(element);
-        selectLocal.add(element);
+        commonConstant2.localList.add(element);
+        commonConstant2.selectLocal.add(element);
       });
-      localList.add('서울시');
+      commonConstant2.localList.add('서울시');
     });
 
     // local exist Check
     FirebaseService.getUserKeyExist(userEmail!).then((value) {
       if(value == true){
-        selectLocal = [];
+        commonConstant2.selectLocal = [];
         FirebaseService.getUserLocalData(userEmail!, 'alramlocal').then((value) {
           value.forEach((element) {
-            selectLocal.add(element);
+            commonConstant2.selectLocal.add(element);
           });
         });
       }
@@ -280,7 +279,7 @@ class _noticemainpageState extends State<noticemainpage>
                 children: [
                   TextButton(
                       onPressed: (){
-                        Get.to(() => noticemainAlarmpage(keywordList, localList,selectLocal));
+                        Get.to(() => noticemainAlarmpage(commonConstant2.keywordList, commonConstant2.localList,commonConstant2.selectLocal));
                         // Navigator.push(
                         //   context, MaterialPageRoute(builder: (context) => noticemainAlarmpage(),),);
                       },

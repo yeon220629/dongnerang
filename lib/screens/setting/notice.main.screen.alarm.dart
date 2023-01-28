@@ -113,27 +113,17 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
                     fontWeight: FontWeight.bold
                     ),
                   ),
-                      Wrap(
-                        children: <Widget>[...generate_tags(widget.keywordList)],
-                      ),
+                  Wrap(
+                    children: <Widget>[...generate_tags(widget.keywordList)],
+                  ),
                   SizedBox(height: size.height / 30,),
                   Text("알림동네", style: TextStyle(fontWeight: FontWeight.bold)),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 1),
-                  //   child:
-                  //   SizedBox(
-                  //     width: size.width,
-                  //     height: size.height / 8,
-                  //     child:
-                      Wrap(
-                        children: <Widget>[...localgenerate_tags(widget.localList)],
-                        ),
-
-                      // ),
-                    // ),
-                  // ),
-                ],
-              ),],
+                    Wrap(
+                      children: <Widget>[...localgenerate_tags(widget.localList)],
+                    ),
+                  ],
+                ),
+              ],
             ),
           )
         ),
@@ -177,11 +167,9 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
         // backgroundColor: AppColors.primary,
         onSelected: (bool selec){
           setState(() {
-            print("widget.selectLocal : ${widget.selectLocal}");
             setState(() {
               // remove
               if(!selec){
-                print("name :$name");
                 widget.selectLocal.remove(name);
               }else{
                 widget.selectLocal.add(name);
