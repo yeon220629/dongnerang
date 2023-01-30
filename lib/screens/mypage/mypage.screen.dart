@@ -253,7 +253,7 @@ class _mypageScreenState extends State<mypageScreen> {
             },
           )
         ],
-        title: Text('마이 페이지', style: TextStyle(color: Colors.black)),
+        title: Text('마이페이지', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
       body: Column(
