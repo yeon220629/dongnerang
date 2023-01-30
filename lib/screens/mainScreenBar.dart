@@ -126,6 +126,12 @@ class mainScreenState extends State<mainScreen>{
                         // ),
                       ],
                       onTap: (index) {
+                        if(navigationController.currentBottomMenuIndex.value == 0){
+                          // print("index : $index");
+                          // print("navigationController : ${navigationController.currentBottomMenuIndex.value}");
+                          var navi = PrimaryScrollController.of(context);
+                          navi?.jumpTo(0);
+                        }
                         navigationController.currentBottomMenuIndex.value = index;
                         // 마이페이지 리스트 출력
                         if(index == 2){
