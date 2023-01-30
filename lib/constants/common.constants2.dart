@@ -1,5 +1,6 @@
 // 소스 내의 중복 함수 공통으로 정의 dart 파일
 import 'package:firebase_auth/firebase_auth.dart';
+import '../services/user.service.dart';
 
 class commonConstant2{
   static List CustomKeyword = [];
@@ -18,7 +19,7 @@ class commonConstant2{
   static List localList = [];
   static List selectLocal = [];
   static late Future<List> mypageUserSaveData;
-  // 하단 마이페이지 화면의 프로필 수정 부분 변수
+  // 하단 마이페이지 화면의 프로필 수정 부분 변수 : mypage.inform.setting.screen.dart
   static String mypageInformPhotoSetting = '';
   static String mypageInformNickSetting = '';
   static String mypageInformGender = '';

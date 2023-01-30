@@ -370,23 +370,19 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
         PrivateLocalData.add(value[i]);
       }
     });
-    FirebaseService.getUserKeyExist(userEmail!).then((value) {
-      // print("PrivateLocalData : $PrivateLocalData");
+    FirebaseService.getUserKeyExist(userEmail!, 'alramlocal').then((value) {
       if(value == false){
         FirebaseService.savePrivacyProfile(userEmail!,PrivateLocalData,'alramlocal');
       }
     });
 
-    mypageUserSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
-    mypageUserSaveData.then((value){
+    commonConstant2.mypageUserSaveData = FirebaseService.getUserPrivacyProfile(userEmail!);
+    commonConstant2.mypageUserSaveData.then((value){
       setState(() {
         commonConstant2.mypageInformPhotoSetting = value[0]['profileImage'];
         commonConstant2.mypageInformNickSetting = value[0]['name'];
         commonConstant2.mypageInformGender = value[0]['gender'];
-        // commonConstant2.mypageInformAgeValue = ;
         commonConstant2.mypageInformAgeValue = value[0]['age'];
-        // print(commonConstant2.mypageInformAgeValue['year']);
-        // print("commonConstant2.mypageInformAgeValue ${commonConstant2.mypageInformAgeValue.year}");
       });
     });
     controllers.addListener(() {

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:dongnerang/constants/common.constants2.dart';
 import 'package:dongnerang/firebase_options.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:dongnerang/screens/splash.screen.dart';
@@ -31,12 +32,25 @@ void main() async {
   await Permission.notification.isDenied.then((value) {
     if (value) { Permission.notification.request(); }
   });
-  if(FirebaseAuth.instance.currentUser?.email != null){
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    // 앱이 죽었을떄
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  }
 
+  String? firebaseUsername = FirebaseAuth.instance.currentUser?.email;
+  //alramlocalPermission 알림 허용 권한 키가 없을 경우
+  FirebaseService.getUserKeyExist(firebaseUsername!, 'alramlocalPermission').then((value){
+    if(value == false){ FirebaseService.savePrivacyProfile(firebaseUsername!, [true], 'alramlocalPermission'); }
+  });
+
+  late Future<List> userAlramPermission;
+  userAlramPermission = FirebaseService.getUserPrivacyProfile(firebaseUsername!);
+  userAlramPermission.then((value) async {
+    // print(value[0]['alramlocalPermission']);
+    if(value[0]['alramlocalPermission'] == true){
+      if(firebaseUsername != null){
+        await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+        // 앱이 죽었을떄
+        FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+      }
+    }else{ print("alram not come"); }
+  });
   runApp(const MyApp());
 }
 

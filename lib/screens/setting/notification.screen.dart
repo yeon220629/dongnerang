@@ -1,16 +1,9 @@
+import 'package:dongnerang/services/firebase.service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
+import '../../services/user.service.dart';
 import '../../widgets/app_appbar_common.widget.dart';
-
-// class Notification extends StatelessWidget {
-//   const Notification({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
 
 class NotificationScreen extends StatefulWidget {
     const NotificationScreen({Key? key}) : super(key: key);
@@ -20,8 +13,21 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  bool status = false;
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
   bool _lights = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    FirebaseService.getUserPrivacyProfile(userEmail!).then((value) {
+      // print("value[0]['alramlocalPermission'] : ${value[0]['alramlocalPermission']}");
+      setState(() {
+        _lights = value[0]['alramlocalPermission'];
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +37,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         title: const Text('알림 허용'),
         value: _lights,
         onChanged: (bool value) {
+          FirebaseService.savePrivacyProfile(userEmail!,[value],'alramlocalPermission');
           setState(() {
             _lights = value;
           });

@@ -220,7 +220,7 @@ class _noticemainpageState extends State<noticemainpage>
     });
 
     // local exist Check
-    FirebaseService.getUserKeyExist(userEmail!).then((value) {
+    FirebaseService.getUserKeyExist(userEmail!, 'alramlocal').then((value) {
       if(value == true){
         commonConstant2.selectLocal = [];
         FirebaseService.getUserLocalData(userEmail!, 'alramlocal').then((value) {

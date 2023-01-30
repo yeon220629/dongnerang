@@ -67,8 +67,6 @@ class FirebaseService {
     checkDuplicate.data()?.forEach((key, value) {
       if(key.contains("userSaveData")){
         if(value[3] == title){
-          // print("key number : $key");
-          // print("value Data : ${value[4]}");
           toggleValue = value[4];
         }
       }
@@ -163,7 +161,6 @@ class FirebaseService {
     checkDuplicate.data()?.forEach((key, value) async {
       if(key.contains("userSaveData")){
         if(value[3] == title){
-          // print("key number : $key");
           var data = <String, dynamic>{
             key: FieldValue.delete(),
           };
@@ -177,10 +174,8 @@ class FirebaseService {
   }
 
   static Future<List> getUserPrivacyProfile(String email) async {
-    // List getUserData = [];
-    List getUserSaveData = [];
-    List getUserSaveKeyData = [];
-    var name =''; var profileImage = ''; var gender = ''; var age;
+    List getUserSaveData = []; List getUserSaveKeyData = [];
+    var name =''; var profileImage = ''; var gender = ''; var age; bool alramlocalPermission = false;
     final checkDuplicate =  await FirebaseFirestore.instance.collection("users").doc(email).get();
     checkDuplicate.data()?.forEach((key, value) async {
       if(key.contains("name")){ name = value; }
@@ -191,50 +186,63 @@ class FirebaseService {
         getUserSaveData.add(value);
         getUserSaveKeyData.add(key);
       }
+      if(key == "alramlocalPermission"){
+        alramlocalPermission = value[0];
+      }
     });
     var getUserData = {
       'name': name,
       'profileImage': profileImage,
       'gender': gender,
-      'age' : age
+      'age' : age,
+      'alramlocalPermission' : alramlocalPermission
     };
-    // print("test : $test");
     return [getUserData, getUserSaveData, checkDuplicate.data(), getUserSaveKeyData];
   }
 
   //user key exist check
-  static Future<bool?> getUserKeyExist(String email) async {
+  static Future<bool?> getUserKeyExist(String email,String param) async {
     bool? ch = false;
     var checkKey = FirebaseFirestore.instance.collection("users").doc(email).get();
     await checkKey.then((value){
-      ch = value.data()?.keys.contains('alramlocal');
+      // ch = value.data()?.keys.contains('alramlocal');
+      value.data()?.keys.forEach((element) {
+        if(element == param){
+          ch = true;
+        }
+      });
     });
     return ch;
   }
 
   static Future<void> savePrivacyProfile(String email, List value, String key) async{
     var addValue = await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email);
-    if(key.contains("keyword")){
+    if(key == "keyword"){
         await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
           key: value,
         }));
       }
-      if(key.contains("local")){
+      if(key == "local"){
         await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
           key: value,
         }));
       }
-    if(key.contains("recentSearch")){
+    if(key == "recentSearch"){
       await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
         key: value,
       }));
     }
-    if(key.contains('alramlocal')){
+    if(key == 'alramlocal'){
       await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
         key: value,
       }));
     }
-    if(key.contains("userSearchWord")){
+    if(key == 'alramlocalPermission'){
+      await FirebaseFirestore.instance.collection("users").doc(UserService.to.currentUser.value!.email).update(({
+        key: value,
+      }));
+    }
+    if(key == "userSearchWord"){
       addValue.get().then((addValueList) {
         addValueList.data()?.forEach((key, value2) {
           if(key == 'userSearchWord'){

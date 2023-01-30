@@ -186,8 +186,10 @@ class _mypageScreenState extends State<mypageScreen> {
         closeTapContainer = controllers.offset > 50;
       });
     });
-    // print("chekc : ${commonConstant2().toString()}");
     // 키워드 설정으로 바로 보내기 위한 변수 세팅
+    commonConstant2.keywordList = [];
+    commonConstant2.localList = [];
+    commonConstant2.selectLocal = [];
     FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value) {
       value.forEach((element) {
         commonConstant2.keywordList.add(element);
@@ -202,7 +204,7 @@ class _mypageScreenState extends State<mypageScreen> {
     });
 
     // local exist Check
-    FirebaseService.getUserKeyExist(userEmail!).then((value) {
+    FirebaseService.getUserKeyExist(userEmail!, 'alramlocal').then((value) {
       if(value == true){
         commonConstant2.selectLocal = [];
         FirebaseService.getUserLocalData(userEmail!, 'alramlocal').then((value) {
@@ -319,6 +321,9 @@ class _mypageScreenState extends State<mypageScreen> {
                       InkWell(
                         onTap: (){
                           // print(commonConstant2().toString());
+                          print("commonConstant2.keywordList : ${commonConstant2.keywordList}");
+                          print(commonConstant2.localList);
+                          print(commonConstant2.selectLocal);
                           Navigator.push(context, MaterialPageRoute(
                               builder: (_) => noticemainAlarmpage(commonConstant2.keywordList, commonConstant2.localList,commonConstant2.selectLocal)));
                               // builder: (_) => noticemainpage()));

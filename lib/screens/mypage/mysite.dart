@@ -50,7 +50,7 @@ class mysite extends GetView<PrivateSettingController> {
                               ? PrivateLocalData
                               : profilelocal[0]
                         }));
-                        await FirebaseService.getUserKeyExist(UserService.to.currentUser.value!.email).then((value) {
+                        await FirebaseService.getUserKeyExist(UserService.to.currentUser.value!.email, 'alramlocal').then((value) {
                           if(value == true){
                             // String email, List value, String key
                             profilelocal.isEmpty

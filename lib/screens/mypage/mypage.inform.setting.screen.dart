@@ -455,6 +455,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
               onTap: () {
                 // 클릭시 모달 팝업을 띄워준다.
                 showModalBottomSheet(
+
                     context: context,
                     builder: ((builder) => bottomSheet())
                 );
@@ -463,19 +464,18 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                 child: SizedBox.fromSize(
                   size: Size.fromRadius(55),
                   child : imageDeleteCheck == true
+                    ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
+                    : _imageFile == null
+                      ? profileimagetype
+                      ? CachedNetworkImage(imageUrl: commonValue.commonConstant2.mypageInformPhotoSetting!, width: size.width / 2.2, fit: BoxFit.fill)
+                      // : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
+                      : commonValue.commonConstant2.mypageInformPhotoSetting!.contains('assets/images/default-profile.png')
                         ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
-                        : _imageFile == null
-                          ? profileimagetype
-                          ? CachedNetworkImage(imageUrl: commonValue.commonConstant2.mypageInformPhotoSetting!, width: size.width / 2.2, fit: BoxFit.fill)
-                          // : Image.file(File(profileImage!), width: size.width / 2.2, fit: BoxFit.fill,)
-                          : commonValue.commonConstant2.mypageInformPhotoSetting!.contains('assets/images/default-profile.png')
-                            ? Image.asset( "assets/images/default-profile.png", width: size.width / 2.2, fit: BoxFit.fill,)
-                            : Image.file(File(commonValue.commonConstant2.mypageInformPhotoSetting!), width: size.width / 2.2, fit: BoxFit.fill,)
-                          : Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,)
+                        : Image.file(File(commonValue.commonConstant2.mypageInformPhotoSetting!), width: size.width / 2.2, fit: BoxFit.fill,)
+                      : Image.file(File(_imageFile!.path), width: size.width / 2.2, fit: BoxFit.fill,)
               )
             )
           ),
-          // SizedBox(height: 660,),
           Positioned(
               bottom: 0,
               right: 0,
