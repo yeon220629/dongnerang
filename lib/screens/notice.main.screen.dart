@@ -23,15 +23,9 @@ class _noticemainpageState extends State<noticemainpage>
     with TickerProviderStateMixin {
   late TabController _tabController;
   double topContainer = 0;
-  int colorindex = 0;
 
   String td = getToday();
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
-
-  List<Widget> noticeDataWidget = [];
-  List<Widget> noticeItemsData = [];
-  List<Widget> userDataWidget = [];
-  List<Widget> userItemsData = [];
 
   Future<void> getNoticeData(td) async {
     final Size size = MediaQuery.of(context).size;
@@ -45,10 +39,10 @@ class _noticemainpageState extends State<noticemainpage>
       noticeData.add(value);
     });
     if(noticeData.length != 0){
-      noticeDataWidget = [];
+      commonConstant2.noticeDataWidget = [];
     }
     for(var ntData in noticeData){
-      noticeDataWidget.add( GestureDetector(
+      commonConstant2.noticeDataWidget.add( GestureDetector(
       child: Container(
         width: size.width ,
         height: size.height / 7.5,
@@ -94,7 +88,7 @@ class _noticemainpageState extends State<noticemainpage>
       ));
     }
     setState(() {
-      noticeItemsData = noticeDataWidget;
+      commonConstant2.noticeItemsData = commonConstant2.noticeDataWidget;
     });
   }
   // 키워드 알림
@@ -109,12 +103,12 @@ class _noticemainpageState extends State<noticemainpage>
       userData.add(value);
     });
     if(userData.length != 0){
-      userDataWidget = [];
+      commonConstant2.userDataWidget = [];
     }
     for(var userKeyword in userData){
-      colorindex = fnSeoulCnterCheck(userKeyword['center_name']);
+      commonConstant2.colorindex = fnSeoulCnterCheck(userKeyword['center_name']);
       // var date = DateTime.fromMillisecondsSinceEpoch(userKeyword['registrationdate']);
-      userDataWidget.add( GestureDetector(
+      commonConstant2.userDataWidget.add( GestureDetector(
         onTap: () async{
           final Uri url = Uri.parse('${userKeyword["link"]}');
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => urlLoadScreen(
@@ -148,17 +142,17 @@ class _noticemainpageState extends State<noticemainpage>
                           padding: EdgeInsets.all(2),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: colorindex == 1
+                            color: commonConstant2.colorindex == 1
                               ? Color(0xff5496D2)
-                              : colorindex == 0
+                              : commonConstant2.colorindex == 0
                               ? Color(0xff3CC181)
-                              : colorindex == 2
+                              : commonConstant2.colorindex == 2
                               ? AppColors.darkgreen
-                              : colorindex == 3
+                              : commonConstant2.colorindex == 3
                               ? AppColors.primary
-                              : colorindex == 4
+                              : commonConstant2.colorindex == 4
                               ? AppColors.orange
-                              : colorindex == 5
+                              : commonConstant2.colorindex == 5
                               ? AppColors.red
                               : Color(0xffEE6D01),
                           ),
@@ -187,7 +181,7 @@ class _noticemainpageState extends State<noticemainpage>
       ));
     }
     setState(() {
-      userItemsData = userDataWidget;
+      commonConstant2.userItemsData = commonConstant2.userDataWidget;
     });
   }
 
@@ -230,6 +224,7 @@ class _noticemainpageState extends State<noticemainpage>
         });
       }
     });
+    commonConstant2().fnResetValue();
   }
 
   @override
@@ -306,10 +301,10 @@ class _noticemainpageState extends State<noticemainpage>
                       )
                   ),
                   Expanded(
-                    child: userItemsData.length == 0
+                    child: commonConstant2.userItemsData.length == 0
                       ? Lottie.asset( 'assets/lottie/searchdata.json', width: size.width, height: size.height / 10, fit: BoxFit.contain, )
                       :ListView.builder(
-                        itemCount: userItemsData.length,
+                        itemCount: commonConstant2.userItemsData.length,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (c, i){
                           double scale = 1.0;
@@ -322,7 +317,7 @@ class _noticemainpageState extends State<noticemainpage>
                                   heightFactor: 1.1,
                                   alignment: Alignment.topCenter,
                                   // child: userItemsData[i],
-                                  child : userItemsData[i]
+                                  child : commonConstant2.userItemsData[i]
                           );
                         }
                     )
@@ -336,7 +331,7 @@ class _noticemainpageState extends State<noticemainpage>
                 children: [
                   Expanded(
                     child: ListView.builder(
-                      itemCount: noticeItemsData.length,
+                      itemCount: commonConstant2.noticeItemsData.length,
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (c, i){
                         double scale = 1.0;
@@ -348,7 +343,7 @@ class _noticemainpageState extends State<noticemainpage>
                         return Align(
                               heightFactor: 0.98,
                               alignment: Alignment.topCenter,
-                              child: noticeItemsData[i],
+                              child: commonConstant2.noticeItemsData[i],
                         );
                       }
                     )

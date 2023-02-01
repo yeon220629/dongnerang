@@ -1,3 +1,4 @@
+import 'package:dongnerang/constants/common.constants2.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,8 +8,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../constants/colors.constants.dart';
 
 class noticemainAlarmpage extends StatefulWidget {
-  final List keywordList; final List localList; final List selectLocal;
-  const noticemainAlarmpage( this.keywordList, this.localList, this.selectLocal);
+  List keywordList; List localList; List selectLocal;
+  noticemainAlarmpage( this.keywordList, this.localList, this.selectLocal);
 
   @override
   State<noticemainAlarmpage> createState() => _noticemainAlarmpageState();
@@ -50,6 +51,27 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
               child: Text("완료", style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),)
           ),
         ],
+        leading:  IconButton(
+          onPressed: () {
+            commonConstant2.keywordList = [];
+            commonConstant2.localList = [];
+            commonConstant2.selectLocal = [];
+            FirebaseService.getUserLocalData(userEmail!, 'keyword').then((value) {
+              value.forEach((element) {
+                commonConstant2.keywordList.add(element);
+              });
+            });
+            FirebaseService.getUserLocalData(userEmail!, 'local').then((value) {
+              value.forEach((element) {
+                commonConstant2.localList.add(element);
+                commonConstant2.selectLocal.add(element);
+              });
+              commonConstant2.localList.add('서울시');
+            });
+            Navigator.pop(context); //뒤로가기
+          },
+          color: Colors.black,
+          icon: Icon(Icons.arrow_back)),
       ),
       body: SingleChildScrollView(
         child: Container(

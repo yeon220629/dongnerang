@@ -398,7 +398,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       iOSId: 'com.dongnerang.com.dongnerang',
     );
     checkNewVersion(newVersion);
-
+    commonConstant2().fnResetValue();
   }
 
   void checkNewVersion(NewVersion newVersion) async {

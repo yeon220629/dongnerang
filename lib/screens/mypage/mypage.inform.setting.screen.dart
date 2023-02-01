@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 import '../../constants/colors.constants.dart';
 import '../../constants/common.constants2.dart' as commonValue;
@@ -20,16 +21,8 @@ import '../../util/logger.service.dart';
 import '../mainScreenBar.dart';
 
 class mypageInformSettingScreen extends GetView<PrivateSettingController> {
-  set ageValue(ageValue) {
-    commonValue.commonConstant2.mypageInformAgeValue = ageValue;
-  }
-
-  void fnResetValue(){
-    print("함수 초기화");
-    commonValue.commonConstant2.keywordList = [];
-    commonValue.commonConstant2.localList = [];
-    commonValue.commonConstant2.selectLocal = [];
-  }
+  // sendDatabase
+  var photo = ''; var nick = ''; var gender = ''; var age;
 
   @override
   Widget build(BuildContext context) {
@@ -51,28 +44,17 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
               SizedBox(width: size.width / 5,),
               TextButton(
                   onPressed: () async {
-                    // print(commonValue.commonConstant2.mypageInformPhotoSetting);
-                    // print(commonValue.commonConstant2.mypageInformNickSetting);
-                    // print(commonValue.commonConstant2.mypageInformGender);
-                    // print(commonValue.commonConstant2.mypageInformAgeValue);
-                    //
-                    // print(commonValue.commonConstant2.keywordList);
-                    // print(commonValue.commonConstant2.localList);
-                    // print(commonValue.commonConstant2.selectLocal);
-
                     if (controller.formKey.currentState!.validate()) {
                       try {
                         await FirebaseFirestore.instance
                           .collection("users")
                           .doc(UserService.to.currentUser.value!.email)
                           .update(({
-                            "profileImage": commonValue.commonConstant2.mypageInformPhotoSetting,
-                            "name": commonValue.commonConstant2.mypageInformNickSetting,
-                            "gender": commonValue.commonConstant2.mypageInformGender,
-                            "age" : commonValue.commonConstant2.mypageInformAgeValue
+                            "profileImage": photo == '' ? commonValue.commonConstant2.mypageInformPhotoSetting : photo,
+                            "name": nick == '' ? commonValue.commonConstant2.mypageInformNickSetting : nick,
+                            "gender": gender =='' ? commonValue.commonConstant2.mypageInformGender : gender,
+                            "age" : age == null ? commonValue.commonConstant2.mypageInformAgeValue : age
                           }));
-                          // PrivateLocalData = [];
-                        fnResetValue();
                         EasyLoading.showSuccess("프로필 수정 완료");
                         await FirebaseService.getCurrentUser();
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
@@ -89,6 +71,14 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
         ],
         leading:  IconButton(
             onPressed: () {
+              // print(commonValue.commonConstant2.mypageInformPhotoSetting);
+              // print(commonValue.commonConstant2.mypageInformNickSetting);
+              // print(commonValue.commonConstant2.mypageInformGender);
+              // print(commonValue.commonConstant2.mypageInformAgeValue);
+              photo = commonValue.commonConstant2.mypageInformPhotoSetting;
+              gender = commonValue.commonConstant2.mypageInformGender;
+              nick = commonValue.commonConstant2.mypageInformNickSetting;
+              age = commonValue.commonConstant2.mypageInformAgeValue;
               Navigator.pop(context); //뒤로가기
             },
             color: Colors.black,
@@ -106,13 +96,19 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                     children: [
                       Container(
                         child : mypagePhotoProfileSetting(callback: (value){
-                          commonValue.commonConstant2.mypageInformPhotoSetting = value;
+                          // print("commonValue.commonConstant2.mypageInformPhotoSetting : ${commonValue.commonConstant2.mypageInformPhotoSetting}");
+                          // print("photo : $value");
+                          // commonValue.commonConstant2.mypageInformPhotoSetting = value;
+                          photo = value;
                         },),
                         height: size.height / 4,
                       ),
                       Container(
                         child: mypageNickNameProfileSetting(callback: (value){
-                          commonValue.commonConstant2.mypageInformNickSetting = value;
+                          // print("commonValue.commonConstant2.mypageInformNickSetting : ${commonValue.commonConstant2.mypageInformNickSetting}");
+                          // print("NICK : $value");
+                          // commonValue.commonConstant2.mypageInformNickSetting = value;
+                          nick = value;
                         },),
                         margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
                       ),
@@ -120,7 +116,10 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                         top: size.height / 3,
                         child: Container(
                           child: genderChoiceWidget(callback: (value) {
-                            commonValue.commonConstant2.mypageInformGender = value;
+                            // print("commonValue.commonConstant2.mypageInformGender : ${commonValue.commonConstant2.mypageInformGender}");
+                            // print("GENDER : $value");
+                            // commonValue.commonConstant2.mypageInformGender = value;
+                            gender = value;
                           }),
                         )
                       ),
@@ -128,7 +127,9 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
                         top: size.height / 2,
                         child: Container(
                           child: AgeStatefulWidget(callback: (value){
-                            commonValue.commonConstant2.mypageInformAgeValue = value;
+                            // commonValue.commonConstant2.mypageInformAgeValue = value;
+                            print("value : $value");
+                            age = value;
                           }
                         ),
                       ))
@@ -260,8 +261,6 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
   String? defaultYear = '2022';
   String? defaultMonth = '1';
   String? defaultDay = '1';
-  // birthDay birth = new birthDay(year: commonValue.commonConstant2.mypageInformAgeValue['year'], month: commonValue.commonConstant2.mypageInformAgeValue['month'], day: commonValue.commonConstant2.mypageInformAgeValue['day']);
-
   DateTime date = DateTime.utc(int.parse(commonValue.commonConstant2.mypageInformAgeValue['year']),int.parse(commonValue.commonConstant2.mypageInformAgeValue['month']),int.parse(commonValue.commonConstant2.mypageInformAgeValue['day']));
 
   void _showDialog(Widget child) {
@@ -285,10 +284,13 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
                   ),
                   onPressed: () {
                     setState(() {
+                      var year = commonValue.commonConstant2.mypageInformAgeValue['year'];
+                      var month = commonValue.commonConstant2.mypageInformAgeValue['month'];
+                      var day = commonValue.commonConstant2.mypageInformAgeValue['day'];
                       date = DateTime.now();
-                      commonValue.commonConstant2.mypageInformAgeValue['year'] = '';
-                      commonValue.commonConstant2.mypageInformAgeValue['month'] = '';
-                      commonValue.commonConstant2.mypageInformAgeValue['day'] = '';
+                      date = new DateTime(int.parse(year), int.parse(month), int.parse(day), date.hour, date.minute);
+                      // date = new DateFormat("$year-$month-$day").format(date);
+                      print("date : $date");
                     });
                     Navigator.pop(context);
                   },
@@ -326,7 +328,8 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    widget.callback(commonValue.commonConstant2.mypageInformAgeValue);
+    var tmpAge = {};
+
     //생년월일 ui
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -343,21 +346,21 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
             children: <Widget>[
               CupertinoButton(
                   child: Container(
-                    // width: size.width - 130,
-                      child: commonValue.commonConstant2.mypageInformAgeValue['year'] == ''
-                          ? Text(
-                        // '생년월일을 입력해주세요',
-                        '${commonValue.commonConstant2.mypageInformAgeValue['year']}년 ${commonValue.commonConstant2.mypageInformAgeValue['month']}월 ${commonValue.commonConstant2.mypageInformAgeValue['day']}일',
-                        style: const TextStyle(
-                          color: AppColors.grey,
-                        ),
-                      )
-                          : Text(
-                        '${date.year}년 ${date.month}월 ${date.day}일',
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                      )),
+                    child: commonValue.commonConstant2.mypageInformAgeValue['year'] == ''
+                        ? Text(
+                      // '생년월일을 입력해주세요',
+                      '${commonValue.commonConstant2.mypageInformAgeValue['year']}년 ${commonValue.commonConstant2.mypageInformAgeValue['month']}월 ${commonValue.commonConstant2.mypageInformAgeValue['day']}일',
+                      style: const TextStyle(
+                        color: AppColors.grey,
+                      ),
+                    )
+                        : Text(
+                      '${date.year}년 ${date.month}월 ${date.day}일',
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
+                    )
+                  ),
                   onPressed: () => _showDialog(CupertinoDatePicker(
                     initialDateTime: date,
                     minimumYear: 1900,
@@ -367,15 +370,14 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
                     onDateTimeChanged: (DateTime newDate) {
                       setState(() => date = newDate);
                       setState(() {
-                        // birth.year = newDate.year.toString();
-                        // birth.month = newDate.month.toString();
-                        // birth.day = newDate.day.toString();
-                        commonValue.commonConstant2.mypageInformAgeValue['year'] = newDate.year.toString();
-                        commonValue.commonConstant2.mypageInformAgeValue['month'] = newDate.month.toString();
-                        commonValue.commonConstant2.mypageInformAgeValue['day'] = newDate.day.toString();
+                        tmpAge['year'] = newDate.year.toString();
+                        tmpAge['month'] = newDate.month.toString();
+                        tmpAge['day'] = newDate.day.toString();
+                        widget.callback(tmpAge);
                       });
                     },
-                  )))
+                  ))
+              )
             ],
           ))
       ],
