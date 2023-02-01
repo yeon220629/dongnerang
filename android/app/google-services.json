@@ -56,10 +56,11 @@
               "client_type": 3
             },
             {
-              "client_id": "747660530943-jui64n18p9sc8vt7jsulsos9gt20komn.apps.googleusercontent.com",
+              "client_id": "747660530943-3eebeqbqe4snckqce5rtig19jhspbta9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.dongnerang.com.dongnerang"
+                "bundle_id": "com.dongnerang.com.dongnerang",
+                "app_store_id": "6444590791"
               }
             }
           ]

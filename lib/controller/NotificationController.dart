@@ -11,24 +11,25 @@ import 'package:get/get.dart';
 class NotificationController extends GetxController {
   static NotificationController get to => Get.find();
   // 최신버전의 초기화 방법
-  String? userEmail = FirebaseAuth.instance.currentUser?.email;
   Rx<RemoteMessage> remoteMessage = const RemoteMessage().obs;
   Rx<DateTime> dateTime = DateTime.now().obs;
 
   @override
   Future<void> onInit() async {
     // await Firebase.initializeApp();
-    FirebaseService.getUserPrivacyProfile(userEmail!).then((value) {
-      if(value[0]['alramlocalPermission'] == true){
-        _initNotification();
-      }
-    });
+    _initNotification();
+
+    // FirebaseService.getUserPrivacyProfile(userEmail!).then((value) {
+    //   if(value[0]['alramlocalPermission'] == true){
+    //   }
+    // });
     // 토큰을 알면 특정 디바이스에게 문자를 전달가능
     super.onInit();
   }
 
   void _initNotification() {
     // 앱이 동작중일때 호출됨
+    String? userEmail = FirebaseAuth.instance.currentUser?.email;
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
     var IOS = new IOSInitializationSettings();

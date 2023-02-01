@@ -33,24 +33,11 @@ void main() async {
     if (value) { Permission.notification.request(); }
   });
 
-  String? firebaseUsername = FirebaseAuth.instance.currentUser?.email;
-  //alramlocalPermission 알림 허용 권한 키가 없을 경우
-  FirebaseService.getUserKeyExist(firebaseUsername!, 'alramlocalPermission').then((value){
-    if(value == false){ FirebaseService.savePrivacyProfile(firebaseUsername!, [true], 'alramlocalPermission'); }
-  });
-
-  late Future<List> userAlramPermission;
-  userAlramPermission = FirebaseService.getUserPrivacyProfile(firebaseUsername!);
-  userAlramPermission.then((value) async {
-    // print(value[0]['alramlocalPermission']);
-    if(value[0]['alramlocalPermission'] == true){
-      if(firebaseUsername != null){
-        await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-        // 앱이 죽었을떄
-        FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-      }
-    }else{ print("alram not come"); }
-  });
+  if(FirebaseAuth.instance.currentUser?.email != null){
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // 앱이 죽었을떄
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  }
   runApp(const MyApp());
 }
 
@@ -63,7 +50,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   flutterLocalNotificationsPlugin.initialize(settings);
   List tempArray = [];
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
-
+  print("userEmail : $userEmail");
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       'Notification id',
       'Notification name',
