@@ -255,6 +255,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                   }
                 } else {
                   print('카카오톡 미설치: 웹 공유 기능 사용 권장');
+                  EasyLoading.showError("카카오톡 미설치: 웹 공유 기능 사용 권장");
                 }
               }, icon: const Icon(Icons.share_outlined, color: Colors.black)),
             ],
