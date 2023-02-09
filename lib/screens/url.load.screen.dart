@@ -87,7 +87,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               if (canGoBack) {
                 webViewController?.goBack();
               } else {
-                print('더이상 뒤로갈페이지가 없습니다.');
+                print('더이상 뒤로 갈 페이지가 없습니다.');
                 // Navigator.pop(context);
                 if(toggle != true){
                   if(widget.i == 1){
@@ -255,7 +255,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                   }
                 } else {
                   print('카카오톡 미설치: 웹 공유 기능 사용 권장');
-                  EasyLoading.showError("카카오톡 미설치: 웹 공유 기능 사용 권장");
+                  EasyLoading.showError("카카오톡 미설치: 카카오톡 다운로드 권장");
                 }
               }, icon: const Icon(Icons.share_outlined, color: Colors.black)),
             ],
@@ -327,7 +327,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                   ),
                 ),
                 //애드몹
-                BannerAdMob(),
+                // BannerAdMob(),
               ],
             ),
           ),

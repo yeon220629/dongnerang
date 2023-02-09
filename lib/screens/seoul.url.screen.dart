@@ -162,7 +162,7 @@ class _seoulUrlLoadScreenState extends State<seoulUrlLoadScreen> {
               ),
             ),
             // //애드몹
-            BannerAdMob(),
+            // BannerAdMob(),
           ],
         ),
       ),

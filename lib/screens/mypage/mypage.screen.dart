@@ -440,7 +440,7 @@ class _saveDataProfileState extends State<saveDataProfile> {
                             }
                           } else {
                             print('카카오톡 미설치: 웹 공유 기능 사용 권장');
-                            EasyLoading.showError("카카오톡 미설치: 웹 공유 기능 사용 권장");
+                            EasyLoading.showError("카카오톡 미설치: 카카오톡 다운로드 권장");
                           }
                         },
                         backgroundColor: AppColors.primary,

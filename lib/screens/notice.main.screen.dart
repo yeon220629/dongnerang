@@ -266,8 +266,7 @@ class _noticemainpageState extends State<noticemainpage>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          Center(
-            child: SizedBox(
+            SizedBox(
               height: size.height,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -279,6 +278,7 @@ class _noticemainpageState extends State<noticemainpage>
                         //   context, MaterialPageRoute(builder: (context) => noticemainAlarmpage(),),);
                       },
                       child: Container(
+                        margin: EdgeInsets.all(5),
                         width: size.width / 4,
                         height: size.height / 23,
                         decoration: BoxDecoration(
@@ -300,32 +300,32 @@ class _noticemainpageState extends State<noticemainpage>
                         // )
                       )
                   ),
-                  Expanded(
-                    child: commonConstant2.userItemsData.length == 0
-                      ? Lottie.asset( 'assets/lottie/searchdata.json', width: size.width, height: size.height / 10, fit: BoxFit.contain, )
-                      :ListView.builder(
-                        itemCount: commonConstant2.userItemsData.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (c, i){
-                          double scale = 1.0;
-                          if (topContainer > 0.5){
-                            scale = i + 0.5 - topContainer;
-                            if (scale < 0 ) { scale = 0;}
-                            else if (scale > 1) { scale = 1; }
-                          }
-                          return Align(
-                                  heightFactor: 1.1,
-                                  alignment: Alignment.topCenter,
-                                  // child: userItemsData[i],
-                                  child : commonConstant2.userItemsData[i]
-                          );
-                        }
-                    )
-                  ),
+                  //키워드 알림 push 메시지 쌓이는 코드
+                  // Expanded(
+                  //   child: commonConstant2.userItemsData.length == 0
+                  //     ? Lottie.asset( 'assets/lottie/searchdata.json', width: size.width, height: size.height / 10, fit: BoxFit.contain, )
+                  //     :ListView.builder(
+                  //       itemCount: commonConstant2.userItemsData.length,
+                  //       physics: const BouncingScrollPhysics(),
+                  //       itemBuilder: (c, i){
+                  //         double scale = 1.0;
+                  //         if (topContainer > 0.5){
+                  //           scale = i + 0.5 - topContainer;
+                  //           if (scale < 0 ) { scale = 0;}
+                  //           else if (scale > 1) { scale = 1; }
+                  //         }
+                  //         return Align(
+                  //                 heightFactor: 1.1,
+                  //                 alignment: Alignment.topCenter,
+                  //                 // child: userItemsData[i],
+                  //                 child : commonConstant2.userItemsData[i]
+                  //         );
+                  //       }
+                  //   )
+                  // ),
                 ],
               ),
             ),
-          ),
 
               Column(
                 children: [
