@@ -34,12 +34,11 @@ class SpaceDBHelper {
             spaceImage TEXT,
             address TEXT,
             category TEXT,
-            latitude TEXT NOT NULL,
-            longitude TEXT NOT NULL,
+            latitude REAL NOT NULL,
+            longitude REAL NOT NULL,
             detailInfo TEXT,
             pageLink TEXT,
             phoneNum TEXT,
-            updated TEXT NOT NULL,
             svcName TEXT,
             svcStat TEXT,
             svcTimeMin TEXT,
@@ -53,39 +52,22 @@ class SpaceDBHelper {
   }
 
   // 데이터 추가
-  Future<void> insertSpace(Space space, String today) async {
+  Future<void> insertSpace(Space space) async {
     Database db = await instance.database;
 
-    await db.insert(
+    int insertNum = await db.insert(
       'spaces', // table name
-      {
-        'uid': space.uid,
-        'gu': space.gu,
-        'spaceName': space.spaceName,
-        'spaceImage': space.spaceImage ?? '',
-        'address': space.address ?? '',
-        'category': space.category,
-        'latitude': space.location['latitude'].toString(),
-        'longitude': space.location['longitude'].toString(),
-        'detailInfo': space.detailInfo ?? '',
-        'pageLink': space.pageLink ?? '',
-        'phoneNum': space.phoneNum ?? '',
-        'updated': today,
-        'svcName': space.svcName ?? '',
-        'svcStat': space.svcStat ?? '',
-        'svcTimeMin': space.svcTimeMin ?? '',
-        'svcTimeMax': space.svcTimeMax ?? '',
-        'payInfo': space.payInfo ?? '',
-        'useTarget': space.useTarget ?? ''
-      },
+      space.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+
+    print("insertSpace >>> $insertNum >>> $space");
   }
 
   // 전체 데이터 삭제
-  Future<int> deleteDataAll() async {
+  Future<void> deleteDataAll() async {
     var db = await instance.database;
-    return await db.rawDelete("DELETE FROM spaces");
+    db.rawQuery('DELETE FROM spaces');
   }
 
   // 자치구(gu)로 리스트 조회
@@ -96,24 +78,7 @@ class SpaceDBHelper {
     if (maps.isEmpty) return [];
 
     return List.generate(maps.length, (i) {
-      return Space(
-          uid: maps[i]['uid'],
-          gu: maps[i]['gu'],
-          spaceName: maps[i]['spaceName'],
-          spaceImage: maps[i]['spaceImage'],
-          address: maps[i]['address'],
-          category: maps[i]['category'],
-          location: {'latitude': double.parse(maps[i]['latitude']), 'longitude': double.parse(maps[i]['longitude'])},
-          detailInfo: maps[i]['detailInfo'],
-          pageLink: maps[i]['pageLink'],
-          phoneNum: maps[i]['phoneNum'],
-          updated: maps[i]['updated'],
-          svcName: maps[i]['svcName'],
-          svcStat: maps[i]['svcStat'],
-          svcTimeMin: maps[i]['svcTimeMin'],
-          svcTimeMax: maps[i]['svcTimeMax'],
-          payInfo: maps[i]['payInfo'],
-          useTarget: maps[i]['useTarget']);
+      return Space.fromMap(maps[i]);
     });
   }
 
@@ -126,11 +91,11 @@ class SpaceDBHelper {
   }
 
   // 업데이트 일자 구하기
-  Future<String> getUpdatedDate() async {
+  Future<void> getOne() async {
     Database db = await instance.database;
-    var updatedDateMap = await db.rawQuery('SELECT updated FROM spaces LIMIT 1');
+    var one = await db.rawQuery('SELECT * FROM spaces LIMIT 1');
 
-    if (updatedDateMap.isEmpty) return '';
-    return updatedDateMap[0]['updated'].toString();
+    print("one >>> $one");
+    // return one;
   }
 }

@@ -8,24 +8,27 @@ class ReverseGeo {
 
   static Map<String, String> headers = {"X-NCP-APIGW-API-KEY-ID": APIKEYID, "X-NCP-APIGW-API-KEY": APIKEY};
 
-  static Future<String> getGuByCoords(String lat, String long) async {
+  // 경도, 위도 받아 [자치구, 도로코드] 변환
+  static Future<Map<String, String>> getGuByCoords(String lat, String long) async {
     late http.Response response;
     late Map<String, dynamic> data;
 
     // https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=127.0518537,37.4770471&output=json
     try {
-      // Uri apiAddr = Uri.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=$long,$lat&orders=roadaddr&output=json");
       Uri apiAddr = Uri.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=$long,$lat&output=json");
       response = await http.get(apiAddr, headers: headers);
       data = jsonDecode(response.body);
 
-      String areaCode = data['results'][0]['code']['id'];
+      String areaCode = data['results'][0]['code']['id'].substring(0, 5);
       String area1 = data['results'][0]['region']['area1']['name'];
       String area2 = data['results'][0]['region']['area2']['name'];
 
       if (area2 == '') {
-        if (area1 == '세종특별자치시') return '세종시';
-        return area1;
+        if (area1 == '세종특별자치시') {
+          area2 = '세종시';
+        } else {
+          area2 = area1;
+        }
       }
 
       if (area2.contains(' ')) {
@@ -37,13 +40,14 @@ class ReverseGeo {
       // print("Reverse geo areaCode >>> $areaCode");
       // print("Reverse geo area2 >>> $area2");
 
-      return area2;
+      return {'gu': area2, 'areaCode': areaCode};
     } catch (e) {
       print(e);
-      return '';
+      return {};
     }
   }
 
+  // 경도, 위도 받아 도로명주소 변환
   static Future<String> getAddrByCoords(String lat, String long) async {
     late http.Response response;
     late Map<String, dynamic> data;
