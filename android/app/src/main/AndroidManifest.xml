@@ -66,6 +66,15 @@
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <!--For Dynamic links 2023 - 02 / 07-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="dongnerang.page.link"
+                    android:scheme="https"/>
+            </intent-filter>
         </activity>
         <activity
             android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"

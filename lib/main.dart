@@ -5,8 +5,10 @@ import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:dongnerang/screens/splash.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:dongnerang/services/user.service.dart';
+import 'package:dongnerang/util/dynamiclink.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'constants/common.constants.dart';
 import 'controller/NotificationController.dart';
 import 'models/notification.model.dart';
@@ -50,7 +53,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   flutterLocalNotificationsPlugin.initialize(settings);
   List tempArray = [];
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
-  print("userEmail : $userEmail");
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       'Notification id',
       'Notification name',
@@ -79,7 +81,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // push 알림 보기 설정
   await flutterLocalNotificationsPlugin.show(0, '${message.notification!.title.toString()}',
       '${message.notification!.body.toString()}',
-      platformChannelSpecifics, payload: 'Default_Sound'
+      platformChannelSpecifics, payload: message.data['link'].toString()
   );
 }
 
@@ -105,8 +107,23 @@ class ColorService { //기본 컬러 설정
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    DynamicLink().setup();
+  }
 
   @override
   Widget build(BuildContext context) {

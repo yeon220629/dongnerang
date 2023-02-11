@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class NotificationController extends GetxController {
@@ -26,6 +27,13 @@ class NotificationController extends GetxController {
     // 토큰을 알면 특정 디바이스에게 문자를 전달가능
     super.onInit();
   }
+  //메시지 클릭 시 이벤트
+  Future<void> onSelectNotification(String payload) async {
+    final url = Uri.parse(payload!);
+    if (await canLaunchUrl(url)) {
+      launchUrl(url, mode: LaunchMode.inAppWebView);
+    }
+  }
 
   void _initNotification() {
     // 앱이 동작중일때 호출됨
@@ -34,8 +42,7 @@ class NotificationController extends GetxController {
     var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
     var IOS = new IOSInitializationSettings();
     var settings = new InitializationSettings(android: android, iOS: IOS);
-    flutterLocalNotificationsPlugin.initialize(settings);
-
+    flutterLocalNotificationsPlugin.initialize(settings, onSelectNotification: (payload) async { onSelectNotification(payload!);});
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         'high_importance_channel',
         'High Importance Notifications',
@@ -54,9 +61,6 @@ class NotificationController extends GetxController {
     FirebaseMessaging.onMessage.listen((RemoteMessage event) async {
       _addNotification(event);
       debugPrint("NotificationController >> message received");
-      // debugPrint('Title >> ${event.notification!.title.toString()}');
-      // debugPrint('Body >> ${event.notification!.body.toString()}');
-      // debugPrint('link >> ${event.data['link'].toString()}');
       tempArray.add(
         CustomNotification(
           title: event.notification!.title.toString(),
@@ -68,28 +72,37 @@ class NotificationController extends GetxController {
       );
       FirebaseService.saveUserNotificationData(userEmail!,tempArray);
       // 5초 뒤에 해당 배열 비우기
-      Future.delayed(Duration(milliseconds : 5000),() {
-        tempArray = [];
-      });
         // push 알림 보기 설정
       flutterLocalNotificationsPlugin.show(0, '${event.notification!.title.toString()}',
           '${event.notification!.body.toString()}',
-          platformChannelSpecifics, payload: 'Default_Sound'
+          platformChannelSpecifics, payload: event.data['link'].toString(),
       );
+      Future.delayed(Duration(milliseconds : 5000),() {
+        tempArray = [];
+      });
     });
 
     // 앱이 background 동작중일때 호출됨, 종료중일때도 호출됨?
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+    FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       // FirebaseService.sendUserKeyword(userEmail!, duplicateCheckValue);
       _addNotification(message);
-      debugPrint('------------------------Message clicked! :');
+      debugPrint('------------------------Message clicked! : ${message.data}');
+      // final url = Uri.parse(payload!);
+      // if (await canLaunchUrl(url)) {
+      //   launchUrl(url, mode: LaunchMode.inAppWebView);
+      // }
+
+      onSelectNotification(message.data['link']);
     });
+
   }
 
 
 
   // 메시지를 변수에 저장
   Future<void> _addNotification(RemoteMessage event) async {
+    // print("data click event : ${event.data}");
+    // final url = Uri.parse(event.data['link'].toString());
     dateTime(event.sentTime);
     remoteMessage(event);
     debugPrint(dateTime.toString());

@@ -34,9 +34,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202302091</string>
+	<string>202302118</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>0</string>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://dongnerang.page.link</string>
+	</array>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3415104781631988~6504027773</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -304,9 +308,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>buildCount</key>
-	<string>1</string>
+	<string>8</string>
 	<key>buildDay</key>
-	<string>20230209</string>
+	<string>20230211</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>
