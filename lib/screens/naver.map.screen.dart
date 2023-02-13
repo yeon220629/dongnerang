@@ -151,11 +151,11 @@ class _naverMapScreenState extends State<naverMapScreen> {
         // 위도, 경도 유효성 검사
         double lat = space['latitude'];
         double long = space['longitude'];
-        if ((lat < 33 && lat > 43) || (long < 124 && long > 132)) {
-          break;
-        } else {
+        if ((lat > 33 && lat < 43) && (long > 124 && long < 132)) {
           space['latitude'] = double.parse(lat.toStringAsFixed(6));
           space['longitude'] = double.parse(long.toStringAsFixed(6));
+        } else {
+          break;
         }
 
         // 카테고리 유효성 검사
@@ -190,7 +190,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
     }
     // print("getSpacesByGu spacesByGu >>> ${spacesByGu.length}");
 
-    // 공공누리 api 호출
+    // 공유누리 api 호출
     List<Space> eshareSpaces = await EshareOpenApi.getAllEshareApiSpaces(area['areaCode']!);
     // print("getSpacesByGu eshareSpaces >>> ${eshareSpaces.length}");
 
@@ -385,6 +385,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                     ],
                   ),
                 ),
+                /*
                 const SizedBox(
                   width: 16.0,
                 ),
@@ -418,6 +419,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
                           ),
                         ),
                 ),
+                */
               ],
             ),
             const SizedBox(

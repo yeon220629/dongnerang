@@ -19,13 +19,15 @@ class Location {
       permission = await Geolocator.requestPermission();
     }
 
-    print("Location Class >>> permission ::: $permission");
+    // print("Location Class >>> permission ::: $permission");
 
     try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      latitude = position.latitude;
-      longitude = position.longitude;
+      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+      if ((position.latitude > 33 && position.latitude < 43) && (position.longitude > 124 && position.longitude < 132)) {
+        latitude = position.latitude;
+        longitude = position.longitude;
+      }
     } catch (e) {
       print(e);
     }

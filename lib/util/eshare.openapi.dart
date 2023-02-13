@@ -70,11 +70,11 @@ class EshareOpenApi {
       // 위도, 경도 유효성 검사
       double lat = spaceData['lat'];
       double long = spaceData['lot'];
-      if ((lat < 33 && lat > 43) || (long < 124 && long > 132)) {
-        return;
-      } else {
+      if ((lat > 33 && lat < 43) && (long > 124 && long < 132)) {
         lat = double.parse(lat.toStringAsFixed(6));
         long = double.parse(long.toStringAsFixed(6));
+      } else {
+        return;
       }
 
       Space space = Space(
