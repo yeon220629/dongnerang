@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 class Space {
   late String uid; // 장소 id

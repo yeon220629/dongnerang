@@ -1,5 +1,6 @@
-import 'dart:convert';
+import 'dart:async';
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
@@ -16,9 +17,10 @@ import 'package:dongnerang/util/reverse.geocoding.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:latlong2/latlong.dart' as latlong2;
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -53,18 +55,17 @@ enum SpaceType {
   }
 }
 
-class naverMapScreen extends StatefulWidget {
-  const naverMapScreen({Key? key}) : super(key: key);
+class googleMapScreen extends StatefulWidget {
+  const googleMapScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _naverMapScreenState();
+  State<StatefulWidget> createState() => _googleMapScreenState();
 }
 
-class _naverMapScreenState extends State<naverMapScreen> {
-  NaverMapController? _ct;
-
-  // sqflite
-  // final SpaceDBHelper _spaceDBHelper = SpaceDBHelper.instance;
+class _googleMapScreenState extends State<googleMapScreen> {
+  // Google Map controller
+  late final GoogleMapController _ct;
+  CameraPosition position = const CameraPosition(target: LatLng(37.494705, 126.959945), zoom: 14);
 
   // 기본 설정 : 상도역
   mylocation.Location myLocation = mylocation.Location(latitude: 37.494705, longitude: 126.959945);
@@ -84,56 +85,6 @@ class _naverMapScreenState extends State<naverMapScreen> {
   Map<String, int> categoryCount = {};
   int categoryCountSum = 0;
 
-  // 로컬 db에 저장 : queue -> sqflite
-  /*
-  Future<void> insertSpacesToLocalDB() async {
-    String databasePath = await getDatabasesPath();
-    String dbpath = path.join(databasePath, 'spacedatabase.db');
-
-    // 데이터 받은 일자 체크 (하루 1번)
-    bool isDBExists = await databaseExists(dbpath);
-
-    if (isDBExists) {
-      print('isDBExists true!!');
-      await _spaceDBHelper.getOne();
-      await _spaceDBHelper.deleteDataAll();
-    }
-
-    // firebase storage -> queue
-    await makeSpacesQueue();
-
-    // queue -> sqflite 로컬 DB
-    try {
-      while (SpacesQueue.isNotEmpty) {
-        Space s = SpacesQueue.removeFirst();
-        await _spaceDBHelper.insertSpace(s);
-      }
-    } catch (e) {
-      await _spaceDBHelper.deleteDataAll();
-      print("sqflite insert error ::: $e");
-    }
-  }
-  */
-
-  // 데이터 조회 후 queue에 저장
-  /*
-  Future<int> makeSpacesQueue() async {
-    String updated = '';
-    SpacesQueue.clear();
-
-    // firebase 데이터
-    updated = await getFirebaseSpaces('dongnerangSpaces');
-    await getFirebaseSpaces('seoulApiSpaces');
-
-    setState(() {
-      dongSpacesUpdated = updated.split(' ')[0].replaceAll('-', '.');
-    });
-
-    print("makeSpacesQueue >>> ${SpacesQueue.length}");
-    return SpacesQueue.length;
-  }
-  */
-
   // firestore 데이터 queue에 저장
   Future<void> getFirebaseSpaces(String docName, String subCollectionName, String gu) async {
     List<String> categoryStrList = categoryList.map((e) => e.code.toString()).toList();
@@ -143,7 +94,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
     late Map<String, dynamic>? valueDoc = documentSnapshot.data(); // JSON 파일(updated, spaces)
 
     if (valueDoc != null) {
-      for (var space in valueDoc?['spaces']) {
+      for (var space in valueDoc['spaces']) {
         if (space['gu'] == "" || space['category'] == "" || space['spaceName'] == "" || space['latitude'] == "" || space['longitude'] == "") {
           break;
         }
@@ -167,18 +118,12 @@ class _naverMapScreenState extends State<naverMapScreen> {
         SpacesQueue.add(s);
       }
     }
-
-    // return valueDoc?['updated'];
   }
 
   // 로컬 db에서 자치구로 공간 리스트 조회
-  getSpacesByGu(Map<String, String> area) async {
+  Future<void> getSpacesByGu(Map<String, String> area) async {
     categoryCount.clear();
     Map<String, Space> spaces = {};
-
-    // Sqflite
-    // List<Space> spacesByGu = await _spaceDBHelper.getSpaceListByGu(area['gu']!);
-    // print("getSpacesByGu spacesByGu >>> ${spacesByGu.length}");
 
     List<Space> spacesByGu = [];
     await getFirebaseSpaces("dongnerangSpaces", "dongnerangSpacesByGu", area['gu']!);
@@ -213,32 +158,33 @@ class _naverMapScreenState extends State<naverMapScreen> {
     }
   }
 
+  // 마커 아이콘 byte로 변환
+  Future<Uint8List> getBytesFromMarkerIconAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+  }
+
   // marker 만들기
-  makeMarkers() async {
+  Future<void> makeMarkers() async {
     Map<String, Marker> markers = {};
     List<Space> spaces = spacesMap.values.toList();
 
     for (var space in spaces.toSet()) {
+      Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).offMarkImg}", 100);
+
       Marker m = Marker(
-        markerId: space.uid,
+        markerId: MarkerId(space.uid),
         position: LatLng(space.latitude, space.longitude),
-        width: 32,
-        height: 32,
-        captionText: space.spaceName,
-        captionMinZoom: 14,
-        captionColor: Colors.black,
-        captionHaloColor: Colors.white,
-        captionRequestedWidth: 200,
-        captionTextSize: 13,
-        captionPerspectiveEnabled: true,
-        icon: await OverlayImage.fromAssetImage(assetName: "assets/images/${SpaceType.getByCode(space.category!).offMarkImg}"),
-        onMarkerTab: (marker, iconSize) async {
-          // 마커 선택시 이벤트
-          onMarkerTabEvent(marker!.markerId, false);
-        },
+        icon: BitmapDescriptor.fromBytes(markerIconByte),
+        onTap: () => onMarkerTabEvent(space.uid, false),
+        consumeTapEvents: true,
+        visible: categoryVisibility[space.category] ?? true,
       );
 
-      markers[m.markerId] = m;
+      markers[space.uid] = m;
     }
 
     setState(() {
@@ -247,14 +193,20 @@ class _naverMapScreenState extends State<naverMapScreen> {
   }
 
   // 전체 마커 이미지 초기화
-  markerInit() {
-    markersMap.forEach((mUid, mValue) async {
-      Space tempSpace = spacesMap[mUid]!;
+  void markerInit() {
+    markersMap.forEach((markerUid, markerValue) async {
+      Space space = spacesMap[markerUid]!;
+      Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).offMarkImg}", 100);
 
-      mValue.width = 32;
-      mValue.height = 32;
-      mValue.icon = await OverlayImage.fromAssetImage(
-          assetName: categoryVisibility[tempSpace.category] == true ? "assets/images/${SpaceType.getByCode(tempSpace.category!).offMarkImg}" : "");
+      setState(() {
+        markersMap.update(
+          markerUid,
+          (value) => value.copyWith(
+            iconParam: BitmapDescriptor.fromBytes(markerIconByte),
+            visibleParam: categoryVisibility[space.category],
+          ),
+        );
+      });
     });
   }
 
@@ -432,6 +384,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
     );
   }
 
+  // 공유누리 데이터 이미지 > byte로 받기
   Future<Uint8List> urlLoadByte(String imageUrl) async {
     Uri imageUri = Uri.parse(imageUrl);
     http.Response response = await http.get(imageUri);
@@ -439,7 +392,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
     return response.bodyBytes;
   }
 
-  // 공유누리 데이터 이미지 > byte로 받아옴
+  // 공유누리 데이터 이미지 위젯
   Widget loadImage(String url) {
     Uint8List? imageBytes;
 
@@ -479,28 +432,32 @@ class _naverMapScreenState extends State<naverMapScreen> {
   }
 
   // 마커 선택시 이벤트
-  onMarkerTabEvent(String uid, bool cameraMove) async {
-    Space? space = spacesMap[uid];
+  Future<void> onMarkerTabEvent(String uid, bool cameraMove) async {
+    Space space = spacesMap[uid]!;
 
     // 같은 위치에 있는 공간 리스트
-    List<Space> selectedSpaces = spacesMap.values.where((s) => s.latitude == space!.latitude && s.longitude == space!.longitude).toList();
+    List<Space> selectedSpaces = spacesMap.values.where((s) => s.latitude == space.latitude && s.longitude == space.longitude).toList();
     // selectedSpace uid 리스트
     List<String> selectedUids = selectedSpaces.map((e) => e.uid).toList();
 
-    // 지도 카메라 이동
+    // 지도 카메라 이동 - 리스트에서 클릭시에만
     if (cameraMove) {
-      await moveMapCamera(space!.latitude!, space.longitude!);
+      await moveMapCamera(space.latitude, space.longitude);
     }
 
-    // 마커 이미지 및 크기 변경
+    // 마커 아이콘 변경
     markersMap.forEach((markerUid, markerValue) async {
       if (selectedUids.contains(markerUid)) {
-        markerValue.icon = await OverlayImage.fromAssetImage(assetName: "assets/images/${SpaceType.getByCode(space!.category!).onMarkImg}");
-        markerValue.width = 48;
-        markerValue.height = 69;
-      } else {
-        markerValue.width = 32;
-        markerValue.height = 32;
+        Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).onMarkImg}", 150);
+
+        setState(() {
+          markersMap.update(
+            markerUid,
+            (value) => value.copyWith(
+              iconParam: BitmapDescriptor.fromBytes(markerIconByte),
+            ),
+          );
+        });
       }
     });
 
@@ -513,7 +470,7 @@ class _naverMapScreenState extends State<naverMapScreen> {
   }
 
   // 공간 상세 모달
-  showSpaceBottomSheet(List<Space> selectedSpace) {
+  void showSpaceBottomSheet(List<Space> selectedSpace) {
     showModalBottomSheet<void>(
       barrierColor: AppColors.black.withOpacity(0.08),
       shape: const RoundedRectangleBorder(
@@ -634,22 +591,28 @@ class _naverMapScreenState extends State<naverMapScreen> {
           ),
         );
       },
-    ).whenComplete(() async {
-      setState(() {
-        markerInit();
-      });
+    ).whenComplete(() {
+      markerInit();
     });
   }
 
   // 현위치 구하기
   Future<Map<String, String>> getLocationData() async {
-    await myLocation.getCurrentLocation(); // 시뮬레이터에서는 주석처리
+    await myLocation.getCurrentLocation();
+
     return await ReverseGeo.getGuByCoords(myLocation.latitude.toString(), myLocation.longitude.toString());
   }
 
   // 지도 카메라 이동하기
   Future<void> moveMapCamera(double lat, double long) async {
-    await _ct?.moveCamera(CameraUpdate.scrollTo(LatLng(lat, long + 0.002)));
+    await _ct.moveCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(lat, long),
+          zoom: 14,
+        ),
+      ),
+    );
   }
 
   // 좌표 사이 거리 구하기
@@ -672,9 +635,9 @@ class _naverMapScreenState extends State<naverMapScreen> {
   }
 
   Future<void> _asyncInitState() async {
-    Map<String, String> area = await getLocationData();
-    await getSpacesByGu(area);
-    await makeMarkers();
+    Map<String, String> area = await getLocationData(); // 현위치 구하기
+    await getSpacesByGu(area); // 자치구별 공간 가져오기
+    await makeMarkers(); // 마커 만들기
 
     setState(() {
       isLoaded = true;
@@ -709,39 +672,29 @@ class _naverMapScreenState extends State<naverMapScreen> {
       body: SizedBox(
         child: Stack(
           children: [
-            // 네이버 지도
-            NaverMap(
-              buildingHeight: height,
-              useSurface: kReleaseMode,
-              contentPadding: const EdgeInsets.only(left: 60.0),
-              minZoom: 7,
-              onMapCreated: ((NaverMapController ct) async {
-                _ct = ct;
-                await _ct!.moveCamera(CameraUpdate.zoomOut());
-                moveMapCamera(myLocation.latitude, myLocation.longitude);
-              }),
-              markers: markersMap.values.toList(),
-              scrollGestureEnable: true,
-              zoomGestureEnable: true,
-              tiltGestureEnable: true,
-              rotationGestureEnable: false,
-              forceGesture: true,
-              onMapTap: (cameraLatLng) async {
+            // 구글 지도
+            GoogleMap(
+              mapType: MapType.normal,
+              markers: Set.from(markersMap.values),
+              initialCameraPosition: position,
+              onMapCreated: (GoogleMapController ct) async {
                 setState(() {
-                  markerInit();
+                  _ct = ct;
                 });
+                await moveMapCamera(myLocation.latitude, myLocation.longitude);
               },
-              onCameraChange: ((latLng, reason, isAnimated) {
+              onCameraMove: (_) {
                 setState(() {
                   showReSearchBtn = true;
                 });
-              }),
+              },
+              myLocationButtonEnabled: false,
             ),
             // 현 동네에서 검색 버튼
             Align(
               alignment: AlignmentDirectional.topCenter,
               child: Padding(
-                padding: EdgeInsets.only(top: 120.0),
+                padding: const EdgeInsets.only(top: 120.0),
                 child: Material(
                   elevation: 1,
                   borderRadius: BorderRadius.circular(20),
@@ -752,19 +705,23 @@ class _naverMapScreenState extends State<naverMapScreen> {
                           isLoaded = false;
                         });
 
-                        CameraPosition? cp = await _ct?.getCameraPosition();
-                        String lat = cp!.target.latitude.toStringAsFixed(6);
-                        String long = cp.target.longitude.toStringAsFixed(6);
+                        LatLng cp = await _ct.getLatLng(
+                          ScreenCoordinate(
+                            x: (width / 2).round(),
+                            y: (height / 2).round(),
+                          ),
+                        );
+                        String lat = cp.latitude.toStringAsFixed(6);
+                        String long = cp.longitude.toStringAsFixed(6);
 
                         Map<String, String> area = await ReverseGeo.getGuByCoords(lat, long);
 
-                        Future.delayed(const Duration(milliseconds: 10), () async {
+                        Future.delayed(const Duration(milliseconds: 1), () async {
                           await getSpacesByGu(area);
                           await makeMarkers();
                           setState(() {
                             isLoaded = true;
                             showReSearchBtn = false;
-                            markerInit();
                             myGu = area['gu']!;
                           });
                         });
@@ -772,7 +729,6 @@ class _naverMapScreenState extends State<naverMapScreen> {
                         if (myGu == '') {
                           const snackBar = SnackBar(content: Text('동네시설을 찾기 위해 위치를 조정해주세요.'));
 
-                          // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       } else {

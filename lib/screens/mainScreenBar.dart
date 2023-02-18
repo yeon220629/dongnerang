@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:dongnerang/screens/google.map.screen.dart';
 import 'package:dongnerang/screens/mypage/mypage.screen.dart';
-import 'package:dongnerang/screens/naver.map.screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -150,7 +150,7 @@ class mainScreenState extends State<mainScreen>{
             index: navigationController.currentBottomMenuIndex.value,
             children: [
               freeComponent_viewpage(),
-              naverMapScreen(),
+              googleMapScreen(),
               mypageScreen(navigationController.currentBottomMenuIndex.value),
               // privateSettingScreen(),
               // LoginScreen(),

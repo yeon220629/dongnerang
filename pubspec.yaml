@@ -21,11 +21,8 @@ dependencies:
   # Kakao
   kakao_flutter_sdk: ^1.3.0-beta.4 # 전체 추가
   kakao_flutter_sdk_share: ^1.3.0-beta.4 # 카카오톡 공유
-  # naver map
-  flutter_naver_map:
-    git:
-      url: https://github.com/note11g/flutter_naver_map.git
-      ref: main
+  # Google map
+  google_maps_flutter: ^2.2.3
   geolocator: ^9.0.2
   # URL
   url_launcher: ^6.1.4

@@ -2,6 +2,7 @@ import UIKit
 import Flutter
 import FirebaseCore
 import CoreLocation
+import GoogleMaps
 // import KakaoSDKCommon
 
 @UIApplicationMain
@@ -12,12 +13,13 @@ import CoreLocation
   ) -> Bool {
 //     KakaoSDK.initSDK(appKey: "kakaod7eaa723a1b0bbd17635330c5c561a5e")
     FirebaseApp.configure()
+    GMSServices.provideAPIKey("AIzaSyDYRks2VmSMhM_5Ee3K8aTXVRqBCZXtXZ4")
     GeneratedPluginRegistrant.register(with: self)
 
     //Ios Push 설정
     if #available(iOS 10.0, *) { UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate }
 
-    // NaverMap - 위치 추적
+    // 위치 추적
     if (CLLocationManager.locationServicesEnabled()) {
       switch CLLocationManager.authorizationStatus() {
       case .denied, .notDetermined, .restricted:
