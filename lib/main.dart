@@ -13,6 +13,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,19 +28,18 @@ import 'models/notification.model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
   MobileAds.instance.initialize();      // 모바일 광고 SDK 초기화
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await Permission.notification.isDenied.then((value) {
-    if (value) { Permission.notification.request(); }
-  });
 
   if(FirebaseAuth.instance.currentUser?.email != null){
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     // 앱이 죽었을떄
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    DynamicLink().setup();
   }
   runApp(const MyApp());
 }
@@ -79,10 +79,15 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   );
   FirebaseService.saveUserNotificationData(userEmail!,tempArray);
   // push 알림 보기 설정
-  await flutterLocalNotificationsPlugin.show(0, '${message.notification!.title.toString()}',
-      '${message.notification!.body.toString()}',
-      platformChannelSpecifics, payload: message.data['link'].toString()
-  );
+  // await flutterLocalNotificationsPlugin.show(0, '${message.notification!.title.toString()}',
+  //     '${message.notification!.body.toString()}',
+  //     platformChannelSpecifics, payload: message.data['link'].toString()
+  // );
+
+  FirebaseMessaging.onMessageOpenedApp.listen((message) async {
+    print("백그라운드 메시지 클릭 시 이벤트");
+    print("message : $message");
+  });
 }
 
 class ColorService { //기본 컬러 설정
@@ -121,8 +126,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    DynamicLink().setup();
   }
 
   @override

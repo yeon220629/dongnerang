@@ -1,23 +1,23 @@
 import 'dart:io';
 import 'package:dongnerang/screens/mainScreenBar.dart';
-import 'package:dongnerang/screens/search.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
-import 'package:dongnerang/util/admob.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:path_provider/path_provider.dart';
 import '../constants/colors.constants.dart';
-import 'mypage/mypage.screen.dart';
 
 
 class urlLoadScreen extends StatefulWidget {
   final Uri urldata;
   final s; final o; final j; final i;
+  //url, post["title"], post['center_name '], dateTime, 0
   const urlLoadScreen( this.urldata, this.s, this.o, this.j, this.i);
 
   @override
@@ -45,7 +45,38 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
   double progress = 0;
 
   final urlController = TextEditingController();
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
+  Future<Uri> _createDynamicLink() async {
+    var _url = widget.urldata.toString();
+    var title = widget.s.toString();
+    var centername = widget.o.toString();
+    var timedate = widget.j;
+    var number = widget.i;
+
+    final dynamicLinkPrefix = 'https://dongnerang.page.link';
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: dynamicLinkPrefix,
+      // link: Uri.parse('${dynamicLinkPrefix}/deeplink?id=test'),
+      link: Uri.parse(
+        //url, post["title"], post['center_name '], dateTime, 0
+        //   '${dynamicLinkPrefix}/deeplink?url=$_url&title=$title&centername=$centername&timedate=$timedate&number=$number',
+        '${dynamicLinkPrefix}/deeplink?title=$title&centername=$centername&timedate=$timedate&number=$number&url=$_url',
+      ),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.dongnerang.com.dongnerang',
+        minimumVersion: 0,
+      ),
+      iosParameters: const IOSParameters(
+        bundleId: 'com.dongnerang.com.dongnerang',
+        minimumVersion: '0',
+      ),
+    );
+    final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters);
+    Uri url = shortLink.shortUrl;
+    print("url : ${url}"); //queryParameters 값을 받아옴
+    return url;
+  }
 
   @override
   void initState() {
@@ -231,32 +262,34 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               ),
 
               IconButton(onPressed: ()async {
-                String firebasesUrl = widget.urldata.toString();
-                final TextTemplate defaultText = TextTemplate(
-                  text:
-                  '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${widget.o}]\n${widget.s}\n\n',
-                  link: Link(
-                    webUrl: Uri.parse('$firebasesUrl'),
-                    mobileWebUrl: Uri.parse('$firebasesUrl'),
-                  ),
-                );
-                // 카카오톡 실행 가능 여부 확인
-                bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
-                if (isKakaoTalkSharingAvailable) {
-                  print('카카오톡으로 공유 가능');
-                  try{
-                    // Uri uri = await ShareClient.instance.shareScrap(url: firebasesUrl);
-                    // await ShareClient.instance.launchKakaoTalk(uri);
-                    Uri uri = await ShareClient.instance.shareDefault(template: defaultText);
-                    await ShareClient.instance.launchKakaoTalk(uri);
-                    // EasyLoading.showSuccess("공유 완료");
-                  }catch (e){
-                    print('카카오톡 공유 실패 $e');
+                _createDynamicLink().then((value) async {
+                  final TextTemplate defaultText = TextTemplate(
+                    text:
+                    '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${widget.o}]\n${widget.s}\n\n',
+                    link: Link(
+                      webUrl: Uri.parse('$value'),
+                      mobileWebUrl: Uri.parse('$value'),
+                    ),
+                  );
+                  // 카카오톡 실행 가능 여부 확인
+                  bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
+                  if (isKakaoTalkSharingAvailable) {
+                    print('카카오톡으로 공유 가능');
+                    try{
+                      Uri uri = await ShareClient.instance.shareDefault(template: defaultText);
+                      await ShareClient.instance.launchKakaoTalk(uri);
+                    }catch (e){
+                      print('카카오톡 공유 실패 $e');
+                    }
+                  } else {
+                    print('카카오톡 미설치: 웹 공유 기능 사용 권장');
+                    print("firebasesUrl : ${value}");
+
+                    EasyLoading.showError("카카오톡 미설치: 카카오톡 다운로드 권장");
                   }
-                } else {
-                  print('카카오톡 미설치: 웹 공유 기능 사용 권장');
-                  EasyLoading.showError("카카오톡 미설치: 카카오톡 다운로드 권장");
-                }
+                });
+
+
               }, icon: const Icon(Icons.share_outlined, color: Colors.black)),
             ],
           ),
@@ -283,10 +316,17 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                             urlController.text = this.url;
                           });
                         },
-                        androidOnPermissionRequest: (controller, origin, resources) async {
-                          return PermissionRequestResponse(
-                              resources: resources,
-                              action: PermissionRequestResponseAction.GRANT);
+                        onDownloadStartRequest: (InAppWebViewController controller, DownloadStartRequest downloadStartRequest) async {
+                          final directory = await getApplicationDocumentsDirectory();
+                          var savedDirPath = directory.path;
+
+                          await FlutterDownloader.enqueue(
+                            url: downloadStartRequest.url.toString(),
+                            savedDir: savedDirPath,
+                            saveInPublicStorage: true,
+                            showNotification: true,
+                            openFileFromNotification: true,
+                          );
                         },
                         shouldOverrideUrlLoading: (controller, navigationAction) async {
                           var uri = navigationAction.request.url!;
@@ -298,7 +338,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
 
                           return NavigationActionPolicy.ALLOW;
                         },
-                        onLoadError: (controller, url, code, message) {
+                        onReceivedError: (controller, request, error) {
                           pullToRefreshController.endRefreshing();
                         },
                         onProgressChanged: (controller, progress) {
@@ -317,7 +357,8 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                           });
                         },
                         onConsoleMessage: (controller, consoleMessage) {
-                          print(consoleMessage);
+                          print("messageLevel : ${consoleMessage.messageLevel}");
+                          print("message : ${consoleMessage.message}");
                         },
                       ),
                       progress < 1.0

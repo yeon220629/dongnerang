@@ -1,25 +1,22 @@
 
 
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 
+import '../screens/url.load.screen.dart';
 import 'logger.service.dart';
 
 class DynamicLink {
   Future<bool> setup() async {
     bool isExistDynamicLink = await _getInitialDynamicLink();
-    print("setUp dynamic link : $isExistDynamicLink");
-
     _addListener();
-
     return isExistDynamicLink;
   }
 
   Future<bool> _getInitialDynamicLink() async {
     final PendingDynamicLinkData? deepLink = await FirebaseDynamicLinks.instance.getInitialLink();
-    final shorLink = getShortLink('', '');
-    print("shortLink : ${shorLink}");
-    print("shortLink : ${shorLink..then((value) => print('value : $value'))}");
-    print("deepLink : ${deepLink}");
     if (deepLink != null) {
       PendingDynamicLinkData? dynamicLinkData = await FirebaseDynamicLinks
           .instance
@@ -27,79 +24,38 @@ class DynamicLink {
 
       if (dynamicLinkData != null) {
         _redirectScreen(dynamicLinkData);
-
         return true;
       }
     }
-
     return false;
   }
 
   void _addListener() {
-    print("dynamic link addListener");
     FirebaseDynamicLinks.instance.onLink.listen((
         PendingDynamicLinkData dynamicLinkData,
         ) {
-      print("dynamicLinkData : $dynamicLinkData");
       _redirectScreen(dynamicLinkData);
     }).onError((error) {
       logger.e(error);
     });
   }
 
-  void _redirectScreen(PendingDynamicLinkData dynamicLinkData) {
-    if (dynamicLinkData.link.queryParameters.containsKey('id')) {
-      String link = dynamicLinkData.link.path.split('/').last;
-      String id = dynamicLinkData.link.queryParameters['id']!;
+  void _redirectScreen(PendingDynamicLinkData dynamicLinkData) async {
+    Map<String, String> dynamicModel = new Map();
+    var url = '';
+    dynamicLinkData.link.queryParameters.forEach((key, values) {
+      // print("$key : $values");
+      dynamicModel.addAll({key : values});
+      if(key != 'title' && key != 'centername' && key != 'timedate' && key != 'number'){
+        url += '&$key=$values';
+      }
+    });
+    // DateFormat dateFormat = DateFormat("yyyy-MM-dd").parse();
+    DateTime dateTime = new DateFormat("yyyy-MM-dd").parse(dynamicModel['timedate']!);
+    url = url.replaceAll('&url=', '');
+    // 페이지 다른 변수만 세팅 하면 끝날 듯. url, post["title"], post['center_name '], dateTime, 0
+    Get.to(urlLoadScreen(Uri.parse(url), dynamicModel['title'],
+        dynamicModel['centername'], dateTime, int.parse(dynamicModel['number']!)));
 
-      // switch (link) {
-      //   case exhibition:
-      //     Get.offAll(
-      //           () => ExhibitionDetailScreen(
-      //         mainBottomTabIndex: MainBottomTabScreenType.exhibitionMap.index,
-      //       ),
-      //       arguments: {
-      //         "exhibitionId": id,
-      //       },
-      //     );
-      //     break;
-      //   case artist:
-      //     Get.offAll(
-      //           () => ArtistScreen(),
-      //       arguments: {
-      //         "artistId": id,
-      //       },
-      //     );
-      //     break;
-      //   case exhibitor:
-      //     Get.offAll(
-      //           () => ExhibitorScreen(),
-      //       arguments: {
-      //         "exhibitorId": id,
-      //       },
-      //     );
-      //     break;
-      // }
-    }
-  }
-
-  Future<String> getShortLink(String screenName, String id) async {
-    final dynamicLinkPrefix = 'https://dongnerang.page.link';
-    final dynamicLinkParams = DynamicLinkParameters(
-      uriPrefix: dynamicLinkPrefix,
-      link: Uri.parse('$dynamicLinkPrefix/$screenName?id=$id'),
-      androidParameters: const AndroidParameters(
-        packageName: 'com.dongnerang.com.dongnerang"',
-        minimumVersion: 0,
-      ),
-      iosParameters: const IOSParameters(
-        bundleId: 'com.dongnerang.com.dongnerang',
-        minimumVersion: '0',
-      ),
-    );
-    final dynamicLink =
-    await FirebaseDynamicLinks.instance.buildShortLink(dynamicLinkParams);
-
-    return dynamicLink.shortUrl.toString();
   }
 }
