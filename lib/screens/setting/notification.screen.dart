@@ -45,24 +45,23 @@ class _NotificationScreenState extends State<NotificationScreen> {
       //   },
       //   secondary: const Icon(Icons.notifications_active_outlined),
       // ),
-      body: Container(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              children: [
-                Text("앱 푸시 알림 설정"),
-              ],
-            ),
-            TextButton(
-                onPressed: (){
-                  openAppSettings();
-                },
-                child: Text("알림 변경")
-            ),
-          ],
+      body: SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("앱 푸시 메시지 설정", style: TextStyle(fontSize: 16),),
+                  TextButton(
+                      onPressed: (){
+                        openAppSettings();
+                      },
+                      child: Text("알림 변경", style: TextStyle(fontWeight: FontWeight.bold),)
+                  ),
+                ],
+              ),
+        ),
         )
-      ),
     );
   }
 }
