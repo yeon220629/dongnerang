@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dongnerang/constants/common.constants.dart';
 import 'package:dongnerang/models/space.model.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,19 +8,12 @@ import 'package:http/http.dart' as http;
 class EshareOpenApi {
   static String apiKey = 'e93e4874eec43b1eb0254c6d861393f1';
   static int limit = 100;
-  static List<Space> eshareSpaces = [];
 
-  static Future<List<Space>> getAllEshareApiSpaces(String areaCode) async {
-    eshareSpaces = [];
-
+  static Future<void> getAllEshareApiSpaces(String areaCode) async {
     await getEshareApiSpacesByCate('010500', areaCode);
     await getEshareApiSpacesByCate('010100', areaCode);
     await getEshareApiSpacesByCate('010200', areaCode);
     await getEshareApiSpacesByCate('040000', areaCode);
-
-    // print('esharespaces list >>> ${eshareSpaces.length}');
-
-    return eshareSpaces;
   }
 
   static Future<void> getEshareApiSpacesByCate(String cateCode, String areaCode) async {
@@ -89,7 +83,7 @@ class EshareOpenApi {
       );
 
       // list에 저장
-      eshareSpaces.add(space);
+      SpacesQueue.add(space);
     }
   }
 }

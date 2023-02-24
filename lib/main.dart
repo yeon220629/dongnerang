@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:dongnerang/constants/common.constants2.dart';
 import 'package:dongnerang/firebase_options.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
+import 'package:dongnerang/models/space.model.dart';
 import 'package:dongnerang/screens/splash.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:dongnerang/services/user.service.dart';
@@ -25,6 +26,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'constants/common.constants.dart';
 import 'controller/NotificationController.dart';
 import 'models/notification.model.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +37,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Hive
+  await Hive.initFlutter();
+  Hive.registerAdapter<Space>(SpaceAdapter());
+  await Hive.openBox<Space>('hiveSpace');
 
   if(FirebaseAuth.instance.currentUser?.email != null){
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

@@ -9,6 +9,7 @@ import 'package:dongnerang/models/space.model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/screens/seoul.url.screen.dart';
+import 'package:dongnerang/services/hive.service.dart';
 import 'package:dongnerang/util/admob.dart';
 import 'package:dongnerang/util/eshare.openapi.dart';
 import 'package:dongnerang/util/location.dart' as mylocation;
@@ -20,6 +21,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:latlong2/latlong.dart' as latlong2;
@@ -67,25 +70,33 @@ class _googleMapScreenState extends State<googleMapScreen> {
   late final GoogleMapController _ct;
   CameraPosition position = const CameraPosition(target: LatLng(37.494705, 126.959945), zoom: 14);
 
-  // 기본 설정 : 상도역
+  // Hive
+  final Box<Space> _spaceBox = HiveBoxes.getHiveSpace();
+
+  // 기본 현위치, 자치구 설정 : 상도역, 동작구
   mylocation.Location myLocation = mylocation.Location(latitude: 37.494705, longitude: 126.959945);
   String myGu = '동작구';
 
-  Map<String, Space> spacesMap = {};
+  // Map<String, Space> spacesMap = {};
   Map<String, Marker> markersMap = {};
 
+  // 위젯 관련 변수
   bool isLoaded = false; // 리스트 전체 로딩 보여주기 유무
   bool showBottomSheetBtn = false; // 리스트 보여주기 유무
   bool showReSearchBtn = true; // [현 동네에서 검색] 버튼 보여주기 유무
 
+  // 카테고리 관련 변수
   List<SpaceType> categoryList = SpaceType.values.toList(); // 카테고리 리스트
   final List<String> _selectedChoices = <String>[]; // 선택된 카테고리 리스트
   Map<String, bool> categoryVisibility = {}; // 카테고리 보여주기 속성
+  Map<String, int> categoryCount = {}; // 카테고리별 공간 개수
+  int categoryCountSum = 0; // 카테고리별 공간 개수 총 합
 
-  Map<String, int> categoryCount = {};
-  int categoryCountSum = 0;
+  // ListView paging 관련 변수
+  final int _pageSize = 10;
+  final PagingController<int, Space> _pagingController = PagingController(firstPageKey: 0);
 
-  // firestore 데이터 queue에 저장
+  // firestore 데이터 가져와 queue에 저장하는 함수
   Future<void> getFirebaseSpaces(String docName, String subCollectionName, String gu) async {
     List<String> categoryStrList = categoryList.map((e) => e.code.toString()).toList();
 
@@ -120,37 +131,31 @@ class _googleMapScreenState extends State<googleMapScreen> {
     }
   }
 
-  // 로컬 db에서 자치구로 공간 리스트 조회
+  // 자치구로 공간 리스트 조회하는 함수
   Future<void> getSpacesByGu(Map<String, String> area) async {
     categoryCount.clear();
-    Map<String, Space> spaces = {};
+    await _spaceBox.clear();
+    print("clear ::: ${_spaceBox.values}");
 
-    List<Space> spacesByGu = [];
+    // Firestore 공간 데이터 -> SpacesQueue에 저장
     await getFirebaseSpaces("dongnerangSpaces", "dongnerangSpacesByGu", area['gu']!);
     await getFirebaseSpaces("seoulApiSpaces", "seoulApiSpacesByGu", area['gu']!);
-
-    while (SpacesQueue.isNotEmpty) {
-      Space s = SpacesQueue.removeFirst();
-      spacesByGu.add(s);
-    }
-    // print("getSpacesByGu spacesByGu >>> ${spacesByGu.length}");
-
-    // 공유누리 api 호출
-    List<Space> eshareSpaces = await EshareOpenApi.getAllEshareApiSpaces(area['areaCode']!);
-    // print("getSpacesByGu eshareSpaces >>> ${eshareSpaces.length}");
-
-    spacesByGu.addAll(eshareSpaces);
+    // 공유누리 공간 api 호출 -> SpacesQueue에 저장
+    await EshareOpenApi.getAllEshareApiSpaces(area['areaCode']!);
 
     try {
-      // 현위치와 거리계산
-      for (var s in spacesByGu) {
-        categoryCount[s.category!] = (categoryCount[s.category] ?? 0) + 1;
-        s.dist = getDistance(s.latitude.toDouble(), s.longitude.toDouble());
-        spaces[s.uid] = s;
+      while (SpacesQueue.isNotEmpty) {
+        Space s = SpacesQueue.removeFirst();
+
+        categoryCount[s.category!] = (categoryCount[s.category] ?? 0) + 1; // 카테고리별 개수 추가
+        s.dist = getDistance(s.latitude.toDouble(), s.longitude.toDouble()); // 현위치와 거리계산
+
+        // hive 저장
+        await _spaceBox.put(s.uid, s);
       }
 
       setState(() {
-        spacesMap = Map.fromEntries(spaces.entries.toList()..sort((e1, e2) => e1.value.dist!.compareTo(e2.value.dist!))); // 거리순 정렬
+        // spacesMap = Map.fromEntries(spaces.entries.toList()..sort((e1, e2) => e1.value.dist!.compareTo(e2.value.dist!))); // 거리순 정렬
         categoryCountSum = getCategoryCountSum();
       });
     } catch (e) {
@@ -158,7 +163,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
     }
   }
 
-  // 마커 아이콘 byte로 변환
+  // 마커 아이콘 byte로 변환하는 함수
   Future<Uint8List> getBytesFromMarkerIconAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
@@ -167,12 +172,11 @@ class _googleMapScreenState extends State<googleMapScreen> {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
 
-  // marker 만들기
+  // marker 만들기 함수
   Future<void> makeMarkers() async {
-    Map<String, Marker> markers = {};
-    List<Space> spaces = spacesMap.values.toList();
+    markersMap.clear();
 
-    for (var space in spaces.toSet()) {
+    for (var space in _spaceBox.values.toSet()) {
       Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).offMarkImg}", 100);
 
       Marker m = Marker(
@@ -184,26 +188,22 @@ class _googleMapScreenState extends State<googleMapScreen> {
         visible: categoryVisibility[space.category] ?? true,
       );
 
-      markers[space.uid] = m;
+      markersMap[space.uid] = m;
     }
-
-    setState(() {
-      markersMap = markers;
-    });
   }
 
-  // 전체 마커 이미지 초기화
+  // 전체 마커 이미지 초기화 함수
   void markerInit() {
     markersMap.forEach((markerUid, markerValue) async {
-      Space space = spacesMap[markerUid]!;
-      Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).offMarkImg}", 100);
+      String cate = _spaceBox.get(markerUid)!.category!;
+      Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(cate).offMarkImg}", 100);
 
       setState(() {
         markersMap.update(
           markerUid,
           (value) => value.copyWith(
             iconParam: BitmapDescriptor.fromBytes(markerIconByte),
-            visibleParam: categoryVisibility[space.category],
+            visibleParam: categoryVisibility[cate],
           ),
         );
       });
@@ -213,7 +213,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
   // 공간 한 개 위젯
   Widget makeSpaceWidget(String uid, bool isLast) {
     double width = MediaQuery.of(context).size.width;
-    Space thisSpace = spacesMap[uid]!;
+    Space thisSpace = _spaceBox.get(uid)!;
     String? imgurl = thisSpace.spaceImage;
     /*
     1. 장소명
@@ -433,32 +433,27 @@ class _googleMapScreenState extends State<googleMapScreen> {
 
   // 마커 선택시 이벤트
   Future<void> onMarkerTabEvent(String uid, bool cameraMove) async {
-    Space space = spacesMap[uid]!;
+    Space space = _spaceBox.get(uid)!;
 
     // 같은 위치에 있는 공간 리스트
-    List<Space> selectedSpaces = spacesMap.values.where((s) => s.latitude == space.latitude && s.longitude == space.longitude).toList();
-    // selectedSpace uid 리스트
-    List<String> selectedUids = selectedSpaces.map((e) => e.uid).toList();
-
+    List<Space> selectedSpaces =
+        _spaceBox.values.where((s) => _selectedChoices.contains(s.category) && s.latitude == space.latitude && s.longitude == space.longitude).toList();
+    print("selectedSpace ::: ${selectedSpaces.map((e) => {e.uid, e.latitude, e.longitude}).toList()}");
     // 지도 카메라 이동 - 리스트에서 클릭시에만
     if (cameraMove) {
       await moveMapCamera(space.latitude, space.longitude);
     }
 
     // 마커 아이콘 변경
-    markersMap.forEach((markerUid, markerValue) async {
-      if (selectedUids.contains(markerUid)) {
-        Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).onMarkImg}", 150);
+    Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).onMarkImg}", 150);
 
-        setState(() {
-          markersMap.update(
-            markerUid,
-            (value) => value.copyWith(
-              iconParam: BitmapDescriptor.fromBytes(markerIconByte),
-            ),
-          );
-        });
-      }
+    setState(() {
+      markersMap.update(
+        uid,
+        (value) => value.copyWith(
+          iconParam: BitmapDescriptor.fromBytes(markerIconByte),
+        ),
+      );
     });
 
     setState(() {
@@ -466,11 +461,11 @@ class _googleMapScreenState extends State<googleMapScreen> {
     });
 
     // 공간 상세 모달
-    showSpaceBottomSheet(selectedSpaces);
+    showSpaceBottomSheet(uid, selectedSpaces);
   }
 
   // 공간 상세 모달
-  void showSpaceBottomSheet(List<Space> selectedSpace) {
+  void showSpaceBottomSheet(String uid, List<Space> selectedSpace) {
     showModalBottomSheet<void>(
       barrierColor: AppColors.black.withOpacity(0.08),
       shape: const RoundedRectangleBorder(
@@ -591,8 +586,20 @@ class _googleMapScreenState extends State<googleMapScreen> {
           ),
         );
       },
-    ).whenComplete(() {
-      markerInit();
+    ).whenComplete(() async {
+      Space space = _spaceBox.get(uid)!;
+
+      // 마커 아이콘 변경
+      Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).offMarkImg}", 100);
+
+      setState(() {
+        markersMap.update(
+          uid,
+          (value) => value.copyWith(
+            iconParam: BitmapDescriptor.fromBytes(markerIconByte),
+          ),
+        );
+      });
     });
   }
 
@@ -634,9 +641,34 @@ class _googleMapScreenState extends State<googleMapScreen> {
     return sum;
   }
 
+  // 리스트 페이징 함수
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        int lastIdx = _spaceBox.values.where((s) => _selectedChoices.contains(s.category)).toList().length;
+        // print("fetchpage try ::: $pageKey ~ ${pageKey + _pageSize < lastIdx ? pageKey + _pageSize : lastIdx}");
+
+        // 카테고리 필터, 거리순, _pageSize개수 만큼 불러오기
+        List<Space> newItems = (_spaceBox.values.where((s) => _selectedChoices.contains(s.category)).toList()..sort(((a, b) => a.dist!.compareTo(b.dist!))))
+            .sublist(pageKey, (pageKey + _pageSize < lastIdx ? pageKey + _pageSize : lastIdx));
+
+        bool isLastPage = newItems.length < _pageSize;
+
+        if (isLastPage) {
+          _pagingController.appendLastPage(newItems);
+        } else {
+          final nextPageKey = pageKey + newItems.length;
+          _pagingController.appendPage(newItems, nextPageKey);
+        }
+      });
+    } catch (error) {
+      _pagingController.error = error;
+    }
+  }
+
   Future<void> _asyncInitState() async {
     Map<String, String> area = await getLocationData(); // 현위치 구하기
-    await getSpacesByGu(area); // 자치구별 공간 가져오기
+    await getSpacesByGu(area); // 자치구별 공간 데이터 가져오기
     await makeMarkers(); // 마커 만들기
 
     setState(() {
@@ -647,15 +679,16 @@ class _googleMapScreenState extends State<googleMapScreen> {
 
   @override
   void initState() {
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
     super.initState();
-
-    // 현위치 가져오기 > 로컬 DB에 저장 > 현위치 자치구로 리스트 가져오기 > 마커만들기
     _asyncInitState();
 
     setState(() {
       // 카테고리
       for (var element in categoryList) {
-        _selectedChoices.add(element.displayName);
+        _selectedChoices.add(element.code);
         categoryVisibility[element.code] = true;
       }
     });
@@ -665,8 +698,11 @@ class _googleMapScreenState extends State<googleMapScreen> {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
-    //모바일 상단 상태 바 높이 값
+    // 모바일 상단 상태 바 높이 값
     final double statusBarHeight = MediaQuery.of(context).padding.top;
+    // 지도 정 중앙 위치
+    double screenX = width * MediaQuery.of(context).devicePixelRatio / 2;
+    double screenY = height * MediaQuery.of(context).devicePixelRatio / 2;
 
     return Scaffold(
       body: SizedBox(
@@ -689,6 +725,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
                 });
               },
               myLocationButtonEnabled: false,
+              zoomControlsEnabled: false,
             ),
             // 현 동네에서 검색 버튼
             Align(
@@ -707,8 +744,8 @@ class _googleMapScreenState extends State<googleMapScreen> {
 
                         LatLng cp = await _ct.getLatLng(
                           ScreenCoordinate(
-                            x: (width / 2).round(),
-                            y: (height / 2).round(),
+                            x: screenX.round(),
+                            y: screenY.round(),
                           ),
                         );
                         String lat = cp.latitude.toStringAsFixed(6);
@@ -716,9 +753,11 @@ class _googleMapScreenState extends State<googleMapScreen> {
 
                         Map<String, String> area = await ReverseGeo.getGuByCoords(lat, long);
 
-                        Future.delayed(const Duration(milliseconds: 1), () async {
+                        Future.delayed(const Duration(milliseconds: 0), () async {
                           await getSpacesByGu(area);
                           await makeMarkers();
+                          _pagingController.refresh();
+
                           setState(() {
                             isLoaded = true;
                             showReSearchBtn = false;
@@ -902,24 +941,35 @@ class _googleMapScreenState extends State<googleMapScreen> {
                                             child: MediaQuery.removePadding(
                                               context: context,
                                               removeTop: true,
-                                              child: ListView.builder(
-                                                cacheExtent: 100,
-                                                itemCount: spacesMap.length + 1,
-                                                itemBuilder: (BuildContext context, int index) {
-                                                  // 애드몹
-                                                  if (index == 0) {
-                                                    return BannerAdMob();
-                                                  } else {
-                                                    String uid = spacesMap.keys.toList()[index - 1];
+                                              // child: ListView.builder(
+                                              //   cacheExtent: 10,
+                                              //   itemCount: _spaceBox.values.length + 1,
+                                              //   itemBuilder: (BuildContext context, int index) {
+                                              //     // 애드몹
+                                              //     if (index == 0) {
+                                              //       return BannerAdMob();
+                                              //     } else {
+                                              //       String uid = _spaceBox.keys.toList()[index - 1];
 
-                                                    return InkWell(
-                                                      onTap: () {
-                                                        onMarkerTabEvent(uid, true);
-                                                      },
-                                                      child: makeSpaceWidget(uid, false),
-                                                    );
-                                                  }
-                                                },
+                                              //       return InkWell(
+                                              //         onTap: () {
+                                              //           onMarkerTabEvent(uid, true);
+                                              //         },
+                                              //         child: makeSpaceWidget(uid, false),
+                                              //       );
+                                              //     }
+                                              //   },
+                                              // ),
+                                              child: PagedListView<int, Space>(
+                                                pagingController: _pagingController,
+                                                builderDelegate: PagedChildBuilderDelegate<Space>(
+                                                  itemBuilder: ((context, item, index) => InkWell(
+                                                        onTap: () {
+                                                          onMarkerTabEvent(item.uid, true);
+                                                        },
+                                                        child: makeSpaceWidget(item.uid, false),
+                                                      )),
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1017,27 +1067,28 @@ class _googleMapScreenState extends State<googleMapScreen> {
                                     choice.displayName,
                                   ),
                                 ),
-                                labelStyle: _selectedChoices.contains(choice.displayName)
+                                labelStyle: _selectedChoices.contains(choice.code)
                                     ? TextStyle(color: Colors.white, fontSize: Theme.of(context).textTheme.bodySmall?.fontSize)
                                     : TextStyle(color: Colors.grey, fontSize: Theme.of(context).textTheme.bodySmall?.fontSize),
                                 selectedColor: Color(choice.iconColor),
                                 showCheckmark: false,
-                                selected: _selectedChoices.contains(choice.displayName),
+                                selected: _selectedChoices.contains(choice.code),
                                 onSelected: (bool value) {
                                   setState(() {
                                     if (value) {
-                                      if (!_selectedChoices.contains(choice.displayName)) {
-                                        _selectedChoices.add(choice.displayName);
+                                      if (!_selectedChoices.contains(choice.code)) {
+                                        _selectedChoices.add(choice.code);
                                         categoryVisibility[choice.code.toString()] = true;
                                       }
                                     } else if (_selectedChoices.length > 1) {
                                       _selectedChoices.removeWhere((String name) {
-                                        return name == choice.displayName;
+                                        return name == choice.code;
                                       });
                                       categoryVisibility[choice.code.toString()] = false;
                                     }
                                   });
                                   markerInit();
+                                  _pagingController.refresh();
                                   categoryCountSum = getCategoryCountSum();
                                 },
                               );
@@ -1108,6 +1159,12 @@ class _googleMapScreenState extends State<googleMapScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
   }
 }
 

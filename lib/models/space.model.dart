@@ -1,24 +1,47 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive/hive.dart';
 
-class Space {
+part 'space.model.g.dart';
+
+@HiveType(typeId: 0)
+class Space extends HiveObject {
+  @HiveField(0)
   late String uid; // 장소 id
+  @HiveField(1)
   late String? gu; // 장소 자치구
+  @HiveField(2)
   late String spaceName; // 장소명
+  @HiveField(3)
   late String? spaceImage; // 장소 이미지
+  @HiveField(4)
   late String? address; // 주소
+  @HiveField(5)
   late String? category; // 카테고리
+  @HiveField(6)
   late double latitude; // 위도
+  @HiveField(7)
   late double longitude; // 경도
+  @HiveField(8)
   late String? detailInfo; // 상세정보
+  @HiveField(9)
   late String? pageLink; // 장소 예약 URL
+  @HiveField(10)
   late String? phoneNum; // 번호
+  @HiveField(11)
   late double? dist = 0; // 현위치와 공간 거리
+  @HiveField(12)
   late String? svcName; // 서비스명
+  @HiveField(13)
   late String? svcStat; // 서비스 상태
+  @HiveField(14)
   late String? svcTimeMin; // 서비스 이용 시작 시간
+  @HiveField(15)
   late String? svcTimeMax; // 서비스 이용 종료 시간
+  @HiveField(16)
   late String? payInfo; // 서비스 결제 정보
+  @HiveField(17)
   late String? useTarget; // 서비스 이용 대상
+  @HiveField(18)
   late String? updated; // 업데이트 일자
 
   late DocumentReference? reference;
