@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:isolate';
+import 'dart:ui';
 import 'package:dongnerang/screens/mainScreenBar.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,10 +30,15 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
   bool toggle = false;
 
   InAppWebViewController? webViewController;
+  InAppWebViewSettings setting = InAppWebViewSettings(
+
+  );
+
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
       crossPlatform: InAppWebViewOptions(
         useShouldOverrideUrlLoading: true,
         mediaPlaybackRequiresUserGesture: false,
+        useOnDownloadStart: true,
       ),
       android: AndroidInAppWebViewOptions(
         useHybridComposition: true,
@@ -46,6 +53,15 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
 
   final urlController = TextEditingController();
   FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+
+  final ReceivePort _port = ReceivePort();
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(String id, DownloadTaskStatus status, int downloadProgress) {
+    final SendPort send = IsolateNameServer.lookupPortByName('downloader_send_port')!;
+    send.send([id, status, downloadProgress]);
+  }
+
 
   Future<Uri> _createDynamicLink() async {
     var _url = widget.urldata.toString();
@@ -97,11 +113,22 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
           webViewController?.reload();
         }
     );
+    IsolateNameServer.registerPortWithName(_port.sendPort, 'downloader_send_port');
+
+    _port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+      setState((){ });
+    });
+    FlutterDownloader.registerCallback(downloadCallback);
+
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
     super.dispose();
   }
 
@@ -306,6 +333,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                         // initialUrlRequest: URLRequest(url: Uri.parse("https://inappwebview.dev/")),
                         initialUrlRequest: URLRequest(url: WebUri.uri(widget.urldata)),
                         initialOptions: options,
+                        // initialSettings: options,
                         pullToRefreshController: pullToRefreshController,
                         onWebViewCreated: (controller) {
                           webViewController = controller;

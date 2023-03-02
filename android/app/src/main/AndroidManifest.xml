@@ -95,7 +95,7 @@
             android:name="com.aboutyou.dart_packages.sign_in_with_apple.SignInWithAppleCallback"
             android:exported="true"
             >
-            <intent-filter>w
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -119,7 +119,7 @@
                android:value="AIzaSyBEx8O-_XmMrrXpdhCA_D_NkEVjyVo1sNE"/>
         <provider
             android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
-            android:authorities="com.dongnerang.com.dongnerang"
+            android:authorities="${applicationId}.flutter_downloader.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

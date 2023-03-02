@@ -31,7 +31,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  await Permission.storage.request(); // 저장공간 권한 요청 추가
+
   KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
   MobileAds.instance.initialize();      // 모바일 광고 SDK 초기화
   await Firebase.initializeApp(

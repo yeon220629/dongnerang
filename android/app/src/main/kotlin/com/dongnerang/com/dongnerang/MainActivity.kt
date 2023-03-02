@@ -10,6 +10,7 @@ import io.flutter.plugins.GeneratedPluginRegistrant
 import java.net.URISyntaxException
 
 class MainActivity: FlutterActivity() {
+
     private var CHANNEL = "fcm_default_channel"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
