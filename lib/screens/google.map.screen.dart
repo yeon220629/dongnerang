@@ -337,7 +337,6 @@ class _googleMapScreenState extends State<googleMapScreen> {
                     ],
                   ),
                 ),
-                /*
                 const SizedBox(
                   width: 16.0,
                 ),
@@ -371,7 +370,6 @@ class _googleMapScreenState extends State<googleMapScreen> {
                           ),
                         ),
                 ),
-                */
               ],
             ),
             const SizedBox(
