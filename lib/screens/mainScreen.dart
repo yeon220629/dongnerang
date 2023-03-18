@@ -30,6 +30,7 @@ import '../util/logger.service.dart';
 import '../widgets/app_button.widget.dart';
 import 'banner/banner.dart';
 import 'notice.main.screen.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 
 class freeComponent_viewpage extends StatefulWidget {
@@ -75,6 +76,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   double topContainer = 0;
   int dotindex =0;
   Map<String, dynamic> urls = {};
+
+  // ListView paging 관련 변수
+  final int _pageSize = 20;
+  final PagingController<int, dynamic> _pagingController = PagingController(firstPageKey: 0);
+
 
   // 자치구 관련 url들 가져오기
   Future<void> checkUrls(String gu) async {
@@ -330,6 +336,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
   @override
   void initState() {
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => initPlugin());
     final FirebaseMessaging _messaging = FirebaseMessaging.instance;
     _getToken(_messaging);
@@ -440,6 +450,29 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     });
   }
 
+  // 리스트 페이징 함수
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        int lastIdx = itemsData.length;
+
+        // 카테고리 필터, 거리순, _pageSize개수 만큼 불러오기
+        List<dynamic> newItems = itemsData.sublist(pageKey, (pageKey + _pageSize < lastIdx ? pageKey + _pageSize : lastIdx));
+
+        bool isLastPage = newItems.length < _pageSize;
+
+        if (isLastPage) {
+          _pagingController.appendLastPage(newItems);
+        } else {
+          final nextPageKey = pageKey + newItems.length;
+          _pagingController.appendPage(newItems, nextPageKey);
+        }
+      });
+    } catch (error) {
+      _pagingController.error = error;
+    }
+  }
+
   void checkNewVersion(NewVersion newVersion) async {
     final status = await newVersion.getVersionStatus();
     // print("status appStoreLink : ${status?.appStoreLink}");
@@ -496,6 +529,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   @override
   void dispose() {
     // TODO: implement dispose
+    _pagingController.dispose();
     super.dispose();
   }
 
@@ -786,6 +820,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         direction: Axis.horizontal,
                         isSelected: _selectedCenter,
                         onPressed: (int index) {
+                          _pagingController.refresh();
                           setState(() {
                             for (int i = 0; i < _selectedCenter.length; i++) {
                               _selectedCenter[i] = i == index;
@@ -1064,10 +1099,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   ),
                 listLength > 0
                   ? Expanded(
-                    child: ListView.builder(
-                        itemCount: itemsData.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (c, i){
+                    child: PagedListView<int, dynamic>(
+                      pagingController: _pagingController,
+                      builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                        itemBuilder: (context, item, i){
                           double scale = 1.0;
                           if (topContainer > 0.5){
                             scale = i + 0.5 - topContainer;
@@ -1080,6 +1115,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             child: itemsData[i],
                           );
                         }
+                      ),
                     )
                 )
                 : Expanded(

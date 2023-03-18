@@ -135,7 +135,6 @@ class _googleMapScreenState extends State<googleMapScreen> {
   Future<void> getSpacesByGu(Map<String, String> area) async {
     categoryCount.clear();
     await _spaceBox.clear();
-    print("clear ::: ${_spaceBox.values}");
 
     // Firestore 공간 데이터 -> SpacesQueue에 저장
     await getFirebaseSpaces("dongnerangSpaces", "dongnerangSpacesByGu", area['gu']!);
@@ -436,7 +435,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
     // 같은 위치에 있는 공간 리스트
     List<Space> selectedSpaces =
         _spaceBox.values.where((s) => _selectedChoices.contains(s.category) && s.latitude == space.latitude && s.longitude == space.longitude).toList();
-    print("selectedSpace ::: ${selectedSpaces.map((e) => {e.uid, e.latitude, e.longitude}).toList()}");
+
     // 지도 카메라 이동 - 리스트에서 클릭시에만
     if (cameraMove) {
       await moveMapCamera(space.latitude, space.longitude);
@@ -446,15 +445,17 @@ class _googleMapScreenState extends State<googleMapScreen> {
     Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).onMarkImg}", 150);
 
     setState(() {
-      markersMap.update(
-        uid,
-        (value) => value.copyWith(
-          iconParam: BitmapDescriptor.fromBytes(markerIconByte),
-        ),
-      );
-    });
+      for (var s in selectedSpaces) {
+        if (markersMap.containsKey(s.uid)) {
+          markersMap.update(
+            s.uid,
+            (value) => value.copyWith(
+              iconParam: BitmapDescriptor.fromBytes(markerIconByte),
+            ),
+          );
+        }
+      }
 
-    setState(() {
       showBottomSheetBtn = false;
     });
 
@@ -591,12 +592,16 @@ class _googleMapScreenState extends State<googleMapScreen> {
       Uint8List markerIconByte = await getBytesFromMarkerIconAsset("assets/images/${SpaceType.getByCode(space.category!).offMarkImg}", 100);
 
       setState(() {
-        markersMap.update(
-          uid,
-          (value) => value.copyWith(
-            iconParam: BitmapDescriptor.fromBytes(markerIconByte),
-          ),
-        );
+        for (var s in selectedSpace) {
+          if (markersMap.containsKey(s.uid)) {
+            markersMap.update(
+              s.uid,
+              (value) => value.copyWith(
+                iconParam: BitmapDescriptor.fromBytes(markerIconByte),
+              ),
+            );
+          }
+        }
       });
     });
   }
@@ -644,7 +649,6 @@ class _googleMapScreenState extends State<googleMapScreen> {
     try {
       Future.delayed(const Duration(milliseconds: 500), () {
         int lastIdx = _spaceBox.values.where((s) => _selectedChoices.contains(s.category)).toList().length;
-        // print("fetchpage try ::: $pageKey ~ ${pageKey + _pageSize < lastIdx ? pageKey + _pageSize : lastIdx}");
 
         // 카테고리 필터, 거리순, _pageSize개수 만큼 불러오기
         List<Space> newItems = (_spaceBox.values.where((s) => _selectedChoices.contains(s.category)).toList()..sort(((a, b) => a.dist!.compareTo(b.dist!))))
