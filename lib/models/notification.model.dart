@@ -43,7 +43,7 @@ class CustomNotification {
 
   @override
   String toString() {
-    return 'Notification ==> '
-        '(title: $title, link: $link, center_name: $center_name, body: $body, registrationdate: $registrationdate)';
+    // urlLoadScreen(urldata, s, o, j, i)
+    return '$title,$link,$center_name,$body,$registrationdate)';
   }
 }

@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202302151</string>
+	<string>2023032611</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>0</string>
 	<key>FirebaseDynamicLinksCustomDomains</key>
@@ -282,6 +282,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -308,9 +309,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>buildCount</key>
-	<string>1</string>
+	<string>11</string>
 	<key>buildDay</key>
-	<string>20230215</string>
+	<string>20230326</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

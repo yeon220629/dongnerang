@@ -122,6 +122,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     List<dynamic> valueData = [];
     List<dynamic> responseList = [];
 
+    if(value == 'GANGSEO'){
+      centerCheck = ['전체', '구청'];
+    }
+
     DocumentReference<Map<String, dynamic>> docref = FirebaseFirestore.instance.collection("crawlingData").doc(value);
     final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await docref.get();
     late  Map<String, dynamic>? valueDoc = documentSnapshot.data();

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dongnerang/models/notification.model.dart';
+import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -24,15 +25,23 @@ class NotificationController extends GetxController {
     //   if(value[0]['alramlocalPermission'] == true){
     //   }
     // });
-    // 토큰을 알면 특정 디바이스에게 문자를 전달가능
     super.onInit();
   }
   //메시지 클릭 시 이벤트
-  Future<void> onSelectNotification(String payload) async {
-    final url = Uri.parse(payload!);
-    if (await canLaunchUrl(url)) {
-      launchUrl(url, mode: LaunchMode.inAppWebView);
-    }
+  Future<void> onSelectNotification(String payload, data) async {
+    // print("data : $data");
+    //url, post["title"], post['center_name '], dateTime, 0
+    
+    // print("payload : ${payload.split(",")}");
+    final Uri url = Uri.parse('${payload.split(",")[1]}');
+    Get.to(
+        urlLoadScreen(url, payload.split(",")[3], payload.split(",")[2], payload.split(",")[4], 0)
+    );
+
+    // final url = Uri.parse(payload!);
+    // if (await canLaunchUrl(url)) {
+    //   launchUrl(url, mode: LaunchMode.inAppWebView);
+    // }
   }
 
   void _initNotification() {
@@ -42,7 +51,10 @@ class NotificationController extends GetxController {
     var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
     var IOS = new IOSInitializationSettings();
     var settings = new InitializationSettings(android: android, iOS: IOS);
-    flutterLocalNotificationsPlugin.initialize(settings, onSelectNotification: (payload) async { onSelectNotification(payload!);});
+    flutterLocalNotificationsPlugin.initialize(
+        settings, onSelectNotification: (payload) async {
+            onSelectNotification(payload!, []);
+        });
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         'high_importance_channel',
         'High Importance Notifications',
@@ -72,10 +84,16 @@ class NotificationController extends GetxController {
       );
       FirebaseService.saveUserNotificationData(userEmail!,tempArray);
       // 5초 뒤에 해당 배열 비우기
+      // print("body : ${event.notification!.body.toString()}");
+      // print("title : ${event.notification!.title.toString()}");
+      // print("Data : ${event.data!.toString()}");
+      // print("tempArray : $tempArray");
+
         // push 알림 보기 설정
       flutterLocalNotificationsPlugin.show(0, '${event.notification!.title.toString()}',
           '${event.notification!.body.toString()}',
-          platformChannelSpecifics, payload: event.data['link'].toString(),
+        // platformChannelSpecifics, payload: event.data['link'].toString(),
+        platformChannelSpecifics, payload: tempArray.toString(),
       );
       Future.delayed(Duration(milliseconds : 5000),() {
         tempArray = [];
@@ -91,8 +109,7 @@ class NotificationController extends GetxController {
       // if (await canLaunchUrl(url)) {
       //   launchUrl(url, mode: LaunchMode.inAppWebView);
       // }
-
-      onSelectNotification(message.data['link']);
+      onSelectNotification(message.data['link'], message.data);
     });
 
   }

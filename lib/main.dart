@@ -4,6 +4,7 @@ import 'package:dongnerang/firebase_options.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:dongnerang/models/space.model.dart';
 import 'package:dongnerang/screens/splash.screen.dart';
+import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dongnerang/services/firebase.service.dart';
 import 'package:dongnerang/services/user.service.dart';
 import 'package:dongnerang/util/dynamiclink.dart';
@@ -32,7 +33,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  await FlutterDownloader.initialize(debug: true);
   await Permission.storage.request(); // 저장공간 권한 요청 추가
 
   KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
@@ -54,14 +55,26 @@ void main() async {
   }
   runApp(const MyApp());
 }
+//메시지 클릭 시 이벤트
+Future<void> onSelectNotification(String payload) async {
+  final url = Uri.parse(payload!);
+  if (await canLaunchUrl(url)) {
+    launchUrl(url, mode: LaunchMode.inAppWebView);
+  }
+}
 
+@pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform, );
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
   var IOS = new IOSInitializationSettings();
   var settings = new InitializationSettings(android: android, iOS: IOS);
-  flutterLocalNotificationsPlugin.initialize(settings);
+  // flutterLocalNotificationsPlugin.initialize(settings);
+  flutterLocalNotificationsPlugin.initialize(settings, onSelectNotification: (payload) async {
+    onSelectNotification(payload!);}
+  );
+
   List tempArray = [];
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
@@ -89,15 +102,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     )
   );
   FirebaseService.saveUserNotificationData(userEmail!,tempArray);
-  // push 알림 보기 설정
-  // await flutterLocalNotificationsPlugin.show(0, '${message.notification!.title.toString()}',
-  //     '${message.notification!.body.toString()}',
-  //     platformChannelSpecifics, payload: message.data['link'].toString()
-  // );
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    final Uri url = Uri.parse('${message.data['link'].toString()}');
 
-  FirebaseMessaging.onMessageOpenedApp.listen((message) async {
-    print("백그라운드 메시지 클릭 시 이벤트");
-    print("message : $message");
+    Get.to(
+        urlLoadScreen(url, message.notification!.title.toString(), message.data['center_name'].toString(), message.data['registrationdate'].toString(), 0)
+    );
   });
 }
 
@@ -137,6 +147,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   }
 
   @override

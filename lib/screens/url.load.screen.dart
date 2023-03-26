@@ -90,7 +90,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
     );
     final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters);
     Uri url = shortLink.shortUrl;
-    print("url : ${url}"); //queryParameters 값을 받아옴
+    // print("url : ${url}"); //queryParameters 값을 받아옴
     return url;
   }
 

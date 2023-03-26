@@ -611,7 +611,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - cloud_firestore (4.3.1):
+  - cloud_firestore (4.4.3):
     - Firebase/Firestore (= 10.3.0)
     - firebase_core
     - Flutter
@@ -633,39 +633,39 @@ PODS:
   - Firebase/Storage (10.3.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.3.0)
-  - firebase_auth (4.2.5):
+  - firebase_auth (4.2.9):
     - Firebase/Auth (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.4.1):
+  - firebase_core (2.7.0):
     - Firebase/CoreOnly (= 10.3.0)
     - Flutter
-  - firebase_dynamic_links (5.0.11):
+  - firebase_dynamic_links (5.0.15):
     - Firebase/DynamicLinks (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.2.1):
+  - firebase_messaging (14.2.5):
     - Firebase/Messaging (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_storage (11.0.10):
+  - firebase_storage (11.0.14):
     - Firebase/Storage (= 10.3.0)
     - firebase_core
     - Flutter
-  - FirebaseAppCheckInterop (10.4.0)
+  - FirebaseAppCheckInterop (10.7.0)
   - FirebaseAuth (10.3.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
-  - FirebaseAuthInterop (10.4.0)
+  - FirebaseAuthInterop (10.7.0)
   - FirebaseCore (10.3.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreExtension (10.4.0):
+  - FirebaseCoreExtension (10.7.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.4.0):
+  - FirebaseCoreInternal (10.7.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - FirebaseDynamicLinks (10.3.0):
     - FirebaseCore (~> 10.0)
@@ -682,7 +682,7 @@ PODS:
     - "gRPC-C++ (~> 1.44.0)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseInstallations (10.4.0):
+  - FirebaseInstallations (10.7.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
@@ -703,6 +703,8 @@ PODS:
     - FirebaseCoreExtension (~> 10.0)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
   - Flutter (1.0.0)
+  - flutter_downloader (0.0.1):
+    - Flutter
   - flutter_inappwebview (0.0.1):
     - Flutter
     - flutter_inappwebview/Core (= 0.0.1)
@@ -716,9 +718,6 @@ PODS:
     - Flutter
   - flutter_native_splash (0.0.1):
     - Flutter
-  - flutter_naver_map (0.10.1):
-    - Flutter
-    - NMapsMap
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
@@ -730,27 +729,30 @@ PODS:
   - Google-Mobile-Ads-SDK (9.14.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
+  - google_maps_flutter_ios (0.0.1):
+    - Flutter
+    - GoogleMaps
   - google_mobile_ads (0.0.1):
     - Flutter
     - Google-Mobile-Ads-SDK (~> 9.13)
   - google_sign_in_ios (0.0.1):
     - Flutter
     - GoogleSignIn (~> 6.2)
-  - GoogleAppMeasurement (10.4.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.4.0)
+  - GoogleAppMeasurement (10.7.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.7.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - GoogleUtilities/Network (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.4.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.4.0)
+  - GoogleAppMeasurement/AdIdSupport (10.7.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.7.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - GoogleUtilities/Network (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.4.0):
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.7.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - GoogleUtilities/Network (~> 7.8)
@@ -760,6 +762,11 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleMaps (6.2.1):
+    - GoogleMaps/Maps (= 6.2.1)
+  - GoogleMaps/Base (6.2.1)
+  - GoogleMaps/Maps (6.2.1):
+    - GoogleMaps/Base
   - GoogleSignIn (6.2.4):
     - AppAuth (~> 1.5)
     - GTMAppAuth (~> 1.3)
@@ -843,41 +850,41 @@ PODS:
     - Flutter
   - kakao_flutter_sdk_common (1.3.1):
     - Flutter
-  - KakaoSDK (2.13.1):
-    - KakaoSDKAuth (= 2.13.1)
-    - KakaoSDKCommon (= 2.13.1)
-    - KakaoSDKFriend (= 2.13.1)
-    - KakaoSDKNavi (= 2.13.1)
-    - KakaoSDKShare (= 2.13.1)
-    - KakaoSDKStory (= 2.13.1)
-    - KakaoSDKTalk (= 2.13.1)
-    - KakaoSDKTemplate (= 2.13.1)
-    - KakaoSDKUser (= 2.13.1)
-  - KakaoSDKAuth (2.13.1):
-    - KakaoSDKCommon (= 2.13.1)
-  - KakaoSDKCommon (2.13.1):
-    - KakaoSDKCommon/Common (= 2.13.1)
-    - KakaoSDKCommon/Network (= 2.13.1)
-  - KakaoSDKCommon/Common (2.13.1)
-  - KakaoSDKCommon/Network (2.13.1):
+  - KakaoSDK (2.14.0):
+    - KakaoSDKAuth (= 2.14.0)
+    - KakaoSDKCommon (= 2.14.0)
+    - KakaoSDKFriend (= 2.14.0)
+    - KakaoSDKNavi (= 2.14.0)
+    - KakaoSDKShare (= 2.14.0)
+    - KakaoSDKStory (= 2.14.0)
+    - KakaoSDKTalk (= 2.14.0)
+    - KakaoSDKTemplate (= 2.14.0)
+    - KakaoSDKUser (= 2.14.0)
+  - KakaoSDKAuth (2.14.0):
+    - KakaoSDKCommon (= 2.14.0)
+  - KakaoSDKCommon (2.14.0):
+    - KakaoSDKCommon/Common (= 2.14.0)
+    - KakaoSDKCommon/Network (= 2.14.0)
+  - KakaoSDKCommon/Common (2.14.0)
+  - KakaoSDKCommon/Network (2.14.0):
     - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.13.1)
-  - KakaoSDKFriend (2.13.1):
-    - KakaoSDKUser (= 2.13.1)
-  - KakaoSDKNavi (2.13.1):
-    - KakaoSDKCommon/Common (= 2.13.1)
-  - KakaoSDKShare (2.13.1):
-    - KakaoSDKCommon (= 2.13.1)
-    - KakaoSDKTemplate (= 2.13.1)
-  - KakaoSDKStory (2.13.1):
-    - KakaoSDKUser (= 2.13.1)
-  - KakaoSDKTalk (2.13.1):
-    - KakaoSDKTemplate (= 2.13.1)
-    - KakaoSDKUser (= 2.13.1)
-  - KakaoSDKTemplate (2.13.1):
-    - KakaoSDKCommon/Common (= 2.13.1)
-  - KakaoSDKUser (2.13.1):
-    - KakaoSDKAuth (= 2.13.1)
+    - KakaoSDKCommon/Common (= 2.14.0)
+  - KakaoSDKFriend (2.14.0):
+    - KakaoSDKUser (= 2.14.0)
+  - KakaoSDKNavi (2.14.0):
+    - KakaoSDKCommon/Common (= 2.14.0)
+  - KakaoSDKShare (2.14.0):
+    - KakaoSDKCommon (= 2.14.0)
+    - KakaoSDKTemplate (= 2.14.0)
+  - KakaoSDKStory (2.14.0):
+    - KakaoSDKUser (= 2.14.0)
+  - KakaoSDKTalk (2.14.0):
+    - KakaoSDKTemplate (= 2.14.0)
+    - KakaoSDKUser (= 2.14.0)
+  - KakaoSDKTemplate (2.14.0):
+    - KakaoSDKCommon/Common (= 2.14.0)
+  - KakaoSDKUser (2.14.0):
+    - KakaoSDKAuth (= 2.14.0)
   - leveldb-library (1.22.1)
   - Libuv-gRPC (0.0.10):
     - Libuv-gRPC/Implementation (= 0.0.10)
@@ -890,17 +897,15 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - NMapsGeometry (1.0.1)
-  - NMapsMap (3.16.1):
-    - NMapsGeometry
   - OrderedSet (5.0.0)
   - package_info_plus (0.4.5):
     - Flutter
-  - path_provider_ios (0.0.1):
+  - path_provider_foundation (0.0.1):
     - Flutter
+    - FlutterMacOS
   - permission_handler_apple (9.0.4):
     - Flutter
-  - PromisesObjC (2.1.1)
+  - PromisesObjC (2.2.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -930,13 +935,14 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
+  - flutter_downloader (from `.symlinks/plugins/flutter_downloader/ios`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
-  - flutter_naver_map (from `.symlinks/plugins/flutter_naver_map/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
   - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
@@ -944,7 +950,7 @@ DEPENDENCIES:
   - KakaoSDK
   - KakaoSDKCommon
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
-  - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
@@ -977,6 +983,7 @@ SPEC REPOS:
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
+    - GoogleMaps
     - GoogleSignIn
     - GoogleUserMessagingPlatform
     - GoogleUtilities
@@ -997,8 +1004,6 @@ SPEC REPOS:
     - leveldb-library
     - Libuv-gRPC
     - nanopb
-    - NMapsGeometry
-    - NMapsMap
     - OrderedSet
     - PromisesObjC
     - Toast
@@ -1020,6 +1025,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
+  flutter_downloader:
+    :path: ".symlinks/plugins/flutter_downloader/ios"
   flutter_inappwebview:
     :path: ".symlinks/plugins/flutter_inappwebview/ios"
   flutter_keyboard_visibility:
@@ -1028,12 +1035,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
-  flutter_naver_map:
-    :path: ".symlinks/plugins/flutter_naver_map/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
+  google_maps_flutter_ios:
+    :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
   google_mobile_ads:
     :path: ".symlinks/plugins/google_mobile_ads/ios"
   google_sign_in_ios:
@@ -1044,8 +1051,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/kakao_flutter_sdk_common/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
-  path_provider_ios:
-    :path: ".symlinks/plugins/path_provider_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   shared_preferences_foundation:
@@ -1071,38 +1078,40 @@ SPEC CHECKSUMS:
   app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  cloud_firestore: 5e5bb98722f66e820bf1aa7b3c98ffc9b2450ffb
+  cloud_firestore: 94326bb743acbfe43c68f933dab8a094e84d5849
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
-  firebase_auth: 3bab991fe1df91c2f948156e9dee976e01a19ab9
-  firebase_core: bf59c32d2e53814f558efa20840c1902fa2fe461
-  firebase_dynamic_links: e5ca49679928f5d46e2db5168656975eae39d379
-  firebase_messaging: ee597229fc260f8fa491fa8f2d4a32dfbfa406fa
-  firebase_storage: 8b85bf19de50a1886f9387924fbddf066a718965
-  FirebaseAppCheckInterop: ef074633831a90cf6c10e8f2c1e1f8b7842a446a
+  firebase_auth: 4e8c693e848ed13b263de2d702d55fa82ed04a79
+  firebase_core: 128d8c43c3a453a4a67463314fc3761bedff860b
+  firebase_dynamic_links: bb28b0958fd7f9c026611fcc11a61d9a40a0820c
+  firebase_messaging: 8ac28baba96e69a58ad26b4bb5f9ee67c3e5efe2
+  firebase_storage: bdbef04ce485eb426152016c735736bc3615b8c0
+  FirebaseAppCheckInterop: 8e907eea79958960a8bd2058e067f31e03a7914b
   FirebaseAuth: 0e415d29d846c1dce2fb641e46f35e9888d9bec6
-  FirebaseAuthInterop: fef284922da3c350f846ff85cc0dfd5186448e49
+  FirebaseAuthInterop: 46201190fe90ef1f581513eb0f9fa3d7820e7d6d
   FirebaseCore: 988754646ab3bd4bdcb740f1bfe26b9f6c0d5f2a
-  FirebaseCoreExtension: d209ada6f48bac53d149e996cf1b2dafa632a615
-  FirebaseCoreInternal: e301297f4c15a17489e48ed722d733b1578e0c02
+  FirebaseCoreExtension: f17247ba8c61e4d3c8d136b5e2de3cb4ac6a85b6
+  FirebaseCoreInternal: 8845798510aae74703467480f71ac613788d0696
   FirebaseDynamicLinks: 51c81d07bd63155bb56d76b0abdda79c8a3d8d02
   FirebaseFirestore: 244f71ff14ef44f39e00b44d356eac708ce03103
-  FirebaseInstallations: 36b38c733fd37e50857e5e8d74138648f466f18c
+  FirebaseInstallations: 59c0e4c7a816a0f76710d83f77e5369b3e45eb96
   FirebaseMessaging: e345b219fd15d325f0cf2fef28cb8ce00d851b3f
   FirebaseStorage: 0efbff0ac978981866d89804191688ae50d64033
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_downloader: b7301ae057deadd4b1650dc7c05375f10ff12c39
   flutter_inappwebview: 4fe74e5e65809c3d363febfd9e2b21aa79bb0f1c
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
-  flutter_naver_map: 6c7f2f09a8f05722ac344149bbf9cf52a3d9eeaf
   fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
   Google-Mobile-Ads-SDK: 4fe6304b771f8467d29978cb790ec1e56e646946
+  google_maps_flutter_ios: 53f75334bad87ccd0473f4b0142756169846b42b
   google_mobile_ads: 6bfe04d9c9fd5c2a026e6f09ca2d97ae25b78f7e
-  google_sign_in_ios: 4f85eb9f937450765c8573bb85fd8cd6a5af675c
-  GoogleAppMeasurement: 173fa22ce7d62c29332568e853b39b2525a0e584
+  google_sign_in_ios: 63e49658400eb806dd30054dc56f8baee3025508
+  GoogleAppMeasurement: fe17c92a32207dd5cdd4e8d742767f2da74857f6
   GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
+  GoogleMaps: 20d7b12be49a14287f797e88e0e31bc4156aaeb4
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
@@ -1110,35 +1119,33 @@ SPEC CHECKSUMS:
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
-  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
+  image_picker_ios: 58b9c4269cb176f89acea5e5d043c9358f2d25f8
   kakao_flutter_sdk_common: b1f30bb70b2341db4d9bbad727f8356e64729668
-  KakaoSDK: c898c01a07ea78081f618c676664ea15596ad573
-  KakaoSDKAuth: d9de0cb0c723441ced3616d481952bde34438dcb
-  KakaoSDKCommon: a16807e19984a0a208c3117c7ef117f101a9a128
-  KakaoSDKFriend: 3bfc8e3c620661365b237b1c839ae4873ec66116
-  KakaoSDKNavi: bc3c7b5fc8fe4a958fc0a392a5918b0a51bcc849
-  KakaoSDKShare: c5d7f1cf9dc38a0a084892f3cab3469c3a8a789d
-  KakaoSDKStory: f4f7e5159766ce1896e44b81f631a06450f4cff8
-  KakaoSDKTalk: 4e43ecb1484191783bf7439da536be8677a0619b
-  KakaoSDKTemplate: 9732b6123946efd1dbafacd0e807ac76c1b3d71c
-  KakaoSDKUser: 92d34cf6af7b123c22a7ee44424332123e356901
+  KakaoSDK: c294f30452701752c0b8a283e88ed97c36e80006
+  KakaoSDKAuth: 8fca87815de22062a23297983f327613b087b8bb
+  KakaoSDKCommon: 0ce638f7a2e49704943c0b74a087a9f8067bba1c
+  KakaoSDKFriend: 9b742a3a4d96ba9b8c20958476e3a871685fa607
+  KakaoSDKNavi: 5dbacc78b915ddb80359b3f041e7428a44e11a82
+  KakaoSDKShare: 342acc83d47a26c73855555ce070c6d55db37f83
+  KakaoSDKStory: 61472ba65d11945796635652a2e200487d279e91
+  KakaoSDKTalk: 6843127498cc01d4bda598e3da96e4c16070deb6
+  KakaoSDKTemplate: 37fe90573759d54843da54fa66b8e21023b41fea
+  KakaoSDKUser: 2ca18314ce72e6690f76cb1f6f9fbc771d31a803
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
-  NMapsMap: 926c3a303d381a24bec8da3cd6e198f50af93ae9
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
-  path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
-  PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  shared_preferences_foundation: 297b3ebca31b34ec92be11acd7fb0ba932c822ca
+  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   store_redirect: 2977747cf81689a39bd62c248c2deacb7a0d131e
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
-  url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
-  video_player_avfoundation: e489aac24ef5cf7af82702979ed16f2a5ef84cff
+  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
+  video_player_avfoundation: 6d971a232d72e6ee25368378d48a079dea01f1cf
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 

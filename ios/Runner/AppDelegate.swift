@@ -3,6 +3,7 @@ import Flutter
 import FirebaseCore
 import CoreLocation
 import GoogleMaps
+import flutter_downloader
 // import KakaoSDKCommon
 
 @UIApplicationMain
@@ -15,7 +16,14 @@ import GoogleMaps
     FirebaseApp.configure()
     GMSServices.provideAPIKey("AIzaSyDYRks2VmSMhM_5Ee3K8aTXVRqBCZXtXZ4")
     GeneratedPluginRegistrant.register(with: self)
-
+    FlutterDownloaderPlugin.setPluginRegistrantCallback(registerPlugins)
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+    
+    func registerPlugins(registry: FlutterPluginRegistry) {
+        if (!registry.hasPlugin("FlutterDownloaderPlugin")) {
+         FlutterDownloaderPlugin.register(with: registry.registrar(forPlugin: "FlutterDownloaderPlugin")!)
+      }
+    }
     //Ios Push 설정
     if #available(iOS 10.0, *) { UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate }
 
