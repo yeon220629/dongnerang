@@ -234,6 +234,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                                   textDirection: ui.TextDirection.ltr,
                                 ),
+                                // //조회수
+                                // Expanded(
+                                //     child: Row(
+                                //       mainAxisAlignment: MainAxisAlignment.end,
+                                //       children: [
+                                //         Icon(
+                                //           Icons.remove_red_eye_outlined,
+                                //           color: AppColors.grey,
+                                //           size: 15,
+                                //         ),
+                                //         SizedBox(width: 3),
+                                //         Text("0", style: TextStyle(color: AppColors.grey, fontSize: 13))
+                                //   ],
+                                // ))
                               ],
                             )
                         )
@@ -323,6 +337,20 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                 style: const TextStyle(fontSize: 13, color: Colors.grey),
                                 textDirection: ui.TextDirection.ltr,
                               ),
+                              // //조회수
+                              // Expanded(
+                              //     child: Row(
+                              //       mainAxisAlignment: MainAxisAlignment.end,
+                              //       children: [
+                              //         Icon(
+                              //           Icons.remove_red_eye_outlined,
+                              //           color: AppColors.grey,
+                              //           size: 15,
+                              //         ),
+                              //         SizedBox(width: 3),
+                              //         Text("0", style: TextStyle(color: AppColors.grey, fontSize: 13))
+                              //       ],
+                              //     ))
                             ],
                           )
                       )
