@@ -230,7 +230,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
       thirdStrList.add('${thisSpace.svcStat == '접수중' ? '<blue>' : ''}${thisSpace.svcStat!}${thisSpace.svcStat == '접수중' ? '</blue>' : ''}');
     }
     if ((thisSpace.payInfo ?? '').trim() != '') thirdStrList.add('<black>${thisSpace.payInfo!}</black>');
-
+    print("thisSpace.uid : ${thisSpace.uid}");
     return Visibility(
       visible: categoryVisibility[thisSpace.category]!,
       child: SizedBox(
@@ -670,12 +670,15 @@ class _googleMapScreenState extends State<googleMapScreen> {
 
   Future<void> _asyncInitState() async {
     Map<String, String> area = await getLocationData(); // 현위치 구하기
+
     await getSpacesByGu(area); // 자치구별 공간 데이터 가져오기
     await makeMarkers(); // 마커 만들기
 
-    setState(() {
+    setState(() async {
       isLoaded = true;
       myGu = area['gu']!;
+
+      await moveMapCamera(myLocation.latitude, myLocation.longitude);
     });
   }
 
@@ -764,6 +767,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
                             isLoaded = true;
                             showReSearchBtn = false;
                             myGu = area['gu']!;
+
                           });
                         });
 
