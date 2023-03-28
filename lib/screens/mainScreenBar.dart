@@ -150,7 +150,7 @@ class mainScreenState extends State<mainScreen>{
             index: navigationController.currentBottomMenuIndex.value,
             children: [
               freeComponent_viewpage(),
-              googleMapScreen(),
+              googleMapScreen(navigationController.currentBottomMenuIndex.value),
               mypageScreen(navigationController.currentBottomMenuIndex.value),
               // privateSettingScreen(),
               // LoginScreen(),

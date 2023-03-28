@@ -59,13 +59,16 @@ enum SpaceType {
 }
 
 class googleMapScreen extends StatefulWidget {
-  const googleMapScreen({Key? key}) : super(key: key);
+  final StatusNumber;
+  googleMapScreen(this.StatusNumber);
 
   @override
   State<StatefulWidget> createState() => _googleMapScreenState();
 }
 
 class _googleMapScreenState extends State<googleMapScreen> {
+  bool WidgetfirstOpen = true;
+
   // Google Map controller
   late final GoogleMapController _ct;
   CameraPosition position = const CameraPosition(target: LatLng(37.494705, 126.959945), zoom: 14);
@@ -687,7 +690,6 @@ class _googleMapScreenState extends State<googleMapScreen> {
       _fetchPage(pageKey);
     });
     super.initState();
-    _asyncInitState();
 
     setState(() {
       // 카테고리
@@ -699,14 +701,23 @@ class _googleMapScreenState extends State<googleMapScreen> {
   }
 
   @override
+  void didUpdateWidget(covariant googleMapScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (WidgetfirstOpen && widget.StatusNumber == 1) {
+      setState(() {
+        WidgetfirstOpen = false;
+      });
+      _asyncInitState();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
     // 모바일 상단 상태 바 높이 값
     final double statusBarHeight = MediaQuery.of(context).padding.top;
-    // 지도 정 중앙 위치
-    double screenX = width * MediaQuery.of(context).devicePixelRatio / 2;
-    double screenY = height * MediaQuery.of(context).devicePixelRatio / 2;
 
     return Scaffold(
       body: SizedBox(
@@ -746,12 +757,10 @@ class _googleMapScreenState extends State<googleMapScreen> {
                           isLoaded = false;
                         });
 
-                        LatLng cp = await _ct.getLatLng(
-                          ScreenCoordinate(
-                            x: screenX.round(),
-                            y: screenY.round(),
-                          ),
-                        );
+                        LatLngBounds visibleRegion = await _ct.getVisibleRegion();
+                        LatLng cp = LatLng((visibleRegion.northeast.latitude + visibleRegion.southwest.latitude) / 2,
+                            (visibleRegion.northeast.longitude + visibleRegion.southwest.longitude) / 2);
+                        
                         String lat = cp.latitude.toStringAsFixed(6);
                         String long = cp.longitude.toStringAsFixed(6);
 
@@ -766,7 +775,6 @@ class _googleMapScreenState extends State<googleMapScreen> {
                             isLoaded = true;
                             showReSearchBtn = false;
                             myGu = area['gu']!;
-
                           });
                         });
 
@@ -836,6 +844,9 @@ class _googleMapScreenState extends State<googleMapScreen> {
                   child: InkWell(
                     onTap: () async {
                       await moveMapCamera(myLocation.latitude, myLocation.longitude);
+                      setState(() {
+                        showReSearchBtn = true;
+                      });
                     },
                     child: Container(
                       width: 40,
