@@ -325,14 +325,11 @@ class _googleMapScreenState extends State<googleMapScreen> {
                                 const SizedBox(
                                   width: 2,
                                 ),
-                                styledText.StyledText(
-                                  text: "업데이트일 $updatedStr",
+                                Text("업데이트일 $updatedStr",
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: AppColors.grey,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
                                 ),
                               ],
                             ),
