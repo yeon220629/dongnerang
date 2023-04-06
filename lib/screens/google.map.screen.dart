@@ -648,7 +648,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
   // 리스트 페이징 함수
   Future<void> _fetchPage(int pageKey) async {
     try {
-      Future.delayed(const Duration(milliseconds: 500), () {
+      Future.delayed(Duration(milliseconds: pageKey == 0 ? 0 : 500), () {
         int lastIdx = _spaceBox.values.where((s) => _selectedChoices.contains(s.category)).toList().length;
 
         // 카테고리 필터, 거리순, _pageSize개수 만큼 불러오기
@@ -978,6 +978,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
                                                       );
                                                     }
                                                   }),
+                                                  firstPageProgressIndicatorBuilder: (_) => const SizedBox(),
                                                 ),
                                               ),
                                             ),

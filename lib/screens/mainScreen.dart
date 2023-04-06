@@ -485,7 +485,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   // 리스트 페이징 함수
   Future<void> _fetchPage(int pageKey) async {
     try {
-      Future.delayed(const Duration(milliseconds: 500), () {
+      Future.delayed(Duration(milliseconds: pageKey == 0 ? 0 : 500), () {
         int lastIdx = itemsData.length;
 
         // 카테고리 필터, 거리순, _pageSize개수 만큼 불러오기
@@ -1146,7 +1146,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             alignment: Alignment.topCenter,
                             child: itemsData[i],
                           );
-                        }
+                        },
+                        firstPageProgressIndicatorBuilder: (_) => const SizedBox(),
                       ),
                     )
                 )
