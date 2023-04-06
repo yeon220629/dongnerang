@@ -325,7 +325,8 @@ class _googleMapScreenState extends State<googleMapScreen> {
                                 const SizedBox(
                                   width: 2,
                                 ),
-                                Text("업데이트일 $updatedStr",
+                                Text(
+                                  "업데이트일 $updatedStr",
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: AppColors.grey,
@@ -757,7 +758,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
                         LatLngBounds visibleRegion = await _ct.getVisibleRegion();
                         LatLng cp = LatLng((visibleRegion.northeast.latitude + visibleRegion.southwest.latitude) / 2,
                             (visibleRegion.northeast.longitude + visibleRegion.southwest.longitude) / 2);
-                        
+
                         String lat = cp.latitude.toStringAsFixed(6);
                         String long = cp.longitude.toStringAsFixed(6);
 
@@ -954,34 +955,29 @@ class _googleMapScreenState extends State<googleMapScreen> {
                                             child: MediaQuery.removePadding(
                                               context: context,
                                               removeTop: true,
-                                              // child: ListView.builder(
-                                              //   cacheExtent: 10,
-                                              //   itemCount: _spaceBox.values.length + 1,
-                                              //   itemBuilder: (BuildContext context, int index) {
-                                              //     // 애드몹
-                                              //     if (index == 0) {
-                                              //       return BannerAdMob();
-                                              //     } else {
-                                              //       String uid = _spaceBox.keys.toList()[index - 1];
-
-                                              //       return InkWell(
-                                              //         onTap: () {
-                                              //           onMarkerTabEvent(uid, true);
-                                              //         },
-                                              //         child: makeSpaceWidget(uid, false),
-                                              //       );
-                                              //     }
-                                              //   },
-                                              // ),
                                               child: PagedListView<int, Space>(
                                                 pagingController: _pagingController,
                                                 builderDelegate: PagedChildBuilderDelegate<Space>(
-                                                  itemBuilder: ((context, item, index) => InkWell(
+                                                  itemBuilder: ((context, item, index) {
+                                                    if (index == 0) {
+                                                      return Column(children: [
+                                                        BannerAdMob(),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            onMarkerTabEvent(item.uid, true);
+                                                          },
+                                                          child: makeSpaceWidget(item.uid, false),
+                                                        )
+                                                      ]);
+                                                    } else {
+                                                      return InkWell(
                                                         onTap: () {
                                                           onMarkerTabEvent(item.uid, true);
                                                         },
                                                         child: makeSpaceWidget(item.uid, false),
-                                                      )),
+                                                      );
+                                                    }
+                                                  }),
                                                 ),
                                               ),
                                             ),
