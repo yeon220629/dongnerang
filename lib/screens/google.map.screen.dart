@@ -291,20 +291,26 @@ class _googleMapScreenState extends State<googleMapScreen> {
                       ),
                       // 3. 카테고리명 / 거리 / [서비스상태] / [결제방법]
                       Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           // 카테고리명
                           Text(
-                            '${thirdStrList[0]} / ',
-                            style: const TextStyle(fontSize: 14, color: AppColors.grey),
+                            thirdStrList[0],
+                            style: const TextStyle(fontSize: 14, color: AppColors.black),
+                          ),
+                          const Text(
+                            ' / ',
+                            style: TextStyle(fontSize: 14, color: AppColors.grey),
                           ),
                           // 거리
                           Text(
                             thirdStrList[1],
-                            style: const TextStyle(fontSize: 14, color: AppColors.grey),
+                            style: const TextStyle(fontSize: 14, color: AppColors.red),
                           ),
                           // [서비스상태]
                           thirdStrList[2] != ''
                               ? Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
                                   children: [
                                     const Text(
                                       ' / ',
@@ -320,6 +326,7 @@ class _googleMapScreenState extends State<googleMapScreen> {
                           // [결제방법]
                           thirdStrList[3] != ''
                               ? Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
                                   children: [
                                     const Text(
                                       ' / ',
