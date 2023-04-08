@@ -30,7 +30,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart' as lottie;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
-import 'package:styled_text/styled_text.dart' as styledText;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'dart:math';
 
@@ -212,6 +211,20 @@ class _googleMapScreenState extends State<googleMapScreen> {
     });
   }
 
+  String replaceEscapedChar(String org) {
+    String newStr = org
+        .replaceAll('&quot;', '"')
+        .replaceAll('&apos;', '\'')
+        .replaceAll('&#39;', '\'')
+        .replaceAll('&amp;', '&')
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll('&space;', ' ')
+        .replaceAll('&middot;', '•');
+
+    return newStr;
+  }
+
   // 공간 한 개 위젯
   Widget makeSpaceWidget(String uid, bool isLast) {
     double width = MediaQuery.of(context).size.width;
@@ -228,12 +241,8 @@ class _googleMapScreenState extends State<googleMapScreen> {
     String addrOrTimeInfoStr = (thisSpace.address ?? '') == ''
         ? ((thisSpace.svcTimeMin ?? '') == '' ? '이용시간 | ' : '이용시간 | ${thisSpace.svcTimeMin} ~ ${thisSpace.svcTimeMax}')
         : thisSpace.address ?? '';
-    List<String> thirdStrList = ['<black>${SpaceType.getByCode(thisSpace.category!).displayName}</black>', '<red>$distStr</red>'];
-    if ((thisSpace.svcStat ?? '').trim() != '') {
-      thirdStrList.add('${thisSpace.svcStat == '접수중' ? '<blue>' : ''}${thisSpace.svcStat!}${thisSpace.svcStat == '접수중' ? '</blue>' : ''}');
-    }
-    if ((thisSpace.payInfo ?? '').trim() != '') thirdStrList.add('<black>${thisSpace.payInfo!}</black>');
-    // print("thisSpace.uid : ${thisSpace.uid}");
+    List<String> thirdStrList = [(SpaceType.getByCode(thisSpace.category!).displayName), distStr, thisSpace.svcStat ?? '', thisSpace.payInfo ?? ''];
+
     return Visibility(
       visible: categoryVisibility[thisSpace.category]!,
       child: SizedBox(
@@ -281,38 +290,61 @@ class _googleMapScreenState extends State<googleMapScreen> {
                         height: 4,
                       ),
                       // 3. 카테고리명 / 거리 / [서비스상태] / [결제방법]
-                      styledText.StyledText(
-                        text: thirdStrList.join(' / '),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: AppColors.grey,
-                        ),
-                        tags: {
-                          'black': styledText.StyledTextTag(
-                            style: const TextStyle(color: AppColors.black),
+                      Wrap(
+                        children: [
+                          // 카테고리명
+                          Text(
+                            '${thirdStrList[0]} / ',
+                            style: const TextStyle(fontSize: 14, color: AppColors.grey),
                           ),
-                          'blue': styledText.StyledTextTag(
-                            style: const TextStyle(color: AppColors.blue),
+                          // 거리
+                          Text(
+                            thirdStrList[1],
+                            style: const TextStyle(fontSize: 14, color: AppColors.grey),
                           ),
-                          'red': styledText.StyledTextTag(
-                            style: const TextStyle(color: AppColors.red),
-                          ),
-                        },
-                        maxLines: 1,
+                          // [서비스상태]
+                          thirdStrList[2] != ''
+                              ? Wrap(
+                                  children: [
+                                    const Text(
+                                      ' / ',
+                                      style: TextStyle(fontSize: 14, color: AppColors.grey),
+                                    ),
+                                    Text(
+                                      thirdStrList[2],
+                                      style: TextStyle(fontSize: 14, color: thirdStrList[2] == '접수중' ? AppColors.blue : AppColors.grey),
+                                    ),
+                                  ],
+                                )
+                              : Wrap(),
+                          // [결제방법]
+                          thirdStrList[3] != ''
+                              ? Wrap(
+                                  children: [
+                                    const Text(
+                                      ' / ',
+                                      style: TextStyle(fontSize: 14, color: AppColors.grey),
+                                    ),
+                                    Text(
+                                      thirdStrList[3],
+                                      style: const TextStyle(fontSize: 14, color: AppColors.black),
+                                    ),
+                                  ],
+                                )
+                              : Wrap(),
+                        ],
                       ),
                       const SizedBox(
                         height: 4,
                       ),
                       // 4. [서비스명] or 업데이트일
                       (thisSpace.uid.startsWith('S'))
-                          ? styledText.StyledText(
-                              text: (thisSpace.svcName ?? '').replaceAll('&#39', '&apos').replaceAll('&middot;', '•'),
+                          ? Text(
+                              replaceEscapedChar(thisSpace.svcName ?? ''),
                               style: const TextStyle(
                                 fontSize: 14,
                                 color: AppColors.black,
                               ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
                             )
                           : Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
@@ -383,11 +415,20 @@ class _googleMapScreenState extends State<googleMapScreen> {
   }
 
   // 공유누리 데이터 이미지 > byte로 받기
-  Future<Uint8List> urlLoadByte(String imageUrl) async {
-    Uri imageUri = Uri.parse(imageUrl);
-    http.Response response = await http.get(imageUri);
+  Future<Uint8List?> urlLoadByte(String imageUrl) async {
+    try {
+      Uri imageUri = Uri.parse(imageUrl);
+      http.Response response = await http.get(imageUri);
 
-    return response.bodyBytes;
+      switch (response.statusCode) {
+        case 201:
+          return response.bodyBytes;
+        default:
+          return null;
+      }
+    } catch (e) {
+      return null;
+    }
   }
 
   // 공유누리 데이터 이미지 위젯

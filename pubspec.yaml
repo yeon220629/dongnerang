@@ -73,7 +73,6 @@ dependencies:
   app_tracking_transparency: ^2.0.3
   pull_to_refresh: ^2.0.0
   new_version: ^0.3.1
-  styled_text: ^6.0.0
   auto_size_text: ^3.0.0
   loading_animation_widget: ^1.2.0+4
   flutter_downloader: ^1.10.2
