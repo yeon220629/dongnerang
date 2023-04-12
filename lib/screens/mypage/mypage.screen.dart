@@ -241,15 +241,14 @@ class _mypageScreenState extends State<mypageScreen> {
           IconButton(
             icon: Icon(Icons.settings, color: Colors.black),
             onPressed: () async {
-              final newVersion = NewVersion(
-                androidId: 'com.dongnerang.com.dongnerang',
-                iOSId: 'com.dongnerang.com.dongnerang',
-              );
-
-              final status = await newVersion.getVersionStatus();
+              // final newVersion = NewVersion(
+              //   androidId: 'com.dongnerang.com.dongnerang',
+              //   iOSId: 'com.dongnerang.com.dongnerang',
+              // );
+              // final status = await newVersion.getVersionStatus();
 
               Navigator.push(context, MaterialPageRoute(
-                  builder: (_) => SettingsPage(status?.storeVersion)),
+                  builder: (_) => SettingsPage("3.1.0")),
               );
             },
           )
