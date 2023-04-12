@@ -86,28 +86,28 @@ class privateSettingLocalScreen extends GetView<PrivateSettingController> {
                     Expanded(
                       child: Column(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 20),
-                            child: Text(
-                              "지역 선택",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Text(
-                              "지역은 최대 3개 선택 가능하며,\n마이페이지-프로필 설정에서 변경 가능해요",
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                color: AppColors.grey,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(top: 10),
+                          //   child: Text(
+                          //     "지역선택",
+                          //     style: TextStyle(
+                          //       fontWeight: FontWeight.bold,
+                          //       fontSize: 18,
+                          //     ),
+                          //     textAlign: TextAlign.center,
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(top: 10),
+                          //   child: Text(
+                          //     "지역은 최대 3개 선택 가능하며,\n마이페이지-프로필 설정에서 변경 가능해요",
+                          //     style: TextStyle(
+                          //       fontWeight: FontWeight.normal,
+                          //       color: AppColors.grey,
+                          //     ),
+                          //     textAlign: TextAlign.center,
+                          //   ),
+                          // ),
                           TagKeywordStateful(callback: (value) {
                             print("value>>>");
                             print(value);
@@ -185,21 +185,44 @@ class _TagKeywordStatefulState extends State<TagKeywordStateful> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Container(
-        margin: EdgeInsets.only(top: 20),
+    return Column(
+      children: [
+        // SizedBox(height: size.height / 30,),
+        Row(
+          children: [
+            Container(
+              alignment: Alignment.topLeft,
+              child: Text("지역선택", style: TextStyle(fontWeight: FontWeight.bold),),
+            )
+          ],
+        ),
+        SizedBox(height: 5,),
+        Container(
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            spacing: size.width / 20, runSpacing: 2.0, children: <Widget>[...generate_tags(CustomData)], ),
+        ),
+        Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
+      ],
+    );
+      Container(
+        margin: EdgeInsets.only(top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Container(
-                width: size.width / 1.2,
+            // Center(
+            //   child:
+        Container(
+                width: size.width,
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
-                  spacing: size.width / 20,
-                  children: <Widget>[...generate_tags(CustomData)],
+                  spacing: size.width / 20, runSpacing: 2.0,
+                  children: <Widget>[...generate_tags(CustomData),
+                  Text("   * 지역 선택은 최대 3개까지 가능 합니다.", style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.grey),),
+                  ],
                 ),
               ),
-            ),
+            // ),
           ],
         ));
   }

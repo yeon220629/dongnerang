@@ -516,12 +516,12 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                   ImageSource.values;
                   Navigator.pop(context);
                 },
-                label: Text('앨범에서 선택', style: TextStyle(fontSize: 20),),
+                label: Text('앨범에서 선택', style: TextStyle(fontSize: 20)),
               ),
             ),
             Container(
               width: size.width,
-              height: 1.5,
+              height: 1,
               color: AppColors.grey,
             ),
             Container(
@@ -539,8 +539,8 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                   });
                 },
                 label: Text('프로필 사진 삭제', style: TextStyle(
-                    fontSize: 20, color: AppColors.red
-                ),),
+                    fontSize: 20, color: AppColors.red,
+                )),
               ),
             )
           ],

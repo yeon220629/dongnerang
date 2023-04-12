@@ -883,7 +883,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         ),
                         children: CategoryCenter,
                       ),
-                      SizedBox(width: size.width / 7),
+                      SizedBox(width: size.width / 8),
                       cuindex == 0
                           ? DropdownButton2(
                               alignment: Alignment.center,

@@ -74,8 +74,8 @@ class SettingsPage extends StatelessWidget {
             ),
             ListTile(
               leading:  Icon(Icons.star_border_outlined),
-              // title: Text('현재버전 v1.1.0'),
-              title: Text('현재버전 v${versionCode}'),
+              title: Text('현재버전 v1.1.6'),
+              // title: Text('현재버전 v${versionCode}'),
               onTap: (){
                 final appId = Platform.isAndroid ? 'com.dongnerang.com.dongnerang' : '6444590791';
                 final url = Uri.parse(
