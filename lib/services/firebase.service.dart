@@ -333,8 +333,41 @@ class FirebaseService {
   // 자치구에 따라 url 가져오기
   static Future<Map<String, dynamic>> getUrlsByGu(String gu) async {
     final doc = await FirebaseFirestore.instance.collection("banner").doc("urls").get();
-    print(doc.data()?[gu]);
+    // print(doc.data()?[gu]);
 
     return doc.data()?[gu];
+  }
+
+  // 크롤링 데이터 조회수 업데이트
+  static Future<void> setCrawlingViewr(String document, String fieldName) async {
+    final doc  = await FirebaseFirestore.instance.collection("crawlingData").doc(document).get();
+    doc.data()?.forEach((key, value) {
+      if(value['title'] == fieldName){
+        // print("key : $key");
+        // print("value['viewCount'] : ${value['viewCount']}");
+        var viewCount = value['viewCount'] == null ?
+                        1
+                        :  value['viewCount'] += 1;
+
+        var changeData = <String, dynamic>{
+          key : {
+            "apperiod" : value['apperiod'],
+            "center_name " : value['center_name '],
+            "link" : value['link'],
+            "number " : value['number'],
+            "registrationdate" : value['registrationdate'],
+            "result" : value['result'],
+            "title" : value['title'],
+            "viewCount": viewCount
+          }
+        };
+
+        var removeData = <String, dynamic>{ key: FieldValue.delete(),};
+
+        doc.reference.update(removeData);
+
+        doc.reference.update(changeData);
+      }
+    });
   }
 }
