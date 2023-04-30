@@ -116,9 +116,17 @@ class mainScreenState extends State<mainScreen>{
                           ),
                           label: "마이페이지",
                         ),
+                        BottomNavigationBarItem(
+                          icon: Icon(
+                            navigationController.currentBottomMenuIndex.value == 3
+                                ? CupertinoIcons.person_fill
+                                : CupertinoIcons.person,
+                          ),
+                          label: "마이페이지",
+                        ),
                         // BottomNavigationBarItem(
                         //   icon: Icon(
-                        //     navigationController.currentBottomMenuIndex.value == 1
+                        //     navigationController.currentBottomMenuIndex.value == 3
                         //         ? Icons.person
                         //         : Icons.person_outline_outlined,
                         //   ),
@@ -151,6 +159,7 @@ class mainScreenState extends State<mainScreen>{
             children: [
               freeComponent_viewpage(),
               googleMapScreen(navigationController.currentBottomMenuIndex.value),
+              mypageScreen(navigationController.currentBottomMenuIndex.value),
               mypageScreen(navigationController.currentBottomMenuIndex.value),
               // privateSettingScreen(),
               // LoginScreen(),
