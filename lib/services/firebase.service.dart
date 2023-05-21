@@ -370,4 +370,9 @@ class FirebaseService {
       }
     });
   }
-}
+
+  static Future<int> saveCommunity(String category) async {
+      final doc  = await FirebaseFirestore.instance.collection("community").doc(category).get();
+      return doc.data()!.length;
+    }
+  }

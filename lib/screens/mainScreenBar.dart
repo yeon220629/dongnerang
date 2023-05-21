@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import '../constants/colors.constants.dart';
 import '../controller/HomeController.dart';
 import '../controller/NavigationController.dart';
+import 'community/community.screen.dart';
 import 'mainScreen.dart';
 import 'splash.screen.dart';
 
@@ -114,7 +115,7 @@ class mainScreenState extends State<mainScreen>{
                                 ? CupertinoIcons.person_fill
                                 : CupertinoIcons.person,
                           ),
-                          label: "마이페이지",
+                          label: "커뮤니티",
                         ),
                         BottomNavigationBarItem(
                           icon: Icon(
@@ -159,7 +160,7 @@ class mainScreenState extends State<mainScreen>{
             children: [
               freeComponent_viewpage(),
               googleMapScreen(navigationController.currentBottomMenuIndex.value),
-              mypageScreen(navigationController.currentBottomMenuIndex.value),
+              commnunityMainScreen(navigationController.currentBottomMenuIndex.value),
               mypageScreen(navigationController.currentBottomMenuIndex.value),
               // privateSettingScreen(),
               // LoginScreen(),

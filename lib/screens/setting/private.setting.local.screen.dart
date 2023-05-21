@@ -86,31 +86,7 @@ class privateSettingLocalScreen extends GetView<PrivateSettingController> {
                     Expanded(
                       child: Column(
                         children: [
-                          // Padding(
-                          //   padding: EdgeInsets.only(top: 10),
-                          //   child: Text(
-                          //     "지역선택",
-                          //     style: TextStyle(
-                          //       fontWeight: FontWeight.bold,
-                          //       fontSize: 18,
-                          //     ),
-                          //     textAlign: TextAlign.center,
-                          //   ),
-                          // ),
-                          // Padding(
-                          //   padding: EdgeInsets.only(top: 10),
-                          //   child: Text(
-                          //     "지역은 최대 3개 선택 가능하며,\n마이페이지-프로필 설정에서 변경 가능해요",
-                          //     style: TextStyle(
-                          //       fontWeight: FontWeight.normal,
-                          //       color: AppColors.grey,
-                          //     ),
-                          //     textAlign: TextAlign.center,
-                          //   ),
-                          // ),
                           TagKeywordStateful(callback: (value) {
-                            print("value>>>");
-                            print(value);
                             local.add(value);
                           }),
                         ],

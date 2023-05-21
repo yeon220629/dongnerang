@@ -525,8 +525,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
               color: AppColors.grey,
             ),
             Container(
-              child: TextButton.icon(
-                icon: Icon(null),
+              child: TextButton(
                 onPressed: () async {
                   // takePhoto("assets/images/default-profile.png");
                   // File file = File('assets/images/default-profile.png');
@@ -538,10 +537,10 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
                     Navigator.pop(context);
                   });
                 },
-                label: Text('프로필 사진 삭제', style: TextStyle(
-                    fontSize: 20, color: AppColors.red,
-                )),
-              ),
+                  child: Text('프로필 사진 삭제', style: TextStyle(
+                      fontSize: size.width / 20, color: AppColors.red
+                  ),)
+              )
             )
           ],
         )
