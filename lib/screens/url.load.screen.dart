@@ -289,13 +289,13 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
               ),
 
               IconButton(onPressed: ()async {
-                _createDynamicLink().then((value) async {
+                // _createDynamicLink().then((value) async {
                   final TextTemplate defaultText = TextTemplate(
                     text:
                     '우리 동네의 모든 공공소식 \'동네랑\'\n\n[${widget.o}]\n${widget.s}\n\n',
                     link: Link(
-                      webUrl: Uri.parse('$value'),
-                      mobileWebUrl: Uri.parse('$value'),
+                      webUrl: Uri.parse('${widget.urldata.toString()}'),
+                      mobileWebUrl: Uri.parse('${widget.urldata.toString()}'),
                     ),
                   );
                   // 카카오톡 실행 가능 여부 확인
@@ -304,19 +304,17 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
                     print('카카오톡으로 공유 가능');
                     try{
                       Uri uri = await ShareClient.instance.shareDefault(template: defaultText);
-                      await ShareClient.instance.launchKakaoTalk(uri);
+                                await ShareClient.instance.launchKakaoTalk(uri);
                     }catch (e){
                       print('카카오톡 공유 실패 $e');
                     }
                   } else {
                     print('카카오톡 미설치: 웹 공유 기능 사용 권장');
-                    print("firebasesUrl : ${value}");
+                    // print("firebasesUrl : ${value}");
 
                     EasyLoading.showError("카카오톡 미설치: 카카오톡 다운로드 권장");
                   }
-                });
-
-
+                // });
               }, icon: const Icon(Icons.share_outlined, color: Colors.black)),
             ],
           ),

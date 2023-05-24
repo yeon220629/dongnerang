@@ -25,8 +25,7 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
 
   Future<void> getListData(value) async{
     var photo;
-
-    if(value["imageList"] != 0){
+    if(value["imageList"].toString() != "[]"){
       // print("value : ${value["imageList"].toString().replaceAll('[', '').replaceAll(']', '')}");
       photo = value["imageList"][0].toString().replaceAll('[', '').replaceAll(']', '');
     }
@@ -59,7 +58,7 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                             Column(
                               children: [
                                 Text(
-                                '제목 : ${value["userName"]}',
+                                '제목 : ${value["title"]}',
                                   style: const TextStyle(fontSize: 16),
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.justify,
@@ -67,13 +66,6 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                                 ),
                                 Text(
                                   '본문 : ${value["mainText"]}',
-                                  style: const TextStyle(fontSize: 16),
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.justify,
-                                  maxLines: 2,
-                                ),
-                                Text(
-                                  '작성자 : ${value["userName"]}',
                                   style: const TextStyle(fontSize: 16),
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.justify,
@@ -121,8 +113,6 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
       // Do something with the data
       if(!data.values.isEmpty){
         data.values.forEach((element) {
-          // print("ele : ${element}");
-          // print("ele : ${element['mainText']}");
           getListData(element);
         });
         // while (data.values.iterator.moveNext()) {
