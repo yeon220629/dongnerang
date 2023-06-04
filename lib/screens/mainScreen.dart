@@ -9,6 +9,7 @@ import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import '../constants/common.constants2.dart';
 import 'package:dongnerang/screens/search.screen.dart';
+import '../firebase_options.dart';
+import '../models/notification.model.dart';
 import '../services/firebase.service.dart';
 import '../util/dynamiclink.dart';
 import '../util/logger.service.dart';
@@ -285,7 +288,18 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       itemsData = listItems;
     });
   }
+  Future<void> setupInteractedMessage() async {
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
 
+  void _handleMessage(RemoteMessage message) {
+    Get.to(urlLoadScreen(Uri.parse(message.data['link'].toString()), message.notification!.body.toString(),
+        message.data['center_name'].toString(), message.data['registrationdate'], 0));
+  }
   @override
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
@@ -297,21 +311,12 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     _getToken(_messaging);
     super.initState();
 
+    setupInteractedMessage();
+
     final status = Permission.notification.request();
     if((status == PermissionStatus.permanentlyDenied)){
       Permission.accessNotificationPolicy.request();
     }
-
-    // if (await Permission.notification.request().isGranted) {
-    // // Either the permission was already granted before or the user just granted it.
-    // }
-    // Map<Permission, PermissionStatus> statuses = await [
-    // Permission.notification,
-    // ].request();
-    // print("Permission.notification.status : ${Permission.notification.status}");
-    // _permission();
-    // PermissionScreen().requestCameraPermission(context);
-
     FirebaseService.findBanner().then((value){
       value.sort((a,b){
         var adata = a['number'];
@@ -379,27 +384,27 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     commonConstant2().fnResetValue();
     // deeplink
     // DynamicLink().setup();
-    FirebaseDynamicLinks.instance.onLink.listen((
-        PendingDynamicLinkData dynamicLinkData,
-        ) {
-      Map<String, String> dynamicModel = new Map();
-      var url = '';
-      dynamicLinkData.link.queryParameters.forEach((key, values) {
-        print("$key : $values");
-        dynamicModel.addAll({key : values});
-        if(key != 'title' && key != 'centername' && key != 'timedate' && key != 'number'){
-          url += '&$key=$values';
-        }
-      });
-      // DateFormat dateFormat = DateFormat("yyyy-MM-dd").parse();
-      DateTime dateTime = new DateFormat("yyyy-MM-dd").parse(dynamicModel['timedate']!);
-      url = url.replaceAll('&url=', '');
-      // 페이지 다른 변수만 세팅 하면 끝날 듯. url, post["title"], post['center_name '], dateTime, 0
-      Get.to(urlLoadScreen(Uri.parse(url), dynamicModel['title'],
-          dynamicModel['centername'], dateTime, int.parse(dynamicModel['number']!)));
-    }).onError((error) {
-      logger.e(error);
-    });
+    // FirebaseDynamicLinks.instance.onLink.listen((
+    //     PendingDynamicLinkData dynamicLinkData,
+    //     ) {
+    //   Map<String, String> dynamicModel = new Map();
+    //   var url = '';
+    //   dynamicLinkData.link.queryParameters.forEach((key, values) {
+    //     print("$key : $values");
+    //     dynamicModel.addAll({key : values});
+    //     if(key != 'title' && key != 'centername' && key != 'timedate' && key != 'number'){
+    //       url += '&$key=$values';
+    //     }
+    //   });
+    //   // DateFormat dateFormat = DateFormat("yyyy-MM-dd").parse();
+    //   DateTime dateTime = new DateFormat("yyyy-MM-dd").parse(dynamicModel['timedate']!);
+    //   url = url.replaceAll('&url=', '');
+    //   // 페이지 다른 변수만 세팅 하면 끝날 듯. url, post["title"], post['center_name '], dateTime, 0
+    //   Get.to(urlLoadScreen(Uri.parse(url), dynamicModel['title'],
+    //       dynamicModel['centername'], dateTime, int.parse(dynamicModel['number']!)));
+    // }).onError((error) {
+    //   logger.e(error);
+    // });
   }
 
   // 리스트 페이징 함수
@@ -457,6 +462,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       debugPrint('token~: [$token]');
       if(userEmail!= null){
         print("userEmail not Null");
+
         await FirebaseFirestore.instance.collection("users").doc(userEmail).update(({
           'usertoken': token,
         }));

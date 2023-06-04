@@ -104,17 +104,15 @@ class NotificationController extends GetxController {
     FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       // FirebaseService.sendUserKeyword(userEmail!, duplicateCheckValue);
       _addNotification(message);
-      debugPrint('------------------------Message clicked! : ${message.data}');
-      // final url = Uri.parse(payload!);
-      // if (await canLaunchUrl(url)) {
-      //   launchUrl(url, mode: LaunchMode.inAppWebView);
-      // }
+      debugPrint('------------------------Message clicked! : ${message.data['link']}');
+      final url = Uri.parse(message.data['link']!);
+      if (await canLaunchUrl(url)) {
+        launchUrl(url, mode: LaunchMode.inAppWebView);
+      }
       onSelectNotification(message.data['link'], message.data);
     });
 
   }
-
-
 
   // 메시지를 변수에 저장
   Future<void> _addNotification(RemoteMessage event) async {

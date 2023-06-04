@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:dongnerang/constants/common.constants2.dart';
 import 'package:dongnerang/firebase_options.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:dongnerang/models/space.model.dart';
@@ -38,9 +37,7 @@ void main() async {
 
   KakaoSdk.init(nativeAppKey:KAKAO_NATIVE_APP_KEY);
   MobileAds.instance.initialize();      // 모바일 광고 SDK 초기화
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,);
 
   // Hive
   await Hive.initFlutter();
@@ -49,12 +46,17 @@ void main() async {
 
   if(FirebaseAuth.instance.currentUser?.email != null){
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    // 앱이 죽었을떄
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     DynamicLink().setup();
   }
-  runApp(const MyApp());
+
+  await FirebaseMessaging.instance.requestPermission();
+
+  // 앱이 죽었을떄
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  runApp(MyApp());
 }
+
 //메시지 클릭 시 이벤트
 Future<void> onSelectNotification(String payload) async {
   final url = Uri.parse(payload!);
@@ -63,18 +65,8 @@ Future<void> onSelectNotification(String payload) async {
   }
 }
 
-@pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform, );
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
-  var IOS = new IOSInitializationSettings();
-  var settings = new InitializationSettings(android: android, iOS: IOS);
-  // flutterLocalNotificationsPlugin.initialize(settings);
-  flutterLocalNotificationsPlugin.initialize(settings, onSelectNotification: (payload) async {
-    onSelectNotification(payload!);}
-  );
-
   List tempArray = [];
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
@@ -92,6 +84,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint("NotificationController >> message received");
   debugPrint('Title >> ${message.notification!.title.toString()}');
   debugPrint('Body >> ${message.notification!.body.toString()}');
+
   tempArray.add(
     CustomNotification(
       title: message.notification!.title.toString(),
@@ -102,13 +95,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     )
   );
   FirebaseService.saveUserNotificationData(userEmail!,tempArray);
-  FirebaseMessaging.onMessageOpenedApp.listen((event) {
-    final Uri url = Uri.parse('${message.data['link'].toString()}');
-
-    Get.to(
-        urlLoadScreen(url, message.notification!.title.toString(), message.data['center_name'].toString(), message.data['registrationdate'].toString(), 0)
-    );
-  });
 }
 
 class ColorService { //기본 컬러 설정
@@ -145,9 +131,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var IOS = new IOSInitializationSettings();
+    var settings = new InitializationSettings(android: android, iOS: IOS);
+    flutterLocalNotificationsPlugin.initialize(settings, onSelectNotification: (payload) async {
+      onSelectNotification(payload!);}
+    );
+
     super.initState();
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   }
 
