@@ -809,7 +809,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         ),
                         children: CategoryCenter,
                       ),
-                      SizedBox(width: size.width / 8),
+                      SizedBox(width: size.width / 10),
                       cuindex == 0
                           ? DropdownButton2(
                         alignment: Alignment.center,
@@ -883,8 +883,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   ? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.asset('assets/images/seoul.logo.png', width: size.width / 26),
-                                  Text(value)
+                                  Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
+                                  Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Text(value)
+                                  ),
                                 ],
                               )
                                   : value == '서울시문화원'
@@ -925,7 +928,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   ? Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset('assets/images/seoulEconomy.jpeg', width: size.width / 25),
+                                    Image.asset('assets/images/seoulEconomy.png', width: size.width / 25),
                                     InkWell(
                                       onTap: () {
                                         final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Citizen_Participation.aspx?C=1C1E2865-6977-EC11-80E8-9418827691E2');
