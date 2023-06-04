@@ -921,6 +921,23 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                   ),
                                 ],
                               )
+                                  : value == '서울경제진흥원'
+                                  ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/seoulEconomy.jpeg', width: size.width / 25),
+                                    InkWell(
+                                      onTap: () {
+                                        final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Citizen_Participation.aspx?C=1C1E2865-6977-EC11-80E8-9418827691E2');
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                      },
+                                      child: Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Text(value)
+                                      ),
+                                    ),
+                                  ],
+                              )
                                   : Text(value),
                               // value: value, child: Text(value),시
                             );

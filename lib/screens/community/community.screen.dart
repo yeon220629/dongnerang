@@ -65,7 +65,7 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                                   maxLines: 2,
                                 ),
                                 Text(
-                                  '본문 : ${value["mainText"]}',
+                                  '${value["mainText"]}',
                                   style: const TextStyle(fontSize: 16),
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.justify,
@@ -207,7 +207,7 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                           padding: const EdgeInsets.only(top: 10, bottom: 10, left: 90),
                           child: Wrap(
                             spacing: 5.0,
-                            children: ['전체', '동네전달', '동네소식'].map((v) {
+                            children: ['전체', '알림', '행사', '소식'].map((category) {
                               return FilterChip(
                                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 // avatar: CircleAvatar(
@@ -216,7 +216,7 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                                 // ),
                                 label: SizedBox(
                                   child: Text(
-                                    v,
+                                    category,
                                   ),
                                 ),
                                 onSelected: (bool value) {
@@ -246,46 +246,46 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                     ),
                   ),
                 ),
-                Positioned(
-                  left: -20,
-                  child: Container(
-                    padding: EdgeInsets.only(top: statusBarHeight, right: 16.0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      child: Wrap(
-                        spacing: 5.0,
-                        children: [
-                          FilterChip(
-                            pressElevation: 0,
-                            backgroundColor: AppColors.background,
-                            shape: const StadiumBorder(side: BorderSide(color: AppColors.ligthGrey)),
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            label: SizedBox(
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                children: [
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  const Icon(
-                                    CupertinoIcons.location_solid,
-                                    size: 14,
-                                    color: Color(0xff4D4D4D),
-                                  ),
-                                  const SizedBox(
-                                    width: 3,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            onSelected: (bool value) {},
-                            showCheckmark: null,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Positioned(
+                //   left: -20,
+                //   child: Container(
+                //     padding: EdgeInsets.only(top: statusBarHeight, right: 16.0),
+                //     child: Padding(
+                //       padding: const EdgeInsets.only(top: 10, bottom: 10),
+                //       child: Wrap(
+                //         spacing: 5.0,
+                //         children: [
+                //           FilterChip(
+                //             pressElevation: 0,
+                //             backgroundColor: AppColors.background,
+                //             shape: const StadiumBorder(side: BorderSide(color: AppColors.ligthGrey)),
+                //             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                //             label: SizedBox(
+                //               child: Wrap(
+                //                 crossAxisAlignment: WrapCrossAlignment.center,
+                //                 children: [
+                //                   const SizedBox(
+                //                     width: 15,
+                //                   ),
+                //                   const Icon(
+                //                     CupertinoIcons.location_solid,
+                //                     size: 14,
+                //                     color: Color(0xff4D4D4D),
+                //                   ),
+                //                   const SizedBox(
+                //                     width: 3,
+                //                   ),
+                //                 ],
+                //               ),
+                //             ),
+                //             onSelected: (bool value) {},
+                //             showCheckmark: null,
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ],

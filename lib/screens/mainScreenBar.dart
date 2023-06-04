@@ -112,8 +112,8 @@ class mainScreenState extends State<mainScreen>{
                         BottomNavigationBarItem(
                           icon: Icon(
                             navigationController.currentBottomMenuIndex.value == 2
-                                ? CupertinoIcons.person_fill
-                                : CupertinoIcons.person,
+                                ? CupertinoIcons.chat_bubble_2_fill
+                                : CupertinoIcons.chat_bubble_2,
                           ),
                           label: "커뮤니티",
                         ),
