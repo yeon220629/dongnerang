@@ -768,170 +768,138 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   ),
                 ),
                 SizedBox(
-                  width: size.width / 1.05,
+                  // width: size.width / 1,
                   // padding: EdgeInsetsDirectional.all(2),
-                  child: Row(
-                    // mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ToggleButtons(
-                        direction: Axis.horizontal,
-                        isSelected: _selectedCenter,
-                        onPressed: (int index) {
-                          _pagingController.refresh();
-                          setState(() {
-                            for (int i = 0; i < _selectedCenter.length; i++) {
-                              _selectedCenter[i] = i == index;
-                            }
-                            if(index == 0){
-                              cuindex = 0;
-                              defaultCenter = '전체';
-                              getPostsData("${fnChecklocal(dropdownValue)?.first}_전체");
-                            }else if(index == 1) {
-                              cuindex = 1;
-                              getPostsData('서울_전체');
-                              SeouldefaultCenter = '전체';
-                            }
-                          });
-                        },
-                        fillColor: AppColors.background,
-                        borderColor: AppColors.background,
-                        selectedBorderColor: AppColors.background,
-                        selectedColor: AppColors.primary,
-                        textStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                        color: AppColors.black,
-                        constraints: const BoxConstraints(
-                          maxWidth: 80,
-                          minWidth: 65,
-                          minHeight: 20.0,
-                        ),
-                        children: CategoryCenter,
-                      ),
-                      SizedBox(width: size.width / 10),
-                      cuindex == 0
-                          ? DropdownButton2(
-                        alignment: Alignment.center,
-                        focusColor: AppColors.primary,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        isExpanded: false,
-                        isDense: false,
-                        underline: Container(),
-                        value: defaultCenter,
-                        items: centerCheck.map( (value) {
-                          if(value == "전체"){
-                            return DropdownMenuItem (
-                              alignment: Alignment.center,
-                              value: value, child: Text("${value}"),
-                            );
-                          }else{
-                            if(dropdownValue == '중구'){
-                              if(value == '구청'){
-                                return DropdownMenuItem (
-                                  alignment: Alignment.center,
-                                  value: value,
-                                  child: Text("  중구청  "),
-                                );
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Row(
+                      // mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ToggleButtons(
+                          direction: Axis.horizontal,
+                          isSelected: _selectedCenter,
+                          onPressed: (int index) {
+                            _pagingController.refresh();
+                            setState(() {
+                              for (int i = 0; i < _selectedCenter.length; i++) {
+                                _selectedCenter[i] = i == index;
                               }
-                            }
-                            return DropdownMenuItem (
-                              alignment: Alignment.center,
-                              value: value,
-                              child: Text("   ${dropdownValue+value}   "),
-                            );
-                          }
-                        },
-                        ).toList(),
-                        onChanged: (value){
-                          setState(() {
-                            listItems = [];
-                            centerLabel = value as String?;
-                            defaultCenter = value as String?;
-                            getPostsData(dropdownValue+"_"+defaultCenter!);
-                          }
-                          );
-                        },
-                        barrierColor: Colors.black.withOpacity(0.5),
-                        iconOnClick: Icon(Icons.keyboard_arrow_up),
-                        offset: const Offset(0, -3),
-                        // buttonWidth: 150,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
+                              if(index == 0){
+                                cuindex = 0;
+                                defaultCenter = '전체';
+                                getPostsData("${fnChecklocal(dropdownValue)?.first}_전체");
+                              }else if(index == 1) {
+                                cuindex = 1;
+                                getPostsData('서울_전체');
+                                SeouldefaultCenter = '전체';
+                              }
+                            });
+                          },
+                          fillColor: AppColors.background,
+                          borderColor: AppColors.background,
+                          selectedBorderColor: AppColors.background,
+                          selectedColor: AppColors.primary,
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          color: AppColors.black,
+                          constraints: const BoxConstraints(
+                            maxWidth: 80,
+                            minWidth: 65,
+                            minHeight: 20.0,
+                          ),
+                          children: CategoryCenter,
                         ),
-                      )
-                      // 서울소식 드롭다운
-                          : DropdownButton2(
-                        alignment: Alignment.center,
-                        focusColor: AppColors.primary,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        isExpanded: false,
-                        isDense: false,
-                        underline: Container(),
-                        value: SeouldefaultCenter,
-                        items: SeoulCheck.map( (value) {
-                          if(value == "전체"){
-                            return DropdownMenuItem (
-                              alignment: Alignment.center,
-                              value: value, child: Text(value),
+                        SizedBox(width: size.width / 10),
+                        cuindex == 0
+                            ? DropdownButton2(
+                          alignment: Alignment.center,
+                          focusColor: AppColors.primary,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          isExpanded: false,
+                          isDense: false,
+                          underline: Container(),
+                          value: defaultCenter,
+                          items: centerCheck.map( (value) {
+                            if(value == "전체"){
+                              return DropdownMenuItem (
+                                alignment: Alignment.center,
+                                value: value, child: Text("${value}"),
+                              );
+                            }else{
+                              if(dropdownValue == '중구'){
+                                if(value == '구청'){
+                                  return DropdownMenuItem (
+                                    alignment: Alignment.center,
+                                    value: value,
+                                    child: Text("  중구청  "),
+                                  );
+                                }
+                              }
+                              return DropdownMenuItem (
+                                alignment: Alignment.center,
+                                value: value,
+                                child: Text("   ${dropdownValue+value}   "),
+                              );
+                            }
+                          },
+                          ).toList(),
+                          onChanged: (value){
+                            setState(() {
+                              listItems = [];
+                              centerLabel = value as String?;
+                              defaultCenter = value as String?;
+                              getPostsData(dropdownValue+"_"+defaultCenter!);
+                            }
                             );
-                          }else{
-                            return DropdownMenuItem (
-                              alignment: Alignment.center,
-                              value: value,
-                              child: value == '서울시청'
-                                  ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
-                                  Padding(
-                                      padding: EdgeInsets.all(5.0),
-                                      child: Text(value)
-                                  ),
-                                ],
-                              )
-                                  : value == '서울시문화원'
-                                  ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/images/culturewon.logo.png', width: size.width / 25),
-                                  InkWell(
-                                    onTap: () {
-                                      final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                    },
-                                    child: Padding(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Text(value)
-                                    ),
-                                  ),
-                                ],
-                              )
-                                  : value == '서울문화재단'
-                                  ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/images/seoulCulture.png', width: size.width / 25),
-                                  InkWell(
-                                    onTap: () {
-                                      final Uri url = Uri.parse('https://www.sfac.or.kr/opensquare/notice/notice_list.do');
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                    },
-                                    child: Padding(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Text(value)
-                                    ),
-                                  ),
-                                ],
-                              )
-                                  : value == '서울경제진흥원'
-                                  ? Row(
+                          },
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          iconOnClick: Icon(Icons.keyboard_arrow_up),
+                          offset: const Offset(0, -3),
+                          // buttonWidth: 150,
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        )
+                        // 서울소식 드롭다운
+                            : DropdownButton2(
+                          alignment: Alignment.center,
+                          focusColor: AppColors.primary,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          isExpanded: false,
+                          isDense: false,
+                          underline: Container(),
+                          value: SeouldefaultCenter,
+                          items: SeoulCheck.map( (value) {
+                            if(value == "전체"){
+                              return DropdownMenuItem (
+                                alignment: Alignment.center,
+                                value: value, child: Text(value),
+                              );
+                            }else{
+                              return DropdownMenuItem (
+                                alignment: Alignment.center,
+                                value: value,
+                                child: value == '서울시청'
+                                    ? Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset('assets/images/seoulEconomy.png', width: size.width / 25),
+                                    Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
+                                    Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Text(value)
+                                    ),
+                                  ],
+                                )
+                                    : value == '서울시문화원'
+                                    ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/culturewon.logo.png', width: size.width / 25),
                                     InkWell(
                                       onTap: () {
-                                        final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Citizen_Participation.aspx?C=1C1E2865-6977-EC11-80E8-9418827691E2');
+                                        final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
                                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
                                       },
                                       child: Padding(
@@ -940,139 +908,174 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                       ),
                                     ),
                                   ],
-                              )
-                                  : Text(value),
-                              // value: value, child: Text(value),시
-                            );
-                          }
-                        },
-                        ).toList(),
-                        onChanged: (value){
-                          setState(() {
-                            listItems = [];
-                            seoulCenterLabel = value as String?;
-                            centerLabel = value as String?;
-                            SeouldefaultCenter = value as String?;
-                            if(value == 'NPO지원센터'){
-                              value = 'NPO';
-                            }else if(value == '서울시청'){
-                              value = '서울_전체';
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context){
-                                    return AlertDialog(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                                        contentPadding: EdgeInsets.only(top: 0.0),
-                                        content: Container(
-                                            width: size.width,
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                InkWell(
-                                                  child: Container(
-                                                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                                )
+                                    : value == '서울문화재단'
+                                    ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/seoulCulture.png', width: size.width / 25),
+                                    InkWell(
+                                      onTap: () {
+                                        final Uri url = Uri.parse('https://www.sfac.or.kr/opensquare/notice/notice_list.do');
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                      },
+                                      child: Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Text(value)
+                                      ),
+                                    ),
+                                  ],
+                                )
+                                    : value == '서울경제진흥원'
+                                    ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset('assets/images/seoulEconomy.png', width: size.width / 25),
+                                      InkWell(
+                                        onTap: () {
+                                          final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Citizen_Participation.aspx?C=1C1E2865-6977-EC11-80E8-9418827691E2');
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                        },
+                                        child: Padding(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Text(value)
+                                        ),
+                                      ),
+                                    ],
+                                )
+                                    : Text(value),
+                                // value: value, child: Text(value),시
+                              );
+                            }
+                          },
+                          ).toList(),
+                          onChanged: (value){
+                            setState(() {
+                              listItems = [];
+                              seoulCenterLabel = value as String?;
+                              centerLabel = value as String?;
+                              SeouldefaultCenter = value as String?;
+                              if(value == 'NPO지원센터'){
+                                value = 'NPO';
+                              }else if(value == '서울시청'){
+                                value = '서울_전체';
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context){
+                                      return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                                          contentPadding: EdgeInsets.only(top: 0.0),
+                                          content: Container(
+                                              width: size.width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  InkWell(
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                                                      decoration: BoxDecoration(
+                                                        color: AppColors.primary,
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
+                                                          Text( " 서울시청", style: TextStyle( color: Colors.white,
+                                                              fontWeight: FontWeight.bold),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child:AppTextButton( text: "분야별 새소식",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                  Container(
+                                                    child:AppTextButton( text: "이달의 행사 및 축제",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://www.seoul.go.kr/thismteventfstvl/list.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                  Container(
+                                                    child:AppTextButton( text: "이벤트 신청",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://www.seoul.go.kr/eventreqst/list.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                  Container(
+                                                    child:AppTextButton( text: "내 손안의 서울(공모전)",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://mediahub.seoul.go.kr/competition/competitionList.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                                                     decoration: BoxDecoration(
                                                       color: AppColors.primary,
                                                     ),
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
-                                                        Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
-                                                        Text( " 서울시청", style: TextStyle( color: Colors.white,
+                                                        // Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
+                                                        Text( " 50플러스포털", style: TextStyle( color: Colors.white,
                                                             fontWeight: FontWeight.bold),
                                                           textAlign: TextAlign.center,
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  child:AppTextButton( text: "분야별 새소식",
-                                                      onPressed: () async {
-                                                        final Uri url = Uri.parse('https://www.seoul.go.kr/realmnews/in/list.do');
-                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                      }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                                ),
-                                                Container(
-                                                  child:AppTextButton( text: "이달의 행사 및 축제",
-                                                      onPressed: () async {
-                                                        final Uri url = Uri.parse('https://www.seoul.go.kr/thismteventfstvl/list.do');
-                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                      }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                                ),
-                                                Container(
-                                                  child:AppTextButton( text: "이벤트 신청",
-                                                      onPressed: () async {
-                                                        final Uri url = Uri.parse('https://www.seoul.go.kr/eventreqst/list.do');
-                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                      }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                                ),
-                                                Container(
-                                                  child:AppTextButton( text: "내 손안의 서울(공모전)",
-                                                      onPressed: () async {
-                                                        final Uri url = Uri.parse('https://mediahub.seoul.go.kr/competition/competitionList.do');
-                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                      }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                                ),
-                                                Container(
-                                                  padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.primary,
+                                                  Container(
+                                                    child:AppTextButton( text: "행사소식",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://50plus.or.kr/event.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      // Image.asset('assets/images/seoul.logo.white.png', width: 20,height: 20,),
-                                                      Text( " 50플러스포털", style: TextStyle( color: Colors.white,
-                                                          fontWeight: FontWeight.bold),
-                                                        textAlign: TextAlign.center,
-                                                      ),
-                                                    ],
+                                                  Container(
+                                                    child:AppTextButton( text: "모집공고",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://www.50plus.or.kr/support.do');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
                                                   ),
-                                                ),
-                                                Container(
-                                                  child:AppTextButton( text: "행사소식",
-                                                      onPressed: () async {
-                                                        final Uri url = Uri.parse('https://50plus.or.kr/event.do');
-                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                      }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                                ),
-                                                Container(
-                                                  child:AppTextButton( text: "모집공고",
-                                                      onPressed: () async {
-                                                        final Uri url = Uri.parse('https://www.50plus.or.kr/support.do');
-                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                      }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                                ),
-                                                Container(
-                                                  child:AppTextButton( text: "교육신청",
-                                                      onPressed: () async {
-                                                        final Uri url = Uri.parse('https://50plus.or.kr/education.do?cost=ALL&state=JOIN&type=ALL');
-                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                                      }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
-                                                ),
-                                              ],
-                                            )
-                                        )
-                                    );
-                                  }
-                              );
+                                                  Container(
+                                                    child:AppTextButton( text: "교육신청",
+                                                        onPressed: () async {
+                                                          final Uri url = Uri.parse('https://50plus.or.kr/education.do?cost=ALL&state=JOIN&type=ALL');
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                                        }), decoration: BoxDecoration(border: Border.all(width: 0.1, color: AppColors.grey)),
+                                                  ),
+                                                ],
+                                              )
+                                          )
+                                      );
+                                    }
+                                );
+                              }
+                              getPostsData(value);
                             }
-                            getPostsData(value);
-                          }
-                          );
-                        },
-                        barrierColor: Colors.black.withOpacity(0.5),
-                        iconOnClick: Icon(Icons.keyboard_arrow_up),
-                        offset: const Offset(0, -3),
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      )
-                    ],
+                            );
+                          },
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          iconOnClick: Icon(Icons.keyboard_arrow_up),
+                          offset: const Offset(0, -3),
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 listLength > 0

@@ -115,7 +115,7 @@ class _noticemainAlarmpageState extends State<noticemainAlarmpage> {
                         controller: addKeyword,
                         decoration: InputDecoration(
                           hintText: '키워드를 입력해주세요 ex) 예술, 모집',
-                          hintStyle: TextStyle(fontSize: 13),
+                          hintStyle: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.035),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 1),
                             borderRadius: BorderRadius.circular(10)
