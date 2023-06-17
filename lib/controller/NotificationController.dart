@@ -82,12 +82,7 @@ class NotificationController extends GetxController {
           registrationdate: event.data['registrationdate'].toString(),
         )
       );
-      FirebaseService.saveUserNotificationData(userEmail!,tempArray);
-      // 5초 뒤에 해당 배열 비우기
-      // print("body : ${event.notification!.body.toString()}");
-      // print("title : ${event.notification!.title.toString()}");
-      // print("Data : ${event.data!.toString()}");
-      // print("tempArray : $tempArray");
+      // FirebaseService.saveUserNotificationData(userEmail!,tempArray);
 
         // push 알림 보기 설정
       flutterLocalNotificationsPlugin.show(0, '${event.notification!.title.toString()}',

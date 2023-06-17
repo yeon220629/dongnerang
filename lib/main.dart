@@ -67,7 +67,7 @@ Future<void> onSelectNotification(String payload) async {
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform, );
-  List tempArray = [];
+  // List tempArray = [];
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       'Notification id',
@@ -80,21 +80,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics
   );
-
-  debugPrint("NotificationController >> message received");
-  debugPrint('Title >> ${message.notification!.title.toString()}');
-  debugPrint('Body >> ${message.notification!.body.toString()}');
-
-  tempArray.add(
-    CustomNotification(
-      title: message.notification!.title.toString(),
-      link: message.data['link'].toString(),
-      center_name: message.data['center_name'].toString(),
-      body: message.notification!.body.toString(),
-      registrationdate: message.data['registrationdate'].toString(),
-    )
-  );
-  FirebaseService.saveUserNotificationData(userEmail!,tempArray);
 }
 
 class ColorService { //기본 컬러 설정

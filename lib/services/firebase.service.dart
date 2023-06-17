@@ -280,55 +280,55 @@ class FirebaseService {
     return sendBannerdata;
   }
   // notification Alarm
-  static Future<void> saveUserNotificationData(String email,List tempArray)async {
-    final checkDuplicate =  await FirebaseFirestore.instance.collection("keywordnotification").doc(email).get();
-    if(checkDuplicate.exists){
-      var userList = [];
-      var existUser = await FirebaseFirestore.instance.collection("keywordnotification").doc(email).get();
-      existUser.data()?.forEach((key, value) {
-        userList.add(int.parse(key.split("_")[1]));
-      });
-      userList.sort((a,b) {
-        var adate = a; //before -> var adate = a.expiry;
-        var bdate = b; //before -> var bdate = b.expiry;
-        return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
-      });
-
-      for(int i = 0; i < tempArray.length; i++){
-        var updateObject = {
-          "title" : tempArray[i].title,
-          "link" : tempArray[i].link,
-          "center_name" : tempArray[i].center_name,
-          "body" : tempArray[i].body,
-          "registrationdate" : tempArray[i].registrationdate,
-
-        };
-        await FirebaseFirestore.instance.collection("keywordnotification").doc(email).update(({
-          'notification_${userList.first + i + 1}': updateObject,
-        }));
-      }
-    }else{
-      // 사용자가 존재하지 않을 경우
-      for(int i = 0; i < tempArray.length; i++){
-        var updateObject = {
-          "title" : tempArray[i].title,
-          "link" : tempArray[i].link,
-          "center_name" : tempArray[i].center_name,
-          "body" : tempArray[i].body,
-          "registrationdate" : tempArray[i].registrationdate,
-        };
-        if(i == 0){
-          await FirebaseFirestore.instance.collection("keywordnotification").doc(email).set(({
-            'notification_$i': updateObject,
-          }));
-        }else{
-          await FirebaseFirestore.instance.collection("keywordnotification").doc(email).update(({
-            'notification_$i': updateObject,
-          }));
-        }
-      }
-    }
-  }
+  // static Future<void> saveUserNotificationData(String email,List tempArray)async {
+  //   final checkDuplicate =  await FirebaseFirestore.instance.collection("keywordnotification").doc(email).get();
+  //   if(checkDuplicate.exists){
+  //     var userList = [];
+  //     var existUser = await FirebaseFirestore.instance.collection("keywordnotification").doc(email).get();
+  //     existUser.data()?.forEach((key, value) {
+  //       userList.add(int.parse(key.split("_")[1]));
+  //     });
+  //     userList.sort((a,b) {
+  //       var adate = a; //before -> var adate = a.expiry;
+  //       var bdate = b; //before -> var bdate = b.expiry;
+  //       return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
+  //     });
+  //
+  //     for(int i = 0; i < tempArray.length; i++){
+  //       var updateObject = {
+  //         "title" : tempArray[i].title,
+  //         "link" : tempArray[i].link,
+  //         "center_name" : tempArray[i].center_name,
+  //         "body" : tempArray[i].body,
+  //         "registrationdate" : tempArray[i].registrationdate,
+  //
+  //       };
+  //       await FirebaseFirestore.instance.collection("keywordnotification").doc(email).update(({
+  //         'notification_${userList.first + i + 1}': updateObject,
+  //       }));
+  //     }
+  //   }else{
+  //     // 사용자가 존재하지 않을 경우
+  //     for(int i = 0; i < tempArray.length; i++){
+  //       var updateObject = {
+  //         "title" : tempArray[i].title,
+  //         "link" : tempArray[i].link,
+  //         "center_name" : tempArray[i].center_name,
+  //         "body" : tempArray[i].body,
+  //         "registrationdate" : tempArray[i].registrationdate,
+  //       };
+  //       if(i == 0){
+  //         await FirebaseFirestore.instance.collection("keywordnotification").doc(email).set(({
+  //           'notification_$i': updateObject,
+  //         }));
+  //       }else{
+  //         await FirebaseFirestore.instance.collection("keywordnotification").doc(email).update(({
+  //           'notification_$i': updateObject,
+  //         }));
+  //       }
+  //     }
+  //   }
+  // }
 
   // 자치구에 따라 url 가져오기
   static Future<Map<String, dynamic>> getUrlsByGu(String gu) async {
@@ -374,5 +374,21 @@ class FirebaseService {
   static Future<int> saveCommunity(String category) async {
       final doc  = await FirebaseFirestore.instance.collection("community").doc(category).get();
       return doc.data()!.length;
+  }
+
+  static Future<void> welcomeMessage(userEmail) async {
+    final exCheck = await FirebaseFirestore.instance.collection("keywordnotification").doc(userEmail).get();
+    if(!exCheck.exists){
+      return await FirebaseFirestore.instance.collection("keywordnotification").doc(userEmail).set(({
+        'notification_0': {
+          'body' : '동네랑에 오신것을 환영 합니다.',
+          'center_name' : '동네랑',
+          'link' : '#',
+          'registrationdate' : '',
+          'title' : '동네랑 설치 환영 메세지',
+        },
+      }));
     }
+  }
+
   }

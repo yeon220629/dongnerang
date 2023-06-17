@@ -233,6 +233,8 @@ int fnSeoulCnterCheck(centerValue){
     return 5;
   }else if(centerValue.contains("서울관광재단")){
     return 6;
+  }else if(centerValue.contains("동네랑")){
+    return 6;
   }
   return 0;
 }

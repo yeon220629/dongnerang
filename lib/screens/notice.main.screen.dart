@@ -102,12 +102,18 @@ class _noticemainpageState extends State<noticemainpage>
     valueDoc?.forEach((key, value) {
       userData.add(value);
     });
+    userData.sort((a,b) {
+      var adate = a['registrationdate']; //before -> var adate = a.expiry;
+      var bdate = b['registrationdate']; //before -> var bdate = b.expiry;
+      return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
+    });
+
     if(userData.length != 0){
       commonConstant2.userDataWidget = [];
     }
+
     for(var userKeyword in userData){
       commonConstant2.colorindex = fnSeoulCnterCheck(userKeyword['center_name']);
-      // var date = DateTime.fromMillisecondsSinceEpoch(userKeyword['registrationdate']);
       commonConstant2.userDataWidget.add( GestureDetector(
         onTap: () async{
           final Uri url = Uri.parse('${userKeyword["link"]}');
@@ -115,7 +121,11 @@ class _noticemainpageState extends State<noticemainpage>
             url, userKeyword["body"], userKeyword['center_name'], userKeyword['registrationdate'], 0
           )));
         },
-        child: SizedBox(
+        child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8), //모서리를 둥글게
+                border: Border.all(color: Colors.black12, width: 1)), //테두리
           width: size.width,
           height: 90,
           child: Padding(
@@ -132,9 +142,6 @@ class _noticemainpageState extends State<noticemainpage>
                     textAlign: TextAlign.justify,
                     maxLines: 2,
                   ),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
                   Expanded(
                     child: Row(
                       children: [
@@ -301,28 +308,28 @@ class _noticemainpageState extends State<noticemainpage>
                       )
                   ),
                   //키워드 알림 push 메시지 쌓이는 코드
-                  // Expanded(
-                  //   child: commonConstant2.userItemsData.length == 0
-                  //     ? Lottie.asset( 'assets/lottie/searchdata.json', width: size.width, height: size.height / 10, fit: BoxFit.contain, )
-                  //     :ListView.builder(
-                  //       itemCount: commonConstant2.userItemsData.length,
-                  //       physics: const BouncingScrollPhysics(),
-                  //       itemBuilder: (c, i){
-                  //         double scale = 1.0;
-                  //         if (topContainer > 0.5){
-                  //           scale = i + 0.5 - topContainer;
-                  //           if (scale < 0 ) { scale = 0;}
-                  //           else if (scale > 1) { scale = 1; }
-                  //         }
-                  //         return Align(
-                  //                 heightFactor: 1.1,
-                  //                 alignment: Alignment.topCenter,
-                  //                 // child: userItemsData[i],
-                  //                 child : commonConstant2.userItemsData[i]
-                  //         );
-                  //       }
-                  //   )
-                  // ),
+                  Expanded(
+                    child: commonConstant2.userItemsData.length == 0
+                      ? Lottie.asset( 'assets/lottie/searchdata.json', width: size.width, height: size.height / 10, fit: BoxFit.contain, )
+                      :ListView.builder(
+                        itemCount: commonConstant2.userItemsData.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (c, i){
+                          double scale = 1.0;
+                          if (topContainer > 0.5){
+                            scale = i + 0.5 - topContainer;
+                            if (scale < 0 ) { scale = 0;}
+                            else if (scale > 1) { scale = 1; }
+                          }
+                          return Align(
+                                  heightFactor: 1.1,
+                                  alignment: Alignment.topCenter,
+                                  // child: userItemsData[i],
+                                  child : commonConstant2.userItemsData[i]
+                          );
+                        }
+                    )
+                  ),
                 ],
               ),
             ),

@@ -76,14 +76,6 @@ class mainScreenState extends State<mainScreen>{
               () => Offstage(
             offstage:HomeController.to.hideBottomMenu.value,
               child:
-              // Container(
-              //   // decoration: BoxDecoration(border: Border(
-              //   //   top: BorderSide( // POINT
-              //   //   color: AppColors.greylottie,
-              //   //   // width: 0.1,
-              //   // ),),
-              //   ),
-              //   child:
                 BottomNavigationBar(
                   // elevation: 0,
                   type: BottomNavigationBarType.fixed,
@@ -151,80 +143,6 @@ class mainScreenState extends State<mainScreen>{
                 ),
               ),
               ),
-      // ),
-      //           child: ListView(
-      //             shrinkWrap: true,
-      //             children: [
-      //               BottomNavigationBar(
-      //                 elevation: 0,
-      //                 type: BottomNavigationBarType.fixed,
-      //                 showSelectedLabels: true,
-      //                 showUnselectedLabels: true,
-      //                 selectedItemColor: AppColors.primary,
-      //                 unselectedItemColor: AppColors.grey,
-      //                 currentIndex: navigationController.currentBottomMenuIndex.value,
-      //                 items: [
-      //                   BottomNavigationBarItem(
-      //                     icon: Icon(
-      //                       navigationController.currentBottomMenuIndex.value == 0
-      //                           ? CupertinoIcons.doc_text_search
-      //                           : CupertinoIcons.doc_text,
-      //                     ),
-      //                     label: "홈",
-      //                   ),
-      //                   BottomNavigationBarItem(
-      //                     icon: Icon(
-      //                       navigationController.currentBottomMenuIndex.value == 1
-      //                           ? CupertinoIcons.map_fill
-      //                           : CupertinoIcons.map,
-      //                     ),
-      //                     label: "동네지도",
-      //                   ),
-      //                   // BottomNavigationBarItem(
-      //                   //   icon: Icon(
-      //                   //     navigationController.currentBottomMenuIndex.value == 2
-      //                   //         ? CupertinoIcons.chat_bubble_2_fill
-      //                   //         : CupertinoIcons.chat_bubble_2,
-      //                   //   ),
-      //                   //   label: "커뮤니티",
-      //                   // ),
-      //                   BottomNavigationBarItem(
-      //                     icon: Icon(
-      //                       navigationController.currentBottomMenuIndex.value == 3
-      //                           ? CupertinoIcons.person_fill
-      //                           : CupertinoIcons.person,
-      //                     ),
-      //                     label: "마이페이지",
-      //                   ),
-      //                   BottomNavigationBarItem(
-      //                     icon: Icon(
-      //                       navigationController.currentBottomMenuIndex.value == 3
-      //                           ? Icons.person
-      //                           : Icons.person_outline_outlined,
-      //                     ),
-      //                     label: "테스트페이지",
-      //                   ),
-      //                 ],
-      //                 onTap: (index) {
-      //                   if(navigationController.currentBottomMenuIndex.value == 0){
-      //                     // print("index : $index");
-      //                     // print("navigationController : ${navigationController.currentBottomMenuIndex.value}");
-      //                     var navi = PrimaryScrollController.of(context);
-      //                     navi?.jumpTo(0);
-      //                   }
-      //                   navigationController.currentBottomMenuIndex.value = index;
-      //                   // 마이페이지 리스트 출력
-      //                   if(index == 2){
-      //                     mypageScreen(navigationController.currentBottomMenuIndex.value);
-      //                     setState(() {});
-      //                   }
-      //                 },
-      //               )
-      //             ],
-      //           ),
-      //         ),
-      //     )
-      // ),
       body: Obx(
               () => IndexedStack(
             index: navigationController.currentBottomMenuIndex.value,

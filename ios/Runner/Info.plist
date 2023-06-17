@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2023061110</string>
+	<string>202306151</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>0</string>
 	<key>FirebaseDynamicLinksCustomDomains</key>
@@ -308,9 +308,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>buildCount</key>
-	<string>10</string>
+	<string>1</string>
 	<key>buildDay</key>
-	<string>20230611</string>
+	<string>20230615</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

@@ -21,6 +21,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:new_version/new_version.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import '../constants/common.constants2.dart';
@@ -79,6 +80,9 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   double topContainer = 0;
   int dotindex =0;
   Map<String, dynamic> urls = {};
+
+  //webView Value
+  int webViewValue = 0;
 
   // ListView paging 관련 변수
   final int _pageSize = 20;
@@ -293,6 +297,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     if (initialMessage != null) {
       _handleMessage(initialMessage);
     }
+
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
   }
 
@@ -302,6 +307,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
   }
   @override
   void initState() {
+    FirebaseService.welcomeMessage(userEmail);
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
@@ -813,7 +819,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                         ),
                         SizedBox(width: size.width / 10),
                         cuindex == 0
-                            ? DropdownButton2(
+                          ? DropdownButton2(
                           alignment: Alignment.center,
                           focusColor: AppColors.primary,
                           icon: const Icon(Icons.keyboard_arrow_down),
@@ -823,6 +829,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           value: defaultCenter,
                           items: centerCheck.map( (value) {
                             if(value == "전체"){
+                              webViewValue = 0;
                               return DropdownMenuItem (
                                 alignment: Alignment.center,
                                 value: value, child: Text("${value}"),
@@ -836,6 +843,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                     child: Text("  중구청  "),
                                   );
                                 }
+                              }else if(dropdownValue == '성북'){
+                                webViewValue = 1;
                               }
                               return DropdownMenuItem (
                                 alignment: Alignment.center,
@@ -1078,34 +1087,46 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     ),
                   ),
                 ),
-                listLength > 0
-                    ? Expanded(
-                    child: PagedListView<int, dynamic>(
-                      pagingController: _pagingController,
-                      builderDelegate: PagedChildBuilderDelegate<dynamic>(
-                        itemBuilder: (context, item, i){
-                          double scale = 1.0;
-                          if (topContainer > 0.5){
-                            scale = i + 0.5 - topContainer;
-                            if (scale < 0 ) { scale = 0;}
-                            else if (scale > 1) { scale = 1; }
-                          }
-                          return Align(
-                            heightFactor: 0.98,
-                            alignment: Alignment.topCenter,
-                            child: itemsData[i],
-                          );
+                dropdownValue == '성북'
+                  ? Container(
+                      width: size.width,
+                      height: size.height,
+                      child: WebView(
+                        initialUrl: "https://www.sb.go.kr/main/mainPage.do",
+                        javascriptMode: JavascriptMode.unrestricted,
+                        onWebViewCreated: (WebViewController webViewController) {
+                          // _controller.complete(webViewController);
                         },
-                        firstPageProgressIndicatorBuilder: (_) => const SizedBox(),
                       ),
-                    )
-                )
+                  )
+                  :  listLength > 0
+                    ? Expanded(
+                          child: PagedListView<int, dynamic>(
+                            pagingController: _pagingController,
+                            builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                              itemBuilder: (context, item, i){
+                                double scale = 1.0;
+                                if (topContainer > 0.5){
+                                  scale = i + 0.5 - topContainer;
+                                  if (scale < 0 ) { scale = 0;}
+                                  else if (scale > 1) { scale = 1; }
+                                }
+                                return Align(
+                                  heightFactor: 0.98,
+                                  alignment: Alignment.topCenter,
+                                  child: itemsData[i],
+                                );
+                              },
+                              firstPageProgressIndicatorBuilder: (_) => const SizedBox(),
+                            ),
+                          )
+                      )
                     : Expanded(
-                  child: Lottie.asset(
-                    'assets/lottie/searchdata.json',
-                  ),
+                      child: Lottie.asset(
+                        'assets/lottie/searchdata.json',
+                      ),
                 )
-              ],
+              ]
             ),
           ),
         )
@@ -1115,3 +1136,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
 
 
 
+// else if(dropdownValue == '성북'){
+// if(value == '구청'){
+// }
+// }
