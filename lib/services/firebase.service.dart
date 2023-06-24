@@ -383,7 +383,7 @@ class FirebaseService {
         'notification_0': {
           'body' : '키워드 사용법을 소개 합니다',
           'center_name' : '동네랑',
-          'link' : 'https://dongnerang.com/',
+          'link' : 'https://bit.ly/dongnerangkeyword',
           'registrationdate' : '2023-01-01',
           'title' : '키워드 사용법을 소개 합니다',
         },

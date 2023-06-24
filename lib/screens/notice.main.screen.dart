@@ -122,26 +122,30 @@ class _noticemainpageState extends State<noticemainpage>
           )));
         },
         child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8), //모서리를 둥글게
                 border: Border.all(color: Colors.black12, width: 1)), //테두리
           width: size.width,
           height: 90,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12.5),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0,0,8,0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text(
-                    '${userKeyword['body']}',
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.justify,
-                    maxLines: 2,
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      '${userKeyword['body']}',
+                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.justify,
+                      maxLines: 2,
+                    )
                   ),
+                  SizedBox(height: 8.5,),
                   Expanded(
                     child: Row(
                       children: [
