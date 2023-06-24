@@ -345,9 +345,7 @@ class FirebaseService {
       if(value['title'] == fieldName){
         // print("key : $key");
         // print("value['viewCount'] : ${value['viewCount']}");
-        var viewCount = value['viewCount'] == null ?
-                        1
-                        :  value['viewCount'] += 1;
+        var viewCount = value['viewCount'] == null ? 1 : value['viewCount'] += 1;
 
         var changeData = <String, dynamic>{
           key : {
