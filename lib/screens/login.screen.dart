@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../constants/colors.constants.dart';
 import '../models/main_view_model.dart';
 import '../services/kakao_login.dart';

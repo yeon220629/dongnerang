@@ -85,57 +85,51 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
             icon: Icon(Icons.arrow_back)),
       ),
       body: SizedBox(
+        height: size.height,
         child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
           return KeyboardDismissOnTap(
             child: Form(
               key: controller.formKey,
-              child: ListView(
+              child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        child : mypagePhotoProfileSetting(callback: (value){
-                          // print("commonValue.commonConstant2.mypageInformPhotoSetting : ${commonValue.commonConstant2.mypageInformPhotoSetting}");
-                          // print("photo : $value");
-                          // commonValue.commonConstant2.mypageInformPhotoSetting = value;
-                          photo = value;
-                        },),
-                        height: size.height / 4,
-                      ),
-                      Container(
-                        child: mypageNickNameProfileSetting(callback: (value){
-                          // print("commonValue.commonConstant2.mypageInformNickSetting : ${commonValue.commonConstant2.mypageInformNickSetting}");
-                          // print("NICK : $value");
-                          // commonValue.commonConstant2.mypageInformNickSetting = value;
-                          nick = value;
-                        },),
-                        margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
-                      ),
-                      Positioned(
-                        top: size.height / 3,
-                        child: Container(
-                          child: genderChoiceWidget(callback: (value) {
-                            // print("commonValue.commonConstant2.mypageInformGender : ${commonValue.commonConstant2.mypageInformGender}");
-                            // print("GENDER : $value");
-                            // commonValue.commonConstant2.mypageInformGender = value;
-                            gender = value;
-                          }),
-                        )
-                      ),
-                      Positioned(
-                        top: size.height / 2,
-                        child: Container(
-                          child: AgeStatefulWidget(callback: (value){
-                            // commonValue.commonConstant2.mypageInformAgeValue = value;
-                            print("value : $value");
-                            age = value;
-                          }
+                child: ListView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    Stack(
+                      children: [
+                        Container(
+                          child : mypagePhotoProfileSetting(callback: (value){
+                            photo = value;
+                          },),
+                          height: size.height / 4,
                         ),
-                      ))
-                    ],
-                  ),
-                ],
+                        Container(
+                          child: mypageNickNameProfileSetting(callback: (value){
+                            nick = value;
+                          },),
+                          margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
+                        ),
+                        Positioned(
+                            top: size.height / 3,
+                            child: Container(
+                              child: genderChoiceWidget(callback: (value) {
+                                gender = value;
+                              }),
+                            )
+                        ),
+                        Positioned(
+                          top: size.height / 2,
+                          child: Container(
+                            child: AgeStatefulWidget(callback: (value){
+                                age = value;
+                              }
+                            ),
+                          )
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -289,8 +283,6 @@ class _AgeStatefulWidgetWidgetState extends State<AgeStatefulWidget> {
                       var day = commonValue.commonConstant2.mypageInformAgeValue['day'];
                       date = DateTime.now();
                       date = new DateTime(int.parse(year), int.parse(month), int.parse(day), date.hour, date.minute);
-                      // date = new DateFormat("$year-$month-$day").format(date);
-                      print("date : $date");
                     });
                     Navigator.pop(context);
                   },
@@ -500,7 +492,7 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
   Widget bottomSheet() {
     final Size size = MediaQuery.of(context).size;
     return Container(
-        height: size.height / 7,
+        height: size.height / 8.5,
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.symmetric(
             horizontal: 20,
@@ -509,14 +501,13 @@ class _mypagePhotoProfileSettingState extends State<mypagePhotoProfileSetting> {
         child: Column(
           children: <Widget>[
             Container(
-              child: TextButton.icon(
-                icon: Icon(null),
+              child: TextButton(
                 onPressed: () {
                   takePhoto(ImageSource.gallery);
                   ImageSource.values;
                   Navigator.pop(context);
                 },
-                label: Text('앨범에서 선택', style: TextStyle(fontSize: 20)),
+                child: Text('앨범에서 선택', style: TextStyle(fontSize: 20)),
               ),
             ),
             Container(

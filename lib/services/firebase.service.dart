@@ -381,11 +381,11 @@ class FirebaseService {
     if(!exCheck.exists){
       return await FirebaseFirestore.instance.collection("keywordnotification").doc(userEmail).set(({
         'notification_0': {
-          'body' : '동네랑에 오신것을 환영 합니다.',
+          'body' : '키워드 사용법을 소개 합니다',
           'center_name' : '동네랑',
-          'link' : '#',
-          'registrationdate' : '',
-          'title' : '동네랑 설치 환영 메세지',
+          'link' : 'https://dongnerang.com/',
+          'registrationdate' : '2023-01-01',
+          'title' : '키워드 사용법을 소개 합니다',
         },
       }));
     }

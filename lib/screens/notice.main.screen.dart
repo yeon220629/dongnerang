@@ -161,6 +161,8 @@ class _noticemainpageState extends State<noticemainpage>
                               ? AppColors.orange
                               : commonConstant2.colorindex == 5
                               ? AppColors.red
+                              : commonConstant2.colorindex == 7
+                              ? AppColors.primary
                               : Color(0xffEE6D01),
                           ),
                           child: Text(
@@ -310,7 +312,13 @@ class _noticemainpageState extends State<noticemainpage>
                   //키워드 알림 push 메시지 쌓이는 코드
                   Expanded(
                     child: commonConstant2.userItemsData.length == 0
-                      ? Lottie.asset( 'assets/lottie/searchdata.json', width: size.width, height: size.height / 10, fit: BoxFit.contain, )
+                      ? Container(
+                        alignment: Alignment.center,
+                        child: Text('받은 알림이 없어요. \n 키워드를 등록하고 알림을 받아보세요.\n\n\n\n\n',style: TextStyle(
+                          fontSize: 15
+                        ), textAlign:TextAlign.center
+                      ),
+                    )
                       :ListView.builder(
                         itemCount: commonConstant2.userItemsData.length,
                         physics: const BouncingScrollPhysics(),

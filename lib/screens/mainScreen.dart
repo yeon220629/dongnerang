@@ -9,12 +9,9 @@ import 'package:dongnerang/screens/url.load.screen.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
@@ -26,11 +23,7 @@ import '../constants/colors.constants.dart';
 import '../constants/common.constants.dart';
 import '../constants/common.constants2.dart';
 import 'package:dongnerang/screens/search.screen.dart';
-import '../firebase_options.dart';
-import '../models/notification.model.dart';
 import '../services/firebase.service.dart';
-import '../util/dynamiclink.dart';
-import '../util/logger.service.dart';
 import '../widgets/app_button.widget.dart';
 import 'banner/banner.dart';
 import 'notice.main.screen.dart';
@@ -388,37 +381,26 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     );
     checkNewVersion(newVersion);
     commonConstant2().fnResetValue();
-    // deeplink
-    // DynamicLink().setup();
-    // FirebaseDynamicLinks.instance.onLink.listen((
-    //     PendingDynamicLinkData dynamicLinkData,
-    //     ) {
-    //   Map<String, String> dynamicModel = new Map();
-    //   var url = '';
-    //   dynamicLinkData.link.queryParameters.forEach((key, values) {
-    //     print("$key : $values");
-    //     dynamicModel.addAll({key : values});
-    //     if(key != 'title' && key != 'centername' && key != 'timedate' && key != 'number'){
-    //       url += '&$key=$values';
-    //     }
-    //   });
-    //   // DateFormat dateFormat = DateFormat("yyyy-MM-dd").parse();
-    //   DateTime dateTime = new DateFormat("yyyy-MM-dd").parse(dynamicModel['timedate']!);
-    //   url = url.replaceAll('&url=', '');
-    //   // 페이지 다른 변수만 세팅 하면 끝날 듯. url, post["title"], post['center_name '], dateTime, 0
-    //   Get.to(urlLoadScreen(Uri.parse(url), dynamicModel['title'],
-    //       dynamicModel['centername'], dateTime, int.parse(dynamicModel['number']!)));
-    // }).onError((error) {
-    //   logger.e(error);
-    // });
   }
-
+  Container webViewWidget(var url, var size){
+    return Container(
+      width: size.width,
+      height: size.height,
+      child: WebView(
+        initialUrl: "https://www.sb.go.kr/main/mainPage.do",
+        javascriptMode: JavascriptMode.unrestricted,
+        onWebViewCreated: (WebViewController webViewController) {
+          // _controller.complete(webViewController);
+        },
+      ),
+    );
+  }
   // 리스트 페이징 함수
   Future<void> _fetchPage(int pageKey) async {
     try {
       Future.delayed(Duration(milliseconds: pageKey == 0 ? 0 : 500), () {
         int lastIdx = itemsData.length;
-
+        // print("mainPage : ${itemsData.length}");
         // 카테고리 필터, 거리순, _pageSize개수 만큼 불러오기
         List<dynamic> newItems = itemsData.sublist(pageKey, (pageKey + _pageSize < lastIdx ? pageKey + _pageSize : lastIdx));
 
@@ -565,6 +547,10 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                   dropdownValue = value;
                   defaultCenter = "전체";
                   checkUrls(dropdownValue);
+
+                  if(dropdownValue != '성북' || dropdownValue != '서대문'){
+                    webViewValue = 0;
+                  }
                 });
               },
               barrierColor: Colors.black.withOpacity(0.5),
@@ -577,8 +563,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
             actions: <Widget>[
               TextButton(
                 onPressed: (){
-                  // final Uri url = Uri.parse('${fnOnlineUrl(dropdownValue)}');
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => onlineUrl( url )));
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -829,7 +813,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           value: defaultCenter,
                           items: centerCheck.map( (value) {
                             if(value == "전체"){
-                              webViewValue = 0;
                               return DropdownMenuItem (
                                 alignment: Alignment.center,
                                 value: value, child: Text("${value}"),
@@ -843,8 +826,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                     child: Text("  중구청  "),
                                   );
                                 }
-                              }else if(dropdownValue == '성북'){
-                                webViewValue = 1;
                               }
                               return DropdownMenuItem (
                                 alignment: Alignment.center,
@@ -856,11 +837,25 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           ).toList(),
                           onChanged: (value){
                             setState(() {
-                              listItems = [];
-                              centerLabel = value as String?;
-                              defaultCenter = value as String?;
-                              getPostsData(dropdownValue+"_"+defaultCenter!);
-                            }
+                                listItems = [];
+                                centerLabel = value as String?;
+                                defaultCenter = value as String?;
+                                getPostsData(dropdownValue+"_"+defaultCenter!);
+
+                                if(dropdownValue == '성북'){
+                                  if(value == '구청'){
+                                    webViewValue = 1;
+                                  } else{
+                                    webViewValue = 0;
+                                  }
+                                }else if(dropdownValue == '서대문'){
+                                  if(value == '구청'){
+                                    webViewValue = 2;
+                                  } else{
+                                    webViewValue = 0;
+                                  }
+                                }
+                              }
                             );
                           },
                           barrierColor: Colors.black.withOpacity(0.5),
@@ -872,7 +867,7 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                           ),
                         )
                         // 서울소식 드롭다운
-                            : DropdownButton2(
+                        : DropdownButton2(
                           alignment: Alignment.center,
                           focusColor: AppColors.primary,
                           icon: const Icon(Icons.keyboard_arrow_down),
@@ -884,65 +879,95 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                             if(value == "전체"){
                               return DropdownMenuItem (
                                 alignment: Alignment.center,
-                                value: value, child: Text(value),
+                                value: value,
+                                child: Text(value),
                               );
                             }else{
                               return DropdownMenuItem (
                                 alignment: Alignment.center,
                                 value: value,
                                 child: value == '서울시청'
-                                    ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
-                                    Padding(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Text(value)
-                                    ),
-                                  ],
-                                )
+                                  ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Row(
+                                            children: [
+                                              Image.asset('assets/images/seoul.logo.png', width: size.width / 25),
+                                              Text(value)
+                                            ],
+                                          )
+                                        ),
+                                      ],
+                                    )
                                     : value == '서울시문화원'
                                     ? Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
+                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                          },
+                                          child: Padding(
+                                              padding: EdgeInsets.all(5.0),
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('assets/images/culturewon.logo.png', width: size.width / 25),
+                                                  Text(value)
+                                                ],
+                                              )
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                : value == '서울문화재단'
+                                ? Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset('assets/images/culturewon.logo.png', width: size.width / 25),
-                                    InkWell(
-                                      onTap: () {
-                                        final Uri url = Uri.parse('http://seoulccf.or.kr/introCulture/introCulture');
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
-                                      },
-                                      child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Text(value)
-                                      ),
-                                    ),
-                                  ],
-                                )
-                                    : value == '서울문화재단'
-                                    ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('assets/images/seoulCulture.png', width: size.width / 25),
                                     InkWell(
                                       onTap: () {
                                         final Uri url = Uri.parse('https://www.sfac.or.kr/opensquare/notice/notice_list.do');
                                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
                                       },
                                       child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Text(value)
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Row(
+                                          children: [
+                                            Image.asset('assets/images/seoulCulture.png', width: size.width / 25),
+                                            Text(value),
+                                          ],
+                                        )
                                       ),
                                     ),
                                   ],
                                 )
-                                    : value == '서울경제진흥원'
-                                    ? Row(
+                                  : value == 'SBA(시민참여)'
+                                      ? Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset('assets/images/seoulEconomy.png', width: size.width / 25),
+                                        InkWell(
+                                          onTap: () {
+                                            final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Citizen_Participation.aspx?C=1C1E2865-6977-EC11-80E8-9418827691E2');
+                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
+                                          },
+                                          child: Padding(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Text(value)
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                    : value == 'SBA(기업지원)'
+                                      ? Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset('assets/images/seoulEconomy.png', width: size.width / 25),
                                       InkWell(
                                         onTap: () {
-                                          final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Citizen_Participation.aspx?C=1C1E2865-6977-EC11-80E8-9418827691E2');
+                                          final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Company_Support.aspx?C=6FA70790-6677-EC11-80E8-9418827691E2');
                                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => seoulUrlLoadScreen( url )));
                                         },
                                         child: Padding(
@@ -951,8 +976,8 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                         ),
                                       ),
                                     ],
-                                )
-                                    : Text(value),
+                                  )
+                                  : Text(value),
                                 // value: value, child: Text(value),시
                               );
                             }
@@ -1087,45 +1112,38 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                     ),
                   ),
                 ),
-                dropdownValue == '성북'
-                  ? Container(
-                      width: size.width,
-                      height: size.height,
-                      child: WebView(
-                        initialUrl: "https://www.sb.go.kr/main/mainPage.do",
-                        javascriptMode: JavascriptMode.unrestricted,
-                        onWebViewCreated: (WebViewController webViewController) {
-                          // _controller.complete(webViewController);
-                        },
-                      ),
-                  )
-                  :  listLength > 0
-                    ? Expanded(
-                          child: PagedListView<int, dynamic>(
-                            pagingController: _pagingController,
-                            builderDelegate: PagedChildBuilderDelegate<dynamic>(
-                              itemBuilder: (context, item, i){
-                                double scale = 1.0;
-                                if (topContainer > 0.5){
-                                  scale = i + 0.5 - topContainer;
-                                  if (scale < 0 ) { scale = 0;}
-                                  else if (scale > 1) { scale = 1; }
-                                }
-                                return Align(
-                                  heightFactor: 0.98,
-                                  alignment: Alignment.topCenter,
-                                  child: itemsData[i],
-                                );
-                              },
-                              firstPageProgressIndicatorBuilder: (_) => const SizedBox(),
+                // webViewWidget
+                webViewValue == 1
+                  ? webViewWidget("https://www.sb.go.kr/main/mainPage.do", size)
+                  : webViewValue == 2
+                    ? webViewWidget("https://www.sdm.go.kr/index.do", size)
+                      : listLength > 0
+                          ? Expanded(
+                                child: PagedListView<int, dynamic>(
+                                  pagingController: _pagingController,
+                                  builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                                    itemBuilder: (context, item, i){
+                                      double scale = 1.0;
+                                      if (topContainer > 0.5){
+                                        scale = i + 0.5 - topContainer;
+                                        if (scale < 0 ) { scale = 0;}
+                                        else if (scale > 1) { scale = 1; }
+                                      }
+                                      return Align(
+                                        heightFactor: 0.98,
+                                        alignment: Alignment.topCenter,
+                                        child: itemsData[i],
+                                      );
+                                    },
+                                    firstPageProgressIndicatorBuilder: (_) => const SizedBox(),
+                                  ),
+                                )
+                            )
+                          : Expanded(
+                            child: Lottie.asset(
+                              'assets/lottie/searchdata.json',
                             ),
                           )
-                      )
-                    : Expanded(
-                      child: Lottie.asset(
-                        'assets/lottie/searchdata.json',
-                      ),
-                )
               ]
             ),
           ),
@@ -1133,10 +1151,3 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     );
   }
 }
-
-
-
-// else if(dropdownValue == '성북'){
-// if(value == '구청'){
-// }
-// }

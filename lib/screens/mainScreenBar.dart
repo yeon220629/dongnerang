@@ -101,14 +101,14 @@ class mainScreenState extends State<mainScreen>{
                       ),
                       label: "동네지도",
                     ),
-                    // BottomNavigationBarItem(
-                    //   icon: Icon(
-                    //     navigationController.currentBottomMenuIndex.value == 2
-                    //         ? CupertinoIcons.chat_bubble_2_fill
-                    //         : CupertinoIcons.chat_bubble_2,
-                    //   ),
-                    //   label: "커뮤니티",
-                    // ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        navigationController.currentBottomMenuIndex.value == 2
+                            ? CupertinoIcons.chat_bubble_2_fill
+                            : CupertinoIcons.chat_bubble_2,
+                      ),
+                      label: "커뮤니티",
+                    ),
                     BottomNavigationBarItem(
                       icon: Icon(
                         navigationController.currentBottomMenuIndex.value == 3
@@ -149,7 +149,7 @@ class mainScreenState extends State<mainScreen>{
             children: [
               freeComponent_viewpage(),
               googleMapScreen(navigationController.currentBottomMenuIndex.value),
-              // commnunityMainScreen(navigationController.currentBottomMenuIndex.value),
+              commnunityMainScreen(navigationController.currentBottomMenuIndex.value),
               mypageScreen(navigationController.currentBottomMenuIndex.value),
               // privateSettingScreen(),
               // LoginScreen(),

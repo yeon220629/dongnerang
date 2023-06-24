@@ -2,8 +2,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dongnerang/constants/colors.constants.dart';
 import 'package:dongnerang/screens/community/community.insert.screen.dart';
+import 'package:dongnerang/screens/mainScreenBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 
 class commnunityMainScreen extends StatefulWidget {
@@ -17,6 +19,9 @@ class commnunityMainScreen extends StatefulWidget {
 class _commnunityMainScreenState extends State<commnunityMainScreen> {
   List<Widget> itemsData = [];
   List<Widget> listItems = [];
+  final int _pageSize = 20;
+  final PagingController<int, dynamic> _pagingController = PagingController(firstPageKey: 0);
+  double topContainer = 0;
 
   Future<List<DocumentSnapshot>> getAllDocuments(String collectionName) async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection(collectionName).get();
@@ -26,7 +31,6 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
   Future<void> getListData(value) async{
     var photo;
     if(value["imageList"].toString() != "[]"){
-      // print("value : ${value["imageList"].toString().replaceAll('[', '').replaceAll(']', '')}");
       photo = value["imageList"][0].toString().replaceAll('[', '').replaceAll(']', '');
     }
 
@@ -107,30 +111,56 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
 
     // 리스트를 다시 부를때 스크롤 위치를 맨위로
     // var controller = PrimaryScrollController.of(context);
-
     for (DocumentSnapshot document in documents) {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
       // Do something with the data
       if(!data.values.isEmpty){
         data.values.forEach((element) {
+          // print("element : ${element}");
           getListData(element);
         });
-        // while (data.values.iterator.moveNext()) {
-        //   // int number = data.values.iterator.current;
-        //   // print(number);
-        // print(data.values.first['userEmail']);
       }
     }
-
-
+    print("listItems : ${listItems.length}");
     setState(() {
       itemsData = listItems;
     });
   }
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      Future.delayed(Duration(milliseconds: pageKey == 0 ? 0 : 500), () {
+        int lastIdx = itemsData.length;
+        print("lastIdx : $lastIdx");
+        print("listItems : ${listItems.length}");
+        // 카테고리 필터, 거리순, _pageSize개수 만큼 불러오기
+        List<dynamic> newItems = itemsData.sublist(pageKey, (pageKey + _pageSize < lastIdx ? pageKey + _pageSize : lastIdx));
 
+        bool isLastPage = newItems.length < _pageSize;
+
+        if (isLastPage) {
+          _pagingController.appendLastPage(newItems);
+        } else {
+          final nextPageKey = pageKey + newItems.length;
+          _pagingController.appendPage(newItems, nextPageKey);
+        }
+      });
+    } catch (error) {
+      _pagingController.error = error;
+    }
+  }
   @override
   void initState() {
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
     getPostsData();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _pagingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -146,13 +176,34 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
           children: [
             Align(
               alignment: AlignmentDirectional.center,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: itemsData
-                ),
-              ),
+              child: Column(
+                children: [
+                  Expanded(
+                      child: PagedListView<int, dynamic>(
+                        pagingController: _pagingController,
+                        builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                          itemBuilder: (context, item, i){
+                            print("item : $item");
+                            print("context : $context");
+                            print("i : $i");
+                            double scale = 1.0;
+                            if (topContainer > 0.5){
+                              scale = i + 0.5 - topContainer;
+                              if (scale < 0 ) { scale = 0;}
+                              else if (scale > 1) { scale = 1; }
+                            }
+                            return Align(
+                              heightFactor: 0.98,
+                              alignment: Alignment.topCenter,
+                              child: itemsData[i],
+                            );
+                          },
+                          firstPageProgressIndicatorBuilder: (_) => const SizedBox(),
+                        ),
+                      )
+                  )
+                ],
+              )
             ),
             Align(
               alignment: AlignmentDirectional.bottomEnd,
@@ -210,10 +261,6 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                             children: ['전체', '알림', '행사', '소식'].map((category) {
                               return FilterChip(
                                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                // avatar: CircleAvatar(
-                                //   radius: 12,
-                                //   child: Image.asset("assets/images/${choice.iconImg}"),
-                                // ),
                                 label: SizedBox(
                                   child: Text(
                                     category,
@@ -223,15 +270,6 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                                   setState(() {
                                     getPostsData();
                                     if (value) {
-                                    //   if (!_selectedChoices.contains(choice.code)) {
-                                    //     _selectedChoices.add(choice.code);
-                                    //     categoryVisibility[choice.code.toString()] = true;
-                                    //   }
-                                    // } else if (_selectedChoices.length > 1) {
-                                    //   _selectedChoices.removeWhere((String name) {
-                                    //     return name == choice.code;
-                                    //   });
-                                      // categoryVisibility[choice.code.toString()] = false;
                                     }
                                   });
                                   // markerInit();
@@ -246,46 +284,6 @@ class _commnunityMainScreenState extends State<commnunityMainScreen> {
                     ),
                   ),
                 ),
-                // Positioned(
-                //   left: -20,
-                //   child: Container(
-                //     padding: EdgeInsets.only(top: statusBarHeight, right: 16.0),
-                //     child: Padding(
-                //       padding: const EdgeInsets.only(top: 10, bottom: 10),
-                //       child: Wrap(
-                //         spacing: 5.0,
-                //         children: [
-                //           FilterChip(
-                //             pressElevation: 0,
-                //             backgroundColor: AppColors.background,
-                //             shape: const StadiumBorder(side: BorderSide(color: AppColors.ligthGrey)),
-                //             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                //             label: SizedBox(
-                //               child: Wrap(
-                //                 crossAxisAlignment: WrapCrossAlignment.center,
-                //                 children: [
-                //                   const SizedBox(
-                //                     width: 15,
-                //                   ),
-                //                   const Icon(
-                //                     CupertinoIcons.location_solid,
-                //                     size: 14,
-                //                     color: Color(0xff4D4D4D),
-                //                   ),
-                //                   const SizedBox(
-                //                     width: 3,
-                //                   ),
-                //                 ],
-                //               ),
-                //             ),
-                //             onSelected: (bool value) {},
-                //             showCheckmark: null,
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ],

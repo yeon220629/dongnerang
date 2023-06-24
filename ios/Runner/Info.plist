@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202306151</string>
+	<string>202306241</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>0</string>
 	<key>FirebaseDynamicLinksCustomDomains</key>
@@ -310,7 +310,7 @@
 	<key>buildCount</key>
 	<string>1</string>
 	<key>buildDay</key>
-	<string>20230615</string>
+	<string>20230624</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>
