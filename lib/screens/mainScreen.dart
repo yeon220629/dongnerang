@@ -947,7 +947,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                       ? Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Image.asset('assets/images/seoulEconomy.png', width: size.width / 25),
                                         InkWell(
                                           onTap: () {
                                             final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Citizen_Participation.aspx?C=1C1E2865-6977-EC11-80E8-9418827691E2');
@@ -955,7 +954,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                           },
                                           child: Padding(
                                             padding: EdgeInsets.all(5.0),
-                                            child: Text(value)
+                                            child: Row(
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/seoulEconomy.png',
+                                                  width: size.width / 25,
+                                                ),
+                                                Text(value),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -964,7 +971,6 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                       ? Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Image.asset('assets/images/seoulEconomy.png', width: size.width / 25),
                                       InkWell(
                                         onTap: () {
                                           final Uri url = Uri.parse('https://www.sba.seoul.kr/Pages/ContentsMenu/Company_Support.aspx?C=6FA70790-6677-EC11-80E8-9418827691E2');
@@ -972,7 +978,15 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
                                         },
                                         child: Padding(
                                             padding: EdgeInsets.all(5.0),
-                                            child: Text(value)
+                                            child: Row(
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/seoulEconomy.png',
+                                                  width: size.width / 25,
+                                                ),
+                                                Text(value),
+                                              ],
+                                            ),
                                         ),
                                       ),
                                     ],
