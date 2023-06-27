@@ -113,6 +113,7 @@ class _noticemainpageState extends State<noticemainpage>
     }
 
     for(var userKeyword in userData){
+      print("length : ${'${userKeyword['body']}'.length}");
       commonConstant2.colorindex = fnSeoulCnterCheck(userKeyword['center_name']);
       commonConstant2.userDataWidget.add( GestureDetector(
         onTap: () async{
@@ -135,15 +136,26 @@ class _noticemainpageState extends State<noticemainpage>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      '${userKeyword['body']}',
-                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.justify,
-                      maxLines: 2,
-                    )
+                  '${userKeyword['body']}'.length >= 28
+                    ? Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        '${userKeyword['body']}',
+                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                        maxLines: 1,
+                      )
+                  )
+                  : Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        '${userKeyword['body']}',
+                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                        maxLines: 2,
+                      )
                   ),
                   SizedBox(height: 8.5,),
                   Expanded(
