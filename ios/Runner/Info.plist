@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.1</string>
+	<string>1.2.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202306252</string>
+	<string>202306302</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>0</string>
 	<key>FirebaseDynamicLinksCustomDomains</key>
@@ -310,7 +310,7 @@
 	<key>buildCount</key>
 	<string>2</string>
 	<key>buildDay</key>
-	<string>20230625</string>
+	<string>20230630</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

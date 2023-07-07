@@ -84,56 +84,58 @@ class mypageInformSettingScreen extends GetView<PrivateSettingController> {
             color: Colors.black,
             icon: Icon(Icons.arrow_back)),
       ),
-      body: SizedBox(
-        height: size.height,
-        child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
-          return KeyboardDismissOnTap(
-            child: Form(
-              key: controller.formKey,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-                child: ListView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          child : mypagePhotoProfileSetting(callback: (value){
-                            photo = value;
-                          },),
-                          height: size.height / 4,
-                        ),
-                        Container(
-                          child: mypageNickNameProfileSetting(callback: (value){
-                            nick = value;
-                          },),
-                          margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
-                        ),
-                        Positioned(
-                            top: size.height / 3,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: size.height,
+          child: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
+            return KeyboardDismissOnTap(
+              child: Form(
+                key: controller.formKey,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+                  child: ListView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            child : mypagePhotoProfileSetting(callback: (value){
+                              photo = value;
+                            },),
+                            height: size.height / 4,
+                          ),
+                          Container(
+                            child: mypageNickNameProfileSetting(callback: (value){
+                              nick = value;
+                            },),
+                            margin: EdgeInsets.fromLTRB(0, size.height / 6, 0, 0),
+                          ),
+                          Positioned(
+                              top: size.height / 3,
+                              child: Container(
+                                child: genderChoiceWidget(callback: (value) {
+                                  gender = value;
+                                }),
+                              )
+                          ),
+                          Positioned(
+                            top: size.height / 2,
                             child: Container(
-                              child: genderChoiceWidget(callback: (value) {
-                                gender = value;
-                              }),
+                              child: AgeStatefulWidget(callback: (value){
+                                  age = value;
+                                }
+                              ),
                             )
-                        ),
-                        Positioned(
-                          top: size.height / 2,
-                          child: Container(
-                            child: AgeStatefulWidget(callback: (value){
-                                age = value;
-                              }
-                            ),
                           )
-                        )
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        }),
+            );
+          }),
+        ),
       ),
     );
   }
