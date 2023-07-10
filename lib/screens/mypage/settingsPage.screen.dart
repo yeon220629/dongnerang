@@ -75,7 +75,7 @@ class SettingsPage extends StatelessWidget {
             ListTile(
               leading:  Icon(Icons.star_border_outlined),
               // 버전 수동으로 수정해야함..
-              title: Text('현재버전 v1.2.2'),
+              title: Text('현재버전 v1.2.3'),
               // title: Text('현재버전 v${versionCode}'),
               onTap: (){
                 final appId = Platform.isAndroid ? 'com.dongnerang.com.dongnerang' : '6444590791';
