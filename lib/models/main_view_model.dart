@@ -52,7 +52,7 @@ class MainViewModel {
             await FirebaseAuth.instance.signInWithCustomToken(customToken);
             var currentUser = await FirebaseService.findUserByEmail(
                 user!.kakaoAccount!.email!);
-            print("currentUsercurrentUsercurrentUser : $currentUser");
+
             if (currentUser == null) {
               await FirebaseFirestore.instance
                   .collection("users")

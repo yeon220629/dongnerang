@@ -110,7 +110,8 @@ class privateSettingKeywordScreen extends GetView<PrivateSettingController> {
                           var resultList = [];
                           if (Privatekeyword.isEmpty) {
                             // Privatekeyword.add('');
-                            resultList.add('');
+                            // resultList.add('');
+
                           }
                           else {
                             for (int i = 0; i < Privatekeyword.length; i ++) {
@@ -123,8 +124,6 @@ class privateSettingKeywordScreen extends GetView<PrivateSettingController> {
                               }
                             }
                           }
-                          // print("After : $resultList");
-
                           if (formKey.currentState!.validate()) {
                             try {
                               await FirebaseFirestore.instance

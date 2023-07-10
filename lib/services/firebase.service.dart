@@ -114,11 +114,14 @@ class FirebaseService {
 
   static Future<void> deleteUser(String? email, provider) async {
     final checkUser =  await FirebaseFirestore.instance.collection("users").doc(email);
+    final keywordDeleteUser = await FirebaseFirestore.instance.collection("keywordnotification").doc(email);
+
     if(provider == 'kakao'){
       await UserApi.instance.unlink();
     }
     print("1 delete");
     checkUser.delete();
+    keywordDeleteUser.delete();
     print("2 delete");
 
     await FirebaseAuth.instance.signOut();

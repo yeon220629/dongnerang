@@ -113,7 +113,7 @@ class _noticemainpageState extends State<noticemainpage>
     }
 
     for(var userKeyword in userData){
-      print("length : ${'${userKeyword['body']}'.length}");
+      // print("length : ${'${userKeyword['body']}'.length}");
       commonConstant2.colorindex = fnSeoulCnterCheck(userKeyword['center_name']);
       commonConstant2.userDataWidget.add( GestureDetector(
         onTap: () async{
@@ -132,18 +132,19 @@ class _noticemainpageState extends State<noticemainpage>
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12.5),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(0,0,8,0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   '${userKeyword['body']}'.length >= 28
                     ? Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.only(left: 0,top: 10,right: 5,bottom: 0),
                       child: Text(
                         '${userKeyword['body']}',
                         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.justify,
+                        // textAlign: TextAlign.justify,
+                        textAlign: TextAlign.left,
                         maxLines: 1,
                       )
                   )
