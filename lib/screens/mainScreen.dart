@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:new_version/new_version.dart';
+// import 'package:new_version/new_version.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../constants/colors.constants.dart';
@@ -375,11 +375,11 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
       });
     });
 
-    final newVersion = NewVersion(
-      androidId: 'com.dongnerang.com.dongnerang',
-      iOSId: 'com.dongnerang.com.dongnerang',
-    );
-    checkNewVersion(newVersion);
+    // final newVersion = NewVersion(
+    //   androidId: 'com.dongnerang.com.dongnerang',
+    //   iOSId: 'com.dongnerang.com.dongnerang',
+    // );
+    // checkNewVersion(newVersion);
     commonConstant2().fnResetValue();
   }
   Container webViewWidget(var url, var size){
@@ -418,30 +418,30 @@ class freeComponentviewpageState extends State<freeComponent_viewpage> {
     }
   }
 
-  void checkNewVersion(NewVersion newVersion) async {
-    final status = await newVersion.getVersionStatus();
-    // print("status appStoreLink : ${status?.appStoreLink}");
-    // print("status LocalVersion : ${status?.localVersion}");
-    // print("status storeVersion : ${status?.storeVersion}");
-    // print("status releaseNotes : ${status?.releaseNotes}");
-    if(status != null) {
-      // 업데이트 테스트
-      // if(!status.canUpdate) {
-      if(status.canUpdate) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return UpdateDialog(
-              allowDismissal: true,
-              description: status.releaseNotes!,
-              version: status.storeVersion,
-              appLink: status.appStoreLink,
-            );
-          },
-        );
-      }
-    }
-  }
+  // void checkNewVersion(NewVersion newVersion) async {
+  //   final status = await newVersion.getVersionStatus();
+  //   // print("status appStoreLink : ${status?.appStoreLink}");
+  //   // print("status LocalVersion : ${status?.localVersion}");
+  //   // print("status storeVersion : ${status?.storeVersion}");
+  //   // print("status releaseNotes : ${status?.releaseNotes}");
+  //   if(status != null) {
+  //     // 업데이트 테스트
+  //     // if(!status.canUpdate) {
+  //     if(status.canUpdate) {
+  //       showDialog(
+  //         context: context,
+  //         builder: (BuildContext context) {
+  //           return UpdateDialog(
+  //             allowDismissal: true,
+  //             description: status.releaseNotes!,
+  //             version: status.storeVersion,
+  //             appLink: status.appStoreLink,
+  //           );
+  //         },
+  //       );
+  //     }
+  //   }
+  // }
 
   Future<void> _getToken(_messaging) async {
     String? userEmail = FirebaseAuth.instance.currentUser?.email;

@@ -121,7 +121,7 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
       int progress = data[2];
       setState((){ });
     });
-    FlutterDownloader.registerCallback(downloadCallback);
+    FlutterDownloader.registerCallback(downloadCallback as DownloadCallback);
 
   }
 

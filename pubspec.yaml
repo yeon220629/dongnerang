@@ -41,14 +41,14 @@ dependencies:
       ref: master
   firebase_dynamic_links: ^5.0.11
   # Util
-  flutter_cupertino_localizations: ^1.0.1
+  #  flutter_cupertino_localizations: ^1.0.1
   latlong2: ^0.8.1
   logger: ^1.1.0
   flutter_switch: ^0.3.2
   carousel_slider: ^4.1.1
   flutter_easyloading: ^3.0.5
   flutter_signin_button: ^2.0.0
-  flutter_html: ^2.2.1
+  flutter_html: ^3.0.0-beta.1
   flutter_colorpicker: ^1.0.3
   permission_handler: ^10.0.0
   crypto: ^3.0.2
@@ -61,7 +61,7 @@ dependencies:
   mask_text_input_formatter: ^2.3.0
   cached_network_image: ^3.2.1
   material_tag_editor: ^0.1.2
-  fluttertagselector: ^0.1.0
+#  fluttertagselector: ^0.1.0
   flutter_slidable: ^2.0.0
   dropdown_button2: ^1.9.2
   lottie: ^1.4.3
@@ -72,13 +72,12 @@ dependencies:
   dots_indicator: ^2.1.0
   app_tracking_transparency: ^2.0.3
   pull_to_refresh: ^2.0.0
-  new_version: ^0.3.1
+#  new_version: ^0.3.1
   auto_size_text: ^3.0.0
   loading_animation_widget: ^1.2.0+4
   flutter_downloader: ^1.10.2
   path_provider: ^2.0.12
   infinite_scroll_pagination: ^3.2.0
-
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
@@ -88,6 +87,8 @@ dev_dependencies:
   # Hive local db
   hive_generator: ^1.1.3
   build_runner: ^2.1.11
+dependency_overrides:
+  intl: any
 
 flutter:
   uses-material-design: true
