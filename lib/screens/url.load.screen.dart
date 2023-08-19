@@ -56,11 +56,11 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
 
   final ReceivePort _port = ReceivePort();
 
-  @pragma('vm:entry-point')
-  static void downloadCallback(String id, DownloadTaskStatus status, int downloadProgress) {
-    final SendPort send = IsolateNameServer.lookupPortByName('downloader_send_port')!;
-    send.send([id, status, downloadProgress]);
-  }
+  // @pragma('vm:entry-point')
+  // static void downloadCallback(String id, DownloadTaskStatus status, int downloadProgress) {
+  //   final SendPort send = IsolateNameServer.lookupPortByName('downloader_send_port')!;
+  //   send.send([id, status, downloadProgress]);
+  // }
 
 
   Future<Uri> _createDynamicLink() async {
@@ -121,7 +121,8 @@ class _urlLoadScreenState extends State<urlLoadScreen> {
       int progress = data[2];
       setState((){ });
     });
-    FlutterDownloader.registerCallback(downloadCallback as DownloadCallback);
+
+    // FlutterDownloader.registerCallback(downloadCallback as DownloadCallback);
 
   }
 
